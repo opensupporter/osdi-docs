@@ -47,10 +47,11 @@ Retrieving a resource gets a representation of a resource instance or resource c
 
 #### Updating a Resource
 Updating a resource instance is accomplished by the use of an HTTP PUT sent to the URI of a given resource.  Due to the complexity of full-resource updates involving read-only properties, out-of-date data, and the need to know all properties (which one may not), this specification focuses on the ability to make partial updates to resources.
+
 To make an update to a resource, the client sends an HTTP PUT to the URI of a resource instance.  The body of the put contains a partial resource representation including the attributes to update.  Missing attributes are left unchanged on the Provider side.
-Clients may set an attribute to nil by including the attribute using ‘nil’ for JSON, or using xsi:nil for XML.
-Note: Using an empty XML element is likely to be interpreted as an empty string rather than nil.
-Do we care about the distinction between 0, empty string, nil, unset?
+
+Clients may set an attribute to nil by including the attribute using ‘nil’ for JSON.
+
 Updating Collections with PUT is not supported.
 
     PUT <editURI> HTTP/1.1
