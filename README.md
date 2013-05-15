@@ -6,8 +6,6 @@ This specification defines a common HTTP based REST protocol and data model for 
 
 [Read our full charter](/skydrive/osdi-charter.v2.htm)
 
-
-
 ## Scenarios
 
 ## API Data Model
@@ -105,8 +103,8 @@ By default, server responses should expand first level instances.  For example, 
 In this specification, when defining models, the following notational conventions are used.
 
 |Convention	|Description
-|-----------|--------------
-|type[]     |	A reference to a collection of resources of type 'type'
-|	type*	|A reference to a single resource of type 'type'
-|	string	|A string
-|	datetime|	A date and time representation.  In JSON this is a string.  The contents of this attribute shall be
+|:-----------:|--------------
+|type[]     | A reference to a collection of resources of type 'type'
+|	type*	| A reference to a single resource of type 'type'
+|	string	| A string
+|	datetime| A date and time representation.  In JSON this is a string.  The contents of this attribute shall be  ISO 8601 
