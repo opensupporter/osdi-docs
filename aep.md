@@ -4,6 +4,8 @@
 
 | Name			| Type		| Description
 |---------------|-----------|---------------------------
+| max_pagesize	| string	| a number that defines how many records a server can return in a single query.  
+| motd			| string	| an informational message from the server
 | people		| Person[]	|A reference to the Persons Collection
 | events		| Event[]	|A reference to the Events Collection
 | attendances	| Attendance[]|	A reference to the Attendance Collection

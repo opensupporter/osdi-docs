@@ -9,15 +9,18 @@ The API will define interfaces including but not limited to resources representi
 
 [Read our scenarios document](scenarios/)
 
-[Play with our prototype](http://osdi-prototype.herokuapp.com)
+[Experiment with our prototype](http://osdi-prototype.herokuapp.com)
+
+[Review Guide](review_guide.md)
 
 # Authors
 * Tim Anderegg, New Organizing Institute (NOI)
 * Topper Bowers, Amicus
-* Josh Cohen, Washington United For Marriage
+* Josh Cohen, Washington United For Marriage (Editor)
 * Erik Lukoff, Change.org
 * Charles Parsons, Salsa Labs
 
+> This effort is currently in an exploratory phase to determine if consensus on a common API can be achieved.  The involvement of a person or company does not reflect a commitment to implement this API.
 
 # API Data Model
 
@@ -32,13 +35,17 @@ The API will define interfaces including but not limited to resources representi
 
 # Basic Resource Access
 ## API Entry Point and linking
-All access through OSDI starts at the API Entry Point (AEP).  The AEP is a resource that acts like a directory of the types of resources available on a server.  Some servers may support some or all of the different resource collections.  For example, a peer to peer donation system might support Donations and People but not events.  In order to find out what resources are available and what URIs to use to access them, do a GET on the AEP URI.
+All access through OSDI starts at the API Entry Point (AEP).  The AEP is a resource that acts like a directory of the types of resources available on a server.  It also includes capability information like the maximum query pagesize.
+
+Some servers may support some or all of the different resource collections.  For example, a peer to peer donation system might support Donations and People but not events.  In order to find out what resources are available and what URIs to use to access them, do a GET on the AEP URI.
 
 Your service provider can tell you what the AEP URI is for your account.
 
 For the purposes of example, assume your provider has given you an AEP URI of
 
-	http://osdi-prototype.herokuapp.com/api/v1
+[http://osdi-prototype.herokuapp.com/api/v1](http://osdi-prototype.herokuapp.com/api/v1)
+
+> Note: you can explore the AEP with a user friendly interface by visiting our [prototype endpoint](http://osdi-prototype.herokuapp.com)
 
 In order to determine the available resources on the server the client should perform an HTTP GET request to this URI.
 
@@ -87,7 +94,7 @@ Response
 	  }
 	}
 
-Given the above example response, let's people collection on this server. 
+Given the above example response, let's fetch the people collection on this server. 
 Notice the "_links" collection.  Find the object in the links collection with key "people".  That object has an attribute "href" which contains the URI to use to access the people collection.
 
 Request
@@ -97,6 +104,8 @@ Request
 Response
 ~~~~
 {
+  "count" : 5,
+  "offset" : 0,
   "_embedded": {
     "people": [
       {
@@ -146,10 +155,17 @@ Creating a new resource involves adding a new item to a collection.  To create a
     Content-Type: application/...
 
     <serialization of new resource>
+
 #### Insert or Update (Upsert)
 In some cases, the client doesn't know if a resource exists or not.  Instead of first having to query a resource to determine if it exists and then do an update via PUT, the client may use the upsert feature.
 
+When used, the server will use a matching algorithm to determine if the input attributes match an existing record.
+
+> The algorithm used by the server to perform matching is vendor-specific.  Contact your vendor for specifics.
+
 To use the upsert feature, the $upsert query parameter is appended to the URI.
+
+> If the upsert parameter is not included, it defaults to false.  The server will create a new resource
 
 	POST <addURI>?upsert=true HTTP/1.1
     Host: ...
@@ -177,14 +193,27 @@ If the resource does already exist, then a 200 response is returned
 ### Retrieving a Resource
 Retrieving a resource gets a representation of a resource instance or resource collection.  The retrieval is performed with an HTTP GET sent to the URI of the resource.
 
+Request
+
     GET <ResourceURI> HTTP/1.1
     Host: ...
     Accept: application/...
+
+Response
 
     HTTP/1.1 200 OK
     Content-Type: application/...
 
     <serialization of resource>
+
+#### Collection Responses
+
+When retrieving collections, the response representation will include some common attributes.
+
+|Name		|Type		| Description
+|-----------|-----------|------------------------
+|count		|integer	|The number of resources returned in this response
+|offset		|integer	|The offset of the first resource in the server collection
 
 ### Updating a Resource
 Updating a resource instance is accomplished by the use of an HTTP PUT sent to the URI of a given resource.  Due to the complexity of full-resource updates involving read-only properties, out-of-date data, and the need to know all properties (which one may not), this specification focuses on the ability to make partial updates to resources.

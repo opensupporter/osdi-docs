@@ -1,4 +1,5 @@
 # Open Supporter Data Interface Charter
+> This effort is currently in an exploratory phase to determine if consensus on a common API can be achieved.  The involvement of a person or company does not reflect a commitment to implement this API.
 
 The Open Supporter Data Interface (OSDI) is an effort to reduce customer costs related to moving data between different systems by defining a common API for products in the non-profit and campaign space.  We are a team of vendors and customers who are prioritizing customer cost reduction and interoperability.
 
