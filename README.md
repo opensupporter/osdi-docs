@@ -6,20 +6,20 @@ The Open Supporter Data Interface (OSDI) is an effort to reduce customer costs r
 The API will define interfaces including but not limited to resources representing people, donations, questions, tags, and events. The group will determine the order in which to define resource models and which version of the API to include them in.
 
 [Read the full charter](charter.md)
+
 [Read our scenarios document](scenarios/)
+
 [Play with our prototype](http://osdi-prototype.herokuapp.com)
 
 # Authors
-Josh Cohen, Washington United For Marriage
-Topper Bowers, Amicus
-Erik Lukoff, Change.org
-Tim Anderegg, New Organizing Institute (NOI)
-Charles Parsons, Salsa Labs
-
-## Scenarios
+* Tim Anderegg, New Organizing Institute (NOI)
+* Topper Bowers, Amicus
+* Josh Cohen, Washington United For Marriage
+* Erik Lukoff, Change.org
+* Charles Parsons, Salsa Labs
 
 
-## API Data Model
+# API Data Model
 
 * [API Entry Point](aep.md)
 * [People and Addresses](people.md)
@@ -30,8 +30,8 @@ Charles Parsons, Salsa Labs
 
 
 
-## Basic Resource Access
-### API Entry Point and linking
+# Basic Resource Access
+## API Entry Point and linking
 All access through OSDI starts at the API Entry Point (AEP).  The AEP is a resource that acts like a directory of the types of resources available on a server.  Some servers may support some or all of the different resource collections.  For example, a peer to peer donation system might support Donations and People but not events.  In order to find out what resources are available and what URIs to use to access them, do a GET on the AEP URI.
 
 Your service provider can tell you what the AEP URI is for your account.
@@ -126,8 +126,12 @@ In this example, the link shown is "addresses".  The href attribute of the "addr
 A client can send a GET request to this URI to retrieve a list of addresses associated with this person.
 
 
-### Common CRUD operations
-#### Creating a Resource
+### HAL
+Resources contained in server responses shall be serialized with the Hypertext Application Language [HAL](http://stateless.co/hal_specification.html)
+By default, server responses should expand first level instances.  For example, in a response for a collection of resources, those resources should be embedded.
+
+## Common CRUD operations
+### Creating a Resource
 Creating a new resource involves adding a new item to a collection.  To create a new resource, an HTTP POST message is sent to the URI for a collection.
 
     POST <addURI> HTTP/1.1
@@ -142,7 +146,7 @@ Creating a new resource involves adding a new item to a collection.  To create a
     Content-Type: application/...
 
     <serialization of new resource>
-##### Insert or Update (Upsert)
+#### Insert or Update (Upsert)
 In some cases, the client doesn't know if a resource exists or not.  Instead of first having to query a resource to determine if it exists and then do an update via PUT, the client may use the upsert feature.
 
 To use the upsert feature, the $upsert query parameter is appended to the URI.
@@ -170,7 +174,7 @@ If the resource does already exist, then a 200 response is returned
 
     <serialization of existing resource>
 
-#### Retrieving a Resource
+### Retrieving a Resource
 Retrieving a resource gets a representation of a resource instance or resource collection.  The retrieval is performed with an HTTP GET sent to the URI of the resource.
 
     GET <ResourceURI> HTTP/1.1
@@ -182,7 +186,7 @@ Retrieving a resource gets a representation of a resource instance or resource c
 
     <serialization of resource>
 
-#### Updating a Resource
+### Updating a Resource
 Updating a resource instance is accomplished by the use of an HTTP PUT sent to the URI of a given resource.  Due to the complexity of full-resource updates involving read-only properties, out-of-date data, and the need to know all properties (which one may not), this specification focuses on the ability to make partial updates to resources.
 
 To make an update to a resource, the client sends an HTTP PUT to the URI of a resource instance.  The body of the put contains a partial resource representation including the attributes to update.  Missing attributes are left unchanged on the Provider side.
@@ -225,10 +229,6 @@ The parameters $limit and $offset control pagination.
 * $offset specifies the starting point or offset to start with.
 
 
-## HAL
-Resources contained in server responses shall be serialized with the Hypertext Application Language [HAL](http://stateless.co/hal_specification.html)
-By default, server responses should expand first level instances.  For example, in a response for a collection of resources, those resources should be embedded.
-
 ### Expand / Mixins
 In order to optimize access, the $expand query parameter can be used to expand collections within resources.  Normally when retrieving a resource instance, subordinate collections are returned as references.
 
@@ -250,3 +250,11 @@ In this specification, when defining models, the following notational convention
 |	type*	| A reference to a single resource of type 'type'
 |	string	| A string
 |	datetime| A date and time representation.  In JSON this is a string.  The contents of this attribute shall be  ISO 8601 
+
+In the description of string types, sometimes the specification will list a set of acceptable values such as
+
+| Name		| Type		| Description
+|-----------|-----------|------------------
+| gender	| string	| one of "Male", "Female", "Other" |
+
+In these cases, the string value should conform to one of the choices unless specified otherwise
