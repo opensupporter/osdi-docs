@@ -1,7 +1,7 @@
 # Open Supporter Data Interface Charter
 > This effort is currently in an exploratory phase to determine if consensus on a common API can be achieved.  The involvement of a person or company does not reflect a commitment to implement this API.
 
-The Open Supporter Data Interface (OSDI) is an effort to reduce customer costs related to moving data between different systems by defining a common API for products in the non-profit and campaign space.  We are a team of vendors and customers who are prioritizing customer cost reduction and interoperability.
+The Open Supporter Data Interface (OSDI) effort seeks to define an API and data structures for interoperability among products in the cause-based, campaign and non-profit marketplace. The existence of a common API will reduce customer costs related to moving data between different systems, lower integration costs and enhance the ability of innovators to create products for the marketplace.
 
 The API will define interfaces including but not limited to resources representing people, donations, questions, tags, and events. The group will determine the order in which to define resource models and which version of the API to include them in.
 
@@ -12,10 +12,10 @@ Systems typically contain a common set of resources, including, but not limited 
 
 There is no competitive advantage for vendors to model a person differently.  The difference merely serves as a cost to customers in the form of added complexity, data loss during transfer, and extra staff & volunteer time.
 
-## Maintain Customer Focus
+# Maintain Customer Focus
 The OSDI team will solicit feedback from customers to review use cases and technical designs to make sure that we are building something that is cost-effective to implement and solves the problems customers care about.
 
-## Allow Vendor Differentiation
+# Allow Vendor Differentiation
 The core API will also allow for proprietary extensions to be built on top of it.  These extensions may represent vendor or party specific features, innovations, or differentiations.  They may also be special purpose features that are not relevant to the wider market.  They may be ideas where it is too early for industry-wide consensus to form.  Over time, these may be integrated into the common API.
 
 By using such a layered model, customer integration costs are reduced by ensuring that as much common code may be reused as possible.  For resources defined by the core there should be very little differential integration code necessary to work with products from different vendors.  Even when using a vendor or party -specific feature extension, the core elements and concepts can be reused, leaving only the extension as conditional code.
