@@ -11,7 +11,7 @@ The API will define interfaces including but not limited to resources representi
 
 [Experiment with our prototype](http://osdi-prototype.herokuapp.com)
 
-[Review Guide](review_guide.md)
+Please give us feedback on our work. [Read the Review Guide](review_guide.md) to learn what kind of feedback we're looking for and how to provide it.
 
 # Authors
 * Tim Anderegg, New Organizing Institute (NOI)
