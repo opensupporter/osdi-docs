@@ -26,7 +26,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 
 * [API Entry Point](aep.md)
 * [People and Addresses](people.md)
-* Survey Questions and Answers
+* [Survey Questions and Answers](questions.md)
 * Events
 * Donations
 * [Canvassing Interactions](interactions.md)
