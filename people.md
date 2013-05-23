@@ -1,4 +1,4 @@
-# People
+# Person
 ## Attributes
 
 | Name          | Type      | Description
@@ -6,7 +6,7 @@
 |last_name      |string     |Last name
 |first_name     |string     |First name
 |middle_initial |string     |Middle Initial
-|sex            |string     |A person's gender
+|sex            |string     |A person's gender, one of "Male", "Female", "Other"
 |guid           |string     |A globally unique identifier (GUID) for a person
 |party          |string     |Party affiliation "democrat", "republican", "independent", "none"
 |primary_address|Address    |A single instance of an address reflecting the person's primary address
@@ -14,7 +14,7 @@
 |primary_email  |string     |A person's primary email address
 |source         |string     |Information about the source where this person record was acquired.  Eg "Ref74"
 
-## Links
+## Collections
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |addresses      |Address[]  |A collection of addresses associated with the person
@@ -22,14 +22,15 @@
 |phones         |Phone[]
 |donations      |Donation[] |A collection of donations associated with the person
 |question_answers|QuestionAnswer[]|A collection of answers to questions from surveys
-|eventAttendance |Attendance[]|A collection of attendance records for a person
+|event_attendance |Attendance[]|A collection of attendance records for a person
 |interactions   |Interaction[]|A collection of outreach interactions for a person, eg Volunteer Joe called voter Sam F. Bar
 
-# Addresses
+# Address
 ## Attributes
 
 | Name          | Type      | Description
 ----------------|-----------|----------------
+| primary		| boolean	|Denotes if this is the primary address.  A person can have only one primary address
 |address_type   |string     |Type of address "home","work",'mailing'
 |address1       |string     |Address line 1
 |address2       |string     |Address line 2
@@ -59,15 +60,24 @@
             "last_name": "Senger",
             "middle_initial": "W",
             "email": "test-1@example.com",
-            "gender_identity": "M",
+            "gender": "Male",
             "party": "Democrat",
             "source": "consequatur",
             "source_details": "Et iusto ea et blanditiis debitis aut at aspernatur.",
             "twitter_handle": "@Casey_Senger",
             "dwid": "qrbqa0eswt",
+            "primary_address" : {
+                  "primary" : true,
+                  "address1": "8923 Imogene Knolls",
+                  "city": "Vandervortfort",
+                  "state": "Washington",
+                  "postal_code": "36397-7686",
+                  "country": "Martinique"
+            }
             "_embedded": {
               "addresses": [
                 {
+                  "primary" : true,
                   "address1": "8923 Imogene Knolls",
                   "city": "Vandervortfort",
                   "state": "Washington",
@@ -116,15 +126,24 @@
             "last_name": "Torphy",
             "middle_initial": "5",
             "email": "test-2@example.com",
-            "gender_identity": "M",
+            "gender": "Male",
             "party": "Democrat",
             "source": "nisi",
             "source_details": "Expedita officiis sed consectetur qui.",
             "twitter_handle": "@Edyth_Torphy",
             "dwid": "zs2qemlwqg",
+            "primary_address":  {
+                  "primary" : true,
+                  "address1": "5806 Elmira Throughway",
+                  "city": "Port Sandrineport",
+                  "state": "California",
+                  "postal_code": "68579",
+                  "country": "Georgia",
+            }
             "_embedded": {
               "addresses": [
                 {
+                  "primary" : true,
                   "address1": "5806 Elmira Throughway",
                   "city": "Port Sandrineport",
                   "state": "California",
