@@ -17,7 +17,6 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Tim Anderegg, New Organizing Institute (NOI)
 * Topper Bowers, Amicus
 * Josh Cohen, Washington United For Marriage (Editor)
-* Erik Lukoff, Change.org
 * Charles Parsons, Salsa Labs
 
 > This effort is currently in an exploratory phase to determine if consensus on a common API can be achieved.  The involvement of a person or company does not reflect a commitment to implement this API.
