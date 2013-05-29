@@ -29,15 +29,44 @@
 ## Attributes
 
 | Name          | Type      | Description
-----------------|-----------|----------------
+|----------------|-----------|----------------
 | primary		| boolean	|Denotes if this is the primary address.  A person can have only one primary address
-|address_type   |string     |Type of address "home","work",'mailing'
+|address_type   |string     |Type of address "Home","Work",'Mailing'
 |address1       |string     |Address line 1
 |address2       |string     |Address line 2
 |addressN       |string     |Additional address lines
 |city           |string     |City
-|state          |string     |State
+|state          |string     |State abbreviation according to ISO 3166-2 (Final 2 alpha digits)
 |postal_code    |string     |Region specific postal code
+|country_code	|string		|Country code according to ISO 3166-1 Alpha-2
+|lat			|float		|Geolocation latitude
+|lng			|float		|Geolocation longitude
+|accuracy		|string		|One of "Rooftop", "Approximate"
+|address_status	|string		|One of "Potential", "Verified", "Bad". 
+
+### State and Country codes
+Country Codes should conform to [ISO 3166-1 Alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+
+Examples: 
+
+|Country		|Code
+|---------------|----------------------
+|United States	|US
+|Canada			|CA
+|Cyprus			|CY
+
+In the United States, state abbreviations should conform to [ISO 3166-1 Alpha-2](http://en.wikipedia.org/wiki/ISO_3166-2:US) but using only the final two alphanumeric characters
+
+Examples:
+
+|State			|Code
+|---------------|----------------------
+|New Jersey		|NJ
+|California		|CA
+|New York		|NY
+|Washington		|WA
+
+
 
 ## Links
 | Name          | Type      | Description
