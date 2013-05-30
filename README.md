@@ -104,15 +104,15 @@ Request
 Response
 ~~~~
 {
-  "count" : 5,
-  "total_count": 80,
-  "page" : 1,
+  "total_records": 80,
+  "total_pages": 16,
+  "page" : 2,
   "_links": {
 	"next" : {
-		"href" : "http://osdi-prototype.herokuapp.com/api/v1/people?2712872"
+		"href" : "http://osdi-prototype.herokuapp.com/api/v1/people?page=3&per_page=5"
 		},
 	"previous" : {
-		"href" : "http://osdi-prototype.herokuapp.com/api/v1/people?168135168"
+		"href" : "http://osdi-prototype.herokuapp.com/api/v1/people?page=1&per_page=5"
 		}
 	},
   "_embedded": {
@@ -123,6 +123,7 @@ Response
         "middle_initial": "W",
         "email": "test-1@example.com",
         "gender": "Male",
+		"sex" : "Female",
         "party": "Democrat",
         "source": "consequatur",
         "source_details": "Et iusto ea et blanditiis debitis aut at aspernatur.",
@@ -218,11 +219,11 @@ Response
 
 When retrieving collections, the response representation will include some common attributes.
 
-|Name		|Type		| Description
-|-----------|-----------|------------------------
-|count		|integer	|The number of resources returned in this response
-|total_count|integer	|The total number of resources matching this query
-|page		|integer	|The page number of this response
+|Name			|Type		| Description
+|-----------	|-----------|------------------------
+|total_pages			|integer	|The number of pages applicable to this query
+|total_records	|integer	|The total number of resources matching this query
+|page			|integer	|The page number of this response
 
 
 ##### Prev/next
@@ -230,8 +231,8 @@ Collection responses may include additional links for navigation to previous and
 
 |Name		|Type		| Description
 |-----------|-----------|------------------------
-|next		|integer	|the link for the next page of results
-|previous	|integer	|the link for the previous page of results
+|next		|			|the link for the next page of results
+|previous	|			|the link for the previous page of results
 
 ### Updating a Resource
 Updating a resource instance is accomplished by the use of an HTTP PUT sent to the URI of a given resource.  Due to the complexity of full-resource updates involving read-only properties, out-of-date data, and the need to know all properties (which one may not), this specification focuses on the ability to make partial updates to resources.
@@ -270,10 +271,10 @@ Assuming a resource of ‘Person’ which has an attribute named ‘firstName’
 
 
 ### Pagination
-The parameters $page_size and $offset control pagination.
+The parameters $per_page and $page control pagination.
 
-* $page_size specifies how many results to return per page
-* $offset specifies the starting point or offset to start with.
+* $per_page specifies how many results to return per page
+* $page specifies the starting page to start with.
 
 
 ### Expand / Mixins
