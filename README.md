@@ -105,7 +105,16 @@ Response
 ~~~~
 {
   "count" : 5,
-  "offset" : 0,
+  "total_count": 80,
+  "page" : 1,
+  "_links": {
+	"next" : {
+		"href" : "http://osdi-prototype.herokuapp.com/api/v1/people?2712872"
+		},
+	"previous" : {
+		"href" : "http://osdi-prototype.herokuapp.com/api/v1/people?168135168"
+		}
+	},
   "_embedded": {
     "people": [
       {
@@ -118,7 +127,6 @@ Response
         "source": "consequatur",
         "source_details": "Et iusto ea et blanditiis debitis aut at aspernatur.",
         "twitter_handle": "@Casey_Senger",
-        "dwid": "qrbqa0eswt",
       ...other properties...
         "_links": {
               "addresses": {
@@ -165,7 +173,7 @@ When used, the server will use a matching algorithm to determine if the input at
 
 To use the upsert feature, the $upsert query parameter is appended to the URI.
 
-> If the upsert parameter is not included, it defaults to false.  The server will create a new resource
+> If the upsert parameter is not included, it defaults to TRUE.  The server will create a new resource
 
 	POST <addURI>?upsert=true HTTP/1.1
     Host: ...
@@ -213,7 +221,17 @@ When retrieving collections, the response representation will include some commo
 |Name		|Type		| Description
 |-----------|-----------|------------------------
 |count		|integer	|The number of resources returned in this response
-|offset		|integer	|The offset of the first resource in the server collection
+|total_count|integer	|The total number of resources matching this query
+|page		|integer	|The page number of this response
+
+
+##### Prev/next
+Collection responses may include additional links for navigation to previous and next pages
+
+|Name		|Type		| Description
+|-----------|-----------|------------------------
+|next		|integer	|the link for the next page of results
+|previous	|integer	|the link for the previous page of results
 
 ### Updating a Resource
 Updating a resource instance is accomplished by the use of an HTTP PUT sent to the URI of a given resource.  Due to the complexity of full-resource updates involving read-only properties, out-of-date data, and the need to know all properties (which one may not), this specification focuses on the ability to make partial updates to resources.
@@ -252,9 +270,9 @@ Assuming a resource of ‘Person’ which has an attribute named ‘firstName’
 
 
 ### Pagination
-The parameters $limit and $offset control pagination.
+The parameters $page_size and $offset control pagination.
 
-* $limit specifies how many results to return
+* $page_size specifies how many results to return per page
 * $offset specifies the starting point or offset to start with.
 
 
