@@ -6,7 +6,8 @@
 |last_name      |string     |Last name
 |first_name     |string     |First name
 |middle_name	|string     |Middle name
-|sex            |string     |A person's gender, one of "Male", "Female", "Other"
+|sex            |string     |A person's biological sex, one of "Male", "Female", "Other"
+|gender			|string		|The gender with which a person identifies
 |guid           |string     |A globally unique identifier (GUID) for a person
 |party          |string     |Party affiliation "democrat", "republican", "independent", "none"
 |primary_address|Address    |A single instance of an address reflecting the person's primary address
