@@ -102,40 +102,41 @@ Request
 	GET /api/v1/people HTTP/1.1
 
 Response
-~~~~
-{
-  "total_records": 80,
-  "total_pages": 16,
-  "page" : 2,
-  "_links": {
-	"next" : {
-		"href" : "http://osdi-prototype.herokuapp.com/api/v1/people?page=3&per_page=5"
+
+	{
+	  "total_records": 80,
+	  "total_pages": 16,
+	  "page" : 2,
+	  "_links": {
+		"next" : {
+			"href" : "http://osdi-prototype.herokuapp.com/api/v1/people?page=3&per_page=5"
+			},
+		"previous" : {
+			"href" : "http://osdi-prototype.herokuapp.com/api/v1/people?page=1&per_page=5"
+			}
 		},
-	"previous" : {
-		"href" : "http://osdi-prototype.herokuapp.com/api/v1/people?page=1&per_page=5"
-		}
-	},
-  "_embedded": {
-    "people": [
-      {
-        "first_name": "Casey",
-        "last_name": "Senger",
-        "middle_initial": "W",
-        "email": "test-1@example.com",
-        "gender": "Male",
-		"sex" : "Female",
-        "party": "Democrat",
-        "source": "consequatur",
-        "source_details": "Et iusto ea et blanditiis debitis aut at aspernatur.",
-        "twitter_handle": "@Casey_Senger",
-      ...other properties...
-        "_links": {
-              "addresses": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/1/addresses"
-              }
-	  ...
-      ...
-~~~~
+	  "_embedded": {
+	    "people": [
+	      {
+	        "first_name": "Casey",
+	        "last_name": "Senger",
+	        "middle_initial": "W",
+	        "email": "test-1@example.com",
+	        "gender": "Male",
+			"sex" : "Female",
+	        "party": "Democrat",
+	        "source": "consequatur",
+	        "source_details": "Et iusto ea et blanditiis debitis aut at aspernatur.",
+	        "twitter_handle": "@Casey_Senger",
+	      ...other properties...
+	        "_links": {
+	              "addresses": {
+	                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/1/addresses"
+	              }
+		  ...
+	      ...
+	}
+
 
 In the last example message, the server returns a list of people.  For brevity this document only shows the first one.  Within each person object, there is also a "_links" collection just like in the AEP.  This will show up in most objects in OSDI.  The links collection lets the client know what other resources and resource collections are associated with a given object.
 
