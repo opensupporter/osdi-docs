@@ -7,7 +7,7 @@ The API will define interfaces including but not limited to resources representi
 
 [Read the full charter](charter.md)
 
-[Read our scenarios document](scenarios/)
+[Read our scenarios document](scenarios/scenarios.md)
 
 [Experiment with our prototype](http://osdi-prototype.herokuapp.com)
 
@@ -18,6 +18,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Topper Bowers, Amicus
 * Josh Cohen, Washington United For Marriage (Editor)
 * Charles Parsons, Salsa Labs
+* Ray Suelzer, UFCW International Union
 
 > This effort is currently in an exploratory phase to determine if consensus on a common API can be achieved.  The involvement of a person or company does not reflect a commitment to implement this API.
 
