@@ -148,6 +148,7 @@ A client can send a GET request to this URI to retrieve a list of addresses asso
 ## HAL
 
 OSDI has embraced the [JSON+HAL spec](http://tools.ietf.org/html/draft-kelly-json-hal-05).  JSON+HAL specifies a simple way to embed linking into APIs.  The combination of linking and a specification allows generic clients to be written and, indeed, (many languages have HAL clients)[http://stateless.co/hal_specification.html].  Linking itself makes it easier to both reason about and write clients for an API.
+
 By default, server responses should expand first level instances.  For example, in a response for a collection of resources, those resources should be embedded.
 
 ## Common CRUD operations
