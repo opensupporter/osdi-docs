@@ -2,13 +2,13 @@
 PARAM='--toc -f markdown_github'
 
 # make main protocol doc
-pandoc -o output/protocol.docx $PARAM docheader.md README.md aep.md people.md questions.md interactions.md
+pandoc -o docs/readme.docx $PARAM docheader.md README.md aep.md people.md questions.md interactions.md
 
 # make scenarios doc
-pandoc -o output/scenarios.docx $PARAM docheader.md scenarios/scenarios.md
+pandoc -o docs/scenarios.docx $PARAM docheader.md scenarios/scenarios.md
 
 #make charter doc
-pandoc -o output/charter.docx $PARAM docheader.md charter.md
+pandoc -o docs/charter.docx $PARAM docheader.md charter.md
 
 #make review guide doc
-pandoc -o output/review.docx $PARAM docheader.md review_guide.md
+pandoc -o docs/review.docx $PARAM docheader.md review_guide.md
