@@ -9,7 +9,7 @@ The API will define interfaces including but not limited to resources representi
 
 [Read our scenarios document](scenarios/scenarios.md)
 
-[Experiment with our prototype](http://osdi-prototype.herokuapp.com)
+[Experiment with our prototype](http://api.opensupporter.org)
 
 Please give us feedback on our work. [Read the Review Guide](review_guide.md) to learn what kind of feedback we're looking for and how to provide it.
 
@@ -145,8 +145,9 @@ In this example, the link shown is "addresses".  The href attribute of the "addr
 A client can send a GET request to this URI to retrieve a list of addresses associated with this person.
 
 
-### HAL
-Resources contained in server responses shall be serialized with the Hypertext Application Language [HAL](http://stateless.co/hal_specification.html)
+## HAL
+
+OSDI has embraced the [JSON+HAL spec](http://tools.ietf.org/html/draft-kelly-json-hal-05).  JSON+HAL specifies a simple way to embed linking into APIs.  The combination of linking and a specification allows generic clients to be written and, indeed, (many languages have HAL clients)[http://stateless.co/hal_specification.html].  Linking itself makes it easier to both reason about and write clients for an API.
 By default, server responses should expand first level instances.  For example, in a response for a collection of resources, those resources should be embedded.
 
 ## Common CRUD operations
@@ -173,11 +174,11 @@ When used, the server will use a matching algorithm to determine if the input at
 
 > The algorithm used by the server to perform matching is vendor-specific.  Contact your vendor for specifics.
 
-To use the upsert feature, the $upsert query parameter is appended to the URI.
+To use the upsert feature, the $upsert query parameter is appended to the URI.  Its value is either true or false
 
-> If the upsert parameter is not included, it defaults to TRUE.  The server will create a new resource
+> If the upsert parameter is not included, it defaults to TRUE.  The server will attempt a match to an existing resource first, but if if cannot find one, a new resource will be created.
 
-	POST <addURI>?upsert=true HTTP/1.1
+	POST <addURI>?upsert=false HTTP/1.1
     Host: ...
     Accept: application/...
     Content-Type: application/...
@@ -242,7 +243,7 @@ To make an update to a resource, the client sends an HTTP PUT to the URI of a re
 
 Clients may set an attribute to nil by including the attribute using ‘nil’ for JSON.
 
-Updating Collections with PUT is not supported.
+> Updating Collections with PUT is not supported.
 
     PUT <editURI> HTTP/1.1
     Host: ...
