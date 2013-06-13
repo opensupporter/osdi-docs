@@ -56,7 +56,7 @@ Examples:
 |Canada			|CA
 |Cyprus			|CY
 
-In the United States, state abbreviations should conform to [ISO 3166-1 Alpha-2](http://en.wikipedia.org/wiki/ISO_3166-2:US) but using only the final two alphanumeric characters
+In the United States, state abbreviations should conform to [ISO 3166-2:US](http://en.wikipedia.org/wiki/ISO_3166-2:US) but using only the final two alphanumeric characters
 
 Examples:
 
