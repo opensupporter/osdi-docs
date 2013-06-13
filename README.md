@@ -43,9 +43,9 @@ Your service provider can tell you what the AEP URI is for your account.
 
 For the purposes of example, assume your provider has given you an AEP URI of
 
-[http://osdi-prototype.herokuapp.com/api/v1](http://osdi-prototype.herokuapp.com/api/v1)
+[http://api.opensupporter.org/api/v1](http://api.opensupporter.org/api/v1)
 
-> Note: you can explore the AEP with a user friendly interface by visiting our [prototype endpoint](http://osdi-prototype.herokuapp.com)
+> Note: you can explore the AEP with a user friendly interface by visiting our [prototype endpoint](http://api.opensupporter.org)
 
 In order to determine the available resources on the server the client should perform an HTTP GET request to this URI.
 
@@ -55,7 +55,7 @@ Within the response will be a collection of links to the resource collections av
 Request
 
 	GET /api/v1 HTTP/1.1
-	Host: osdi-prototype.herokuapp.com
+	Host: api.opensupporter.org
 
 Response
 
@@ -74,11 +74,11 @@ Response
 	      "title": "The collection of addresses in the system"
 	    },
 	    "questions": {
-	      "href": "http://osdi-prototype.herokuapp.com/api/v1/questions",
+	      "href": "http://api.opensupporter.org/api/v1/questions",
 	      "title": "The collection of questions in the system"
 	    },
 	    "question_answers": {
-	      "href": "http://osdi-prototype.herokuapp.com/api/v1/question_answers",
+	      "href": "http://api.opensupporter.org/api/v1/question_answers",
 	      "title": "The collection of question answers in the system"
 	    },
 	    "self": {
@@ -97,59 +97,205 @@ Response
 Given the above example response, let's fetch the people collection on this server. 
 Notice the "_links" collection.  Find the object in the links collection with key "people".  That object has an attribute "href" which contains the URI to use to access the people collection.
 
+> This is for example purpose only.  The official definition of the person schema is [People and Addresses](people.md)
+
 Request
 
 	GET /api/v1/people HTTP/1.1
 
 Response
 
-	{
-	  "total_records": 80,
-	  "total_pages": 16,
-	  "page" : 2,
-	  "_links": {
-		"next" : {
-			"href" : "http://osdi-prototype.herokuapp.com/api/v1/people?page=3&per_page=5"
-			},
-		"previous" : {
-			"href" : "http://osdi-prototype.herokuapp.com/api/v1/people?page=1&per_page=5"
-			}
-		},
-	  "_embedded": {
-	    "people": [
-	      {
-	        "first_name": "Casey",
-	        "last_name": "Senger",
-	        "middle_initial": "W",
-	        "email": "test-1@example.com",
-	        "gender": "Male",
-			"sex" : "Female",
-	        "party": "Democrat",
-	        "source": "consequatur",
-	        "source_details": "Et iusto ea et blanditiis debitis aut at aspernatur.",
-	        "twitter_handle": "@Casey_Senger",
-	      ...other properties...
-	        "_links": {
-	              "addresses": {
-	                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/1/addresses"
-	              }
-		  ...
-	      ...
-	}
+    {
+    	  "total_records": 80,
+    	  "total_pages": 16,
+    	  "page" : 2,
+    	  "_links": {
+    		"next" : {
+    			"href" : "http://api.opensupporter.org/api/v1/people?page=3&per_page=5"
+    			},
+    		"previous" : {
+    			"href" : "http://api.opensupporter.org/api/v1/people?page=1&per_page=5"
+    			}
+    		},
+    	  "_embedded": {
+    	    "people": [
+             {
+                "first_name": "Edwin",
+                "last_name": "Labadie",
+                "middle_name": "Marques",
+                "email": "test-3@example.com",
+                "gender": "Male",
+                "sex": "Female",
+                "party": "Democrat",
+                "source": "sed",
+                "source_details": "Delectus rerum autem mollitia sit asperiores odit hic cum.",
+                "twitter_handle": "@Edwin_Labadie",
+                "guid": "c1d9c510-b562-0130-dc7c-168c51e904de",
+                "_embedded": {
+                  "primary_address": {
+                    "address1": "935 Ed Lock",
+                    "city": "New Dudley",
+                    "state": "MN",
+                    "postal_code": "17678",
+                    "country_code": "RU",
+                    "address_type": "Home",
+                    "lat": 44,
+                    "lng": 40,
+                    "accuracy": "Rooftop",
+                    "address_status": "Verified",
+                    "primary": true,
+                    "_links": {
+                      "self": {
+                        "href": "http://api.opensupporter.org/api/v1/addresses/46"
+                      },
+                      "person": {
+                        "href": "http://api.opensupporter.org/api/v1/people/23"
+                      }
+                    }
+                  },
+                  "addresses": [
+                    {
+                      "address1": "28160 Wiegand Divide",
+                      "city": "Lake Amarimouth",
+                      "state": "GA",
+                      "postal_code": "27585-7257",
+                      "country_code": "US",
+                      "address_type": "Work",
+                      "lat": 44,
+                      "lng": 40,
+                      "accuracy": "Rooftop",
+                      "address_status": "Verified",
+                      "primary": false,
+                      "_links": {
+                        "self": {
+                          "href": "http://api.opensupporter.org/api/v1/addresses/45"
+                        },
+                        "person": {
+                          "href": "http://api.opensupporter.org/api/v1/people/23"
+                        }
+                      }
+                    },
+                    {
+                      "address1": "935 Ed Lock",
+                      "city": "New Dudley",
+                      "state": "MN",
+                      "postal_code": "17678",
+                      "country_code": "RU",
+                      "address_type": "Home",
+                      "lat": 44,
+                      "lng": 40,
+                      "accuracy": "Rooftop",
+                      "address_status": "Verified",
+                      "primary": true,
+                      "_links": {
+                        "self": {
+                          "href": "http://api.opensupporter.org/api/v1/addresses/46"
+                        },
+                        "person": {
+                          "href": "http://api.opensupporter.org/api/v1/people/23"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "_links": {
+                  "addresses": {
+                    "href": "http://api.opensupporter.org/api/v1/people/23/addresses"
+                  },
+                  "question_answers": {
+                    "href": "http://api.opensupporter.org/api/v1/people/23/question_answers"
+                  },
+                  "self": {
+                    "href": "http://api.opensupporter.org/api/v1/people/23"
+                  }
+                }
+              }
+            .... other person records follow
+           }
+        }
 
 
 In the last example message, the server returns a list of people.  For brevity this document only shows the first one.  Within each person object, there is also a "_links" collection just like in the AEP.  This will show up in most objects in OSDI.  The links collection lets the client know what other resources and resource collections are associated with a given object.
 
 In this example, the link shown is "addresses".  The href attribute of the "addresses" link contains the URI of the address collection *for this person*.
 
+     "_links": {
+              "addresses": {
+                "href": "http://api.opensupporter.org/api/v1/people/23/addresses"
+              }
+
 A client can send a GET request to this URI to retrieve a list of addresses associated with this person.
 
 
+    GET /api/v1/people/23/addresses
+
+    200 OK
+    Content-Type: application/json
+
+    {
+      "total_pages": 1,
+      "page": 1,
+      "total_records": 2,
+      "_embedded": {
+        "addresses": [
+          {
+            "address1": "28160 Wiegand Divide",
+            "city": "Lake Amarimouth",
+            "state": "GA",
+            "postal_code": "27585-7257",
+            "country_code": "US",
+            "address_type": "Work",
+            "lat": 44,
+            "lng": 40,
+            "accuracy": "Rooftop",
+            "address_status": "Verified",
+            "primary": false,
+            "_links": {
+              "self": {
+                "href": "http://api.opensupporter.org/api/v1/addresses/45"
+              },
+              "person": {
+                "href": "http://api.opensupporter.org/api/v1/people/23"
+              }
+            }
+          },
+          {
+            "address1": "935 Ed Lock",
+            "city": "New Dudley",
+            "state": "MN",
+            "postal_code": "17678",
+            "country_code": "RU",
+            "address_type": "Home",
+            "lat": 44,
+            "lng": 40,
+            "accuracy": "Rooftop",
+            "address_status": "Verified",
+            "primary": true,
+            "_links": {
+              "self": {
+                "href": "http://api.opensupporter.org/api/v1/addresses/46"
+              },
+              "person": {
+                "href": "http://api.opensupporter.org/api/v1/people/23"
+              }
+            }
+          }
+        ]
+      },
+      "_links": {
+        "self": {
+          "href": "http://api.opensupporter.org/api/v1/addresses"
+        }
+      }
+    }
+
+Note that this pattern can be applied to other associated collections including but not limited to donations or question_answers.
+
 ## HAL
 
-OSDI has embraced the [JSON+HAL spec](http://tools.ietf.org/html/draft-kelly-json-hal-05).  JSON+HAL specifies a simple way to embed linking into APIs.  The combination of linking and a specification allows generic clients to be written and, indeed, (many languages have HAL clients)[http://stateless.co/hal_specification.html].  Linking itself makes it easier to both reason about and write clients for an API.
+OSDI has embraced the [JSON+HAL spec](http://tools.ietf.org/html/draft-kelly-json-hal-05).  JSON+HAL specifies a simple way to embed linking into APIs.  The combination of linking and a specification allows generic clients to be written and, indeed, [many languages have HAL clients](http://stateless.co/hal_specification.html).  Linking itself makes it easier to both reason about and write clients for an API.
 
-By default, server responses should expand first level instances.  For example, in a response for a collection of resources, those resources should be embedded.
+By default, server responses should expand first level instances unless otherwise specified.  For example, in a response for a collection of resources, those resources should be embedded.
 
 ## Common CRUD operations
 ### Creating a Resource

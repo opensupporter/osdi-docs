@@ -75,65 +75,93 @@ Examples:
 |person      |Person*       |A link to the person associated with the address
 
 # Scenarios
-## Get a list of people
+## Get a list of people with pagination
 
-    GET /api/v1/people
+    GET /api/v1/people?per_page=2&page=1
 
     200 OK
     Content-Type: application/json
 
     {
+      "total_pages": 1,
+      "page": 1,
+      "total_records": 2,
       "_embedded": {
         "people": [
           {
-            "first_name": "Casey",
-            "last_name": "Senger",
-            "middle_initial": "W",
-            "email": "test-1@example.com",
+            "first_name": "Edwin",
+            "last_name": "Labadie",
+            "middle_name": "Marques",
+            "email": "test-3@example.com",
             "gender": "Male",
+            "sex": "Female",
             "party": "Democrat",
-            "source": "consequatur",
-            "source_details": "Et iusto ea et blanditiis debitis aut at aspernatur.",
-            "twitter_handle": "@Casey_Senger",
-            "dwid": "qrbqa0eswt",
-            "primary_address" : {
-                  "primary" : true,
-                  "address1": "8923 Imogene Knolls",
-                  "city": "Vandervortfort",
-                  "state": "Washington",
-                  "postal_code": "36397-7686",
-                  "country": "Martinique"
-            }
+            "source": "sed",
+            "source_details": "Delectus rerum autem mollitia sit asperiores odit hic cum.",
+            "twitter_handle": "@Edwin_Labadie",
+            "guid": "c1d9c510-b562-0130-dc7c-168c51e904de",
             "_embedded": {
+              "primary_address": {
+                "address1": "935 Ed Lock",
+                "city": "New Dudley",
+                "state": "MN",
+                "postal_code": "17678",
+                "country_code": "RU",
+                "address_type": "Home",
+                "lat": 44,
+                "lng": 40,
+                "accuracy": "Rooftop",
+                "address_status": "Verified",
+                "primary": true,
+                "_links": {
+                  "self": {
+                    "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/46"
+                  },
+                  "person": {
+                    "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
+                  }
+                }
+              },
               "addresses": [
                 {
-                  "primary" : true,
-                  "address1": "8923 Imogene Knolls",
-                  "city": "Vandervortfort",
-                  "state": "Washington",
-                  "postal_code": "36397-7686",
-                  "country": "Martinique",
+                  "address1": "28160 Wiegand Divide",
+                  "city": "Lake Amarimouth",
+                  "state": "GA",
+                  "postal_code": "27585-7257",
+                  "country_code": "US",
+                  "address_type": "Work",
+                  "lat": 44,
+                  "lng": 40,
+                  "accuracy": "Rooftop",
+                  "address_status": "Verified",
+                  "primary": false,
                   "_links": {
                     "self": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/1"
+                      "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/45"
                     },
                     "person": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/people/1"
+                      "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
                     }
                   }
                 },
                 {
-                  "address1": "1371 Matt Stravenue",
-                  "city": "West Emelymouth",
-                  "state": "Indiana",
-                  "postal_code": "44088",
-                  "country": "Austria",
+                  "address1": "935 Ed Lock",
+                  "city": "New Dudley",
+                  "state": "MN",
+                  "postal_code": "17678",
+                  "country_code": "RU",
+                  "address_type": "Home",
+                  "lat": 44,
+                  "lng": 40,
+                  "accuracy": "Rooftop",
+                  "address_status": "Verified",
+                  "primary": true,
                   "_links": {
                     "self": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/2"
+                      "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/46"
                     },
                     "person": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/people/1"
+                      "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
                     }
                   }
                 }
@@ -141,65 +169,90 @@ Examples:
             },
             "_links": {
               "addresses": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/1/addresses"
+                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/addresses"
               },
               "question_answers": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/1/question_answers"
+                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/question_answers"
               },
               "self": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/1"
+                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
               }
             }
           },
           {
-            "first_name": "Edyth",
-            "last_name": "Torphy",
-            "middle_initial": "5",
-            "email": "test-2@example.com",
+            "first_name": "Parker",
+            "last_name": "Walker",
+            "middle_name": "Jannie",
+            "email": "test-4@example.com",
             "gender": "Male",
+            "sex": "Female",
             "party": "Democrat",
-            "source": "nisi",
-            "source_details": "Expedita officiis sed consectetur qui.",
-            "twitter_handle": "@Edyth_Torphy",
-            "dwid": "zs2qemlwqg",
-            "primary_address":  {
-                  "primary" : true,
-                  "address1": "5806 Elmira Throughway",
-                  "city": "Port Sandrineport",
-                  "state": "California",
-                  "postal_code": "68579",
-                  "country": "Georgia",
-            }
+            "source": "architecto",
+            "source_details": "Itaque et reprehenderit rerum ea quis.",
+            "twitter_handle": "@Parker_Walker",
+            "guid": "c1e1d0d0-b562-0130-dc7c-168c51e904de",
             "_embedded": {
+              "primary_address": {
+                "address1": "22184 Vernie Cove",
+                "city": "Rowemouth",
+                "state": "GA",
+                "postal_code": "74895",
+                "country_code": "JP",
+                "address_type": "Home",
+                "lat": 44,
+                "lng": 40,
+                "accuracy": "Rooftop",
+                "address_status": "Verified",
+                "primary": true,
+                "_links": {
+                  "self": {
+                    "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/48"
+                  },
+                  "person": {
+                    "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24"
+                  }
+                }
+              },
               "addresses": [
                 {
-                  "primary" : true,
-                  "address1": "5806 Elmira Throughway",
-                  "city": "Port Sandrineport",
-                  "state": "California",
-                  "postal_code": "68579",
-                  "country": "Georgia",
+                  "address1": "7485 Rashad Pine",
+                  "city": "Brandynview",
+                  "state": "PR",
+                  "postal_code": "76221-3163",
+                  "country_code": "US",
+                  "address_type": "Work",
+                  "lat": 44,
+                  "lng": 40,
+                  "accuracy": "Rooftop",
+                  "address_status": "Verified",
+                  "primary": false,
                   "_links": {
                     "self": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/3"
+                      "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/47"
                     },
                     "person": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/people/2"
+                      "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24"
                     }
                   }
                 },
                 {
-                  "address1": "242 Ora Mill",
-                  "city": "Ziemeland",
-                  "state": "Louisiana",
-                  "postal_code": "35127",
-                  "country": "Tokelau",
+                  "address1": "22184 Vernie Cove",
+                  "city": "Rowemouth",
+                  "state": "GA",
+                  "postal_code": "74895",
+                  "country_code": "JP",
+                  "address_type": "Home",
+                  "lat": 44,
+                  "lng": 40,
+                  "accuracy": "Rooftop",
+                  "address_status": "Verified",
+                  "primary": true,
                   "_links": {
                     "self": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/4"
+                      "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/48"
                     },
                     "person": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/people/2"
+                      "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24"
                     }
                   }
                 }
@@ -207,13 +260,24 @@ Examples:
             },
             "_links": {
               "addresses": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/2/addresses"
+                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24/addresses"
               },
               "question_answers": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/2/question_answers"
+                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24/question_answers"
               },
               "self": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/2"
+                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24"
               }
             }
-          },
+          }
+        ]
+      },
+      "_links": {
+        "self": {
+          "href": "http://osdi-prototype.herokuapp.com/api/v1/people"
+        },
+        "addresses": {
+          "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses"
+        }
+      }
+    }
