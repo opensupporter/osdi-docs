@@ -11,7 +11,7 @@ The API will define interfaces including but not limited to resources representi
 
 [Experiment with our prototype http://api.opensupporter.org](http://api.opensupporter.org)
 
-[Join our reviewers email group to stay up to date: http://signup.opensupporter.org](signup.opensupporter.org)
+[Join our reviewers email group to stay up to date: http://signup.opensupporter.org](http://signup.opensupporter.org)
 
 Please give us feedback on our work. [Read the Review Guide](review_guide.md) to learn what kind of feedback we're looking for and how to provide it.
 
