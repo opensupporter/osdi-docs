@@ -9,7 +9,9 @@ The API will define interfaces including but not limited to resources representi
 
 [Read our scenarios document](scenarios/scenarios.md)
 
-[Experiment with our prototype](http://api.opensupporter.org)
+[Experiment with our prototype http://api.opensupporter.org](http://api.opensupporter.org)
+
+[Join our reviewers email group to stay up to date: http://signup.opensupporter.org](signup.opensupporter.org)
 
 Please give us feedback on our work. [Read the Review Guide](review_guide.md) to learn what kind of feedback we're looking for and how to provide it.
 
@@ -21,6 +23,11 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Ray Suelzer, UFCW International Union
 
 > This effort is currently in an exploratory phase to determine if consensus on a common API can be achieved.  The involvement of a person or company does not reflect a commitment to implement this API.
+
+# Contact Info
+Website: [http://opensupporter.org](http://opensupporter.org)
+
+Email: [info@opensupporter.org](mailto:info@opensupporter.org)
 
 # API Data Model
 
