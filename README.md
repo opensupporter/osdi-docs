@@ -13,6 +13,8 @@ The API will define interfaces including but not limited to resources representi
 
 [Join our reviewers email group to stay up to date: http://signup.opensupporter.org](http://signup.opensupporter.org)
 
+[**Please Fill out our survey**](https://docs.google.com/forms/d/1YazUaISNvH_j2p4rfv7eKcbq4CLjaGuszDnTFxA4Gcw/viewform)
+
 Please give us feedback on our work. [Read the Review Guide](review_guide.md) to learn what kind of feedback we're looking for and how to provide it.
 
 # Authors
