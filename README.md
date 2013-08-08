@@ -1,7 +1,9 @@
 
 ![Logo](logo.png)
 
-The Open Supporter Data Interface (OSDI) effort seeks to define an API and data structures for interoperability among products in the cause-based, campaign and non-profit marketplace. The existence of a common API will reduce customer costs related to moving data between different systems, lower integration costs and enhance the ability of innovators to create products for the marketplace.
+The Open Supporter Data Interface (OSDI) effort seeks to define an API and data structures for interoperability among products in the **progressive** cause-based, campaign and non-profit marketplace. The existence of a common API will reduce customer costs related to moving data between different systems, lower integration costs and enhance the ability of innovators to create products for the marketplace.
+
+OSDI membership is made up of progressive vendors and organizations as well as invited non-partisan and mainstream industry vendors.
 
 The API will define interfaces including but not limited to resources representing people, donations, questions, tags, and events. The group will determine the order in which to define resource models and which version of the API to include them in.
 
