@@ -45,6 +45,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 # Authors
 * Tim Anderegg, New Organizing Institute (NOI)
 * Topper Bowers, Amicus
+* Jeff Crigler, Catalist
 * Josh Cohen, Washington United For Marriage (Editor)
 * Charles Parsons, Salsa Labs
 * Ben Stein, Mobile Commons
