@@ -50,6 +50,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Charles Parsons, Salsa Labs
 * Ben Stein, Mobile Commons
 * Ray Suelzer, UFCW International Union
+* Nathan Woodhull, ControlShift Labs
 
 
 > This effort is currently in an exploratory phase to determine if consensus on a common API can be achieved.  The involvement of a person or company does not reflect a commitment to implement this API.
