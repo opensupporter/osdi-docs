@@ -121,42 +121,32 @@ This page defines Events, EventRSVPS
 	  "transparency": string,
 	  "visibility": string,
 	  "_embedded" : {
-	       "attendees": [
-	            {
-		        "first_name": "Lurline",
-		        "last_name": "Glover",
-		        "middle_name": "Titus",
-		        "email": "test-1@example.com",
-		        "gender": "Male",
-		        "sex": "Female",
-		        "twitter_handle": "@Lurline_Glover",
-		        "guid": "c199e4a0-b562-0130-dc7c-168c51e904de",
-		        "_embedded": {
-		          "primary_address": {
-		            "address1": "430 Erwin Stream",
-		             ...
-		          },
-		        {
-		        "first_name": "Lucas",
-		        "last_name": "Lubowitz",
-		        "middle_name": "Ramon",
-		        "email": "test-2@example.com",
-		        "gender": "Male",
-		        "sex": "Female",
-		        "party": "Democrat",
-		        "source": "ut",
-		        "source_details": "Optio enim eius expedita occaecati.",
-		        "twitter_handle": "@Lucas_Lubowitz",
-		        "guid": "c1d2a360-b562-0130-dc7c-168c51e904de",
-		        "_embedded": {
-		          "primary_address": {
-		            "address1": "57715 Elody Point",
-		           ...
-				   }
-	              }
-                 }
-               ]
-              },
+	       "attendance": [
+                {
+					"_links" : { 
+						"event" : {"href" : uri }
+					},
+					"_embedded" : {
+						"person": {
+							
+			            
+				        "first_name": "Lurline",
+				        "last_name": "Glover",
+				        "middle_name": "Titus",
+				        "email": "test-1@example.com",
+				        "gender": "Male",
+				        "sex": "Female",
+				        "twitter_handle": "@Lurline_Glover",
+				        "guid": "c199e4a0-b562-0130-dc7c-168c51e904de",
+				        "_embedded": {
+				          "primary_address": {
+				            "address1": "430 Erwin Stream",
+				             ...
+				          }
+		        
+              			}
+					}
+					]
 	  "guestsCanInviteOthers": boolean,
 	  "privateCopy": boolean,
 	  "locked": boolean,
