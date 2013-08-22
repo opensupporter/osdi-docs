@@ -29,6 +29,7 @@ This page defines Events, EventRSVPS
 | visibility| string	| Visibility of the event.  Possible values are
 |			|			| "public" visible on public web interfaces
 |			|			| "private" not visible on public web interfaces
+| attendance_count| integer | read-only computed property of attendance count
 | attendees	| Attendance[]| A Collection of Attendance resources
 | guestsCanInviteOthers | boolean | Attendees can invite guests to the event
 | reminders | list		| a list of reminder elements
@@ -51,7 +52,12 @@ This page defines Events, EventRSVPS
 | comment	| string	| An optional comment from the attendee
 |
 
-# JSON
+# Single resource retrieval 
+
+## default embed policy
+> TBD
+
+## JSON Representation
 
 	{
 	  "id": string,
@@ -80,39 +86,38 @@ This page defines Events, EventRSVPS
 	              "person": {
 	                "href": "http://api.opensupporter.org/api/v1/people/21"
 	              }
-	            }
-	  "_embedded" : {
-		"creator" :   {
-            {
-	        "first_name": "Lurline",
-	        "last_name": "Glover",
-	        "middle_name": "Titus",
-	        "email": "test-1@example.com",
-	        "gender": "Male",
-	        "sex": "Female",
-	        "twitter_handle": "@Lurline_Glover",
-	        "guid": "c199e4a0-b562-0130-dc7c-168c51e904de",
-	        "_embedded": {
-	          "primary_address": {
-	            "address1": "430 Erwin Stream",
-	             ...
-	          },
-      "_embedded" : {
-		"organizer" :   {
-            {
-	        "first_name": "Lurline",
-	        "last_name": "Glover",
-	        "middle_name": "Titus",
-	        "email": "test-1@example.com",
-	        "gender": "Male",
-	        "sex": "Female",
-	        "twitter_handle": "@Lurline_Glover",
-	        "guid": "c199e4a0-b562-0130-dc7c-168c51e904de",
-	        "_embedded": {
-	          "primary_address": {
-	            "address1": "430 Erwin Stream",
-	             ...
-	          },
+			"creator" :   {
+	            {
+		        "first_name": "Lurline",
+		        "last_name": "Glover",
+		        "middle_name": "Titus",
+		        "email": "test-1@example.com",
+		        "gender": "Male",
+		        "sex": "Female",
+		        "twitter_handle": "@Lurline_Glover",
+		        "guid": "c199e4a0-b562-0130-dc7c-168c51e904de",
+		        "_embedded": {
+		          "primary_address": {
+		            "address1": "430 Erwin Stream",
+		             ...
+		          },
+
+			"organizer" :   {
+	            {
+		        "first_name": "Lurline",
+		        "last_name": "Glover",
+		        "middle_name": "Titus",
+		        "email": "test-1@example.com",
+		        "gender": "Male",
+		        "sex": "Female",
+		        "twitter_handle": "@Lurline_Glover",
+		        "guid": "c199e4a0-b562-0130-dc7c-168c51e904de",
+		        "_embedded": {
+		          "primary_address": {
+		            "address1": "430 Erwin Stream",
+		             ...
+		          },
+			},
 	  "start": datetime,
 	  "end" : datetime,
       "all_day" : boolean,
@@ -120,11 +125,14 @@ This page defines Events, EventRSVPS
 
 	  "transparency": string,
 	  "visibility": string,
+	  "attendance_count" : integer,
 	  "_embedded" : {
 	       "attendance": [
                 {
+				  "total_records": 80,
 					"_links" : { 
 						"event" : {"href" : uri }
+						"person" : {"href" : uri }
 					},
 					"_embedded" : {
 						"person": {
@@ -166,8 +174,24 @@ This page defines Events, EventRSVPS
        "self": { "href" : uri },
        "attendance" : { "href" : uri }
        "location" : { "href" : uri } 
+	   "organizer" : { "href" : uri } 
+	   "creator" : { "href" : uri } 
       }
 
 	}
 	
 
+# Collection Response
+
+## Default embed policy
+When retrieving a collection of events, by default, the full event resource is returned but:
+
+* Included: creator, organizer, location
+* Excluded: Attendance collection
+
+All 1:1 relationships are contained in the response
+
+Excluded resources can be accessed directly by de-referencing the appropriate link in the _links collection
+
+## JSON Representation
+> TBD
