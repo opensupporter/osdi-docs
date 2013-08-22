@@ -47,9 +47,11 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Topper Bowers, Amicus
 * Jeff Crigler, Catalist
 * Josh Cohen, Washington United For Marriage (Editor)
+* Tim Gutowski, Trilogy Interactive
 * Charles Parsons, Salsa Labs
 * Ben Stein, Mobile Commons
 * Ray Suelzer, UFCW International Union
+* Brian Vallelunga, Trilogy Interactive
 * Nathan Woodhull, ControlShift Labs
 
 
