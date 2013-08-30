@@ -29,12 +29,14 @@ This page defines Events, EventRSVPS
 | visibility| string	| Visibility of the event.  Possible values are
 |			|			| "public" visible on public web interfaces
 |			|			| "private" not visible on public web interfaces
-| attendance_count| integer | read-only computed property of attendance count
+
 | attendees	| Attendance[]| A Collection of Attendance resources
 | guestsCanInviteOthers | boolean | Attendees can invite guests to the event
 | reminders | list		| a list of reminder elements
 | .method	| string	| "email", "sms"
 | .minutes	| integer	| number of minutes before the start of the event to send reminder
+| capacity  | integer	| the max capacity for attendees of an event
+| total_accepted| integer | read-only computed property of attending guests count
 
 ## Attendance
 
@@ -47,10 +49,10 @@ This page defines Events, EventRSVPS
 | 			|			| "declined" The attendee declined
 |			|			| "tentative" The attendee tentatively accepted
 |			|			| "accepted" The attendee accepted
-|			|			| "no show" The attendee did not show up
 |			|			| "needs action" The attendee needs help
+| attended 	| boolean	| true if the person actually attended
 | comment	| string	| An optional comment from the attendee
-|
+| invited_by | Person*	| Person that invited this attendee
 
 # Single resource retrieval 
 
