@@ -6,6 +6,8 @@
 |last_name      |string     |Last name
 |first_name     |string     |First name
 |middle_name	|string     |Middle name
+| prefix		| string	|Prefix like "Dr", "Mr" etc. Free-form field
+| suffix		| string	|Suffix like "Jr.", "Ph.D" Free-form field
 |sex            |string     |A person's biological sex, one of "Male", "Female", "Other"
 |gender			|string		|The gender with which a person identifies
 |guid           |string     |A globally unique identifier (GUID) for a person
