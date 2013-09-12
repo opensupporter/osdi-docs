@@ -487,6 +487,7 @@ In this specification, when defining models, the following notational convention
 |	type*	| A reference to a single resource of type 'type'
 |	string	| A string
 |	datetime| A date and time representation.  In JSON this is a string.  The contents of this attribute shall be  ISO 8601 
+| hash	| A complex attribute represented by a JSON hash
 
 In the description of string types, sometimes the specification will list a set of acceptable values such as
 

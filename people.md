@@ -16,6 +16,10 @@
 |primary_phone  |string     |The person's primary phone number
 |primary_email  |string     |A person's primary email address
 |source         |string     |Information about the source where this person record was acquired.  Eg "Ref74"
+|birthdate		|hash		| A hash representing the birth date
+|birthdate.month|integer	| integer representing the month of the birth date
+|birthdate.day	|integer	| integer representing the day of the birth date
+|birthdate.year|integer		| integer representing the 4 digit year of the birth date
 
 ## Collections
 | Name          | Type      | Description
@@ -102,6 +106,11 @@ Examples:
             "source_details": "Delectus rerum autem mollitia sit asperiores odit hic cum.",
             "twitter_handle": "@Edwin_Labadie",
             "guid": "c1d9c510-b562-0130-dc7c-168c51e904de",
+			"birth_date" : {
+				"month" : 1,
+				"day" : 1,
+				"year" : 1970
+				},
             "_embedded": {
               "primary_address": {
                 "address1": "935 Ed Lock",
@@ -193,6 +202,11 @@ Examples:
             "source_details": "Itaque et reprehenderit rerum ea quis.",
             "twitter_handle": "@Parker_Walker",
             "guid": "c1e1d0d0-b562-0130-dc7c-168c51e904de",
+			"birth_date" : {
+				"month" : 1,
+				"day" : 1,
+				"year" : 1970
+				},
             "_embedded": {
               "primary_address": {
                 "address1": "22184 Vernie Cove",
