@@ -9,7 +9,7 @@
 | prefix		| string	|Prefix like "Dr", "Mr" etc. Free-form field
 | suffix		| string	|Suffix like "Jr.", "Ph.D" Free-form field
 |sex            |string     |A person's biological sex, one of "Male", "Female", "Other"
-|gender			|string		|The gender with which a person identifies
+|gender			|string		|The gender with which a person identifies. Free-form field
 |guid           |string     |A globally unique identifier (GUID) for a person
 |party          |string     |Party affiliation "democrat", "republican", "independent", "none"
 |primary_address|Address    |A single instance of an address reflecting the person's primary address
