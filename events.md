@@ -52,7 +52,12 @@ This page defines Events, EventRSVPS
 |			|			| "needs action" The attendee needs help
 | attended 	| boolean	| true if the person actually attended
 | comment	| string	| An optional comment from the attendee
-| invited_by | Person*	| Person that invited this attendee
+| invited_by | Person*	| Person that invited this attendee.  This is expected to be used for guests
+
+## Event Guests
+To handle guests, additional attendance records are created with the invited_by attribute set to point to the attendee this guest is associated with.
+
+If guest information (such as name, etc) is not given, then the person resource is null.
 
 # Single resource retrieval 
 
