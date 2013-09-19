@@ -67,6 +67,7 @@ Email: [info@opensupporter.org](mailto:info@opensupporter.org)
 
 * [API Entry Point](aep.md)
 * [People and Addresses](people.md)
+* [Lists](lists.md)
 * [Survey Questions and Answers](questions.md)
 * [Events](events.md)
 * Donations
