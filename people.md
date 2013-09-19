@@ -45,12 +45,12 @@
 |lat			|float		|Geolocation latitude
 |lng			|float		|Geolocation longitude
 |accuracy		|string		|One of "Rooftop", "Approximate"
-|address_status	|string		|One of "Potential", "Verified", "Bad". 
+|address_status	|string		|One of "Potential", "Verified", "Bad".
 
 ### State and Country codes
 Country Codes should conform to [ISO 3166-1 Alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 
-Examples: 
+Examples:
 
 |Country		|Code
 |---------------|----------------------
@@ -96,7 +96,7 @@ Examples:
             "middle_name": "Marques",
             "email": "test-3@example.com",
             "gender": "Male",
-            "sex": "Female",
+            "gender_identity": "Male",
             "party": "Democrat",
             "source": "sed",
             "source_details": "Delectus rerum autem mollitia sit asperiores odit hic cum.",
@@ -187,7 +187,7 @@ Examples:
             "middle_name": "Jannie",
             "email": "test-4@example.com",
             "gender": "Male",
-            "sex": "Female",
+            "gender_identity": "Male",
             "party": "Democrat",
             "source": "architecto",
             "source_details": "Itaque et reprehenderit rerum ea quis.",
