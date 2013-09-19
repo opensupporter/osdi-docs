@@ -59,7 +59,7 @@ To handle guests, additional attendance records are created with the invited_by 
 
 If guest information (such as name, etc) is not given, then the person resource is null.
 
-# Single resource retrieval 
+# Single resource retrieval
 
 ## default embed policy
 > TBD
@@ -100,7 +100,7 @@ If guest information (such as name, etc) is not given, then the person resource 
 		        "middle_name": "Titus",
 		        "email": "test-1@example.com",
 		        "gender": "Male",
-		        "sex": "Female",
+		        "gender_identity": "Male",
 		        "twitter_handle": "@Lurline_Glover",
 		        "guid": "c199e4a0-b562-0130-dc7c-168c51e904de",
 		        "_embedded": {
@@ -116,7 +116,7 @@ If guest information (such as name, etc) is not given, then the person resource 
 		        "middle_name": "Titus",
 		        "email": "test-1@example.com",
 		        "gender": "Male",
-		        "sex": "Female",
+		        "gender_identity": "Male",
 		        "twitter_handle": "@Lurline_Glover",
 		        "guid": "c199e4a0-b562-0130-dc7c-168c51e904de",
 		        "_embedded": {
@@ -137,20 +137,20 @@ If guest information (such as name, etc) is not given, then the person resource 
 	       "attendance": [
                 {
 				  "total_records": 80,
-					"_links" : { 
+					"_links" : {
 						"event" : {"href" : uri }
 						"person" : {"href" : uri }
 					},
 					"_embedded" : {
 						"person": {
-							
-			            
+
+
 				        "first_name": "Lurline",
 				        "last_name": "Glover",
 				        "middle_name": "Titus",
 				        "email": "test-1@example.com",
 				        "gender": "Male",
-				        "sex": "Female",
+				        "gender_identity": "Male",
 				        "twitter_handle": "@Lurline_Glover",
 				        "guid": "c199e4a0-b562-0130-dc7c-168c51e904de",
 				        "_embedded": {
@@ -158,7 +158,7 @@ If guest information (such as name, etc) is not given, then the person resource 
 				            "address1": "430 Erwin Stream",
 				             ...
 				          }
-		        
+
               			}
 					}
 					]
@@ -180,13 +180,13 @@ If guest information (such as name, etc) is not given, then the person resource 
 	  "_links" : {
        "self": { "href" : uri },
        "attendance" : { "href" : uri }
-       "location" : { "href" : uri } 
-	   "organizer" : { "href" : uri } 
-	   "creator" : { "href" : uri } 
+       "location" : { "href" : uri }
+	   "organizer" : { "href" : uri }
+	   "creator" : { "href" : uri }
       }
 
 	}
-	
+
 
 # Collection Response
 

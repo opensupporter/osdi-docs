@@ -131,7 +131,7 @@ Response
 	  }
 	}
 
-Given the above example response, let's fetch the people collection on this server. 
+Given the above example response, let's fetch the people collection on this server.
 Notice the "_links" collection.  Find the object in the links collection with key "people".  That object has an attribute "href" which contains the URI to use to access the people collection.
 
 > This is for example purpose only.  The official definition of the person schema is [People and Addresses](people.md)
@@ -162,7 +162,7 @@ Response
                 "middle_name": "Marques",
                 "email": "test-3@example.com",
                 "gender": "Male",
-                "sex": "Female",
+                "gender_identity": "Transgender Male",
                 "party": "Democrat",
                 "source": "sed",
                 "source_details": "Delectus rerum autem mollitia sit asperiores odit hic cum.",
@@ -483,7 +483,7 @@ In this specification, when defining models, the following notational convention
 |type[]     | A reference to a collection of resources of type 'type'
 |	type*	| A reference to a single resource of type 'type'
 |	string	| A string
-|	datetime| A date and time representation.  In JSON this is a string.  The contents of this attribute shall be  ISO 8601 
+|	datetime| A date and time representation.  In JSON this is a string.  The contents of this attribute shall be  ISO 8601
 
 In the description of string types, sometimes the specification will list a set of acceptable values such as
 
