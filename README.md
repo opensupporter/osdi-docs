@@ -474,6 +474,17 @@ Example
 
 Assuming a resource of Person with a collection of addresses, $expand=addresses would cause the collection of instances of addresses to be returned rather than a reference.
 
+## Common Attributes
+All resources have a set of common attributes.  These are present, even if the table definitions do not explicitly list them.
+
+### Common Attributes
+
+| Name          | Type      | Description
+|-----------    |-----------|--------------
+|created_at	    |datetime   |The date and time the resource was created
+|modified_at		|datetime	|The date and time the resource was last modified
+
+
 ## Notational Conventions
 
 In this specification, when defining models, the following notational conventions are used.
