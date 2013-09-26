@@ -1,5 +1,11 @@
 # Lists Proposals
-There are two proposals here.  Approach 1 creates a new resource type for lists and Approach 2 uses _links to represent them (like the AEP).
+There are 3 proposals here.
+
+Approach 1 creates a new resource type for lists
+
+Approach 2 uses _links to represent them (like the AEP).
+
+Approach 3 uses URI params to identify the list collection
 
 # Lists (Approach 1 - list as resource type)
 Lists are server side collections, saved queries or subsets of other collections.  
@@ -114,3 +120,14 @@ Each list is represented in a collection of _links where the hash key is the nam
         },
       }
     }
+
+# Lists (Approach 3)
+Lists are not unique resources.  Lists are indicated by URL query parameters. This is a peer to parameters like $filter.
+
+## Selecting a saved list in a request
+Saved lists are targeted with the URL query parameter $list.  The $list parameter value is the identifier of a given list.
+
+Assuming an organization has a saved list called 'donors2013', a request to query items from that list would use a URL like:
+
+> /api/v1/people?list=donors2013
+
