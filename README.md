@@ -111,6 +111,10 @@ Response
 	      "href": "/api/v1/people",
 	      "title": "The collection of people in the system"
 	    },
+		"people_lists": {
+	      "href": "/api/v1/people_lists",
+	      "title": "The collection of people in the system"
+	    },
 	    "addresses": {
 	      "href": "/api/v1/addresses",
 	      "title": "The collection of addresses in the system"
