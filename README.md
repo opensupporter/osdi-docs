@@ -490,8 +490,8 @@ All resources have a set of common attributes.  These are present, even if the t
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
-|created_at	    |datetime   |The date and time the resource was created
-|modified_at		|datetime	|The date and time the resource was last modified
+|created_at	    |datetime   |The date and time the resource was created on the local system
+|modified_at		|datetime	|The date and time the resource was last modified on the local system
 
 
 ## Notational Conventions
