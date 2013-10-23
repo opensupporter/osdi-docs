@@ -67,6 +67,7 @@ Email: [info@opensupporter.org](mailto:info@opensupporter.org)
 
 * [API Entry Point](aep.md)
 * [People and Addresses](people.md)
+* [Lists](lists.md)
 * [Survey Questions and Answers](questions.md)
 * [Events](events.md)
 * Donations
@@ -109,6 +110,14 @@ Response
 	    "people": {
 	      "href": "/api/v1/people",
 	      "title": "The collection of people in the system"
+	    },
+		"people_lists": {
+	      "href": "/api/v1/people_lists",
+	      "title": "The collection of people in the system"
+	    },
+	    "addresses": {
+	      "href": "/api/v1/addresses",
+	      "title": "The collection of addresses in the system"
 	    },
 	    "questions": {
 	      "href": "http://api.opensupporter.org/api/v1/questions",
