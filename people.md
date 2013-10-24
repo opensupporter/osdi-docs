@@ -33,16 +33,21 @@
 | Name          | Type      | Description
 |----------------|-----------|----------------
 | primary		| boolean	|Denotes if this is the primary address.  A person can have only one primary address
-| address		| string	| The actual email address
-| location		| string	| The address location, one of Home, Work, Other
+| address		| string	| The actual email address according to RFC822
+| address_type	| string	| Flexenum of Home, Work, Other
 
 # Phone Numbers
 | Name          | Type      | Description
 |----------------|-----------|----------------
 | primary		| boolean	|Denotes if this is the primary phone number.  A person can have only one primary number
-| number		| string	| The actual phone number
-| location		| string	| The address type, one of Home, Work, Mobile, Other
+| number		| string	| The actual phone number which MUST including country code and MUST be numeric characters only 
+| extension		| string	| Optional associated extension
+| description	| string	| Optional Free form additional text description
+| phone_type	| string	| flexnum of Home, Work, Mobile, Other, Daytime, Evening, Fax
+| operator		| string	| Optional: Operator/Carrier associated with number, eg "Verizon"
+| country		| string	| Country code according to ISO 3166-1 Alpha-2
 | sms_capable	| boolean	| True if the number can accept sms text messages
+| do_not_call	| boolean	| True if this number is registered on the US FCC Do Not Call Registry
 
 # Profiles
 Profiles correspond to a person's accounts on online services like Facebook, Twitter, etc.
@@ -52,7 +57,7 @@ Profiles correspond to a person's accounts on online services like Facebook, Twi
 | provider		| string	| The provider name, eg "Facebook"
 | id			| string	| The unique identifier provided by the provider, eg "135165"
 | url			| string	| The URL to the user's web viewable profile, eg "http://facebook.com/johnqpublic"
-| handle		| string	| The handle name, eg "joshrcohen"
+| handle		| string	| The handle name, eg "johnqpublic"
 
 # Address
 ## Attributes
