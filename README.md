@@ -50,6 +50,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Tim Gutowski, Trilogy Interactive
 * Mark Paquette, TheDataBank
 * Charles Parsons, Salsa Labs
+* Jason Rosenbaum, The Action Network
 * Ben Stein, Mobile Commons
 * Ray Suelzer, UFCW International Union
 * Brian Vallelunga, Trilogy Interactive
