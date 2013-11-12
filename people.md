@@ -103,7 +103,7 @@ Examples:
             "twitter_handle": "@Edwin_Labadie",
             "guid": "c1d9c510-b562-0130-dc7c-168c51e904de",
             "_embedded": {
-              "primary_address": {
+              "osdi:primary_address": {
                 "address1": "935 Ed Lock",
                 "city": "New Dudley",
                 "state": "MN",
@@ -124,7 +124,7 @@ Examples:
                   }
                 }
               },
-              "addresses": [
+              "osdi:addresses": [
                 {
                   "address1": "28160 Wiegand Divide",
                   "city": "Lake Amarimouth",
@@ -170,10 +170,14 @@ Examples:
               ]
             },
             "_links": {
-              "addresses": {
+              "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+              "osdi:addresses": {
                 "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/addresses"
               },
-              "question_answers": {
+              "osdi:primary_address": {
+                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/addresses/1"
+              },
+              "osdi:question_answers": {
                 "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/question_answers"
               },
               "self": {
@@ -194,7 +198,7 @@ Examples:
             "twitter_handle": "@Parker_Walker",
             "guid": "c1e1d0d0-b562-0130-dc7c-168c51e904de",
             "_embedded": {
-              "primary_address": {
+              "osdi:primary_address": {
                 "address1": "22184 Vernie Cove",
                 "city": "Rowemouth",
                 "state": "GA",
@@ -215,7 +219,7 @@ Examples:
                   }
                 }
               },
-              "addresses": [
+              "osdi:addresses": [
                 {
                   "address1": "7485 Rashad Pine",
                   "city": "Brandynview",
@@ -261,10 +265,11 @@ Examples:
               ]
             },
             "_links": {
-              "addresses": {
+                
+              "osdi:addresses": {
                 "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24/addresses"
               },
-              "question_answers": {
+              "osdi:question_answers": {
                 "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24/question_answers"
               },
               "self": {
@@ -275,11 +280,16 @@ Examples:
         ]
       },
       "_links": {
+        "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
         "self": {
           "href": "http://osdi-prototype.herokuapp.com/api/v1/people"
         },
-        "addresses": {
+        "osdi:addresses": {
           "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses"
+        },
+        "osdi:find": {
+            "href": "http://api.opensupporter.org/api/v1/people?$filter={odata_query}",
+            "templated": true
         }
       }
     }

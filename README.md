@@ -107,41 +107,30 @@ Response
 	{
 	  "motd": "Welcome to the ACME Action Platform OSDI API endpoint!!",
 	  "_links": {
-	    "people": {
+	    "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],  
+	    "osdi:people": {
 	      "href": "/api/v1/people",
-	      "title": "The collection of people in the system"
 	    },
-		"people_lists": {
+		"osdi:people_lists": {
 	      "href": "/api/v1/people_lists",
-	      "title": "The collection of people in the system"
 	    },
-	    "addresses": {
+	    "osdi:addresses": {
 	      "href": "/api/v1/addresses",
-	      "title": "The collection of addresses in the system"
 	    },
-	    "questions": {
+	    "odsi:questions": {
 	      "href": "http://api.opensupporter.org/api/v1/questions",
-	      "title": "The collection of questions in the system"
 	    },
-	    "question_answers": {
+	    "osdi:question_answers": {
 	      "href": "http://api.opensupporter.org/api/v1/question_answers",
-	      "title": "The collection of question answers in the system"
 	    },
 	    "self": {
 	      "href": "/api/v1",
-	      "title": "The root API Entry Point (Your are here)"
-	    },
-	    "docs": {
-	      "href": "https://github.com/wufm/osdi-docs",
-	      "title": "Documentation:",
-	      "name": "Docs",
-	      "index": "index"
 	    }
 	  }
 	}
 
 Given the above example response, let's fetch the people collection on this server.
-Notice the "_links" collection.  Find the object in the links collection with key "people".  That object has an attribute "href" which contains the URI to use to access the people collection.
+Notice the "_links" collection.  Find the object in the links collection with key "osdi:people".  That object has an attribute "href" which contains the URI to use to access the people collection.
 
 > This is for example purpose only.  The official definition of the person schema is [People and Addresses](people.md)
 
@@ -245,10 +234,11 @@ Response
                   ]
                 },
                 "_links": {
-                  "addresses": {
+                  "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+                  "osdi:addresses": {
                     "href": "http://api.opensupporter.org/api/v1/people/23/addresses"
                   },
-                  "question_answers": {
+                  "osdi:question_answers": {
                     "href": "http://api.opensupporter.org/api/v1/people/23/question_answers"
                   },
                   "self": {
@@ -263,12 +253,13 @@ Response
 
 In the last example message, the server returns a list of people.  For brevity this document only shows the first one.  Within each person object, there is also a "_links" collection just like in the AEP.  This will show up in most objects in OSDI.  The links collection lets the client know what other resources and resource collections are associated with a given object.
 
-In this example, the link shown is "addresses".  The href attribute of the "addresses" link contains the URI of the address collection *for this person*.
+In this example, the link shown is "osdi:addresses".  The href attribute of the "osdi:addresses" link contains the URI of the address collection *for this person*.
 
      "_links": {
-              "addresses": {
-                "href": "http://api.opensupporter.org/api/v1/people/23/addresses"
-              }
+          "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],         
+          "osdi:addresses": {
+            "href": "http://api.opensupporter.org/api/v1/people/23/addresses"
+          }
 
 A client can send a GET request to this URI to retrieve a list of addresses associated with this person.
 
@@ -297,10 +288,11 @@ A client can send a GET request to this URI to retrieve a list of addresses asso
             "address_status": "Verified",
             "primary": false,
             "_links": {
+              "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
               "self": {
                 "href": "http://api.opensupporter.org/api/v1/addresses/45"
               },
-              "person": {
+              "osdi:person": {
                 "href": "http://api.opensupporter.org/api/v1/people/23"
               }
             }
@@ -318,10 +310,11 @@ A client can send a GET request to this URI to retrieve a list of addresses asso
             "address_status": "Verified",
             "primary": true,
             "_links": {
+              "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
               "self": {
                 "href": "http://api.opensupporter.org/api/v1/addresses/46"
               },
-              "person": {
+              "osdi:person": {
                 "href": "http://api.opensupporter.org/api/v1/people/23"
               }
             }
@@ -342,6 +335,56 @@ Note that this pattern can be applied to other associated collections including 
 OSDI has embraced the [JSON+HAL spec](http://tools.ietf.org/html/draft-kelly-json-hal-05).  JSON+HAL specifies a simple way to embed linking into APIs.  The combination of linking and a specification allows generic clients to be written and, indeed, [many languages have HAL clients](http://stateless.co/hal_specification.html).  Linking itself makes it easier to both reason about and write clients for an API.
 
 By default, server responses should expand first level instances unless otherwise specified.  For example, in a response for a collection of resources, those resources should be embedded.
+
+### Curies
+
+You may have noticed that most links are prefaced with a name space "osdi" and that in the _links section there is a key labeled "curies." The link section defines links to *relationships* between objects and curies define those relationships. You will find documentation on the particular relationship by using the templated curie link.  For example, given the following links section:
+
+    "_links": {
+      "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+      "self": {
+        "href": "http://api.opensupporter.org/api/v1/addresses/46"
+      },
+      "osdi:people_lists": {
+        "href": "http://api.opensupporter.org/api/v1/people_lists"
+      },
+      "osdi:find": {
+        "href": "http://api.opensupporter.org/api/v1/people?$filter={odata_query}",
+        "templated": true
+      }
+    }
+    
+In order to fetch documentation on the people_lists relationship, I would visit the following url: "http://api.opensupporter.org/docs/v1/people_lists"
+
+Any links not prefaced with a curie name space are defined here (http://www.iana.org/assignments/link-relations/link-relations.xml).
+
+Vendors who add their own vendor-specific relationships must defined their own curie and preface their relationships with their own curie namespace.  For example,
+
+    "_links": {
+      "curies": [
+        { "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true },
+        { "name": "fb", "href": "http://facebook.com/docs/v1/{rel}", "templated": true }
+      ],
+      "self": {
+        "href": "http://api.opensupporter.org/api/v1/addresses/46"
+      },
+      "osdi:people_lists": {
+        "href": "http://api.opensupporter.org/api/v1/people_lists"
+      },
+      "osdi:find": {
+        "href": "http://api.opensupporter.org/api/v1/people?$filter={odata_query}",
+        "templated": true
+      },
+      "fb:profile": {
+          href: "http://facebook.com/profiles/1234"
+      }
+    }
+
+HREFs within the links section may be templated.  That is denoted by the "templated": true attribute in the link object.  If the href is templated, then clients should follow the URI template spec (http://tools.ietf.org/html/rfc6570) to create the actual URI. At this time OSDI is only supporting simple variable substitution using the "{variable_name}" syntax.  For example, if I wanted to run a find on the collection above I would use the find link relation ("osdi:find").
+
+I would then construct an odata_query and substitute the odata_query variable with my query string:
+
+"http://api.opensupporter.org/api/v1/people?$filter={odata_query}", would become "http://api.opensupporter.org/api/v1/people?$filter=name eq 'bob'", for more information on odata queries see http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter.
 
 ## Common CRUD operations
 ### Creating a Resource
