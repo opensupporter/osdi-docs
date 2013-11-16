@@ -453,11 +453,15 @@ Clients may set an attribute to nil by including the attribute using ‘nil’ f
     The HTTP response body shall contain the serialization of the updated resource
 
 ### Composite Requests (Updating or Creating with Embedded Resources)
-In some situations, a client may wish to update or create a resource and include embedded resources in the same request.  For example, a client may wish to create or update a Person while including Address information.  
+In some situations, a client may wish to update or create a resource and include embedded resources in the same request.  For example, a client may wish to create or update a Person while including Address information.  The functionality to accomplish this is called a *Composite Request*
 
-Normally, this would be accomplished with two separate requests. An initial request with a POST (for the create case) containing the parent resource (Person) information would be sent to the server.  Based on the response to this initial request, the client would learn the URI for the newly created resource.  A second POST request would be sent to that URI containing the representation of the child resource (Address)address to be added.  The update case would be handled similarly but by using the PUT method rather than the POST method.
+Composite Requests are only allowed with POST requests.
 
-To accomplish this in a single request, the client would use a Composite Request.  Composite requests are used with POST or PUT.  A Composite request contains the representations of both the parent and child representations in a single request, according to the rules of HAL.  Child representations are contained within an _embedded JSON element.
+Support for Composite Requests is OPTIONAL.
+
+Without Composite Requests, these scenarios would be accomplished with two separate requests. An initial request with a POST (for the create case) containing the parent resource (Person) information would be sent to the server.  Based on the response to this initial request, the client would learn the URI for the newly created resource.  A second POST request would be sent to that URI containing the representation of the child resource (Address)address to be added.  
+
+To accomplish this in a single request, the client would use a Composite Request.  Composite requests are used with POST only.  A Composite request contains the representations of both the parent and child representations in a single request, according to the rules of HAL.  Child representations are contained within an _embedded JSON element.
 
 Assuming the same example of updating or creating a Person and Address information in a composite request, the request body would contain the following information:
 
@@ -506,10 +510,6 @@ Note that in the description below, the server shall order operations as specifi
 ##### Composite POST
 
 When a composite request such as the example above is sent to a server with a POST method, first a new resource is created for the parent (Person). If that is successful, then new resources are created for the child or children (Address) resources.  If the upsert parameter is true, then the server may merge the transmitted resource representation with existing resources according to the rules of upsert.
-
-##### Composite PUT
-
-When a composite request such as the example above is sent to a server with a PUT method, first a the parent resource is updated (Person). If that is successful, then the child or children (Address) resources are updated.  
 
 ##### Error Handling
 
