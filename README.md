@@ -48,7 +48,9 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Jeff Crigler, Catalist
 * Josh Cohen, Washington United For Marriage (Editor)
 * Tim Gutowski, Trilogy Interactive
+* Mark Paquette, TheDataBank
 * Charles Parsons, Salsa Labs
+* Jason Rosenbaum, The Action Network
 * Ben Stein, Mobile Commons
 * Ray Suelzer, UFCW International Union
 * Brian Vallelunga, Trilogy Interactive
@@ -66,6 +68,7 @@ Email: [info@opensupporter.org](mailto:info@opensupporter.org)
 
 * [API Entry Point](aep.md)
 * [People and Addresses](people.md)
+* [Lists](lists.md)
 * [Survey Questions and Answers](questions.md)
 * [Events](events.md)
 * Donations
@@ -109,6 +112,10 @@ Response
 	      "href": "/api/v1/people",
 	      "title": "The collection of people in the system"
 	    },
+		"people_lists": {
+	      "href": "/api/v1/people_lists",
+	      "title": "The collection of people in the system"
+	    },
 	    "addresses": {
 	      "href": "/api/v1/addresses",
 	      "title": "The collection of addresses in the system"
@@ -134,7 +141,7 @@ Response
 	  }
 	}
 
-Given the above example response, let's fetch the people collection on this server. 
+Given the above example response, let's fetch the people collection on this server.
 Notice the "_links" collection.  Find the object in the links collection with key "people".  That object has an attribute "href" which contains the URI to use to access the people collection.
 
 > This is for example purpose only.  The official definition of the person schema is [People and Addresses](people.md)
@@ -165,7 +172,7 @@ Response
                 "middle_name": "Marques",
                 "email": "test-3@example.com",
                 "gender": "Male",
-                "sex": "Female",
+                "gender_identity": "Transgender Male",
                 "party": "Democrat",
                 "source": "sed",
                 "source_details": "Delectus rerum autem mollitia sit asperiores odit hic cum.",
@@ -476,6 +483,17 @@ When this parameter is used in requests for Collections, the value applies to th
 Example
 
 Assuming a resource of Person with a collection of addresses, $expand=addresses would cause the collection of instances of addresses to be returned rather than a reference.
+
+## Common Attributes
+All resources have a set of common attributes.  These are present, even if the table definitions do not explicitly list them.
+
+### Common Attributes
+
+| Name          | Type      | Description
+|-----------    |-----------|--------------
+|created_at	    |datetime   |The date and time the resource was created on the local system
+|modified_at		|datetime	|The date and time the resource was last modified on the local system
+
 
 ## Notational Conventions
 

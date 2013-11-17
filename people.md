@@ -6,10 +6,10 @@
 |last_name      |string     |Last name
 |first_name     |string     |First name
 |middle_name	|string     |Middle name
-| prefix		| string	|Prefix like "Dr", "Mr" etc. Free-form field
-| suffix		| string	|Suffix like "Jr.", "Ph.D" Free-form field
-|sex            |string     |A person's biological sex, one of "Male", "Female", "Other"
-|gender			|string		|The gender with which a person identifies. Free-form field
+|prefix			| string	|Prefix like "Dr", "Mr" etc. Free-form field
+|suffix			| string	|Suffix like "Jr.", "Ph.D" Free-form field
+|gender			|string		|The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", "Other".
+|gender_identity|string     |The self-described gender with which a person identifies. Free-form field. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
 |guid           |string     |A globally unique identifier (GUID) for a person
 |party          |string     |Party affiliation "democrat", "republican", "independent", "none"
 |primary_address|Address    |A single instance of an address reflecting the person's primary address
@@ -49,12 +49,12 @@
 |lat			|float		|Geolocation latitude
 |lng			|float		|Geolocation longitude
 |accuracy		|string		|One of "Rooftop", "Approximate"
-|address_status	|string		|One of "Potential", "Verified", "Bad". 
+|address_status	|string		|One of "Potential", "Verified", "Bad".
 
 ### State and Country codes
 Country Codes should conform to [ISO 3166-1 Alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 
-Examples: 
+Examples:
 
 |Country		|Code
 |---------------|----------------------
@@ -100,7 +100,7 @@ Examples:
             "middle_name": "Marques",
             "email": "test-3@example.com",
             "gender": "Male",
-            "sex": "Female",
+            "gender_identity": "Male",
             "party": "Democrat",
             "source": "sed",
             "source_details": "Delectus rerum autem mollitia sit asperiores odit hic cum.",
@@ -196,7 +196,7 @@ Examples:
             "middle_name": "Jannie",
             "email": "test-4@example.com",
             "gender": "Male",
-            "sex": "Female",
+            "gender_identity": "Male",
             "party": "Democrat",
             "source": "architecto",
             "source_details": "Itaque et reprehenderit rerum ea quis.",

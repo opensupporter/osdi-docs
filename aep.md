@@ -33,10 +33,6 @@ Content-Type: application/json
       "href": "/api/v1/people",
       "title": "The collection of people in the system"
     },
-    "addresses": {
-      "href": "/api/v1/addresses",
-      "title": "The collection of addresses in the system"
-    },
     "questions": {
       "href": "http://osdi-prototype.herokuapp.com/api/v1/questions",
       "title": "The collection of questions in the system"
