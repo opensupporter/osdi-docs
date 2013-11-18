@@ -524,24 +524,3 @@ In the description of string types, sometimes the specification will list a set 
 | gender	| string	| one of "Male", "Female", "Other" |
 
 In these cases, the string value should conform to one of the choices unless specified otherwise
-
-## Security
-
-###	Encryption
-
-Providers shall support secure HTTP connections using TLS. TLS 1.0, which shall be implemented, is specified in [RFC2246], and the TLS 1.1 and TLS 1.2 should be implemented as specified in [RFC4346] and [RFC5246], respectively.
-
-Providers may support non-secure HTTP connections.
-
-###	Authentication
-
-Clients and Providers may use a variety of mechanisms to authenticate and authorize operations.  The specification does not currently require supporting a specific method.  However, there are many choices which can work with this specification.  
-
-* Cookie Based Authentication
-* HTTP Basic
-* HTTP Digest
-* Token Based Authentication
-* OAuth and OAuth 2.0
-* OpenID
-
-Future versions of this specification may officially support one or more of these methods, or provide standard ways of implementing these methods, or may in other ways be more specific about security and authentication.
