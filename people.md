@@ -46,9 +46,10 @@
 |state          |string     |State abbreviation according to ISO 3166-2 (Final 2 alpha digits)
 |postal_code    |string     |Region specific postal code
 |country_code	|string		|Country code according to ISO 3166-1 Alpha-2
-|lat			|float		|Geolocation latitude
-|lng			|float		|Geolocation longitude
-|accuracy		|string		|One of "Rooftop", "Approximate"
+|location		|hash		| Location information for the address
+|.lattitude		|string		|Geolocation latitude
+|.longitude		|string		|Geolocation longitude
+|.accuracy		|string		|One of "Rooftop", "Approximate"
 |address_status	|string		|One of "Potential", "Verified", "Bad".
 
 ### State and Country codes
@@ -119,9 +120,11 @@ Examples:
                 "postal_code": "17678",
                 "country_code": "RU",
                 "address_type": "Home",
-                "lat": 44,
-                "lng": 40,
-                "accuracy": "Rooftop",
+                "location" : {
+             		"longitude" : "40.1",
+             		"latitude" : "44.5"4,
+             		"accuracy": "Rooftop"
+             		},
                 "address_status": "Verified",
                 "primary": true,
                 "_links": {
@@ -141,9 +144,11 @@ Examples:
                   "postal_code": "27585-7257",
                   "country_code": "US",
                   "address_type": "Work",
-                  "lat": 44,
-                  "lng": 40,
-                  "accuracy": "Rooftop",
+                  "location" : {
+             		"longitude" : "40.1",
+             		"latitude" : "44.5"4,
+             		"accuracy": "Rooftop"
+             		},
                   "address_status": "Verified",
                   "primary": false,
                   "_links": {
@@ -162,9 +167,11 @@ Examples:
                   "postal_code": "17678",
                   "country_code": "RU",
                   "address_type": "Home",
-                  "lat": 44,
-                  "lng": 40,
-                  "accuracy": "Rooftop",
+                  "location" : {
+             		"longitude" : "40.1",
+             		"latitude" : "44.5"4,
+             		"accuracy": "Rooftop"
+             		},
                   "address_status": "Verified",
                   "primary": true,
                   "_links": {
@@ -215,9 +222,11 @@ Examples:
                 "postal_code": "74895",
                 "country_code": "JP",
                 "address_type": "Home",
-                "lat": 44,
-                "lng": 40,
-                "accuracy": "Rooftop",
+                "location" : {
+             		"longitude" : "40.1",
+             		"latitude" : "44.5"4,
+             		"accuracy": "Rooftop"
+             		},
                 "address_status": "Verified",
                 "primary": true,
                 "_links": {
@@ -237,9 +246,11 @@ Examples:
                   "postal_code": "76221-3163",
                   "country_code": "US",
                   "address_type": "Work",
-                  "lat": 44,
-                  "lng": 40,
-                  "accuracy": "Rooftop",
+                  "location" : {
+             		"longitude" : "40.1",
+             		"latitude" : "44.5"4,
+             		"accuracy": "Rooftop"
+             		},
                   "address_status": "Verified",
                   "primary": false,
                   "_links": {
@@ -258,9 +269,11 @@ Examples:
                   "postal_code": "74895",
                   "country_code": "JP",
                   "address_type": "Home",
-                  "lat": 44,
-                  "lng": 40,
-                  "accuracy": "Rooftop",
+                  "location" : {
+             		"longitude" : "40.1",
+             		"latitude" : "44.5"4,
+             		"accuracy": "Rooftop"
+             		},
                   "address_status": "Verified",
                   "primary": true,
                   "_links": {

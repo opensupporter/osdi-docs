@@ -186,9 +186,11 @@ Response
                     "postal_code": "17678",
                     "country_code": "RU",
                     "address_type": "Home",
-                    "lat": 44,
-                    "lng": 40,
-                    "accuracy": "Rooftop",
+                    "location" : {
+             		   "longitude" : "40.1",
+             		   "latitude" : "44.5"4,
+             		   "accuracy": "Rooftop"
+             		 },
                     "address_status": "Verified",
                     "primary": true,
                     "_links": {
@@ -208,9 +210,11 @@ Response
                       "postal_code": "27585-7257",
                       "country_code": "US",
                       "address_type": "Work",
-                      "lat": 44,
-                      "lng": 40,
-                      "accuracy": "Rooftop",
+                      "location" : {
+             		      "longitude" : "40.1",
+             		      "latitude" : "44.5"4,
+             		      "accuracy": "Rooftop"
+             		   },
                       "address_status": "Verified",
                       "primary": false,
                       "_links": {
@@ -229,9 +233,11 @@ Response
                       "postal_code": "17678",
                       "country_code": "RU",
                       "address_type": "Home",
-                      "lat": 44,
-                      "lng": 40,
-                      "accuracy": "Rooftop",
+                      "location" : {
+             		      "longitude" : "40.1",
+             		      "latitude" : "44.5"4,
+             		      "accuracy": "Rooftop"
+             		   },
                       "address_status": "Verified",
                       "primary": true,
                       "_links": {
@@ -292,9 +298,11 @@ A client can send a GET request to this URI to retrieve a list of addresses asso
             "postal_code": "27585-7257",
             "country_code": "US",
             "address_type": "Work",
-            "lat": 44,
-            "lng": 40,
-            "accuracy": "Rooftop",
+            "location" : {
+               "longitude" : "40.1",
+             	"latitude" : "44.5"4,
+             	"accuracy": "Rooftop"
+             },
             "address_status": "Verified",
             "primary": false,
             "_links": {
@@ -313,9 +321,11 @@ A client can send a GET request to this URI to retrieve a list of addresses asso
             "postal_code": "17678",
             "country_code": "RU",
             "address_type": "Home",
-            "lat": 44,
-            "lng": 40,
-            "accuracy": "Rooftop",
+            "location" : {
+             	"longitude" : "40.1",
+             	"latitude" : "44.5"4,
+             	"accuracy": "Rooftop"
+             },
             "address_status": "Verified",
             "primary": true,
             "_links": {
