@@ -10,7 +10,7 @@
 |suffix			| string	|Suffix like "Jr.", "Ph.D" Free-form field
 |gender			|string		|The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", "Other".
 |gender_identity|string     |The self-described gender with which a person identifies. Free-form field. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
-|guid           |string     |A globally unique identifier (GUID) for a person
+|identifier     |string     |The provider's current canonical identifier for a person. Identifier should comply with the format `<provider-name>:<id>`. See below for more details. 
 |party          |string     |Party affiliation "democrat", "republican", "independent", "none"
 |primary_address|Address    |A single instance of an address reflecting the person's primary address
 |primary_phone  |string     |The person's primary phone number
@@ -24,6 +24,7 @@
 ## Collections
 | Name          | Type      | Description
 |-----------    |-----------|--------------
+|identifiers    |identifiers[]| A collection of identifiers the provider has determined to be associated with the person
 |addresses      |Address[]  |A collection of addresses associated with the person
 |emails         |Email[]    |A collection of email addresses associated with the person
 |phones         |Phone[]
@@ -31,6 +32,90 @@
 |question_answers|QuestionAnswer[]|A collection of answers to questions from surveys
 |event_attendance |Attendance[]|A collection of attendance records for a person
 |interactions   |Interaction[]|A collection of outreach interactions for a person, eg Volunteer Joe called voter Sam F. Bar
+
+# Identifier
+
+- Any OSDI entity may generate an identifier to refer to a real person.
+
+- Identifiers are composed of two segments:
+
+		<issuer-id>:<person-id>
+
+	The `issuer-id` must be a unique string that identifies the issuer and has been registered by the issuer with OSDI. Valid characters for `issuer-id` are any printable US-ASCII character other than `:` and `SPACE`. 
+
+	The `person-id` should be a unique string within the namespace of `issuer-id` that identifies the person. Valid characters for `person-id` are any printable US-ASCII character other than `SPACE`.
+
+	_Example: The company "Voter Labs" registers their `issuer-id` as "`voterlabs`" with OSDI. Their internal database id for Jane Doe is `123456`. Jane's OSDI identifier is: `voterlabs:123456`._ 
+
+- Identifiers are __not__ associated with a particular representation of a person record. When a person record is updated, the identifier should not change as a result.
+
+- An OSDI entity __must__ retain any identifiers it previously issued to refer to this person in the `identifiers` collection.
+
+- The `identifiers` collection does not prescribe how an OSDI consumer should utilize the collection for merging or updating their own person records. It's only purpose is to communicate that a real person has been referred to by those identifiers and that the OSDI provider believes those identifiers to all be associated with the same real person.
+
+- Identifiers __must__ be persistent and consumers of a provider's OSDI API should always be able to request a person record by any `identifier` the provider previously used as their canonical `identifier`. If an `identifier` is no longer the canonical `identifier` for the requested person record, the response should be an HTTP 301 redirect to the new record for that real person. The new record should have the new canonical identifier in the `identifier` field and all previously issued identifiers in the `identifiers` collection.
+
+## Merging Records
+
+Determining how, when, and whether two person records should be merged, and then determining which record is more authoritative for each data element of a record is a very difficult task. Automating that process is highly error prone and defining a standard process for merging records goes beyond the scope of OSDI's charter. OSDI is only responsible for establishing a standard for how OSDI entities communicate with each other that they have merged records by whatever internal processes they have defined.
+
+### Example
+
+Voter Labs is a data provider who provides OSDI-formatted data. Voter Labs identifies a new supporter. They create a new person record for this supporter and assign them a new identifier:
+
+__Figure 1.__
+
+	{
+		"identifier": "voterlabs:5678"
+		"first_name": "Edwin",
+		"last_name": "Labadie"
+		"email": "edwin.labadie@example.com"
+		"_embedded": {
+			"identifiers": [
+				"voterlabs:12bd9f4e-cc98-44aa-b741-fe52dc2af93d"
+			]
+		}
+	}
+
+Voter Labs also has an existing record in their database that looks like this:
+
+__Figure 2.__
+
+	{
+		"identifier": "voterlabs:1234"
+		"first_name": "Edwin",
+		"last_name": "Labadie"
+		"middle_name": "Marques"
+		"email": "edwin@example-old.com",
+		"_embedded": {
+			"identifiers": [
+				"voterlabs:e2cdf524-15fc-48b4-8261-b905e91de954"
+			]
+		}
+	}
+
+Through some internally-defined process, Voter Labs decides the two records represent the same person and should be merged. Also through some internally-defined process, they determine which record should be trusted for which fields and determine which record's identifier is the new canonical identifier. The resulting merged record would look like this:
+
+__Figure 3.__
+
+	{
+		"identifier": "voterlabs:1234"
+		"first_name": "Edwin",
+		"last_name": "Labadie"
+		"middle_name": "Marques"
+		"email": "edwin.labadie@example.com",
+		"_embedded": {
+			"identifiers": [
+				"voterlabs:1234",
+				"voterlabs:5678"
+			]
+		}
+	}
+
+What this new record means is that `voterlabs:1234` is the new id by which Voter Labs refers to this real person and that `voterlabs:5678` is another id by which this real person has previously been referred to.
+
+"Jane Doe For Congress" is a consumer of the Voter Labs API. They have a locally cached representation of both records before Voter Labs merged the two records. When "Jane Doe For Congress" requests the record `voterlabs:5678` from the Voter Labs API, they should get a 301 redirect to the newly merged record seen above (Figure 3).
+
 
 # Address
 ## Attributes
