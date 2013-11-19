@@ -66,8 +66,11 @@ Email: [info@opensupporter.org](mailto:info@opensupporter.org)
 
 # API Data Model
 
+## Beta Stability Level
 * [API Entry Point](aep.md)
 * [People and Addresses](people.md)
+
+## Experimental Stability Level
 * [Lists](lists.md)
 * [Survey Questions and Answers](questions.md)
 * [Events](events.md)
