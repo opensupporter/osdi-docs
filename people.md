@@ -155,9 +155,7 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
 |----------------|-----------|----------------
 | primary		| boolean	|Denotes if this is the primary address.  A person can have only one primary address
 |address_type   |string     |Type of address "Home","Work",'Mailing'
-|address1       |string     |Address line 1
-|address2       |string     |Address line 2
-|addressN       |string     |Additional address lines
+|address_lines       |string[]     |Address lines 1 - n
 |city           |string     |City
 |state          |string     |State abbreviation according to ISO 3166-2 (Final 2 alpha digits)
 |postal_code    |string     |Region specific postal code
