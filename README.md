@@ -470,6 +470,7 @@ When retrieving collections, a client may request that the server filter the res
 
 See [OData Filter Query] for more information. (http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter)
 
+General information can be found at [odata.org](http://odata.org)
 #### Conventions
 
 * String literals are enclosed in single quotes, eg: 'Jon'
