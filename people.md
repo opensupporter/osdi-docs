@@ -27,11 +27,42 @@
 |identifiers    |identifiers[]| A collection of identifiers the provider has determined to be associated with the person
 |addresses      |Address[]  |A collection of addresses associated with the person
 |emails         |Email[]    |A collection of email addresses associated with the person
-|phones         |Phone[]
+|phones         |Phone[]	|A collection of phone numbers associated with the person
 |donations      |Donation[] |A collection of donations associated with the person
 |question_answers|QuestionAnswer[]|A collection of answers to questions from surveys
 |event_attendance |Attendance[]|A collection of attendance records for a person
 |interactions   |Interaction[]|A collection of outreach interactions for a person, eg Volunteer Joe called voter Sam F. Bar
+|profiles		| Profile[]	| A collection of profiles for online services
+
+# Email Addresses
+| Name          | Type      | Description
+|----------------|-----------|----------------
+| primary		| boolean	|Denotes if this is the primary address.  A person can have only one primary address
+| address		| string	| The actual email address according to RFC822
+| address_type	| string	| Flexenum of Home, Work, Other
+
+# Phone Numbers
+| Name          | Type      | Description
+|----------------|-----------|----------------
+| primary		| boolean	|Denotes if this is the primary phone number.  A person can have only one primary number
+| number		| string	| The actual phone number which MUST including country code and MUST be numeric characters only 
+| extension		| string	| Optional associated extension
+| description	| string	| Optional Free form additional text description
+| phone_type	| string	| flexnum of Home, Work, Mobile, Other, Daytime, Evening, Fax
+| operator		| string	| Optional: Operator/Carrier associated with number, eg "Verizon"
+| country		| string	| Country code according to ISO 3166-1 Alpha-2
+| sms_capable	| boolean	| True if the number can accept sms text messages
+| do_not_call	| boolean	| True if this number is registered on the US FCC Do Not Call Registry
+
+# Profiles
+Profiles correspond to a person's accounts on online services like Facebook, Twitter, etc.
+
+| Name          | Type      | Description
+|----------------|-----------|----------------
+| provider		| string	| The provider name, eg "Facebook"
+| id			| string	| The unique identifier provided by the provider, eg "135165"
+| url			| string	| The URL to the user's web viewable profile, eg "http://facebook.com/johnqpublic"
+| handle		| string	| The handle name, eg "johnqpublic"
 
 # Identifier
 
