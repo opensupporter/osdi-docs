@@ -73,6 +73,7 @@ Email: [info@opensupporter.org](mailto:info@opensupporter.org)
 * [Events](events.md)
 * Donations
 * [Canvassing Interactions](interactions.md)
+* [Employer Details](employers.md)
 
 
 

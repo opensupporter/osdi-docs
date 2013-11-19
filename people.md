@@ -20,6 +20,9 @@
 |birthdate.month|integer	| integer representing the month of the birth date
 |birthdate.day	|integer	| integer representing the day of the birth date
 |birthdate.year|integer		| integer representing the 4 digit year of the birth date
+| employer		| string	| Employer Name
+| occupation	| string	| Occupation associated with the person
+| employer_details| Employer*| A link to the associated employer details 
 
 ## Collections
 | Name          | Type      | Description
