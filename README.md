@@ -464,18 +464,59 @@ Clients may set an attribute to nil by including the attribute using ‘nil’ f
     The HTTP response body shall contain the serialization of the updated resource
 
 ## Selecting Results
-### Filtering Collections
-When retrieving representations of a collection, clients may include filters expressed as query parameters.  The $filter query parameter is used for this purpose.  The $filter parameter value shall contain an expression using the following operators:
+### Filtering Collections with OData
 
-        '<', '<=', '=', '>=', ">', '!=' : Integer and date value/attribute
-        '=', '!='                       : String value/attribute
+When retrieving collections, a client may request that the server filter the results according to a query.  OSDI makes use of a subset of the OData query language to accomplish this.  The filter string is the value of the 'filter' query parameter.
 
-Example:
-Assuming a resource of ‘Person’ which has an attribute named ‘firstName’, the following filter would return resources with first name of ‘Jon’
+See [OData Filter Query] for more information. (http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter)
 
-        $filter=first_name=’Jon’
+#### Conventions
 
+* String literals are enclosed in single quotes, eg: 'Jon'
+* Integers are not quoted, eg: 5
+* The whole query string is not enclosed in any quotes
 
+#### Operators
+
+OSDI supports the following OData operators:
+
+| Name  | Description | Example
+|-------|-------------------------------|-------------------------------
+| eq    | Exact match                   | first_name eq 'John'
+| ne    | Not Equal exact match         | first_name ne 'John'
+| gt    | Greater than                  | birthdate.month gt 1980
+| ge    | Greater or equal than         | created gt '2013-11-17T18:27:35-05'
+| lt    | Less than                     | birthdate.year lt 1980
+| le    | Less or equal than            | created le '2013-11-17T18:27:35-05'
+| or    | Logical OR                    | first_name eq 'John' or first_name eq 'Jon'
+| and   | Logical AND                   | first_name eq 'John' and last_name eq 'Doe'
+    
+OSDI defines the following OPTIONAL extension operators:
+
+| Name  | Description | Example
+|---------------------------------------|------------------------------
+| like  | Case insensitive match        | first_name like 'john'       # returns John or john
+| re    | Matches a regular expression  | first_name regexp '/[Rr]ob/' # Returns robert, Robert, rob, roberto 
+
+#### Functions
+
+OSDI defines the following OPTIONAL extension functions:
+
+| Name  | Description | Example
+|---------------------|-----------------------------------------------
+| near  | Returns entries near a location within a radius   | gender eq 'Female' and near('10011', '5 miles')
+
+Examples
+
+Find all males in a given ZIP code
+
+    /api/v1/people?filter=gender eq 'Male' and address.postal_code eq '10011'
+    
+Find new signups on or since a date and time (Eastern Time)
+
+    /api/v1/people?filter=created ge '2013-11-17T18:27:35-05'
+    
+    
 ### Pagination
 The parameters $per_page and $page control pagination.
 
