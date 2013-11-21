@@ -154,19 +154,19 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
 | Name          | Type      | Description
 |----------------|-----------|----------------
 | primary		| boolean	|Denotes if this is the primary address.  A person can have only one primary address
-|address_type   |string     |Type of address "Home","Work",'Mailing'
+|type   |string     |Type of address "Home","Work",'Mailing'
 |address_lines       |string[]     |Address lines 1 - n
-|city           |string     |City
-|state          |string     |State abbreviation according to ISO 3166-2 (Final 2 alpha digits)
+|locality           |string     |A city or other local administrative area
+|region          |string     |State / subdivision codes according to ISO 3166-2 (Final 2 alpha digits)
 |postal_code    |string     |Region specific postal code
-|country_code	|string		|Country code according to ISO 3166-1 Alpha-2
+|country	|string		|Country code according to ISO 3166-1 Alpha-2
 |location		|hash		| Location information for the address
 |.lattitude		|string		|Geolocation latitude
 |.longitude		|string		|Geolocation longitude
 |.accuracy		|string		|One of "Rooftop", "Approximate"
-|address_status	|string		|One of "Potential", "Verified", "Bad".
+|status	|string		|One of "Potential", "Verified", "Bad".
 
-### State and Country codes
+### Region and Country codes
 Country Codes should conform to [ISO 3166-1 Alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 
 Examples:
