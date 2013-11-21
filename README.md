@@ -55,7 +55,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Ray Suelzer, UFCW International Union
 * Brian Vallelunga, Trilogy Interactive
 * Nathan Woodhull, ControlShift Labs
-
+* Misha Zhurkin, Catalist
 
 > This effort is currently in an exploratory phase to determine if consensus on a common API can be achieved.  The involvement of a person or company does not reflect a commitment to implement this API.
 
