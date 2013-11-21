@@ -3,11 +3,11 @@
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
-|last_name      |string     |Last name
-|first_name     |string     |First name
-|middle_name	|string     |Middle name
-|prefix			| string	|Prefix like "Dr", "Mr" etc. Free-form field
-|suffix			| string	|Suffix like "Jr.", "Ph.D" Free-form field
+|family_name      |string     |Last name
+|given_name     |string     |First name
+|additional_name	|string     |An additional name not included in family or given. Usually a middle name.
+|honorific_prefix			| string	|An honorific prefix like "Dr", "Mr" etc. Free-form field
+|honorific_suffix			| string	|An honorific suffix like "Jr.", "Ph.D" Free-form field
 |gender			|string		|The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", "Other".
 |gender_identity|string     |The self-described gender with which a person identifies. Free-form field. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
 |identifier     |string     |The provider's current canonical identifier for a person. Identifier should comply with the format `<provider-name>:<id>`. See below for more details. 
