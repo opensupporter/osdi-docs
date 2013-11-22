@@ -34,6 +34,8 @@ Platform Vendors
 
 [Read our scenarios document](scenarios/scenarios.md)
 
+[Download a one page PDF about the project](docs/osdi-one-pager.pdf)
+
 [Experiment with our prototype http://api.opensupporter.org](http://api.opensupporter.org)
 
 [Join our reviewers email group to stay up to date: http://signup.opensupporter.org](http://signup.opensupporter.org)
