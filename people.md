@@ -12,9 +12,6 @@
 |gender_identity|string     |The self-described gender with which a person identifies. Free-form field. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
 |identifier     |string     |The provider's current canonical identifier for a person. Identifier should comply with the format `<provider-name>:<id>`. See below for more details. 
 |party          |string     |Party affiliation "democrat", "republican", "independent", "none"
-|primary_address|Address    |A single instance of an address reflecting the person's primary address
-|primary_phone  |string     |The person's primary phone number
-|primary_email  |string     |A person's primary email address
 |source         |string     |Information about the source where this person record was acquired.  Eg "Ref74"
 |birthdate		|hash		| A hash representing the birth date
 |birthdate.month|integer	| integer representing the month of the birth date
