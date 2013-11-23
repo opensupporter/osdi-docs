@@ -495,7 +495,7 @@ OSDI supports the following OData operators:
 OSDI defines the following OPTIONAL extension operators:
 
 | Name  | Description | Example
-|---------------------------------------|------------------------------
+|-------|-------------------------------|------------------------------
 | like  | Case insensitive match        | first_name like 'john'       # returns John or john
 | re    | Matches a regular expression  | first_name regexp '/[Rr]ob/' # Returns robert, Robert, rob, roberto 
 
@@ -503,11 +503,12 @@ OSDI defines the following OPTIONAL extension operators:
 
 OSDI defines the following OPTIONAL extension functions:
 
+
 | Name  | Description | Example
-|---------------------|-----------------------------------------------
+|-------|-------------|-----------------------------------------------
 | near  | Returns entries near a location within a radius   | gender eq 'Female' and near('10011', '5 miles')
 
-Examples
+#### Examples
 
 Find all males in a given ZIP code
 
