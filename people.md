@@ -3,18 +3,15 @@
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
-|last_name      |string     |Last name
-|first_name     |string     |First name
-|middle_name	|string     |Middle name
-|prefix			| string	|Prefix like "Dr", "Mr" etc. Free-form field
-|suffix			| string	|Suffix like "Jr.", "Ph.D" Free-form field
+|family_name      |string     |Last name
+|given_name     |string     |First name
+|additional_name	|string     |An additional name not included in family or given. Usually a middle name.
+|honorific_prefix			| string	|An honorific prefix like "Dr", "Mr" etc. Free-form field
+|honorific_suffix			| string	|An honorific suffix like "Jr.", "Ph.D" Free-form field
 |gender			|string		|The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", "Other".
 |gender_identity|string     |The self-described gender with which a person identifies. Free-form field. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
 |identifier     |string     |The provider's current canonical identifier for a person. Identifier should comply with the format `<provider-name>:<id>`. See below for more details. 
 |party          |string     |Party affiliation "democrat", "republican", "independent", "none"
-|primary_address|Address    |A single instance of an address reflecting the person's primary address
-|primary_phone  |string     |The person's primary phone number
-|primary_email  |string     |A person's primary email address
 |source         |string     |Information about the source where this person record was acquired.  Eg "Ref74"
 |birthdate		|hash		| A hash representing the birth date
 |birthdate.month|integer	| integer representing the month of the birth date
@@ -154,21 +151,19 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
 | Name          | Type      | Description
 |----------------|-----------|----------------
 | primary		| boolean	|Denotes if this is the primary address.  A person can have only one primary address
-|address_type   |string     |Type of address "Home","Work",'Mailing'
-|address1       |string     |Address line 1
-|address2       |string     |Address line 2
-|addressN       |string     |Additional address lines
-|city           |string     |City
-|state          |string     |State abbreviation according to ISO 3166-2 (Final 2 alpha digits)
+|type   |string     |Type of address "Home","Work",'Mailing'
+|address_lines       |string[]     |Address lines 1 - n
+|locality           |string     |A city or other local administrative area
+|region          |string     |State / subdivision codes according to ISO 3166-2 (Final 2 alpha digits)
 |postal_code    |string     |Region specific postal code
-|country_code	|string		|Country code according to ISO 3166-1 Alpha-2
+|country	|string		|Country code according to ISO 3166-1 Alpha-2
 |location		|hash		| Location information for the address
 |.lattitude		|string		|Geolocation latitude
 |.longitude		|string		|Geolocation longitude
 |.accuracy		|string		|One of "Rooftop", "Approximate"
-|address_status	|string		|One of "Potential", "Verified", "Bad".
+|status	|string		|One of "Potential", "Verified", "Bad".
 
-### State and Country codes
+### Region and Country codes
 Country Codes should conform to [ISO 3166-1 Alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 
 Examples:
