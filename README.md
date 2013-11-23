@@ -137,6 +137,10 @@ Response
 	      "href": "/api/v1",
 	      "title": "The root API Entry Point (Your are here)"
 	    },
+	    "person_signup": {
+	      "href": "http://api.opensupporter.org/api/v1/person_signup",
+	      "title": "The magic method for person signups"
+	    },
 	    "docs": {
 	      "href": "https://github.com/wufm/osdi-docs",
 	      "title": "Documentation:",
@@ -358,6 +362,53 @@ Note that this pattern can be applied to other associated collections including 
 OSDI has embraced the [JSON+HAL spec](http://tools.ietf.org/html/draft-kelly-json-hal-05).  JSON+HAL specifies a simple way to embed linking into APIs.  The combination of linking and a specification allows generic clients to be written and, indeed, [many languages have HAL clients](http://stateless.co/hal_specification.html).  Linking itself makes it easier to both reason about and write clients for an API.
 
 By default, server responses should expand first level instances unless otherwise specified.  For example, in a response for a collection of resources, those resources should be embedded.
+
+## Magic Methods
+In order to ease client development for extremely common cases, OSDI defines a set of Magic Methods that allow simple representations which may relate to multiple resources to be sent as a single, simple request.  They are designed with a web developer in mind and to be easy to implement in a web page via javascript.
+
+Retrieving resources with GET or other methods is undefined.  There are no specified representations available to read.  Upon receipt of a GET request for a magic method URI, a server should return the 405 Method not allowed HTTP response code.
+
+Magic Methods are always sent to the server using the HTTP POST method.  The server response is always the parent resource representation (as defined by the magic method) in the response body.  It will not look the same as the request body representation.
+
+### Person Signup
+The Person Signup method request body a representation containing common attributes for person, email, phone, address and employer information.  These fields are intended to align with common web signups.
+
+#####Request Body
+
+    {
+	 "first_name": "Edwin",
+     "last_name": "Labadie",
+     "middle_name": "Marques",
+     "email": "test-3@example.com",
+     "gender": "Male",
+     "address_type",
+     "address": "122 East West St",
+     "address2": "Apt 4g",
+     "city": "Seattle",
+     "state": "WA",
+     "postal_code", "98102",
+     "email": "ed.labadie@example.com",
+     "mobile_phone": "2125551212",
+     "employer": "ACME Inc",
+     "occupation": "engineer"
+    }
+    
+Vendors may extend this schema.
+
+#####Semantics
+
+The Person Signup method honors the upsert parameter
+
+When processing a person signup, the server will do the appropriate insertion of address, email, and phone fields.  The server configuration will determine decisions like whether to make the included address Primary or not.
+
+### Event Signup
+
+The Event Signup method request body a representation containing common attributes for an event signup.  These fields are intended to align with common web signups.
+
+##### Request Body
+
+##### Semantics
+
 
 ## Common CRUD operations
 ### Creating a Resource
