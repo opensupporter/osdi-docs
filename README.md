@@ -47,11 +47,15 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 # Authors
 * Tim Anderegg, New Organizing Institute (NOI)
 * Topper Bowers, Amicus
+* Beth Becker, Indigo Strategies
 * Jeff Crigler, Catalist
 * Josh Cohen, Washington United For Marriage (Editor)
 * Tim Gutowski, Trilogy Interactive
+* Harlan Hill, Indigo Strategies
+* Walter Ludwig, Indigo Strategies
 * Mark Paquette, TheDataBank
 * Charles Parsons, Salsa Labs
+* Rich Ranallo, Revolution Messaging
 * Jason Rosenbaum, The Action Network
 * Ben Stein, Mobile Commons
 * Ray Suelzer, UFCW International Union
