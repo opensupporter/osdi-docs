@@ -25,9 +25,9 @@
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |identifiers    |identifiers[]| A collection of identifiers the provider has determined to be associated with the person
-|addresses      |Address[]  |A collection of addresses associated with the person
-|emails         |Email[]    |A collection of email addresses associated with the person
-|phones         |Phone[]	|A collection of phone numbers associated with the person
+|postal_addresses      |PostalAddress[]  |A collection of postal addresses associated with the person
+|email_addresses         |EmailAddress[]    |A collection of email addresses associated with the person
+|phone_numbers         |PhoneNumber[]	|A collection of phone numbers associated with the person
 |donations      |Donation[] |A collection of donations associated with the person
 |question_answers|QuestionAnswer[]|A collection of answers to questions from surveys
 |event_attendance |Attendance[]|A collection of attendance records for a person
@@ -148,7 +148,7 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
 "Jane Doe For Congress" is a consumer of the Voter Labs API. They have a locally cached representation of both records before Voter Labs merged the two records. When "Jane Doe For Congress" requests the record `voterlabs:5678` from the Voter Labs API, they should get a 301 redirect to the newly merged record seen above (Figure 3).
 
 
-# Address
+# Postal Address
 ## Attributes
 
 | Name          | Type      | Description
