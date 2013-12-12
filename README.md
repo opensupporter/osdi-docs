@@ -520,6 +520,76 @@ Clients may set an attribute to nil by including the attribute using ‘nil’ f
 
     The HTTP response body shall contain the serialization of the updated resource
 
+### Composite Requests (Updating or Creating with Embedded Resources)
+In some situations, a client may wish to update or create a resource and include embedded resources in the same request.  For example, a client may wish to create or update a Person while including Address information.  The functionality to accomplish this is called a *Composite Request*
+
+Composite Requests are only allowed with POST requests.
+
+Support for Composite Requests is OPTIONAL.
+
+Without Composite Requests, these scenarios would be accomplished with two separate requests. An initial request with a POST (for the create case) containing the parent resource (Person) information would be sent to the server.  Based on the response to this initial request, the client would learn the URI for the newly created resource.  A second POST request would be sent to that URI containing the representation of the child resource (Address)address to be added.  
+
+To accomplish this in a single request, the client would use a Composite Request.  Composite requests are used with POST only.  A Composite request contains the representations of both the parent and child representations in a single request, according to the rules of HAL.  Child representations are contained within an _embedded JSON element.
+
+Assuming the same example of updating or creating a Person and Address information in a composite request, the request body would contain the following information:
+
+	{
+	   "first_name": "Edwin",
+       "last_name": "Labadie",
+       "middle_name": "Marques",
+       "email": "test-3@example.com",
+       ... other attributes ...
+       "_embedded": {
+           "addresses": [ {
+               "address1": "935 Ed Lock",
+               "city": "New Dudley",
+               "state": "MN",
+               "postal_code": "17678",
+               "country_code": "RU",
+               "address_type": "Home",
+               "lat": 44,
+               "lng": 40,
+               "accuracy": "Rooftop",
+               "address_status": "Verified",
+               "primary": true,
+               ... other attributes ...
+               },
+               {
+               "address1": "935 Ed Lock",
+               "city": "New Dudley",
+               "state": "MN",
+               "postal_code": "17678",
+               "country_code": "RU",
+               "address_type": "Home",
+               "lat": 44,
+               "lng": 40,
+               "accuracy": "Rooftop",
+               "address_status": "Verified",
+               ... other attributes ...
+               } ]
+        } 
+    }              
+
+### Composite Server Behavior
+Composite requests that contain embedded representations may contain single embedded resources or resource collections (multiple instances of the same resource type).
+
+Note that in the description below, the server shall order operations as specified.
+
+##### Composite POST
+
+When a composite request such as the example above is sent to a server with a POST method, first a new resource is created for the parent (Person). If that is successful, then new resources are created for the child or children (Address) resources.  If the upsert parameter is true, then the server may merge the transmitted resource representation with existing resources according to the rules of upsert.
+
+##### Error Handling
+
+If the attempt to update or create the parent resource fails, the server shall return the appropriate HTTP error code representing the failure.
+
+If the attempt to update or create the child resource(s) fails, the server shall return the 409 Conflict HTTP response code.  Within the response body, the server shall include descriptive information on the nature of the child resource failure. This information is determined by best-effort.  Consistent with the definition of 409 Conflict, the assumption is that the user or client may need to examine the resulting resource state to determine the appropriate next steps.
+
+##### Responses to Composite requests
+
+If the composite server operations are successful, then a standard response containing the resource representations is returned.  It should contain the embedded resources as well.   
+           
+  
 ## Selecting Results
 ### Filtering Collections with OData
 
