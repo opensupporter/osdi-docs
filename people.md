@@ -189,7 +189,11 @@ Examples:
 |Washington		|WA
 
 
-# Scenarios
+# Scenarios / Examples
+
+> JSON respresenations below are provided as an informative reflection of what the wire format would look like.  
+> The tables above are the authoritative specification of the attributes.  Any discrepancy should defer to the above tables.
+
 ## Get a list of people with pagination
 
     GET /api/v1/people?per_page=2&page=1
