@@ -16,6 +16,7 @@
 |birthdate.month|integer	| integer representing the month of the birth date
 |birthdate.day	|integer	| integer representing the day of the birth date
 |birthdate.year|integer		| integer representing the 4 digit year of the birth date
+|ethnicity|string	|A person's ethinicity
 |languages_spoken|string[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
 |employer|string	|The name of the person's employer
 |occupation|string	|The occupation of the person.
