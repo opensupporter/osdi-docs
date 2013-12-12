@@ -55,7 +55,9 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Tim Gutowski, Trilogy Interactive
 * Chuck Hagenbuch, Blue State Digital
 * Harlan Hill, Indigo Strategies
+* Matt Klaber, NGP VAN
 * Walter Ludwig, Indigo Strategies
+* Drew Miller, NGP VAN
 * Mark Paquette, TheDataBank
 * Charles Parsons, Salsa Labs
 * Rich Ranallo, Revolution Messaging
