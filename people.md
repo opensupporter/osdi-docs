@@ -139,15 +139,12 @@ Voter Labs is a data provider who provides OSDI-formatted data. Voter Labs ident
 __Figure 1.__
 
 	{
-		"identifier": "voterlabs:5678"
-		"first_name": "Edwin",
-		"last_name": "Labadie"
-		"email": "edwin.labadie@example.com"
-		"_embedded": {
-			"identifiers": [
-				"voterlabs:12bd9f4e-cc98-44aa-b741-fe52dc2af93d"
-			]
-		}
+		"given_name": "Edwin",
+		"family_name": "Labadie"
+		"email_addresses": ["edwin.labadie@example.com"],
+		"identifiers": [
+			"voterlabs:1234"
+		]
 	}
 
 Voter Labs also has an existing record in their database that looks like this:
@@ -155,16 +152,13 @@ Voter Labs also has an existing record in their database that looks like this:
 __Figure 2.__
 
 	{
-		"identifier": "voterlabs:1234"
-		"first_name": "Edwin",
-		"last_name": "Labadie"
-		"middle_name": "Marques"
-		"email": "edwin@example-old.com",
-		"_embedded": {
-			"identifiers": [
-				"voterlabs:e2cdf524-15fc-48b4-8261-b905e91de954"
-			]
-		}
+		"given_name": "Edwin",
+		"family_name": "Labadie"
+		"additional_name": "Marques"
+		"email_addresses": ["edwin@example-old.com"],
+		"identifiers": [
+			"voterlabs:5678"
+		]
 	}
 
 Through some internally-defined process, Voter Labs decides the two records represent the same person and should be merged. Also through some internally-defined process, they determine which record should be trusted for which fields and determine which record's identifier is the new canonical identifier. The resulting merged record would look like this:
@@ -172,17 +166,14 @@ Through some internally-defined process, Voter Labs decides the two records repr
 __Figure 3.__
 
 	{
-		"identifier": "voterlabs:1234"
-		"first_name": "Edwin",
-		"last_name": "Labadie"
-		"middle_name": "Marques"
-		"email": "edwin.labadie@example.com",
-		"_embedded": {
-			"identifiers": [
-				"voterlabs:1234",
-				"voterlabs:5678"
-			]
-		}
+		"given_name": "Edwin",
+		"family_name": "Labadie"
+		"additional_name": "Marques"
+		"email_addresses": ["edwin.labadie@example.com"],
+		"identifiers": [
+			"voterlabs:1234",
+			"voterlabs:5678"
+		]
 	}
 
 What this new record means is that `voterlabs:1234` is the new id by which Voter Labs refers to this real person and that `voterlabs:5678` is another id by which this real person has previously been referred to.
