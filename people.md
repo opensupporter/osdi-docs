@@ -26,7 +26,7 @@
 |phone_numbers         |PhoneNumber[]	|A collection of phone numbers associated with the person
 |profiles		| Profile[]	| A collection of profiles for online services
 
-## Resource Collections
+## Resource Collections (post developer preview)
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |donations      |Donation[] |A collection of donations associated with the person
