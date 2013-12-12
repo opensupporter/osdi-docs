@@ -10,7 +10,6 @@
 |honorific_suffix			| string	|An honorific suffix like "Jr.", "Ph.D" Free-form field
 |gender			|string		|The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", "Other".
 |gender_identity|string     |The self-described gender with which a person identifies. Free-form field. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
-|identifier     |string     |The provider's current canonical identifier for a person. Identifier should comply with the format `<provider-name>:<id>`. See below for more details. 
 |party_identification          |string     |Flexnum describing the person's politcal party. Values: "None", "Democratic", "Republican", "Independent"
 |source         |string     |Information about the source where this person record was acquired.  Eg "Ref74"
 |birthdate		|hash		| A hash representing the birth date
@@ -20,28 +19,29 @@
 |languages_spoken|string[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
 |employer|string	|The name of the person's employer
 |occupation|string	|The occupation of the person.
-
-## Collections
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|identifiers    |identifiers[]| A collection of identifiers the provider has determined to be associated with the person
+|identifiers    |Identifier[]| A collection of identifiers the provider has determined to be associated with the person
 |postal_addresses      |PostalAddress[]  |A collection of postal addresses associated with the person
 |email_addresses         |EmailAddress[]    |A collection of email addresses associated with the person
 |phone_numbers         |PhoneNumber[]	|A collection of phone numbers associated with the person
+|profiles		| Profile[]	| A collection of profiles for online services
+
+## Resource Collections
+| Name          | Type      | Description
+|-----------    |-----------|--------------
 |donations      |Donation[] |A collection of donations associated with the person
 |question_answers|QuestionAnswer[]|A collection of answers to questions from surveys
 |event_attendance |Attendance[]|A collection of attendance records for a person
 |interactions   |Interaction[]|A collection of outreach interactions for a person, eg Volunteer Joe called voter Sam F. Bar
-|profiles		| Profile[]	| A collection of profiles for online services
 
-# Email Addresses
+
+# Email Address
 | Name          | Type      | Description
 |----------------|-----------|----------------
 | primary		| boolean	|Denotes if this is the primary address.  A person can have only one primary address
 | address		| string	| The actual email address according to RFC822
 | address_type	| string	| Flexenum of Home, Work, Other
 
-# Phone Numbers
+# Phone Number
 | Name          | Type      | Description
 |----------------|-----------|----------------
 | primary		| boolean	|Denotes if this is the primary phone number.  A person can have only one primary number
@@ -54,7 +54,7 @@
 | sms_capable	| boolean	| True if the number can accept sms text messages
 | do_not_call	| boolean	| True if this number is registered on the US FCC Do Not Call Registry
 
-# Profiles
+# Profile
 Profiles correspond to a person's accounts on online services like Facebook, Twitter, etc.
 
 | Name          | Type      | Description
@@ -62,7 +62,48 @@ Profiles correspond to a person's accounts on online services like Facebook, Twi
 | provider		| string	| The provider name, eg "Facebook"
 | id			| string	| The unique identifier provided by the provider, eg "135165"
 | url			| string	| The URL to the user's web viewable profile, eg "http://facebook.com/johnqpublic"
-| handle		| string	| The handle name, eg "johnqpublic"
+| handle		| string	| The handle name, eg "johnqpublic." Twitter handles should not include the "@"
+
+
+# Postal Address
+## Attributes
+
+| Name          | Type      | Description
+|----------------|-----------|----------------
+| primary		| boolean	|Denotes if this is the primary address.  A person can have only one primary address
+|address_type   |string     |Type of address "Home","Work","Mailing"
+|address_lines       |string[]     |Address lines 1 - n
+|locality           |string     |A city or other local administrative area
+|region          |string     |State / subdivision codes according to ISO 3166-2 (Final 2 alpha digits)
+|postal_code    |string     |Region specific postal code
+|country	|string		|Country code according to ISO 3166-1 Alpha-2
+|location		|hash		| Location information for the address
+|.lattitude		|string		|Geolocation latitude
+|.longitude		|string		|Geolocation longitude
+|.accuracy		|string		|One of "Rooftop", "Approximate"
+|status	|string		|One of "Potential", "Verified", "Bad".
+
+### Region and Country codes
+Country Codes should conform to [ISO 3166-1 Alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+
+Examples:
+
+|Country		|Code
+|---------------|----------------------
+|United States	|US
+|Canada			|CA
+|Cyprus			|CY
+
+In the United States, state abbreviations should conform to [ISO 3166-2:US](http://en.wikipedia.org/wiki/ISO_3166-2:US) but using only the final two alphanumeric characters
+
+Examples:
+
+|State			|Code
+|---------------|----------------------
+|New Jersey		|NJ
+|California		|CA
+|New York		|NY
+|Washington		|WA
 
 # Identifier
 
@@ -146,48 +187,6 @@ __Figure 3.__
 What this new record means is that `voterlabs:1234` is the new id by which Voter Labs refers to this real person and that `voterlabs:5678` is another id by which this real person has previously been referred to.
 
 "Jane Doe For Congress" is a consumer of the Voter Labs API. They have a locally cached representation of both records before Voter Labs merged the two records. When "Jane Doe For Congress" requests the record `voterlabs:5678` from the Voter Labs API, they should get a 301 redirect to the newly merged record seen above (Figure 3).
-
-
-# Postal Address
-## Attributes
-
-| Name          | Type      | Description
-|----------------|-----------|----------------
-| primary		| boolean	|Denotes if this is the primary address.  A person can have only one primary address
-|address_type   |string     |Type of address "Home","Work","Mailing"
-|address_lines       |string[]     |Address lines 1 - n
-|locality           |string     |A city or other local administrative area
-|region          |string     |State / subdivision codes according to ISO 3166-2 (Final 2 alpha digits)
-|postal_code    |string     |Region specific postal code
-|country	|string		|Country code according to ISO 3166-1 Alpha-2
-|location		|hash		| Location information for the address
-|.lattitude		|string		|Geolocation latitude
-|.longitude		|string		|Geolocation longitude
-|.accuracy		|string		|One of "Rooftop", "Approximate"
-|status	|string		|One of "Potential", "Verified", "Bad".
-
-### Region and Country codes
-Country Codes should conform to [ISO 3166-1 Alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-
-Examples:
-
-|Country		|Code
-|---------------|----------------------
-|United States	|US
-|Canada			|CA
-|Cyprus			|CY
-
-In the United States, state abbreviations should conform to [ISO 3166-2:US](http://en.wikipedia.org/wiki/ISO_3166-2:US) but using only the final two alphanumeric characters
-
-Examples:
-
-|State			|Code
-|---------------|----------------------
-|New Jersey		|NJ
-|California		|CA
-|New York		|NY
-|Washington		|WA
-
 
 # Scenarios / Examples
 
