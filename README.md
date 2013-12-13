@@ -5,42 +5,13 @@ The Open Supporter Data Interface (OSDI) effort seeks to define an API and data 
 
 OSDI membership is made up of progressive vendors and organizations as well as invited non-partisan and mainstream industry vendors.
 
-The API will define interfaces including but not limited to resources representing people, donations, questions, tags, and events. The group will determine the order in which to define resource models and which version of the API to include them in.
-
-<img src="docs/diagram.png" align="right" width=450>
-
-**Benefits of a Common API**
-
-Customers, digital and tech directors, technology consultants
-
-* Less manual and error-prone data import/export
-* Staff and Volunteer data entry time savings
-* Better ability to pick and choose technology products and use them together
-* Multi-Vendor solutions mean less headaches
-
-Technology Application Developers
-
-* Write platform integration code once rather than per platform means less dev hours spent
-* Data consistency across platforms reduces cost
-* Can spend more resources on new customer features rather than integration code
-
-Platform Vendors
-
-* Ability to integrate means an easier sell to customers who already use another platform.
-* Common API across vendors enables a larger app ecosystem for your platform
-
-
-[Read the full charter](charter.md)
-
-[Read our scenarios document](scenarios/scenarios.md)
+More Information about OSDI can be found at the website [opensupporter.org](http://opensupporter.org)
 
 [Download a one page PDF about the project](docs/osdi-one-pager.pdf)
 
-[Experiment with our prototype http://api.opensupporter.org](http://api.opensupporter.org)
+[Experiment with our prototype server http://api.opensupporter.org](http://api.opensupporter.org)
 
-[Join our reviewers email group to stay up to date: http://signup.opensupporter.org](http://signup.opensupporter.org)
-
-[**Please Fill out our survey**](https://docs.google.com/forms/d/1YazUaISNvH_j2p4rfv7eKcbq4CLjaGuszDnTFxA4Gcw/viewform)
+[Play with our Canvasser example client application](http://canvasser.opensupporter.org)
 
 Please give us feedback on our work. [Read the Review Guide](review_guide.md) to learn what kind of feedback we're looking for and how to provide it.
 
