@@ -1,4 +1,3 @@
-
 ![Logo](logo.png)
 
 The Open Supporter Data Interface (OSDI) effort seeks to define an API and data structures for interoperability among products in the **progressive** cause-based, campaign and non-profit marketplace. The existence of a common API will reduce customer costs related to moving data between different systems, lower integration costs and enhance the ability of innovators to create products for the marketplace.
@@ -27,6 +26,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Chuck Hagenbuch, Blue State Digital
 * Harlan Hill, Indigo Strategies
 * Matt Klaber, NGP VAN
+* Marc Love, Carbon Five
 * Walter Ludwig, Indigo Strategies
 * Drew Miller, NGP VAN
 * Mark Paquette, TheDataBank
