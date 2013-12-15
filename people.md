@@ -49,7 +49,7 @@
 | number		| string	| The actual phone number which MUST including country code and MUST be numeric characters only 
 | extension		| string	| Optional associated extension
 | description	| string	| Optional Free form additional text description
-| phone_type	| string	| flexnum of Home, Work, Mobile, Other, Daytime, Evening, Fax
+| number_type	| string	| flexnum of Home, Work, Mobile, Other, Daytime, Evening, Fax
 | operator		| string	| Optional: Operator/Carrier associated with number, eg "Verizon"
 | country		| string	| Country code according to ISO 3166-1 Alpha-2
 | sms_capable	| boolean	| True if the number can accept sms text messages
