@@ -29,7 +29,6 @@ This page defines Events, EventRSVPS
 | visibility| string	| Visibility of the event.  Possible values are
 |			|			| "public" visible on public web interfaces
 |			|			| "private" not visible on public web interfaces
-
 | attendees	| Attendance[]| A Collection of Attendance resources
 | guestsCanInviteOthers | boolean | Attendees can invite guests to the event
 | reminders | list		| a list of reminder elements
