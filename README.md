@@ -35,7 +35,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Jason Rosenbaum, The Action Network
 * Ben Stein, Mobile Commons
 * Ray Suelzer, UFCW International Union
-* Brian Vallelunga, Trilogy Interactive
+* Brian Vallelunga, Trilogy Interactive (Editor)
 * Nathan Woodhull, ControlShift Labs
 * Misha Zhurkin, Catalist
 
