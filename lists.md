@@ -33,24 +33,22 @@ A list is a resource type that contains list metadata as well as a link to the i
       "_embedded": {
         "lists": [
           {
-			"name" : "supporters",
+			"name" : "Ref74 Supporters",
 			"description" : "The set of all supporters for Ref74",
 			"type" : "person",
 			"_links" : {
 				"items" : {
 					"href" : "api/v1/people?list=supporters",
-					"title" : "R74 supporters"
 				}
 			}
 		   },
           {
-			"name" : "donors",
+			"name" : "Ref74 Donors",
 			"description" : "The set of all 2012 donors for Ref74",
 			"type" : "person",
 			"_links" : {
 				"items" : {
 					"href" : uri,
-					"title" : "R74 donors"
 				}
 			}
 		   }
@@ -63,3 +61,19 @@ A list is a resource type that contains list metadata as well as a link to the i
       }
     }
 
+### Get a list
+  	GET /api/v1/list/1
+
+  	200 OK
+    Content-Type: application/json
+
+  	{
+			"name" : "Ref74 Supporters",
+			"description" : "The set of all supporters for Ref74",
+			"type" : "person",
+			"_links" : {
+				"items" : {
+					"href" : "api/v1/people?list=supporters",
+				}
+			}
+	}
