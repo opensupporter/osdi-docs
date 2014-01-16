@@ -14,7 +14,7 @@
 |currency		|string		|ISO 4217 designation of currency. Example: USD, JPY
 |payment		|hash		|A hash of payment details
 |payment.method	|enum		|A flexible enumeration of "Credit Card", "Check", "Cash", "Electronic Funds Transfer"
-|payment.key	|string		|A check number, transaction ID, or some other information 
+|payment.reference_number	|string		|A check number, transaction ID, or some other information referencing the payment
 |payment.authorization_stored	|boolean	|Indicates if payment information has been stored for future automatic payments
 |recurrence		|hash		|A hash detailing the donation's part in a recurrence of other donations
 |recurrence.recurring|boolean	|Indicates if the donation is part of a recurring donation series
