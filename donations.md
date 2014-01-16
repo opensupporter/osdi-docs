@@ -22,5 +22,5 @@
 |recurrence.instance|string	|A sequence number or some other id unique to this instance of the recurrence. Examples: 5, JAN-2014
 |voided			|boolean	|Indicates if the donation has been voided
 |url			|string		|URL at which the donation was taken
-|source			|string		|Source associated with the donation
-|attribution	|string		|Attribution associated with the donation
+|sources			|string[]		|Sources associated with the donation
+|attributions	|string[]		|Attributions associated with the donation
