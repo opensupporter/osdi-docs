@@ -7,8 +7,8 @@
 |-----------    |-----------|--------------
 |name			|string		|Name for the question
 |question       |string     |Human readable text of the question
-|question_type  |string     |One of "MultiChoice"
-|responses      |QuestionResponse[]|A collection of possible responses
+|question_type  |flexenum   |Flexenum of "MultiChoice", "SingleChoice", "Freeform"
+|responses      |QuestionResponse[]|A collection of possible responses (required for MultiChoice and SingleChoice)
 
 ## QuestionResponse
 A possible response or choice for a question.
@@ -25,13 +25,12 @@ A possible response or choice for a question.
 An answer to a question.  An answer is chosen by the user from one of the QuestionResponse options
 
 ### Attributes
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|value          |string     |Human readable text of the value
-|person_id		|integer	|ID of associated person object
-|question_id	|integer	|ID of associated question object
-|question		|Question*	|Reference to associated question
-|person			|Person*	|Reference to associated person
+| Name          | Type             | Description
+|-----------    |------------------|--------------
+|value          |string            |Human readable text of the value
+|question		|Question*	       |Reference to associated question
+|answer         |Answer* or string |if it's a freeform question then string otherwise link to answer 
+|person			|Person*	       |Reference to associated person
 
 
 ## Retrieving Available Questions
@@ -158,7 +157,6 @@ Request
 
 	{
 		"value" : "Emacs",
-		"question_id" : 5
+		"question_id" : 5,
+		"answer_id" : 1,
 	}
-	
-Response
