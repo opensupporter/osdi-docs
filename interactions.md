@@ -6,11 +6,13 @@ Interactions are instances of one person engaging another person. An example of 
 
 | Name			| Type 		| Description
 |-----------	|-----------|-----------------------
-| canvasser		| Person*	| Reference to the person who completed this interaction, eg the person who asked the question
-| prospect		| Person*	| Reference to the person the canvasser interacted with.  eg, the person who was asked the question
-| attempt_type	| string	| One of "Call", "Email","Canvass","Web", "Other"
-| attempt_result| string	| One of "Completed", "Unreachable", "Left Message"
+| contactedBy	| Person*	| Reference to the person who completed this interaction, eg the person who asked the question (null allowed)
+| prospect		| Person*	| Reference to the person the canvasser interacted with.  eg, the person who was asked the question (null allowed)
+| coder 		| Person*	| Reference to the person that entered the data about this interaction (null allowed)
+| attempt_type	| string	| Flexenum of "Call", "Email","Canvass","Web", "Other"
+| attempt_result| string	| Flexenum of "Completed", "Unreachable", "Left Message"
+| retryable     | boolean   | Is this interaction retryable?
 | donations		| Donation[] | Associated donations
 | attendances 	| Attendance[]| Associated event attendances
+| attempt_time  | DatTime   | The date this was attempted
 | question_answers| QuestionAnswer[]| Associated answered questions
-| foos			| Foo[]		| There may be additonal collections of objects associated with an interaction
