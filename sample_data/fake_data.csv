@@ -1,0 +1,53 @@
+Household ID, Last, First, Middle, YoB, MoB, DoB, Address, City, State, Zip
+0000000001, Woodard, Lawrence, J, 1976, 2, 3, 401 I St. SW, Washington, DC, 20024
+0000000002, Carter, Joshua, L, 1979, 4, 18, 3219 O St. NW, Washington, DC, 20007
+0000000002, Scott, Melissa, L, 2000, 8, 23, 3219 O St. NW, Washington, DC, 20007
+0000000002, Mcclain, Richard, J, 2006, 4, 2, 3219 O St. NW, Washington, DC, 20007
+0000000002, Jefferson, Scott, D, 1975, 9, 11, 3219 O St. NW, Washington, DC, 20007
+0000000002, Mathis, Johnny, F, 1986, 6, 15, 3219 O St. NW, Washington, DC, 20007
+0000000002, Charles, Frank, G, 1980, 5, 20, 3219 O St. NW, Washington, DC, 20007
+0000000002, Gamble, Walter, A, 1972, 4, 3, 3219 O St. NW, Washington, DC, 20007
+0000000002, Williams, Scott, B, 1983, 5, 10, 3219 O St. NW, Washington, DC, 20007
+0000000002, Booker, Arthur, R, 1971, 9, 6, 3219 O St. NW, Washington, DC, 20007
+0000000002, Rivers, Samuel, R, 1984, 10, 10, 3219 O St. NW, Washington, DC, 20007
+0000000003, Brooks, Louise, P, 1991, 3, 14, 1825 8th St. NW, Washington, DC, 20001
+0000000004, Douglas, Nicholas, F, 1971, 7, 19, 2201 18th St. NW, Washington, DC, 20009
+0000000004, Roberson, Helen, G, 1972, 4, 5, 2201 18th St. NW, Washington, DC, 20009
+0000000004, Cherry, William, R, 1950, 11, 20, 2201 18th St. NW, Washington, DC, 20009
+0000000005, Hardy, Samuel, C, 1987, 4, 12, 300 Bryant Street NW, Washington, DC, 20001
+0000000006, Wiggins, Stephanie, S, 1946, 1, 2, 2200 Minnesota Ave. SE, Washington, DC, 20020
+0000000006, Charles, Emily, N, 1924, 4, 27, 2200 Minnesota Ave. SE, Washington, DC, 20020
+0000000007, Simmons, Jimmy, J, 1969, 7, 19, 425 C St NE, Washington, DC, 20002
+0000000008, Davis, Cynthia, M, 1960, 12, 16, 3101 13th St. NW, Washington, DC, 20010
+0000000009, Haynes, Peter, B, 1953, 10, 23, 920 F St. NE, Washington, DC, 20002
+0000000009, Willis, Julie, C, 1954, 5, 12, 920 F St. NE, Washington, DC, 20002
+0000000010, Dickerson, Victor, H, 1966, 10, 12, 1300 Nicholson St. NW, Washington, DC, 20011
+0000000010, Woodard, Bonnie, K, 1959, 7, 13, 1300 Nicholson St. NW, Washington, DC, 20011
+0000000010, Branch, Andrew, L, 1958, 5, 8, 1300 Nicholson St. NW, Washington, DC, 20011
+0000000010, Woodard, Jane, J, 1990, 7, 24, 1300 Nicholson St. NW, Washington, DC, 20011
+0000000010, Grant, Cynthia, K, 1977, 5, 1, 1300 Nicholson St. NW, Washington, DC, 20011
+0000000011, Bryant, Victor, J, 1990, 8, 6, 219 50th St. SE, Washington, DC, 20019
+0000000012, Hawkins, Anna, K, 1962, 7, 18, 1919 15th St. SE, Washington, DC, 20020
+0000000013, Haynes, Paul, K, 1947, 7, 19, 2725 10th St. NE, Washington, DC, 20018
+0000000013, Richardson, Katherine, M, 1958, 5, 17, 2725 10th St. NE, Washington, DC, 20018
+0000000014, Terrell, Harry, W, 1976, 5, 6, 1900 Evarts St. NE, Washington, DC, 20018
+0000000014, Jackson, Lillian, A, 1970, 8, 3, 1900 Evarts St. NE, Washington, DC, 20018
+0000000015, Clay, Randy, B, 1930, 3, 1, 1700 Q St. SE, Washington, DC, 20020
+0000000015, Curry, Marie, M, 1940, 7, 21, 1700 Q St. SE, Washington, DC, 20020
+0000000016, Miles, Lois, B, 1966, 5, 5, 4201 M.L. King Ave. SW, Washington, DC, 20032
+0000000016, Sims, Scott, A, 1957, 10, 17, 4201 M.L. King Ave. SW, Washington, DC, 20032
+0000000016, Tyler, Jason, D, 1997, 7, 1, 4201 M.L. King Ave. SW, Washington, DC, 20032
+0000000016, Brooks, Paula, S, 1998, 4, 15, 4201 M.L. King Ave. SW, Washington, DC, 20032
+0000000017, Holloway, Joshua, T, 1983, 1, 2, 1825 8th St. NW, Washington, DC, 20001
+0000000018, Glover, Juan, J, 1956, 9, 9, 1125 New Jersey Ave. NW, Washington, DC, 20001
+0000000019, James, Kimberly, B, 1982, 4, 21, 401 Mississippi Ave. SE, Washington, DC, 20032
+0000000020, Richardson, Deborah, J, 1983, 10, 7, 660 K St. NE, Washington, DC, 20002
+0000000021, Benjamin, Stephen, P, 1941, 1, 3, 2425 N St. NW, Washington, DC, 20037
+0000000022, Singleton, Betty, L, 1978, 1, 18, 100 Gallatin St. NE, Washington, DC, 20011
+0000000022, Byrd, Samuel, F, 2006, 3, 3, 100 Gallatin St. NE, Washington, DC, 20011
+0000000022, Butler, Russell, S, 2007, 11, 23, 100 Gallatin St. NE, Washington, DC, 20011
+0000000023, Washington, Rose, C, 1966, 10, 28, 101 T Street NE, Washington, DC, 20002
+0000000023, Singleton, Bonnie, C, 1991, 2, 17, 101 T Street NE, Washington, DC, 20002
+0000000023, Ingram, Tina, A, 1989, 6, 13, 101 T Street NE, Washington, DC, 20002
+0000000023, Green, Ruth, D, 1985, 5, 9, 101 T Street NE, Washington, DC, 20002
+0000000023, Mcneil, Bobby, J, 2004, 7, 11, 101 T Street NE, Washington, DC, 20002
