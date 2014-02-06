@@ -492,7 +492,9 @@ POST /api/v1/urltoaction/record_donation
 		"email_address" : "testy@example.com"
 		"identifiers" : [ "voterlabs:1234" ]
 		"options" : {
-			"update" : true, // update the matched person with included info (true) or use only for matching (false)
+			"update" : true, // update the matched person with
+			 //included info (true) or use only for matching 
+			//(false)
 			}
 	},
 	"donation_date" : "2013-11-19T08:37:48-0600",
@@ -505,7 +507,7 @@ Content-Type: application/json
 
 {
 	"person_match_response" : {
-		"result" : "matched" | "created",
+		"result" : "created",
 		"href" : "http://url/to/matched/or/created/person"
 		"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
 	},
@@ -520,8 +522,46 @@ Content-Type: application/json
 }
 ````
 
+###Event RSVP
+In order to simplify event signups, OSDI provides the event_signup action.  The event_signup endpoint is event specific.  It is returned within a specific event's representation.  It is expected that the client has this information in advance of the action.
 
+````javascript
+POST /api/v1/event_url/blah/blah/attendance_create
 
+{
+	"person_match": {
+		"email_address" : "testy@example.com"
+		"identifiers" : [ "voterlabs:1234" ]
+		"options" : {
+			"update" : false, // update the matched person with
+			// included info (true) or use only for
+			// matching (false)
+			}
+	},
+	"status" : "accepted",
+	"comment" : "1 phone bank == 5.3 votes!"
+}
+
+201 Created
+Content-Type: application/json
+
+{
+	"person_match_response" : {
+		"result" : "matched" ,
+		"href" : "http://url/to/matched/or/created/person"
+		"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
+	},
+	"status" : "accepted",
+	"comment" : "1 phone bank == 5.3 votes!"
+	// continuation of donation resource attributes
+	
+	"_links" : {
+		"self" : { "href" : "http://link/to/this/new/donation"},
+		"person" : { "href" : "http://link/to/associated/person"}
+	}
+}
+
+````
 
 ## Writing Data (rest-write)
 RESful writing, or updating of data is done via common RESTful (CRUD) operations
