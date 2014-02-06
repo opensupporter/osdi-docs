@@ -62,10 +62,27 @@ Email: [info@opensupporter.org](mailto:info@opensupporter.org)
 
 
 # Basic Resource Access
-## API Entry Point and linking
-All access through OSDI starts at the API Entry Point (AEP).  The AEP is a resource that acts like a directory of the types of resources available on a server.  It also includes capability information like the maximum query pagesize.
 
-Some servers may support some or all of the different resource collections.  For example, a peer to peer donation system might support Donations and People but not events.  In order to find out what resources are available and what URIs to use to access them, do a GET on the AEP URI.
+## Overview
+OSDI used a combination of approaches to provide flexible reading of data, simple operations for simple scenarios, and general purpose CRUD access.
+
+OSDI Compliant endpoints achieve this through the following capabilities
+
+### RESTful Reading of Data (rest-read)
+Reading of data, or querying resources, is done via traditional REST and Hypermedia practices.  OSDI uses HAL for hypermedia and OData query language to give a rich and flexible way to express queries
+
+### Actions (actions)
+OSDI also allows a client to perform actions, sometimes known as scenarios or methods, when the scenario is 'action oriented' vs 'data oriented' such as singing up a supporter, recording a donation, or rsvping for an event.
+
+Certain common actions have been specifically defined to include any needed semantics to allow a client to perform an action in a single HTTP request/response.
+
+### Direct Data Updates (rest-write)
+There will always be an unbounded set of scenarios such that defining specific actions for each would be impractical.  For scenarios outside Actions, OSDI provides direct RESTful data access.  By using the common RESTful operations, along with hypermedia, virtually any scenario can be accomplished.
+
+## API Entry Point and linking
+
+### Overview
+All access through OSDI starts at the API Entry Point (AEP).  The AEP is a resource that acts like a directory of the types of resources available on a server.  It also includes capability information like the maximum query pagesize.
 
 Your service provider can tell you what the AEP URI is for your account.
 
@@ -75,10 +92,20 @@ For the purposes of example, assume your provider has given you an AEP URI of
 
 > Note: you can explore the AEP with a user friendly interface by visiting our [prototype endpoint](http://api.opensupporter.org)
 
+### Available Collections 
+Some servers may support some or all of the different resource collections.  For example, a peer to peer donation system might support Donations and People but not events.  In order to find out what resources are available and what URIs to use to access them, do a GET on the AEP URI.
+
+
 In order to determine the available resources on the server the client should perform an HTTP GET request to this URI.
 
 Within the response will be a collection of links to the resource collections available on the server.
 
+### Capabilities
+Implementations of OSDI may differ in support of certain semantic capabilities.  Implementations may also define extensions to the OSDI specification.  A client may determine which capabilities are supported on a server by examining the "capabilities" hash inside of the AEP.
+
+Some capabilities may be advertised merely by the presence of a boolean key, others may have complex hash structures indicating capability specific parameters.
+
+### Example
 
 Request
 
@@ -92,8 +119,21 @@ Response
 
 	{
 	  "motd": "Welcome to the ACME Action Platform OSDI API endpoint!!",
+	  "capabilities" : {
+		"osdi:rest-read" : true,
+		"osdi:actions" : true,
+		"osdi:rest-write" : true,
+		"acme:defeat_opponent": {								"modes" : [
+				"landslide", "nailbiter"
+			]
+		},
+	
+
 	  "_links": {
-	    "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],  
+	    "curies": [
+			{"name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true },
+			{"name": "acme", "href": "http://acme.foo/"}
+		],  
 	    "osdi:people": {
 	      "href": "/api/v1/people",
 	    },
@@ -115,7 +155,9 @@ Response
 	  }
 	}
 
-Given the above example response, let's fetch the people collection on this server.
+
+## Reading Data
+Given the above example AEP response, let's fetch the people collection on this server.
 Notice the "_links" collection.  Find the object in the links collection with key "osdi:people".  That object has an attribute "href" which contains the URI to use to access the people collection.
 
 > This is for example purpose only.  The official definition of the person schema is [People and Addresses](people.md)
@@ -382,7 +424,107 @@ I would then construct an odata_query and substitute the odata_query variable wi
 
 "http://api.opensupporter.org/api/v1/people?$filter={odata_query}", would become "http://api.opensupporter.org/api/v1/people?$filter=name eq 'bob'", for more information on odata queries see http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter.
 
-## Common CRUD operations
+## Actions
+Most actions are operations which combine:
+1) Matching or locating a Person resource
+2) Creating an associated resource like Donation, Event RSVP, or Q&A response
+
+````javascript
+{
+	"person_match" : {
+		// matching attributes
+	},
+	"<resource>" : {
+		// attributes for the newly created resource
+	}
+}
+````
+### Match
+
+In order to perform that matching function, a common "person_match" element is defined.  This element contains atributes from person.  By convention, attributes that would be arrays or sub-resources are included inline.
+
+This match element is then included in the action along with the action specific attributes.
+
+When receiving a person_match element, a server shall make a best effort to match to a single existing person.  In the event that a confident match cannot be made, the server shall either create a new person or fail, according to the options specified.
+
+If the __upsert__ query parameter is present and sent to false, then the server will always create a new person resource.
+
+````javascript
+"person_match": {
+	"given_name" : "Testy",
+	"family_name" : "McTesterson",
+	"address1" : "124 Foobarrio St",
+	"postal_code" : "99999",
+	"email_address" : "testy@example.com"
+	"identifiers" : [ "voterlabs:1234" ]
+	"options" : {
+		"update" : true, // update the matched person with included info (true) or use only for matching (false)
+		}
+}
+
+````
+"person_match_response"
+After processing an action, the server shall send back a response including a "person_match_response" element.  This element contains status information regarding the match attempt.
+
+````javascript
+"person_match_response" : {
+	"result" : "matched" | "created",
+	"href" : "http://url/to/matched/or/created/person"
+	"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
+}
+````
+
+### Action
+An action 
+
+#### Recording a Donation
+The record_donation is a top level action.  The URL endpoint can be found in the AEP.
+
+````javascript
+POST /api/v1/urltoaction/record_donation
+
+{
+	"person_match": {
+		"given_name" : "Testy",
+		"family_name" : "McTesterson",
+		"address1" : "124 Foobarrio St",
+		"postal_code" : "99999",
+		"email_address" : "testy@example.com"
+		"identifiers" : [ "voterlabs:1234" ]
+		"options" : {
+			"update" : true, // update the matched person with included info (true) or use only for matching (false)
+			}
+	},
+	"donation_date" : "2013-11-19T08:37:48-0600",
+	"amount" : 50.00,
+	"currency" : "USD",
+}
+
+201 Created
+Content-Type: application/json
+
+{
+	"person_match_response" : {
+		"result" : "matched" | "created",
+		"href" : "http://url/to/matched/or/created/person"
+		"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
+	},
+	"donation_date" : "2013-11-19T08:37:48-0600",
+	"amount" : 50.00,
+	"currency" : "USD",
+	// continuation of donation resource attributes
+	"_links" : {
+		"self" : { "href" : "http://link/to/this/new/donation"},
+		"person" : { "href" : "http://link/to/associated/person"}
+	}
+}
+````
+
+
+
+
+## Writing Data (rest-write)
+RESful writing, or updating of data is done via common RESTful (CRUD) operations
 ### Creating a Resource
 Creating a new resource involves adding a new item to a collection.  To create a new resource, an HTTP POST message is sent to the URI for a collection.
 
