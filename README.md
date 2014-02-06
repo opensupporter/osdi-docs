@@ -385,6 +385,7 @@ I would then construct an odata_query and substitute the odata_query variable wi
 "http://api.opensupporter.org/api/v1/people?$filter={odata_query}", would become "http://api.opensupporter.org/api/v1/people?$filter=name eq 'bob'", for more information on odata queries see http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter.
 
 ## Common CRUD operations
+
 ### Creating a Resource
 Creating a new resource involves adding a new item to a collection.  To create a new resource, an HTTP POST message is sent to the URI for a collection.
 
