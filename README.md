@@ -71,13 +71,16 @@ OSDI Compliant endpoints achieve this through the following capabilities
 ### RESTful Reading of Data (rest-read)
 Reading of data, or querying resources, is done via traditional REST and Hypermedia practices.  OSDI uses HAL for hypermedia and OData query language to give a rich and flexible way to express queries
 
-### Actions (actions)
-OSDI also allows a client to perform actions, sometimes known as scenarios or methods, when the scenario is 'action oriented' vs 'data oriented' such as singing up a supporter, recording a donation, or rsvping for an event.
-
-Certain common actions have been specifically defined to include any needed semantics to allow a client to perform an action in a single HTTP request/response.
-
 ### Direct Data Updates (rest-write)
 There will always be an unbounded set of scenarios such that defining specific actions for each would be impractical.  For scenarios outside Actions, OSDI provides direct RESTful data access.  By using the common RESTful operations, along with hypermedia, virtually any scenario can be accomplished.
+
+
+### Fuzzy Linking (fuzzy-link)
+Fuzzy linking allows a client to link two resources together by providing matching criteria rather than an explicit identifier.
+
+This can be useful in actions where the intent is to create a new resource, such as a donation, and either associate it with an existing Person or create a new associated Person resource. 
+
+Which course of action to take is not known at the time of the request, and the client has little interest in researching the existence of Person.
 
 ## API Entry Point and linking
 
@@ -121,10 +124,10 @@ Response
 	  "motd": "Welcome to the ACME Action Platform OSDI API endpoint!!",
 	  "capabilities" : {
 		"osdi:rest-read" : true,
-		"osdi:actions" : true,
+		"osdi:fuzzy-linking" : true,
 		"osdi:rest-write" : true,
 		"acme:defeat_opponent": {								"modes" : [
-				"landslide", "nailbiter"
+				"landslide", "nailbiter", "recount"
 			]
 		},
 	
@@ -424,144 +427,226 @@ I would then construct an odata_query and substitute the odata_query variable wi
 
 "http://api.opensupporter.org/api/v1/people?$filter={odata_query}", would become "http://api.opensupporter.org/api/v1/people?$filter=name eq 'bob'", for more information on odata queries see http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter.
 
-## Actions
-Most actions are operations which combine:
+## Fuzzy Linking 
+### Life can be Tedious
+In certain scenarios like recording a donation, or rsvp'ing to an event, a new resource is being created **and** being associated with an existing resource such as a Person.
+
+In order to execute this task, normally this would involve multiple requests:
+
 1) Matching or locating a Person resource
 2) Creating an associated resource like Donation, Event RSVP, or Q&A response
 
+> Srsly? This is tedious.
+
+### Relationship Drama
+
+Hypermedia gets much of it's power from relationships. Being able to traverse relationships between associated resources is very helpful.  How many donations associated with *this* Person?
+
+In traditional Hypermedia, when creating a new resource (or updating an existing one)there may be multiple links or associations to other resources.  If the association cannot be implied from the containing collection, common practice would entail setting those links to a pre-known and explicit URL or ID.  
+
+> That's a pain.  Why can't I just give you the email address and other form data I have and **you** figure it out?
+
+### Match (I'm Feeling Lucky)
+
+OSDI provides a new way of doing this by allowing links or associations to be specified in a fuzzy manner.  
+
+In OSDI, clients may specify conditions for the server to find and match an existing resource, or create one if no suitable match exists.
+
+
 ````javascript
 {
-	"person_match" : {
-		// matching attributes
-	},
-	"<resource>" : {
-		// attributes for the newly created resource
-	}
+	"_links" : {
+		"self" : { 
+			"href" : "http://link/to/self"
+		},
+		"person" : {
+			"osdi:match" : {
+				"email_address"	: "testy@example.com",
+				"given_name" : "Testy",
+				"family_name" : "McTesterson",
+				"identifier" : "voterlabs:123",
+						}
+		}
 }
 ````
-### Match
 
-In order to perform that matching function, a common "person_match" element is defined.  This element contains atributes from person.  By convention, attributes that would be arrays or sub-resources are included inline.
 
-This match element is then included in the action along with the action specific attributes.
+In order to perform that matching function, a common "match" element is defined.  
 
-When receiving a person_match element, a server shall make a best effort to match to a single existing person.  In the event that a confident match cannot be made, the server shall either create a new person or fail, according to the options specified.
+> this match element may be used wherever a "href" element is used in a hash, such as a _links collection.
+
+This element contains atributes from the resource being matched.    By convention, attributes that would be arrays or sub-resources are included inline.
+
+> Each resource definition specifies what attributes are permitted in a match
+
+When receiving a Match element, a server shall make a best effort to match to a single existing person.  In the event that a confident match cannot be made, the server shall either create a new person or fail, according to the "fail_no_match" option specified.  It defaults to false, which will result in a new resource being created in the event of a failed match.
 
 If the __upsert__ query parameter is present and sent to false, then the server will always create a new person resource.
 
 ````javascript
-"person_match": {
+"osdi:match" : {
+	"email_address"	: "testy@example.com",
 	"given_name" : "Testy",
 	"family_name" : "McTesterson",
-	"address1" : "124 Foobarrio St",
+	"identifier" : "voterlabs:123",
+	"identifiers" : [ "voterlabs:123", "acme:1234", "twitter:mctesty" ]
+	"address_lines" : [ "123 Foobarrio St", "Apt Bar" ],
 	"postal_code" : "99999",
-	"email_address" : "testy@example.com"
-	"identifiers" : [ "voterlabs:1234" ]
-	"options" : {
-		"update" : true, // update the matched person with included info (true) or use only for matching (false)
-		}
+	
+	// resource specific permitted attributes...
+	"href" : "http://turns/out/I/actually/had/the/URL"
+	"_options" : {
+		"update" : true, // update the matched person with
+		// included info (true) or use only for matching (false)
+	"fail_on" : "none" | "ambiguous" | "noexist" | "match_fail"
+		// enum
+		//if the match does fails because the resource doesn't exist,or cannot be uniquely located
+		// then return an error (Precondition Failed)	
+	}
 }
 
 ````
-"person_match_response"
+
+"match_response"
 After processing an action, the server shall send back a response including a "person_match_response" element.  This element contains status information regarding the match attempt.
 
 ````javascript
-"person_match_response" : {
+"match_response" : {
 	"result" : "matched" | "created",
 	"href" : "http://url/to/matched/or/created/person"
 	"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
 }
 ````
+### Match Compliance
+must support href, identifiers, email,
 
-### Action
+### Examples
 An action 
 
 #### Recording a Donation
-The record_donation is a top level action.  The URL endpoint can be found in the AEP.
+To record a donation, a new resource is created in the donations collection using fuzzy linking to identify the person associated.
 
 ````javascript
-POST /api/v1/urltoaction/record_donation
+POST /api/v1/urlto_donations_collection
 
 {
-	"person_match": {
-		"given_name" : "Testy",
-		"family_name" : "McTesterson",
-		"address1" : "124 Foobarrio St",
-		"postal_code" : "99999",
-		"email_address" : "testy@example.com"
-		"identifiers" : [ "voterlabs:1234" ]
-		"options" : {
-			"update" : true, // update the matched person with
-			 //included info (true) or use only for matching 
-			//(false)
-			}
-	},
+	// resource specific attributes	
 	"donation_date" : "2013-11-19T08:37:48-0600",
 	"amount" : 50.00,
 	"currency" : "USD",
+
+	"_links" : { 
+		"person": {
+			"osdi:match" {
+				"given_name" : "Testy",
+				"family_name" : "McTesterson",
+				"address1" : "124 Foobarrio St",
+				"postal_code" : "99999",
+				"email_address" : "testy@example.com"
+				"identifiers" : [ "voterlabs:1234" ]
+				"_options" : {
+					"update" : true, // update the matched person with
+			 		//included info (true) or use only for matching (false)
+			}
+	},
 }
 
 201 Created
 Content-Type: application/json
 
 {
-	"person_match_response" : {
-		"result" : "created",
-		"href" : "http://url/to/matched/or/created/person"
-		"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
-	},
+
 	"donation_date" : "2013-11-19T08:37:48-0600",
 	"amount" : 50.00,
 	"currency" : "USD",
 	// continuation of donation resource attributes
 	"_links" : {
 		"self" : { "href" : "http://link/to/this/new/donation"},
-		"person" : { "href" : "http://link/to/associated/person"}
+		"person" : { 
+			"href" : "http://link/to/associated/person"
+			"osdi:match_response" : {
+				"result" : "created",
+				"href" : "http://url/to/matched/or/created/person"
+				"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
+			},
+		}
 	}
 }
 ````
 
 ###Event RSVP
-In order to simplify event signups, OSDI provides the event_signup action.  The event_signup endpoint is event specific.  It is returned within a specific event's representation.  It is expected that the client has this information in advance of the action.
+Event signup is another scenario where fuzzy linking can be helpful.  In the OSDI data model, Attendance resources link a Person to an Event, as well as "invited_by".
+
+Clever usage of fuzzy linking can make this easy.
+
+The event attendance collection endpoint is event specific.  It is returned within a specific event's representation.  It is expected that the client has this information in advance of the action.
+
+In the example below, the relationship to the Event is implied by the collection resource URI.
 
 ````javascript
-POST /api/v1/event_url/blah/blah/attendance_create
+POST /api/v1/event_url/blah/attendances
 
 {
-	"person_match": {
-		"email_address" : "testy@example.com"
-		"identifiers" : [ "voterlabs:1234" ]
-		"options" : {
-			"update" : false, // update the matched person with
-			// included info (true) or use only for
-			// matching (false)
-			}
-	},
+	// resource specific attributes
 	"status" : "accepted",
 	"comment" : "1 phone bank == 5.3 votes!"
+
+	"_links" : {
+		// Ok, we've seen this before.
+		"person" : { 
+			"osdi:match": {
+				"email_address" : "testy@example.com"
+				"identifiers" : [ "voterlabs:1234" ]
+			// no _options.  accept defaults (update)
+		},
+		// This is new.  Stretch your brain.
+		"invited_by" : { 
+			"osdi:match" : {
+				"email_address" : "my_friend@example.com"
+				"_options" : { "update" : false }
+			}
+
 }
 
 201 Created
 Content-Type: application/json
 
 {
-	"person_match_response" : {
-		"result" : "matched" ,
-		"href" : "http://url/to/matched/or/created/person"
-		"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
-	},
+
 	"status" : "accepted",
 	"comment" : "1 phone bank == 5.3 votes!"
 	// continuation of donation resource attributes
 	
 	"_links" : {
 		"self" : { "href" : "http://link/to/this/new/donation"},
-		"person" : { "href" : "http://link/to/associated/person"}
+		"person" : { 
+			"href" : "http://link/to/associated/person"
+			"osdi:match_response" : {
+				"result" : "created" ,
+				"href" : "http://url/to/matched/or/created/person"
+				"identifiers" : [  ]
+			},
+		},
+		"invited_by" : {
+			"href" : "http://link/to/who/guilted/me/into/volunteering",
+			"osdi:match_response" : {
+				"result" : "matched" ,
+				"href" : "http://link/to/who/guilted/me/into/volunteering"
+				"identifiers" : [ "voterlabs:12234", "acme:3119999999" ]
+			},
 	}
 }
 
 ````
+
+### Other scenarios
+How far can we go?
+
+We could post to a top level Attendance collection and use fuzzy linking for person, invited_by **and** event itself.
+
+We could set certain matches (like event) to match only but if there is no match, don't create the event, just fail.
+
+Or, just try to match, but if there is no match, don't update, don't create, just ignore it.  
 
 ## Writing Data (rest-write)
 RESful writing, or updating of data is done via common RESTful (CRUD) operations
