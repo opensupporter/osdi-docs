@@ -29,7 +29,6 @@ This page defines Events, EventRSVPS
 | visibility| string	| Visibility of the event.  Possible values are
 |			|			| "public" visible on public web interfaces
 |			|			| "private" not visible on public web interfaces
-
 | attendees	| Attendance[]| A Collection of Attendance resources
 | guestsCanInviteOthers | boolean | Attendees can invite guests to the event
 | reminders | list		| a list of reminder elements
@@ -74,7 +73,7 @@ If guest information (such as name, etc) is not given, then the person resource 
 	  "summary": string,
 	  "description": string,
 	  "_embedded" : {
-			"location" : {
+			"osdi:location" : {
 				"address1": "430 Erwin Stream",
 	            "city": "Altheastad",
 	            "state": "FL",
@@ -93,7 +92,7 @@ If guest information (such as name, etc) is not given, then the person resource 
 	              "person": {
 	                "href": "http://api.opensupporter.org/api/v1/people/21"
 	              }
-			"creator" :   {
+			"osdi:creator" :   {
 	            {
 		        "first_name": "Lurline",
 		        "last_name": "Glover",
@@ -109,7 +108,7 @@ If guest information (such as name, etc) is not given, then the person resource 
 		             ...
 		          },
 
-			"organizer" :   {
+			"osdi:organizer" :   {
 	            {
 		        "first_name": "Lurline",
 		        "last_name": "Glover",
@@ -138,13 +137,12 @@ If guest information (such as name, etc) is not given, then the person resource 
                 {
 				  "total_records": 80,
 					"_links" : {
-						"event" : {"href" : uri }
-						"person" : {"href" : uri }
+					    "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+						"osdi:event" : {"href" : uri }
+						"osdi:person" : {"href" : uri }
 					},
 					"_embedded" : {
-						"person": {
-
-
+						"osdi:person": {
 				        "first_name": "Lurline",
 				        "last_name": "Glover",
 				        "middle_name": "Titus",
@@ -178,11 +176,12 @@ If guest information (such as name, etc) is not given, then the person resource 
 	    ],
 	  },
 	  "_links" : {
+	   "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
        "self": { "href" : uri },
-       "attendance" : { "href" : uri }
-       "location" : { "href" : uri }
-	   "organizer" : { "href" : uri }
-	   "creator" : { "href" : uri }
+       "osdi:attendance" : { "href" : uri }
+       "osdi:location" : { "href" : uri }
+	   "osdi:organizer" : { "href" : uri }
+	   "osdi:creator" : { "href" : uri }
       }
 
 	}

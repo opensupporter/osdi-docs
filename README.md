@@ -1,61 +1,43 @@
-
 ![Logo](logo.png)
 
 The Open Supporter Data Interface (OSDI) effort seeks to define an API and data structures for interoperability among products in the **progressive** cause-based, campaign and non-profit marketplace. The existence of a common API will reduce customer costs related to moving data between different systems, lower integration costs and enhance the ability of innovators to create products for the marketplace.
 
 OSDI membership is made up of progressive vendors and organizations as well as invited non-partisan and mainstream industry vendors.
 
-The API will define interfaces including but not limited to resources representing people, donations, questions, tags, and events. The group will determine the order in which to define resource models and which version of the API to include them in.
+More Information about OSDI can be found at the website [opensupporter.org](http://opensupporter.org)
 
-<img src="docs/diagram.png" align="right" width=450>
+[Download a one page PDF about the project](docs/osdi-one-pager.pdf)
 
-**Benefits of a Common API**
+[Experiment with our prototype server http://api.opensupporter.org](http://api.opensupporter.org)
 
-Customers, digital and tech directors, technology consultants
-
-* Less manual and error-prone data import/export
-* Staff and Volunteer data entry time savings
-* Better ability to pick and choose technology products and use them together
-* Multi-Vendor solutions mean less headaches
-
-Technology Application Developers
-
-* Write platform integration code once rather than per platform means less dev hours spent
-* Data consistency across platforms reduces cost
-* Can spend more resources on new customer features rather than integration code
-
-Platform Vendors
-
-* Ability to integrate means an easier sell to customers who already use another platform.
-* Common API across vendors enables a larger app ecosystem for your platform
-
-
-[Read the full charter](charter.md)
-
-[Read our scenarios document](scenarios/scenarios.md)
-
-[Experiment with our prototype http://api.opensupporter.org](http://api.opensupporter.org)
-
-[Join our reviewers email group to stay up to date: http://signup.opensupporter.org](http://signup.opensupporter.org)
-
-[**Please Fill out our survey**](https://docs.google.com/forms/d/1YazUaISNvH_j2p4rfv7eKcbq4CLjaGuszDnTFxA4Gcw/viewform)
+[Play with our Canvasser example client application](http://canvasser.opensupporter.org)
 
 Please give us feedback on our work. [Read the Review Guide](review_guide.md) to learn what kind of feedback we're looking for and how to provide it.
 
 # Authors
 * Tim Anderegg, New Organizing Institute (NOI)
 * Topper Bowers, Amicus
+* Beth Becker, Indigo Strategies
 * Jeff Crigler, Catalist
 * Josh Cohen, Washington United For Marriage (Editor)
+* Michael Eskin, Blue State Digital
+* Jascha Franklin-Hodge, Blue State Digital
 * Tim Gutowski, Trilogy Interactive
+* Chuck Hagenbuch, Blue State Digital
+* Harlan Hill, Indigo Strategies
+* Matt Klaber, NGP VAN
+* Marc Love, Carbon Five
+* Walter Ludwig, Indigo Strategies
+* Drew Miller, NGP VAN
 * Mark Paquette, TheDataBank
 * Charles Parsons, Salsa Labs
+* Rich Ranallo, Revolution Messaging
 * Jason Rosenbaum, The Action Network
 * Ben Stein, Mobile Commons
 * Ray Suelzer, UFCW International Union
-* Brian Vallelunga, Trilogy Interactive
+* Brian Vallelunga, Trilogy Interactive (Editor)
 * Nathan Woodhull, ControlShift Labs
-
+* Misha Zhurkin, Catalist
 
 > This effort is currently in an exploratory phase to determine if consensus on a common API can be achieved.  The involvement of a person or company does not reflect a commitment to implement this API.
 
@@ -66,8 +48,11 @@ Email: [info@opensupporter.org](mailto:info@opensupporter.org)
 
 # API Data Model
 
+## Beta Stability Level
 * [API Entry Point](aep.md)
 * [People and Addresses](people.md)
+
+## Experimental Stability Level
 * [Lists](lists.md)
 * [Survey Questions and Answers](questions.md)
 * [Events](events.md)
@@ -108,41 +93,30 @@ Response
 	{
 	  "motd": "Welcome to the ACME Action Platform OSDI API endpoint!!",
 	  "_links": {
-	    "people": {
+	    "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],  
+	    "osdi:people": {
 	      "href": "/api/v1/people",
-	      "title": "The collection of people in the system"
 	    },
-		"people_lists": {
+		"osdi:people_lists": {
 	      "href": "/api/v1/people_lists",
-	      "title": "The collection of people in the system"
 	    },
-	    "addresses": {
+	    "osdi:addresses": {
 	      "href": "/api/v1/addresses",
-	      "title": "The collection of addresses in the system"
 	    },
-	    "questions": {
+	    "odsi:questions": {
 	      "href": "http://api.opensupporter.org/api/v1/questions",
-	      "title": "The collection of questions in the system"
 	    },
-	    "question_answers": {
+	    "osdi:question_answers": {
 	      "href": "http://api.opensupporter.org/api/v1/question_answers",
-	      "title": "The collection of question answers in the system"
 	    },
 	    "self": {
 	      "href": "/api/v1",
-	      "title": "The root API Entry Point (Your are here)"
-	    },
-	    "docs": {
-	      "href": "https://github.com/wufm/osdi-docs",
-	      "title": "Documentation:",
-	      "name": "Docs",
-	      "index": "index"
 	    }
 	  }
 	}
 
 Given the above example response, let's fetch the people collection on this server.
-Notice the "_links" collection.  Find the object in the links collection with key "people".  That object has an attribute "href" which contains the URI to use to access the people collection.
+Notice the "_links" collection.  Find the object in the links collection with key "osdi:people".  That object has an attribute "href" which contains the URI to use to access the people collection.
 
 > This is for example purpose only.  The official definition of the person schema is [People and Addresses](people.md)
 
@@ -252,10 +226,11 @@ Response
                   ]
                 },
                 "_links": {
-                  "addresses": {
+                  "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+                  "osdi:addresses": {
                     "href": "http://api.opensupporter.org/api/v1/people/23/addresses"
                   },
-                  "question_answers": {
+                  "osdi:question_answers": {
                     "href": "http://api.opensupporter.org/api/v1/people/23/question_answers"
                   },
                   "self": {
@@ -270,12 +245,13 @@ Response
 
 In the last example message, the server returns a list of people.  For brevity this document only shows the first one.  Within each person object, there is also a "_links" collection just like in the AEP.  This will show up in most objects in OSDI.  The links collection lets the client know what other resources and resource collections are associated with a given object.
 
-In this example, the link shown is "addresses".  The href attribute of the "addresses" link contains the URI of the address collection *for this person*.
+In this example, the link shown is "osdi:addresses".  The href attribute of the "osdi:addresses" link contains the URI of the address collection *for this person*.
 
      "_links": {
-              "addresses": {
-                "href": "http://api.opensupporter.org/api/v1/people/23/addresses"
-              }
+          "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],         
+          "osdi:addresses": {
+            "href": "http://api.opensupporter.org/api/v1/people/23/addresses"
+          }
 
 A client can send a GET request to this URI to retrieve a list of addresses associated with this person.
 
@@ -306,10 +282,11 @@ A client can send a GET request to this URI to retrieve a list of addresses asso
             "address_status": "Verified",
             "primary": false,
             "_links": {
+              "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
               "self": {
                 "href": "http://api.opensupporter.org/api/v1/addresses/45"
               },
-              "person": {
+              "osdi:person": {
                 "href": "http://api.opensupporter.org/api/v1/people/23"
               }
             }
@@ -329,10 +306,11 @@ A client can send a GET request to this URI to retrieve a list of addresses asso
             "address_status": "Verified",
             "primary": true,
             "_links": {
+              "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
               "self": {
                 "href": "http://api.opensupporter.org/api/v1/addresses/46"
               },
-              "person": {
+              "osdi:person": {
                 "href": "http://api.opensupporter.org/api/v1/people/23"
               }
             }
@@ -353,6 +331,56 @@ Note that this pattern can be applied to other associated collections including 
 OSDI has embraced the [JSON+HAL spec](http://tools.ietf.org/html/draft-kelly-json-hal-05).  JSON+HAL specifies a simple way to embed linking into APIs.  The combination of linking and a specification allows generic clients to be written and, indeed, [many languages have HAL clients](http://stateless.co/hal_specification.html).  Linking itself makes it easier to both reason about and write clients for an API.
 
 By default, server responses should expand first level instances unless otherwise specified.  For example, in a response for a collection of resources, those resources should be embedded.
+
+### Curies
+
+You may have noticed that most links are prefaced with a name space "osdi" and that in the _links section there is a key labeled "curies." The link section defines links to *relationships* between objects and curies define those relationships. You will find documentation on the particular relationship by using the templated curie link.  For example, given the following links section:
+
+    "_links": {
+      "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+      "self": {
+        "href": "http://api.opensupporter.org/api/v1/addresses/46"
+      },
+      "osdi:people_lists": {
+        "href": "http://api.opensupporter.org/api/v1/people_lists"
+      },
+      "osdi:find": {
+        "href": "http://api.opensupporter.org/api/v1/people?$filter={odata_query}",
+        "templated": true
+      }
+    }
+    
+In order to fetch documentation on the people_lists relationship, I would visit the following url: "http://api.opensupporter.org/docs/v1/people_lists"
+
+Any links not prefaced with a curie name space are defined here (http://www.iana.org/assignments/link-relations/link-relations.xml).
+
+Vendors who add their own vendor-specific relationships must defined their own curie and preface their relationships with their own curie namespace.  For example,
+
+    "_links": {
+      "curies": [
+        { "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true },
+        { "name": "fb", "href": "http://facebook.com/docs/v1/{rel}", "templated": true }
+      ],
+      "self": {
+        "href": "http://api.opensupporter.org/api/v1/addresses/46"
+      },
+      "osdi:people_lists": {
+        "href": "http://api.opensupporter.org/api/v1/people_lists"
+      },
+      "osdi:find": {
+        "href": "http://api.opensupporter.org/api/v1/people?$filter={odata_query}",
+        "templated": true
+      },
+      "fb:profile": {
+          href: "http://facebook.com/profiles/1234"
+      }
+    }
+
+HREFs within the links section may be templated.  That is denoted by the "templated": true attribute in the link object.  If the href is templated, then clients should follow the URI template spec (http://tools.ietf.org/html/rfc6570) to create the actual URI. At this time OSDI is only supporting simple variable substitution using the "{variable_name}" syntax.  For example, if I wanted to run a find on the collection above I would use the find link relation ("osdi:find").
+
+I would then construct an odata_query and substitute the odata_query variable with my query string:
+
+"http://api.opensupporter.org/api/v1/people?$filter={odata_query}", would become "http://api.opensupporter.org/api/v1/people?$filter=name eq 'bob'", for more information on odata queries see http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter.
 
 ## Common CRUD operations
 ### Creating a Resource
@@ -463,19 +491,132 @@ Clients may set an attribute to nil by including the attribute using ‘nil’ f
 
     The HTTP response body shall contain the serialization of the updated resource
 
+### Composite Requests (Updating or Creating with Embedded Resources)
+In some situations, a client may wish to update or create a resource and include embedded resources in the same request.  For example, a client may wish to create or update a Person while including Address information.  The functionality to accomplish this is called a *Composite Request*
+
+Composite Requests are only allowed with POST requests.
+
+Support for Composite Requests is OPTIONAL.
+
+Without Composite Requests, these scenarios would be accomplished with two separate requests. An initial request with a POST (for the create case) containing the parent resource (Person) information would be sent to the server.  Based on the response to this initial request, the client would learn the URI for the newly created resource.  A second POST request would be sent to that URI containing the representation of the child resource (Address)address to be added.  
+
+To accomplish this in a single request, the client would use a Composite Request.  Composite requests are used with POST only.  A Composite request contains the representations of both the parent and child representations in a single request, according to the rules of HAL.  Child representations are contained within an _embedded JSON element.
+
+Assuming the same example of updating or creating a Person and Address information in a composite request, the request body would contain the following information:
+
+	{
+	   "first_name": "Edwin",
+       "last_name": "Labadie",
+       "middle_name": "Marques",
+       "email": "test-3@example.com",
+       ... other attributes ...
+       "_embedded": {
+           "addresses": [ {
+               "address1": "935 Ed Lock",
+               "city": "New Dudley",
+               "state": "MN",
+               "postal_code": "17678",
+               "country_code": "RU",
+               "address_type": "Home",
+               "lat": 44,
+               "lng": 40,
+               "accuracy": "Rooftop",
+               "address_status": "Verified",
+               "primary": true,
+               ... other attributes ...
+               },
+               {
+               "address1": "935 Ed Lock",
+               "city": "New Dudley",
+               "state": "MN",
+               "postal_code": "17678",
+               "country_code": "RU",
+               "address_type": "Home",
+               "lat": 44,
+               "lng": 40,
+               "accuracy": "Rooftop",
+               "address_status": "Verified",
+               ... other attributes ...
+               } ]
+        } 
+    }              
+
+### Composite Server Behavior
+Composite requests that contain embedded representations may contain single embedded resources or resource collections (multiple instances of the same resource type).
+
+Note that in the description below, the server shall order operations as specified.
+
+##### Composite POST
+
+When a composite request such as the example above is sent to a server with a POST method, first a new resource is created for the parent (Person). If that is successful, then new resources are created for the child or children (Address) resources.  If the upsert parameter is true, then the server may merge the transmitted resource representation with existing resources according to the rules of upsert.
+
+##### Error Handling
+
+If the attempt to update or create the parent resource fails, the server shall return the appropriate HTTP error code representing the failure.
+
+If the attempt to update or create the child resource(s) fails, the server shall return the 409 Conflict HTTP response code.  Within the response body, the server shall include descriptive information on the nature of the child resource failure. This information is determined by best-effort.  Consistent with the definition of 409 Conflict, the assumption is that the user or client may need to examine the resulting resource state to determine the appropriate next steps.
+
+##### Responses to Composite requests
+
+If the composite server operations are successful, then a standard response containing the resource representations is returned.  It should contain the embedded resources as well.   
+           
+  
 ## Selecting Results
-### Filtering Collections
-When retrieving representations of a collection, clients may include filters expressed as query parameters.  The $filter query parameter is used for this purpose.  The $filter parameter value shall contain an expression using the following operators:
+### Filtering Collections with OData
 
-        '<', '<=', '=', '>=', ">', '!=' : Integer and date value/attribute
-        '=', '!='                       : String value/attribute
+When retrieving collections, a client may request that the server filter the results according to a query.  OSDI makes use of a subset of the OData query language to accomplish this.  The filter string is the value of the 'filter' query parameter.
 
-Example:
-Assuming a resource of ‘Person’ which has an attribute named ‘firstName’, the following filter would return resources with first name of ‘Jon’
+See [OData Filter Query] for more information. (http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter)
 
-        $filter=first_name=’Jon’
+General information can be found at [odata.org](http://odata.org)
+#### Conventions
+
+* String literals are enclosed in single quotes, eg: 'Jon'
+* Integers are not quoted, eg: 5
+* The whole query string is not enclosed in any quotes
+
+#### Operators
+
+OSDI supports the following OData operators:
+
+| Name  | Description | Example
+|-------|-------------------------------|-------------------------------
+| eq    | Exact match                   | first_name eq 'John'
+| ne    | Not Equal exact match         | first_name ne 'John'
+| gt    | Greater than                  | birthdate.month gt 1980
+| ge    | Greater or equal than         | created gt '2013-11-17T18:27:35-05'
+| lt    | Less than                     | birthdate.year lt 1980
+| le    | Less or equal than            | created le '2013-11-17T18:27:35-05'
+| or    | Logical OR                    | first_name eq 'John' or first_name eq 'Jon'
+| and   | Logical AND                   | first_name eq 'John' and last_name eq 'Doe'
+    
+OSDI defines the following OPTIONAL extension operators:
+
+| Name  | Description | Example
+|-------|-------------------------------|------------------------------
+| like  | Case insensitive match        | first_name like 'john'       # returns John or john
+| re    | Matches a regular expression  | first_name regexp '/[Rr]ob/' # Returns robert, Robert, rob, roberto 
+
+#### Functions
+
+OSDI defines the following OPTIONAL extension functions:
 
 
+| Name  | Description | Example
+|-------|-------------|-----------------------------------------------
+| near  | Returns entries near a location within a radius   | gender eq 'Female' and near('10011', '5 miles')
+
+#### Examples
+
+Find all males in a given ZIP code
+
+    /api/v1/people?filter=gender eq 'Male' and address.postal_code eq '10011'
+    
+Find new signups on or since a date and time (Eastern Time)
+
+    /api/v1/people?filter=created ge '2013-11-17T18:27:35-05'
+    
+    
 ### Pagination
 The parameters $per_page and $page control pagination.
 

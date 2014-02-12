@@ -55,7 +55,7 @@ Content-Type: application/json
         "question_type": "MultiChoice",
         "id": 1,
         "_embedded": {
-          "question_responses": [
+          "osdi:question_responses": [
             {
               "name": "Emacs",
               "value": "Emacs",
@@ -79,6 +79,8 @@ Content-Type: application/json
           ]
         },
         "_links": {
+          "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+          "osdi:question_responses": { "href": "http://osdi-prototype.herokuapp.com/api/v1/questions/1/question_responses"}, 
           "self": {
             "href": "http://osdi-prototype.herokuapp.com/api/v1/questions/1"
           }
@@ -90,7 +92,7 @@ Content-Type: application/json
         "question_type": "MultiChoice",
         "id": 2,
         "_embedded": {
-          "question_responses": [
+          "osdi:question_responses": [
             {
               "name": "Strongly Support",
               "value": "5",
@@ -114,6 +116,8 @@ Content-Type: application/json
           ]
         },
         "_links": {
+          "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+          "osdi:question_responses": { "href": "http://osdi-prototype.herokuapp.com/api/v1/questions/1/question_responses"}, 
           "self": {
             "href": "http://osdi-prototype.herokuapp.com/api/v1/questions/2"
           }
@@ -125,10 +129,12 @@ Content-Type: application/json
         "question_type": "Paragraph",
         "id": 3,
         "_embedded": {
-          "question_responses": []
+          "osdi:question_responses": []
         },
         "_links": {
           "self": {
+            "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+            "osdi:question_responses": { "href": "http://osdi-prototype.herokuapp.com/api/v1/questions/1/question_responses"}, 
             "href": "http://osdi-prototype.herokuapp.com/api/v1/questions/3"
           }
         }
