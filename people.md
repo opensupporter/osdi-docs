@@ -10,7 +10,7 @@
 |honorific_suffix			| string	|An honorific suffix like "Jr.", "Ph.D" Free-form field
 |gender			|string		|The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", "Other".
 |gender_identity|string     |The self-described gender with which a person identifies. Free-form field. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
-|party_identification          |string     |Flexnum describing the person's politcal party. Values: "None", "Democratic", "Republican", "Independent"
+|party_identification_identification          |string     |Flexnum describing the person's politcal party_identification. Values: "None", "Democratic", "Republican", "Independent"
 |source         |string     |Information about the source where this person record was acquired.  Eg "Ref74"
 |birthdate		|hash		| A hash representing the birth date
 |birthdate.month|integer	| integer representing the month of the birth date
@@ -200,103 +200,81 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
       "_embedded": {
         "people": [
           {
-            "first_name": "Edwin",
-            "last_name": "Labadie",
-            "middle_name": "Marques",
-            "email": "test-3@example.com",
+            "family_name": "Edwin",
+            "given_name": "Labadie",
+            "additional_name": "Marques",
+            "identifiers": [
+            	"osdi:23"
+            ],
+            "email_addresses": [
+            	{
+            		"address":"test-3@example.com",
+					"primary": true,
+					"address_type": "Personal"
+				}
+            ],
+            "phone_numbers": [
+            	{
+            		"primary": true,
+            		"number": 19876543210,
+            		"number_type": "Mobile",
+            		"sms_capable": true
+            	}
+            ],
             "gender": "Male",
             "gender_identity": "Male",
-            "party": "Democrat",
+            "party_identification": "Democrat",
             "source": "sed",
-            "source_details": "Delectus rerum autem mollitia sit asperiores odit hic cum.",
-            "twitter_handle": "@Edwin_Labadie",
-            "guid": "c1d9c510-b562-0130-dc7c-168c51e904de",
+            "ethnicity": "Caucasian",
+            "profiles": [
+            	{
+	            	"provider": "Twitter",
+	            	"id": "Edwin_Labadie",
+	            	"url": "http://twitter.com/Edwin_Labadie",
+	            	"handle": "Edwin_Labadie"
+	            }
+            ],
 			"birth_date" : {
 				"month" : 1,
 				"day" : 1,
 				"year" : 1970
-				},
-            "_embedded": {
-              "osdi:primary_address": {
-                "address1": "935 Ed Lock",
-                "city": "New Dudley",
-                "state": "MN",
-                "postal_code": "17678",
-                "country_code": "RU",
-                "address_type": "Home",
-                "location" : {
-             		"longitude" : "40.1",
-             		"latitude" : "44.5"4,
-             		"accuracy": "Rooftop"
-             		},
-                "address_status": "Verified",
-                "primary": true,
-                "_links": {
-                  "self": {
-                    "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/46"
-                  },
-                  "person": {
-                    "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
-                  }
-                }
-              },
-              "osdi:addresses": [
-                {
-                  "address1": "28160 Wiegand Divide",
-                  "city": "Lake Amarimouth",
-                  "state": "GA",
-                  "postal_code": "27585-7257",
-                  "country_code": "US",
-                  "address_type": "Work",
-                  "location" : {
-             		"longitude" : "40.1",
-             		"latitude" : "44.5"4,
-             		"accuracy": "Rooftop"
-             		},
-                  "address_status": "Verified",
-                  "primary": false,
-                  "_links": {
-                    "self": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/45"
-                    },
-                    "person": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
-                    }
-                  }
-                },
-                {
-                  "address1": "935 Ed Lock",
-                  "city": "New Dudley",
-                  "state": "MN",
-                  "postal_code": "17678",
-                  "country_code": "RU",
-                  "address_type": "Home",
-                  "location" : {
-             		"longitude" : "40.1",
-             		"latitude" : "44.5"4,
-             		"accuracy": "Rooftop"
-             		},
-                  "address_status": "Verified",
-                  "primary": true,
-                  "_links": {
-                    "self": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/46"
-                    },
-                    "person": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
-                    }
-                  }
-                }
-              ]
-            },
+			},
+            "postal_addresses": [
+            	{
+	                "primary": true,
+	                "address_lines": [
+	                	"935 Ed Lock"
+					],
+	                "locality": "New Dudley",
+	                "region": "MN",
+	                "postal_code": "17678",
+	                "country": "RU",
+	                "address_type": "Home",
+	                "location" : {
+	             		"longitude" : "40.1",
+	             		"latitude" : "44.5",
+	             		"accuracy": "Rooftop"
+	             		},
+	                "address_status": "Verified"
+	             },
+	             {
+					"address1": "28160 Wiegand Divide",
+					"city": "Lake Amarimouth",
+					"state": "GA",
+					"postal_code": "27585-7257",
+					"country_code": "US",
+					"address_type": "Work",
+					"location" : {
+						"longitude" : "40.1",
+						"latitude" : "44.5",
+						"accuracy": "Rooftop"
+						},
+					"address_status": "Verified",
+					"primary": false
+	             }
+			],
             "_links": {
               "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-              "osdi:addresses": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/addresses"
-              },
-              "osdi:primary_address": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/addresses/1"
-              },
               "osdi:question_answers": {
                 "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/question_answers"
               },
@@ -306,100 +284,74 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
             }
           },
           {
-            "first_name": "Parker",
-            "last_name": "Walker",
-            "middle_name": "Jannie",
-            "email": "test-4@example.com",
+            "family_name": "Parker",
+            "given_name": "Walker",
+            "additional_name": "Jannie",
+            "identifiers": [
+            	"osdi:24"
+            ],
+            "email_addresses": [
+            	{
+            		"address":"test-4@example.com",
+					"primary": true,
+					"address_type": "Work"
+				}
+            ],
             "gender": "Male",
             "gender_identity": "Male",
-            "party": "Democrat",
+            "party_identification": "Democrat",
             "source": "architecto",
-            "source_details": "Itaque et reprehenderit rerum ea quis.",
-            "twitter_handle": "@Parker_Walker",
-            "guid": "c1e1d0d0-b562-0130-dc7c-168c51e904de",
+            "ethnicity": "African American",
+            "profiles": [
+            	{
+	            	"provider": "Twitter",
+	            	"id": "Parker_Walker",
+	            	"url": "http://twitter.com/Parker_Walker",
+	            	"handle": "Parker_Walker"
+            	}
+            ],
 			"birth_date" : {
 				"month" : 1,
 				"day" : 1,
 				"year" : 1970
-				},
-            "_embedded": {
-              "osdi:primary_address": {
-                "address1": "22184 Vernie Cove",
-                "city": "Rowemouth",
-                "state": "GA",
-                "postal_code": "74895",
-                "country_code": "JP",
-                "address_type": "Home",
-                "location" : {
-             		"longitude" : "40.1",
-             		"latitude" : "44.5"4,
-             		"accuracy": "Rooftop"
-             		},
-                "address_status": "Verified",
-                "primary": true,
-                "_links": {
-                  "self": {
-                    "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/48"
-                  },
-                  "person": {
-                    "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24"
-                  }
-                }
-              },
-              "osdi:addresses": [
-                {
-                  "address1": "7485 Rashad Pine",
-                  "city": "Brandynview",
-                  "state": "PR",
-                  "postal_code": "76221-3163",
-                  "country_code": "US",
-                  "address_type": "Work",
-                  "location" : {
-             		"longitude" : "40.1",
-             		"latitude" : "44.5"4,
-             		"accuracy": "Rooftop"
-             		},
-                  "address_status": "Verified",
-                  "primary": false,
-                  "_links": {
-                    "self": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/47"
-                    },
-                    "person": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24"
-                    }
-                  }
-                },
-                {
-                  "address1": "22184 Vernie Cove",
-                  "city": "Rowemouth",
-                  "state": "GA",
-                  "postal_code": "74895",
-                  "country_code": "JP",
-                  "address_type": "Home",
-                  "location" : {
-             		"longitude" : "40.1",
-             		"latitude" : "44.5"4,
-             		"accuracy": "Rooftop"
-             		},
-                  "address_status": "Verified",
-                  "primary": true,
-                  "_links": {
-                    "self": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses/48"
-                    },
-                    "person": {
-                      "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24"
-                    }
-                  }
-                }
-              ]
-            },
+			},
+			"postal_addresses": [
+            	{
+	                "primary": true,
+	                "address_lines": [
+	                	"22184 Vernie Cove",
+	                	"Apt 1"
+					],
+	                "locality": "Rowemouth",
+	                "region": "JP",
+	                "postal_code": "74895",
+	                "country": "RU",
+	                "address_type": "Home",
+	                "location" : {
+	             		"longitude" : "40.1",
+	             		"latitude" : "44.5",
+	             		"accuracy": "Rooftop"
+	             		},
+	                "address_status": "Verified"
+	             },
+	             {
+					"address1": "7485 Rashad Pine",
+					"city": "Brandynview",
+					"state": "PR",
+					"postal_code": "76221-3163",
+					"country_code": "US",
+					"address_type": "Work",
+					"location" : {
+						"longitude" : "40.1",
+						"latitude" : "44.5",
+						"accuracy": "Rooftop"
+						},
+					"address_status": "Verified",
+					"primary": false
+	             }
+			],
             "_links": {
-                
-              "osdi:addresses": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24/addresses"
-              },
+			  "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
               "osdi:question_answers": {
                 "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24/question_answers"
               },
@@ -415,8 +367,8 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
         "self": {
           "href": "http://osdi-prototype.herokuapp.com/api/v1/people"
         },
-        "osdi:addresses": {
-          "href": "http://osdi-prototype.herokuapp.com/api/v1/addresses"
+        "osdi:question_answers": {
+          "href": "http://osdi-prototype.herokuapp.com/api/v1/question_answers"
         },
         "osdi:find": {
             "href": "http://api.opensupporter.org/api/v1/people?$filter={odata_query}",
