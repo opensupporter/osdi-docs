@@ -16,7 +16,7 @@
 |birthdate.month|integer	| integer representing the month of the birth date
 |birthdate.day	|integer	| integer representing the day of the birth date
 |birthdate.year|integer		| integer representing the 4 digit year of the birth date
-|ethnicity|string	|A person's ethinicity
+|ethnilocality|string	|A person's ethinilocality
 |languages_spoken|string[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
 |employer|string	|The name of the person's employer
 |occupation|string	|The occupation of the person.
@@ -74,8 +74,8 @@ Profiles correspond to a person's accounts on online services like Facebook, Twi
 | primary		| boolean	|Denotes if this is the primary address.  A person can have only one primary address
 |address_type   |string     |Type of address "Home","Work","Mailing"
 |address_lines       |string[]     |Address lines 1 - n
-|locality           |string     |A city or other local administrative area
-|region          |string     |State / subdivision codes according to ISO 3166-2 (Final 2 alpha digits)
+|locality           |string     |A locality or other local administrative area
+|region          |string     |region / subdivision codes according to ISO 3166-2 (Final 2 alpha digits)
 |postal_code    |string     |Region specific postal code
 |country	|string		|Country code according to ISO 3166-1 Alpha-2
 |language	|string		|Language in which the address is recorder -- language code according to ISO 639
@@ -92,15 +92,15 @@ Examples:
 
 |Country		|Code
 |---------------|----------------------
-|United States	|US
+|United regions	|US
 |Canada			|CA
 |Cyprus			|CY
 
-In the United States, state abbreviations should conform to [ISO 3166-2:US](http://en.wikipedia.org/wiki/ISO_3166-2:US) but using only the final two alphanumeric characters
+In the United regions, region abbreviations should conform to [ISO 3166-2:US](http://en.wikipedia.org/wiki/ISO_3166-2:US) but using only the final two alphanumeric characters
 
 Examples:
 
-|State			|Code
+|region			|Code
 |---------------|----------------------
 |New Jersey		|NJ
 |California		|CA
@@ -193,184 +193,189 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
     200 OK
     Content-Type: application/json
 
-    {
-      "total_pages": 1,
-      "page": 1,
-      "total_records": 2,
-      "people": [
-          {
-            "family_name": "Edwin",
-            "given_name": "Labadie",
-            "additional_name": "Marques",
-            "identifiers": [
-            	"osdi:23"
-            ],
-            "email_addresses": [
-            	{
-            		"address":"test-3@example.com",
-					"primary": true,
-					"address_type": "Personal"
-				}
-            ],
-            "phone_numbers": [
-            	{
-            		"primary": true,
-            		"number": 19876543210,
-            		"number_type": "Mobile",
-            		"sms_capable": true
-            	}
-            ],
-            "gender": "Male",
-            "gender_identity": "Male",
-            "party_identification": "Democrat",
-            "source": "sed",
-            "ethnicity": "Caucasian",
-            "profiles": [
-            	{
-	            	"provider": "Twitter",
-	            	"id": "Edwin_Labadie",
-	            	"url": "http://twitter.com/Edwin_Labadie",
-	            	"handle": "Edwin_Labadie"
-	            }
-            ],
-			"birth_date" : {
-				"month" : 1,
-				"day" : 1,
-				"year" : 1970
-			},
-            "postal_addresses": [
-            	{
-	                "primary": true,
-	                "address_lines": [
-	                	"935 Ed Lock"
-					],
-	                "locality": "New Dudley",
-	                "region": "MN",
-	                "postal_code": "17678",
-	                "country": "RU",
-	                "address_type": "Home",
-	                "location" : {
-	             		"longitude" : "40.1",
-	             		"latitude" : "44.5",
-	             		"accuracy": "Rooftop"
-	             		},
-	                "address_status": "Verified"
-	             },
-	             {
-					"address1": "28160 Wiegand Divide",
-					"city": "Lake Amarimouth",
-					"state": "GA",
-					"postal_code": "27585-7257",
-					"country_code": "US",
-					"address_type": "Work",
-					"location" : {
-						"longitude" : "40.1",
-						"latitude" : "44.5",
-						"accuracy": "Rooftop"
+	{
+		"total_pages": 1,
+		"page": 1,
+		"total_records": 2,
+		"people": [
+			{
+				"family_name": "Edwin",
+				"given_name": "Labadie",
+				"additional_name": "Marques",
+				"identifiers": [
+					"osdi:23"
+				],
+				"email_addresses": [
+					{
+						"address":"test-3@example.com",
+						"primary": true,
+						"address_type": "Personal"
+					}
+				],
+				"phone_numbers": [
+					{
+						"primary": true,
+						"number": 19876543210,
+						"number_type": "Mobile",
+						"sms_capable": true
+					}
+				],
+				"gender": "Male",
+				"gender_identity": "Male",
+				"party_identification": "Democrat",
+				"source": "sed",
+				"ethnilocality": "Caucasian",
+				"profiles": [
+					{
+					 	"provider": "Twitter",
+					 	"id": "Edwin_Labadie",
+					 	"url": "http://twitter.com/Edwin_Labadie",
+					 	"handle": "Edwin_Labadie"
+					 }
+				],
+				"birth_date" : {
+					"month" : 1,
+					"day" : 1,
+					"year" : 1970
+				},
+				"postal_addresses": [
+					{
+						"primary": true,
+						"address_lines": [
+							"935 Ed Lock"
+						],
+						"locality": "New Dudley",
+						"region": "MN",
+						"postal_code": "17678",
+						"country": "RU",
+						"address_type": "Home",
+						"location" : {
+							"longitude" : "40.1",
+							"latitude" : "44.5",
+							"accuracy": "Rooftop"
 						},
-					"address_status": "Verified",
-					"primary": false
-	             }
-			],
-            "_links": {
-              "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-              "osdi:question_answers": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/question_answers"
-              },
-              "self": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
-              }
-            }
-          },
-          {
-            "family_name": "Parker",
-            "given_name": "Walker",
-            "additional_name": "Jannie",
-            "identifiers": [
-            	"osdi:24"
-            ],
-            "email_addresses": [
-            	{
-            		"address":"test-4@example.com",
-					"primary": true,
-					"address_type": "Work"
-				}
-            ],
-            "gender": "Male",
-            "gender_identity": "Male",
-            "party_identification": "Democrat",
-            "source": "architecto",
-            "ethnicity": "African American",
-            "profiles": [
-            	{
-	            	"provider": "Twitter",
-	            	"id": "Parker_Walker",
-	            	"url": "http://twitter.com/Parker_Walker",
-	            	"handle": "Parker_Walker"
-            	}
-            ],
-			"birth_date" : {
-				"month" : 1,
-				"day" : 1,
-				"year" : 1970
-			},
-			"postal_addresses": [
-            	{
-	                "primary": true,
-	                "address_lines": [
-	                	"22184 Vernie Cove",
-	                	"Apt 1"
-					],
-	                "locality": "Rowemouth",
-	                "region": "JP",
-	                "postal_code": "74895",
-	                "country": "RU",
-	                "address_type": "Home",
-	                "location" : {
-	             		"longitude" : "40.1",
-	             		"latitude" : "44.5",
-	             		"accuracy": "Rooftop"
-	             		},
-	                "address_status": "Verified"
-	             },
-	             {
-					"address1": "7485 Rashad Pine",
-					"city": "Brandynview",
-					"state": "PR",
-					"postal_code": "76221-3163",
-					"country_code": "US",
-					"address_type": "Work",
-					"location" : {
-						"longitude" : "40.1",
-						"latitude" : "44.5",
-						"accuracy": "Rooftop"
+						"status": "Verified"
+					},
+					{
+						"address_lines": [
+							 "28160 Wiegand Divide",
+							 "Apt 1"
+						],
+						"locality": "Lake Amarimouth",
+						"region": "GA",
+						"postal_code": "27585-7257",
+						"country": "US",
+						"address_type": "Work",
+						"location" : {
+							"longitude" : "40.1",
+							"latitude" : "44.5",
+							"accuracy": "Rooftop"
 						},
-					"address_status": "Verified",
-					"primary": false
-	             }
-			],
-            "_links": {
-			  "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-              "osdi:question_answers": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24/question_answers"
-              },
-              "self": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24"
-              }
-            }
-          }
-        ],
-      "_links": {
-        "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-        "self": {
-          "href": "http://osdi-prototype.herokuapp.com/api/v1/people"
-        },
-        "osdi:question_answers": {
-          "href": "http://osdi-prototype.herokuapp.com/api/v1/question_answers"
-        },
-        "osdi:find": {
-            "href": "http://api.opensupporter.org/api/v1/people?$filter={odata_query}",
-            "templated": true
-        }
-      }
-    }
+						"status": "Verified",
+						"primary": false
+					}
+				],
+				"_links": {
+					"curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+					"osdi:question_answers": {
+						"href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/question_answers"
+					},
+					"self": {
+						"href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
+					}
+				}
+			},
+			{
+				"family_name": "Parker",
+				"given_name": "Walker",
+				"additional_name": "Jannie",
+				"identifiers": [
+					"osdi:24"
+				],
+				"email_addresses": [
+					{
+						"address":"test-4@example.com",
+						"primary": true,
+						"address_type": "Work"
+					}
+				],
+				"gender": "Male",
+				"gender_identity": "Male",
+				"party_identification": "Democrat",
+				"source": "architecto",
+				"ethnilocality": "African American",
+				"profiles": [
+					{
+					 	"provider": "Twitter",
+					 	"id": "Parker_Walker",
+					 	"url": "http://twitter.com/Parker_Walker",
+					 	"handle": "Parker_Walker"
+					}
+				],
+				"birth_date" : {
+					"month" : 1,
+					"day" : 1,
+					"year" : 1970
+				},
+				"postal_addresses": [
+					{
+						"primary": true,
+						"address_lines": [
+							"22184 Vernie Cove",
+							"Apt 1"
+						],
+						"locality": "Rowemouth",
+						"region": "JP",
+						"postal_code": "74895",
+						"country": "RU",
+						"address_type": "Home",
+						"location" : {
+							"longitude" : "40.1",
+							"latitude" : "44.5",
+							"accuracy": "Rooftop"
+						},
+						"status": "Verified"
+					},
+					{
+						"address_lines": [
+							"7485 Rashad Pine",
+						],
+						"locality": "Brandynview",
+						"region": "PR",
+						"postal_code": "76221-3163",
+						"country": "US",
+						"address_type": "Work",
+						"location" : {
+							"longitude" : "40.1",
+							"latitude" : "44.5",
+							"accuracy": "Rooftop"
+						},
+						"status": "Verified",
+						"primary": false
+					}
+				],
+				"_links": {
+					 "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+					 "osdi:question_answers": {
+					 	"href": "http://osdi-prototype.herokuapp.com/api/v1/people/24/question_answers"
+					 },
+					 "self": {
+					 	"href": "http://osdi-prototype.herokuapp.com/api/v1/people/24"
+					 }
+				}
+			}
+		],
+		"_links": {
+			"curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+			"self": {
+				"href": "http://osdi-prototype.herokuapp.com/api/v1/people"
+			},
+			"osdi:question_answers": {
+				"href": "http://osdi-prototype.herokuapp.com/api/v1/question_answers"
+			},
+			"osdi:find": {
+				"href": "http://api.opensupporter.org/api/v1/people?$filter={odata_query}",
+				"templated": true
+			}
+		}
+	}
