@@ -131,22 +131,22 @@ Response
 
     {
 		"total_records": 80,
-			"total_pages": 16,
-			"page" : 2,
-			"_links": {
-    			"next" : {
-    				"href" : "http://api.opensupporter.org/api/v1/people?page=3&per_page=5"
-				},
-				"previous" : {
-    				"href" : "http://api.opensupporter.org/api/v1/people?page=1&per_page=5"
-    			}
-    		},
-			"people": [
-				{
+		"total_pages": 16,
+		"page" : 2,
+		"_links": {
+			"next" : {
+				"href" : "http://api.opensupporter.org/api/v1/people?page=3&per_page=5"
+			},
+			"previous" : {
+				"href" : "http://api.opensupporter.org/api/v1/people?page=1&per_page=5"
+			}
+		},
+		"people": [
+			{
 				"family_name": "Edwin",
-					"given_name": "Labadie",
-					"additional_name": "Marques",
-					"identifiers": [
+				"given_name": "Labadie",
+				"additional_name": "Marques",
+				"identifiers": [
 					"osdi:23"
 				],
 				"email_addresses": [
@@ -155,79 +155,80 @@ Response
 						"primary": true,
 						"address_type": "Personal"
 					}
-			],
-			"phone_numbers": [
-				{
-					"primary": true,
-					"number": 19876543210,
-					"number_type": "Mobile",
-					"sms_capable": true
-				}
-			],
-			"gender": "Male",
-			"gender_identity": "Male",
-			"party_identification": "Democrat",
-			"source": "sed",
-			"ethnicity": "Caucasian",
-			"profiles": [
-				{
-					"provider": "Twitter",
-					"id": "Edwin_Labadie",
-					"url": "http://twitter.com/Edwin_Labadie",
-					"handle": "Edwin_Labadie"
-				  }
-			],
-			"birth_date" : {
-				"month" : 1,
-				"day" : 1,
-				"year" : 1970
-			},
-			"postal_addresses": [
-				{
-					"primary": true,
-					"address_lines": [
-						"935 Ed Lock"
-					],
-					"locality": "New Dudley",
-					"region": "MN",
-					"postal_code": "17678",
-					"country": "RU",
-					"address_type": "Home",
-					"location" : {
-						"longitude" : "40.1",
-						"latitude" : "44.5",
-						"accuracy": "Rooftop"
-					},
-					"status": "Verified"
+				],
+				"phone_numbers": [
+					{
+						"primary": true,
+						"number": 19876543210,
+						"number_type": "Mobile",
+						"sms_capable": true
+					}
+				],
+				"gender": "Male",
+				"gender_identity": "Male",
+				"party_identification": "Democrat",
+				"source": "sed",
+				"ethnicity": "Caucasian",
+				"profiles": [
+					{
+						"provider": "Twitter",
+						"id": "Edwin_Labadie",
+						"url": "http://twitter.com/Edwin_Labadie",
+						"handle": "Edwin_Labadie"
+					  }
+				],
+				"birth_date" : {
+					"month" : 1,
+					"day" : 1,
+					"year" : 1970
 				},
-				{
-					"address_lines": [
-						"28160 Wiegand Divide"
-					],
-					"locality": "Lake Amarimouth",
-					"region": "GA",
-					"postal_code": "27585-7257",
-					"country": "US",
-					"address_type": "Work",
-					"location" : {
-						"longitude" : "40.1",
-						"latitude" : "44.5",
-						"accuracy": "Rooftop"
+				"postal_addresses": [
+					{
+						"primary": true,
+						"address_lines": [
+							"935 Ed Lock"
+						],
+						"locality": "New Dudley",
+						"region": "MN",
+						"postal_code": "17678",
+						"country": "RU",
+						"address_type": "Home",
+						"location" : {
+							"longitude" : "40.1",
+							"latitude" : "44.5",
+							"accuracy": "Rooftop"
+						},
+						"status": "Verified"
 					},
-					"status": "Verified",
-					"primary": false
-				}
-			],
-			"_links": {
-				"curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-				"osdi:question_answers": {
-					"href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/question_answers"
-				},
-				"self": {
-					"href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
+					{
+						"address_lines": [
+							"28160 Wiegand Divide"
+						],
+						"locality": "Lake Amarimouth",
+						"region": "GA",
+						"postal_code": "27585-7257",
+						"country": "US",
+						"address_type": "Work",
+						"location" : {
+							"longitude" : "40.1",
+							"latitude" : "44.5",
+							"accuracy": "Rooftop"
+						},
+						"status": "Verified",
+						"primary": false
+					}
+				],
+				"_links": {
+					"curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+					"osdi:question_answers": {
+						"href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/question_answers"
+					},
+					"self": {
+						"href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
+					}
 				}
 			}
-		}, 
+		], 
 		
 		.... other person records follow
 	}
