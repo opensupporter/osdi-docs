@@ -197,8 +197,7 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
       "total_pages": 1,
       "page": 1,
       "total_records": 2,
-      "_embedded": {
-        "people": [
+      "people": [
           {
             "family_name": "Edwin",
             "given_name": "Labadie",
@@ -360,8 +359,7 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
               }
             }
           }
-        ]
-      },
+        ],
       "_links": {
         "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
         "self": {
