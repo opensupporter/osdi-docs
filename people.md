@@ -338,7 +338,7 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
 					},
 					{
 						"address_lines": [
-							"7485 Rashad Pine",
+							"7485 Rashad Pine"
 						],
 						"locality": "Brandynview",
 						"region": "PR",
