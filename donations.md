@@ -6,7 +6,12 @@
 |identifiers    |Identifier[] |The OSDI identifiers of this donation
 |system			|string		|The donation system. Example: ActBlue
 |recipient		|string		|The recipient of the donation. Example: Obama for America
-|donor			|Person		|Donor data collected at the time of donation
+|donor			|Person		|Donor data collected at the time of donation (inline)
+|donor_resource|Person|Person resource related to the donation
+|employment		|hash		|Employment information
+|employment.employer|string	|The name of the employer
+|employment.occupation|string	|The occupation of the employer
+|employment.address|Address	|The address of the employer
 |donation_date  |date     	|Date of the donation
 |amount			|number		|Amount of total donation (after any credits) in specified currency
 |amount_credited|number		|Amount credited back to donor in specified currency
