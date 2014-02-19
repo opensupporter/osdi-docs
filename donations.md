@@ -10,7 +10,7 @@
 |donor_resource|Person|Person resource related to the donation
 |employment		|hash		|Employment information
 |employment.employer|string	|The name of the employer
-|employment.occupation|string	|The occupation of the employer
+|employment.occupation|string	|The occupation of the donor
 |employment.address|Address	|The address of the employer
 |donation_date  |date     	|Date of the donation
 |amount			|number		|Amount of total donation (after any credits) in specified currency
