@@ -1,5 +1,5 @@
 # Donation
-## Attributes
+## Model
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
@@ -11,7 +11,7 @@
 |employment		|hash		|Employment information
 |employment.employer|string	|The name of the employer
 |employment.occupation|string	|The occupation of the donor
-|employment.address|Address	|The address of the employer
+|employment.postal_address|Address	|The postal address of the employer
 |donation_date  |date     	|Date of the donation
 |amount			|number		|Amount of total donation (after any credits) in specified currency
 |amount_credited|number		|Amount credited back to donor in specified currency
@@ -30,3 +30,70 @@
 |url			|string		|URL at which the donation was taken
 |sources			|string[]		|Sources associated with the donation
 |attributions	|string[]		|Attributions associated with the donation
+
+## POST Scenario
+In this scenario, a donation is being created by posting the data to an OSDI server. The client includes transaction data about the donor, along with current donor data from its own system. Between the donation date and the current date, the donor moved and this is reflected in the differing postal addresses.
+
+
+	POST /api/donations
+	{
+		"system": "ActBlue",
+		"donation_date": "2014-04-21T15:24:13",
+		"amount": 25,
+		"currency": "USD",
+		"recipient": "Candidate for America",
+		"payment": {
+			"method": "Credit Card",
+			"reference_number": "BGV123"
+		},
+		"voided": false,
+		"url": "https://secure.candidateforamerica.com/donate",
+		"sources": [ "p2p-email" ],
+		"attributions": [ "johnnyboy12" ],
+		"donor": {
+			"given_name": "Sample",
+			"family_name": "Donor",
+			"email_addresses": "[ { "address": "sample_donor@opensupporter.org" } ]",
+			"postal_addresses": [
+				{
+					"address_type": "Home",
+					"address_lines": [ "123 Main St. NW", "APT 4" ],
+					"locality": "Washington",
+					"region": "DC",
+					"postal_code": "20010"
+				}
+			]
+		},
+		"donor_resource": {
+			"identifiers": ["osdimember:1"],
+			"given_name": "Sample",
+			"family_name": "Donor",
+			"email_addresses": "[ { "address": "sample_donor@opensupporter.org" } ]",
+			"postal_addresses": [
+				{
+					"address_type": "Home",
+					"address_lines": [ "456 Main St. NW" ],
+					"locality": "Washington",
+					"region": "DC",
+					"postal_code": "20010"
+				}
+			],
+			"phone_numbers": [ { "number": "12025555555", "number_type": "Mobile" } ]
+		},
+		"employment": {
+			"employer": "Big Corp.",
+			"occupation": "Tester",
+			"postal_address": {
+				"address_type": "Home",
+				"address_lines": [ "1 Corporate Way" ],
+				"locality": "Washington",
+				"region": "DC",
+				"postal_code": "20002"
+			}
+		},
+		"recurrence": {
+			"recurring": true,
+			"instance": "1",
+			"correlation_key": "AB123456"
+		}
+	}
