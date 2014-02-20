@@ -154,6 +154,58 @@ In this scenario, a donation is being created by posting the data to an OSDI ser
 
 
 
+## POST Scenario (Donor Only)
+In this scenario, a donation is being created by posting the data to an OSDI server. The client includes transaction data about the donor but no donor resource data.
+
+
+	POST /api/donations
+	{
+		"system": "ActBlue",
+		"donation_date": "2014-04-21T15:24:13",
+		"amount": 25,
+		"currency": "USD",
+		"recipient": "Candidate for America",
+		"payment": {
+			"method": "Credit Card",
+			"reference_number": "BGV123"
+		},
+		"voided": false,
+		"url": "https://secure.candidateforamerica.com/donate",
+		"sources": [ "p2p-email" ],
+		"attributions": [ "johnnyboy12" ],
+		"donor": {
+			"given_name": "Sample",
+			"family_name": "Donor",
+			"email_addresses": "[ { "address": "sample_donor@opensupporter.org" } ]",
+			"postal_addresses": [
+				{
+					"address_type": "Home",
+					"address_lines": [ "123 Main St. NW", "APT 4" ],
+					"locality": "Washington",
+					"region": "DC",
+					"postal_code": "20010"
+				}
+			]
+		},
+		"employment": {
+			"employer": "Big Corp.",
+			"occupation": "Tester",
+			"postal_address": {
+				"address_type": "Home",
+				"address_lines": [ "1 Corporate Way" ],
+				"locality": "Washington",
+				"region": "DC",
+				"postal_code": "20002"
+			}
+		},
+		"recurrence": {
+			"recurring": true,
+			"instance": "1",
+			"correlation_key": "AB123456"
+		}
+	}
+
+
 ## POST Scenario (Donor and Donor Resource Identifier)
 In this scenario, a donation is being created by posting the data to an OSDI server. The client includes transaction data about the donor and also the identifier for the donor resource.
 
