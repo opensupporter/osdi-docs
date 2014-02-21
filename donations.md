@@ -301,3 +301,64 @@ In this scenario, a donation is being created by posting the data to an OSDI ser
 			"correlation_key": "AB123456"
 		}
 	}
+
+
+## GET Scenario (With Donor)
+
+	GET /api/donations/50
+	{
+		"identifiers": ["osdimember:50"],
+		"created_at": "2014-05-21T16:12:45",
+		"modified_at": "2014-05-21T16:12:45",
+		"system": "ActBlue",
+		"donation_date": "2014-04-21T15:24:13",
+		"amount": 25,
+		"currency": "USD",
+		"recipient": "Candidate for America",
+		"payment": {
+			"method": "Credit Card",
+			"reference_number": "BGV123"
+		},
+		"voided": false,
+		"url": "https://secure.candidateforamerica.com/donate",
+		"sources": [ "p2p-email" ],
+		"attributions": [ "johnnyboy12" ],
+		"donor": {
+			"given_name": "Sample",
+			"family_name": "Donor",
+			"email_addresses": "[ { "address": "sample_donor@opensupporter.org" } ]",
+			"postal_addresses": [
+				{
+					"address_type": "Home",
+					"address_lines": [ "123 Main St. NW", "APT 4" ],
+					"locality": "Washington",
+					"region": "DC",
+					"postal_code": "20010"
+				}
+			]
+		},
+		"employment": {
+			"employer": "Big Corp.",
+			"occupation": "Tester",
+			"postal_address": {
+				"address_type": "Home",
+				"address_lines": [ "1 Corporate Way" ],
+				"locality": "Washington",
+				"region": "DC",
+				"postal_code": "20002"
+			}
+		},
+		"recurrence": {
+			"recurring": true,
+			"instance": "1",
+			"correlation_key": "AB123456"
+		},
+		_links: {
+			"self": {
+				"href": "https://api.opensupporter.org/api/donations/50"
+			},
+			"osdi:donor_resource": {
+				"href": "https://api.opensupporter.org/api/people/1"
+			}
+		}
+	}
