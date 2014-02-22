@@ -89,6 +89,12 @@ Content-type: application/json
 ## Get the list of child tags
 GET /api/v1/tags/children/labor
 
+## Add a tag to a person
+
+## Remove a tag from a person
+
+## Find people with a given tag/value
+
 200 OK
 Content-type: application/json
 
