@@ -47,6 +47,9 @@ Website: [http://opensupporter.org](http://opensupporter.org)
 
 Email: [info@opensupporter.org](mailto:info@opensupporter.org)
 
+# Scenarios
+To help understand the scenarios OSDI covers, check out our evolving [scenarios document](scenarios/scenarios.md)
+
 # API Data Model
 
 ## Beta Stability Level
