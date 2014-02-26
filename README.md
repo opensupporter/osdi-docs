@@ -424,101 +424,152 @@ I would then construct an odata_query and substitute the odata_query variable wi
 
 "http://api.opensupporter.org/api/v1/people?$filter={odata_query}", would become "http://api.opensupporter.org/api/v1/people?$filter=name eq 'bob'", for more information on odata queries see http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter.
 
-## Actions
-Most actions are operations which combine:
-1) Matching or locating a Person resource
-2) Creating an associated resource like Donation, Event RSVP, or Q&A response
+## Actions and Creating Resources
+
+In numerous cases, creating a resource associated with an action, like recording a Donation, or signing up for an Event, the end result is that multiple resources need to be created (or updated).
+
+When recording a donation, both donor information (like name and address) and donation information (like amount and currency) are typically captured.
+
+In OSDI, donation resources and person resources are associated by a link.  This provides the ability to link multiple donations to a person as well as navigate from a person to an associated collection of donations.
+
+In order to make this simple for clients, a special Create representation is used when POSTing to a collection.  These representations contain attributes for both resources like donation and person.
+
+The server will process this action and create both resources with an association between them.
+
+## Retrieving and Updating Resources
+When retrieving a resource via GET, or updating with PUT or PATCH a different representation is used.
+
+When retrieving an individual resource, the representation contains the attributes of that resource.  Associated resources are listed in the "_links" section and optionally sent in the "_embedded" section as a convenience.
+
+When updating that resource via PUT or PATCH, only the attributes of the specified resource are sent.  In order to update the associated resources, the client should locate the URI for that resource in the "_links" section.
+
+## Changing Relationships
+
+Sometimes it is necessary to change which subordinate resource is linked to a primary resource.
+Assume that a donation was created.  However, due to a matching error, the donation was matched with the wrong user.  The client wishes to change the association to that it points to the correct Person resource.
+
+In order to provide this functionality, when a resource is retrieved, the "_links" section of the representation may contain links to a setter operation such as `osdi:set_person`.
+
+To change a relationship, a client should send a POST to the setter resource containing the representation of the link destination.  Assuming a setter of `osdi:set_person`, the client would POST a representation of Person.
+
+## Examples
+
+### DonationCreate
+
+To create a donation, a client sends a POST request to the donations collection.  In the body of the POST, the `DonationCreate` representation is used.
+
 
 ````javascript
+POST /api/v1/1828182/donations
+
 {
-	"person_match" : {
-		// matching attributes
+	options: {
+		match: "match_and_store" // default	
+		post_processing: true,
+		"acme:magic_decoding_needed" : true
 	},
-	"<resource>" : {
-		// attributes for the newly created resource
-	}
-}
-````
-### Match
-
-In order to perform that matching function, a common "person_match" element is defined.  This element contains atributes from person.  By convention, attributes that would be arrays or sub-resources are included inline.
-
-This match element is then included in the action along with the action specific attributes.
-
-When receiving a person_match element, a server shall make a best effort to match to a single existing person.  In the event that a confident match cannot be made, the server shall either create a new person or fail, according to the options specified.
-
-If the __upsert__ query parameter is present and sent to false, then the server will always create a new person resource.
-
-````javascript
-"person_match": {
-	"given_name" : "Testy",
-	"family_name" : "McTesterson",
-	"address1" : "124 Foobarrio St",
-	"postal_code" : "99999",
-	"email_address" : "testy@example.com"
-	"identifiers" : [ "voterlabs:1234" ]
-	"options" : {
-		"update" : true, // update the matched person with included info (true) or use only for matching (false)
-		}
-}
-
-````
-"person_match_response"
-After processing an action, the server shall send back a response including a "person_match_response" element.  This element contains status information regarding the match attempt.
-
-````javascript
-"person_match_response" : {
-	"result" : "matched" | "created",
-	"href" : "http://url/to/matched/or/created/person"
-	"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
-}
-````
-
-### Action
-An action 
-
-#### Recording a Donation
-The record_donation is a top level action.  The URL endpoint can be found in the AEP.
-
-````javascript
-POST /api/v1/urltoaction/record_donation
-
-{
-	"person_match": {
+	person: {
 		"given_name" : "Testy",
-		"family_name" : "McTesterson",
-		"address1" : "124 Foobarrio St",
-		"postal_code" : "99999",
-		"email_address" : "testy@example.com"
-		"identifiers" : [ "voterlabs:1234" ]
-		"options" : {
-			"update" : true, // update the matched person with
-			 //included info (true) or use only for matching 
-			//(false)
-			}
+		"family_name" : "McTesterson"
+		... other person attributes
 	},
 	"donation_date" : "2013-11-19T08:37:48-0600",
 	"amount" : 50.00,
-	"currency" : "USD",
+	"currency" : "USD"
+	... other DonationCreate fields
 }
 
-201 Created
-Content-Type: application/json
+````
+### DonationCreate Server Behavior
+When the server processes a `DonationCreate`, the following things happen
+1. A Donation resource is created
+2. A person resource is created or merged based on provided information
+3. If transactional is supported, then a donation_transaction is created containing the exact data contained in the DonationCreate representation
 
+Response
+The server shall respond to a DonationCreate with a Donation representation
+
+````javascript
 {
-	"person_match_response" : {
-		"result" : "created",
-		"href" : "http://url/to/matched/or/created/person"
-		"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
-	},
 	"donation_date" : "2013-11-19T08:37:48-0600",
 	"amount" : 50.00,
-	"currency" : "USD",
-	// continuation of donation resource attributes
+	"currency" : "USD"
+	... other Donation fields
+	"_embedded" : { // should these be inlined or relational
+		"osdi:person" {
+			"given_name" : "Testy",
+			"family_name" : "McTesterson",
+			... other person attributes
+		},
+		"osdi:donation_transaction" : {
+			"person" : {
+				"given_name" : "Testy",
+				"family_name" : "McTesterson",
+				... other person attributes
+		
+	},
 	"_links" : {
-		"self" : { "href" : "http://link/to/this/new/donation"},
-		"person" : { "href" : "http://link/to/associated/person"}
+		"osdi:person" : {
+			"href": "http://server/path/to/person"
+		},
+		"osdi:donation_transaction" : {	
+			"href": "http://path/to/donation_transaction",
+		},
+		"osdi:set_person" : {
+			"href": "http://path/to/donation/5/set_person"
+		},
+
+		... other links
 	}
+}
+````
+
+### Working with Donation Resources
+Reading data
+
+A client sends a GET on the donations collection or an individual donation record
+
+Updating Data
+A client sends a PUT or PATCH to an individual Donation resource
+
+### Working with DonationTransaction Resources
+By having a separate donation transaction resource, we can customize this at will or even cherry pick data from other resources.
+
+If a system does not support transactional data, then there is no complexity to the models.  It just does not show up in _embedded or _linked
+
+Reading data
+
+A client sends a GET on the DonationTransaction collection or an individual donation record
+
+Updating Data
+A client sends a PUT or PATCH to an individual DonationTransaction resource
+
+## Changing an association
+Sometimes it is necessary to change which subordinate resource is linked to a primary resource.
+Assume that the above donation was created.  However, due to a matching error, the donation was matched with the wrong user.  The correct user is determined to have identifier "acme:1836283"
+
+To change the Donation to be associated with the correct user, a client sends a POST message to the URL in the href in the osdi:set_person relation.
+The server shall respond with the correct person object
+
+````javascript
+POST /path/to/donation5/set_person
+
+{
+  "identifiers" : [
+  "acme:1836283"
+  ]
+}
+
+200 OK
+
+{
+  "given_name" : "John",
+  "family_name" : "Doe",
+  "identifiers" : [
+    "acme:1836283",
+    "vanid:372938298"
+    ]
+  ... other person attributes
 }
 ````
 
@@ -526,18 +577,17 @@ Content-Type: application/json
 In order to simplify event signups, OSDI provides the event_signup action.  The event_signup endpoint is event specific.  It is returned within a specific event's representation.  It is expected that the client has this information in advance of the action.
 
 ````javascript
-POST /api/v1/event_url/blah/blah/attendance_create
+POST /api/v1/event543_url/attendance
 
 {
-	"person_match": {
+	"person": {
 		"email_address" : "testy@example.com"
 		"identifiers" : [ "voterlabs:1234" ]
-		"options" : {
-			"update" : false, // update the matched person with
-			// included info (true) or use only for
-			// matching (false)
-			}
 	},
+  "creator" : {
+    "given_name" : "James",
+    "family_name" : "O'Field-Organizer",
+}
 	"status" : "accepted",
 	"comment" : "1 phone bank == 5.3 votes!"
 }
@@ -546,18 +596,24 @@ POST /api/v1/event_url/blah/blah/attendance_create
 Content-Type: application/json
 
 {
-	"person_match_response" : {
-		"result" : "matched" ,
-		"href" : "http://url/to/matched/or/created/person"
+  "_embedded" : {
+    "osdi:person" : {
+		"given_name" : "Testy",
+    "family_name" : "McTesterson"
 		"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
-	},
-	"status" : "accepted",
+	  }
+  }
+ 	"status" : "accepted",
 	"comment" : "1 phone bank == 5.3 votes!"
 	// continuation of donation resource attributes
 	
 	"_links" : {
 		"self" : { "href" : "http://link/to/this/new/donation"},
-		"person" : { "href" : "http://link/to/associated/person"}
+		"osdi:person" : { "href" : "http://link/to/associated/person"}
+    "osdi:set_person" { "href" : "http://link/to/set/associated/person"},
+	"osdi:set_creator" : {
+		"href": "http://path/to/donation/5/set_creator"
+		}
 	}
 }
 
@@ -673,75 +729,6 @@ Clients may set an attribute to nil by including the attribute using ‘nil’ f
 
     The HTTP response body shall contain the serialization of the updated resource
 
-### Composite Requests (Updating or Creating with Embedded Resources)
-In some situations, a client may wish to update or create a resource and include embedded resources in the same request.  For example, a client may wish to create or update a Person while including Address information.  The functionality to accomplish this is called a *Composite Request*
-
-Composite Requests are only allowed with POST requests.
-
-Support for Composite Requests is OPTIONAL.
-
-Without Composite Requests, these scenarios would be accomplished with two separate requests. An initial request with a POST (for the create case) containing the parent resource (Person) information would be sent to the server.  Based on the response to this initial request, the client would learn the URI for the newly created resource.  A second POST request would be sent to that URI containing the representation of the child resource (Address)address to be added.  
-
-To accomplish this in a single request, the client would use a Composite Request.  Composite requests are used with POST only.  A Composite request contains the representations of both the parent and child representations in a single request, according to the rules of HAL.  Child representations are contained within an _embedded JSON element.
-
-Assuming the same example of updating or creating a Person and Address information in a composite request, the request body would contain the following information:
-
-	{
-	   "first_name": "Edwin",
-       "last_name": "Labadie",
-       "middle_name": "Marques",
-       "email": "test-3@example.com",
-       ... other attributes ...
-       "_embedded": {
-           "addresses": [ {
-               "address1": "935 Ed Lock",
-               "city": "New Dudley",
-               "state": "MN",
-               "postal_code": "17678",
-               "country_code": "RU",
-               "address_type": "Home",
-               "lat": 44,
-               "lng": 40,
-               "accuracy": "Rooftop",
-               "address_status": "Verified",
-               "primary": true,
-               ... other attributes ...
-               },
-               {
-               "address1": "935 Ed Lock",
-               "city": "New Dudley",
-               "state": "MN",
-               "postal_code": "17678",
-               "country_code": "RU",
-               "address_type": "Home",
-               "lat": 44,
-               "lng": 40,
-               "accuracy": "Rooftop",
-               "address_status": "Verified",
-               ... other attributes ...
-               } ]
-        } 
-    }              
-
-### Composite Server Behavior
-Composite requests that contain embedded representations may contain single embedded resources or resource collections (multiple instances of the same resource type).
-
-Note that in the description below, the server shall order operations as specified.
-
-##### Composite POST
-
-When a composite request such as the example above is sent to a server with a POST method, first a new resource is created for the parent (Person). If that is successful, then new resources are created for the child or children (Address) resources.  If the upsert parameter is true, then the server may merge the transmitted resource representation with existing resources according to the rules of upsert.
-
-##### Error Handling
-
-If the attempt to update or create the parent resource fails, the server shall return the appropriate HTTP error code representing the failure.
-
-If the attempt to update or create the child resource(s) fails, the server shall return the 409 Conflict HTTP response code.  Within the response body, the server shall include descriptive information on the nature of the child resource failure. This information is determined by best-effort.  Consistent with the definition of 409 Conflict, the assumption is that the user or client may need to examine the resulting resource state to determine the appropriate next steps.
-
-##### Responses to Composite requests
-
-If the composite server operations are successful, then a standard response containing the resource representations is returned.  It should contain the embedded resources as well.   
-           
   
 ## Selecting Results
 ### Filtering Collections with OData
