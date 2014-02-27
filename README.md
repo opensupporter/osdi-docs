@@ -446,11 +446,16 @@ When updating that resource via PUT or PATCH, only the attributes of the specifi
 ## Changing Relationships
 
 Sometimes it is necessary to change which subordinate resource is linked to a primary resource.
-Assume that a donation was created.  However, due to a matching error, the donation was matched with the wrong user.  The client wishes to change the association to that it points to the correct Person resource.
 
-In order to provide this functionality, when a resource is retrieved, the "_links" section of the representation may contain links to a setter operation such as `osdi:set_person`.
+Assume that an Event has been created. An event has an organizer who is responsible for the event.  This Person is associated to the Event resource via the "organizer" attribute.
 
-To change a relationship, a client should send a POST to the setter resource containing the representation of the link destination.  Assuming a setter of `osdi:set_person`, the client would POST a representation of Person.
+As needs change, the customer may need to reassign this Event to a new organizer. (Say the original organizer is on vacation)  In this case, it would be costly to delete the event and recreate it, which would also destroy any attendance resources associated with that event.
+
+In situations like these, OSDI provides a mechanism, where needed, to change a relationship.
+
+In order to provide this functionality, when a resource is retrieved, the "_links" section of the representation may contain links to a setter operation such as `osdi:set_organizer`.
+
+To change a relationship, a client should send a POST to the setter resource containing the representation of the link destination.  Assuming a setter of `osdi:set_organizer`, the client would POST a representation of Person.
 
 ## Examples
 
@@ -545,16 +550,50 @@ Updating Data
 A client sends a PUT or PATCH to an individual DonationTransaction resource
 
 ## Changing an association
-Sometimes it is necessary to change which subordinate resource is linked to a primary resource.
-Assume that the above donation was created.  However, due to a matching error, the donation was matched with the wrong user.  The correct user is determined to have identifier "acme:1836283"
 
-To change the Donation to be associated with the correct user, a client sends a POST message to the URL in the href in the osdi:set_person relation.
+Using the above example described for changing relationship, let's assume we want to change the organizer associated with an event.
+
+Example Event
+
+````javascript
+{
+    "id": string,
+    "status": string,
+    "created": datetime,
+    "updated": datetime,
+    "summary": "Rugby Team Phone Bank",
+    "description": "Come join your favorite players and fans and phonebank to support Marriage Equality",
+    "_embedded" : {
+      "osdi:organizer" :   {
+              {
+            "given_name": "Lurline",
+            "family_name": "Glover",
+            }
+     "osdi:attendance": { attendance resources .... },
+     "_links" : {
+     "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+       "self": { "href" : uri },
+       "osdi:attendance" : { "href" : "http://path/to/event5/attendance" }
+       "osdi:location" : { "href" : uri }
+       "osdi:organizer" : { "href" : uri }
+       "osdi:creator" : { "href" : uri }
+       "osdi:set_organizer" { "href" : "http://path/to/event5/set/organizer"}
+      }
+  }
+````
+
+To change the Donation to be associated with the correct user, a client sends a POST message to the URL in the href in the osdi:set_organizer relation. 
+
+> "osdi:set_organizer" { "href" : "http://path/to/event5/set/organizer"}
+
 The server shall respond with the correct person object
 
 ````javascript
-POST /path/to/donation5/set_person
+POST /path/to/event5/set/organizer
 
 {
+  "given_name" : "Oscar",
+  "family_name" : "O'Field-Dude",
   "identifiers" : [
   "acme:1836283"
   ]
@@ -563,8 +602,8 @@ POST /path/to/donation5/set_person
 200 OK
 
 {
-  "given_name" : "John",
-  "family_name" : "Doe",
+  "given_name" : "Oscar",
+  "family_name" : "O'Field-Dude",
   "identifiers" : [
     "acme:1836283",
     "vanid:372938298"
@@ -574,10 +613,12 @@ POST /path/to/donation5/set_person
 ````
 
 ###Event RSVP
-In order to simplify event signups, OSDI provides the event_signup action.  The event_signup endpoint is event specific.  It is returned within a specific event's representation.  It is expected that the client has this information in advance of the action.
+To RSVP to an event, a client would retrieve the event and locate the attendance collection link. Using the above event example, that link is:
+
+> "osdi:attendance" : { "href" : "http://path/to/event5/attendance" }
 
 ````javascript
-POST /api/v1/event543_url/attendance
+POST /path/to/event5/attendance"
 
 {
 	"person": {
