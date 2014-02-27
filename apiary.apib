@@ -7,21 +7,52 @@ Welcome to the our sample API documentation. All comments can be written in (sup
 ---
 
 --
-Shopping Cart Resources
-The following is a section of resources related to the shopping cart
+API Endpoint
+
 --
 
-List products added into your shopping-cart. (comment block again in Markdown)
-GET /shopping-cart
+Get the API Endpoint
+GET /api/v1
 < 200
 < Content-Type: application/json
-{ "items": [
-            { "url": "/shopping-cart/1",
-            "product":"2ZY48XPZ", 
-            "quantity": 1, "name": "New socks", 
-            "price": 1.25 }
-   ]
-}
+
+	{
+	  "motd": "Welcome to the ACME Action Platform OSDI API endpoint!!",
+	  "capabilities" : {
+		"osdi:rest-read" : true,
+		"osdi:actions" : true,
+		"osdi:rest-write" : true,
+		"acme:defeat_opponent": {								"modes" : [
+				"landslide", "nailbiter"
+			]
+		},
+	
+
+	  "_links": {
+	    "curies": [
+			{"name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true },
+			{"name": "acme", "href": "http://acme.foo/"}
+		],  
+	    "osdi:people": {
+	      "href": "/api/v1/people",
+	    },
+		"osdi:people_lists": {
+	      "href": "/api/v1/people_lists",
+	    },
+	    "osdi:addresses": {
+	      "href": "/api/v1/addresses",
+	    },
+	    "odsi:questions": {
+	      "href": "http://api.opensupporter.org/api/v1/questions",
+	    },
+	    "osdi:question_answers": {
+	      "href": "http://api.opensupporter.org/api/v1/question_answers",
+	    },
+	    "self": {
+	      "href": "/api/v1",
+	    }
+	  }
+	}
 
 Save new products in your shopping cart
 POST /shopping-cart
@@ -33,10 +64,16 @@ POST /shopping-cart
   "url": "/shopping-cart/2" 
 }
 
--- Payment Resources --
+-- Donation Resources --
 
 This resource allows you to submit payment information to process your *shopping cart* items
-POST /payment
-{ "cc": "12345678900", "cvc": "123", "expiry": "0112" }
+POST /api/v1/donations
+{ 
+    "amount": "50.00", "currency": "usd",
+    "person" : {
+            "given_name" : "John",
+            "family_name" : "Doe"
+    }
+}
 < 200
 { "receipt": "/payment/receipt/1" }
