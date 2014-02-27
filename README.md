@@ -62,10 +62,27 @@ Email: [info@opensupporter.org](mailto:info@opensupporter.org)
 
 
 # Basic Resource Access
-## API Entry Point and linking
-All access through OSDI starts at the API Entry Point (AEP).  The AEP is a resource that acts like a directory of the types of resources available on a server.  It also includes capability information like the maximum query pagesize.
 
-Some servers may support some or all of the different resource collections.  For example, a peer to peer donation system might support Donations and People but not events.  In order to find out what resources are available and what URIs to use to access them, do a GET on the AEP URI.
+## Overview
+OSDI used a combination of approaches to provide flexible reading of data, simple operations for simple scenarios, and general purpose CRUD access.
+
+OSDI Compliant endpoints achieve this through the following capabilities
+
+### RESTful Reading of Data (rest-read)
+Reading of data, or querying resources, is done via traditional REST and Hypermedia practices.  OSDI uses HAL for hypermedia and OData query language to give a rich and flexible way to express queries
+
+### Actions (actions)
+OSDI also allows a client to perform actions, sometimes known as scenarios or methods, when the scenario is 'action oriented' vs 'data oriented' such as singing up a supporter, recording a donation, or rsvping for an event.
+
+Certain common actions have been specifically defined to include any needed semantics to allow a client to perform an action in a single HTTP request/response.
+
+### Direct Data Updates (rest-write)
+There will always be an unbounded set of scenarios such that defining specific actions for each would be impractical.  For scenarios outside Actions, OSDI provides direct RESTful data access.  By using the common RESTful operations, along with hypermedia, virtually any scenario can be accomplished.
+
+## API Entry Point and linking
+
+### Overview
+All access through OSDI starts at the API Entry Point (AEP).  The AEP is a resource that acts like a directory of the types of resources available on a server.  It also includes capability information like the maximum query pagesize.
 
 Your service provider can tell you what the AEP URI is for your account.
 
@@ -75,10 +92,20 @@ For the purposes of example, assume your provider has given you an AEP URI of
 
 > Note: you can explore the AEP with a user friendly interface by visiting our [prototype endpoint](http://api.opensupporter.org)
 
+### Available Collections 
+Some servers may support some or all of the different resource collections.  For example, a peer to peer donation system might support Donations and People but not events.  In order to find out what resources are available and what URIs to use to access them, do a GET on the AEP URI.
+
+
 In order to determine the available resources on the server the client should perform an HTTP GET request to this URI.
 
 Within the response will be a collection of links to the resource collections available on the server.
 
+### Capabilities
+Implementations of OSDI may differ in support of certain semantic capabilities.  Implementations may also define extensions to the OSDI specification.  A client may determine which capabilities are supported on a server by examining the "capabilities" hash inside of the AEP.
+
+Some capabilities may be advertised merely by the presence of a boolean key, others may have complex hash structures indicating capability specific parameters.
+
+### Example
 
 Request
 
@@ -92,8 +119,21 @@ Response
 
 	{
 	  "motd": "Welcome to the ACME Action Platform OSDI API endpoint!!",
+	  "capabilities" : {
+		"osdi:rest-read" : true,
+		"osdi:actions" : true,
+		"osdi:rest-write" : true,
+		"acme:defeat_opponent": {								"modes" : [
+				"landslide", "nailbiter"
+			]
+		},
+	
+
 	  "_links": {
-	    "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],  
+	    "curies": [
+			{"name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true },
+			{"name": "acme", "href": "http://acme.foo/"}
+		],  
 	    "osdi:people": {
 	      "href": "/api/v1/people",
 	    },
@@ -115,7 +155,9 @@ Response
 	  }
 	}
 
-Given the above example response, let's fetch the people collection on this server.
+
+## Reading Data
+Given the above example AEP response, let's fetch the people collection on this server.
 Notice the "_links" collection.  Find the object in the links collection with key "osdi:people".  That object has an attribute "href" which contains the URI to use to access the people collection.
 
 > This is for example purpose only.  The official definition of the person schema is [People and Addresses](people.md)
@@ -382,7 +424,239 @@ I would then construct an odata_query and substitute the odata_query variable wi
 
 "http://api.opensupporter.org/api/v1/people?$filter={odata_query}", would become "http://api.opensupporter.org/api/v1/people?$filter=name eq 'bob'", for more information on odata queries see http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter.
 
-## Common CRUD operations
+## Actions and Creating Resources
+
+In numerous cases, creating a resource associated with an action, like recording a Donation, or signing up for an Event, the end result is that multiple resources need to be created (or updated).
+
+When recording a donation, both donor information (like name and address) and donation information (like amount and currency) are typically captured.
+
+In OSDI, donation resources and person resources are associated by a link.  This provides the ability to link multiple donations to a person as well as navigate from a person to an associated collection of donations.
+
+In order to make this simple for clients, a special Create representation is used when POSTing to a collection.  These representations contain attributes for both resources like donation and person.
+
+The server will process this action and create both resources with an association between them.
+
+## Retrieving and Updating Resources
+When retrieving a resource via GET, or updating with PUT or PATCH a different representation is used.
+
+When retrieving an individual resource, the representation contains the attributes of that resource.  Associated resources are listed in the "_links" section and optionally sent in the "_embedded" section as a convenience.
+
+When updating that resource via PUT or PATCH, only the attributes of the specified resource are sent.  In order to update the associated resources, the client should locate the URI for that resource in the "_links" section.
+
+## Changing Relationships
+
+Sometimes it is necessary to change which subordinate resource is linked to a primary resource.
+
+Assume that an Event has been created. An event has an organizer who is responsible for the event.  This Person is associated to the Event resource via the "organizer" attribute.
+
+As needs change, the customer may need to reassign this Event to a new organizer. (Say the original organizer is on vacation)  In this case, it would be costly to delete the event and recreate it, which would also destroy any attendance resources associated with that event.
+
+In situations like these, OSDI provides a mechanism, where needed, to change a relationship.
+
+In order to provide this functionality, when a resource is retrieved, the "_links" section of the representation may contain links to a setter operation such as `osdi:set_organizer`.
+
+To change a relationship, a client should send a POST to the setter resource containing the representation of the link destination.  Assuming a setter of `osdi:set_organizer`, the client would POST a representation of Person.
+
+## Examples
+
+### DonationCreate
+
+To create a donation, a client sends a POST request to the donations collection.  In the body of the POST, the `DonationCreate` representation is used.
+
+
+````javascript
+POST /api/v1/1828182/donations
+
+{
+	options: {
+		match: "match_and_store" // default	
+		post_processing: true,
+		"acme:magic_decoding_needed" : true
+	},
+	person: {
+		"given_name" : "Testy",
+		"family_name" : "McTesterson"
+		... other person attributes
+	},
+	"donation_date" : "2013-11-19T08:37:48-0600",
+	"amount" : 50.00,
+	"currency" : "USD"
+	... other DonationCreate fields
+}
+
+````
+### DonationCreate Server Behavior
+When the server processes a `DonationCreate`, the following things happen
+1. A Donation resource is created
+2. A person resource is created or merged based on provided information
+3. If transactional is supported, then a transaction_donor is created containing the exact data contained in the DonationCreate representation
+
+Response
+The server shall respond to a DonationCreate with a Donation representation
+
+````javascript
+{
+	"donation_date" : "2013-11-19T08:37:48-0600",
+	"amount" : 50.00,
+	"currency" : "USD"
+	... other Donation fields
+	"_embedded" : { // should these be inlined or relational
+		"osdi:person" {
+			"given_name" : "Testy",
+			"family_name" : "McTesterson",
+			... other person attributes
+		},
+		"osdi:transaction_donor" : {
+				"given_name" : "Testy",
+				"family_name" : "McTesterson",
+				... other person attributes
+		
+	},
+	"_links" : {
+		"osdi:person" : {
+			"href": "http://server/path/to/person"
+		},
+		"osdi:transaction_donor" : {	
+			"href": "http://path/to/transaction_donor",
+		},
+		... other links
+	}
+}
+````
+
+### Working with Donation Resources
+Reading data
+
+A client sends a GET on the donations collection or an individual donation record
+
+Updating Data
+A client sends a PUT or PATCH to an individual Donation resource
+
+### Working with TransactionDonor Resources
+By having a separate donation transaction resource, we can customize this at will or even cherry pick data from other resources.
+
+If a system does not support transactional data, then there is no complexity to the models.  It just does not show up in _embedded or _linked
+
+Reading data
+
+A client sends a GET on the TransactionDonor collection or an individual donation record
+
+Updating Data
+A client sends a PUT or PATCH to an individual TransactionDonor resource
+
+## Changing an association
+
+Using the above example described for changing relationship, let's assume we want to change the organizer associated with an event.
+
+Example Event
+
+````javascript
+{
+    "id": string,
+    "status": string,
+    "created": datetime,
+    "updated": datetime,
+    "summary": "Rugby Team Phone Bank",
+    "description": "Come join your favorite players and fans and phonebank to support Marriage Equality",
+    "_embedded" : {
+      "osdi:organizer" :   {
+              {
+            "given_name": "Lurline",
+            "family_name": "Glover",
+            }
+     "osdi:attendance": { attendance resources .... },
+     "_links" : {
+     "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+       "self": { "href" : uri },
+       "osdi:attendance" : { "href" : "http://path/to/event5/attendance" }
+       "osdi:location" : { "href" : uri }
+       "osdi:organizer" : { "href" : uri }
+       "osdi:creator" : { "href" : uri }
+       "osdi:set_organizer" { "href" : "http://path/to/event5/set/organizer"}
+      }
+  }
+````
+
+To change the Donation to be associated with the correct user, a client sends a POST message to the URL in the href in the osdi:set_organizer relation. 
+
+> "osdi:set_organizer" { "href" : "http://path/to/event5/set/organizer"}
+
+The server shall respond with the correct person object
+
+````javascript
+POST /path/to/event5/set/organizer
+
+{
+  "given_name" : "Oscar",
+  "family_name" : "O'Field-Dude",
+  "identifiers" : [
+  "acme:1836283"
+  ]
+}
+
+200 OK
+
+{
+  "given_name" : "Oscar",
+  "family_name" : "O'Field-Dude",
+  "identifiers" : [
+    "acme:1836283",
+    "vanid:372938298"
+    ]
+  ... other person attributes
+}
+````
+
+###Event RSVP
+To RSVP to an event, a client would retrieve the event and locate the attendance collection link. Using the above event example, that link is:
+
+> "osdi:attendance" : { "href" : "http://path/to/event5/attendance" }
+
+````javascript
+POST /path/to/event5/attendance"
+
+{
+	"person": {
+		"email_address" : "testy@example.com"
+		"identifiers" : [ "voterlabs:1234" ]
+	},
+  "creator" : {
+    "given_name" : "James",
+    "family_name" : "O'Field-Organizer",
+}
+	"status" : "accepted",
+	"comment" : "1 phone bank == 5.3 votes!"
+}
+
+201 Created
+Content-Type: application/json
+
+{
+  "_embedded" : {
+    "osdi:person" : {
+		"given_name" : "Testy",
+    "family_name" : "McTesterson"
+		"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
+	  }
+  }
+ 	"status" : "accepted",
+	"comment" : "1 phone bank == 5.3 votes!"
+	// continuation of donation resource attributes
+	
+	"_links" : {
+		"self" : { "href" : "http://link/to/this/new/donation"},
+		"osdi:person" : { "href" : "http://link/to/associated/person"}
+    "osdi:set_person" { "href" : "http://link/to/set/associated/person"},
+	"osdi:set_creator" : {
+		"href": "http://path/to/donation/5/set_creator"
+		}
+	}
+}
+
+````
+
+## Writing Data (rest-write)
+RESful writing, or updating of data is done via common RESTful (CRUD) operations
 ### Creating a Resource
 Creating a new resource involves adding a new item to a collection.  To create a new resource, an HTTP POST message is sent to the URI for a collection.
 
@@ -491,75 +765,6 @@ Clients may set an attribute to nil by including the attribute using ‘nil’ f
 
     The HTTP response body shall contain the serialization of the updated resource
 
-### Composite Requests (Updating or Creating with Embedded Resources)
-In some situations, a client may wish to update or create a resource and include embedded resources in the same request.  For example, a client may wish to create or update a Person while including Address information.  The functionality to accomplish this is called a *Composite Request*
-
-Composite Requests are only allowed with POST requests.
-
-Support for Composite Requests is OPTIONAL.
-
-Without Composite Requests, these scenarios would be accomplished with two separate requests. An initial request with a POST (for the create case) containing the parent resource (Person) information would be sent to the server.  Based on the response to this initial request, the client would learn the URI for the newly created resource.  A second POST request would be sent to that URI containing the representation of the child resource (Address)address to be added.  
-
-To accomplish this in a single request, the client would use a Composite Request.  Composite requests are used with POST only.  A Composite request contains the representations of both the parent and child representations in a single request, according to the rules of HAL.  Child representations are contained within an _embedded JSON element.
-
-Assuming the same example of updating or creating a Person and Address information in a composite request, the request body would contain the following information:
-
-	{
-	   "first_name": "Edwin",
-       "last_name": "Labadie",
-       "middle_name": "Marques",
-       "email": "test-3@example.com",
-       ... other attributes ...
-       "_embedded": {
-           "addresses": [ {
-               "address1": "935 Ed Lock",
-               "city": "New Dudley",
-               "state": "MN",
-               "postal_code": "17678",
-               "country_code": "RU",
-               "address_type": "Home",
-               "lat": 44,
-               "lng": 40,
-               "accuracy": "Rooftop",
-               "address_status": "Verified",
-               "primary": true,
-               ... other attributes ...
-               },
-               {
-               "address1": "935 Ed Lock",
-               "city": "New Dudley",
-               "state": "MN",
-               "postal_code": "17678",
-               "country_code": "RU",
-               "address_type": "Home",
-               "lat": 44,
-               "lng": 40,
-               "accuracy": "Rooftop",
-               "address_status": "Verified",
-               ... other attributes ...
-               } ]
-        } 
-    }              
-
-### Composite Server Behavior
-Composite requests that contain embedded representations may contain single embedded resources or resource collections (multiple instances of the same resource type).
-
-Note that in the description below, the server shall order operations as specified.
-
-##### Composite POST
-
-When a composite request such as the example above is sent to a server with a POST method, first a new resource is created for the parent (Person). If that is successful, then new resources are created for the child or children (Address) resources.  If the upsert parameter is true, then the server may merge the transmitted resource representation with existing resources according to the rules of upsert.
-
-##### Error Handling
-
-If the attempt to update or create the parent resource fails, the server shall return the appropriate HTTP error code representing the failure.
-
-If the attempt to update or create the child resource(s) fails, the server shall return the 409 Conflict HTTP response code.  Within the response body, the server shall include descriptive information on the nature of the child resource failure. This information is determined by best-effort.  Consistent with the definition of 409 Conflict, the assumption is that the user or client may need to examine the resulting resource state to determine the appropriate next steps.
-
-##### Responses to Composite requests
-
-If the composite server operations are successful, then a standard response containing the resource representations is returned.  It should contain the embedded resources as well.   
-           
   
 ## Selecting Results
 ### Filtering Collections with OData
