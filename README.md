@@ -489,7 +489,7 @@ POST /api/v1/1828182/donations
 When the server processes a `DonationCreate`, the following things happen
 1. A Donation resource is created
 2. A person resource is created or merged based on provided information
-3. If transactional is supported, then a donation_transaction is created containing the exact data contained in the DonationCreate representation
+3. If transactional is supported, then a transaction_donor is created containing the exact data contained in the DonationCreate representation
 
 Response
 The server shall respond to a DonationCreate with a Donation representation
@@ -506,8 +506,7 @@ The server shall respond to a DonationCreate with a Donation representation
 			"family_name" : "McTesterson",
 			... other person attributes
 		},
-		"osdi:donation_transaction" : {
-			"person" : {
+		"osdi:transaction_donor" : {
 				"given_name" : "Testy",
 				"family_name" : "McTesterson",
 				... other person attributes
@@ -517,13 +516,9 @@ The server shall respond to a DonationCreate with a Donation representation
 		"osdi:person" : {
 			"href": "http://server/path/to/person"
 		},
-		"osdi:donation_transaction" : {	
-			"href": "http://path/to/donation_transaction",
+		"osdi:transaction_donor" : {	
+			"href": "http://path/to/transaction_donor",
 		},
-		"osdi:set_person" : {
-			"href": "http://path/to/donation/5/set_person"
-		},
-
 		... other links
 	}
 }
@@ -537,17 +532,17 @@ A client sends a GET on the donations collection or an individual donation recor
 Updating Data
 A client sends a PUT or PATCH to an individual Donation resource
 
-### Working with DonationTransaction Resources
+### Working with TransactionDonor Resources
 By having a separate donation transaction resource, we can customize this at will or even cherry pick data from other resources.
 
 If a system does not support transactional data, then there is no complexity to the models.  It just does not show up in _embedded or _linked
 
 Reading data
 
-A client sends a GET on the DonationTransaction collection or an individual donation record
+A client sends a GET on the TransactionDonor collection or an individual donation record
 
 Updating Data
-A client sends a PUT or PATCH to an individual DonationTransaction resource
+A client sends a PUT or PATCH to an individual TransactionDonor resource
 
 ## Changing an association
 
