@@ -62,8 +62,14 @@ POST /shopping-cart
 }
 
 -- Donation Resources --
+List Donations
+GET /api/v1/donations
+< 200
+< Content-Type: application/json
+{
+    
 
-This resource allows you to submit payment information to process your *shopping cart* items
+Send a Donation
 POST /api/v1/donations
 { 
     "amount": "50.00", "currency": "usd",
