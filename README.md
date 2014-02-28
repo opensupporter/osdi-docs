@@ -56,6 +56,7 @@ Email: [info@opensupporter.org](mailto:info@opensupporter.org)
 * [Lists](lists.md)
 * [Survey Questions and Answers](questions.md)
 * [Events](events.md)
+* [Petitions](petitions.md)
 * Donations
 * [Canvassing Interactions](interactions.md)
 
