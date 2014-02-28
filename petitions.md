@@ -227,12 +227,12 @@ GET /api/v1/petitions/
 
 
 ## A single petition
-
-```javascript
-
+```
 GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/
 200 OK
+```
 
+```javascript
 {
   {
     "identifier": [
@@ -311,11 +311,12 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/
 
 Only two shown for brevity.
 
-```javascript
-
+```
 GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures
 200 OK
+```
 
+```javascript
 {
   "total_pages": 4,
   "per_page": 25,
@@ -617,11 +618,11 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures
 
 ## A single signature on a petition
 
-```javascript
-
+```
 GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures/25d2d08f-7c3a-4bdc-8329-815aa5117d54
 200 OK
-
+```
+```javascript
 {
   "_links": {
     "self": {
