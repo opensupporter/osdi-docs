@@ -49,7 +49,6 @@ GET /api/v1/petitions/
 ```
 
 ```javascript
-
 {
   "total_pages": 6,
   "per_page": 25,
@@ -222,7 +221,6 @@ GET /api/v1/petitions/
     ]
   }
 }
-
 ```
 
 
@@ -612,7 +610,6 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures
     ]
   }
 }
-
 ```
 
 
@@ -771,7 +768,6 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures/25d2d08f-7
     ]
   }
 }
-
 ```
 
 
