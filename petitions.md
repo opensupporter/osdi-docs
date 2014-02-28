@@ -2,7 +2,7 @@
 
 This page defines Petitions, Petition Signatures
 
-## Events
+## Petitions
 
 | Name		| Type		| Description
 |-----------|-----------|------------------
@@ -33,7 +33,7 @@ This page defines Petitions, Petition Signatures
 
 # Retrieving Resources (GET)
 
-## default embed policy
+## Default embed policy
 
 When retreiving a petition resource, the creator can be embededed, but the signatures collection should only be linked.
 
@@ -43,10 +43,12 @@ When retreiving a signature or list of signatures, both the person and the petit
 
 Only two shown for brevity.
 
-```javascript
-
+```
 GET /api/v1/petitions/
 200 OK
+```
+
+```javascript
 
 {
   "total_pages": 6,
@@ -332,7 +334,8 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures
       },
       {
         "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures/13d2d08f-6c3a-3bec-8628-515aa5147e57"
-      }
+      },
+      ...
     ],
     "curies": [
       {
@@ -480,7 +483,7 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures
         ],
         "created_at": "2014-02-20T21:32:56Z",
         "modified_at": "2014-02-20T21:32:56Z",
-        "comments": "Stop the bad thing, please!",
+        "comments": "Please don't do it.",
         "_embedded": {
           "osdi:person": {
             "given_name": "James",
