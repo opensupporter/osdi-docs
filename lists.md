@@ -78,7 +78,7 @@ Lists are used to denote collections of resources. A list is a resource type tha
 
       "_links": {
         "self": {
-          "href": "http://osdi-prototype.herokuapp.com/api/v1/lists"
+          "href": "/api/v1/lists"
         },
       }
     }
