@@ -7,9 +7,14 @@ A query is a collection of resources that fit a set of criteria
 * Queries are unique collections of resources: a resource may match a query only once
 
 ### Query attributes:
-* Name
-* Description: plaintext describing the query's function
-* Dynamic: boolean reflecting whether the query is dynamic or static
+* identifier
+* description: plaintext describing the query's function
+* dynamic: boolean reflecting whether the query is dynamic or static
+* created_at
+* modified_at
+* summary  //name
+* url
+* total_items
 
 ### Query collections:
 * Resources: the collection of resources which match the query's criteria at the time of the query's creation in static queries or at the time of retrieval in dynamic queries
