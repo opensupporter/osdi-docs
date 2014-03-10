@@ -61,6 +61,7 @@ To help understand the scenarios OSDI covers, check out our evolving [scenarios 
 * [Survey Questions and Answers](questions.md)
 * [Events](events.md)
 * [Petitions](petitions.md)
+* [Forms](forms.md)
 * Donations
 * [Canvassing Interactions](interactions.md)
 
