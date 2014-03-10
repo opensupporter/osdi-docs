@@ -10,22 +10,22 @@ Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.m
 
 | Name		| Type		| Description
 |-----------|-----------|------------------
-| identifiers	| Identifier[]	| A collection of identifiers the provider has determined to be associated with the petition
+| identifiers	| Identifier[]	| A collection of identifiers the provider has determined to be associated with the form
 | created_at	| datetime	| Date and Time of creation
 | modified_at	| datetime	| Date and Time of last modification
-| summary	| string	| title / summary of petition
-| description	| string/html string	| description of the petition, optionally an HTML string
+| summary	| string	| title / summary of the form
+| description	| string/html string	| description of the form, optionally an HTML string
 | call_to_action	| string	| Text of the call to action of the form (ex: Fill out our survey)
-| url	| string	| A URL string pointing to the publicly available petition page on the web
+| url	| string	| A URL string pointing to the publicly available form page on the web
 | total_signups	| integer	| Read-only computed property representing the current count of signups on the form
-| creator	| Person*	| A single embedded instance of a person representing the creator of the petition
+| creator	| Person*	| A single embedded instance of a person representing the creator of the form
 | signups	| Signups[]| A Collection of Signup resources
 
 ## Signups
 
 | Name		| Type		| Description
 |-----------|-----------|------------------
-| identifiers	| Identifier[]	| A collection of identifiers the provider has determined to be associated with the petition
+| identifiers	| Identifier[]	| A collection of identifiers the provider has determined to be associated with the form
 | created_at	| datetime	| Date and Time of creation
 | modified_at	| datetime	| Date and Time of last modification
 | person	| Person*	| An embedded person that made the signup on the referenced form
