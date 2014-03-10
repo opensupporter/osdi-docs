@@ -61,7 +61,7 @@ GET /api/v1/petitions/
     "self": {
       "href": "https://api.opensupporter.org/api/v1/petitions"
     },
-    "items": [
+    "osdi:petitions": [
       {
         "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7"
       },
@@ -79,7 +79,7 @@ GET /api/v1/petitions/
     ]
   },
   "_embedded": {
-    "items": [
+    "osdi:petitions": [
       {
         "identifier": [
           "osdi_provider:9b385f65-23b3-47a4-a4b5-9abd537b37a7"
@@ -232,8 +232,7 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/
 
 ```javascript
 {
-  {
-    "identifier": [
+	"identifier": [
       "osdi_provider:9b385f65-23b3-47a4-a4b5-9abd537b37a7"
     ],
     "created_at": "2014-02-20T21:30:55Z",
@@ -301,7 +300,6 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/
         "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
       }
     }
-  }
 }
 ```
 
@@ -327,7 +325,7 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures
     "next": {
       "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures/?page=2"
     },
-    "items": [
+    "osdi:signatures": [
       {
         "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures/25d2d08f-7c3a-4bdc-8329-815aa5117d54"
       },
@@ -345,7 +343,7 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures
     ]
   },
   "_embedded": {
-    "items": [
+    "osdi:signatures": [
       {
         "identifier": [
           "osdi_provider:25d2d08f-7c3a-4bdc-8329-815aa5117d54"
@@ -353,117 +351,6 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures
         "created_at": "2014-02-20T21:32:56Z",
         "modified_at": "2014-02-20T21:32:56Z",
         "comments": "Stop the bad thing, please!",
-        "_embedded": {
-          "osdi:person": {
-            "given_name": "Ellen",
-            "family_name": "Omonaria",
-            "identifiers": [
-              "osdi_provider:c945d6fe-929e-11e3-a2e9-12313d316c29"
-            ],
-            "created_at": "2013-03-14T13:03:25Z",
-            "modified_at": "2014-02-26T21:01:52Z",
-            "email_addresses": [
-              {
-                "primary": true,
-                "address": "ellen.omonaria@gmail.com"
-              }
-            ],
-            "postal_addresses": [
-              {
-                "primary": true,
-                "locality": "Washington",
-                "region": "DC",
-                "postal_code": "20009",
-                "country": "US",
-                "language": "en",
-                "location": {
-                  "latitude": 33.333,
-                  "longitude": -77.7777,
-                  "accuracy": "Approximate"
-                }
-              }
-            ],
-            "_links": {
-              "self": {
-                "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-              },
-              "osdi:signatures": {
-                "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/signatures"
-              }
-              ...
-            }
-          },
-          "osdi:petition": {
-            "identifier": [
-		      "osdi_provider:9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-		    ],
-		    "created_at": "2014-02-20T21:30:55Z",
-		    "modified_at": "2014-02-21T15:36:34Z",
-		    "summary": "Stop doing the bad thing",
-		    "description": "<p>Please sign this petition to stop John Smith from doing the bad thing.</p>",
-		    "petition_text": "John Smith, please stop doing the bad thing now.",
-		    "url": "https://api.opensupporter.org/petitions/stop-doing-the-bad-thing",
-		    "total_signatures": 100,
-		    "target": [
-		      {
-		        "name": "John Smith"
-		      }
-		    ],
-		    "_embedded": {
-		      "osdi:creator": {
-		        "given_name": "Jane",
-		        "family_name": "Doe",
-		        "identifiers": [
-		          "osdi_provider:c945d6fe-929e-11e3-a2e9-12313d316c29"
-		        ],
-		        "email_addresses": [
-		          {
-		            "primary": true,
-		            "address": "jane.doe@gmail.com"
-		          }
-		        ],
-		        "postal_addresses": [
-		          {
-		            "primary": true,
-		            "address_lines": [
-		              "123 Something Rd."
-		            ],
-		            "locality": "Washington",
-		            "region": "DC",
-		            "postal_code": "20009",
-		            "country": "US",
-		            "language": "en",
-		            "location": {
-		              "latitude": 38.919,
-		              "longitude": -72.6375,
-		              "accuracy": "Approximate"
-		            }
-		          }
-		        ],
-		        "_links": {
-		          "self": {
-		            "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-		          },
-		          "osdi:signatures": {
-		            "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/signatures"
-		          },
-		          ...
-		        }
-		      }
-		    },
-		    "_links": {
-		      "self": {
-		        "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-		      },
-		      "osdi:signatures": {
-		        "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures"
-		      },
-		      "osdi:creator": {
-		        "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-		      }
-		    }
-          }
-        },
         "_links": {
           "self": {
             "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures/25d2d08f-7c3a-4bdc-8329-815aa5117d54"
@@ -483,117 +370,6 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures
         "created_at": "2014-02-20T21:32:56Z",
         "modified_at": "2014-02-20T21:32:56Z",
         "comments": "Please don't do it.",
-        "_embedded": {
-          "osdi:person": {
-            "given_name": "James",
-            "family_name": "Gonter",
-            "identifiers": [
-              "osdi_provider:35ad5d6ed-913e-12e6-a2e8-11673r314c14"
-            ],
-            "created_at": "2013-03-14T13:03:25Z",
-            "modified_at": "2014-02-26T21:01:52Z",
-            "email_addresses": [
-              {
-                "primary": true,
-                "address": "james.gonter@gmail.com"
-              }
-            ],
-            "postal_addresses": [
-              {
-                "primary": true,
-                "locality": "Washington",
-                "region": "DC",
-                "postal_code": "20009",
-                "country": "US",
-                "language": "en",
-                "location": {
-                  "latitude": 33.332,
-                  "longitude": -77.7177,
-                  "accuracy": "Approximate"
-                }
-              }
-            ],
-            "_links": {
-              "self": {
-                "href": "https://api.opensupporter.org/api/v1/people/35ad5d6ed-913e-12e6-a2e8-11673r314c14"
-              },
-              "osdi:signatures": {
-                "href": "https://api.opensupporter.org/api/v1/people/35ad5d6ed-913e-12e6-a2e8-11673r314c14/signatures"
-              }
-              ...
-            }
-          },
-          "osdi:petition": {
-            "identifier": [
-		      "osdi_provider:9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-		    ],
-		    "created_at": "2014-02-20T21:30:55Z",
-		    "modified_at": "2014-02-21T15:36:34Z",
-		    "summary": "Stop doing the bad thing",
-		    "description": "<p>Please sign this petition to stop John Smith from doing the bad thing.</p>",
-		    "petition_text": "John Smith, please stop doing the bad thing now.",
-		    "url": "https://api.opensupporter.org/petitions/stop-doing-the-bad-thing",
-		    "total_signatures": 100,
-		    "target": [
-		      {
-		        "name": "John Smith"
-		      }
-		    ],
-		    "_embedded": {
-		      "osdi:creator": {
-		        "given_name": "Jane",
-		        "family_name": "Doe",
-		        "identifiers": [
-		          "osdi_provider:c945d6fe-929e-11e3-a2e9-12313d316c29"
-		        ],
-		        "email_addresses": [
-		          {
-		            "primary": true,
-		            "address": "jane.doe@gmail.com"
-		          }
-		        ],
-		        "postal_addresses": [
-		          {
-		            "primary": true,
-		            "address_lines": [
-		              "123 Something Rd."
-		            ],
-		            "locality": "Washington",
-		            "region": "DC",
-		            "postal_code": "20009",
-		            "country": "US",
-		            "language": "en",
-		            "location": {
-		              "latitude": 38.919,
-		              "longitude": -72.6375,
-		              "accuracy": "Approximate"
-		            }
-		          }
-		        ],
-		        "_links": {
-		          "self": {
-		            "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-		          },
-		          "osdi:signatures": {
-		            "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/signatures"
-		          },
-		          ...
-		        }
-		      }
-		    },
-		    "_links": {
-		      "self": {
-		        "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-		      },
-		      "osdi:signatures": {
-		        "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures"
-		      },
-		      "osdi:creator": {
-		        "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-		      }
-		    }
-          }
-        },
         "_links": {
           "self": {
             "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures/13d2d08f-6c3a-3bec-8628-515aa5147e57"
@@ -621,152 +397,23 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures/25d2d08f-7
 ```
 ```javascript
 {
-  "_links": {
-    "self": {
-      "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures/25d2d08f-7c3a-4bdc-8329-815aa5117d54"
-    },
-    "curies": [
-      {
-        "name": "osdi",
-        "href": "http://api.opensupporter.org/docs/v1/{rel}",
-        "templated": true
-      }
-    ]
-  },
-  "_embedded": {
-    "items": [
-      {
-        "identifier": [
-          "osdi_provider:25d2d08f-7c3a-4bdc-8329-815aa5117d54"
-        ],
-        "created_at": "2014-02-20T21:32:56Z",
-        "modified_at": "2014-02-20T21:32:56Z",
-        "comments": "Stop the bad thing, please!",
-        "_embedded": {
-          "osdi:person": {
-            "given_name": "Ellen",
-            "family_name": "Omonaria",
-            "identifiers": [
-              "osdi_provider:c945d6fe-929e-11e3-a2e9-12313d316c29"
-            ],
-            "created_at": "2013-03-14T13:03:25Z",
-            "modified_at": "2014-02-26T21:01:52Z",
-            "email_addresses": [
-              {
-                "primary": true,
-                "address": "ellen.omonaria@gmail.com"
-              }
-            ],
-            "postal_addresses": [
-              {
-                "primary": true,
-                "locality": "Washington",
-                "region": "DC",
-                "postal_code": "20009",
-                "country": "US",
-                "language": "en",
-                "location": {
-                  "latitude": 33.333,
-                  "longitude": -77.7777,
-                  "accuracy": "Approximate"
-                }
-              }
-            ],
-            "_links": {
-              "self": {
-                "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-              },
-              "osdi:signatures": {
-                "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/signatures"
-              }
-              ...
-            }
-          },
-          "osdi:petition": {
-            "identifier": [
-		      "osdi_provider:9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-		    ],
-		    "created_at": "2014-02-20T21:30:55Z",
-		    "modified_at": "2014-02-21T15:36:34Z",
-		    "summary": "Stop doing the bad thing",
-		    "description": "<p>Please sign this petition to stop John Smith from doing the bad thing.</p>",
-		    "petition_text": "John Smith, please stop doing the bad thing now.",
-		    "url": "https://api.opensupporter.org/petitions/stop-doing-the-bad-thing",
-		    "total_signatures": 100,
-		    "target": [
-		      {
-		        "name": "John Smith"
-		      }
-		    ],
-		    "_embedded": {
-		      "osdi:creator": {
-		        "given_name": "Jane",
-		        "family_name": "Doe",
-		        "identifiers": [
-		          "osdi_provider:c945d6fe-929e-11e3-a2e9-12313d316c29"
-		        ],
-		        "email_addresses": [
-		          {
-		            "primary": true,
-		            "address": "jane.doe@gmail.com"
-		          }
-		        ],
-		        "postal_addresses": [
-		          {
-		            "primary": true,
-		            "address_lines": [
-		              "123 Something Rd."
-		            ],
-		            "locality": "Washington",
-		            "region": "DC",
-		            "postal_code": "20009",
-		            "country": "US",
-		            "language": "en",
-		            "location": {
-		              "latitude": 38.919,
-		              "longitude": -72.6375,
-		              "accuracy": "Approximate"
-		            }
-		          }
-		        ],
-		        "_links": {
-		          "self": {
-		            "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-		          },
-		          "osdi:signatures": {
-		            "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/signatures"
-		          },
-		          ...
-		        }
-		      }
-		    },
-		    "_links": {
-		      "self": {
-		        "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-		      },
-		      "osdi:signatures": {
-		        "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures"
-		      },
-		      "osdi:creator": {
-		        "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-		      }
-		    }
-          }
-        },
-        "_links": {
-          "self": {
-            "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures/25d2d08f-7c3a-4bdc-8329-815aa5117d54"
-          },
-          "osdi:petition": {
-            "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-          },
-          "osdi:person": {
-            "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-          }
-        }
-      }
-    ]
-  }
+	"identifier": [
+	  "osdi_provider:25d2d08f-7c3a-4bdc-8329-815aa5117d54"
+	],
+	"created_at": "2014-02-20T21:32:56Z",
+	"modified_at": "2014-02-20T21:32:56Z",
+	"comments": "Stop the bad thing, please!",
+	"_links": {
+	  "self": {
+	    "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/signatures/25d2d08f-7c3a-4bdc-8329-815aa5117d54"
+	  },
+	  "osdi:petition": {
+	    "href": "https://api.opensupporter.org/api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7"
+	  },
+	  "osdi:person": {
+	    "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+	  }
+	}
 }
 ```
 
