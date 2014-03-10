@@ -1,6 +1,8 @@
 # Petitions
 
-This page defines Petitions, Petition Signatures
+This page defines Petitions, Petition Signatures.
+
+Petitions are actions that have a target. Activists are asked to sign the petition to add their name to a common letter directed at the target.
 
 ## Petitions
 
