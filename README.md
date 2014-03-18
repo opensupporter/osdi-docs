@@ -62,10 +62,30 @@ Email: [info@opensupporter.org](mailto:info@opensupporter.org)
 
 
 # Basic Resource Access
-## API Entry Point and linking
-All access through OSDI starts at the API Entry Point (AEP).  The AEP is a resource that acts like a directory of the types of resources available on a server.  It also includes capability information like the maximum query pagesize.
 
-Some servers may support some or all of the different resource collections.  For example, a peer to peer donation system might support Donations and People but not events.  In order to find out what resources are available and what URIs to use to access them, do a GET on the AEP URI.
+## Overview
+OSDI used a combination of approaches to provide flexible reading of data, simple operations for simple scenarios, and general purpose CRUD access.
+
+OSDI Compliant endpoints achieve this through the following capabilities
+
+### RESTful Reading of Data (rest-read)
+Reading of data, or querying resources, is done via traditional REST and Hypermedia practices.  OSDI uses HAL for hypermedia and OData query language to give a rich and flexible way to express queries
+
+### Direct Data Updates (rest-write)
+There will always be an unbounded set of scenarios such that defining specific actions for each would be impractical.  For scenarios outside Actions, OSDI provides direct RESTful data access.  By using the common RESTful operations, along with hypermedia, virtually any scenario can be accomplished.
+
+
+### Fuzzy Linking (fuzzy-link)
+Fuzzy linking allows a client to link two resources together by providing matching criteria rather than an explicit identifier.
+
+This can be useful in actions where the intent is to create a new resource, such as a donation, and either associate it with an existing Person or create a new associated Person resource. 
+
+Which course of action to take is not known at the time of the request, and the client has little interest in researching the existence of Person.
+
+## API Entry Point and linking
+
+### Overview
+All access through OSDI starts at the API Entry Point (AEP).  The AEP is a resource that acts like a directory of the types of resources available on a server.  It also includes capability information like the maximum query pagesize.
 
 Your service provider can tell you what the AEP URI is for your account.
 
@@ -75,10 +95,20 @@ For the purposes of example, assume your provider has given you an AEP URI of
 
 > Note: you can explore the AEP with a user friendly interface by visiting our [prototype endpoint](http://api.opensupporter.org)
 
+### Available Collections 
+Some servers may support some or all of the different resource collections.  For example, a peer to peer donation system might support Donations and People but not events.  In order to find out what resources are available and what URIs to use to access them, do a GET on the AEP URI.
+
+
 In order to determine the available resources on the server the client should perform an HTTP GET request to this URI.
 
 Within the response will be a collection of links to the resource collections available on the server.
 
+### Capabilities
+Implementations of OSDI may differ in support of certain semantic capabilities.  Implementations may also define extensions to the OSDI specification.  A client may determine which capabilities are supported on a server by examining the "capabilities" hash inside of the AEP.
+
+Some capabilities may be advertised merely by the presence of a boolean key, others may have complex hash structures indicating capability specific parameters.
+
+### Example
 
 Request
 
@@ -92,8 +122,21 @@ Response
 
 	{
 	  "motd": "Welcome to the ACME Action Platform OSDI API endpoint!!",
+	  "capabilities" : {
+		"osdi:rest-read" : true,
+		"osdi:fuzzy-linking" : true,
+		"osdi:rest-write" : true,
+		"acme:defeat_opponent": {								"modes" : [
+				"landslide", "nailbiter", "recount"
+			]
+		},
+	
+
 	  "_links": {
-	    "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],  
+	    "curies": [
+			{"name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true },
+			{"name": "acme", "href": "http://acme.foo/"}
+		],  
 	    "osdi:people": {
 	      "href": "/api/v1/people",
 	    },
@@ -115,7 +158,9 @@ Response
 	  }
 	}
 
-Given the above example response, let's fetch the people collection on this server.
+
+## Reading Data
+Given the above example AEP response, let's fetch the people collection on this server.
 Notice the "_links" collection.  Find the object in the links collection with key "osdi:people".  That object has an attribute "href" which contains the URI to use to access the people collection.
 
 > This is for example purpose only.  The official definition of the person schema is [People and Addresses](people.md)
@@ -382,7 +427,229 @@ I would then construct an odata_query and substitute the odata_query variable wi
 
 "http://api.opensupporter.org/api/v1/people?$filter={odata_query}", would become "http://api.opensupporter.org/api/v1/people?$filter=name eq 'bob'", for more information on odata queries see http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter.
 
-## Common CRUD operations
+## Fuzzy Linking 
+### Life can be Tedious
+In certain scenarios like recording a donation, or rsvp'ing to an event, a new resource is being created **and** being associated with an existing resource such as a Person.
+
+In order to execute this task, normally this would involve multiple requests:
+
+1) Matching or locating a Person resource
+2) Creating an associated resource like Donation, Event RSVP, or Q&A response
+
+> Srsly? This is tedious.
+
+### Relationship Drama
+
+Hypermedia gets much of it's power from relationships. Being able to traverse relationships between associated resources is very helpful.  How many donations associated with *this* Person?
+
+In traditional Hypermedia, when creating a new resource (or updating an existing one)there may be multiple links or associations to other resources.  If the association cannot be implied from the containing collection, common practice would entail setting those links to a pre-known and explicit URL or ID.  
+
+> That's a pain.  Why can't I just give you the email address and other form data I have and **you** figure it out?
+
+### Match (I'm Feeling Lucky)
+
+OSDI provides a new way of doing this by allowing links or associations to be specified in a fuzzy manner.  
+
+In OSDI, clients may specify conditions for the server to find and match an existing resource, or create one if no suitable match exists.
+
+
+````javascript
+{
+	"_links" : {
+		"self" : { 
+			"href" : "http://link/to/self"
+		},
+		"person" : {
+			"osdi:match" : {
+				"email_address"	: "testy@example.com",
+				"given_name" : "Testy",
+				"family_name" : "McTesterson",
+				"identifier" : "voterlabs:123",
+						}
+		}
+}
+````
+
+
+In order to perform that matching function, a common "match" element is defined.  
+
+> this match element may be used wherever a "href" element is used in a hash, such as a _links collection.
+
+This element contains atributes from the resource being matched.    By convention, attributes that would be arrays or sub-resources are included inline.
+
+> Each resource definition specifies what attributes are permitted in a match
+
+When receiving a Match element, a server shall make a best effort to match to a single existing person.  In the event that a confident match cannot be made, the server shall either create a new person or fail, according to the "fail_no_match" option specified.  It defaults to false, which will result in a new resource being created in the event of a failed match.
+
+If the __upsert__ query parameter is present and sent to false, then the server will always create a new person resource.
+
+````javascript
+"osdi:match" : {
+	"email_address"	: "testy@example.com",
+	"given_name" : "Testy",
+	"family_name" : "McTesterson",
+	"identifier" : "voterlabs:123",
+	"identifiers" : [ "voterlabs:123", "acme:1234", "twitter:mctesty" ]
+	"address_lines" : [ "123 Foobarrio St", "Apt Bar" ],
+	"postal_code" : "99999",
+	
+	// resource specific permitted attributes...
+	"href" : "http://turns/out/I/actually/had/the/URL"
+	"_options" : {
+		"update" : true, // update the matched person with
+		// included info (true) or use only for matching (false)
+	"fail_on" : "none" | "ambiguous" | "noexist" | "match_fail"
+		// enum
+		//if the match does fails because the resource doesn't exist,or cannot be uniquely located
+		// then return an error (Precondition Failed)	
+	}
+}
+
+````
+
+"match_response"
+After processing an action, the server shall send back a response including a "person_match_response" element.  This element contains status information regarding the match attempt.
+
+````javascript
+"match_response" : {
+	"result" : "matched" | "created",
+	"href" : "http://url/to/matched/or/created/person"
+	"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
+}
+````
+### Match Compliance
+must support href, identifiers, email,
+
+### Examples
+An action 
+
+#### Recording a Donation
+To record a donation, a new resource is created in the donations collection using fuzzy linking to identify the person associated.
+
+````javascript
+POST /api/v1/urlto_donations_collection
+
+{
+	// resource specific attributes	
+	"donation_date" : "2013-11-19T08:37:48-0600",
+	"amount" : 50.00,
+	"currency" : "USD",
+
+	"_links" : { 
+		"person": {
+			"osdi:match" {
+				"given_name" : "Testy",
+				"family_name" : "McTesterson",
+				"address1" : "124 Foobarrio St",
+				"postal_code" : "99999",
+				"email_address" : "testy@example.com"
+				"identifiers" : [ "voterlabs:1234" ]
+				"_options" : {
+					"update" : true, // update the matched person with
+			 		//included info (true) or use only for matching (false)
+			}
+	},
+}
+
+201 Created
+Content-Type: application/json
+
+{
+
+	"donation_date" : "2013-11-19T08:37:48-0600",
+	"amount" : 50.00,
+	"currency" : "USD",
+	// continuation of donation resource attributes
+	"_links" : {
+		"self" : { "href" : "http://link/to/this/new/donation"},
+		"person" : { 
+			"href" : "http://link/to/associated/person"
+			"osdi:match_response" : {
+				"result" : "created",
+				"href" : "http://url/to/matched/or/created/person"
+				"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
+			},
+		}
+	}
+}
+````
+
+###Event RSVP
+Event signup is another scenario where fuzzy linking can be helpful.  In the OSDI data model, Attendance resources link a Person to an Event, as well as "invited_by".
+
+Clever usage of fuzzy linking can make this easy.
+
+The event attendance collection endpoint is event specific.  It is returned within a specific event's representation.  It is expected that the client has this information in advance of the action.
+
+In the example below, the relationship to the Event is implied by the collection resource URI.
+
+````javascript
+POST /api/v1/event_url/blah/attendances
+
+{
+	// resource specific attributes
+	"status" : "accepted",
+	"comment" : "1 phone bank == 5.3 votes!"
+
+	"_links" : {
+		// Ok, we've seen this before.
+		"person" : { 
+			"osdi:match": {
+				"email_address" : "testy@example.com"
+				"identifiers" : [ "voterlabs:1234" ]
+			// no _options.  accept defaults (update)
+		},
+		// This is new.  Stretch your brain.
+		"invited_by" : { 
+			"osdi:match" : {
+				"email_address" : "my_friend@example.com"
+				"_options" : { "update" : false }
+			}
+
+}
+
+201 Created
+Content-Type: application/json
+
+{
+
+	"status" : "accepted",
+	"comment" : "1 phone bank == 5.3 votes!"
+	// continuation of donation resource attributes
+	
+	"_links" : {
+		"self" : { "href" : "http://link/to/this/new/donation"},
+		"person" : { 
+			"href" : "http://link/to/associated/person"
+			"osdi:match_response" : {
+				"result" : "created" ,
+				"href" : "http://url/to/matched/or/created/person"
+				"identifiers" : [  ]
+			},
+		},
+		"invited_by" : {
+			"href" : "http://link/to/who/guilted/me/into/volunteering",
+			"osdi:match_response" : {
+				"result" : "matched" ,
+				"href" : "http://link/to/who/guilted/me/into/volunteering"
+				"identifiers" : [ "voterlabs:12234", "acme:3119999999" ]
+			},
+	}
+}
+
+````
+
+### Other scenarios
+How far can we go?
+
+We could post to a top level Attendance collection and use fuzzy linking for person, invited_by **and** event itself.
+
+We could set certain matches (like event) to match only but if there is no match, don't create the event, just fail.
+
+Or, just try to match, but if there is no match, don't update, don't create, just ignore it.  
+
+## Writing Data (rest-write)
+RESful writing, or updating of data is done via common RESTful (CRUD) operations
 ### Creating a Resource
 Creating a new resource involves adding a new item to a collection.  To create a new resource, an HTTP POST message is sent to the URI for a collection.
 
