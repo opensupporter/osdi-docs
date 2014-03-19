@@ -18,7 +18,7 @@ Lists are used to denote collections of resources. A list is a resource type tha
 |is_dynamic		|bool		|A boolean value that indicates if the list is static or dynamic
 =======
 |---------------|-----------|--------------
-|name		|string     |Name of list
+|name			|string     |Name of list
 |description	|string     |A description of a list, eg "2012 donors"
 |type	        |string     |A string description of the type of resources, eg "events"
 <<<<<<< HEAD
@@ -28,7 +28,7 @@ Lists are used to denote collections of resources. A list is a resource type tha
 >>>>>>> 8a3020b... more work on scenario examples for lists
 
 ## Collections
-| Name          | Type      | Description
+| Name         	| Type      | Description
 |---------------|-----------|--------------
 | osdi-items	| Type[]    |A collection of items in the list 
 
@@ -204,6 +204,8 @@ Lists are used to denote collections of resources. A list is a resource type tha
 
 ##Create a new list
 	PUT /api/v1/list
+	### Payload
+	* 
 	//request body: list metadata, collection of resource IDs to add
 ##Delete a list
 	DELETE /api/v1/list/{id}
