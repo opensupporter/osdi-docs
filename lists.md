@@ -23,66 +23,97 @@ Lists are used to denote collections of resources. A list is a resource type tha
 # Scenarios
 ## Get the list of lists
 ### URL
-    GET /api/v1/lists
+    GET api/v1/lists?page=&per_page=
 ### Response
     200 OK
     Content-Type: application/json
 
     {
-      "total_pages": 1,
-      "page": 1,
-      "total_records": 1,
+      "total_pages": 5,
+      "page": 2,
+      "total_records": 25,
       "_embedded": {
         "lists": [
           {
 			"name" : "supporters",
 			"description" : "The set of all supporters for Ref74",
 			"type" : "person",
+			"total_items":"666",
 			"_links" : {
-				"osdi-items" : {
-					"href" : "api/v1/people?list=supporters",
+					"href" : "api/v1/list/23",
 					"title" : "R74 supporters"
 				}
-			}
 		   },
           {
-			"name" : "donors",
-			"description" : "The set of all 2012 donors for Ref74",
-			"type" : "person",
+			"name" : "venues",
+			"description" : "The set of locations willing to host Ref74 events",
+			"type" : "locations",
+			"total_items":"13",
 			"_links" : {
 				"osdi-items" : {
-					"href" : uri,
+					"href" : "api/v1/list/24",
 					"title" : "R74 donors"
 				}
 			}
 		   }
-
+		   ...
+		   ]
 
       "_links": {
-        "self": {
-          "href": "/api/v1/lists"
+        "self":{
+        	"href":"http://api.opensupporter.org/api/v1/lists?page=2&per_page=5"
+        	},
+        	next" : {
+            "href" : "http://api.opensupporter.org/api/v1/lists?page=3&per_page=5"
+            },
+        "previous" : {
+            "href" : "http://api.opensupporter.org/api/v1/people?page=1&per_page=5"
+            }
         },
-      }
     }
+
 ##Add a resource to a list / remove a resource from a list
 ### URL
 * POST /api/v1/list/{id}
 ### Payload
-* add:	list of identifiers/links to resources to add to the list
-* remove: list of identifiers/links to resources to remove from the list
+{
+	"add" :	collection of identifiers/links to resources to add to the list
+	"remove" :	collection of identifiers/links to resources to remove from the list
+}
+
 ### Response
 * 204 No Content
 	
-##Retrieve a full list
-###URL
+## Retrieve a full list
+### URL
 * GET /api/v1/list/{id}
-###Response
+### Response
+{
+	"name" : "supporters",
+	"description" : "The set of all supporters for Ref74",
+	"type" : "person",
+	"total_items":"666",
+	"_links" : {
+		"href" : "api/v1/list/23",
+		"title" : "R74 supporters"
+	}
+}
 
-
-##Create a new list
-	PUT /api/v1/list
-	### Payload
-	* 
-	//request body: list metadata, collection of resource IDs to add
-##Delete a list
-	DELETE /api/v1/list/{id}
+## Create a new list
+### URL
+* PUT /api/v1/list
+### Payload
+{
+	"name" : string,
+	"description" :string,
+	"type" : flexnum,
+	"osdi-items" : collection of identifiers/links to be added to the list upon creation
+}
+### Response
+* 201 Created
+	
+## Delete a list
+### URL
+* DELETE /api/v1/list/{id}
+### Response
+204 No Content
