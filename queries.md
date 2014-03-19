@@ -6,15 +6,15 @@ A query is a collection of resources that fit a set of criteria
 * Query metadata may be updated via the API, but query criteria may only be modified and queries may only be created or deleted via the content provider's system
 * Queries are unique collections of resources: a resource may match a query only once
 
-### Query attributes:
-* identifier
-* description: plaintext describing the query's function
-* dynamic: boolean reflecting whether the query is dynamic or static
-* created_at
-* modified_at
-* summary  //name
-* url
-* total_items
+## Attributes:
+| name 	| type	| description	|
+|-------|-------|---------------|
+| description	| string	| plaintext describing the query's function; if possible, enough data to recreate query on the host system	|
+| dynamic		| boolean	| denotes whether the query is dynamic or static	|
+| created\_at	| timestamp	| time the query was created	|
+| summary		| string	| short name of the query	|
+| total_items	| integer	| number of items in the query	|
+
 
 ### Query collections:
 * Resources: the collection of resources which match the query's criteria at the time of the query's creation in static queries or at the time of retrieval in dynamic queries
