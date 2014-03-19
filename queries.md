@@ -15,10 +15,72 @@ A query is a collection of resources that fit a set of criteria
 | summary		| string	| short name of the query	|
 | total_items	| integer	| number of items in the query	|
 
+## Query collections:
+| name 	| description	|
+|-------|---------------|
+| osdi-items	| the collection of resources which match the query's criteria at the time of the query's creation in static queries or at the time of retrieval in dynamic queries	|
 
-### Query collections:
-* Resources: the collection of resources which match the query's criteria at the time of the query's creation in static queries or at the time of retrieval in dynamic queries
+# Scenarios
 
-### Query operations:
+## Retrieve a list of all queries
+### URL
+	GET api/v1/queries?page=2&per_page=5
+### Response
+	{
+      "total_pages": 5,
+      "page": 2,
+      "total_records": 25,
+      "_embedded": {
+        "queries": [
+          {
+			"summary" : "trivia participants",
+			"description" : "people who participate in one of our labor history trivia challenges (tag = TRIVIA)",
+			"dynamic" : true,
+			"created\_at":"2014-03-17 20:23:23",
+			"total_items":"3850",
+			"_links" : {
+					"href" : "api/v1/query/23"
+				}
+		   },
+		    {
+			"summary" : "November volunteers",
+			"description" : "all volunteers who were avaialble for walks as of November 2013",
+			"dynamic" : false,
+			"created\_at":"2013-11-30 23:55:23",
+			"total_items":"3850",
+			"_links" : {
+					"href" : "api/v1/query/23"
+				}
+		   },
+		   ...
+		   ]
 
-* Retrieve a query with matching resources
+      "_links": {
+        "self":{
+        	"href":"http://api.opensupporter.org/api/v1/queries?page=2&per_page=5"
+        	},
+        	next" : {
+            "href" : "http://api.opensupporter.org/api/v1/queries?page=3&per_page=5"
+            },
+        "previous" : {
+            "href" : "http://api.opensupporter.org/api/v1/queries?page=1&per_page=5"
+            }
+        },
+    }
+
+
+## Retrieve a query with matching resources
+### URL
+	GET api/v1/query/{id}
+###Response
+	{
+		"summary" : "November volunteers",
+		"description" : "all volunteers who were avaialble for walks as of November 2013",
+		"dynamic" : false,
+		"created\_at":"2013-11-30 23:55:23",
+		"total_items":"3850",
+		"_links" : {
+				"href" : "api/v1/query/23"
+		}
+	}
+
