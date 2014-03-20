@@ -90,10 +90,9 @@ Tags are binary pieces of information that apply to individual people.
 
 ## Add a tag to a person
 ### URL
-* PUT /api/v1/person/tag
+* PUT /api/v1/person/_{person id}_tag
 ### Payload
 {
-	"person id" : _person id_,
 	"tag id" : _tag id_
 }
 ### Response
