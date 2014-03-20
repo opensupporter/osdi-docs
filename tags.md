@@ -6,22 +6,21 @@ Tags are binary pieces of information that apply to individual people.
 |---	|---	|---
 |name	|string	|name of tag
 |description	|string	|plaintext meaning of the tag
-|identifiers	|identifier[]	|A collection of identifiers the provider has determined to be associated with the tag
-|parent	|string (optional)	|broader-scope tag containing this tag
+|identifiers	|identifier[]	|An array of identifiers the provider has determined to be associated with the tag
 
 # Scenarios
 ## Get the list of tags
-GET /api/v1/tags
+### URL
+* GET /api/v1/tags
+### Response
 
-200 OK
-Content-type: application/json
-
+* 200 OK
 	{
-		"total_pages": 1,
-		"page": 1,
-		"total_records": 1,
-		"_embedded": {
-			"tags": [
+	"total\_pages": 5,
+	"page": 2,
+	"total\_records": 25,
+	"\_embedded": {
+		"tags": [
 				{
 					"name":"labor",
 					"description":"this person is a labor supporter",
@@ -29,39 +28,9 @@ Content-type: application/json
 						"voterlabs:987654",
 						"datafarm:poisdfg"
 					],
-					"_links" : {
+					"\_links" : {
 						"items" : {
-							"href" : "api/v1/people?tag=labor",
-						}
-					}
-				},
-				{
-					"name":"minimum wage",
-					"description":"this person supports an increase in the minimum wage",
-					"parent":"labor",
-					"identifiers":[
-						"voterlabs:987654",
-						"datafarm:poisdfg"
-					],
-					"_links" : {
-						"items" : {
-							"href":"api/v1/people?tag=minimum_wage",
-							"parent":"api/v1/people?tag=labor"
-						}
-					}
-				},
-				{
-					"name":"collective bargaining",
-					"description":"this person supports a right to collective bargaining",
-					"parent":"labor",
-					"identifiers":[
-						"voterlabs:6549843",
-						"datafarm:dgktjcd"
-					],
-					"_links" : {
-						"items" : {
-							"href" : "api/v1/people?tag=collective_bargaining",
-							"parent":"api/v1/people?tag=labor"
+							"href" : "api/v1/people?filter=tag eq 'voterlabs:987654'",
 						}
 					}
 				},
@@ -71,73 +40,95 @@ Content-type: application/json
 					"identifiers":[
 						"voterlabs:9538267"
 					],
-					"_links" : {
+					"\_links" : {
 						"items" : {
-							"href" : "api/v1/people?tag=reproductive_rights"
-						}
-					}
-				},
-				]
-			 "_links": {
-			 "self": {
-			 "href": "http://osdi-prototype.herokuapp.com/api/v1/tags"
-			},
-		      }
-		    }
-	}
-	
-## Get the list of child tags
-GET /api/v1/tags/children/labor
-
-## Add a tag to a person
-
-## Remove a tag from a person
-
-## Find people with a given tag/value
-
-200 OK
-Content-type: application/json
-
-	{
-		"total_pages": 1,
-		"page": 1,
-		"total_records": 1,
-		"_embedded": {
-			"tags": [
-				{
-					"name":"minimum wage",
-					"description":"this person supports an increase in the minimum wage",
-					"parent":"labor",
-					"identifiers":[
-						"voterlabs:987654",
-						"datafarm:poisdfg"
-					],
-					"_links" : {
-						"items" : {
-							"href" : "api/v1/people?list=minimum_wage",
-						}
-					}
-				},
-				{
-					"name":"collective bargaining",
-					"description":"this person supports a right to collective bargaining",
-					"parent":"labor",
-					"identifiers":[
-						"voterlabs:6549843",
-						"datafarm:dgktjcd"
-					],
-					"_links" : {
-						"items" : {
-							"href" : "api/v1/people?list=collective_bargaining",
+							"href" : "api/v1/people?filter=tag eq 'voterlabs:9538267'"
 						}
 					}
 				}
+				....
 			]
-			 "_links": {
-			 "self": {
-			 "href": "http://osdi-prototype.herokuapp.com/api/v1/tags/children/labor"
-			},
-		      }
-		    }
+		 "\_links": {
+	        "self":{
+	        	"href":"api/v1/tags?page=2&per\_page=5"
+	        	},
+	    	next" : {
+	            "href" : "api/v1/tags?page=3&per\_page=5"
+	            },
+	        "previous" : {
+	            "href" : "api/v1/tags?page=1&per\_page=5"
+	            }
+	        },
+	    }
 	}
 
+## Create a new tag
+### URL
+* POST /api/v1/tags
+### Payload
+	{
+		"name":_string_,
+		"description":_optional string_,
+		"identifiers":[
+			_namespaced identifiers_
+			]
+	}
+### Response
+* 201 Created
+{
+	"name":_string_,
+	"description":_string_,
+	"identifiers":[
+		_namespaced identifiers_
+	],
+	"_links" : {
+		"items" : {
+			"href" : "api/v1/tags/_namespaced identifier_"
+		}
+	}
+}
+
+## Add a tag to a person
+### URL
+* PUT /api/v1/person/tag
+### Payload
+{
+	"person id" : _person id_,
+	"tag id" : _tag id_
+}
+### Response
+* 204 No Content
+
+## Remove a tag from a person
+### URL
+* DELETE /api/v1/person/tag
+### Payload
+{
+	"person id" : _person identifier_,
+	"tag id" : _tag identifier_
+}
+### Response
+* 204 No Content
+
+## Find people with a given tag
+### URL
+* GET api/v1/people?filter=tag eq _tag identifier_
+### Response
+* 200 OK
+{
+	"total_pages": 5,
+	"page": 2,
+	"total_records": 25,
+	"people":[
+		"person": {
+          "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
+        },
+        "person": {
+          "href": "http://osdi-prototype.herokuapp.com/api/v1/people/33"
+        }
+        "person": {
+          "href": "http://osdi-prototype.herokuapp.com/api/v1/people/66"
+        }
+        ....
+	]
+}
