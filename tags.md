@@ -24,6 +24,9 @@ GET /api/v1/tags
 				{
 					"name":"labor",
 					"description":"this person is a labor supporter",
+					"created_at":"2014-01-01 00:00:00",
+					"modified_at":"2014-02-28 11:23:23",
+					"originating_system":"voterlabs",
 					"identifiers":[
 						"voterlabs:987654",
 						"datafarm:poisdfg"
@@ -37,6 +40,9 @@ GET /api/v1/tags
 				{
 					"name":"reproductive rights",
 					"description":"this person supports a right to reproductive choice",
+					"created_at":"2014-01-01 00:00:00",
+					"modified_at":"2014-02-28 11:23:23",
+					"originating_system":"voterlabs",
 					"identifiers":[
 						"voterlabs:9538267"
 					],
@@ -62,6 +68,30 @@ GET /api/v1/tags
 	    }
 	}
 
+## Retrieve a single tag
+### URL
+GET /api/v1/tag/_namespace:id_
+### Response
+200 OK
+
+	{
+		"name":"labor",
+		"description":"this person is a labor supporter",
+		"created_at":"2014-01-01 00:00:00",
+		"modified_at":"2014-02-28 11:23:23",
+		"originating_system":"voterlabs",
+		"identifiers":[
+			"voterlabs:987654",
+			"datafarm:poisdfg"
+		],
+		"_links" : {
+			"items" : {
+				"href" : "api/v1/people?filter=tag eq 'voterlabs:987654'",
+			}
+		}
+	}
+
+
 ## Create a new tag
 ### URL
 POST /api/v1/tags
@@ -70,7 +100,7 @@ POST /api/v1/tags
 		"name":_string_,
 		"description":_optional string_,
 		"identifiers":[
-			_namespaced identifiers_
+			_namespace:id_
 			]
 	}
 ### Response
@@ -80,21 +110,21 @@ POST /api/v1/tags
       "name":_string_,
       "description":_string_,
       "identifiers":[
-        _namespaced identifiers_
+        _namespace:id_
       ],
       "_links" : {
         "items" : {
-          "href" : "api/v1/tags/_namespaced identifier_"
+          "href" : "api/v1/tags/_namespace:id_"
         }
       }
     }
 
 ## Add a tag to a person
 ### URL
-PUT /api/v1/person/_{person id}_tag
+PUT /api/v1/person/tag/_namespace:id_
 ### Payload
     {
-    "tag id" : _tag id_
+    "tag id" : "_namespace:id_"
     }
 ### Response
 204 No Content
@@ -104,15 +134,15 @@ PUT /api/v1/person/_{person id}_tag
 DELETE /api/v1/person/tag
 ### Payload
     {
-    "person id" : _person identifier_,
-    "tag id" : _tag identifier_
+    "person id" : "_namespace:id_",
+    "tag id" : "_namespace:id_"
     }
 ### Response
 204 No Content
 
 ## Find people with a given tag
 ### URL
-GET api/v1/people?filter=tag eq _tag identifier_
+GET api/v1/people?filter=tag eq _namespace:id_
 ### Response
 200 OK
 
@@ -122,13 +152,13 @@ GET api/v1/people?filter=tag eq _tag identifier_
       "total_records": 25,
       "people":[
         "person": {
-              "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
+              "href": "http://osdi-prototype.herokuapp.com/api/v1/people/_namespace:id_"
             },
             "person": {
-              "href": "http://osdi-prototype.herokuapp.com/api/v1/people/33"
+              "href": "http://osdi-prototype.herokuapp.com/api/v1/people/_namespace:id_"
             }
             "person": {
-              "href": "http://osdi-prototype.herokuapp.com/api/v1/people/66"
+              "href": "http://osdi-prototype.herokuapp.com/api/v1/people/_namespace:id_"
             }
             ....
       ]

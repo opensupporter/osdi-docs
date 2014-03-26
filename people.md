@@ -348,16 +348,16 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
               },
               "osdi:addresses": [
                 {
-                  "address1": "7485 Rashad Pine",
-                  "city": "Brandynview",
-                  "state": "PR",
-                  "postal_code": "76221-3163",
-                  "country_code": "US",
-                  "address_type": "Work",
-                  "location" : {
-             		"longitude" : "40.1",
-             		"latitude" : "44.5"4,
-             		"accuracy": "Rooftop"
+                "address1": "7485 Rashad Pine",
+                "city": "Brandynview",
+                "state": "PR",
+                "postal_code": "76221-3163",
+                "country_code": "US",
+                "address_type": "Work",
+                "location" : {
+               		"longitude" : "40.1",
+               		"latitude" : "44.5"4,
+               		"accuracy": "Rooftop"
              		},
                   "address_status": "Verified",
                   "primary": false,
@@ -378,10 +378,10 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
                   "country_code": "JP",
                   "address_type": "Home",
                   "location" : {
-             		"longitude" : "40.1",
-             		"latitude" : "44.5"4,
-             		"accuracy": "Rooftop"
-             		},
+                 		"longitude" : "40.1",
+                 		"latitude" : "44.5"4,
+                 		"accuracy": "Rooftop"
+                 	},
                   "address_status": "Verified",
                   "primary": true,
                   "_links": {
@@ -395,6 +395,32 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
                 }
               ]
             },
+            "osdi:tags": [
+              {
+                "name":"labor",
+                "identifiers":[
+                  "voterlabs:987654",
+                  "datafarm:poisdfg"
+                ],
+                "_links" : {
+                  "items" : {
+                    "href" : "api/v1/people?filter=tag eq 'voterlabs:987654'",
+                  }
+                }
+              },
+              {
+                "name":"reproductive rights",
+                "description":"this person supports a right to reproductive choice",
+                "identifiers":[
+                  "voterlabs:9538267"
+                ],
+                "_links" : {
+                  "items" : {
+                    "href" : "api/v1/people?filter=tag eq 'voterlabs:9538267'"
+                  }
+                }
+              }
+            ]
             "_links": {
                 
               "osdi:addresses": {
