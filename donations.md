@@ -47,44 +47,45 @@
 |fundraising_page|FundraisingPage* |The related fundraising page the donation was taken on 
 
 ## Donation Wire Example
-
-	GET /donations/5
-	{
-	    "identifiers": ["actblue:5"],
-		"created_at": "2013-04-12T20:44:55",
-		"modified_at": "2013-04-12T21:42:34,
-		"originating_system": "ActBlue",
-		"donation_at": "2013-04-12T20:44:55",
-	    "currency": "USD",
-		"amount": 40.00,
-		"credited_amount": 5.00,
-		"credited_at": "2013-04-12T21:42:34,
-	    "voided": false,
-		"voided_at": null,
-		"url": "htts://actblue.com/page/BobsCandidates",
-		"sources": ["email-your-friends"],
-		"attribution": ["JohnSmith", "SusanSmith"],
-		"payment": {
-			"method": "Credit Card",
-			"reference_number": "1232456",
-			"authorization_stored": true
+```javascript
+GET /donations/5
+{
+    "identifiers": ["actblue:5"],
+	"created_at": "2013-04-12T20:44:55",
+	"modified_at": "2013-04-12T21:42:34",
+	"originating_system": "ActBlue",
+	"donation_at": "2013-04-12T20:44:55",
+    "currency": "USD",
+	"amount": 40.00,
+	"credited_amount": 5.00,
+	"credited_at": "2013-04-12T21:42:34",
+    "voided": false,
+	"voided_at": null,
+	"url": "htts://actblue.com/page/BobsCandidates",
+	"sources": ["email-your-friends"],
+	"attribution": ["JohnSmith", "SusanSmith"],
+	"payment": {
+		"method": "Credit Card",
+		"reference_number": "1232456",
+		"authorization_stored": true
+	},
+	"recipients": [
+		{
+			"amount": 25.00,
+			"display_name": "Barack Obama",
+			"legal_name": "Obama for America"
 		},
-		"recipients": [
-			{
-				"amount": 25.00,
-				"display_name": "Barack Obama",
-				"legal_name": "Obama for America"
-			},
-			{
-				"amount": 20.00,
-				"display_name": "Joe Candidate",
-				"legal_name": "Joe for Congress"
-			}
-		],
-	
-	    "_links" : {
-            "_self": "/donations/5",
-			"osdi:donor": "/people/22"
-            "osdi:fundraising_page": "/fundraisingpages/2"
-	    }
-	}
+		{
+			"amount": 20.00,
+			"display_name": "Joe Candidate",
+			"legal_name": "Joe for Congress"
+		}
+	],
+
+    "_links" : {
+    "_self": "/donations/5",
+		"osdi:donor": "/people/22"
+    "osdi:fundraising_page": "/fundraisingpages/2"
+    }
+}
+```
