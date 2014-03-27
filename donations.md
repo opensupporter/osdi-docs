@@ -2,13 +2,15 @@
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |identifiers    |Identifier[] |The OSDI identifiers of this page
+|originating_system	    |string	| Human readable text identifying where this page originated
 |created_at	    |datetime	| Date and Time of creation
 |modified_at	|datetime	| Date and Time of last modification
 |name			|string		|The name of the page
 |title			|string		|The title of the page
+|summary 		|string		|The summary of the page
 |description 	|string		|The description of the page
 |url			|string	 	|The URL of the fundraising page
-|donations_count|int		|Computed value of total donations made to the page
+|total_donations|int		|Computed value of total donations made to the page
 |total_revenue	|decimal	|Computed value of total donation revenue made to this page
 |currency		|string		|ISO 4217 designation of currency. Example: USD, JPY
 |creator		|Person*	|The person representing the creator of the fundraising page
@@ -39,6 +41,7 @@
 |payment.method	|enum		|A flexible enumeration of "Credit Card", "Check", "Cash", "Electronic Funds Transfer"
 |payment.reference_number	|string		|A check number, transaction ID, or some other information referencing the payment
 |payment.authorization_stored	|boolean	|Indicates if payment information has been stored for future automatic payments
+|subscription_instance|string|A sequence number or some other value unique to this instance of the donation in the context of a subscription. Examples: 5, JAN-2014
 |voided			|boolean	|Indicates if the donation has been voided
 |voided_at  	|date		|Date of the void
 |url			|string		|URL at which the donation was taken
@@ -47,8 +50,9 @@
 |fundraising_page|FundraisingPage* |The related fundraising page the donation was taken on 
 
 ## Donation Wire Example
+
 ```javascript
-GET /donations/5
+// GET /donations/5	
 {
     "identifiers": ["actblue:5"],
 	"created_at": "2013-04-12T20:44:55",
@@ -63,7 +67,7 @@ GET /donations/5
 	"voided_at": null,
 	"url": "htts://actblue.com/page/BobsCandidates",
 	"sources": ["email-your-friends"],
-	"attribution": ["JohnSmith", "SusanSmith"],
+	"attributions": ["JohnSmith", "SusanSmith"],
 	"payment": {
 		"method": "Credit Card",
 		"reference_number": "1232456",
@@ -71,7 +75,7 @@ GET /donations/5
 	},
 	"recipients": [
 		{
-			"amount": 25.00,
+			"amount": 20.00,
 			"display_name": "Barack Obama",
 			"legal_name": "Obama for America"
 		},
@@ -83,9 +87,9 @@ GET /donations/5
 	],
 
     "_links" : {
-    "_self": "/donations/5",
+        "_self": "/donations/5",
 		"osdi:donor": "/people/22"
-    "osdi:fundraising_page": "/fundraisingpages/2"
+        "osdi:fundraising_page": "/fundraisingpages/2"
     }
 }
 ```
