@@ -26,14 +26,14 @@ GET /api/v1/tags
 					"description":"this person is a labor supporter",
 					"created_at":"2014-01-01 00:00:00",
 					"modified_at":"2014-02-28 11:23:23",
-					"originating_system":"voterlabs",
+					"originating_system":"Voter Labs",
 					"identifiers":[
 						"voterlabs:987654",
 						"datafarm:poisdfg"
 					],
 					"_links" : {
 						"items" : {
-							"href" : "api/v1/people?filter=tag eq 'voterlabs:987654'",
+							"href" : "api/v1/people/tag/voterlabs:987654",
 						}
 					}
 				},
@@ -42,13 +42,13 @@ GET /api/v1/tags
 					"description":"this person supports a right to reproductive choice",
 					"created_at":"2014-01-01 00:00:00",
 					"modified_at":"2014-02-28 11:23:23",
-					"originating_system":"voterlabs",
+					"originating_system":"Voter Labs",
 					"identifiers":[
 						"voterlabs:9538267"
 					],
 					"_links" : {
 						"items" : {
-							"href" : "api/v1/people?filter=tag eq 'voterlabs:9538267'"
+							"href" : "api/v1/people?/tag/voterlabs:9538267"
 						}
 					}
 				}
@@ -58,7 +58,7 @@ GET /api/v1/tags
 	        "self":{
 	        	"href":"api/v1/tags?page=2&per_page=5"
 	        	},
-	    	next" : {
+	    	"next" : {
 	            "href" : "api/v1/tags?page=3&per_page=5"
 	            },
 	        "previous" : {
@@ -86,7 +86,7 @@ GET /api/v1/tag/_namespace:id_
 		],
 		"_links" : {
 			"items" : {
-				"href" : "api/v1/people?filter=tag eq 'voterlabs:987654'",
+				"href" : "api/v1/people/tag/voterlabs:987654'",
 			}
 		}
 	}
