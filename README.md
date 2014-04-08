@@ -692,4 +692,20 @@ Clients and Providers may use a variety of mechanisms to authenticate and author
 * OAuth and OAuth 2.0
 * OpenID
 
-Future versions of this specification may officially support one or more of these methods, or provide standard ways of implementing these methods, or may in other ways be more specific about security and authentication.
+Future versions of this specification may officially support one or more of these methods, or provide standard ways of implementing various methods, or may in other ways be more specific about security and authentication.
+
+#### Token Based Authentication
+
+While OSDI does not currently mandate implementation of token based authentication, for those that do implement this method of authentication the following standard should be followed. 
+
+For header-based token authentication, the header should be named `OSDI-API-Token` (case sensitive), as in this example:
+
+```
+OSDI-API-Token: [your token here]
+```
+
+For URL query string-based token authentication, the query parameter should be named `osdi-api-token` (case insensitive), as in this example:
+
+```
+https://api.opensupporter.org/api/v1/?osdi-api-token=[your token here]
+```
