@@ -3,6 +3,13 @@
 
 The document outlines the scope of OSDI.  It describes the personas, model areas and scenarios to be addressed
 
+# E2E Scenarios
+## Donations
+![donations](doc/donations.png)
+
+## Events
+![events](doc/events.png)
+
 # Personas
 ## Supporter
 Sam the supporter is an end user.  She visits a campaign website, attends campaign events and receives email updates from the campaign.  She may also volunteer, make donations, sign petitions or take other actions for the campaign.
