@@ -146,9 +146,6 @@ Response
 		"osdi:people_lists": {
 	      "href": "/api/v1/people_lists",
 	    },
-	    "osdi:addresses": {
-	      "href": "/api/v1/addresses",
-	    },
 	    "odsi:questions": {
 	      "href": "http://api.opensupporter.org/api/v1/questions",
 	    },
@@ -175,202 +172,121 @@ Request
 Response
 
     {
-    	  "total_records": 80,
-    	  "total_pages": 16,
-    	  "page" : 2,
-    	  "_links": {
-    		"next" : {
-    			"href" : "http://api.opensupporter.org/api/v1/people?page=3&per_page=5"
-    			},
-    		"previous" : {
-    			"href" : "http://api.opensupporter.org/api/v1/people?page=1&per_page=5"
-    			}
-    		},
-    	  "_embedded": {
-    	    "people": [
-             {
-                "first_name": "Edwin",
-                "last_name": "Labadie",
-                "middle_name": "Marques",
-                "email": "test-3@example.com",
-                "gender": "Male",
-                "gender_identity": "Transgender Male",
-                "party": "Democrat",
-                "source": "sed",
-                "source_details": "Delectus rerum autem mollitia sit asperiores odit hic cum.",
-                "twitter_handle": "@Edwin_Labadie",
-                "guid": "c1d9c510-b562-0130-dc7c-168c51e904de",
-                "_embedded": {
-                  "primary_address": {
-                    "address1": "935 Ed Lock",
-                    "city": "New Dudley",
-                    "state": "MN",
-                    "postal_code": "17678",
-                    "country_code": "RU",
-                    "address_type": "Home",
-                    "location" : {
-             		   "longitude" : "40.1",
-             		   "latitude" : "44.5"4,
-             		   "accuracy": "Rooftop"
-             		 },
-                    "address_status": "Verified",
-                    "primary": true,
-                    "_links": {
-                      "self": {
-                        "href": "http://api.opensupporter.org/api/v1/addresses/46"
-                      },
-                      "person": {
-                        "href": "http://api.opensupporter.org/api/v1/people/23"
-                      }
-                    }
-                  },
-                  "addresses": [
-                    {
-                      "address1": "28160 Wiegand Divide",
-                      "city": "Lake Amarimouth",
-                      "state": "GA",
-                      "postal_code": "27585-7257",
-                      "country_code": "US",
-                      "address_type": "Work",
-                      "location" : {
-             		      "longitude" : "40.1",
-             		      "latitude" : "44.5"4,
-             		      "accuracy": "Rooftop"
-             		   },
-                      "address_status": "Verified",
-                      "primary": false,
-                      "_links": {
-                        "self": {
-                          "href": "http://api.opensupporter.org/api/v1/addresses/45"
-                        },
-                        "person": {
-                          "href": "http://api.opensupporter.org/api/v1/people/23"
-                        }
-                      }
-                    },
-                    {
-                      "address1": "935 Ed Lock",
-                      "city": "New Dudley",
-                      "state": "MN",
-                      "postal_code": "17678",
-                      "country_code": "RU",
-                      "address_type": "Home",
-                      "location" : {
-             		      "longitude" : "40.1",
-             		      "latitude" : "44.5"4,
-             		      "accuracy": "Rooftop"
-             		   },
-                      "address_status": "Verified",
-                      "primary": true,
-                      "_links": {
-                        "self": {
-                          "href": "http://api.opensupporter.org/api/v1/addresses/46"
-                        },
-                        "person": {
-                          "href": "http://api.opensupporter.org/api/v1/people/23"
-                        }
-                      }
-                    }
-                  ]
-                },
-                "_links": {
-                  "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-                  "osdi:addresses": {
-                    "href": "http://api.opensupporter.org/api/v1/people/23/addresses"
-                  },
-                  "osdi:question_answers": {
-                    "href": "http://api.opensupporter.org/api/v1/people/23/question_answers"
-                  },
-                  "self": {
-                    "href": "http://api.opensupporter.org/api/v1/people/23"
-                  }
-                }
-              }
-            .... other person records follow
-           }
-        }
+		"total_records": 80,
+		"total_pages": 16,
+		"page" : 2,
+		"_links": {
+			"next" : {
+				"href" : "http://api.opensupporter.org/api/v1/people?page=3&per_page=5"
+			},
+			"previous" : {
+				"href" : "http://api.opensupporter.org/api/v1/people?page=1&per_page=5"
+			}
+		},
+		"people": [
+			{
+				"family_name": "Edwin",
+				"given_name": "Labadie",
+				"additional_name": "Marques",
+				"identifiers": [
+					"osdi:23"
+				],
+				"email_addresses": [
+					{
+						"address":"test-3@example.com",
+						"primary": true,
+						"address_type": "Personal"
+					}
+				],
+				"phone_numbers": [
+					{
+						"primary": true,
+						"number": 19876543210,
+						"number_type": "Mobile",
+						"sms_capable": true
+					}
+				],
+				"gender": "Male",
+				"gender_identity": "Male",
+				"party_identification": "Democrat",
+				"source": "sed",
+				"ethnicity": "Caucasian",
+				"profiles": [
+					{
+						"provider": "Twitter",
+						"id": "Edwin_Labadie",
+						"url": "http://twitter.com/Edwin_Labadie",
+						"handle": "Edwin_Labadie"
+					  }
+				],
+				"birth_date" : {
+					"month" : 1,
+					"day" : 1,
+					"year" : 1970
+				},
+				"postal_addresses": [
+					{
+						"primary": true,
+						"address_lines": [
+							"935 Ed Lock"
+						],
+						"locality": "New Dudley",
+						"region": "MN",
+						"postal_code": "17678",
+						"country": "RU",
+						"address_type": "Home",
+						"location" : {
+							"longitude" : "40.1",
+							"latitude" : "44.5",
+							"accuracy": "Rooftop"
+						},
+						"status": "Verified"
+					},
+					{
+						"address_lines": [
+							"28160 Wiegand Divide"
+						],
+						"locality": "Lake Amarimouth",
+						"region": "GA",
+						"postal_code": "27585-7257",
+						"country": "US",
+						"address_type": "Work",
+						"location" : {
+							"longitude" : "40.1",
+							"latitude" : "44.5",
+							"accuracy": "Rooftop"
+						},
+						"status": "Verified",
+						"primary": false
+					}
+				],
+				"_links": {
+					"curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
+					"osdi:question_answers": {
+						"href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/question_answers"
+					},
+					"self": {
+						"href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
+					}
+				}
+			}
+		], 
+		
+		.... other person records follow
+	}
 
 
 In the last example message, the server returns a list of people.  For brevity this document only shows the first one.  Within each person object, there is also a "_links" collection just like in the AEP.  This will show up in most objects in OSDI.  The links collection lets the client know what other resources and resource collections are associated with a given object.
 
-In this example, the link shown is "osdi:addresses".  The href attribute of the "osdi:addresses" link contains the URI of the address collection *for this person*.
+In this example, the link shown is "osdi:question_answers".  The href attribute of the "osdi:question_answers" link contains the URI of the address collection *for this person*.
 
      "_links": {
           "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],         
-          "osdi:addresses": {
-            "href": "http://api.opensupporter.org/api/v1/people/23/addresses"
+          "osdi:question_answers": {
+            "href": "http://api.opensupporter.org/api/v1/people/23/question_answers"
           }
 
-A client can send a GET request to this URI to retrieve a list of addresses associated with this person.
-
-
-    GET /api/v1/people/23/addresses
-
-    200 OK
-    Content-Type: application/json
-
-    {
-      "total_pages": 1,
-      "page": 1,
-      "total_records": 2,
-      "_embedded": {
-        "addresses": [
-          {
-            "address1": "28160 Wiegand Divide",
-            "city": "Lake Amarimouth",
-            "state": "GA",
-            "postal_code": "27585-7257",
-            "country_code": "US",
-            "address_type": "Work",
-            "location" : {
-               "longitude" : "40.1",
-             	"latitude" : "44.5"4,
-             	"accuracy": "Rooftop"
-             },
-            "address_status": "Verified",
-            "primary": false,
-            "_links": {
-              "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-              "self": {
-                "href": "http://api.opensupporter.org/api/v1/addresses/45"
-              },
-              "osdi:person": {
-                "href": "http://api.opensupporter.org/api/v1/people/23"
-              }
-            }
-          },
-          {
-            "address1": "935 Ed Lock",
-            "city": "New Dudley",
-            "state": "MN",
-            "postal_code": "17678",
-            "country_code": "RU",
-            "address_type": "Home",
-            "location" : {
-             	"longitude" : "40.1",
-             	"latitude" : "44.5"4,
-             	"accuracy": "Rooftop"
-             },
-            "address_status": "Verified",
-            "primary": true,
-            "_links": {
-              "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-              "self": {
-                "href": "http://api.opensupporter.org/api/v1/addresses/46"
-              },
-              "osdi:person": {
-                "href": "http://api.opensupporter.org/api/v1/people/23"
-              }
-            }
-          }
-        ]
-      },
-      "_links": {
-        "self": {
-          "href": "http://api.opensupporter.org/api/v1/addresses"
-        }
-      }
-    }
+A client can send a GET request to this URI to retrieve a list of question answers associated with this person.
 
 Note that this pattern can be applied to other associated collections including but not limited to donations or question_answers.
 
@@ -387,10 +303,7 @@ You may have noticed that most links are prefaced with a name space "osdi" and t
     "_links": {
       "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
       "self": {
-        "href": "http://api.opensupporter.org/api/v1/addresses/46"
-      },
-      "osdi:people_lists": {
-        "href": "http://api.opensupporter.org/api/v1/people_lists"
+        "href": "http://api.opensupporter.org/api/v1/question_answers/46"
       },
       "osdi:find": {
         "href": "http://api.opensupporter.org/api/v1/people?$filter={odata_query}",
@@ -398,7 +311,7 @@ You may have noticed that most links are prefaced with a name space "osdi" and t
       }
     }
     
-In order to fetch documentation on the people_lists relationship, I would visit the following url: "http://api.opensupporter.org/docs/v1/people_lists"
+In order to fetch documentation on the question_answers relationship, I would visit the following url: "http://api.opensupporter.org/docs/v1/question_answers"
 
 Any links not prefaced with a curie name space are defined here (http://www.iana.org/assignments/link-relations/link-relations.xml).
 
@@ -410,10 +323,7 @@ Vendors who add their own vendor-specific relationships must defined their own c
         { "name": "fb", "href": "http://facebook.com/docs/v1/{rel}", "templated": true }
       ],
       "self": {
-        "href": "http://api.opensupporter.org/api/v1/addresses/46"
-      },
-      "osdi:people_lists": {
-        "href": "http://api.opensupporter.org/api/v1/people_lists"
+        "href": "http://api.opensupporter.org/api/v1/question_answers/46"
       },
       "osdi:find": {
         "href": "http://api.opensupporter.org/api/v1/people?$filter={odata_query}",
