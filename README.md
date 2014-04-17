@@ -20,6 +20,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Beth Becker, Indigo Strategies
 * Jeff Crigler, Catalist
 * Josh Cohen, Washington United For Marriage (Editor)
+* Gustavo Costa, The Action Network
 * Michael Eskin, Blue State Digital
 * Jascha Franklin-Hodge, Blue State Digital
 * Tim Gutowski, Trilogy Interactive
@@ -33,7 +34,6 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Charles Parsons, Salsa Labs
 * Rich Ranallo, Revolution Messaging
 * Jason Rosenbaum, The Action Network
-* Gustavo Costa, The Action Network
 * Ben Stein, Mobile Commons
 * Ray Suelzer, UFCW International Union
 * Brian Vallelunga, Trilogy Interactive (Editor)
