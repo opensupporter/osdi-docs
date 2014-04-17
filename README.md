@@ -77,7 +77,7 @@ OSDI Compliant endpoints achieve this through the following capabilities
 ### RESTful Reading of Data (rest-read)
 Reading of data, or querying resources, is done via traditional REST and Hypermedia practices.  OSDI uses HAL for hypermedia and OData query language to give a rich and flexible way to express queries
 
-### Actions (actions)
+### Helpers
 OSDI also allows a client to perform actions, sometimes known as scenarios or methods, when the scenario is 'action oriented' vs 'data oriented' such as singing up a supporter, recording a donation, or rsvping for an event.
 
 Certain common actions have been specifically defined to include any needed semantics to allow a client to perform an action in a single HTTP request/response.
@@ -106,11 +106,6 @@ In order to determine the available resources on the server the client should pe
 
 Within the response will be a collection of links to the resource collections available on the server.
 
-### Capabilities
-Implementations of OSDI may differ in support of certain semantic capabilities.  Implementations may also define extensions to the OSDI specification.  A client may determine which capabilities are supported on a server by examining the "capabilities" hash inside of the AEP.
-
-Some capabilities may be advertised merely by the presence of a boolean key, others may have complex hash structures indicating capability specific parameters.
-
 ### Example
 
 Request
@@ -125,27 +120,17 @@ Response
 
 	{
 	  "motd": "Welcome to the ACME Action Platform OSDI API endpoint!!",
-	  "capabilities" : {
-		"osdi:rest-read" : true,
-		"osdi:actions" : true,
-		"osdi:rest-write" : true,
-		"acme:defeat_opponent": {								"modes" : [
-				"landslide", "nailbiter"
-			]
-		},
-	
-
 	  "_links": {
 	    "curies": [
 			{"name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true },
 			{"name": "acme", "href": "http://acme.foo/"}
 		],  
-	    "osdi:people": {
-	      "href": "/api/v1/people",
-	    },
-		"osdi:people_lists": {
-	      "href": "/api/v1/people_lists",
-	    },
+  	  "osdi:people": {
+  	      "href": "/api/v1/people",
+  	    },
+  		"osdi:people_lists": {
+  	      "href": "/api/v1/people_lists",
+  	  },
 	    "odsi:questions": {
 	      "href": "http://api.opensupporter.org/api/v1/questions",
 	    },
@@ -340,144 +325,7 @@ I would then construct an odata_query and substitute the odata_query variable wi
 
 "http://api.opensupporter.org/api/v1/people?$filter={odata_query}", would become "http://api.opensupporter.org/api/v1/people?$filter=name eq 'bob'", for more information on odata queries see http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter.
 
-## Actions
-Most actions are operations which combine:
-1) Matching or locating a Person resource
-2) Creating an associated resource like Donation, Event RSVP, or Q&A response
-
-````javascript
-{
-	"person_match" : {
-		// matching attributes
-	},
-	"<resource>" : {
-		// attributes for the newly created resource
-	}
-}
-````
-### Match
-
-In order to perform that matching function, a common "person_match" element is defined.  This element contains atributes from person.  By convention, attributes that would be arrays or sub-resources are included inline.
-
-This match element is then included in the action along with the action specific attributes.
-
-When receiving a person_match element, a server shall make a best effort to match to a single existing person.  In the event that a confident match cannot be made, the server shall either create a new person or fail, according to the options specified.
-
-If the __upsert__ query parameter is present and sent to false, then the server will always create a new person resource.
-
-````javascript
-"person_match": {
-	"given_name" : "Testy",
-	"family_name" : "McTesterson",
-	"address1" : "124 Foobarrio St",
-	"postal_code" : "99999",
-	"email_address" : "testy@example.com"
-	"identifiers" : [ "voterlabs:1234" ]
-	"options" : {
-		"update" : true, // update the matched person with included info (true) or use only for matching (false)
-		}
-}
-
-````
-"person_match_response"
-After processing an action, the server shall send back a response including a "person_match_response" element.  This element contains status information regarding the match attempt.
-
-````javascript
-"person_match_response" : {
-	"result" : "matched" | "created",
-	"href" : "http://url/to/matched/or/created/person"
-	"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
-}
-````
-
-### Action
-An action 
-
-#### Recording a Donation
-The record_donation is a top level action.  The URL endpoint can be found in the AEP.
-
-````javascript
-POST /api/v1/urltoaction/record_donation
-
-{
-	"person_match": {
-		"given_name" : "Testy",
-		"family_name" : "McTesterson",
-		"address1" : "124 Foobarrio St",
-		"postal_code" : "99999",
-		"email_address" : "testy@example.com"
-		"identifiers" : [ "voterlabs:1234" ]
-		"options" : {
-			"update" : true, // update the matched person with
-			 //included info (true) or use only for matching 
-			//(false)
-			}
-	},
-	"donation_date" : "2013-11-19T08:37:48-0600",
-	"amount" : 50.00,
-	"currency" : "USD",
-}
-
-201 Created
-Content-Type: application/json
-
-{
-	"person_match_response" : {
-		"result" : "created",
-		"href" : "http://url/to/matched/or/created/person"
-		"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
-	},
-	"donation_date" : "2013-11-19T08:37:48-0600",
-	"amount" : 50.00,
-	"currency" : "USD",
-	// continuation of donation resource attributes
-	"_links" : {
-		"self" : { "href" : "http://link/to/this/new/donation"},
-		"person" : { "href" : "http://link/to/associated/person"}
-	}
-}
-````
-
-###Event RSVP
-In order to simplify event signups, OSDI provides the event_signup action.  The event_signup endpoint is event specific.  It is returned within a specific event's representation.  It is expected that the client has this information in advance of the action.
-
-````javascript
-POST /api/v1/event_url/blah/blah/attendance_create
-
-{
-	"person_match": {
-		"email_address" : "testy@example.com"
-		"identifiers" : [ "voterlabs:1234" ]
-		"options" : {
-			"update" : false, // update the matched person with
-			// included info (true) or use only for
-			// matching (false)
-			}
-	},
-	"status" : "accepted",
-	"comment" : "1 phone bank == 5.3 votes!"
-}
-
-201 Created
-Content-Type: application/json
-
-{
-	"person_match_response" : {
-		"result" : "matched" ,
-		"href" : "http://url/to/matched/or/created/person"
-		"identitifiers" : [ "voterlabs:1234", "acme:3516516" ]
-	},
-	"status" : "accepted",
-	"comment" : "1 phone bank == 5.3 votes!"
-	// continuation of donation resource attributes
-	
-	"_links" : {
-		"self" : { "href" : "http://link/to/this/new/donation"},
-		"person" : { "href" : "http://link/to/associated/person"}
-	}
-}
-
-````
+## Helpers (TBD)
 
 ## Writing Data (rest-write)
 RESful writing, or updating of data is done via common RESTful (CRUD) operations
