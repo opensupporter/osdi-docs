@@ -72,8 +72,7 @@ Custom fields are arbitrary key/value pairs associated with the person. They are
 
 | Name          | Type      | Description
 |----------------|-----------|----------------
-| [key]		| string	| The key associated with this custom field. May be namespaced similar to identifiers to prevent collision across systems.
-| [value]			| string	| The value associated with the key.
+| [key]		| string	| The key associated with this custom field, with a corresponding value as a string. May be namespaced similar to identifiers to prevent collision across systems.
 
 
 # Postal Address
