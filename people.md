@@ -25,6 +25,7 @@
 |email_addresses         |EmailAddress[]    |A collection of email addresses associated with the person
 |phone_numbers         |PhoneNumber[]	|A collection of phone numbers associated with the person
 |profiles		| Profile[]	| A collection of profiles for online services
+|custom_fields		| CustomFields[]	| A collection of key/value pairs associated with the person
 
 ## Resource Collections (post developer preview)
 | Name          | Type      | Description
@@ -64,6 +65,15 @@ Profiles correspond to a person's accounts on online services like Facebook, Twi
 | id			| string	| The unique identifier provided by the provider, eg "135165"
 | url			| string	| The URL to the user's web viewable profile, eg "http://facebook.com/johnqpublic"
 | handle		| string	| The handle name, eg "johnqpublic." Twitter handles should not include the "@"
+
+
+# Custom Fields
+Custom fields are arbitrary key/value pairs associated with the person. They are designed to be a more flexible and lightweight version of [Survey Questions and Answers](questions.md).
+
+| Name          | Type      | Description
+|----------------|-----------|----------------
+| [key]		| string	| The key associated with this custom field. May be namespaced similar to identifiers to prevent collision across systems.
+| [value]			| string	| The value associated with the key.
 
 
 # Postal Address
@@ -210,6 +220,12 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
             "source": "sed",
             "source_details": "Delectus rerum autem mollitia sit asperiores odit hic cum.",
             "twitter_handle": "@Edwin_Labadie",
+            "custom_fields": {
+	            "system_one:volunteer": "true",
+	            "system_one:team_captain": "true",
+	            "system_two:manager": "Marcus Notting",
+	            "suppression_list": "1"
+            },
             "guid": "c1d9c510-b562-0130-dc7c-168c51e904de",
 			"birth_date" : {
 				"month" : 1,
@@ -315,6 +331,10 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
             "party": "Democrat",
             "source": "architecto",
             "source_details": "Itaque et reprehenderit rerum ea quis.",
+            "custom_fields": {
+	            "system_one:volunteer": "true",
+	            "suppression_list": "0"
+            },
             "twitter_handle": "@Parker_Walker",
             "guid": "c1e1d0d0-b562-0130-dc7c-168c51e904de",
 			"birth_date" : {
