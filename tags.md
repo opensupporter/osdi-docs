@@ -6,160 +6,125 @@ Tags are binary pieces of information that apply to individual people.
 |---	|---	|---
 |name	|string	|name of tag
 |description	|string	|plaintext meaning of the tag
-|identifiers	|identifier[]	|An array of identifiers the provider has determined to be associated with the tag
 
 # Scenarios
-## Get the list of tags
-### URL
-GET /api/v1/tags
-### Response
-200 OK
-
-	{
-	"total_pages": 5,
-	"page": 2,
-	"total_records": 25,
-	"_embedded": {
-		"tags": [
-				{
-					"name":"labor",
-					"description":"this person is a labor supporter",
-					"created_at":"2014-01-01 00:00:00",
-					"modified_at":"2014-02-28 11:23:23",
-					"originating_system":"Voter Labs",
-					"identifiers":[
-						"voterlabs:987654",
-						"datafarm:poisdfg"
-					],
-					"_links" : {
-						"items" : {
-							"href" : "api/v1/people/tag/voterlabs:987654",
-						}
-					}
-				},
-				{
-					"name":"reproductive rights",
-					"description":"this person supports a right to reproductive choice",
-					"created_at":"2014-01-01 00:00:00",
-					"modified_at":"2014-02-28 11:23:23",
-					"originating_system":"Voter Labs",
-					"identifiers":[
-						"voterlabs:9538267"
-					],
-					"_links" : {
-						"items" : {
-							"href" : "api/v1/people?/tag/voterlabs:9538267"
-						}
-					}
-				}
-				....
-			]
-		 "_links": {
-	        "self":{
-	        	"href":"api/v1/tags?page=2&per_page=5"
-	        	},
-	    	"next" : {
-	            "href" : "api/v1/tags?page=3&per_page=5"
-	            },
-	        "previous" : {
-	            "href" : "api/v1/tags?page=1&per_page=5"
-	            }
-	        },
-	    }
-	}
-
-## Retrieve a single tag
-### URL
-GET /api/v1/tag/_namespace:id_
-### Response
-200 OK
-
-	{
-		"name":"labor",
-		"description":"this person is a labor supporter",
-		"created_at":"2014-01-01 00:00:00",
-		"modified_at":"2014-02-28 11:23:23",
-		"originating_system":"voterlabs",
-		"identifiers":[
-			"voterlabs:987654",
-			"datafarm:poisdfg"
-		],
-		"_links" : {
-			"items" : {
-				"href" : "api/v1/people/tag/voterlabs:987654'",
-			}
-		}
-	}
-
-
 ## Create a new tag
-### URL
-POST /api/v1/tags
-### Payload
-	{
-		"name":_string_,
-		"description":_optional string_,
-		"identifiers":[
-			_namespace:id_
-			]
-	}
-### Response
-201 Created
+To create a tag, send a json document containing the tag name and description
 
-    {
-      "name":_string_,
-      "description":_string_,
-      "identifiers":[
-        _namespace:id_
-      ],
-      "_links" : {
-        "items" : {
-          "href" : "api/v1/tags/_namespace:id_"
+Request
+
+> curl -X POST -d @tagcreate.json http://api.opensupporter.org/api/v1/tags
+
+````
+/* tagcreate.json */
+{
+     "name" : "acme-team",
+     "description" : "Indicates a member of the acme team"
+}
+````
+
+Response
+
+````
+{
+  "name": "acme-team",
+  "description": "Indicates a member of the acme team",
+  "updated_at": "2014-04-18T19:15:31Z",
+  "created_at": "2014-04-18T19:15:31Z",
+  "_embedded": {
+  },
+  "_links": {
+    "self": {
+      "href": "http://api.opensupporter.org/api/v1/tags/8"
+    }
+  }
+}
+````
+
+## Finding a tag reference for use in tagging by using odata query
+
+> curl -v -G --data-urlencode "filter=name eq 'acme-team'" "http://localhost:3000/api/v1/tags"
+
+Response
+````
+{
+  "per_page": 1,
+  "page": 1,
+  "total_records": 1,
+  "_embedded": {
+    "osdi:tags": [
+      {
+        "name": "acme-team",
+        "description": "Indicates a member of the acme team",
+        "updated_at": "2014-04-18T19:15:31Z",
+        "created_at": "2014-04-18T19:15:31Z",
+        "_embedded": {
+        },
+        "_links": {
+          "self": {
+            "href": "http://api.opensupporter.org/api/v1/tags/8"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "http://api.opensupporter.org/api/v1/tags"
+    }
+  }
+}
+````
+
+## Add a tagging
+Lets tag a user with the new tag
+User: Martha Stewart, url: http://api.opensupporter.org/api/v1/people/69/taggings
+
+> curl -X POST -d @../taggingcreate.json http://api.opensupporter.org/api/v1/people/69/taggings
+
+
+Request
+````
+{
+     "_links" : {
+          "osdi:tag" : {
+               "href" : "http://api.opensupporter.org/api/v1/tags/8"
+          }
+     }
+}
+````
+
+Response
+
+````
+{
+  "updated_at": "2014-04-18T20:01:13Z",
+  "created_at": "2014-04-18T20:01:13Z",
+  "_embedded": {
+    "osdi:tag": {
+      "name": "acme-team",
+      "description": "Indicates a member of the acme team",
+      "updated_at": "2014-04-18T19:15:31Z",
+      "created_at": "2014-04-18T19:15:31Z",
+      "_embedded": {
+      },
+      "_links": {
+        "self": {
+          "href": "http://api.opensupporter.org/api/v1/tags/8"
         }
       }
     }
-
-## Add a tag to a person
-### URL
-PUT /api/v1/person/tag/_namespace:id_
-### Payload
-    {
-    "tag id" : "_namespace:id_"
+  },
+  "_links": {
+    "self": {
+      "href": "http://api.opensupporter.org/api/v1/taggings/5"
+    },
+    "osdi:tag": {
+      "href": "http://api.opensupporter.org/api/v1/tags/8"
+    },
+    "osdi:person": {
+      "href": "http://api.opensupporter.org/api/v1/people/69"
     }
-### Response
-204 No Content
-
-## Remove a tag from a person
-### URL
-DELETE /api/v1/person/tag
-### Payload
-    {
-    "person id" : "_namespace:id_",
-    "tag id" : "_namespace:id_"
-    }
-### Response
-204 No Content
-
-## Find people with a given tag
-### URL
-GET api/v1/people?filter=tag eq _namespace:id_
-### Response
-200 OK
-
-    {
-      "total_pages": 5,
-      "page": 2,
-      "total_records": 25,
-      "people":[
-        "person": {
-              "href": "http://osdi-prototype.herokuapp.com/api/v1/people/_namespace:id_"
-            },
-            "person": {
-              "href": "http://osdi-prototype.herokuapp.com/api/v1/people/_namespace:id_"
-            }
-            "person": {
-              "href": "http://osdi-prototype.herokuapp.com/api/v1/people/_namespace:id_"
-            }
-            ....
-      ]
-    }
+  }
+}
+````
