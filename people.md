@@ -186,6 +186,111 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
 > JSON respresenations below are provided as an informative reflection of what the wire format would look like.  
 > The tables above are the authoritative specification of the attributes.  Any discrepancy should defer to the above tables.
 
+## Person Signup Helper
+The Person Signup Helper provides a simple method for adding a new person to a collection.  It also supports adding tags and list membership info.
+
+The Person Signup helper can be determined in the AEP with the "osdi:person_signup_helper" link relation
+
+The response to a Person Signup Helper is the full representation of the person.
+
+Some initial implementations may only support helpers, direct RESTful access may not be supporter.  In those cases,_links may be omitted in responses.
+
+### Parameters
+The Person Signup Helper takes the following parameters in its body
+* Inlined Person - Any fields in a person resource are valid in the input representation
+* osdi:add_tags - a collection of tag names
+* osdi:add_lists - an array of list names
+
+### Example
+
+#### Request
+````
+POST /api/v1/person_signup_helper
+
+{
+	"family_name": "Edwin",
+	"given_name": "Labadie",
+	"additional_name": "Marques",
+	"email_addresses": [
+		{
+			"address":"test-3@example.com",
+			"primary": true,
+			"address_type": "Personal"
+		}
+	],
+	"postal_addresses": [
+		{
+			"primary": true,
+			"address_lines": [
+				"935 Ed Lock"
+			],
+			"locality": "New Dudley",
+			"region": "MN",
+			"postal_code": "17678",
+			"country": "RU",
+			"address_type": "Home",
+			"status": "Verified"
+		},
+	"phone_numbers": [
+		{
+			"primary": true,
+			"number": 19876543210,
+			"number_type": "Mobile",
+			"sms_capable": true
+		}
+	],
+	"gender": "Male",
+	"osdi:add_tags" : [ "volunteer", "donor" ],
+	"osdi:add_lists" : [ "supporters" ]
+}
+
+````
+#### Response
+````
+200 OK
+
+{
+	"family_name": "Edwin",
+	"given_name": "Labadie",
+	"additional_name": "Marques",
+	"email_addresses": [
+		{
+			"address":"test-3@example.com",
+			"primary": true,
+			"address_type": "Personal"
+		}
+	],
+	"postal_addresses": [
+		{
+			"primary": true,
+			"address_lines": [
+				"935 Ed Lock"
+			],
+			"locality": "New Dudley",
+			"region": "MN",
+			"postal_code": "17678",
+			"country": "RU",
+			"address_type": "Home",
+			"status": "Verified"
+		},
+	"phone_numbers": [
+		{
+			"primary": true,
+			"number": 19876543210,
+			"number_type": "Mobile",
+			"sms_capable": true
+		}
+	],
+	"gender": "Male",
+	"_embedded" : {
+		"osdi:taggings" : { .... }
+		"osdi:lists" : { .... }
+	}
+}
+
+````
+
+
 ## Get a list of people with pagination
 
     GET /api/v1/people?per_page=2&page=1
