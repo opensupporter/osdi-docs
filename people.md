@@ -284,7 +284,7 @@ POST /api/v1/person_signup_helper
 	"gender": "Male",
 	"_embedded" : {
 		"osdi:taggings" : { .... }
-		"osdi:lists" : { .... }
+		"osdi:items" : { .... }
 	}
 }
 
