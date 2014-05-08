@@ -282,6 +282,10 @@ POST /api/v1/person_signup_helper
 		}
 	],
 	"gender": "Male",
+	"_links" : {
+		"self" : {
+			"href": "http://foo/bar/people/44",
+			},
 	"_embedded" : {
 		"osdi:taggings" : { .... }
 		"osdi:items" : { .... }
