@@ -198,8 +198,8 @@ Some initial implementations may only support helpers, direct RESTful access may
 ### Parameters
 The Person Signup Helper takes the following parameters in its body
 * Inlined Person - Any fields in a person resource are valid in the input representation
-* osdi:add_tags - a collection of tag names
-* osdi:add_lists - an array of list names
+* add_tags - a collection of tag names
+* add_lists - an array of list names
 
 ### Example
 
@@ -240,8 +240,8 @@ POST /api/v1/person_signup_helper
 		}
 	],
 	"gender": "Male",
-	"osdi:add_tags" : [ "volunteer", "donor" ],
-	"osdi:add_lists" : [ "supporters" ]
+	"add_tags" : [ "volunteer", "donor" ],
+	"add_lists" : [ "supporters" ]
 }
 
 ````
