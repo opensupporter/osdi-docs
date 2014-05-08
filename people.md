@@ -240,6 +240,7 @@ POST /api/v1/person_signup_helper
 		}
 	],
 	"gender": "Male",
+	... other Person attributes ...,
 	"add_tags" : [ "volunteer", "donor" ],
 	"add_lists" : [ "supporters" ]
 }
