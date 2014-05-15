@@ -11,15 +11,15 @@ This page defines Events, EventRSVPS
 |			|			| "confirmed" The Event is confirmed (Default)
 |			|			| "tentative"
 |			|			| "cancelled"
-| created	| datetime	| Date and Time of creation
-| updated	| datetime	| Date and Time of update
+| created_date	| datetime	| Date and Time of creation
+| modified_date	| datetime	| Date and Time of update
 | summary	| string	| title / summary of event
 | description| string	| description of the event
 | location	| Address	| A single instance of Address representing the location of the event
-| creator	| Person	| A single instance of Person representing the creator of the event
-| organizer | Person	| A single instance of Person representing the organizer of the event
-| start		| datetime	| start time for the event
-| end		| datetime	| end time for the event
+| creator	| Person*	| A single instance of Person representing the creator of the event
+| organizer | Person*	| A single instance of Person representing the organizer of the event
+| start_date		| datetime	| start time for the event
+| end_date		| datetime	| end time for the event
 | all_day_date| date	| date only for all day events
 | all_day	| boolean	| true if the event is an all day event
 | recurrence| TBD		| TBD
@@ -29,7 +29,7 @@ This page defines Events, EventRSVPS
 | visibility| string	| Visibility of the event.  Possible values are
 |			|			| "public" visible on public web interfaces
 |			|			| "private" not visible on public web interfaces
-| attendees	| Attendance[]| A Collection of Attendance resources
+| attendees	| Attendance[]*| A Collection of Attendance resources
 | guestsCanInviteOthers | boolean | Attendees can invite guests to the event
 | reminders | list		| a list of reminder elements
 | .method	| string	| "email", "sms"
@@ -68,8 +68,8 @@ If guest information (such as name, etc) is not given, then the person resource 
 	{
 	  "id": string,
 	  "status": string,
-	  "created": datetime,
-	  "updated": datetime,
+	  "created_date": datetime,
+	  "modified_date": datetime,
 	  "summary": string,
 	  "description": string,
 	  "_embedded" : {
@@ -124,8 +124,8 @@ If guest information (such as name, etc) is not given, then the person resource 
 		             ...
 		          },
 			},
-	  "start": datetime,
-	  "end" : datetime,
+	  "start_date": datetime,
+	  "end_date" : datetime,
       "all_day" : boolean,
       "all_day_date" : date,
 
