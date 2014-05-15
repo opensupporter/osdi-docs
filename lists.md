@@ -16,7 +16,7 @@ A list is a resource type that contains list metadata as well as a link to the i
 ## Collections
 | Name          | Type      | Description
 |-----------    |-----------|--------------
-| items			| Type[]	|A collection of items in the list 
+| items			| Type[]*	|A collection of items in the list 
 
 # Scenarios
 ## Get the list of lists

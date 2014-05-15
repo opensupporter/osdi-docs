@@ -3,8 +3,8 @@
 |-----------    |-----------|--------------
 |identifiers    |Identifier[] |The OSDI identifiers of this page
 |originating_system	    |string	| Human readable text identifying where this page originated
-|created_at	    |datetime	| Date and Time of creation
-|modified_at	|datetime	| Date and Time of last modification
+|created_date	    |datetime	| Date and Time of creation
+|modified_date	|datetime	| Date and Time of last modification
 |name			|string		|The name of the page
 |title			|string		|The title of the page
 |summary 		|string		|The summary of the page
@@ -14,7 +14,7 @@
 |total_revenue	|decimal	|Computed value of total donation revenue made to this page
 |currency		|string		|ISO 4217 designation of currency. Example: USD, JPY
 |creator		|Person*	|The person representing the creator of the fundraising page
-|donations		|Donation[] |Collection of donations made from this page
+|donations		|Donation[]* |Collection of donations made from this page
 
 # Recipient : ComplexType
 | Name          | Type      | Description
@@ -27,14 +27,14 @@
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |identifiers    |Identifier[] |The OSDI identifiers of this donation
-|created_at	    |datetime	| Date and Time of creation
-|modified_at	|datetime	| Date and Time of last modification
+|created_date	    |datetime	| Date and Time of creation
+|modified_date	|datetime	| Date and Time of last modification
 |originating_system			|string		|The original donation system. Example: ActBlue
 |donor			|Person*    |Donor data collected at the time of donation
-|donated_at  |date     	|Date of the donation
+|donated_date  |date     	|Date of the donation
 |amount         |number		|Amount of total donation (after any credits) in specified currency
 |credited_amount|number		|Amount credited back to donor in specified currency
-|credited_at	|datetime	|Date of the credit
+|credited_date	|datetime	|Date of the credit
 |currency		|string		|ISO 4217 designation of currency. Example: USD, JPY
 |recipients		|Recipient[]|Array of recipients associated with the donation
 |payment		|hash		|A hash of payment details
@@ -43,7 +43,7 @@
 |payment.authorization_stored	|boolean	|Indicates if payment information has been stored for future automatic payments
 |subscription_instance|string|A sequence number or some other value unique to this instance of the donation in the context of a subscription. Examples: 5, JAN-2014
 |voided			|boolean	|Indicates if the donation has been voided
-|voided_at  	|date		|Date of the void
+|voided_date  	|date		|Date of the void
 |url			|string		|URL at which the donation was taken
 |sources		|string[]   |Array of sources associated with the donation
 |attributions	|string[]   |Array of attributions associated with the donation
@@ -55,16 +55,16 @@
 // GET /donations/5	
 {
     "identifiers": ["actblue:5"],
-	"created_at": "2013-04-12T20:44:55",
-	"modified_at": "2013-04-12T21:42:34",
+	"created_date": "2013-04-12T20:44:55",
+	"modified_date": "2013-04-12T21:42:34",
 	"originating_system": "ActBlue",
-	"donation_at": "2013-04-12T20:44:55",
+	"donation_date": "2013-04-12T20:44:55",
     "currency": "USD",
 	"amount": 40.00,
 	"credited_amount": 5.00,
-	"credited_at": "2013-04-12T21:42:34",
+	"credited_date": "2013-04-12T21:42:34",
     "voided": false,
-	"voided_at": null,
+	"voided_date": null,
 	"url": "htts://actblue.com/page/BobsCandidates",
 	"sources": ["email-your-friends"],
 	"attributions": ["JohnSmith", "SusanSmith"],

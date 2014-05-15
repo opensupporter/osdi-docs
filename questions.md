@@ -8,7 +8,7 @@
 |name			|string		|Name for the question
 |question       |string     |Human readable text of the question
 |question_type  |string     |One of "MultiChoice"
-|responses      |QuestionResponse[]|A collection of possible responses
+|responses      |QuestionResponse[]*|A collection of possible responses
 
 ## QuestionResponse
 A possible response or choice for a question.

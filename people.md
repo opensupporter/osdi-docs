@@ -21,18 +21,14 @@
 |employer|string	|The name of the person's employer
 |occupation|string	|The occupation of the person.
 |identifiers    |Identifier[]| A collection of identifiers the provider has determined to be associated with the person
-|postal_addresses      |PostalAddress[]  |A collection of postal addresses associated with the person
-|email_addresses         |EmailAddress[]    |A collection of email addresses associated with the person
-|phone_numbers         |PhoneNumber[]	|A collection of phone numbers associated with the person
-|profiles		| Profile[]	| A collection of profiles for online services
-
-## Resource Collections (post developer preview)
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|donations      |Donation[] |A collection of donations associated with the person
-|question_answers|QuestionAnswer[]|A collection of answers to questions from surveys
-|event_attendance |Attendance[]|A collection of attendance records for a person
-|interactions   |Interaction[]|A collection of outreach interactions for a person, eg Volunteer Joe called voter Sam F. Bar
+|postal_addresses      |PostalAddress[]  |An array of postal addresses associated with the person
+|email_addresses         |EmailAddress[]    |An array of email addresses associated with the person
+|phone_numbers         |PhoneNumber[]	|An array of phone numbers associated with the person
+|profiles		| Profile[]	| An array of profiles for online services
+|donations      |Donation[]* |A collection of donations associated with the person
+|question_answers|QuestionAnswer[]*|A collection of answers to questions from surveys
+|event_attendance |Attendance[]*|A collection of attendance records for a person
+|interactions   |Interaction[]*|A collection of outreach interactions for a person, eg Volunteer Joe called voter Sam F. Bar
 
 
 # Email Address
