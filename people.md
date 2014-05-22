@@ -374,6 +374,42 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
 				}
 			}
 		],
+		"osdi:taggings": [
+              {
+                "added_at":"2014-03-01 00:00:00",
+                "tag":
+                  {
+                    "name":"labor",
+                    "description":"this person is a labor supporter",
+                    "created_at":"2014-01-01 00:00:00",
+                    "modified_at":"2014-02-28 11:23:23",
+                    "originating_system":"Voter Labs",
+                    "_links" : {
+                      "items" : {
+                        "href" : "api/v1/people/tag/labor",
+                      }
+                    }
+                  }
+                },
+                {
+                  "added_at":"2014-03-01 00:00:00",
+                  "tag":
+                  {
+                    "name":"reproductive-rights",
+                    "description":"this person supports a right to reproductive choice",
+                    "description":"this person supports a right to reproductive choice",
+                    "created_at":"2014-01-01 00:00:00",
+                    "modified_at":"2014-02-28 11:23:23",
+                    "originating_system":"Voter Labs",
+                    "_links" : {
+                      "items" : {
+                        "href" : "api/v1/people/tag/reproductive-rights"
+                      }
+                    }
+                  }
+                }
+              ],
+            },
 		"_links": {
 			"curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
 			"self": {
