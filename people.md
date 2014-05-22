@@ -25,6 +25,7 @@
 |email_addresses         |EmailAddress[]    |A collection of email addresses associated with the person
 |phone_numbers         |PhoneNumber[]	|A collection of phone numbers associated with the person
 |profiles		| Profile[]	| A collection of profiles for online services
+|custom_fields		| CustomFields[]	| A collection of user-created key/value pairs associated with the person
 
 ## Resource Collections (post developer preview)
 | Name          | Type      | Description
@@ -64,6 +65,14 @@ Profiles correspond to a person's accounts on online services like Facebook, Twi
 | id			| string	| The unique identifier provided by the provider, eg "135165"
 | url			| string	| The URL to the user's web viewable profile, eg "http://facebook.com/johnqpublic"
 | handle		| string	| The handle name, eg "johnqpublic." Twitter handles should not include the "@"
+
+
+# Custom Fields
+Custom fields are arbitrary key/value pairs associated with the person that are created by a user, *not* created by the server or vendor. For example, custom fields are appropriate to store information a user decided to collect on a particular form, like whether the person filling out a form wants to volunteer. They are not appropriate for storing extra information the server or vendor has on this person that doesn't fit into the OSDI spec, such as a person's modeling score. In this way, custom fields are designed to be a more flexible and lightweight version of [Survey Questions and Answers](questions.md).
+
+| Name          | Type      | Description
+|----------------|-----------|----------------
+| [key]		| string	| The key associated with this custom field, with a corresponding value as a string. May be prefixed by servers based on naming conventions they document to control how collisions across systems and data sets occur.
 
 
 # Postal Address
