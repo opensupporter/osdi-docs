@@ -288,7 +288,7 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
                   }
                 }
               ],
-              "osdi:tags": [
+              "osdi:taggings": [
               {
                 "added_at":"2014-03-01 00:00:00",
                 "tag":
