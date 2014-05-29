@@ -13,8 +13,10 @@ This page defines Events, EventRSVPS
 |			|			| "cancelled"
 | created_date	| datetime	| Date and Time of creation
 | modified_date	| datetime	| Date and Time of update
-| summary	| string	| title / summary of event
+| title	| string	| title of event 
+| name	| string	| name of event
 | description| string	| description of the event
+| summary	| string	| summary of event
 | location	| Address	| A single instance of Address representing the location of the event
 | creator	| Person*	| A single instance of Person representing the creator of the event
 | organizer | Person*	| A single instance of Person representing the organizer of the event

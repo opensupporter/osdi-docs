@@ -10,10 +10,12 @@ Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.m
 
 | Name		| Type		| Description
 |-----------|-----------|------------------
-| identifiers	| Identifier[]	| A collection of identifiers the provider has determined to be associated with the form
+| identifiers	| Identifier[]	| An array of identifiers the provider has determined to be associated with the form
 | created_date	| datetime	| Date and Time of creation
 | modified_date	| datetime	| Date and Time of last modification
-| summary	| string	| title / summary of the form
+| name	| string	| name of the form
+| title	| string	| title of the form
+| summary	| string	| summary of the form
 | description	| string/html string	| description of the form, optionally an HTML string
 | call_to_action	| string	| Text of the call to action of the form (ex: Fill out our survey)
 | url	| string	| A URL string pointing to the publicly available form page on the web
@@ -29,7 +31,7 @@ Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.m
 | created_date	| datetime	| Date and Time of creation
 | modified_date	| datetime	| Date and Time of last modification
 | person	| Person*	| An embedded person that made the submission on the referenced form
-| form	| Form*	| An embedded  reference to the form this submission is related to
+| form	| Form*	| A reference to the form this submission is related to
 | question_answers	| Question_Answers[]* | A Collection of Question Answer resources related to this submission
 
 

@@ -7,16 +7,16 @@ A list is a resource type that contains list metadata as well as a link to the i
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
-|identifier		|string		|A internally unique identifier, usually URL friendly
+|identifiers    |Identifier[]	|An array of identifiers
 |name		    |string     |Name of list
-|description	|string		|A description of a list, eg "2012 donors"
+|description	|string		|A description of a list
 |type	        |string     |A string description of the type of resources, eg "events"
 |is_dynamic		|bool		|A boolean value that indicates if the list is static or dynamic
 
 ## Collections
 | Name          | Type      | Description
 |-----------    |-----------|--------------
-| items			| Type[]*	|A collection of items in the list 
+| items			|Type[]*	|A collection of items in the list 
 
 # Scenarios
 ## Get the list of lists

@@ -9,16 +9,17 @@ A query is a collection of resources that fit a set of criteria
 ## Attributes:
 | name 	| type	| description	|
 |-------|-------|---------------|
-| description	| string	| plaintext describing the query's function; if possible, enough data to recreate query on the host system	|
+| identifiers | Identifier[] | An array of identifiers
+| description	| string	| description of the query's function; if possible, enough data to recreate query on the host system	|
 | dynamic		| boolean	| denotes whether the query is dynamic or static	|
 | created_date	| timestamp	| time the query was created	|
-| summary		| string	| short name of the query	|
+| name		| string	| name of the query	|
 | total_items	| integer	| number of items in the query	|
 
 ## Query collections:
 | name 	| description	|
 |-------|---------------|
-| osdi-items	| the collection of resources which match the query's criteria at the time of the query's creation in static queries or at the time of retrieval in dynamic queries	|
+| osdi-items	 | the collection of resources which match the query's criteria at the time of the query's creation in static queries or at the time of retrieval in dynamic queries	|
 
 # Scenarios
 

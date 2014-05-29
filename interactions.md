@@ -13,4 +13,4 @@ Interactions are instances of one person engaging another person. An example of 
 | donations		| Donation[]* | Associated donations
 | attendances 	| Attendance[]*| Associated event attendances
 | question_answers| QuestionAnswer[]*| Associated answered questions
-| foos			| Foo[]		| There may be additonal collections of objects associated with an interaction
+| foos			| Foo[]*		| There may be additonal collections of objects associated with an interaction

@@ -8,29 +8,31 @@ Petitions are actions that have a target. Activists are asked to sign the petiti
 
 | Name		| Type		| Description
 |-----------|-----------|------------------
-| identifiers	| Identifier[]	| A collection of identifiers the provider has determined to be associated with the petition
+| identifiers	| Identifier[]	| An array of identifiers the provider has determined to be associated with the petition
 | created_at	| datetime	| Date and Time of creation
 | modified_at	| datetime	| Date and Time of last modification
-| summary	| string	| title / summary of petition
-| description	| string/html string	| description of the petition, optionally an HTML string
+| title | string  | title of the petition
+| name  | string  | name of petition (may or may not be shown to an end user)
+| description| string | description of the petition
+| summary	| string	| summary of petition
 | petition_text	| string	| Text of the petition, to be delivered to the target
 | url	| string	| A URL string pointing to the publicly available petition page on the web
 | total_signatures	| integer	| Read-only computed property representing the current count of petition signatures
-| target	| Target[]	| A collection of hashes representing the target(s) of the petition
+| target	| Target[]	| An array of hashes representing the target(s) of the petition
 | .name	| string	| The name of the target
-| creator	| Person*	| A single embedded instance of a person representing the creator of the petition
-| signatures	| Signatures[]| A Collection of Signature resources
+| creator	| Person*	| A single person representing the creator of the petition
+| signatures	| Signatures[]*| A Collection of Signature resources
 
 ## Signatures
 
 | Name		| Type		| Description
 |-----------|-----------|------------------
-| identifiers	| Identifier[]	| A collection of identifiers the provider has determined to be associated with the petition
+| identifiers	| Identifier[]	| An array of identifiers the provider has determined to be associated with the signature
 | created_at	| datetime	| Date and Time of creation
 | modified_at	| datetime	| Date and Time of last modification
 | comments	| string	| The comments left when the signature was created
-| person	| Person*	| An embedded person that signed the referenced petition
-| petition	| Petition*	| An embedded  reference to the petition this signature is related to
+| person	| Person*	| The person that signed the referenced petition
+| petition	| Petition*	| The petition this signature is related to
 
 
 # Retrieving Resources (GET)
