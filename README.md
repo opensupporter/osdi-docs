@@ -52,17 +52,19 @@ To help understand the scenarios OSDI covers, check out our evolving [scenarios 
 
 # API Data Model
 
-## Beta Stability Level
+## Release
 * [API Entry Point](aep.md)
 * [People and Addresses](people.md)
-
-## Experimental Stability Level
 * [Lists](lists.md)
 * [Survey Questions and Answers](questions.md)
 * [Events](events.md)
 * [Petitions](petitions.md)
 * [Forms](forms.md)
-* Donations
+* [Donations](donations.md)
+* [Tags](tags.md)
+
+## Experimental
+
 * [Canvassing Interactions](interactions.md)
 
 
