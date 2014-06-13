@@ -206,7 +206,7 @@ Some initial implementations may only support helpers, direct RESTful access may
 
 ### Parameters
 The Person Signup Helper takes the following parameters in its body
-* Inlined Person - Any fields in a person resource are valid in the input representation
+* Inlined Person - A "person" attribute conaining any valid attributes of a person resource are valid in the input representation
 * add_tags - a collection of tag names
 * add_lists - an array of list names
 
@@ -217,38 +217,40 @@ The Person Signup Helper takes the following parameters in its body
 POST /api/v1/person_signup_helper
 
 {
-	"family_name": "Edwin",
-	"given_name": "Labadie",
-	"additional_name": "Marques",
-	"email_addresses": [
-		{
-			"address":"test-3@example.com",
-			"primary": true,
-			"address_type": "Personal"
-		}
-	],
-	"postal_addresses": [
-		{
-			"primary": true,
-			"address_lines": [
-				"935 Ed Lock"
-			],
-			"locality": "New Dudley",
-			"region": "MN",
-			"postal_code": "17678",
-			"country": "RU",
-			"address_type": "Home",
-			"status": "Verified"
-		},
-	"phone_numbers": [
-		{
-			"primary": true,
-			"number": 19876543210,
-			"number_type": "Mobile",
-			"sms_capable": true
-		}
-	],
-	"gender": "Male",
+	"person" : {
+		"family_name": "Edwin",
+		"given_name": "Labadie",
+		"additional_name": "Marques",
+		"email_addresses": [
+			{
+				"address":"test-3@example.com",
+				"primary": true,
+				"address_type": "Personal"
+			}
+		],
+		"postal_addresses": [
+			{
+				"primary": true,
+				"address_lines": [
+					"935 Ed Lock"
+				],
+				"locality": "New Dudley",
+				"region": "MN",
+				"postal_code": "17678",
+				"country": "RU",
+				"address_type": "Home",
+				"status": "Verified"
+			},
+		"phone_numbers": [
+			{
+				"primary": true,
+				"number": 19876543210,
+				"number_type": "Mobile",
+				"sms_capable": true
+			}
+		],
+		"gender": "Male"
+	}
 	"add_tags" : [ "volunteer", "donor" ],
 	"add_lists" : [ "supporters" ]
 }
