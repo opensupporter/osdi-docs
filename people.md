@@ -190,10 +190,7 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
 
 "Jane Doe For Congress" is a consumer of the Voter Labs API. They have a locally cached representation of both records before Voter Labs merged the two records. When "Jane Doe For Congress" requests the record `voterlabs:5678` from the Voter Labs API, they should get a 301 redirect to the newly merged record seen above (Figure 3).
 
-# Scenarios / Examples
 
-> JSON respresenations below are provided as an informative reflection of what the wire format would look like.  
-> The tables above are the authoritative specification of the attributes.  Any discrepancy should defer to the above tables.
 
 ## Person Signup Helper
 The Person Signup Helper provides a simple method for adding a new person to a collection.  It also supports adding tags and list membership info.
@@ -210,7 +207,18 @@ The Person Signup Helper takes the following parameters in its body
 * add_tags - a collection of tag names
 * add_lists - an array of list names
 
-### Example
+### Anonymous Access Behavior
+
+In many common cases, organizations use a web signup form to add supporters.  These are typically unauthenticated.  In order to facilitate easy support for this scenario, person_signup_helper may be allowed without authentication.
+
+When servicing unauthenticated requests, OSDI servers should follow these recommendations.
+
+> Response bodies should not contain any person attributes
+> Response bodies may omit any identifier information
+> Response status code may be ambiguous, such as using 200 when a new person has been created in order to prevent "test for presence" attacks.
+
+
+### Person Signup Helper Example
 
 #### Request
 ````
@@ -296,11 +304,79 @@ POST /api/v1/person_signup_helper
 	"_embedded" : {
 		"osdi:taggings" : { .... }
 		"osdi:lists" : { .... }
+	},
+	{
+		"osdi:status" : {
+			"code" : 201,
+			"description" : "Created"
 	}
 }
 
 ````
 
+### Anonymous Person Signup Helper Example
+
+#### Anonymous Request
+````
+POST /api/v1/person_signup_helper
+
+{
+	"person" : {
+		"family_name": "Edwin",
+		"given_name": "Labadie",
+		"additional_name": "Marques",
+		"email_addresses": [
+			{
+				"address":"test-3@example.com",
+				"primary": true,
+				"address_type": "Personal"
+			}
+		],
+		"postal_addresses": [
+			{
+				"primary": true,
+				"address_lines": [
+					"935 Ed Lock"
+				],
+				"locality": "New Dudley",
+				"region": "MN",
+				"postal_code": "17678",
+				"country": "RU",
+				"address_type": "Home",
+				"status": "Verified"
+			},
+		"phone_numbers": [
+			{
+				"primary": true,
+				"number": 19876543210,
+				"number_type": "Mobile",
+				"sms_capable": true
+			}
+		],
+		"gender": "Male"
+	}
+	"add_tags" : [ "volunteer", "donor" ],
+	"add_lists" : [ "supporters" ]
+}
+
+````
+#### Anonymous Response
+````
+200 OK
+
+{
+	"osdi:status" : {
+		"code" : 200,
+		"description" : "Successful"
+}
+
+````
+
+
+# General Scenarios / Examples
+
+> JSON respresenations below are provided as an informative reflection of what the wire format would look like.  
+> The tables above are the authoritative specification of the attributes.  Any discrepancy should defer to the above tables.
 
 ## Get a list of people with pagination
 
