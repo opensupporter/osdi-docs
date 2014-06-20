@@ -93,3 +93,89 @@
     }
 }
 ```
+
+# Scenarios / Examples
+
+> JSON respresenations below are provided as an informative reflection of what the wire format would look like.  
+> The tables above are the authoritative specification of the attributes.  Any discrepancy should defer to the above tables.
+
+## Record Donation Helper
+The Record Donation Helper provides a simple method for adding a new donation and a new person to a system at the same time. 
+
+The Record Donation Helper URL can be determined from the donations collection under the "record_donations_helper" link relation
+
+The response to a Record Donation Helper is the full representation of the donation, with a link to the person resource created and an optional embedded person resource.
+
+Some initial implementations may only support helpers, direct RESTful access may not be supporter.  In those cases,_links may be omitted in responses.
+
+### Parameters
+The Record Dontion Helper takes the following parameters in its body
+* Inlined Person - A "person" attribute conaining any valid attributes of a person resource are valid in the input representation
+* identifiers - an array of identifiers being passed in for this donation
+* originating_system - a string representing the originating system of this donation
+* recipients - an array of objects representing the recipients and amounts of the donation
+
+### Example
+
+#### Request
+````
+POST /api/v1/donations/record_donations_helper
+
+{
+	"identifiers": [
+		"free_fundraisers:2"
+	],
+	"originating_system" : "FreeFundraisers.com",
+	"recipients": [
+		{
+			"name": "Campaign To Elect Tom",
+			"amount": 3.00
+		}
+	],
+	"person" : {
+		"family_name" : "Smith",
+		"given_name" : "John",
+		"postal_addresses" : [ { "postal_code" : "20009" } ],
+		"email_addresses" : [ { "address" : "jsmith@mail.com" } ]
+	}
+} 
+
+````
+#### Response
+````
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+	"identifiers": [
+		"free_fundraisers:2",
+		"osdi_system:38ec0365-f996-42a0-b26a-dbed24cf927f"
+	],
+	"originating_system": "FreeFundraisers.com",
+	"created_at": "2014-03-27T17:58:45Z",
+	"modified_at": "2014-03-27T17:58:45Z",
+	"currency": "USD",
+	"total_amount": 3.00,
+	"recipients": [
+		{
+			"name": "Campaign To Elect Tom",
+			"amount": 3.00
+		}
+	],
+	"payment": {
+		"method": "Credit Card",
+		"reference_number": "38ec0365-f996-42a0-b26a-dbed24cf927f",
+		"authorization_stored": false
+	},
+	"_links": {
+	"self": {
+		"href": "/api/v1/donations/38ec0365-f996-42a0-b26a-dbed24cf927f"
+	},
+	"osdi:person": {
+		"href": "/api/v1/people/17be9a36-bb9a-4f68-94a8-40523b9dab27"
+	}
+}
+
+````
