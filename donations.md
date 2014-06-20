@@ -118,7 +118,7 @@ The Record Dontion Helper takes the following parameters in its body
 ### Example
 
 #### Request
-````
+```javascript
 POST /api/v1/donations/record_donations_helper
 
 {
@@ -140,9 +140,9 @@ POST /api/v1/donations/record_donations_helper
 	}
 } 
 
-````
+```
 #### Response
-````
+```javascript
 200 OK
 
 Content-Type: application/hal+json
@@ -178,4 +178,4 @@ Cache-Control: max-age=0, private, must-revalidate
 	}
 }
 
-````
+```
