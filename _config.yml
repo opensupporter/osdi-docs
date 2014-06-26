@@ -3,7 +3,7 @@ title: Open Supporter Data Interface Documentation
 subtitle: ""
 email: info@opensupporter.org
 description: "The Open Supporter Data Interface (OSDI) effort seeks to define an API and data structures for interoperability among products in the progressive cause-based, campaign and non-profit marketplace."
-baseurl: ""
+baseurl: "osdi-docs"
 url: "http://opensupporter.org/"
 
 testmessage: "yo"
