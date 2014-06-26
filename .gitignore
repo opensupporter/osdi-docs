@@ -17,3 +17,4 @@ pickle-email-*.html
 .idea
 .idea/*
 ~*
+/_site

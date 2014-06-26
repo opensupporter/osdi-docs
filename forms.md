@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Forms"
+---
+
 # Forms
 
 This page defines Forms, Form Submissions.

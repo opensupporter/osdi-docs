@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Lists"
+---
+
 # Lists 
 Lists are server side collections, saved queries or subsets of other collections.  
 

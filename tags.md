@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Tags"
+---
+
 # Tags
 Tags are binary pieces of information that apply to individual people.
 
