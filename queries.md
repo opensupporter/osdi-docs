@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Queries"
+---
+
 #Queries
 A query is a collection of resources that fit a set of criteria
 * Queries are nonarbitrary: a resource's inclusion in the collection is based on attributes intrinsic to that resource

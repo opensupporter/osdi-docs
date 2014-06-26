@@ -1,3 +1,9 @@
+---
+layout: page
+title: Person
+category: ref
+---
+
 # Person
 ## Attributes
 

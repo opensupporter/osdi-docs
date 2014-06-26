@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Questions"
+---
+
 # Survey Questions and Answers
 
 ## Question

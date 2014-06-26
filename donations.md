@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Forms"
+---
+
 # FundraisingPage : Resource
 | Name          | Type      | Description
 |-----------    |-----------|--------------
