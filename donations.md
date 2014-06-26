@@ -4,6 +4,7 @@ title: "Forms"
 ---
 
 # FundraisingPage : Resource
+
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |identifiers    |Identifier[] |The OSDI identifiers of this page
@@ -22,6 +23,7 @@ title: "Forms"
 |donations		|Donation[] |Collection of donations made from this page
 
 # Recipient : ComplexType
+
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |display_name	|string		|The recipient's display name. Example: Barack Obama
@@ -29,6 +31,7 @@ title: "Forms"
 |amount  		|decimal	|The amount donated to the recipient
 
 # Donation : Resource
+
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |identifiers    |Identifier[] |The OSDI identifiers of this donation
