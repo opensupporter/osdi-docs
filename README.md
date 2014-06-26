@@ -15,18 +15,25 @@ More Information about OSDI can be found at the website [opensupporter.org](http
 Please give us feedback on our work. [Read the Review Guide](review_guide.md) to learn what kind of feedback we're looking for and how to provide it.
 
 # Authors
+* Leo Aguayo, Organizer
 * Tim Anderegg, New Organizing Institute (NOI)
 * Topper Bowers, Amicus
 * Beth Becker, Indigo Strategies
-* Jeff Crigler, Catalist
+* Gilbert Chan, Organizer
 * Josh Cohen, Washington United For Marriage (Editor)
+* Jeff Crigler, Catalist
 * Gustavo Costa, The Action Network
 * Michael Eskin, Blue State Digital
 * Jascha Franklin-Hodge, Blue State Digital
+* Abraham Godong, FasterCampaigns
 * Tim Gutowski, Trilogy Interactive
 * Chuck Hagenbuch, Blue State Digital
 * Harlan Hill, Indigo Strategies
+* Tim Holahan, BroadStripes
 * Matt Klaber, NGP VAN
+* Ben Krokower, FasterCampaigns
+* Eli Lee, The Quad
+* Dave Leichtman, Salsa Labs
 * Marc Love, Carbon Five
 * Walter Ludwig, Indigo Strategies
 * Drew Miller, NGP VAN
@@ -36,7 +43,10 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Jason Rosenbaum, The Action Network
 * Ben Stein, Mobile Commons
 * Ray Suelzer, UFCW International Union
+* Nate Thames, ActBlue
+* Chris Thomas, Sierra Club
 * Brian Vallelunga, Trilogy Interactive (Editor)
+* Sandra Wechsler, The Quad
 * Nathan Woodhull, ControlShift Labs
 * Misha Zhurkin, Catalist
 
@@ -52,17 +62,19 @@ To help understand the scenarios OSDI covers, check out our evolving [scenarios 
 
 # API Data Model
 
-## Beta Stability Level
+## Release
 * [API Entry Point](aep.md)
 * [People and Addresses](people.md)
-
-## Experimental Stability Level
 * [Lists](lists.md)
 * [Survey Questions and Answers](questions.md)
 * [Events](events.md)
 * [Petitions](petitions.md)
 * [Forms](forms.md)
-* Donations
+* [Donations](donations.md)
+* [Tags](tags.md)
+
+## Experimental
+
 * [Canvassing Interactions](interactions.md)
 
 

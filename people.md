@@ -30,7 +30,6 @@
 |event_attendance |Attendance[]*|A collection of attendance records for a person
 |interactions   |Interaction[]*|A collection of outreach interactions for a person, eg Volunteer Joe called voter Sam F. Bar
 
-
 # Email Address
 | Name          | Type      | Description
 |----------------|-----------|----------------
@@ -60,6 +59,14 @@ Profiles correspond to a person's accounts on online services like Facebook, Twi
 | id			| string	| The unique identifier provided by the provider, eg "135165"
 | url			| string	| The URL to the user's web viewable profile, eg "http://facebook.com/johnqpublic"
 | handle		| string	| The handle name, eg "johnqpublic." Twitter handles should not include the "@"
+
+
+# Custom Fields
+Custom fields are arbitrary key/value pairs associated with the person that are created by a user, *not* created by the server or vendor. For example, custom fields are appropriate to store information a user decided to collect on a particular form, like whether the person filling out a form wants to volunteer. They are not appropriate for storing extra information the server or vendor has on this person that doesn't fit into the OSDI spec, such as a person's modeling score. In this way, custom fields are designed to be a more flexible and lightweight version of [Survey Questions and Answers](questions.md).
+
+| Name          | Type      | Description
+|----------------|-----------|----------------
+| [key]		| string	| The key associated with this custom field, with a corresponding value as a string. May be prefixed by servers based on naming conventions they document to control how collisions across systems and data sets occur.
 
 
 # Postal Address
@@ -181,6 +188,113 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
 
 > JSON respresenations below are provided as an informative reflection of what the wire format would look like.  
 > The tables above are the authoritative specification of the attributes.  Any discrepancy should defer to the above tables.
+
+## Person Signup Helper
+The Person Signup Helper provides a simple method for adding a new person to a collection.  It also supports adding tags and list membership info.
+
+The Person Signup helper can be determined in the AEP with the "osdi:person_signup_helper" link relation
+
+The response to a Person Signup Helper is the full representation of the person.
+
+Some initial implementations may only support helpers, direct RESTful access may not be supporter.  In those cases,_links may be omitted in responses.
+
+### Parameters
+The Person Signup Helper takes the following parameters in its body
+* Inlined Person - A "person" attribute conaining any valid attributes of a person resource are valid in the input representation
+* add_tags - a collection of tag names
+* add_lists - an array of list names
+
+### Example
+
+#### Request
+````
+POST /api/v1/person_signup_helper
+
+{
+	"person" : {
+		"family_name": "Edwin",
+		"given_name": "Labadie",
+		"additional_name": "Marques",
+		"email_addresses": [
+			{
+				"address":"test-3@example.com",
+				"primary": true,
+				"address_type": "Personal"
+			}
+		],
+		"postal_addresses": [
+			{
+				"primary": true,
+				"address_lines": [
+					"935 Ed Lock"
+				],
+				"locality": "New Dudley",
+				"region": "MN",
+				"postal_code": "17678",
+				"country": "RU",
+				"address_type": "Home",
+				"status": "Verified"
+			},
+		"phone_numbers": [
+			{
+				"primary": true,
+				"number": 19876543210,
+				"number_type": "Mobile",
+				"sms_capable": true
+			}
+		],
+		"gender": "Male"
+	}
+	"add_tags" : [ "volunteer", "donor" ],
+	"add_lists" : [ "supporters" ]
+}
+
+````
+#### Response
+````
+200 OK
+
+{
+	"family_name": "Edwin",
+	"given_name": "Labadie",
+	"additional_name": "Marques",
+	"email_addresses": [
+		{
+			"address":"test-3@example.com",
+			"primary": true,
+			"address_type": "Personal"
+		}
+	],
+	"postal_addresses": [
+		{
+			"primary": true,
+			"address_lines": [
+				"935 Ed Lock"
+			],
+			"locality": "New Dudley",
+			"region": "MN",
+			"postal_code": "17678",
+			"country": "RU",
+			"address_type": "Home",
+			"status": "Verified"
+		},
+	"phone_numbers": [
+		{
+			"primary": true,
+			"number": 19876543210,
+			"number_type": "Mobile",
+			"sms_capable": true
+		}
+	],
+	"gender": "Male",
+	"_embedded" : {
+		"osdi:taggings" : { .... }
+		"osdi:lists" : { .... }
+	}
+}
+
+````
+
 
 ## Get a list of people with pagination
 
@@ -361,6 +475,42 @@ What this new record means is that `voterlabs:1234` is the new id by which Voter
 				}
 			}
 		],
+		"osdi:taggings": [
+              {
+                "added_at":"2014-03-01 00:00:00",
+                "tag":
+                  {
+                    "name":"labor",
+                    "description":"this person is a labor supporter",
+                    "created_at":"2014-01-01 00:00:00",
+                    "modified_at":"2014-02-28 11:23:23",
+                    "originating_system":"Voter Labs",
+                    "_links" : {
+                      "items" : {
+                        "href" : "api/v1/people/tag/labor",
+                      }
+                    }
+                  }
+                },
+                {
+                  "added_at":"2014-03-01 00:00:00",
+                  "tag":
+                  {
+                    "name":"reproductive-rights",
+                    "description":"this person supports a right to reproductive choice",
+                    "description":"this person supports a right to reproductive choice",
+                    "created_at":"2014-01-01 00:00:00",
+                    "modified_at":"2014-02-28 11:23:23",
+                    "originating_system":"Voter Labs",
+                    "_links" : {
+                      "items" : {
+                        "href" : "api/v1/people/tag/reproductive-rights"
+                      }
+                    }
+                  }
+                }
+              ],
+            },
 		"_links": {
 			"curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
 			"self": {
