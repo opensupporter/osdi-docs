@@ -6,7 +6,6 @@ title: "Questions"
 # Survey Questions and Answers
 
 ## Question
-### Attributes
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
@@ -19,8 +18,6 @@ title: "Questions"
 ## QuestionResponse
 A possible response or choice for a question.
 
-### Attributes
-
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |identifier			|Identifier[]		|Array of identifiers
@@ -31,7 +28,6 @@ A possible response or choice for a question.
 ## QuestionAnswer
 An answer to a question.  An answer is chosen by the user from one of the QuestionResponse options
 
-### Attributes
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |identifier		|Identifier[]		|Array of identifiers
@@ -42,11 +38,11 @@ An answer to a question.  An answer is chosen by the user from one of the Questi
 
 ## Retrieving Available Questions
 
-Request
+### Request
 
 	GET /api/v1/questions HTTP/1.1
 
-Response
+### Response
 
 ~~~~
 200 OK
@@ -157,7 +153,7 @@ Content-Type: application/json
 
 ## Creating a QuestionAnswer
 
-Request
+### Request
 
 	POST /api/v1/people/question_answers HTTP/1.1
 	Content-Type: application/json
@@ -167,4 +163,4 @@ Request
 		"question_id" : 5
 	}
 	
-Response
+### Response
