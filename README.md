@@ -600,8 +600,8 @@ All resources have a set of common attributes.  These are present, even if the t
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
-|created_at	    |datetime   |The date and time the resource was created on the local system
-|modified_at		|datetime	|The date and time the resource was last modified on the local system
+|created_date	    |datetime   |The date and time the resource was created on the local system
+|modified_date		|datetime	|The date and time the resource was last modified on the local system
 
 
 ## Notational Conventions
@@ -610,7 +610,8 @@ In this specification, when defining models, the following notational convention
 
 |Convention	|Description
 |:-----------:|--------------
-|type[]     | A reference to a collection of resources of type 'type'
+|type[]    | An array of objects of type 'type'
+|type[]*    | A reference to a collection of resources of type 'type'
 |	type*	| A reference to a single resource of type 'type'
 |	string	| A string
 |	datetime| A date and time representation.  In JSON this is a string.  The contents of this attribute shall be  ISO 8601 

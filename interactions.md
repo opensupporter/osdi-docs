@@ -10,7 +10,7 @@ Interactions are instances of one person engaging another person. An example of 
 | prospect		| Person*	| Reference to the person the canvasser interacted with.  eg, the person who was asked the question
 | attempt_type	| string	| One of "Call", "Email","Canvass","Web", "Other"
 | attempt_result| string	| One of "Completed", "Unreachable", "Left Message"
-| donations		| Donation[] | Associated donations
-| attendances 	| Attendance[]| Associated event attendances
-| question_answers| QuestionAnswer[]| Associated answered questions
-| foos			| Foo[]		| There may be additonal collections of objects associated with an interaction
+| donations		| Donation[]* | Associated donations
+| attendances 	| Attendance[]*| Associated event attendances
+| question_answers| QuestionAnswer[]*| Associated answered questions
+| foos			| Foo[]*		| There may be additonal collections of objects associated with an interaction

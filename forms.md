@@ -15,10 +15,12 @@ Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.h
 
 | Name		| Type		| Description
 |-----------|-----------|------------------
-| identifiers	| Identifier[]	| A collection of identifiers the provider has determined to be associated with the form
-| created_at	| datetime	| Date and Time of creation
-| modified_at	| datetime	| Date and Time of last modification
-| summary	| string	| title / summary of the form
+| identifiers	| Identifier[]	| An array of identifiers the provider has determined to be associated with the form
+| created_date	| datetime	| Date and Time of creation
+| modified_date	| datetime	| Date and Time of last modification
+| name	| string	| name of the form
+| title	| string	| title of the form
+| summary	| string	| summary of the form
 | description	| string/html string	| description of the form, optionally an HTML string
 | call_to_action	| string	| Text of the call to action of the form (ex: Fill out our survey)
 | url	| string	| A URL string pointing to the publicly available form page on the web
@@ -30,13 +32,12 @@ Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.h
 
 | Name		| Type		| Description
 |-----------|-----------|------------------
-| identifiers	| Identifier[]	| A collection of identifiers the provider has determined to be associated with the form
-| created_at	| datetime	| Date and Time of creation
-| modified_at	| datetime	| Date and Time of last modification
+| identifiers	| Identifier[]	| An array of identifiers the provider has determined to be associated with the form
+| created_date	| datetime	| Date and Time of creation
+| modified_date	| datetime	| Date and Time of last modification
 | person	| Person*	| An embedded person that made the submission on the referenced form
-| form	| Form*	| An embedded  reference to the form this submission is related to
-| question_answers	| Question_Answers[]*	| A Collection of Question Answer resources related to this submission
-
+| form	| Form*	| A reference to the form this submission is related to
+| question_answers	| Question_Answers[]* | A Collection of Question Answer resources related to this submission
 
 # Retrieving Resources (GET)
 
@@ -91,8 +92,8 @@ GET /api/v1/forms/
         "identifier": [
           "osdi_provider:9b385f65-23b3-47a4-a4b5-9abd537b37a7"
         ],
-        "created_at": "2014-02-20T21:30:55Z",
-        "modified_at": "2014-02-21T15:36:34Z",
+        "created_date": "2014-02-20T21:30:55Z",
+        "modified_date": "2014-02-21T15:36:34Z",
         "summary": "Take our year-end activist survey",
         "description": "<p>Please take this survey to tell us stuff about you.</p>",
         "call_to_action": "Take our survey",
@@ -156,8 +157,8 @@ GET /api/v1/forms/
         "identifier": [
           "osdi_provider:7580ac3e-9a72-11e3-a2e9-12313d316c29"
         ],
-        "created_at": "2014-02-14T15:35:59Z",
-        "modified_at": "2014-02-14T15:39:12Z",
+        "created_date": "2014-02-14T15:35:59Z",
+        "modified_date": "2014-02-14T15:39:12Z",
         "summary": "Sign up for our email list",
         "description": "<p>Get the latest updates from us by adding your email here!</p>",
         "call_to_action": "Sign up",
@@ -232,8 +233,8 @@ GET /api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/
 	"identifier": [
       "osdi_provider:9b385f65-23b3-47a4-a4b5-9abd537b37a7"
     ],
-    "created_at": "2014-02-20T21:30:55Z",
-    "modified_at": "2014-02-21T15:36:34Z",
+    "created_date": "2014-02-20T21:30:55Z",
+    "modified_date": "2014-02-21T15:36:34Z",
     "summary": "Take our year-end activist survey",
     "description": "<p>Please take this survey to tell us stuff about you.</p>",
 	"call_to_action": "Take our survey",
@@ -340,8 +341,8 @@ GET /api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions
         "identifier": [
           "osdi_provider:25d2d08f-7c3a-4bdc-8329-815aa5117d54"
         ],
-        "created_at": "2014-02-20T21:32:56Z",
-        "modified_at": "2014-02-20T21:32:56Z",
+        "created_date": "2014-02-20T21:32:56Z",
+        "modified_date": "2014-02-20T21:32:56Z",
         "_links": {
           "self": {
             "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/25d2d08f-7c3a-4bdc-8329-815aa5117d54"
@@ -361,8 +362,8 @@ GET /api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions
         "identifier": [
           "osdi_provider:13d2d08f-6c3a-3bec-8628-515aa5147e57"
         ],
-        "created_at": "2014-02-20T21:32:56Z",
-        "modified_at": "2014-02-20T21:32:56Z",
+        "created_date": "2014-02-20T21:32:56Z",
+        "modified_date": "2014-02-20T21:32:56Z",
         "_links": {
           "self": {
             "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/13d2d08f-6c3a-3bec-8628-515aa5147e57"
@@ -396,8 +397,8 @@ GET /api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/25d2d08f-7c3a
 	"identifier": [
 	  "osdi_provider:25d2d08f-7c3a-4bdc-8329-815aa5117d54"
 	],
-	"created_at": "2014-02-20T21:32:56Z",
-	"modified_at": "2014-02-20T21:32:56Z",
+	"created_date": "2014-02-20T21:32:56Z",
+	"modified_date": "2014-02-20T21:32:56Z",
 	"_links": {
 	  "self": {
 	    "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/25d2d08f-7c3a-4bdc-8329-815aa5117d54"

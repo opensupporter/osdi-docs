@@ -10,10 +10,11 @@ title: "Questions"
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
+|identifier			|Identifier[]		|Array of identifiers
 |name			|string		|Name for the question
 |question       |string     |Human readable text of the question
 |question_type  |string     |One of "MultiChoice"
-|responses      |QuestionResponse[]|A collection of possible responses
+|responses      |QuestionResponse[]*|A collection of possible responses
 
 ## QuestionResponse
 A possible response or choice for a question.
@@ -22,6 +23,7 @@ A possible response or choice for a question.
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
+|identifier			|Identifier[]		|Array of identifiers
 |name       |string     |Human readable text of the value
 |value		|string		|Actual value
 |default	|boolean	|True if this response should be the default response
@@ -32,9 +34,8 @@ An answer to a question.  An answer is chosen by the user from one of the Questi
 ### Attributes
 | Name          | Type      | Description
 |-----------    |-----------|--------------
+|identifier		|Identifier[]		|Array of identifiers
 |value          |string     |Human readable text of the value
-|person_id		|integer	|ID of associated person object
-|question_id	|integer	|ID of associated question object
 |question		|Question*	|Reference to associated question
 |person			|Person*	|Reference to associated person
 

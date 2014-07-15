@@ -10,7 +10,7 @@ A list is a resource type that contains list metadata as well as a link to the i
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
-|identifier     |string     |A internally unique identifier, usually URL friendly
+|identifiers    |Identifier[]   |An array of identifiers
 |name           |string     |Name of list
 |description    |string     |A description of a list, eg "2012 donors"
 |type           |string     |A string description of the type of resources, eg "events"
