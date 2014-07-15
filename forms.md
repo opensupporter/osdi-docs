@@ -5,11 +5,11 @@ title: "Forms"
 
 # Forms
 
-This page defines Forms, Form Submissions.
+This page defines Forms and Submissions.
 
 Forms are flexible actions for collecting user data. They can be as simple as a signup form collecting an email address on a website to complex surveys that collect lots of questions and answers from users. Forms take submissions, which represent the individual data each time the form was submitted by a user.
 
-Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.md).
+Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.html).
 
 ## Forms
 
@@ -24,7 +24,7 @@ Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.m
 | url	| string	| A URL string pointing to the publicly available form page on the web
 | total_submissions	| integer	| Read-only computed property representing the current count of submissions on the form
 | creator	| Person*	| A single embedded instance of a person representing the creator of the form
-| submissions	| Submissions[]| A Collection of Submission resources
+| submissions	| Submissions[]* | A Collection of Submission resources
 
 ## Submissions
 
@@ -35,7 +35,7 @@ Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.m
 | modified_at	| datetime	| Date and Time of last modification
 | person	| Person*	| An embedded person that made the submission on the referenced form
 | form	| Form*	| An embedded  reference to the form this submission is related to
-| question_answers	| Question_Answers[]	| A Collection of Question Answer resources related to this submission
+| question_answers	| Question_Answers[]*	| A Collection of Question Answer resources related to this submission
 
 
 # Retrieving Resources (GET)

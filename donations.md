@@ -1,9 +1,14 @@
 ---
 layout: default
-title: "Forms"
+title: "Donations"
 ---
 
-# FundraisingPage : Resource
+# Donations
+This page defines the resources FundraisingPage and Donation, and the object Recipient.
+
+
+
+## FundraisingPage
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
@@ -22,7 +27,7 @@ title: "Forms"
 |creator		|Person*	|The person representing the creator of the fundraising page
 |donations		|Donation[] |Collection of donations made from this page
 
-# Recipient : ComplexType
+## Recipient
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
@@ -30,7 +35,7 @@ title: "Forms"
 |legal_name		|string		|The recipient's legal name. Example: Obama for America
 |amount  		|decimal	|The amount donated to the recipient
 
-# Donation : Resource
+## Donation
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------

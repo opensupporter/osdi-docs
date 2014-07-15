@@ -1,11 +1,11 @@
 ---
-layout: page
+layout: default
 title: Person
-category: ref
 ---
 
-# Person
-## Attributes
+# People
+
+## Person
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
