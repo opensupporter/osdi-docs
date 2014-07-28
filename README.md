@@ -17,7 +17,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 # Authors
 * Leo Aguayo, Organizer
 * Tim Anderegg, New Organizing Institute (NOI)
-* Topper Bowers, Amicus
+* Topper Bowers, Independent
 * Beth Becker, Indigo Strategies
 * Gilbert Chan, Organizer
 * Josh Cohen, Washington United For Marriage (Editor)
@@ -34,7 +34,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Ben Krokower, FasterCampaigns
 * Eli Lee, The Quad
 * Dave Leichtman, Salsa Labs
-* Marc Love, Carbon Five
+* Marc Love, Independent
 * Walter Ludwig, Indigo Strategies
 * Drew Miller, NGP VAN
 * Mark Paquette, TheDataBank
@@ -42,6 +42,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Rich Ranallo, Revolution Messaging
 * Jason Rosenbaum, The Action Network
 * Ben Stein, Mobile Commons
+* Ben Stroud, Targetsmart Communications
 * Ray Suelzer, UFCW International Union
 * Nate Thames, ActBlue
 * Chris Thomas, Sierra Club
