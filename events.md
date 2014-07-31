@@ -60,6 +60,65 @@ To handle guests, additional attendance records are created with the invited_by 
 
 If guest information (such as name, etc) is not given, then the person resource is null.
 
+
+## Event Attendance Helper
+The Event Attendance Helper provides a simple method for registering an RSVP for an event.
+
+The Event Attendance Helper URL can be determined from the donations collection under the "event_attendance_helper" link relation on a specific event resource
+
+The response to a Event Attendance Helper is the full representation of the attendance, with a link to the person resource created and optional embedded resources for person, event or invited_by resource.
+
+Some initial implementations may only support helpers, direct RESTful access may not be supporter.  In those cases,_links may be omitted in responses.
+
+### Parameters
+The Event Attendance Helper takes the following parameters in its body
+* Inlined Person - A "person" attribute containing any valid attributes of a person resource are valid in the input representation
+* Optional Inlined "invited_by" Person - A "person" attribute containing any valid attributes of a person resource are valid in the input representation
+* Attendance attributes - any valid Attendance resource attribute
+
+### Example
+
+#### Request
+```javascript
+POST /api/v1/events/507/event_attendance_helper
+
+{
+	"status" : "accepted",
+	"comment" : "I can't wait for this event!",
+
+	"person" : {
+		"family_name" : "Smith",
+		"given_name" : "John",
+		"postal_addresses" : [ { "postal_code" : "20009" } ],
+		"email_addresses" : [ { "address" : "jsmith@mail.com" } ]
+	},
+	"invited_by" : { /* optional */
+		"family_name" : "Testy",
+		"given_name" : "McTesterson",
+		"postal_addresses" : [ { "postal_code" : "20009" } ],
+		"email_addresses" : [ { "address" : "testy@mctesterson.com" } ]
+	}
+
+} 
+````
+#### Response
+````
+{
+	"status" : "accepted",
+	"comment" : "I can't wait for this event!",
+	"attended" : false,
+	
+	"_links" : {
+		"event" : { "href" : "http://server/event/507" },
+		"person" : { "href" : "http://server/person/4" },
+		"invited_by" : { "href" : "http://server/person/5" }
+	}
+}
+
+
+
+````
+
 # Single resource retrieval
 
 ## default embed policy
