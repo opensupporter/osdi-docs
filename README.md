@@ -30,7 +30,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Chuck Hagenbuch, Blue State Digital
 * Harlan Hill, Indigo Strategies
 * Tim Holahan, BroadStripes
-* Matt Klaber, NGP VAN
+* Matt Klaber, Independent
 * Ben Krokower, FasterCampaigns
 * Eli Lee, The Quad
 * Dave Leichtman, Salsa Labs
