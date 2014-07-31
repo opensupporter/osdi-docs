@@ -91,7 +91,7 @@ OSDI Compliant endpoints achieve this through the following capabilities
 Reading of data, or querying resources, is done via traditional REST and Hypermedia practices.  OSDI uses HAL for hypermedia and OData query language to give a rich and flexible way to express queries
 
 ### Helpers
-OSDI also allows a client to perform actions, sometimes known as scenarios or methods, when the scenario is 'action oriented' vs 'data oriented' such as singing up a supporter, recording a donation, or rsvping for an event.
+OSDI also allows a client to perform actions, sometimes known as scenarios or methods, when the scenario is 'action oriented' vs 'data oriented' such as signing up a supporter, recording a donation, or RSVPing for an event.
 
 Certain common actions have been specifically defined to include any needed semantics to allow a client to perform an action in a single HTTP request/response.
 
@@ -109,7 +109,7 @@ For the purposes of example, assume your provider has given you an AEP URI of
 
 [http://api.opensupporter.org/api/v1](http://api.opensupporter.org/api/v1)
 
-> Note: you can explore the AEP with a user friendly interface by visiting our [prototype endpoint](http://api.opensupporter.org)
+> Note: you can explore the AEP with a user-friendly interface by visiting our [prototype endpoint](http://api.opensupporter.org)
 
 ### Available Collections 
 Some servers may support some or all of the different resource collections.  For example, a peer to peer donation system might support Donations and People but not events.  In order to find out what resources are available and what URIs to use to access them, do a GET on the AEP URI.
@@ -457,7 +457,7 @@ Composite Requests are only allowed with POST requests.
 
 Support for Composite Requests is OPTIONAL.
 
-Without Composite Requests, these scenarios would be accomplished with two separate requests. An initial request with a POST (for the create case) containing the parent resource (Person) information would be sent to the server.  Based on the response to this initial request, the client would learn the URI for the newly created resource.  A second POST request would be sent to that URI containing the representation of the child resource (Address)address to be added.  
+Without Composite Requests, these scenarios would be accomplished with two separate requests. An initial request with a POST (for the create case) containing the parent resource (Person) information would be sent to the server.  Based on the response to this initial request, the client would learn the URI for the newly created resource.  A second POST request would be sent to that URI containing the representation of the child resource (Address) address to be added.  
 
 To accomplish this in a single request, the client would use a Composite Request.  Composite requests are used with POST only.  A Composite request contains the representations of both the parent and child representations in a single request, according to the rules of HAL.  Child representations are contained within an _embedded JSON element.
 
@@ -638,10 +638,10 @@ Providers may support non-secure HTTP connections.
 
 Clients and Providers may use a variety of mechanisms to authenticate and authorize operations.  The specification does not currently require supporting a specific method.  However, there are many choices which can work with this specification.  
 
-* Cookie Based Authentication
+* Cookie-Based Authentication
 * HTTP Basic
 * HTTP Digest
-* Token Based Authentication
+* Token-Based Authentication
 * OAuth and OAuth 2.0
 * OpenID
 
@@ -649,7 +649,7 @@ Future versions of this specification may officially support one or more of thes
 
 #### Token Based Authentication
 
-While OSDI does not currently mandate implementation of token based authentication, for those that do implement this method of authentication the following standard should be followed. 
+While OSDI does not currently mandate implementation of token-based authentication, for those that do implement this method of authentication the following standard should be followed. 
 
 For header-based token authentication, the header should be named `OSDI-API-Token` (case sensitive), as in this example:
 
