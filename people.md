@@ -86,6 +86,7 @@ Custom fields are arbitrary key/value pairs associated with the person that are 
 |----------------|-----------|----------------
 | primary       | boolean   |Denotes if this is the primary address.  A person can have only one primary address
 |address_type   |string     |Type of address "Home","Work","Mailing"
+|venue | string | Optional venue name at the address, useful for events. (ex: Smith Hall)
 |address_lines       |string[]     |Address lines 1 - n
 |locality           |string     |A locality or other local administrative area
 |region          |string     |region / subdivision codes according to ISO 3166-2 (Final 2 alpha digits)
