@@ -14,6 +14,8 @@ More Information about OSDI can be found at the website [opensupporter.org](http
 
 Please give us feedback on our work. [Read the Review Guide](review_guide.md) to learn what kind of feedback we're looking for and how to provide it.
 
+> This effort is currently in an exploratory phase to determine if consensus on a common API can be achieved.  The involvement of a person or company does not reflect a commitment to implement this API.
+
 # Authors
 * Leo Aguayo, Organizer
 * Tim Anderegg, New Organizing Institute (NOI)
@@ -51,7 +53,14 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Nathan Woodhull, ControlShift Labs
 * Misha Zhurkin, Catalist
 
-> This effort is currently in an exploratory phase to determine if consensus on a common API can be achieved.  The involvement of a person or company does not reflect a commitment to implement this API.
+## Additional Acknowledgments
+* Reed Probus, Web, Logo & Graphic Design
+* Nathan Tabak, Whitepaper writing and editing
+* Anthony Whittaker, Evangelism and Booth Duty
+* Scott Wooledge, V1 Logo
+
+# Leadership
+See our [governance committee members and executive officers.](http://opensupporter.org/leadership)
 
 # Contact Info
 Website: [http://opensupporter.org](http://opensupporter.org)
