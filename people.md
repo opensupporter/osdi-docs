@@ -36,7 +36,8 @@ This page defines the Person resource and several related objects: EmailAddress,
 |donations      |Donation[]* |A collection of donations associated with the person
 |question_answers|QuestionAnswer[]*|A collection of answers to questions from surveys
 |event_attendance |Attendance[]*|A collection of attendance records for a person
-|interactions   |Interaction[]*|A collection of outreach interactions for a person, eg Volunteer Joe called voter Sam F. Bar
+|interactions   |Interaction[]*|A collection of outreach interactions for a person, eg Volunteer Joe called voter  Sam F. Bar
+|taggings | Tagging[]*|A collection of taggings for a person
 
 # Email Address
 
