@@ -139,6 +139,7 @@ The Record Dontion Helper takes the following parameters in its body
 	"identifiers": [
 		"free_fundraisers:2"
 	],
+	"amount" : 3.00,
 	"originating_system" : "FreeFundraisers.com",
 	"recipients": [
 		{
