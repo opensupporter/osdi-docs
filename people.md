@@ -92,7 +92,7 @@ Custom fields are arbitrary key/value pairs associated with the person that are 
 |region          |string     |region / subdivision codes according to ISO 3166-2 (Final 2 alpha digits)
 |postal_code    |string     |Region specific postal code
 |country    |string     |Country code according to ISO 3166-1 Alpha-2
-|language   |string     |Language in which the address is recorder -- language code according to ISO 639
+|language   |string     |Language in which the address is recorded -- language code according to ISO 639
 |location       |hash       | Location information for the address
 |.lattitude     |string     |Geolocation latitude
 |.longitude     |string     |Geolocation longitude
