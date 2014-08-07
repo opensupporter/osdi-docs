@@ -44,7 +44,7 @@ This page defines the resources FundraisingPage and Donation, and the object Rec
 |modified_date	|datetime	| Date and Time of last modification
 |originating_system			|string		|The original donation system. Example: ActBlue
 |donor			|Person*    |Donor data collected at the time of donation
-|donated_date  |date     	|Date of the donation
+|transaction_date  |date     	|Date of the donation
 |amount         |number		|Amount of total donation (after any credits) in specified currency
 |credited_amount|number		|Amount credited back to donor in specified currency
 |credited_date	|datetime	|Date of the credit
