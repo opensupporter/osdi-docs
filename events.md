@@ -16,7 +16,7 @@ This page defines Events, EventRSVPS
 | title	| string	| title of event 
 | name	| string	| name of event
 | description| string	| description of the event
-| event_instructions| string | Instructions for the event after attendees have RSVPed
+| instructions| string | Instructions for the event after attendees have RSVPed
 | summary	| string	| summary of event
 | location	| Address	| A single instance of Address representing the location of the event
 | creator	| Person*	| A single instance of Person representing the creator of the event
@@ -134,7 +134,7 @@ POST /api/v1/events/507/event_attendance_helper
 	  "modified_date": datetime,
 	  "summary": string,
 	  "description": string,
-	  "event_instructions": string,
+	  "instructions": string,
 	  "_embedded" : {
 			"osdi:location" : {
 				"venue": "Smith Hall",
