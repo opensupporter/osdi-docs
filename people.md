@@ -27,6 +27,7 @@ This page defines the Person resource and several related objects: EmailAddress,
 |ethnilocality|string   |A person's ethinilocality
 |languages_spoken|string[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
 |employer|string    |The name of the person's employer
+|employer_address|PostalAddress    |The postal address of the person's employer
 |occupation|string  |The occupation of the person.
 |identifiers    |Identifier[]| A collection of identifiers the provider has determined to be associated with the person
 |postal_addresses      |PostalAddress[]  |An array of postal addresses associated with the person
