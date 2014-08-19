@@ -3,7 +3,7 @@ layout: default
 title: "Queries"
 ---
 
-#Queries
+# Queries
 A query is a collection of resources that fit a set of criteria
 
 * Queries are nonarbitrary: a resource's inclusion in the collection is based on attributes intrinsic to that resource
@@ -78,7 +78,7 @@ A query is a collection of resources that fit a set of criteria
 ### URL
 	GET api/v1/query/{id}
 
-###Response
+### Response
 	{
 		"summary" : "November volunteers",
 		"description" : "all volunteers who were avaialble for walks as of November 2013",
@@ -86,7 +86,7 @@ A query is a collection of resources that fit a set of criteria
 		"created_date":"2013-11-30 23:55:23",
 		"total_items":"3850",
 		"_links" : {
-				"href" : "api/v1/query/23"
+			"href" : "api/v1/query/23"
 		}
 	}
 

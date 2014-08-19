@@ -27,6 +27,7 @@ This page defines the Person resource and several related objects: EmailAddress,
 |ethnilocality|string   |A person's ethinilocality
 |languages_spoken|string[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
 |employer|string    |The name of the person's employer
+|employer_address|PostalAddress    |The postal address of the person's employer
 |occupation|string  |The occupation of the person.
 |identifiers    |Identifier[]| A collection of identifiers the provider has determined to be associated with the person
 |postal_addresses      |PostalAddress[]  |An array of postal addresses associated with the person
@@ -36,7 +37,8 @@ This page defines the Person resource and several related objects: EmailAddress,
 |donations      |Donation[]* |A collection of donations associated with the person
 |question_answers|QuestionAnswer[]*|A collection of answers to questions from surveys
 |event_attendance |Attendance[]*|A collection of attendance records for a person
-|interactions   |Interaction[]*|A collection of outreach interactions for a person, eg Volunteer Joe called voter Sam F. Bar
+|interactions   |Interaction[]*|A collection of outreach interactions for a person, eg Volunteer Joe called voter  Sam F. Bar
+|taggings | Tagging[]*|A collection of taggings for a person
 
 # Email Address
 
@@ -91,7 +93,7 @@ Custom fields are arbitrary key/value pairs associated with the person that are 
 |region          |string     |region / subdivision codes according to ISO 3166-2 (Final 2 alpha digits)
 |postal_code    |string     |Region specific postal code
 |country    |string     |Country code according to ISO 3166-1 Alpha-2
-|language   |string     |Language in which the address is recorder -- language code according to ISO 639
+|language   |string     |Language in which the address is recorded -- language code according to ISO 639
 |location       |hash       | Location information for the address
 |.lattitude     |string     |Geolocation latitude
 |.longitude     |string     |Geolocation longitude

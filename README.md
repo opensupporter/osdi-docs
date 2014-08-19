@@ -1,3 +1,9 @@
+---
+layout: default
+title: "OSDI"
+permalink: index.html
+---
+
 ![Logo](logo.png)
 
 The Open Supporter Data Interface (OSDI) effort seeks to define an API and data structures for interoperability among products in the **progressive** cause-based, campaign and non-profit marketplace. The existence of a common API will reduce customer costs related to moving data between different systems, lower integration costs and enhance the ability of innovators to create products for the marketplace.
@@ -628,7 +634,7 @@ In this specification, when defining models, the following notational convention
 |	type*	| A reference to a single resource of type 'type'
 |	string	| A string
 |	datetime| A date and time representation.  In JSON this is a string.  The contents of this attribute shall be  ISO 8601 
-| hash	| A complex attribute represented by a JSON hash
+| object	| A complex attribute represented by a JSON object
 
 In the description of string types, sometimes the specification will list a set of acceptable values such as
 
