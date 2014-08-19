@@ -35,10 +35,11 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Matt Klaber, Independent
 * Ben Krokower, FasterCampaigns
 * Eli Lee, The Quad
-* Dave Leichtman, Salsa Labs
+* Dave Leichtman, Microsoft Corporation
 * Marc Love, Independent
 * Walter Ludwig, Indigo Strategies
 * Drew Miller, NGP VAN
+* Joe McLaughlin, Citizen Action NY
 * Mark Paquette, TheDataBank
 * Charles Parsons, Salsa Labs
 * Rich Ranallo, Revolution Messaging
@@ -47,10 +48,12 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Ben Stroud, Targetsmart Communications
 * Ray Suelzer, UFCW International Union
 * Nate Thames, ActBlue
+* Jim Pugh, ShareProgress
 * Chris Thomas, Sierra Club
 * Brian Vallelunga, Trilogy Interactive (Editor)
 * Sandra Wechsler, The Quad
 * Nathan Woodhull, ControlShift Labs
+* Ryan Zarkesh, Popular Democrazy
 * Misha Zhurkin, Catalist
 
 ## Additional Acknowledgments
