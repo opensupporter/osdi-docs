@@ -16,8 +16,8 @@ Tags are binary pieces of information that apply to individual people.
 
 |Name   	|Type   |Description
 |---    	|---    |---
-|tagged_item   |link |name of tag
-|tagged_item.type | string | The type of resource, eg "osdi:person"
+| type 		|string | a resource type such as "osdi:person" or "acme:foo"
+|<resource type>  |link | link with name of "osdi:person"
 |tag    	|link |plaintext meaning of the tag
 
 # Scenarios
