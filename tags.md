@@ -11,6 +11,15 @@ Tags are binary pieces of information that apply to individual people.
 |name   |string |name of tag
 |description    |string |plaintext meaning of the tag
 
+# Tagging
+Tags are binary pieces of information that apply to individual people.
+
+|Name   	|Type   |Description
+|---    	|---    |---
+|tagged_item   |link |name of tag
+|tagged_item.type | string | The type of resource, eg "osdi:person"
+|tag    	|link |plaintext meaning of the tag
+
 # Scenarios
 
 ## Create a new tag
@@ -82,7 +91,7 @@ To create a tag, send a json document containing the tag name and description
 }
 ```
 
-## Add a tagging
+## Add a tagging (Implied tagged_item)
 Lets tag a user with the new tag
 User: Martha Stewart, url: http://api.opensupporter.org/api/v1/people/69/taggings
 
@@ -128,8 +137,9 @@ User: Martha Stewart, url: http://api.opensupporter.org/api/v1/people/69/tagging
     "osdi:tag": {
       "href": "http://api.opensupporter.org/api/v1/tags/8"
     },
-    "osdi:person": {
+    "osdi:tagged_item": {
       "href": "http://api.opensupporter.org/api/v1/people/69"
+	  "type" : "osdi:person"
     }
   }
 }
