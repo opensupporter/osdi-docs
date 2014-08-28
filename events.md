@@ -26,7 +26,7 @@ This page defines Events, EventRSVPS
 | all_day_date| date	| date only for all day events
 | all_day	| boolean	| true if the event is an all day event
 | recurrence| TBD		| TBD
-| transparence| string	| Whether the event blocks time on the calendar. Optional. Possible values are:
+| transparence| string	| Whether the event blocks time on the calendar. Default, can be overridden by a user. Optional. Possible values are:
 |			|			| "opaque" - The event blocks time on the calendar. This is the default value.
 |			|			| "transparent" - The event does not block time on the calendar.
 | visibility| string	| Visibility of the event.  Possible values are
