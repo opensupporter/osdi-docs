@@ -16,9 +16,9 @@ Tags are binary pieces of information that apply to individual people.
 
 |Name   	|Type   |Description
 |---    	|---    |---
-|tagged_item   |link |name of tag
-|tagged_item.type | string | The type of resource, eg "osdi:person"
-|tag    	|link |plaintext meaning of the tag
+|<resource>  |link | The tagged item
+|item_type | string | The type of resource to use as a key in links collection. eg "osdi:person"
+|tag    	|link |The tag itself
 
 # Scenarios
 
@@ -115,6 +115,7 @@ User: Martha Stewart, url: http://api.opensupporter.org/api/v1/people/69/tagging
 {
   "updated_at": "2014-04-18T20:01:13Z",
   "created_at": "2014-04-18T20:01:13Z",
+  "item_type" : "osdi:person"
   "_embedded": {
     "osdi:tag": {
       "name": "acme-team",
@@ -137,9 +138,8 @@ User: Martha Stewart, url: http://api.opensupporter.org/api/v1/people/69/tagging
     "osdi:tag": {
       "href": "http://api.opensupporter.org/api/v1/tags/8"
     },
-    "osdi:tagged_item": {
+    "osdi:person": {
       "href": "http://api.opensupporter.org/api/v1/people/69"
-	  "type" : "osdi:person"
     }
   }
 }
