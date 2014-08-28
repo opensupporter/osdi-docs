@@ -617,11 +617,11 @@ All resources have a set of common attributes.  These are present, even if the t
 
 ### Common Attributes
 
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|created_date	    |datetime   |The date and time the resource was created on the local system
-|modified_date		|datetime	|The date and time the resource was last modified on the local system
-|modified_by		|Person	|The last editor of the resource
+| Name          | Required	| Type      | Description
+|-----------    |-----------|-----------|--------------
+|created_date	|true	|datetime   |The date and time the resource was created on the local system
+|modified_date	|true	|datetime	|The date and time the resource was last modified on the local system
+|modified_by	|true	|Person	|The last editor of the resource
 
 
 ## Notational Conventions
