@@ -82,7 +82,6 @@ To help understand the scenarios OSDI covers, check out our evolving [scenarios 
 # API Data Model
 
 ## Release
-* [API Entry Point](aep.md)
 * [People and Addresses](people.md)
 * [Lists](lists.md)
 * [Survey Questions and Answers](questions.md)
