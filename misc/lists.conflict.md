@@ -231,7 +231,7 @@ Lists are used to denote collections of resources. A list is a resource type tha
 {
 	"name" : string,
 	"description" :string,
-	"type" : flexnum,
+	"type" : flexenum,
 	"osdi-items" : collection of identifiers/links to be added to the list upon creation
 }
 ### Response
