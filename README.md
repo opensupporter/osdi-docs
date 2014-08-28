@@ -119,7 +119,7 @@ There will always be an unbounded set of scenarios such that defining specific a
 ## API Entry Point and linking
 
 ### Overview
-All access through OSDI starts at the API Entry Point (AEP).  The AEP is a resource that acts like a directory of the types of resources available on a server.  It also includes capability information like the maximum query pagesize.
+All access through OSDI starts at the API Entry Point (AEP).  The AEP is a resource that acts like a directory of the types of resources available on a server. It also includes capability information like the maximum query pagesize and links to helper endpoints.
 
 Your service provider can tell you what the AEP URI is for your account.
 
@@ -129,15 +129,16 @@ For the purposes of example, assume your provider has given you an AEP URI of
 
 > Note: you can explore the AEP with a user-friendly interface by visiting our [prototype endpoint](http://api.opensupporter.org)
 
-### Available Collections 
-Some servers may support some or all of the different resource collections.  For example, a peer to peer donation system might support Donations and People but not events.  In order to find out what resources are available and what URIs to use to access them, do a GET on the AEP URI.
+### Available Collections
+Some servers may support some or all of the different resource collections.  For example, a peer to peer donation system might support Donations and People but not events. In order to find out what resources are available and what URIs to use to access them, do a GET on the AEP URI.
 
+### Available Resource Helpers
+In addition to the available resources, the AEP also includes links to the resource helper endpoints available. These endpoints are used primarily to create multiple related resources at one time. 
 
-In order to determine the available resources on the server the client should perform an HTTP GET request to this URI.
-
-Within the response will be a collection of links to the resource collections available on the server.
+Note that some resource helpers are applicable to a specific resources. These are not included in the AEP, but are found in the _links section of the specific resources.
 
 ### Example
+In order to determine the available resources and helpers that exist on the server the client should perform an HTTP GET request to this URI. Within the response will be a collection of links to the resource collections and resource helper endpoints available on the server.
 
 Request
 
@@ -156,17 +157,27 @@ Response
 			{"name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true },
 			{"name": "acme", "href": "http://acme.foo/"}
 		],  
-  	  "osdi:people": {
-  	      "href": "/api/v1/people",
-  	    },
-  		"osdi:people_lists": {
-  	      "href": "/api/v1/people_lists",
-  	  },
+		"osdi:people": {
+		  "href": "/api/v1/people",
+		},
+		"osdi:people_lists": {
+		  "href": "/api/v1/people_lists",
+		},
 	    "odsi:questions": {
 	      "href": "http://api.opensupporter.org/api/v1/questions",
 	    },
 	    "osdi:question_answers": {
 	      "href": "http://api.opensupporter.org/api/v1/question_answers",
+	    },
+		"osdi:people": {
+		  "href": "http://api.opensupporter.org/api/v1/people",
+		},
+		"osdi:people_lists": {
+		  "href": "http://api.opensupporter.org/api/v1/people_lists",
+		},
+	    "osdi:person_signup_helper": {
+	      "href": "http://api.opensupporter.org/api/v1/person_signup_helper",
+	      "title": "Person Signup Helper"
 	    },
 	    "self": {
 	      "href": "/api/v1",
