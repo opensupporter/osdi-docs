@@ -13,6 +13,7 @@ A query is a collection of resources that fit a set of criteria
 | dynamic		| boolean	| denotes whether the query is dynamic or static	|
 | created\_at	| timestamp	| time the query was created	|
 | summary		| string	| short name of the query	|
+| item_type     | string    | description of the type of objects in the query |
 | total_items	| integer	| number of items in the query	|
 
 ## Query collections:
@@ -35,7 +36,8 @@ A query is a collection of resources that fit a set of criteria
           {
 			"summary" : "trivia participants",
 			"description" : "people who participate in one of our labor history trivia challenges (tag = TRIVIA)",
-			"dynamic" : true,
+			"item_type" : "person",
+            "dynamic" : true,
 			"created\_at":"2014-03-17 20:23:23",
 			"total_items":"3850",
 			"_links" : {
@@ -45,7 +47,8 @@ A query is a collection of resources that fit a set of criteria
 		    {
 			"summary" : "November volunteers",
 			"description" : "all volunteers who were avaialble for walks as of November 2013",
-			"dynamic" : false,
+			"item_type" : "person",
+            "dynamic" : false,
 			"created\_at":"2013-11-30 23:55:23",
 			"total_items":"3850",
 			"_links" : {
@@ -76,7 +79,8 @@ A query is a collection of resources that fit a set of criteria
 	{
 		"summary" : "November volunteers",
 		"description" : "all volunteers who were avaialble for walks as of November 2013",
-		"dynamic" : false,
+		"item_type" : "person",
+        "dynamic" : false,
 		"created\_at":"2013-11-30 23:55:23",
 		"total_items":"3850",
 		"_links" : {
