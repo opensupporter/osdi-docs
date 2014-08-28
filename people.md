@@ -18,7 +18,7 @@ This page defines the Person resource and several related objects: EmailAddress,
 |honorific_suffix           | string    |An honorific suffix like "Jr.", "Ph.D" Free-form field
 |gender         |string     |The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", "Other".
 |gender_identity|string     |The self-described gender with which a person identifies. Free-form field. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
-|party_identification_identification          |string     |Flexnum describing the person's politcal party_identification. Values: "None", "Democratic", "Republican", "Independent"
+|party_identification_identification          |string     |Flexenum describing the person's politcal party_identification. Values: "None", "Democratic", "Republican", "Independent"
 |source         |string     |Information about the source where this person record was acquired.  Eg "Ref74"
 |birthdate      |hash       | A hash representing the birth date
 |birthdate.month|integer    | integer representing the month of the birth date
@@ -56,7 +56,7 @@ This page defines the Person resource and several related objects: EmailAddress,
 | number        | string    | The actual phone number which MUST including country code and MUST be numeric characters only 
 | extension     | string    | Optional associated extension
 | description   | string    | Optional Free form additional text description
-| number_type   | string    | flexnum of Home, Work, Mobile, Other, Daytime, Evening, Fax
+| number_type   | string    | flexenum of Home, Work, Mobile, Other, Daytime, Evening, Fax
 | operator      | string    | Optional: Operator/Carrier associated with number, eg "Verizon"
 | country       | string    | Country code according to ISO 3166-1 Alpha-2
 | sms_capable   | boolean   | True if the number can accept sms text messages
