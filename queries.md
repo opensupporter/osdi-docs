@@ -16,7 +16,7 @@ A query is a collection of resources that fit a set of criteria
 |-------|-------|---------------|
 | identifiers | Identifier[] | An array of identifiers
 | description	| string	| description of the query's function; if possible, enough data to recreate query on the host system	|
-| dynamic		| boolean	| denotes whether the query is dynamic or static	|
+| is_dynamic		| boolean	| denotes whether the query is dynamic or static	|
 | created_date	| timestamp	| time the query was created	|
 | name		| string	| name of the query	|
 | total_items	| integer	| number of items in the query	|
@@ -39,7 +39,7 @@ A query is a collection of resources that fit a set of criteria
           {
 			"summary" : "trivia participants",
 			"description" : "people who participate in one of our labor history trivia challenges (tag = TRIVIA)",
-			"dynamic" : true,
+			"is_dynamic" : true,
 			"created_date":"2014-03-17 20:23:23",
 			"total_items":"3850",
 			"_links" : {
@@ -49,7 +49,7 @@ A query is a collection of resources that fit a set of criteria
 		    {
 			"summary" : "November volunteers",
 			"description" : "all volunteers who were avaialble for walks as of November 2013",
-			"dynamic" : false,
+			"is_dynamic" : false,
 			"created_date":"2013-11-30 23:55:23",
 			"total_items":"3850",
 			"_links" : {
@@ -82,7 +82,7 @@ A query is a collection of resources that fit a set of criteria
 	{
 		"summary" : "November volunteers",
 		"description" : "all volunteers who were avaialble for walks as of November 2013",
-		"dynamic" : false,
+		"is_dynamic" : false,
 		"created_date":"2013-11-30 23:55:23",
 		"total_items":"3850",
 		"_links" : {
