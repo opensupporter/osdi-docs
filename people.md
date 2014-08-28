@@ -24,7 +24,7 @@ This page defines the Person resource and several related objects: EmailAddress,
 |birthdate.month|integer    | integer representing the month of the birth date
 |birthdate.day  |integer    | integer representing the day of the birth date
 |birthdate.year|integer     | integer representing the 4 digit year of the birth date
-|ethnilocality|string   |A person's ethinilocality
+|ethnicities|string[]   | An array containing a person's ethinicities
 |languages_spoken|string[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
 |employer|string    |The name of the person's employer
 |employer_address|PostalAddress    |The postal address of the person's employer
@@ -348,7 +348,7 @@ POST /api/v1/person_signup_helper
                 "gender_identity": "Male",
                 "party_identification": "Democrat",
                 "source": "sed",
-                "ethnilocality": "Caucasian",
+                "ethnicities": ["Caucasian"],
                 "profiles": [
                     {
                         "provider": "Twitter",
@@ -427,7 +427,7 @@ POST /api/v1/person_signup_helper
                 "gender_identity": "Male",
                 "party_identification": "Democrat",
                 "source": "architecto",
-                "ethnilocality": "African American",
+                "ethnicities": ["African American", "Hispanic"],
                 "profiles": [
                     {
                         "provider": "Twitter",
