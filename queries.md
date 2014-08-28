@@ -18,6 +18,7 @@ A query is a collection of resources that fit a set of criteria
 | description	| string	| description of the query's function; if possible, enough data to recreate query on the host system	|
 | is_dynamic		| boolean	| denotes whether the query is dynamic or static	|
 | created_date	| timestamp	| time the query was created	|
+| origin_system | string    | Human readable identifier of the system where this query was created
 | name		| string	| name of the query	|
 | total_items	| integer	| number of items in the query	|
 | osdi-items | []*	 | the collection of resources which match the query's criteria at the time of the query's creation in static queries or at the time of retrieval in dynamic queries	|
@@ -84,6 +85,7 @@ A query is a collection of resources that fit a set of criteria
 		"description" : "all volunteers who were avaialble for walks as of November 2013",
 		"is_dynamic" : false,
 		"created_date":"2013-11-30 23:55:23",
+        "origin_system": "OpenSupporter",
 		"total_items":"3850",
 		"_links" : {
 			"href" : "api/v1/query/23"

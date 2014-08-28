@@ -13,8 +13,8 @@ This page defines the resources FundraisingPage and Donation, and the object Rec
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |identifiers    |Identifier[] |The OSDI identifiers of this page
-|originating_system	    |string	| Human readable text identifying where this page originated
-|created_date	    |datetime	| Date and Time of creation
+|origin_system	|string		| Human readable text identifying where this page originated
+|created_date	|datetime	| Date and Time of creation
 |modified_date	|datetime	| Date and Time of last modification
 |name			|string		|The name of the page
 |title			|string		|The title of the page
@@ -42,7 +42,7 @@ This page defines the resources FundraisingPage and Donation, and the object Rec
 |identifiers    |Identifier[] |The OSDI identifiers of this donation
 |created_date	    |datetime	| Date and Time of creation
 |modified_date	|datetime	| Date and Time of last modification
-|originating_system			|string		|The original donation system. Example: ActBlue
+|origin_system	|string		| Human readable text identifiying the system where this donation was created.
 |donor			|Person*    |Donor data collected at the time of donation
 |transaction_date  |date     	|Date of the donation
 |amount         |number		|Amount of total donation (after any credits) in specified currency
@@ -140,7 +140,7 @@ The Record Dontion Helper takes the following parameters in its body
 		"free_fundraisers:2"
 	],
 	"amount" : 3.00,
-	"originating_system" : "FreeFundraisers.com",
+	"origin_system" : "FreeFundraisers.com",
 	"recipients": [
 		{
 			"name": "Campaign To Elect Tom",
@@ -170,7 +170,7 @@ Cache-Control: max-age=0, private, must-revalidate
 		"free_fundraisers:2",
 		"osdi_system:38ec0365-f996-42a0-b26a-dbed24cf927f"
 	],
-	"originating_system": "FreeFundraisers.com",
+	"origin_system": "FreeFundraisers.com",
 	"created_at": "2014-03-27T17:58:45Z",
 	"modified_at": "2014-03-27T17:58:45Z",
 	"currency": "USD",

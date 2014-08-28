@@ -11,6 +11,7 @@ A list is a resource type that contains list metadata as well as a link to the i
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |identifiers    |Identifier[]   |An array of identifiers
+|origin_system  |string     | Human readable identifier of the system where this list was created
 |name           |string     |Name of list
 |description    |string     |A description of a list, eg "2012 donors"
 |type           |string     |A string description of the type of resources, eg "events"
@@ -35,6 +36,7 @@ A list is a resource type that contains list metadata as well as a link to the i
           {
             "id" : "1",
             "name" : "Ref74 Supporters",
+            "origin_system": "OpenSupporter",
             "description" : "The set of all supporters for Ref74",
             "type" : "osdi:people",
             "is_dynamic" : false,
@@ -51,6 +53,7 @@ A list is a resource type that contains list metadata as well as a link to the i
           {
             "id" : "2",
             "name" : "Ref74 Donors",
+            "origin_system": "OpenSupporter",
             "description" : "The set of all 2012 donors for Ref74",
             "type" : "osdi:people",
             "is_dynamic" : false,
@@ -82,6 +85,7 @@ A list is a resource type that contains list metadata as well as a link to the i
 
     {
             "id" : 1,
+            "origin_system": "OpenSupporter",
             "name" : "Ref74 Supporters",
             "description" : "The set of all supporters for Ref74",
             "type" : "osdi:people",

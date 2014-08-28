@@ -11,6 +11,7 @@ Petitions are actions that have a target. Activists are asked to sign the petiti
 | identifiers	| Identifier[]	| An array of identifiers the provider has determined to be associated with the petition
 | created_at	| datetime	| Date and Time of creation
 | modified_at	| datetime	| Date and Time of last modification
+| origin_system | string  | Human readable identifier of the system where this petition was created
 | title | string  | title of the petition
 | name  | string  | name of petition (may or may not be shown to an end user)
 | description| string | description of the petition
@@ -90,6 +91,7 @@ GET /api/v1/petitions/
         ],
         "created_at": "2014-02-20T21:30:55Z",
         "modified_at": "2014-02-21T15:36:34Z",
+        "origin_system": "OpenSupporter",
         "summary": "Stop doing the bad thing",
         "description": "<p>Please sign this petition to stop John Smith from doing the bad thing.</p>",
         "petition_text": "John Smith, please stop doing the bad thing now.",
@@ -160,6 +162,7 @@ GET /api/v1/petitions/
         ],
         "created_at": "2014-02-14T15:35:59Z",
         "modified_at": "2014-02-14T15:39:12Z",
+        "origin_system": "OpenSupporter",
         "summary": "Bring back the thing we love today!",
         "description": "<p>It's time for Amy Sue to bring back the thing we love. Sign now!</p>",
         "petition_text": "Amy Sue, bring back the thing we love.",
@@ -241,6 +244,7 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/
     ],
     "created_at": "2014-02-20T21:30:55Z",
     "modified_at": "2014-02-21T15:36:34Z",
+    "origin_system": "OpenSupporter",
     "summary": "Stop doing the bad thing",
     "description": "<p>Please sign this petition to stop John Smith from doing the bad thing.</p>",
     "petition_text": "John Smith, please stop doing the bad thing now.",

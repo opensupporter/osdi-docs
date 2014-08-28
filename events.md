@@ -13,6 +13,7 @@ This page defines Events, EventRSVPS
 |			|			| "cancelled"
 | created_date	| datetime	| Date and Time of creation
 | modified_date	| datetime	| Date and Time of update
+| origin_system | string | Human readable text identifiying the system where this event was created.
 | title	| string	| title of event 
 | name	| string	| name of event
 | description| string	| description of the event
@@ -132,6 +133,7 @@ POST /api/v1/events/507/event_attendance_helper
 	  "status": string,
 	  "created_date": datetime,
 	  "modified_date": datetime,
+	  "origin_system": string,
 	  "summary": string,
 	  "description": string,
 	  "instructions": string,
