@@ -52,6 +52,9 @@ A query is a collection of resources that fit a set of criteria
 			"description" : "all volunteers who were avaialble for walks as of November 2013",
 			"is_dynamic" : false,
 			"created_date":"2013-11-30 23:55:23",
+			"item_type" : "person",
+            "dynamic" : false,
+			"created\_at":"2013-11-30 23:55:23",
 			"total_items":"3850",
 			"_links" : {
 					"href" : "api/v1/query/23"
