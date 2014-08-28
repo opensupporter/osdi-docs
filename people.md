@@ -20,6 +20,7 @@ This page defines the Person resource and several related objects: EmailAddress,
 |gender_identity|string     |The self-described gender with which a person identifies. Free-form field. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
 |party_identification_identification          |string     |Flexnum describing the person's politcal party_identification. Values: "None", "Democratic", "Republican", "Independent"
 |source         |string     |Information about the source where this person record was acquired.  Eg "Ref74"
+|origin_system  |string     | Human readable name of the system where this person was created
 |birthdate      |hash       | A hash representing the birth date
 |birthdate.month|integer    | integer representing the month of the birth date
 |birthdate.day  |integer    | integer representing the day of the birth date
@@ -228,6 +229,7 @@ POST /api/v1/person_signup_helper
         "family_name": "Edwin",
         "given_name": "Labadie",
         "additional_name": "Marques",
+        "origin_system": "OpenSupporter",
         "email_addresses": [
             {
                 "address":"test-3@example.com",
@@ -272,6 +274,7 @@ POST /api/v1/person_signup_helper
         "family_name": "Edwin",
         "given_name": "Labadie",
         "additional_name": "Marques",
+        "origin_system": "OpenSupporter",
         "email_addresses": [
             {
                 "address":"test-3@example.com",
@@ -326,6 +329,7 @@ POST /api/v1/person_signup_helper
                 "family_name": "Edwin",
                 "given_name": "Labadie",
                 "additional_name": "Marques",
+                "origin_system": "OpenSupporter",
                 "identifiers": [
                     "osdi:23"
                 ],
@@ -413,6 +417,7 @@ POST /api/v1/person_signup_helper
                 "family_name": "Parker",
                 "given_name": "Walker",
                 "additional_name": "Jannie",
+                "origin_system": "OpenSupporter",
                 "identifiers": [
                     "osdi:24"
                 ],

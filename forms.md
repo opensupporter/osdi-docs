@@ -18,6 +18,7 @@ Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.h
 | identifiers	| Identifier[]	| An array of identifiers the provider has determined to be associated with the form
 | created_date	| datetime	| Date and Time of creation
 | modified_date	| datetime	| Date and Time of last modification
+| origin_system | string | Human readable identifier of the system where this form was created
 | name	| string	| name of the form
 | title	| string	| title of the form
 | summary	| string	| summary of the form
@@ -94,6 +95,7 @@ GET /api/v1/forms/
         ],
         "created_date": "2014-02-20T21:30:55Z",
         "modified_date": "2014-02-21T15:36:34Z",
+        "origin_system": "OpenSupporter",
         "summary": "Take our year-end activist survey",
         "description": "<p>Please take this survey to tell us stuff about you.</p>",
         "call_to_action": "Take our survey",
@@ -159,6 +161,7 @@ GET /api/v1/forms/
         ],
         "created_date": "2014-02-14T15:35:59Z",
         "modified_date": "2014-02-14T15:39:12Z",
+        "origin_system": "OpenSupporter",
         "summary": "Sign up for our email list",
         "description": "<p>Get the latest updates from us by adding your email here!</p>",
         "call_to_action": "Sign up",
@@ -235,6 +238,7 @@ GET /api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/
     ],
     "created_date": "2014-02-20T21:30:55Z",
     "modified_date": "2014-02-21T15:36:34Z",
+    "origin_system": "OpenSupporter",
     "summary": "Take our year-end activist survey",
     "description": "<p>Please take this survey to tell us stuff about you.</p>",
 	"call_to_action": "Take our survey",
