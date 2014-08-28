@@ -16,9 +16,15 @@ Tags are binary pieces of information that apply to individual people.
 
 |Name   	|Type   |Description
 |---    	|---    |---
+<<<<<<< HEAD
 |<resource>  |link | The tagged item
 |item_type | string | The type of resource to use as a key in links collection. eg "osdi:person"
 |tag    	|link |The tag itself
+=======
+| type 		|string | a resource type such as "osdi:person" or "acme:foo"
+|"resource type"  |link | link with name of "osdi:person"
+|tag    	|link |plaintext meaning of the tag
+>>>>>>> ab0786bc14fa0d7bc5748052d4448f5db036b13f
 
 # Scenarios
 
