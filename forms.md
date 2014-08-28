@@ -24,7 +24,7 @@ Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.h
 | summary	| string	| summary of the form
 | description	| string/html string	| description of the form, optionally an HTML string
 | call_to_action	| string	| Text of the call to action of the form (ex: Fill out our survey)
-| url	| string	| A URL string pointing to the publicly available form page on the web
+| browser_url	| string	| A URL string pointing to the publicly available form page on the web
 | total_submissions	| integer	| Read-only computed property representing the current count of submissions on the form
 | creator	| Person*	| A single embedded instance of a person representing the creator of the form
 | submissions	| Submissions[]* | A Collection of Submission resources
@@ -99,7 +99,7 @@ GET /api/v1/forms/
         "summary": "Take our year-end activist survey",
         "description": "<p>Please take this survey to tell us stuff about you.</p>",
         "call_to_action": "Take our survey",
-        "url": "https://api.opensupporter.org/forms/take-our-year-end-activist-survey",
+        "browser_url": "https://api.opensupporter.org/forms/take-our-year-end-activist-survey",
         "total_submissions": 100,
         "_embedded": {
           "osdi:creator": {
@@ -165,7 +165,7 @@ GET /api/v1/forms/
         "summary": "Sign up for our email list",
         "description": "<p>Get the latest updates from us by adding your email here!</p>",
         "call_to_action": "Sign up",
-        "url": "https://api.opensupporter.org/forms/sign-up-for-our-email-list",
+        "browser_url": "https://api.opensupporter.org/forms/sign-up-for-our-email-list",
         "total_submissions": 4829,
         "_embedded": {
           "osdi:creator": {
@@ -242,7 +242,7 @@ GET /api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/
     "summary": "Take our year-end activist survey",
     "description": "<p>Please take this survey to tell us stuff about you.</p>",
 	"call_to_action": "Take our survey",
-    "url": "https://api.opensupporter.org/forms/take-our-year-end-activist-survey",
+    "browser_url": "https://api.opensupporter.org/forms/take-our-year-end-activist-survey",
     "total_submissions": 100,
     "_embedded": {
       "osdi:creator": {

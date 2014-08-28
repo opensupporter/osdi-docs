@@ -19,6 +19,7 @@ This page defines Events, EventRSVPS
 | description| string	| description of the event
 | instructions| string | Instructions for the event after attendees have RSVPed
 | summary	| string	| summary of event
+| browser_url | string | A URL string pointing to the publicly available petition page on the web
 | location	| Address	| A single instance of Address representing the location of the event
 | creator	| Person*	| A single instance of Person representing the creator of the event
 | organizer | Person*	| A single instance of Person representing the organizer of the event
@@ -135,6 +136,7 @@ POST /api/v1/events/507/event_attendance_helper
 	  "modified_date": datetime,
 	  "origin_system": string,
 	  "summary": string,
+	  "browser_url": string,
 	  "description": string,
 	  "instructions": string,
 	  "_embedded" : {

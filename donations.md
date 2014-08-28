@@ -20,7 +20,7 @@ This page defines the resources FundraisingPage and Donation, and the object Rec
 |title			|string		|The title of the page
 |summary 		|string		|The summary of the page
 |description 	|string		|The description of the page
-|url			|string	 	|The URL of the fundraising page
+|browser_url			|string	 	|A URL string pointing to the publicly available fundraising page on the web
 |total_donations|int		|Computed value of total donations made to the page
 |total_revenue	|decimal	|Computed value of total donation revenue made to this page
 |currency		|string		|ISO 4217 designation of currency. Example: USD, JPY

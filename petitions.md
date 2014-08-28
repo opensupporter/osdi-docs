@@ -17,7 +17,7 @@ Petitions are actions that have a target. Activists are asked to sign the petiti
 | description| string | description of the petition
 | summary	| string	| summary of petition
 | petition_text	| string	| Text of the petition, to be delivered to the target
-| url	| string	| A URL string pointing to the publicly available petition page on the web
+| browser_url	| string	| A URL string pointing to the publicly available petition page on the web
 | total_signatures	| integer	| Read-only computed property representing the current count of petition signatures
 | target	| Target[]	| An array of hashes representing the target(s) of the petition
 | .name	| string	| The name of the target
@@ -95,7 +95,7 @@ GET /api/v1/petitions/
         "summary": "Stop doing the bad thing",
         "description": "<p>Please sign this petition to stop John Smith from doing the bad thing.</p>",
         "petition_text": "John Smith, please stop doing the bad thing now.",
-        "url": "https://api.opensupporter.org/petitions/stop-doing-the-bad-thing",
+        "browser_url": "https://api.opensupporter.org/petitions/stop-doing-the-bad-thing",
         "total_signatures": 100,
         "target": [
           {
@@ -166,7 +166,7 @@ GET /api/v1/petitions/
         "summary": "Bring back the thing we love today!",
         "description": "<p>It's time for Amy Sue to bring back the thing we love. Sign now!</p>",
         "petition_text": "Amy Sue, bring back the thing we love.",
-        "url": "https://api.opensupporter.org/petitions/bring-back-the-thing-we-love-today",
+        "browser_url": "https://api.opensupporter.org/petitions/bring-back-the-thing-we-love-today",
         "total_signatures": 4829,
         "target": [
           {
@@ -248,7 +248,7 @@ GET /api/v1/petitions/9b385f65-23b3-47a4-a4b5-9abd537b37a7/
     "summary": "Stop doing the bad thing",
     "description": "<p>Please sign this petition to stop John Smith from doing the bad thing.</p>",
     "petition_text": "John Smith, please stop doing the bad thing now.",
-    "url": "https://api.opensupporter.org/petitions/stop-doing-the-bad-thing",
+    "browser_url": "https://api.opensupporter.org/petitions/stop-doing-the-bad-thing",
     "total_signatures": 100,
     "target": [
       {
