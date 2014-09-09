@@ -26,6 +26,7 @@ This page defines the resources FundraisingPage and Donation, and the object Rec
 |currency		|string		|ISO 4217 designation of currency. Example: USD, JPY
 |creator		|Person*	|The person representing the creator of the fundraising page
 |donations		|Donation[]* |Collection of donations made from this page
+|"osdi:record_donation_helper" | link | a link to the page's record donation helper
 
 ## Recipient
 
@@ -115,7 +116,7 @@ This page defines the resources FundraisingPage and Donation, and the object Rec
 ## Record Donation Helper
 The Record Donation Helper provides a simple method for adding a new donation and a new person to a system at the same time. 
 
-The Record Donation Helper URL can be determined from the donations collection under the "record_donations_helper" link relation
+The Record Donation Helper URL can be determined from the fundraising page under the "record_donations_helper" link relation.  The system's default donation record helper should be found on the API Entry Point (AEP)
 
 The response to a Record Donation Helper is the full representation of the donation, with a link to the person resource created and an optional embedded person resource.
 
