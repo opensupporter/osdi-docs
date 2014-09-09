@@ -16,12 +16,13 @@ A query is a collection of resources that fit a set of criteria
 |-------|-------|---------------|
 | identifiers | Identifier[] | An array of identifiers
 | description	| string	| description of the query's function; if possible, enough data to recreate query on the host system	|
-| is_dynamic		| boolean	| denotes whether the query is dynamic or static	|
+| dynamic		| boolean	| denotes whether the query is dynamic or static	|
 | created_date	| timestamp	| time the query was created	|
+| item_type     | string      | the type of item, eg "osdi:person"
 | origin_system | string    | Human readable identifier of the system where this query was created
 | name		| string	| name of the query	|
 | total_items	| integer	| number of items in the query	|
-| osdi-items | []*	 | the collection of resources which match the query's criteria at the time of the query's creation in static queries or at the time of retrieval in dynamic queries	|
+| osdi_items | []*	 | the collection of resources which match the query's criteria at the time of the query's creation in static queries or at the time of retrieval in dynamic queries	|
 
 # Scenarios
 
@@ -40,7 +41,7 @@ A query is a collection of resources that fit a set of criteria
           {
 			"summary" : "trivia participants",
 			"description" : "people who participate in one of our labor history trivia challenges (tag = TRIVIA)",
-			"is_dynamic" : true,
+			"dynamic" : true,
 			"created_date":"2014-03-17 20:23:23",
 			"total_items":"3850",
 			"_links" : {
@@ -50,10 +51,10 @@ A query is a collection of resources that fit a set of criteria
 		    {
 			"summary" : "November volunteers",
 			"description" : "all volunteers who were avaialble for walks as of November 2013",
-			"is_dynamic" : false,
+			"dynamic" : false,
 			"created_date":"2013-11-30 23:55:23",
-			"item_type" : "person",
-            "dynamic" : false,
+			"item_type" : "osdi:person",
+            		"dynamic" : false,
 			"created\_at":"2013-11-30 23:55:23",
 			"total_items":"3850",
 			"_links" : {
@@ -86,12 +87,14 @@ A query is a collection of resources that fit a set of criteria
 	{
 		"summary" : "November volunteers",
 		"description" : "all volunteers who were avaialble for walks as of November 2013",
-		"is_dynamic" : false,
+		"dynamic" : false,
 		"created_date":"2013-11-30 23:55:23",
-        "origin_system": "OpenSupporter",
+        	"origin_system": "OpenSupporter",
 		"total_items":"3850",
 		"_links" : {
-			"href" : "api/v1/query/23"
+			"osdi:items" : {
+			"href" : "http://api.opensupporter.org/api/v1/query/23/items"
+			}
 		}
 	}
 
