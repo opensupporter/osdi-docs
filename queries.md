@@ -115,84 +115,84 @@ An item is an individual member of a query, linked to a resource type such as a 
 	GET api/v1/query/{id}/items
 
 ### Response
-{
-  "total_pages": 5,
-  "per_page": 25,
-  "page": 1,
-  "total_records": 123,
-  "_links": {
-    "next": {
-      "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298/items?page=2"
-    },
-    "self": {
-      "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298/items"
-    },
-    "osdi:items": [
-      {
-        "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298/items/82e909f9-1ac7-4952-bbd4-b4690a14bec2"
-      },
-      {
-        "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298/items/a9ccd87c-97f4-48db-9e6b-507509091839"
-      },
-      //truncated for brevity
-    ],
-    "curies": [
-      {
-        "name": "osdi",
-        "href": "https://opensupporter.org/docs/v1/{rel}",
-        "templated": true
-      },
-      {
-        "name": "action_network",
-        "href": "https://opensupporter.org/docs/v1/{rel}",
-        "templated": true
-      }
-    ]
-  },
-  "_embedded": {
-    "osdi:items": [
-      {
-        "_links": {
-          "self": {
-            "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298/items/82e909f9-1ac7-4952-bbd4-b4690a14bec2"
-          },
-          "osdi:query": {
-            "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298"
-          },
-          "osdi:person": {
-            "href": "https://opensupporter.org/api/v1/people/82e909f9-1ac7-4952-bbd4-b4690a14bec2"
-          }
-        },
-        "identifiers": [
-          "action_network:82e909f9-1ac7-4952-bbd4-b4690a14bec2"
-        ],
-        "origin_system": "Action Network",
-        "created_at": "2014-03-18T22:25:31Z",
-        "modified_at": "2014-03-18T22:25:38Z",
-        "item_type": "osdi:person"
-      },
-      {
-        "_links": {
-          "self": {
-            "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298/items/a9ccd87c-97f4-48db-9e6b-507509091839"
-          },
-          "osdi:query": {
-            "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298"
-          },
-          "osdi:person": {
-            "href": "https://opensupporter.org/api/v1/people/a9ccd87c-97f4-48db-9e6b-507509091839"
-          }
-        },
-        "identifiers": [
-          "action_network:a9ccd87c-97f4-48db-9e6b-507509091839"
-        ],
-        "origin_system": "Action Network",
-        "created_at": "2014-03-18T22:24:24Z",
-        "modified_at": "2014-03-18T22:24:24Z",
-        "item_type": "osdi:person"
-      },
-      //truncated for brevity
-    ]
-  }
-}
+	{
+	  "total_pages": 5,
+	  "per_page": 25,
+	  "page": 1,
+	  "total_records": 123,
+	  "_links": {
+	    "next": {
+	      "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298/items?page=2"
+	    },
+	    "self": {
+	      "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298/items"
+	    },
+	    "osdi:items": [
+	      {
+	        "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298/items/82e909f9-1ac7-4952-bbd4-b4690a14bec2"
+	      },
+	      {
+	        "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298/items/a9ccd87c-97f4-48db-9e6b-507509091839"
+	      },
+	      //truncated for brevity
+	    ],
+	    "curies": [
+	      {
+	        "name": "osdi",
+	        "href": "https://opensupporter.org/docs/v1/{rel}",
+	        "templated": true
+	      },
+	      {
+	        "name": "action_network",
+	        "href": "https://opensupporter.org/docs/v1/{rel}",
+	        "templated": true
+	      }
+	    ]
+	  },
+	  "_embedded": {
+	    "osdi:items": [
+	      {
+	        "_links": {
+	          "self": {
+	            "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298/items/82e909f9-1ac7-4952-bbd4-b4690a14bec2"
+	          },
+	          "osdi:query": {
+	            "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298"
+	          },
+	          "osdi:person": {
+	            "href": "https://opensupporter.org/api/v1/people/82e909f9-1ac7-4952-bbd4-b4690a14bec2"
+	          }
+	        },
+	        "identifiers": [
+	          "action_network:82e909f9-1ac7-4952-bbd4-b4690a14bec2"
+	        ],
+	        "origin_system": "Action Network",
+	        "created_at": "2014-03-18T22:25:31Z",
+	        "modified_at": "2014-03-18T22:25:38Z",
+	        "item_type": "osdi:person"
+	      },
+	      {
+	        "_links": {
+	          "self": {
+	            "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298/items/a9ccd87c-97f4-48db-9e6b-507509091839"
+	          },
+	          "osdi:query": {
+	            "href": "https://opensupporter.org/api/v1/queries/71f8feef-61c8-4e6b-9745-ec1d7752f298"
+	          },
+	          "osdi:person": {
+	            "href": "https://opensupporter.org/api/v1/people/a9ccd87c-97f4-48db-9e6b-507509091839"
+	          }
+	        },
+	        "identifiers": [
+	          "action_network:a9ccd87c-97f4-48db-9e6b-507509091839"
+	        ],
+	        "origin_system": "Action Network",
+	        "created_at": "2014-03-18T22:24:24Z",
+	        "modified_at": "2014-03-18T22:24:24Z",
+	        "item_type": "osdi:person"
+	      },
+	      //truncated for brevity
+	    ]
+	  }
+	}
 
