@@ -4,7 +4,7 @@ title: "Lists"
 ---
 
 # Lists 
-Lists are server side collections, saved queries or subsets of other collections.  
+Lists are arbitrary collections of items.  Items can be added or deleted with the API.
 
 A list is a resource type that contains list metadata as well as a link to the items collection.  The items collection is the actual list resources.
 
