@@ -8,6 +8,8 @@ Lists are arbitrary collections of items.  Items can be added or deleted with th
 
 A list is a resource type that contains list metadata as well as a link to the items collection.  The items collection is the actual list resources.
 
+The list object can be used to implement "static queries," queries whose component members do not and cannot be changed once executed. For lists used to represent static queries, the is_dynamic attribute should be false. 
+
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |identifiers    |Identifier[]   |An array of identifiers
