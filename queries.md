@@ -148,11 +148,6 @@ An item is an individual member of a query, linked to a resource type such as a 
 	        "name": "osdi",
 	        "href": "https://opensupporter.org/docs/v1/{rel}",
 	        "templated": true
-	      },
-	      {
-	        "name": "action_network",
-	        "href": "https://opensupporter.org/docs/v1/{rel}",
-	        "templated": true
 	      }
 	    ]
 	  },
