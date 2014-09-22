@@ -8,7 +8,7 @@ A query is a collection of resources that fit a set of criteria
 
 * Queries are nonarbitrary: a resource's inclusion in the collection is based on attributes intrinsic to that resource
 * Queries may only be dynamic: A dynamic query will return the resources which match its criteria at the moment the query is retrieved. To implement a static query, which contains the resources which matched its criteria at the time the query was created, the API's list object may be used.
-* Queries may only be created, deleted and edited on the content provider's native system; OSDI does not support 
+* Queries may only be created, deleted and edited on the content provider's native system; OSDI does not support CRUD operations on queries
 * Query metadata may be updated via the API, but query criteria may only be modified and queries may only be created or deleted via the content provider's system
 * Queries are unique collections of resources: a resource may match a query only once
 
