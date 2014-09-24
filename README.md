@@ -188,8 +188,8 @@ Response
 		},
 		"people": [
 			{
-				"family_name": "Edwin",
-				"given_name": "Labadie",
+				"given_name": "Edwin",
+				"family_name": "Labadie",
 				"additional_name": "Marques",
 				"identifiers": [
 					"osdi:23"
