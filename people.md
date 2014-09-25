@@ -97,7 +97,7 @@ Custom fields are arbitrary key/value pairs associated with the person that are 
 |country    |string     |Country code according to ISO 3166-1 Alpha-2
 |language   |string     |Language in which the address is recorded -- language code according to ISO 639
 |location       |hash       | Location information for the address
-|.lattitude     |string     |Geolocation latitude
+|.latitude     |string     |Geolocation latitude
 |.longitude     |string     |Geolocation longitude
 |.accuracy      |string     |One of "Rooftop", "Approximate"
 |status |string     |One of "Potential", "Verified", "Bad".
