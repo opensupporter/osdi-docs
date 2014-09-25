@@ -29,8 +29,9 @@ Petitions are actions that have a target. Activists are asked to sign the petiti
 | Name		| Type		| Description
 |-----------|-----------|------------------
 | identifiers	| Identifier[]	| An array of identifiers the provider has determined to be associated with the signature
-| created_at	| datetime	| Date and Time of creation
-| modified_at	| datetime	| Date and Time of last modification
+| created_date	| datetime	| Date and Time of creation
+| modified_date	| datetime	| Date and Time of last modification
+| action_date | datetime  | Date and Time the signature was made by the person
 | comments	| string	| The comments left when the signature was created
 | person	| Person*	| The person that signed the referenced petition
 | petition	| Petition*	| The petition this signature is related to

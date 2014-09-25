@@ -36,6 +36,7 @@ Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.h
 | identifiers	| Identifier[]	| An array of identifiers the provider has determined to be associated with the form
 | created_date	| datetime	| Date and Time of creation
 | modified_date	| datetime	| Date and Time of last modification
+| action_date | datetime  | Date and Time the submission was made by the person
 | person	| Person*	| An embedded person that made the submission on the referenced form
 | form	| Form*	| A reference to the form this submission is related to
 | question_answers	| Question_Answers[]* | A Collection of Question Answer resources related to this submission
