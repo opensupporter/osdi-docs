@@ -14,14 +14,16 @@ People have names, email addresses, and other information, and they have associa
 
 ### Sections:
 
-* Endpoints and URL structures
-* Field names and descriptions
-* Links
-* Scenario: Retrieving a collection of person resources (GET)
-* Scenario: Retrieving an individual person resource (GET)
-* Scenario: Creating a new person (POST)
-* Scenario: Modifying a person (PUT)
-* Scenario: Deleting a person (DELETE)
+* [Endpoints and URL structures](#endpoints)
+* [Field names and descriptions](#fields)
+* [Links](#links)
+* [Scenario: Retrieving a collection of person resources (GET)](#get)
+* [Scenario: Retrieving an individual person resource (GET)](#get-individual)
+* [Scenario: Creating a new person (POST)](#post)
+* [Scenario: Modifying a person (PUT)](#put)
+* [Scenario: Deleting a person (DELETE)](#delete)
+
+<a name="endpoints"></a>
 
 ## Endpoints and URL structures
 
@@ -37,7 +39,9 @@ People resources live exclusively at the above endpoint. The endpoint returns a 
 
 `https://osdi-sample-system.org/api/v1/people/[id]`
 
-To address a specific person, use their identifier without the system prefix to construct a URL, like https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3
+To address a specific person, use their identifier without the system prefix to construct a URL, like `https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3`
+
+_[Back to top...](#)_
 
 
 ## Field names and descriptions
