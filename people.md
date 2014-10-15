@@ -3,7 +3,7 @@ layout: default
 title: Person
 ---
 
-# People
+# Person
 
 This document defines the Person resource. 
 
