@@ -14,16 +14,15 @@ People have names, email addresses, and other information, and they have associa
 
 ### Sections:
 
-* [Endpoints and URL structures](#endpoints)
-* [Field names and descriptions](#fields)
+* [Endpoints and URL structures](#endpoints-and-url-structures)
+* [Field names and descriptions](#field-names-and-descriptions)
 * [Links](#links)
-* [Scenario: Retrieving a collection of person resources (GET)](#get)
-* [Scenario: Retrieving an individual person resource (GET)](#get-individual)
-* [Scenario: Creating a new person (POST)](#post)
-* [Scenario: Modifying a person (PUT)](#put)
-* [Scenario: Deleting a person (DELETE)](#delete)
+* [Scenario: Retrieving a collection of person resources (GET)](#scenario-retrieving-a-collection-of-person-resources-get)
+* [Scenario: Retrieving an individual person resource (GET)](#scenario-scenario-retrieving-an-individual-person-resource-get)
+* [Scenario: Creating a new person (POST)](#scenario-creating-a-new-person-post)
+* [Scenario: Modifying a person (PUT)](#scenario-modifying-a-person-put)
+* [Scenario: Deleting a person (DELETE)](#scenario-deleting-a-person-delete)
 
-<a name="endpoints"></a>
 
 ## Endpoints and URL structures
 
@@ -41,7 +40,7 @@ People resources live exclusively at the above endpoint. The endpoint returns a 
 
 To address a specific person, use their identifier without the system prefix to construct a URL, like `https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3`
 
-_[Back to top...](#)_
+_[Back to top...](#person)_
 
 
 ## Field names and descriptions
@@ -125,6 +124,8 @@ The field names for a person, with standard names, punctuation and capitalizatio
 |custom_fields	|hash	|A hash of key/value pairs associated with the person created by a user rather than a service or vendor.
 |custom_fields.[key]	|string	|The key associated with this custom field, with a corresponding value as a string. May be prefixed by servers based on naming conventions they document to control how collisions across systems and data sets occur.
 
+_[Back to top...](#person)_
+
 ## Links
 
 The links associated with this person, available in the links section of the resource. 
@@ -140,6 +141,8 @@ The links associated with this person, available in the links section of the res
 |signatures      |A link to the collection of petition signatures associated with the person.
 |question_answers	|A link to the collection of answers to questions associated with the person.
 |taggings 	|A link to the collection of taggins associated with the person.
+
+_[Back to top...](#person)_
 
 
 ## Scenario: Retrieving a collection of person resources (GET)
@@ -382,7 +385,9 @@ Cache-Control: max-age=0, private, must-revalidate
     ]
   }
 }
-```			
+```	
+
+_[Back to top...](#person)_		
 
 ## Scenario: Scenario: Retrieving an individual person resource (GET)
 
@@ -539,6 +544,9 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```
 
+_[Back to top...](#person)_
+
+
 ## Scenario: Creating a new person (POST)
 
 You can create a new person directly by posting to the person signup helper endpoint defined on the AEP and potentially in other places. Systems may also allow you to create new people by posting an action they've taken either on an existing action resource or a new one you create with the API. See the documentation describing each action type (petitions, events, forms, fundraising pages) and each individual action record (signatures, attendance, submissions, donations) for details.
@@ -679,6 +687,9 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```
 
+_[Back to top...](#person)_
+
+
 ## Scenario: Modifying a person (PUT)
 
 You can updating a person by calling a PUT operation on that person's resource endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
@@ -778,6 +789,8 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```
 
+_[Back to top...](#person)_
+
 
 ## Scenario: Deleting a person (DELETE)
 
@@ -804,3 +817,5 @@ Cache-Control: max-age=0, private, must-revalidate
   "notice": "This user was successfully deleted."
 }
 ```
+
+_[Back to top...](#person)_
