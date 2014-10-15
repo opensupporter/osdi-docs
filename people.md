@@ -134,7 +134,6 @@ The links associated with this person, available in the links section of the res
 
 |Name          |Description
 |-----------   	|--------------
-
 |donations      |A link to the collection of donations associated with the person.
 |submissions      |A link to the collection of form submissions associated with the person.
 |attendance      |A link to the collection of event attendances associated with the person.
