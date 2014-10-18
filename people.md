@@ -158,20 +158,6 @@ The helpers that operate on people are described in the table below. Click on th
 
 _[Back to top...](#person)_
 
-## Helpers
-
-|Name		|Location	|Description
-|---------------|---------------|--------------------------------
-| person_signup_helper | AEP    |Provides the ability to signup a person along with tags
-
-### person_signup_helper
-The Person Signup Helper provides a simple method for adding a new person to a collection. It also supports adding tags and list membership info.
-
-The Person Signup helper can be determined in the AEP with the "osdi:person_signup_helper" link relation
-
-The response to a Person Signup Helper is the full representation of the person.
-
-Some initial implementations may only support helpers, direct RESTful access may not be supporter. In those cases,_links may be omitted in responses.
 
 ## Scenario: Retrieving a collection of person resources (GET)
 
