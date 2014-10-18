@@ -17,6 +17,7 @@ People have names, email addresses, and other information, and they have associa
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Field names and descriptions](#field-names-and-descriptions)
 * [Links](#links)
+* [Helpers](#helpers)
 * [Scenario: Retrieving a collection of person resources (GET)](#scenario-retrieving-a-collection-of-person-resources-get)
 * [Scenario: Retrieving an individual person resource (GET)](#scenario-scenario-retrieving-an-individual-person-resource-get)
 * [Scenario: Creating a new person (POST)](#scenario-creating-a-new-person-post)
@@ -139,7 +140,21 @@ The links associated with this person, available in the links section of the res
 |attendance      |A link to the collection of event attendances associated with the person.
 |signatures      |A link to the collection of petition signatures associated with the person.
 |question_answers	|A link to the collection of answers to questions associated with the person.
-|taggings 	|A link to the collection of taggins associated with the person.
+|taggings 	|A link to the collection of taggings associated with the person.
+|items 	|A link to the collection of list items associated with the person.
+
+_[Back to top...](#person)_
+
+
+## Helpers
+
+Helpers faciliate combined creation operations (POST) that are commonly performed by users. Each resource may have one or more associated helpers, which perform different operations and have separate syntax. Some initial OSDI implementations may only support helpers, rather than full RESTful access.
+
+The helpers that operate on people are described in the table below. Click on the helper to view its documentation and syntax.
+
+|Name          |Description
+|-----------   	|--------------
+|person_signup_helper      |Allows the creation of a person and associated tag and list membership.
 
 _[Back to top...](#person)_
 
@@ -335,8 +350,11 @@ Cache-Control: max-age=0, private, must-revalidate
           "osdi:donations": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/donations"
           },
-          "osdi:donations": {
+          "osdi:taggings": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+          },
+          "osdi:items": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/items"
           }
         }
       },
@@ -391,6 +409,9 @@ Cache-Control: max-age=0, private, must-revalidate
           },
           "osdi:taggings": {
             "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+          },
+          "osdi:items": {
+            "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/items"
           }
         }
       },
@@ -550,9 +571,12 @@ Cache-Control: max-age=0, private, must-revalidate
     "osdi:donations": {
       "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/donations"
     },
-    "osdi:donations": {
+    "osdi:taggings": {
       "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
-    }
+    },
+    "osdi:items": {
+        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/items"
+      }
   }
 }
 ```
@@ -562,67 +586,53 @@ _[Back to top...](#person)_
 
 ## Scenario: Creating a new person (POST)
 
-You can create a new person directly by posting to the person signup helper endpoint defined on the AEP and potentially in other places. Systems may also allow you to create new people by posting an action they've taken either on an existing action resource or a new one you create with the API. See the documentation describing each action type (petitions, events, forms, fundraising pages) and each individual action record (signatures, attendance, submissions, donations) for details.
-
-The person signup helper provides a simple method for adding a new person to a collection. It also supports adding tags and list membership info.
-
-The response to a person signup helper post is the full representation of the person that was created.
-
-Some initial implementations may only support helpers, direct RESTful access may not be supported. In those cases, the _links section may be omitted in responses.
-
-When you post to the person signup helper, include a person hash describing the person with the spec defined above, and arrays of strings corresponding to the tags and lists you want to add in the "add_tags" and "add_lists" arrays.
+Posting to the people collection endpoint will allow you to create a new person. The response is the new person that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
 **Request**
 
 ```javascript
-POST https://osdi-sample-system.org/api/v1/people/person_signup_helper
+POST https://osdi-sample-system.org/api/v1/people/
 
 Header:
 OSDI-API-Token:[your api key here]
 
 {
-    "person" : {
-        "family_name": "Edwin",
-        "given_name": "Labadie",
-        "additional_name": "Marques",
-        "origin_system": "OpenSupporter",
-        "email_addresses": [
-            {
-                "address":"test-3@example.com",
-                "primary": true,
-                "address_type": "Personal"
-            }
-        ],
-        "postal_addresses": [
-            {
-                "primary": true,
-                "address_lines": [
-                    "935 Ed Lock"
-                ],
-                "locality": "New Dudley",
-                "region": "MN",
-                "postal_code": "17678",
-                "country": "RU",
-                "address_type": "Home",
-                "status": "Verified"
-            },
-        "phone_numbers": [
-            {
-                "primary": true,
-                "number": 19876543210,
-                "number_type": "Mobile",
-                "sms_capable": true
-            }
-        ],
-        "gender": "Male"
-    }
-    "add_tags" : [ 
-    	"edsiek24d", 
-    	"834kjd8830d" 
+	"identifiers": [
+    	"foreign_system:1"
+	],
+    "family_name": "Edwin",
+    "given_name": "Labadie",
+    "additional_name": "Marques",
+    "origin_system": "OpenSupporter",
+    "email_addresses": [
+        {
+            "address":"test-3@example.com",
+            "primary": true,
+            "address_type": "Personal"
+        }
     ],
-    "add_lists" : [ 
-    	"uejd7623dd" 
-    ]
+    "postal_addresses": [
+        {
+            "primary": true,
+            "address_lines": [
+                "935 Ed Lock"
+            ],
+            "locality": "New Dudley",
+            "region": "MN",
+            "postal_code": "17678",
+            "country": "RU",
+            "address_type": "Home",
+            "status": "Verified"
+        },
+    "phone_numbers": [
+        {
+            "primary": true,
+            "number": 19876543210,
+            "number_type": "Mobile",
+            "sms_capable": true
+        }
+    ],
+    "gender": "Male"
 }
 
 ```
@@ -638,6 +648,7 @@ Cache-Control: max-age=0, private, must-revalidate
 {
     "identifiers": [
       "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+      "foreign_system:1"
     ],
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
@@ -693,8 +704,11 @@ Cache-Control: max-age=0, private, must-revalidate
       "osdi:donations": {
         "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/donations"
       },
-      "osdi:donations": {
+      "osdi:taggings": {
         "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/taggings"
+      },
+      "osdi:items": {
+        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/items"
       }
     }
 }
@@ -795,8 +809,11 @@ Cache-Control: max-age=0, private, must-revalidate
       "osdi:donations": {
         "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/donations"
       },
-      "osdi:donations": {
+      "osdi:taggings": {
         "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/taggings"
+      },
+      "osdi:items": {
+        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/items"
       }
     }
 }
