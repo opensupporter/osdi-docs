@@ -25,7 +25,7 @@ A query is a collection of resources that fit a set of criteria.
 # Results
 A result is an individual member of a query, linked to a resource type such as a person. A result can be of any resource type. Results are unique within their query.
 
-*Note:*: Because results represent the actual results of a query in real time, unlike other similar resources (like list items), resources that results link to will not display a link to all results for that resource, because this would cause the server to have to re-run all queries to identify current matching status on call. For example, a person resource should not have a link to all results that link to that person, as this would easily cause high server load as the system re-runs all queries to determine which queries that person matches at that moment.
+*Note:* Because results represent the actual results of a query in real time, unlike other similar resources (like list items), resources that results link to will not display a link to all results for that resource, because this would cause the server to have to re-run all queries to identify current matching status on call. For example, a person resource should not have a link to all results that link to that person, as this would easily cause high server load as the system re-runs all queries to determine which queries that person matches at that moment.
 
 
 | name 	| type	| description	|
