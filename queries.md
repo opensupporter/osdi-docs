@@ -70,7 +70,7 @@ A result is an individual member of a query, linked to a resource type such as a
 				"self": {
             				"href": "https://opensupporter.org/api/v1/queries/23"
           			},
-          			"osdi:items": {
+          			"osdi:results": {
             				"href": "https://actionnetwork.org/api/v1/queries/23/results"
           			}
 			}
@@ -108,7 +108,7 @@ A result is an individual member of a query, linked to a resource type such as a
 			"self": {
             			"href": "https://opensupporter.org/api/v1/queries/23"
           		},
-          		"osdi:items": {
+          		"osdi:results": {
             			"href": "https://actionnetwork.org/api/v1/queries/23/results"
           		}
 		}
