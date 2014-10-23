@@ -57,7 +57,6 @@ The field names for a person, with standard names, punctuation and capitalizatio
 |origin_system	|string		|A human readable string identifying where this person originated. May be used in the user interface for this purpose.
 |created_date	|datetime	|The date and time the resource was created on the local system.
 |modified_date	|datetime	|The date and time the resource was last modified on the local system.
-|modified_by	|osdi:person	|An embedded person resource representing the last editor of this person resource.
 |family_name      |string     |The person's last name.
 |given_name     |string     |The person's first name.
 |additional_name    |string     |An additional name not included in family or given. Usually a middle name.
@@ -133,15 +132,16 @@ The links associated with this person, available in the links section of the res
 
 **Note:** As with the entire OSDI specification, the specific links a compliant system supplies will vary between each system. In addition, systems may choose to embed a linked resource directly in the response in addition to linking to it in the links section, using the standard `_embedded` syntax described in the general overview documentation.
 
-|Name          |Description
-|-----------   	|--------------
-|donations      |A link to the collection of donations associated with the person.
-|submissions      |A link to the collection of form submissions associated with the person.
-|attendance      |A link to the collection of event attendances associated with the person.
-|signatures      |A link to the collection of petition signatures associated with the person.
-|question_answers	|A link to the collection of answers to questions associated with the person.
-|taggings 	|A link to the collection of taggings associated with the person.
-|items 	|A link to the collection of list items associated with the person.
+|Name          	|Type		|Description
+|----------- 	|------		|------------
+|donations		|Donations[]*  |A link to the collection of donations associated with the person.
+|submissions	|Submissions[]*  |A link to the collection of form submissions associated with the person.
+|attendance		|Attendances[]*        |A link to the collection of event attendances associated with the person.
+|signatures		|Signatures[]*        |A link to the collection of petition signatures associated with the person.
+|question_answers		|Question Answers[]*  |A link to the collection of answers to questions associated with the person.
+|taggings		|Taggings[]*   	|A link to the collection of taggings associated with the person.
+|items		|Items[]*   	|A link to the collection of list items associated with the person.
+|modified_by		|Person*  	|A link to a person resource representing the last editor of this person resource.
 
 _[Back to top...](#person)_
 
