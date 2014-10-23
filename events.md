@@ -1,6 +1,37 @@
 # Events
 
-This page defines Events, EventRSVPS
+This page defines Events and Attendance resources.  
+
+Events can be used to represent things like fundraisers, phonebanks, or anything else.
+
+Attendance resources represent a Person's attendance at an event. The Attendance has attributes to represent various states like "Accepted" or if they actually attended.
+
+### Sections
+
+* [Endpoints and URL structures](#endpoints-and-url-structures)
+* [Field names and descriptions](#field-names-and-descriptions)
+* [Links](#links)
+* [Helpers](#helpers)
+* [Scenario: Signup with attendance helper](#scenario-retrieving-a-collection-of-person-resources-get)
+* [Scenario: Single resource retrieval
+
+## Endpoints and URL structures
+
+While OSDI does not specify specific endpoints and link structures for compliant systems to use, commonly used conventions are shown below. The links section of each resource or collection, described more fully below, should be your cononical source for the exact URLs pointing to specific other resources or collections.
+
+`https://osdi-sample-system.org/api/v1/events`
+
+EventsPeople resources live exclusively at the above endpoint. The endpoint returns a collection of all the people in the OSDI system's database associated with the given API key.
+
+**Endpoints:**
+
+**URL Structures:**
+
+`https://osdi-sample-system.org/api/v1/events/[id]`
+
+To address a specific event, use their identifier without the system prefix to construct a URL, like `https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3`
+
+_[Back to top...](#events)_
 
 ## Events
 
@@ -21,8 +52,6 @@ This page defines Events, EventRSVPS
 | summary	| string	| summary of event
 | browser_url | string | A URL string pointing to the publicly available petition page on the web
 | location	| Address	| A single instance of Address representing the location of the event
-| creator	| Person*	| A single instance of Person representing the creator of the event
-| organizer | Person*	| A single instance of Person representing the organizer of the event
 | start_date		| datetime	| start time for the event
 | end_date		| datetime	| end time for the event
 | all_day_date| date	| date only for all day events
@@ -42,13 +71,21 @@ This page defines Events, EventRSVPS
 | capacity  | integer	| the max capacity for attendees of an event
 | total_accepted| integer | read-only computed property of attending guests count
 
+## Links
+| Name		|  Type		| Description
+|-----------|-----------|----------------------------------
+| creator	| Person*	| A single instance of Person representing the creator of the event
+| organizer | Person*	| A single instance of Person representing the organizer of the event
+
+The links associated with this event, available in the links section of the resource. 
+
+**Note:** As with the entire OSDI specification, the specific links a compliant system supplies will vary between each system. In addition, systems may choose to embed a linked resource directly in the response in addition to linking to it in the links section, using the standard `_embedded` syntax described in the general overview documentation.
+
 ## Attendance
 
 | Name		| Type		| Description
 |-----------|-----------|------------------
 | id		| string	| Identifier
-| event		| Event*	| Event that this attendance refers to
-| person	| Person*	| Person that is attending the referenced event
 | status	| string	| The attendee's response status. Possible values
 | 			|			| "declined" The attendee declined
 |			|			| "tentative" The attendee tentatively accepted
@@ -56,7 +93,15 @@ This page defines Events, EventRSVPS
 |			|			| "needs action" The attendee needs help
 | attended 	| boolean	| true if the person actually attended
 | comment	| string	| An optional comment from the attendee
+
+
+### Links
+| Name		| Type		| Description
+|-----------|-----------|------------------
+| event		| Event*	| Event that this attendance refers to
+| person	| Person*	| Person that is attending the referenced event
 | invited_by | Person*	| Person that invited this attendee.  This is expected to be used for guests
+
 
 ## Event Guests
 To handle guests, additional attendance records are created with the invited_by attribute set to point to the attendee this guest is associated with.
@@ -64,7 +109,9 @@ To handle guests, additional attendance records are created with the invited_by 
 If guest information (such as name, etc) is not given, then the person resource is null.
 
 
-## Event Attendance Helper
+## Helpers
+
+### Event Attendance Helper
 The Event Attendance Helper provides a simple method for registering an RSVP for an event.
 
 The Event Attendance Helper URL can be determined from the donations collection under the "event_attendance_helper" link relation on a specific event resource
@@ -79,9 +126,9 @@ The Event Attendance Helper takes the following parameters in its body
 * Optional Inlined "invited_by" Person - A "person" attribute containing any valid attributes of a person resource are valid in the input representation
 * Attendance attributes - any valid Attendance resource attribute
 
-### Example
+### Scenario: Event signup using attendance helper
 
-#### Request
+** Request **
 ```javascript
 POST /api/v1/events/507/event_attendance_helper
 
@@ -104,7 +151,7 @@ POST /api/v1/events/507/event_attendance_helper
 
 } 
 ````
-#### Response
+** Response **
 ````
 {
 	"status" : "accepted",
@@ -122,11 +169,9 @@ POST /api/v1/events/507/event_attendance_helper
 
 ````
 
-# Single resource retrieval
+### Scenario: Single resource retrieval
 
-## default embed policy
-> TBD
-
+** Request
 ## JSON Representation
 
 	{
