@@ -101,7 +101,7 @@ The links associated with this person, available in the links section of the res
 |Name          |Description
 |-----------    |--------------
 |submissions      |A link to the collection of form submissions associated with the form.
-|question         |A link to the collection of questions associated with the form.
+|question_answers |A link to the collection of question-answer pairs associated with the form.
 
 _[Back to top...](#form)_
 
@@ -110,7 +110,7 @@ _[Back to top...](#form)_
 
 ## Default embed policy
 
-When retreiving a form resource, the creator can be embededed, but the submissions collection should only be linked.
+When retreiving a form resource, the creator can be embedded, but the submissions collection should only be linked.
 
 When retreiving a submission or list of submissions, the person, the form related to the submission, and the related question answers can be embedded.
 
