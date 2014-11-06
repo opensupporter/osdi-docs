@@ -16,7 +16,7 @@ Taggings link an individual person or other item type to a specific tag.  For ex
 
 |Name   	|Type   |Description
 |---    	|---    |---
-|resource-type  |link | The tagged item
+|resource |link | The tagged item
 |item_type | string | The type of resource to use as a key in links collection. eg "osdi:person"
 |tag    	|link |The tag itself
 
