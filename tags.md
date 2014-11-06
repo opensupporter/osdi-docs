@@ -12,7 +12,7 @@ Tags are binary pieces of information that apply to individual people.
 |description    |string |plaintext meaning of the tag
 
 # Tagging
-Tags are binary pieces of information that apply to individual people.
+Taggings link an individual person or other item type to a specific tag.  For example: a tagging links a tag to a person or event.
 
 |Name   	|Type   |Description
 |---    	|---    |---
