@@ -20,11 +20,11 @@ A `tagging` is a one-to-one collection between a `tag` and another resource such
 |resource |link | The tagged item
 |tag    	|link |The tag itself
 
-Additional comments about `resource_type`: As a `tagging` can link a `tag` to a variety of resources (`person`, `event`, `donation`,etc) the `resource_type` variable servers two primary purposes.  
+Additional comments about `resource_type`: As a `tagging` can link a `tag` to a variety of resources (`person`, `event`, `donation`,etc) the `resource_type` variable serves two primary purposes.  
 
 The first purpose is that it is used to determine the type of resource to which a `tagging` should be applied when a non-implied `tagging` is created via POST.  
 
-The second purpose is that the resource type allows resources to be grouped together by type in a response object.  For example, the same `tag` may be applied to both an `event` and a `person` using a tagging.  When creating a response, the server will not return both `event` and `person` resources in a single collection, but rather group the `event` and `person` resources into seperate collections using the `resource_type` as a the key.  This allows the consumer of the API to be able to quickly look only at the tagged resource types for which they are concerned. I.E. A consumer might only be interested in which `event` resources are linked to a `tag` through a `tagging` and not interested in which `person` resources also are linked to the same `tag` through a `tagging`.
+The second purpose is that `resource_type` allows resources to be grouped together by type in a response object.  For example, the same `tag` may be applied to both an `event` and a `person` using a tagging.  When creating a response, the server will not return both `event` and `person` resources in a single collection, but rather group the `event` and `person` resources into seperate collections using the `resource_type` as a the key.  This allows the consumer of the API to be able to quickly look only at the tagged resource types for which they are concerned. I.E. A consumer might only be interested in which `event` resources are linked to a `tag` through a `tagging` and not interested in which `person` resources also are linked to the same `tag` through a `tagging`.
 
 # Scenarios
 
