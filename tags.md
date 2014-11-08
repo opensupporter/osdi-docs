@@ -12,13 +12,19 @@ Tags are binary pieces of information that apply to individual people.
 |description    |string |plaintext meaning of the tag
 
 # Tagging
-Taggings link an individual person or other item type to a specific tag.  For example: a tagging links a tag to a person or event.
+Taggings are a one-to-one collection between a tag and another resource such as an `event` or `person`. 
 
 |Name   	|Type   |Description
 |---    	|---    |---
+|resource_type | string | The type of resource being linked, such as "osdi:person" or "osdi"event".  A more detailed explanation is provided below.
 |resource |link | The tagged item
-|item_type | string | The type of resource to use as a key in links collection. eg "osdi:person"
 |tag    	|link |The tag itself
+
+Additional comments about `resource_type`: As a `tagging` can link a `tag` to a variety of resources (`person`, `event`, `donation`,etc) the `resource_type` variable servers two primary purposes.  
+
+The first purpose is that it is used to determine the type of resource to which a tagging should be applied when a non-implied tagging is created via POST.  
+
+The second purpose is that the resource type allows resources to be grouped together by type in a response object.  For example, the same `tag` may be applied to both an `event` and a `person` using a tagging.  When creating a response, the server will not return both `event` and `person` resources in a single collection, but rather group the `event` and `person` resources into seperate collections using the `resource_type` as a the key.  This allows the consumer of the API to be able to quickly look only at the tagged resource types for which they are concerned. I.E. A consumer might only be interested in which `event` resources are linked to a `tag` through a `tagging` and not interested in which `person` resources also are linked to the same `tag` through a `tagging`.
 
 # Scenarios
 
@@ -138,7 +144,7 @@ User: Martha Stewart, url: http://api.opensupporter.org/api/v1/people/69/tagging
     "osdi:tag": {
       "href": "http://api.opensupporter.org/api/v1/tags/8"
     },
-    "osdi:person": {
+    "osdi:person": {  
       "href": "http://api.opensupporter.org/api/v1/people/69"
     }
   }
