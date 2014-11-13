@@ -37,7 +37,7 @@ This page defines the Donation resource.
 |donor      	|Person*	|The Person who made the donation.
 |fundraising_page|FundraisingPage* |The related fundraising page the donation was taken on
 
-# Embedded Objects
+# Objects
 
 Donations makes use of the Recipient and Payment objects defined below.
 
