@@ -9,6 +9,8 @@ This page defines the Person resource and several related objects: EmailAddress,
 
 ## Person
 
+{% include global_fields.md %}
+
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 |source         |string         |{{ site.source_description}}
