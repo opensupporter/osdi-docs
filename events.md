@@ -2,6 +2,8 @@
 
 This page defines Events, EventRSVPS
 
+{% include global_fields.md %}
+
 ## Events
 
 | Name		| Type		| Description
