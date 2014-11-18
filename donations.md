@@ -39,16 +39,6 @@ An object representing the recipient of a donation.
 |legal_name		|string		|The recipient's legal name. Example: Obama for America
 |amount  		|decimal	|The amount donated to the recipient
 
-## Links
-
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|modified_by	|Person*	|The Person who last modified the resource.
-|donor      	|Person*	|The Person who made the donation.
-|fundraising_page|FundraisingPage* |The related fundraising page the donation was taken on
-
-
-
 ## Payment
 
 An object representing the payment details of a donation.
@@ -58,6 +48,14 @@ An object representing the payment details of a donation.
 |method			|enum		|A flexible enumeration of "Credit Card", "Check", "Cash", "Electronic Funds Transfer"
 |reference_number |string		|A check number, transaction ID, or some other information referencing the payment
 |authorization_stored |boolean	|Indicates if payment information has been stored for future automatic payments
+
+## Links
+
+| Name          | Type      | Description
+|-----------    |-----------|--------------
+|modified_by	|Person*	|The Person who last modified the resource.
+|donor      	|Person*	|The Person who made the donation.
+|fundraising_page|FundraisingPage* |The related fundraising page the donation was taken on
 
 # Helpers
 
