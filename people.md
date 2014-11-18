@@ -11,7 +11,8 @@ This page defines the Person resource and several related objects: EmailAddress,
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
-{% include common_fields.html %} |family_name      |string     |Last name
+|source         |string         |{{ site.source_description}}
+|family_name      |string     |Last name
 |given_name     |string     |First name
 |additional_name    |string     |An additional name not included in family or given. Usually a middle name.
 |honorific_prefix           | string    |An honorific prefix like "Dr", "Mr" etc. Free-form field
