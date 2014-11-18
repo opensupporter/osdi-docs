@@ -11,7 +11,7 @@ This page defines the Person resource and several related objects: EmailAddress,
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
-{ $include common_fields.html $}
+{% include common_fields.html %}
 |family_name      |string     |Last name
 |given_name     |string     |First name
 |additional_name    |string     |An additional name not included in family or given. Usually a middle name.
