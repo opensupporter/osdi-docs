@@ -20,7 +20,7 @@ This page defines the Donation resource.
 |credited_amount|number		| Amount credited back to donor in specified currency
 |credited_date	|datetime	| Date of the credit
 |currency		|string		| ISO 4217 designation of currency. Example: USD, JPY
-|recipients		|Recipient[]| Array of recipients associated with the donation
+|recipients		|[Recipient](#Recipient)[]| Array of recipients associated with the donation
 |payment		|Payment	| The payment details
 |subscription_instance|string| A sequence number or some other value unique to this instance of the donation in the context of a subscription. Examples: 5, JAN-2014
 |voided			|boolean	|Indicates if the donation has been voided
@@ -28,6 +28,16 @@ This page defines the Donation resource.
 |url			|string		|URL at which the donation was taken
 |sources		|string[]   |Array of sources associated with the donation
 |attributions	|string[]   |Array of attributions associated with the donation
+
+## Links
+
+| Name          | Type      | Description
+|-----------    |-----------|--------------
+|modified_by	|Person*	|The Person who last modified the resource.
+|donor      	|Person*	|The Person who made the donation.
+|fundraising_page|FundraisingPage* |The related fundraising page the donation was taken on
+
+# Related Objects
 
 ## Recipient
 
@@ -49,13 +59,6 @@ An object representing the payment details of a donation.
 |reference_number |string		|A check number, transaction ID, or some other information referencing the payment
 |authorization_stored |boolean	|Indicates if payment information has been stored for future automatic payments
 
-## Links
-
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|modified_by	|Person*	|The Person who last modified the resource.
-|donor      	|Person*	|The Person who made the donation.
-|fundraising_page|FundraisingPage* |The related fundraising page the donation was taken on
 
 # Helpers
 
