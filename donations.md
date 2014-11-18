@@ -29,18 +29,6 @@ This page defines the Donation resource.
 |sources		|string[]   |Array of sources associated with the donation
 |attributions	|string[]   |Array of attributions associated with the donation
 
-## Links
-
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|modified_by	|Person*	|The Person who last modified the resource.
-|donor      	|Person*	|The Person who made the donation.
-|fundraising_page|FundraisingPage* |The related fundraising page the donation was taken on
-
-# Objects
-
-Donations makes use of the Recipient and Payment objects defined below.
-
 ## Recipient
 
 An object representing the recipient of a donation.
@@ -50,6 +38,16 @@ An object representing the recipient of a donation.
 |display_name	|string		|The recipient's display name. Example: Barack Obama
 |legal_name		|string		|The recipient's legal name. Example: Obama for America
 |amount  		|decimal	|The amount donated to the recipient
+
+## Links
+
+| Name          | Type      | Description
+|-----------    |-----------|--------------
+|modified_by	|Person*	|The Person who last modified the resource.
+|donor      	|Person*	|The Person who made the donation.
+|fundraising_page|FundraisingPage* |The related fundraising page the donation was taken on
+
+
 
 ## Payment
 
