@@ -646,6 +646,7 @@ In this specification, when defining models, the following notational convention
 |	string	| A string
 |	datetime| A date and time representation.  In JSON this is a string.  The contents of this attribute shall be  ISO 8601 
 | object	| A complex attribute represented by a JSON object
+| decimal	| A number in decimal notation such as 12.15. Used for currency.
 | flexenum  | One of a list of values, or another value. For example, for party_identification on people, if the person is a Democrat they should be marked as "Democratic" with that exact spelling and casing, but if they are not one of the defined types then you can use another value instead, such as "Working Families".
 
 In the description of string types, sometimes the specification will list a set of acceptable values such as

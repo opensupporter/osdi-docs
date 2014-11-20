@@ -46,8 +46,8 @@ This page defines the resources FundraisingPage and Donation, and the object Rec
 |origin_system	|string		| Human readable text identifiying the system where this donation was created.
 |donor			|Person*    |Donor data collected at the time of donation
 |action_date  |datetime     	|Date of the donation
-|amount         |number		|Amount of total donation (after any credits) in specified currency
-|credited_amount|number		|Amount credited back to donor in specified currency
+|amount         |decimal		|Amount of total donation (after any credits) in specified currency
+|credited_amount|decimal		|Amount credited back to donor in specified currency
 |credited_date	|datetime	|Date of the credit
 |currency		|string		|ISO 4217 designation of currency. Example: USD, JPY
 |recipients		|Recipient[]|Array of recipients associated with the donation
