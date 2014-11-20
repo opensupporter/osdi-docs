@@ -45,9 +45,10 @@ This page defines the Person resource and several related objects: EmailAddress,
 
 | Name          | Type      | Description
 |----------------|-----------|----------------
-| primary       | boolean   |Denotes if this is the primary address.  A person can have only one primary address
+| primary       | boolean   | Denotes if this is the primary address.  A person can have only one primary address
 | address       | string    | The actual email address according to RFC822
 | address_type  | string    | Flexenum of Personal, Work, Other
+| subscribed    | boolean   | Indicates whether or not this email address is subscribed to at least one email list (read only)
 
 # Phone Number
 
