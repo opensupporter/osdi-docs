@@ -28,19 +28,18 @@ People have names, email addresses, and other information, and they have associa
 {% include endpoints_and_url_structures.md %}
 
 
-## Field names and descriptions
+## Fields
 
-The field names for a person, with standard names, punctuation and capitalization, and values where appropriate. 
+{% include fields_intro.md %}
 
-**Note:** As with the entire OSDI specification, the specific fields a compliant system implements will vary between each system, as will the fields each system requires when creating or updating resources, which fields are writeable, and the operations you are allowed to perform on each resource.
+{% include global_fields.md %}
 
+### People Fields
+
+A list of fields specific to the person resource.
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-|identifiers	|strings[]	|A unique string array of identifiers in the format `[system name]:[id]`. See the general concepts document for more information about identifiers.
-|origin_system	|string		|A human readable string identifying where this person originated. May be used in the user interface for this purpose.
-|created_date	|datetime	|The date and time the resource was created on the local system.
-|modified_date	|datetime	|The date and time the resource was last modified on the local system.
 |family_name      |string     |The person's last name.
 |given_name     |string     |The person's first name.
 |additional_name    |string     |An additional name not included in family or given. Usually a middle name.
@@ -50,14 +49,34 @@ The field names for a person, with standard names, punctuation and capitalizatio
 |gender_identity|string     |The self-described gender with which a person identifies. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
 |party_identification          |flexenum     |Flexenum describing the person's politcal party_identification. One of "None", "Democratic", "Republican", "Independent", or another free-form string.
 |source         |string     |Information about the source where this person record was acquired.   _Example: "facebook-ad-october"_
+|ethnicities|strings[]   |A unique string array representing a person's ethinicities.
+|languages_spoken|strings[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
+|employer|string    |The name of the person's employer.
+|employer_address|[Employer Address](#Employer Address)    |An object hash representing the postal address of the person's employer.
+|postal_addresses      |[Postal Addresses[]](#Postal Addresses)   |An array of postal address object hashes associated with the person.
+|email_addresses	|[Email Addresses[]](#Email Addresses)   |An array of email address object hashes associated with the person.
+|phone_numbers	|[Phone Numbers[]](#Phone Numbers)   |An array of phone number object hashes associated with the person.
+|profiles       | [Profiles[]](#Profiles) |An array of profile object hashes for online services related to the person.
+|custom_fields	|[Custom Fields](#Custom Fields)	|An object hash of key/value pairs associated with the person created by a user rather than a service or vendor.
+
+
+### Related Objects
+
+These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+#### Birthdate
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
 |birthdate      |object       |An object hash representing the birth date of the person.
 |birthdate.month|integer    |An integer representing the month of the birth date of the person.
 |birthdate.day  |integer    |An integer representing the day of the birth date of the person.
 |birthdate.year|integer     |An integer representing the 4 digit year of the birth date of the person.
-|ethnicities|strings[]   |A unique string array representing a person's ethinicities.
-|languages_spoken|strings[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
-|employer|string    |The name of the person's employer.
-|employer_address|object    |An object hash representing the postal address of the person's employer.
+
+#### Employer Address
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
 |employer_address.venue	|string	|Optional venue name at the employer address, useful for names of buildings. (ex: Smith Hall)
 |employer_address.address_lines	|strings[]	|An array of strings representing the employer's street address.
 |employer_address.locality	|string	|A city or other local administrative area.
@@ -70,8 +89,11 @@ The field names for a person, with standard names, punctuation and capitalizatio
 |employer_address.location.longitude	|float	|A positive or negative float number representing the longitude of the address.
 |employer_address.location.accuracy	|enum	|A value representing the accuracy of the geocode. One of "Rooftop" or "Approximate".
 |employer_address.status	|enum	|A value representing the status of the address. One of "Potential", "Verified", or "Bad".
-|occupation	|string  |The occupation of the person.
-|postal_addresses      |objects[]  |An array of postal address object hashes associated with the person.
+
+#### Postal Addresses
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
 |postal_addresses.primary	|boolean	|Denotes if this is the primary address. A person can have only one primary address.
 |postal_addresses.address_type	|enum	|The type of address. One of "Home", "Work", or "Mailing".
 |postal_addresses.venue	|string	|Optional venue name at the address, useful for names of buildings. (ex: Smith Hall)
@@ -86,11 +108,20 @@ The field names for a person, with standard names, punctuation and capitalizatio
 |postal_addresses.location.longitude	|float	|A positive or negative float number representing the longitude of the address.
 |postal_addresses.location.accuracy	|enum	|A value representing the accuracy of the geocode. One of "Rooftop" or "Approximate".
 |postal_addresses.status	|enum	|A value representing the status of the address. One of "Potential", "Verified", or "Bad".
-|email_addresses	|objects[]    |An array of email address object hashes associated with the person.
+|occupation	|string  |The occupation of the person.
+
+#### Email Addresses
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
 |email_addresses.primary	|boolean	|Denotes if this is the primary address. A person can have only one primary address.
 |email_addresses.address	|string	|The email address for the person.
 |email_addresses.address_type	|flexenum	|The type of email address. One of "Personal", "Work", "Other", or another value.
-|phone_numbers	|objects[]   |An array of phone number object hashes associated with the person.
+
+#### Phone Numbers
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
 |phone_numbers.primary	|string   |Denotes if this is the primary phone number. A person can have only one primary number.
 |phone_numbers.number	|string   |The phone number of the person. Must including country code and must be numeric characters only.
 |phone_numbers.extension	|string   |An optional associated extension for the number.
@@ -100,21 +131,25 @@ The field names for a person, with standard names, punctuation and capitalizatio
 |phone_numbers.country	|string   |The country code according to ISO 3166-1 Alpha-2.
 |phone_numbers.sms_capable	|boolean   |True if the number can accept SMS text messages.
 |phone_numbers.do_not_call	|boolean   |True if this number is registered on the US FCC Do Not Call Registry.
-|profiles       | objects[] |An array of profile object hashes for online services related to the person.
+
+#### Profiles
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
 |profiles.provider       | string |The provider name of the profile. _Example: "Facebook"_
 |profiles.id       | string |The unique identifier provided by the provider for the profile. _Example: "135165"_
 |profiles.url       | string |The URL to the person's web viewable profile. _Example: "http://facebook.com/john.doe"_
 |profiles.handle       | string |The handle name of the profile. Twitter handles should not include the "@" _Example: "johndoe"_
-|custom_fields	|object	|An object hash of key/value pairs associated with the person created by a user rather than a service or vendor.
+
+#### Custom Fields
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
 |custom_fields.[key]	|string	|The key associated with this custom field, with a corresponding value as a string. May be prefixed by servers based on naming conventions they document to control how collisions across systems and data sets occur.
 
-_[Back to top...](#person)_
+### Links
 
-## Links
-
-The links associated with this person, available in the links section of the resource. 
-
-**Note:** As with the entire OSDI specification, the specific links a compliant system supplies will vary between each system. In addition, systems may choose to embed a linked resource directly in the response in addition to linking to it in the links section, using the standard `_embedded` syntax described in the general overview documentation.
+{% include links_intro.md %}
 
 |Name          	|Type		|Description
 |----------- 	|------		|------------
@@ -127,7 +162,7 @@ The links associated with this person, available in the links section of the res
 |items		|Items[]*   	|A link to the collection of list items associated with the person.
 |modified_by		|Person*  	|A link to a person resource representing the last editor of this person resource.
 
-_[Back to top...](#person)_
+_[Back to top...](#)_
 
 
 ## Helpers
