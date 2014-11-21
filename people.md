@@ -25,23 +25,7 @@ People have names, email addresses, and other information, and they have associa
 * [Scenario: Deleting a person (DELETE)](#scenario-deleting-a-person-delete)
 
 
-## Endpoints and URL structures
-
-While OSDI does not specify specific endpoints and link structures for compliant systems to use, commonly used conventions are shown below. The links section of each resource or collection, described more fully below, should be your cononical source for the exact URLs pointing to specific other resources or collections.
-
-**Endpoints:**
-
-`https://osdi-sample-system.org/api/v1/people`
-
-People resources live exclusively at the above endpoint. The endpoint returns a collection of all the people in the OSDI system's database associated with the given API key.
-
-**URL Structures:**
-
-`https://osdi-sample-system.org/api/v1/people/[id]`
-
-To address a specific person, use their identifier without the system prefix to construct a URL, like `https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3`
-
-_[Back to top...](#person)_
+{% include endpoints_and_url_structures.md %}
 
 
 ## Field names and descriptions
