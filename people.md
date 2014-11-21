@@ -52,12 +52,12 @@ A list of fields specific to the person resource.
 |ethnicities|strings[]   |A unique string array representing a person's ethinicities.
 |languages_spoken|strings[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
 |employer|string    |The name of the person's employer.
-|employer_address|[Employer Address](#Employer Address)    |An object hash representing the postal address of the person's employer.
-|postal_addresses      |[Postal Addresses[]](#Postal Addresses)   |An array of postal address object hashes associated with the person.
-|email_addresses	|[Email Addresses[]](#Email Addresses)   |An array of email address object hashes associated with the person.
-|phone_numbers	|[Phone Numbers[]](#Phone Numbers)   |An array of phone number object hashes associated with the person.
-|profiles       | [Profiles[]](#Profiles) |An array of profile object hashes for online services related to the person.
-|custom_fields	|[Custom Fields](#Custom Fields)	|An object hash of key/value pairs associated with the person created by a user rather than a service or vendor.
+|employer_address|[Employer Address](#employer-address)    |An object hash representing the postal address of the person's employer.
+|postal_addresses      |[Postal Addresses[]](#postal-addresses)   |An array of postal address object hashes associated with the person.
+|email_addresses	|[Email Addresses[]](#email-addresses)   |An array of email address object hashes associated with the person.
+|phone_numbers	|[Phone Numbers[]](#phone-numbers)   |An array of phone number object hashes associated with the person.
+|profiles       | [Profiles[]](#profiles) |An array of profile object hashes for online services related to the person.
+|custom_fields	|[Custom Fields](#custom-fields)	|An object hash of key/value pairs associated with the person created by a user rather than a service or vendor.
 
 
 ### Related Objects
@@ -152,7 +152,7 @@ These JSON hashes included in the table above are broken out into their own tabl
 {% include links_intro.md %}
 
 |Name          	|Type		|Description
-|----------- 	|------		|------------
+|----------- 	|----------		|------------
 |donations		|Donations[]*  |A link to the collection of donations associated with the person.
 |submissions	|Submissions[]*  |A link to the collection of form submissions associated with the person.
 |attendance		|Attendances[]*        |A link to the collection of event attendances associated with the person.
