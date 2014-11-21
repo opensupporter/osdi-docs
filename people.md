@@ -152,7 +152,7 @@ These JSON hashes included in the table above are broken out into their own tabl
 {% include links_intro.md %}
 
 |Name          	|Type		|Description
-|----------- 	|----------		|------------
+|-----------    |-----------|--------------
 |donations		|Donations[]*  |A link to the collection of donations associated with the person.
 |submissions	|Submissions[]*  |A link to the collection of form submissions associated with the person.
 |attendance		|Attendances[]*        |A link to the collection of event attendances associated with the person.
