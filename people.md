@@ -183,13 +183,13 @@ _[Back to top...](#)_
 
 ## Related Resources
 
-* [#](Donation)
-* [#](Submission)
-* [#](Attendance)
-* [#](Signature)
-* [#](Question Answer)
-* [#](Tagging)
-* [#](Item)
+* [Donation](#)
+* [Submission](#)
+* [Attendance](#)
+* [Signature](#)
+* [Question Answer](#)
+* [Tagging](#)
+* [Item](#)
 
 
 ## Scenarios
