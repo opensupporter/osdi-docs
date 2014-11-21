@@ -15,14 +15,19 @@ People have names, email addresses, and other information, and they have associa
 ### Sections:
 
 * [Endpoints and URL structures](#endpoints-and-url-structures)
-* [Field names and descriptions](#field-names-and-descriptions)
-* [Links](#links)
+* [Fields](#field-names-and-descriptions)
+    * [Common Fields](#common-fields)
+    * [People Fields](#people-fields)
+    * [Related Objects](#related-objects)
+    * [Links](#links)
 * [Helpers](#helpers)
-* [Scenario: Retrieving a collection of person resources (GET)](#scenario-retrieving-a-collection-of-person-resources-get)
-* [Scenario: Retrieving an individual person resource (GET)](#scenario-scenario-retrieving-an-individual-person-resource-get)
-* [Scenario: Creating a new person (POST)](#scenario-creating-a-new-person-post)
-* [Scenario: Modifying a person (PUT)](#scenario-modifying-a-person-put)
-* [Scenario: Deleting a person (DELETE)](#scenario-deleting-a-person-delete)
+* [Related Resources](#related-resources)
+* [Scenarios](#scenarios)
+    * [Scenario: Retrieving a collection of person resources (GET)](#scenario-retrieving-a-collection-of-person-resources-get)
+    * [Scenario: Retrieving an individual person resource (GET)](#scenario-scenario-retrieving-an-individual-person-resource-get)
+    * [Scenario: Creating a new person (POST)](#scenario-creating-a-new-person-post)
+    * [Scenario: Modifying a person (PUT)](#scenario-modifying-a-person-put)
+    * [Scenario: Deleting a person (DELETE)](#scenario-deleting-a-person-delete)
 
 
 {% include endpoints_and_url_structures.md %}
@@ -167,18 +172,31 @@ _[Back to top...](#)_
 
 ## Helpers
 
-Helpers faciliate combined creation operations (POST) that are commonly performed by users. Each resource may have one or more associated helpers, which perform different operations and have separate syntax. Some initial OSDI implementations may only support helpers, rather than full RESTful access.
-
-The helpers that operate on people are described in the table below. Click on the helper to view its documentation and syntax.
+{% include helpers_intro.md %}
 
 |Name          |Description
-|-----------   	|--------------
+|-----------    |-----------
 |person_signup_helper      |Allows the creation of a person and associated tag and list membership.
 
-_[Back to top...](#person)_
+_[Back to top...](#)_
 
 
-## Scenario: Retrieving a collection of person resources (GET)
+## Related Resources
+
+* [#](Donation)
+* [#](Submission)
+* [#](Attendance)
+* [#](Signature)
+* [#](Question Answer)
+* [#](Tagging)
+* [#](Item)
+
+
+## Scenarios
+
+{% include scenarios_intro.md %}
+
+### Scenario: Retrieving a collection of person resources (GET)
 
 Person resources are sometimes presented as collections of people. For example, calling the people endpoint will return a collection of all the people stored in the system's database associated with your api key.
 
@@ -426,9 +444,9 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```	
 
-_[Back to top...](#person)_		
+_[Back to top...](#)_		
 
-## Scenario: Scenario: Retrieving an individual person resource (GET)
+### Scenario: Scenario: Retrieving an individual person resource (GET)
 
 Calling an individual person resource will return the resource directly, along with all associated fields and appropriate links to additional information about the person.
 
@@ -586,10 +604,10 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```
 
-_[Back to top...](#person)_
+_[Back to top...](#)_
 
 
-## Scenario: Creating a new person (POST)
+### Scenario: Creating a new person (POST)
 
 Posting to the people collection endpoint will allow you to create a new person. The response is the new person that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
@@ -719,14 +737,14 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```
 
-_[Back to top...](#person)_
+_[Back to top...](#)_
 
 
-## Scenario: Modifying a person (PUT)
+### Scenario: Modifying a person (PUT)
 
 You can updating a person by calling a PUT operation on that person's resource endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
 
-**Note:** Modifying members of an array separately is not supported. To change the contents of an array, first GET the current contents and then PUT back only those you wish to keep.
+{% include array_warning.md %}
 
 **Request**
 
@@ -824,10 +842,10 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```
 
-_[Back to top...](#person)_
+_[Back to top...](#)_
 
 
-## Scenario: Deleting a person (DELETE)
+### Scenario: Deleting a person (DELETE)
 
 You may delete a person by calling the DELETE command on the person resource's endpoint.
 
@@ -853,4 +871,4 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```
 
-_[Back to top...](#person)_
+_[Back to top...](#)_

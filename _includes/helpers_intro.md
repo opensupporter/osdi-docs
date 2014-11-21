@@ -1,0 +1,3 @@
+Helpers faciliate combined creation operations (POST) that are commonly performed by users. Each resource may have one or more associated helpers, which perform different operations and have separate syntax. Some initial OSDI implementations may only support helpers, rather than full RESTful access.
+
+The helpers that operate on this resource are described in the table below. Click on the helper to view its documentation and syntax.
