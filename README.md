@@ -90,6 +90,8 @@ To help understand the scenarios OSDI covers, check out our evolving [scenarios 
 * [Forms](forms.md)
 * [Donations](donations.md)
 * [Tags](tags.md)
+* [Status and Errors](status.md)
+
 
 ## Experimental
 
