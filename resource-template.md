@@ -44,6 +44,16 @@ A list of fields specific to the resource.
 
 _[Back to top...](#)_
 
+## Links
+
+{% include links_intro.md %}
+
+|Name          	|Type		|Description
+|-----------    |-----------|--------------
+|linked_resource1		|LinkedResourceType1*  |A link to the instance of LinkedResourceType1
+|linked_resource2		|LinkedResourceType2[]*  |A link to the collection of resources
+
+_[Back to top...](#)_
 
 # Related Objects
 
@@ -55,18 +65,6 @@ These objects included in the table above are broken out into their own tables f
 |-----------    |-----------|--------------
 |field1      |string       |Description of field1
 |field2      |string       |Description of field2
-
-_[Back to top...](#)_
-
-
-# Links
-
-{% include links_intro.md %}
-
-|Name          	|Type		|Description
-|-----------    |-----------|--------------
-|linked_resource1		|LinkedResourceType1*  |A link to the instance of LinkedResourceType1
-|linked_resource2		|LinkedResourceType2[]*  |A link to the collection of resources
 
 _[Back to top...](#)_
 
