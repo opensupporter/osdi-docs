@@ -57,7 +57,7 @@ A list of fields specific to the person resource.
 |gender_identity|string     |The self-described gender with which a person identifies. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
 |party_identification          |flexenum     |Flexenum describing the person's politcal party_identification. One of "None", "Democratic", "Republican", "Independent", or another free-form string.
 |source         |string     |Information about the source where this person record was acquired.   _Example: "facebook-ad-october"_
-|ethnicities|strings[]   |A unique string array representing a person's ethinicities.
+|ethnicities|strings[]   |A unique string array representing a person's ethnicities.
 |languages_spoken|strings[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
 |employer|string    |The name of the person's employer.
 |employer_address|[Employer Address](#employer-address)    |An object hash representing the postal address of the person's employer.
