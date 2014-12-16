@@ -119,27 +119,32 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-  "total_pages": 88,
-  "per_page": 25,
-  "page": 1,
-  "total_records": 2188,
-  "_links": {
-    "next": {
-      "href": "https://osdi-sample-system.org/api/v1/resource?page=2"
+    "total_pages": 88,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 2188,
+    "_links": {
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/resource?page=2"
+        },
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/resource"
+        },
+        //other links here
     },
-    //(truncated for brevity)
-    "curies": [
-      {
-        "name": "osdi",
-        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
-        "templated": true
-      }
-    ],
-    "self": {
-      "href": "https://osdi-sample-system.org/api/v1/resource"
+    "_embedded": {
+        "osdi:resource": [
+            //fields go here
+        ]
     }
-  }
-
+}
 ```
 
 _[Back to top...](#)_		
@@ -166,18 +171,19 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-  "identifiers": [
-    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
-    "foreign_system:1"
-  ],
-  "created_date": "2014-03-20T21:04:31Z",
-  "modified_date": "2014-03-20T21:04:31Z",
-  "_links": {
-    "self": {
-      "href": "https://osdi-sample-system.org/api/v1/resource/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+        "foreign_system:1"
+    ],
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    //more fields here
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/resource/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        },
+        //more links here
     }
-
-	// truncated
 }
 ```
 
@@ -195,9 +201,8 @@ Header:
 OSDI-API-Token:[your api key here]
 
 {
-	// truncated
+    //fields here
 }
-
 ```
 
 #### Response
@@ -210,12 +215,12 @@ Cache-Control: max-age=0, private, must-revalidate
 
 {
     "identifiers": [
-      "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
-      "foreign_system:1"
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+        "foreign_system:1"
     ],
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
-    // truncated
+    // more fields/links here
 }
 ```
 
@@ -235,9 +240,8 @@ Header:
 OSDI-API-Token:[your api key here]
 
 {
-    // truncated
+    // fields here
 }
-
 ```
 
 #### Response
@@ -249,10 +253,9 @@ Cache-Control: max-age=0, private, must-revalidate
 
 {
     "identifiers": [
-      "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
     ],
-    
-	// truncated
+    // more fields/links here
 }
 ```
 
@@ -281,7 +284,7 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-  "notice": "This resource was successfully deleted."
+    "notice": "This resource was successfully deleted."
 }
 ```
 
