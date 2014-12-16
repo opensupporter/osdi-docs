@@ -208,7 +208,7 @@ _[Back to top...](#)_
 
 Person resources are sometimes presented as collections of people. For example, calling the people endpoint will return a collection of all the people stored in the system's database associated with your api key.
 
-**Request**
+#### Request
 
 ```javascript
 GET https://osdi-sample-system.org/api/v1/people/
@@ -217,7 +217,7 @@ Header:
 OSDI-API-Token:[your api key here]
 ```
 
-**Response**
+#### Response
 
 ```javascript
 200 OK
@@ -458,7 +458,7 @@ _[Back to top...](#)_
 
 Calling an individual person resource will return the resource directly, along with all associated fields and appropriate links to additional information about the person.
 
-**Request**
+#### Request
 
 ```javascript
 GET https://osdi-sample-system.org/api/v1/people/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
@@ -467,7 +467,7 @@ Header:
 OSDI-API-Token:[your api key here]
 ```
 
-**Response**
+#### Response
 
 ```javascript
 200 OK
@@ -619,7 +619,7 @@ _[Back to top...](#)_
 
 Posting to the people collection endpoint will allow you to create a new person. The response is the new person that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
-**Request**
+#### Request
 
 ```javascript
 POST https://osdi-sample-system.org/api/v1/people/
@@ -668,7 +668,7 @@ OSDI-API-Token:[your api key here]
 
 ```
 
-**Response**
+#### Response
 
 ```javascript
 200 OK
@@ -754,7 +754,7 @@ You can updating a person by calling a PUT operation on that person's resource e
 
 {% include array_warning.md %}
 
-**Request**
+#### Request
 
 ```javascript
 PUT https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
@@ -775,7 +775,7 @@ OSDI-API-Token:[your api key here]
 
 ```
 
-**Response**
+#### Response
 ```javascript
 200 OK
 
@@ -857,7 +857,7 @@ _[Back to top...](#)_
 
 You may delete a person by calling the DELETE command on the person resource's endpoint.
 
-**Request**
+#### Request
 
 ```javascript
 DELETE https://osdi-sample-system.org/api/v1/people/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
@@ -866,7 +866,7 @@ Header:
 OSDI-API-Token:[your api key here]
 ```
 
-**Response**
+#### Response
 
 ```javascript
 200 OK

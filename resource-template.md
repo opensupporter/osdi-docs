@@ -7,13 +7,14 @@ title: Resource Name
 
 Introductory paragraphs describing the resource. 
 
-# Sections
+### Sections
 
+* [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
     * [Common Fields](#common-fields)
     * [Resource Fields](#resource-fields)
+    * [Related Objects](#related-objects)   
     * [Links](#links)
-* [Related Objects](#related-objects)    
 * [Helpers](#helpers)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -24,7 +25,10 @@ Introductory paragraphs describing the resource.
     * [Scenario: Deleting a resource (DELETE)](#scenario-deleting-a-resource-delete)
 
 
-# Fields
+{% include endpoints_and_url_structures.md %}
+
+
+## Fields
 
 {% include fields_intro.md %}
 
@@ -32,7 +36,7 @@ Introductory paragraphs describing the resource.
 
 _[Back to top...](#)_
 
-## Resource-Specific Fields
+### Resource-Specific Fields
 
 A list of fields specific to the resource.
 
@@ -44,7 +48,22 @@ A list of fields specific to the resource.
 
 _[Back to top...](#)_
 
-## Links
+### Related Objects
+
+These objects included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+#### Example Object
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|field1      |string       |Description of field1
+|field2      |string       |Description of field2
+
+_[Back to top...](#)_
+
+
+
+### Links
 
 {% include links_intro.md %}
 
@@ -55,21 +74,9 @@ _[Back to top...](#)_
 
 _[Back to top...](#)_
 
-# Related Objects
-
-These objects included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
-
-## Example Object
-
-|Name          |Type      |Description
-|-----------    |-----------|--------------
-|field1      |string       |Description of field1
-|field2      |string       |Description of field2
-
-_[Back to top...](#)_
 
 
-# Helpers
+## Helpers
 
 {% include helpers_intro.md %}
 
@@ -81,20 +88,20 @@ _[Back to top...](#)_
 _[Back to top...](#)_
 
 
-# Related Resources
+## Related Resources
 
 * [RelatedResource1](#)
 * [RelatedResource2](#)
 
-# Scenarios
+## Scenarios
 
 {% include scenarios_intro.md %}
 
-## Scenario: Retrieving a collection of resources (GET)
+### Scenario: Retrieving a collection of resources (GET)
 
 Description of scenario
 
-### Request
+#### Request
 
 ```javascript
 GET https://osdi-sample-system.org/api/v1/resource
@@ -103,7 +110,7 @@ Header:
 OSDI-API-Token:[your api key here]
 ```
 
-### Response
+#### Response
 
 ```javascript
 200 OK
@@ -137,11 +144,11 @@ Cache-Control: max-age=0, private, must-revalidate
 
 _[Back to top...](#)_		
 
-## Scenario: Scenario: Retrieving an individual resource (GET)
+### Scenario: Scenario: Retrieving an individual resource (GET)
 
 Description of how to get an individual resource
 
-### Request
+#### Request
 
 ```javascript
 GET https://osdi-sample-system.org/api/v1/resource/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
@@ -150,7 +157,7 @@ Header:
 OSDI-API-Token:[your api key here]
 ```
 
-### Response
+#### Response
 
 ```javascript
 200 OK
@@ -177,9 +184,9 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-## Scenario: Creating a new resource (POST)
+### Scenario: Creating a new resource (POST)
 
-### Request
+#### Request
 
 ```javascript
 POST https://osdi-sample-system.org/api/v1/resource/
@@ -193,7 +200,7 @@ OSDI-API-Token:[your api key here]
 
 ```
 
-### Response
+#### Response
 
 ```javascript
 200 OK
@@ -215,11 +222,11 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-## Scenario: Modifying a resource (PUT)
+### Scenario: Modifying a resource (PUT)
 
 {% include array_warning.md %}
 
-### Request
+#### Request
 
 ```javascript
 PUT https://osdi-sample-system.org/api/v1/resource/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
@@ -233,7 +240,7 @@ OSDI-API-Token:[your api key here]
 
 ```
 
-### Response
+#### Response
 ```javascript
 200 OK
 
@@ -252,11 +259,11 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-## Scenario: Deleting a resource (DELETE)
+### Scenario: Deleting a resource (DELETE)
 
 You may delete a resource by calling the DELETE command on the resource's endpoint.
 
-### Request
+#### Request
 
 ```javascript
 DELETE https://osdi-sample-system.org/api/v1/resource/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
@@ -265,7 +272,7 @@ Header:
 OSDI-API-Token:[your api key here]
 ```
 
-### Response
+#### Response
 
 ```javascript
 200 OK
