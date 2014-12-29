@@ -60,11 +60,14 @@ These JSON hashes included in the table above are broken out into their own tabl
 |-----------    |-----------|--------------
 |person      |Person*     |AAn inlined JSON representation of a person, containing any valid fields for the Person resource. See the full [Person resource documentation](person.md) for details.
 
+_[Back to top...](#)_
 
 
 ## Related Resources
 
 * [Person](person.md)
+
+_[Back to top...](#)_
 
 
 ## Scenarios
