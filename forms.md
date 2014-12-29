@@ -15,17 +15,16 @@ Forms are a type of action that a user may take by filling out page and submitti
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
     * [Common Fields](#common-fields)
-    * [Resource Fields](#resource-fields)
+    * [Form Fields](#form-fields)
     * [Related Objects](#related-objects)   
     * [Links](#links)
-* [Helpers](#helpers)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
-    * [Scenario: Retrieving a collection of resources (GET)](#scenario-retrieving-a-collection-of-resources-get)
-    * [Scenario: Retrieving an individual resource (GET)](#scenario-scenario-retrieving-an-individual-resource-get)
-    * [Scenario: Creating a new resource (POST)](#scenario-creating-a-new-resource-post)
-    * [Scenario: Modifying a resource (PUT)](#scenario-modifying-a-resource-put)
-    * [Scenario: Deleting a resource (DELETE)](#scenario-deleting-a-resource-delete)
+    * [Scenario: Retrieving a collection of Form resources (GET)](#scenario-retrieving-a-collection-of-form-resources-get)
+    * [Scenario: Retrieving an individual Form resource (GET)](#scenario-scenario-retrieving-an-individual-form-resource-get)
+    * [Scenario: Creating a new form (POST)](#scenario-creating-a-new-form-post)
+    * [Scenario: Modifying a form (PUT)](#scenario-modifying-a-form-put)
+    * [Scenario: Deleting a form (DELETE)](#scenario-deleting-a-form-delete)
 
 
 {% include endpoints_and_url_structures.md %}
@@ -48,8 +47,8 @@ _[Back to top...](#)_
 
 A list of fields specific to the Form.
 
-|Name          		|Type      |Description
-|-----------    	|-----------|--------------
+| Name          | Type      | Description
+|-----------    |-----------|-----------|--------------
 |origin_system		|string     |A human readable identifier of the system where this form was created. (ex: "OSDI System")
 |name				|string		|The name of the form. Intended for administrative display rather than a public title, though may be shown to a user.
 |title				|string		|The title of the form. Intended for public display rather than administrative purposes.
@@ -66,8 +65,8 @@ _[Back to top...](#)_
 
 {% include links_intro.md %}
 
-|Name          	|Type			|Description
-|-----------    |-----------	|--------------
+| Name          | Type      | Description
+|-----------    |-----------|-----------|--------------
 |creator		|Person*  		|A link to a single Person resource representing the creator of the form.
 |modified_by	|Person*  		|A link to a Person resource representing the last editor of this form.
 |submissions	|Submissions[]*	|A link to the collection of Submission resources for this form.
