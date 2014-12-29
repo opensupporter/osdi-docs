@@ -50,3 +50,5 @@ When you are finished writing, make sure to validate your code in all of these w
 ### Step 5: Add appropriate links
 
 Now that you're done with your new documentation page, please search through other documentation pages and create links to your new page where appropriate. For example, field tables that reference your newly created resource page should be linked.
+
+Also please make sure to add your new page to the navigational sidebar using the ```/_include/navigation.html``` files. Pages should be linked in alphabetical order.
