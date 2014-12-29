@@ -74,14 +74,14 @@ _[Back to top...](#)_
 
 |Name          |Description
 |-----------    |-----------
-|[record_submission_helper](record_submissions.html)      |Allows the creation of a submission and a person at the same time.
+|[record_submission_helper](record_submission.html)      |Allows the creation of a submission and a person at the same time.
 
 _[Back to top...](#)_
 
 
 ## Related Resources
 
-* [Record Submission Helper](record_submissions.html)
+* [Record Submission Helper](record_submission.html)
 * [Form](forms.html)
 * [Person](people.html)
 * [Question Answer](#)
@@ -253,7 +253,7 @@ _[Back to top...](#)_
 
 Posting to the submissions collection endpoint and including a link to an existing Person resource will allow you to create a new submission associated with that form and person. The response is the new submission that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
-For information on how to link a submission with a question answer, see the [Question Answers](#) documentation. For information on how to create a person along with a submission, see the [Record Submission Helper](record_submissions.html) documentation.
+For information on how to link a submission with a question answer, see the [Question Answers](#) documentation. For information on how to create a person along with a submission, see the [Record Submission Helper](record_submission.html) documentation.
 
 #### Request
 
