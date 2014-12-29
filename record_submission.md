@@ -21,7 +21,7 @@ Some initial implementations may only support helpers -- direct RESTful access m
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
 	* [Common Fields](#common-fields)
-    * [Record Submission Helper Fields](#record-submissions-helper-fields)
+    * [Record Submission Helper Fields](#record-submission-helper-fields)
     * [Related Objects](#related-objects)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -157,7 +157,7 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
-    "action_date": "2014-03-18T11:02:15Z"
+    "action_date": "2014-03-18T11:02:15Z",
     "origin_system": "OpenSupporter",
     "_links": {
         "self": {
