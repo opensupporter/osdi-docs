@@ -7,7 +7,7 @@ title: Form
 
 This document defines the Form resource. 
 
-Forms are a type of action that a user may take by filling out page and submitting their information. Forms have fields to describe them such as names, titles, summaries, and descriptions, and when activists submit a form, Submission resources are created representing the submission an activist made on that form.
+Forms represent a page, survey, or interaction that a user may participate in by submitting their information. Forms have fields to describe them such as names, titles, summaries, and descriptions, and when activists submit a form, Submission resources are created representing the individual submission an activist made on that form.
 
 
 ### Sections
@@ -44,7 +44,7 @@ _[Back to top...](#)_
 
 ### Form Fields
 
-A list of fields specific to the Form.
+A list of fields specific to the Form resource.
 
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
@@ -75,8 +75,8 @@ _[Back to top...](#)_
 
 ## Related Resources
 
-* [Person](#)
 * [Submission](#)
+* [Person](#)
 
 _[Back to top...](#)_
 
