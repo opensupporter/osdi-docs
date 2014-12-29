@@ -15,7 +15,7 @@ People have names, email addresses, and other information, and they have associa
 ### Sections:
 
 * [Endpoints and URL structures](#endpoints-and-url-structures)
-* [Fields](#field-names-and-descriptions)
+* [Fields](#fields)
     * [Common Fields](#common-fields)
     * [People Fields](#people-fields)
     * [Related Objects](#related-objects)

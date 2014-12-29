@@ -19,8 +19,9 @@ Some initial implementations may only support helpers -- direct RESTful access m
 ### Sections:
 
 * [Endpoints and URL structures](#endpoints-and-url-structures)
-* [Fields](#field-names-and-descriptions)
+* [Fields](#fields)
     * [Person Signup Helper Fields](#person-signup-helper-fields)
+    * [Related Objects](#related-objects)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
     * [Scenario: Creating a new person (POST)](#scenario-creating-a-new-person-post)
@@ -65,7 +66,7 @@ _[Back to top...](#)_
 
 ## Related Resources
 
-* [Person](person.md)
+* [Person](people.html)
 
 _[Back to top...](#)_
 
@@ -130,10 +131,10 @@ OSDI-API-Token:[your api key here]
     "add_tags": [
         "volunteer",
         "donor"
-	],
-	"add_lists": [
+    ],
+    "add_lists": [
         "supporters"
-	]
+    ]
 }
 ```
 
