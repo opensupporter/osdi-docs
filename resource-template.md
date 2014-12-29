@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Resource Name
+title: Example Resource
 ---
 
 # Example Resource
@@ -27,6 +27,10 @@ Introductory paragraphs describing the resource.
 
 {% include endpoints_and_url_structures.md %}
 
+The link relation label for a Example Resource resource is ```osdi:person``` for a single Example Resource resource or ```osdi:people``` for a collection of Example Resource resources.
+
+_[Back to top...](#)_
+
 
 ## Fields
 
@@ -36,9 +40,10 @@ Introductory paragraphs describing the resource.
 
 _[Back to top...](#)_
 
-### Resource-Specific Fields
 
-A list of fields specific to the resource.
+### Example Resource Fields
+
+A list of fields specific to the Example Resource.
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------

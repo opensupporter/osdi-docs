@@ -32,7 +32,7 @@ People have names, email addresses, and other information, and they have associa
 
 {% include endpoints_and_url_structures.md %}
 
-The link relation label for a Person/People resource is ```osdi:person``` for a single Person resource or ```osdi:people``` for a collection of Person resources.
+The link relation label for a Person resource is ```osdi:person``` for a single Person resource or ```osdi:people``` for a collection of Person resources.
 
 _[Back to top...](#)_
 
@@ -48,7 +48,7 @@ _[Back to top...](#)_
 
 ### People Fields
 
-A list of fields specific to the person resource.
+A list of fields specific to the Person resource.
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
