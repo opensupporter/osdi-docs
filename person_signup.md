@@ -15,7 +15,7 @@ Some systems may attempt to match inputs via the Person Signup Helper to existin
 
 The response to a Person Signup Helper POST is the full representation of the person.
 
-Some initial implementations may only support helpers -- direct RESTful access may not be supporter. In those cases, the _links section may be omitted in responses.
+Some initial implementations may only support helpers -- direct RESTful access may not be supported. In those cases, the _links section may be omitted in responses.
 
 
 ### Sections:
