@@ -11,6 +11,8 @@ The Person Signup Helper is a helper endpoint to aid in the creation of People r
 
 When using the Person Signup Helper, tagging and list membership info may be added at the same time as well, eliminating the need for multiple POST operations to store that information.
 
+Some systems may attempt to match inputs via the Person Signup Helper to existing people in the database and update their record instead of creating a new person for every POST. The method used for matching will be detailed in that system's documentation. 
+
 The response to a Person Signup Helper POST is the full representation of the person.
 
 Some initial implementations may only support helpers -- direct RESTful access may not be supporter. In those cases, the _links section may be omitted in responses.
@@ -78,7 +80,7 @@ _[Back to top...](#)_
 
 ### Scenario: Creating a new person (POST)
 
-Posting to the person signup helper endpoint will allow you to create a new person along with associated tags and list membership information in one operation. The response is the new person that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+Posting to the person signup helper endpoint will allow you to create a new person (or update a person if the system attempts to match people posted with helpers) along with associated tags and list membership information in one operation. The response is the person that was created or updated. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
 #### Request
 
