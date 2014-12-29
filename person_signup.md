@@ -49,6 +49,7 @@ A list of fields specific for POSTing via the Person Signup Helper.
 |-----------    |-----------|--------------
 |add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
 |add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
+|person			|[Person*](#person)	|An object hash representing the person to be added.
 
 _[Back to top...](#)_
 
@@ -61,7 +62,7 @@ These JSON hashes included in the table above are broken out into their own tabl
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-|person      |Person*     |An inlined JSON representation of a person, containing any valid fields for the Person resource. See the full [Person resource documentation](people.html) for details.
+|person      |Person*     |An inlined hash representation of a person, containing any valid fields for the Person resource. See the full [Person resource documentation](people.html) for details.
 
 _[Back to top...](#)_
 

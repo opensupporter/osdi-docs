@@ -7,7 +7,7 @@ title: Record Submission Helper
 
 This document defines the Record Submission Helper resource. 
 
-The Record Submission Helper is a helper endpoint to aid in the creation of Submission and People resources via POST. It provides a quick and easy way to create submissions and people at the same time, eliminating the need for multiple POST operations to store that information.
+The Record Submission Helper is a helper endpoint to aid in the creation of [Submission](submissions.html) and [People](people.html) resources via POST. It provides a quick and easy way to create submissions and people at the same time, eliminating the need for multiple POST operations to store that information.
 
 Some systems may attempt to match people sent via the Record Submission Helper to existing people in the database and update their record instead of creating a new person. The method used for matching will be detailed in that system's documentation. 
 
@@ -52,6 +52,7 @@ A list of fields specific for POSTing via the Record Submission Helper.
 |-----------    |-----------|-----------|--------------
 |origin_system		|string     |A human readable identifier of the system where this submission was created. (ex: "OSDI System")
 |action_date		|string		|The date and time the submission was made by the person.
+|person			|[Person*](#person)	|An object hash representing the person who made the submission.
 
 _[Back to top...](#)_
 
@@ -64,7 +65,7 @@ These JSON hashes included in the table above are broken out into their own tabl
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-|person      |Person*     |An inlined JSON representation of a person, containing any valid fields for the Person resource. See the full [Person resource documentation](people.html) for details.
+|person      |[Person*](people.html)     |An inlined hash representation of a person, containing any valid fields for the Person resource. See the full [Person resource documentation](people.html) for details.
 
 _[Back to top...](#)_
 
@@ -72,7 +73,7 @@ _[Back to top...](#)_
 ## Related Resources
 
 * [Submission](submissions.html)
-* [Person](#)
+* [Person](people.html)
 
 _[Back to top...](#)_
 

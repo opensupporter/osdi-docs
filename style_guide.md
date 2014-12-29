@@ -45,3 +45,8 @@ When you are finished writing, make sure to validate your code in all of these w
 * Make sure your example JSON uses four spaces for each tab stop
 * Check all links, including internal anchors and cross-document links
 * Take a good look at the Jekyll output after your commit to ensure everything looks visually correct
+
+
+### Step 5: Add appropriate links
+
+Now that you're done with your new documentation page, please search through other documentation pages and create links to your new page where appropriate. For example, field tables that reference your newly created resource page should be linked.

@@ -170,14 +170,14 @@ _[Back to top...](#)_
 
 |Name          	|Type		|Description
 |-----------    |-----------|--------------
-|donations		|Donations[]*  |A link to the collection of donations associated with the person.
-|submissions	|Submissions[]*  |A link to the collection of form submissions associated with the person.
-|attendance		|Attendances[]*        |A link to the collection of event attendances associated with the person.
-|signatures		|Signatures[]*        |A link to the collection of petition signatures associated with the person.
-|question_answers		|Question Answers[]*  |A link to the collection of answers to questions associated with the person.
-|taggings		|Taggings[]*   	|A link to the collection of taggings associated with the person.
-|items		|Items[]*   	|A link to the collection of list items associated with the person.
-|modified_by		|Person*  	|A link to a Person resource representing the last editor of this person.
+|donations		|[Donations[]*](#)  |A link to the collection of donations associated with the person.
+|submissions	|[Submissions[]*](submissions.html)  |A link to the collection of form submissions associated with the person.
+|attendance		|[Attendances[]*](#)        |A link to the collection of event attendances associated with the person.
+|signatures		|[Signatures[]*](#)        |A link to the collection of petition signatures associated with the person.
+|question_answers		|[Question Answers[]*](#)  |A link to the collection of answers to questions associated with the person.
+|taggings		|[Taggings[]*](#)   	|A link to the collection of taggings associated with the person.
+|items		|[Items[]*](#)   	|A link to the collection of list items associated with the person.
+|modified_by		|[Person*](people.html)  	|A link to a Person resource representing the last editor of this person.
 
 _[Back to top...](#)_
 
@@ -188,15 +188,16 @@ _[Back to top...](#)_
 
 |Name          |Description
 |-----------    |-----------
-|person_signup_helper      |Allows the creation of a person and associated tag and list membership.
+|[person_signup_helper](person_signup.html)      |Allows the creation of a person and associated tag and list membership.
 
 _[Back to top...](#)_
 
 
 ## Related Resources
 
+* [Person Signup Helper](person_signup.html)
 * [Donation](#)
-* [Submission](#)
+* [Submission](submissions.html)
 * [Attendance](#)
 * [Signature](#)
 * [Question Answer](#)
@@ -622,6 +623,8 @@ _[Back to top...](#)_
 ### Scenario: Creating a new person (POST)
 
 Posting to the people collection endpoint will allow you to create a new person. The response is the new person that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+
+For information on how to link a person with tags and list subscription information in one post, see the [Person Signup Helper](person_signup.html) documentation.
 
 #### Request
 

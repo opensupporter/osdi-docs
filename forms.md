@@ -7,7 +7,7 @@ title: Form
 
 This document defines the Form resource. 
 
-Forms represent a page, survey, or interaction that a user may participate in by submitting their information. Forms have fields to describe them such as names, titles, summaries, and descriptions, and when activists submit a form, Submission resources are created representing the individual submission an activist made on that form.
+Forms represent a page, survey, or interaction that a user may participate in by submitting their information. Forms have fields to describe them such as names, titles, summaries, and descriptions, and when activists submit a form, [Submission](submissions.html) resources are created representing the individual submission an activist made on that form.
 
 
 ### Sections
@@ -66,18 +66,19 @@ _[Back to top...](#)_
 
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
-|creator		|Person*  		|A link to a single Person resource representing the creator of the form.
-|modified_by	|Person*  		|A link to a Person resource representing the last editor of this form.
-|submissions	|Submissions[]*	|A link to the collection of Submission resources for this form.
-|record_submissions_helper	|Record Submissions Helper*	|A link to the Record Submissions Helper resource endpoint for this form.
+|creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the form.
+|modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this form.
+|submissions	|[Submissions[]*](submissions.html)	|A link to the collection of Submission resources for this form.
+|record_submissions_helper	|[Record Submissions Helper*](record_submissions.html)	|A link to the Record Submissions Helper resource endpoint for this form.
 
 _[Back to top...](#)_
 
 
 ## Related Resources
 
-* [Submission](#)
-* [Person](#)
+* [Submission](submissions.html)
+* [Record Submission Helper](record_submissions.html)
+* [Person](people.html)
 
 _[Back to top...](#)_
 

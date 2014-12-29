@@ -7,7 +7,7 @@ title: Submission
 
 This document defines the Submission resource. 
 
-Submission are a type of action that a user may take by completing a form. Submissions have fields to describe them such as when the submission was created and typically are linked to the person who made the submission as well as any information they submitted in the form of Question and Question Answer resources.
+Submission are a type of action that a user may take by completing a form. Submissions have fields to describe them such as when the submission was created and typically are linked to the person who made the submission as well as any information they submitted in the form of [Question](#) and [Question Answer](#) resources.
 
 
 ### Sections
@@ -61,9 +61,9 @@ _[Back to top...](#)_
 
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
-|person			|Person*  		|A link to a single Person resource representing the person who submitted the information.
-|form			|Form*  		|A link to a Form resource representing the form on which this submission was created.
-|question_answers	|Question_Answers[]*	|A link to the collection of Question Answer resources representing data submitted by the person when this submission was made.
+|person			|[Person*](people.html)		|A link to a single Person resource representing the person who submitted the information.
+|form			|[Form*](forms.html)  		|A link to a Form resource representing the form on which this submission was created.
+|question_answers	|[Question_Answers[]*](#)	|A link to the collection of Question Answer resources representing data submitted by the person when this submission was made.
 
 _[Back to top...](#)_
 
@@ -74,16 +74,16 @@ _[Back to top...](#)_
 
 |Name          |Description
 |-----------    |-----------
-|record_submission_helper      |Allows the creation of a submission and a person at the same time.
+|[record_submission_helper](record_submissions.html)      |Allows the creation of a submission and a person at the same time.
 
 _[Back to top...](#)_
 
 
 ## Related Resources
 
-* [Record Submission Helper](#)
-* [Form](#)
-* [Person](#)
+* [Record Submission Helper](record_submissions.html)
+* [Form](forms.html)
+* [Person](people.html)
 * [Question Answer](#)
 
 _[Back to top...](#)_
@@ -253,7 +253,7 @@ _[Back to top...](#)_
 
 Posting to the submissions collection endpoint and including a link to an existing Person resource will allow you to create a new submission associated with that form and person. The response is the new submission that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
-For information on how to link a submission with a question answer, see the [Question Answers](#) documentation. For information on how to create a person along with a submission, see the [Record Submission Helper](#) documentation.
+For information on how to link a submission with a question answer, see the [Question Answers](#) documentation. For information on how to create a person along with a submission, see the [Record Submission Helper](record_submissions.html) documentation.
 
 #### Request
 
