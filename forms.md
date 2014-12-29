@@ -15,8 +15,7 @@ Forms are a type of action that a user may take by filling out page and submitti
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
     * [Common Fields](#common-fields)
-    * [Form Fields](#form-fields)
-    * [Related Objects](#related-objects)   
+    * [Form Fields](#form-fields)  
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -78,6 +77,8 @@ _[Back to top...](#)_
 
 * [Person](#)
 * [Submission](#)
+
+_[Back to top...](#)_
 
 ## Scenarios
 

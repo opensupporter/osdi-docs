@@ -98,6 +98,8 @@ _[Back to top...](#)_
 * [RelatedResource1](#)
 * [RelatedResource2](#)
 
+_[Back to top...](#)_
+
 ## Scenarios
 
 {% include scenarios_intro.md %}
