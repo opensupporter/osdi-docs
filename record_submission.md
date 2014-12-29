@@ -65,7 +65,7 @@ These JSON hashes included in the table above are broken out into their own tabl
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-|person      |[Person*](people.html)     |An inlined hash representation of a person, containing any valid fields for the Person resource. See the full [Person resource documentation](people.html) for details.
+|person      |[Person*](people.html)     |An inlined hash representation of a person, containing any valid fields for the Person resource.
 
 _[Back to top...](#)_
 
