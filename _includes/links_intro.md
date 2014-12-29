@@ -1,3 +1,3 @@
-The links associated with this resource, available in the links section of the resource. 
+The links associated with this resource, available in the links section of the resource. Links that are part of the OSDI spec are typically prefixed with the ```osdi:``` namespace to aid in curie matching and readability.
 
 **Note:** As with the entire OSDI specification, the specific links a compliant system supplies will vary between each system. In addition, systems may choose to embed a linked resource directly in the response in addition to linking to it in the links section, using the standard `_embedded` syntax described in the general overview documentation.

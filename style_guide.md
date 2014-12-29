@@ -23,6 +23,8 @@ Make a copy of the template file and rename it to the name of the resource you a
 
 Using the template, write the documentation for your resource, making sure to fill in the necessary information for each section. Familiarize yourself with the includes used in the template, so you are not repeating what's already been said accidentally.
 
+Full sentances are preferred, with appropriate punctuation. For example, field descriptions should be full sentances. Capitalize the resource name if it is referred to as a resoure. For example, "The Person resource represents the fields for a person" should be capitalized, where "Update a person by posting to their endpoint" should not be capitalized.
+
 ### Step 3: Craft your examples
 
 While the field tables at the top of your documentation serve as the canonical representation of the resource, the examples below should be carefully crafted, as they are often the most useful part of the documentation for implementers.

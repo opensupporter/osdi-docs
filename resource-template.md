@@ -27,7 +27,7 @@ Introductory paragraphs describing the resource.
 
 {% include endpoints_and_url_structures.md %}
 
-The link relation label for a Example Resource resource is ```osdi:person``` for a single Example Resource resource or ```osdi:people``` for a collection of Example Resource resources.
+The link relation label for a Example Resource resource is ```osdi:example_resource``` for a single Example Resource resource or ```osdi:example_resources``` for a collection of Example Resource resources.
 
 _[Back to top...](#)_
 
@@ -104,7 +104,7 @@ _[Back to top...](#)_
 
 ### Scenario: Retrieving a collection of resources (GET)
 
-Description of scenario
+Resource Example resources are sometimes presented as collections of resource example. For example, calling the resource example endpoint will return a collection of all the resource example stored in the system's database associated with your api key.
 
 #### Request
 
@@ -156,7 +156,7 @@ _[Back to top...](#)_
 
 ### Scenario: Scenario: Retrieving an individual resource (GET)
 
-Description of how to get an individual resource
+Calling an individual Resource Example resource will return the resource directly, along with all associated fields and appropriate links to additional information about the resource.
 
 #### Request
 
@@ -197,6 +197,8 @@ _[Back to top...](#)_
 
 ### Scenario: Creating a new resource (POST)
 
+Posting to the resource collection endpoint will allow you to create a new resource. The response is the new resource that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+
 #### Request
 
 ```javascript
@@ -233,6 +235,8 @@ _[Back to top...](#)_
 
 
 ### Scenario: Modifying a resource (PUT)
+
+You can updating a resource by calling a PUT operation on that resource's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
 
 {% include array_warning.md %}
 

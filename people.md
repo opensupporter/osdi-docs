@@ -177,7 +177,7 @@ _[Back to top...](#)_
 |question_answers		|Question Answers[]*  |A link to the collection of answers to questions associated with the person.
 |taggings		|Taggings[]*   	|A link to the collection of taggings associated with the person.
 |items		|Items[]*   	|A link to the collection of list items associated with the person.
-|modified_by		|Person*  	|A link to a person resource representing the last editor of this person resource.
+|modified_by		|Person*  	|A link to a Person resource representing the last editor of this person.
 
 _[Back to top...](#)_
 
@@ -208,7 +208,7 @@ _[Back to top...](#)_
 
 {% include scenarios_intro.md %}
 
-### Scenario: Retrieving a collection of person resources (GET)
+### Scenario: Retrieving a collection of Person resources (GET)
 
 Person resources are sometimes presented as collections of people. For example, calling the people endpoint will return a collection of all the people stored in the system's database associated with your api key.
 
@@ -458,9 +458,9 @@ Cache-Control: max-age=0, private, must-revalidate
 
 _[Back to top...](#)_		
 
-### Scenario: Scenario: Retrieving an individual person resource (GET)
+### Scenario: Scenario: Retrieving an individual Person resource (GET)
 
-Calling an individual person resource will return the resource directly, along with all associated fields and appropriate links to additional information about the person.
+Calling an individual Person resource will return the resource directly, along with all associated fields and appropriate links to additional information about the person.
 
 #### Request
 
@@ -753,7 +753,7 @@ _[Back to top...](#)_
 
 ### Scenario: Modifying a person (PUT)
 
-You can updating a person by calling a PUT operation on that person's resource endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
+You can updating a person by calling a PUT operation on that person's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
 
 {% include array_warning.md %}
 
@@ -787,7 +787,8 @@ Cache-Control: max-age=0, private, must-revalidate
 
 {
     "identifiers": [
-        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+        "foreign_system:1"
     ],
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
@@ -859,7 +860,7 @@ _[Back to top...](#)_
 
 ### Scenario: Deleting a person (DELETE)
 
-You may delete a person by calling the DELETE command on the person resource's endpoint.
+You may delete a person by calling the DELETE command on the person's endpoint.
 
 #### Request
 
@@ -879,7 +880,7 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "notice": "This user was successfully deleted."
+    "notice": "This person was successfully deleted."
 }
 ```
 
