@@ -66,7 +66,7 @@ A list of fields specific to the Event resource.
 |guestsCanInviteOthers |boolean |Attendees can invite guests to the event.
 |transparence		|enum		|Whether the event blocks time on online calendar systems. Possible values are "opaque" or "transparent". Opaque is the default, but this can be overridden by a user.
 |visibility			|enum		|Visibility of the event.  Possible values are "public" and "private".
-|location			|[Address](#address)	| An object hash representing the location of the event.
+|location			|[Location](#location)	| An object hash representing the location of the event.
 |reminders 			|[Reminders[]](#reminders)	|An array of object hashes representing the reminders set for this event.
 
 _[Back to top...](#)_
@@ -76,7 +76,7 @@ _[Back to top...](#)_
 
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
 
-#### Address
+#### Location
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
