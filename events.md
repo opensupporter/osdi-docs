@@ -99,6 +99,8 @@ These JSON hashes included in the table above are broken out into their own tabl
 |reminder.method|enum    |The way the reminder is to be delivered. One of "email" or "sms".
 |reminder.minutes  |integer    |The number of minutes before the start of the event to send the reminder.
 
+_[Back to top...](#)_
+
 
 ### Links
 
@@ -106,7 +108,7 @@ These JSON hashes included in the table above are broken out into their own tabl
 
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
-|self			|[Event](events.html)	|A self-referential link to the event.
+|self			|[Event*](events.html)	|A self-referential link to the event.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the event.
 |organizer		|[Person*](people.html)  		|A link to a single Person resource representing the organizer of the event.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this event.
@@ -203,31 +205,31 @@ Cache-Control: max-age=0, private, must-revalidate
                 "transparence": "opaque",
                 "visibility": "public",
                 "location": {
-	                "venue": "Lafayette Square",
-	                "address_lines": [
-		                "1564 H St NW"
-		            ],
-		            "locality": "Washington",
-		            "region": "DC",
-		            "postal_code": "20001",
-		            "country": "US",
-		            "language": "EN",
-		            "location": {
-			            "latitude": 38.9002101,
-			            "longitude": -77.0359252,
-			            "accuracy": "Rooftop"
-			        }
-	            },
-	            "reminders": [
-		            {
-		                "method": "email",
-		                "minutes": 1440
-		            },
-		            {
-			            "method": "sms",
-			            "minutes": 60
-			        }
-		        ],
+                    "venue": "Lafayette Square",
+                    "address_lines": [
+                        "1564 H St NW"
+                    ],
+                    "locality": "Washington",
+                    "region": "DC",
+                    "postal_code": "20001",
+                    "country": "US",
+                    "language": "EN",
+                    "location": {
+                        "latitude": 38.9002101,
+                        "longitude": -77.0359252,
+                        "accuracy": "Rooftop"
+                    }
+                },
+                "reminders": [
+                    {
+                        "method": "email",
+                        "minutes": 1440
+                    },
+                    {
+                        "method": "sms",
+                        "minutes": 60
+                    }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -270,27 +272,27 @@ Cache-Control: max-age=0, private, must-revalidate
                 "transparence": "opaque",
                 "visibility": "private",
                 "location": {
-	                "venue": "My House",
-	                "address_lines": [
-		                "1600 Pennsylvania Ave. NW"
-		            ],
-		            "locality": "Washington",
-		            "region": "DC",
-		            "postal_code": "20001",
-		            "country": "US",
-		            "language": "EN",
-		            "location": {
-			            "latitude": 38.9002101,
-			            "longitude": -77.0359252,
-			            "accuracy": "Rooftop"
-			        }
-	            },
-	            "reminders": [
-		            {
-		                "method": "email",
-		                "minutes": 1440
-		            }
-		        ],
+                    "venue": "My House",
+                    "address_lines": [
+                        "1600 Pennsylvania Ave. NW"
+                    ],
+                    "locality": "Washington",
+                    "region": "DC",
+                    "postal_code": "20001",
+                    "country": "US",
+                    "language": "EN",
+                    "location": {
+                        "latitude": 38.9002101,
+                        "longitude": -77.0359252,
+                        "accuracy": "Rooftop"
+                    }
+                },
+                "reminders": [
+                    {
+                        "method": "email",
+                        "minutes": 1440
+                    }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/events/1efc3644-af25-4253-90b8-a0baf12dbd1e"

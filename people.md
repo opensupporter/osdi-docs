@@ -170,7 +170,7 @@ _[Back to top...](#)_
 
 |Name          	|Type		|Description
 |-----------    |-----------|--------------
-|self			|[Person](people.html)	|A self-referential link to the person.
+|self			|[Person*](people.html)	|A self-referential link to the person.
 |donations		|[Donations[]*](#)  |A link to the collection of donations associated with the person.
 |submissions	|[Submissions[]*](submissions.html)  |A link to the collection of form submissions associated with the person.
 |attendances		|[Attendances[]*](attendances.html)        |A link to the collection of event attendances associated with the person.

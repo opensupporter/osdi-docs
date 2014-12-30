@@ -66,7 +66,7 @@ _[Back to top...](#)_
 
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
-|self			|[Attendance](attendances.html)	|A self-referential link to the attendance.
+|self			|[Attendance*](attendances.html)	|A self-referential link to the attendance.
 |person			|[Person*](people.html)		|A link to a single Person resource representing the person who RSVPed for the event.
 |invited_by		|[Person*](people.html)	|A link to a Person resource representing the person that invited this attendee. This is expected to be used for guests.
 |event			|[Event*](events.html)  		|A link to an Event resource representing the event on which this attendance was created.

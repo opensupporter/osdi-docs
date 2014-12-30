@@ -44,7 +44,7 @@ _[Back to top...](#)_
 _[Back to top...](#)_
 
 
-### Record Submission Helper Fields
+### Record Attendance Helper Fields
 
 A list of fields specific for POSTing via the Record Attendance Helper.
 

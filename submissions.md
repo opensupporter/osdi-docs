@@ -61,7 +61,7 @@ _[Back to top...](#)_
 
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
-|self			|[Submission](submissions.html)	|A self-referential link to the submission.
+|self			|[Submission*](submissions.html)	|A self-referential link to the submission.
 |person			|[Person*](people.html)		|A link to a single Person resource representing the person who submitted the information.
 |form			|[Form*](forms.html)  		|A link to a Form resource representing the form on which this submission was created.
 |question_answers	|[Question_Answers[]*](#)	|A link to the collection of Question Answer resources representing data submitted by the person when this submission was made.

@@ -66,7 +66,7 @@ _[Back to top...](#)_
 
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
-|self			|[Form](forms.html)	|A self-referential link to the form.
+|self			|[Form*](forms.html)	|A self-referential link to the form.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the form.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this form.
 |submissions	|[Submissions[]*](submissions.html)	|A link to the collection of Submission resources for this form.
