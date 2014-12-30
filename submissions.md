@@ -7,7 +7,7 @@ title: Submission
 
 This document defines the Submission resource. 
 
-Submission are a type of action that a user may take by completing a form. Submissions have fields to describe them such as when the submission was created and typically are linked to the person who made the submission as well as any information they submitted in the form of [Question](#) and [Question Answer](#) resources.
+Submissions are a type of action that a user may take by completing a form. Submissions have fields to describe them such as when the submission was created and typically are linked to the person who made the submission as well as any information they submitted in the form of [Question](#) and [Question Answer](#) resources.
 
 
 ### Sections
@@ -61,6 +61,7 @@ _[Back to top...](#)_
 
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
+|self			|[Submission](submissions.html)	|A self-referential link to the submission.
 |person			|[Person*](people.html)		|A link to a single Person resource representing the person who submitted the information.
 |form			|[Form*](forms.html)  		|A link to a Form resource representing the form on which this submission was created.
 |question_answers	|[Question_Answers[]*](#)	|A link to the collection of Question Answer resources representing data submitted by the person when this submission was made.
@@ -143,7 +144,7 @@ Cache-Control: max-age=0, private, must-revalidate
         }
     },
     "_embedded": {
-        "osdi:forms": [
+        "osdi:submissions": [
             {
                 "identifiers": [
                     "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",

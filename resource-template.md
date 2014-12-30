@@ -74,6 +74,7 @@ _[Back to top...](#)_
 
 |Name          	|Type		|Description
 |-----------    |-----------|--------------
+|self			|Example Resource*	|A self-referential link to the resource.
 |linked_resource1		|LinkedResourceType1*  |A link to the instance of LinkedResourceType1
 |linked_resource2		|LinkedResourceType2[]*  |A link to the collection of resources
 

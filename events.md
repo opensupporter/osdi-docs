@@ -1,273 +1,646 @@
-# Events
+---
+layout: default
+title: Event
+---
 
-This page defines Events, EventRSVPS
+# Event
+
+This document defines the Event resource. 
+
+Event resources represent an event that a user may attend by submitting their RSVP information. Events have fields to describe them such as names, titles, summaries, descriptions, dates, times, and locations, and when activists RSVP to attend an event, [Attendance](attendances.html) resources are created representing the individual RSVP made by an activist made for that event.
+
+
+### Sections
+
+* [Endpoints and URL structures](#endpoints-and-url-structures)
+* [Fields](#fields)
+    * [Common Fields](#common-fields)
+    * [Event Fields](#event-fields)  
+    * [Related Objects](#related-objects)
+    * [Links](#links)
+* [Related Resources](#related-resources)
+* [Scenarios](#scenarios)
+    * [Scenario: Retrieving a collection of Event resources (GET)](#scenario-retrieving-a-collection-of-event-resources-get)
+    * [Scenario: Retrieving an individual Event resource (GET)](#scenario-scenario-retrieving-an-individual-event-resource-get)
+    * [Scenario: Creating a new event (POST)](#scenario-creating-a-new-event-post)
+    * [Scenario: Modifying an event (PUT)](#scenario-modifying-an-event-put)
+    * [Scenario: Deleting an event (DELETE)](#scenario-deleting-an-event-delete)
+
+
+{% include endpoints_and_url_structures.md %}
+
+The link relation label for an Event resource is ```osdi:event``` for a single Event resource or ```osdi:events``` for a collection of Event resources.
+
+_[Back to top...](#)_
+
+
+## Fields
+
+{% include fields_intro.md %}
 
 {% include global_fields.md %}
 
-## Events
-
-| Name		| Type		| Description
-|-----------|-----------|------------------
-| id		| string	| Identifier of the event
-| status	| string	| Status of the event.  Possible values are:
-|			|			| "confirmed" The Event is confirmed (Default)
-|			|			| "tentative"
-|			|			| "cancelled"
-| created_date	| datetime	| Date and Time of creation
-| modified_date	| datetime	| Date and Time of update
-| origin_system | string | Human readable text identifiying the system where this event was created.
-| title	| string	| title of event 
-| name	| string	| name of event
-| description| string	| description of the event
-| instructions| string | Instructions for the event after attendees have RSVPed
-| summary	| string	| summary of event
-| browser_url | string | A URL string pointing to the publicly available petition page on the web
-| location	| Address	| A single instance of Address representing the location of the event
-| creator	| Person*	| A single instance of Person representing the creator of the event
-| organizer | Person*	| A single instance of Person representing the organizer of the event
-| start_date		| datetime	| start time for the event
-| end_date		| datetime	| end time for the event
-| all_day_date| date	| date only for all day events
-| all_day	| boolean	| true if the event is an all day event
-| recurrence| TBD		| TBD
-| transparence| string	| Whether the event blocks time on the calendar. Default, can be overridden by a user. Optional. Possible values are:
-|			|			| "opaque" - The event blocks time on the calendar. This is the default value.
-|			|			| "transparent" - The event does not block time on the calendar.
-| visibility| string	| Visibility of the event.  Possible values are
-|			|			| "public" visible on public web interfaces
-|			|			| "private" not visible on public web interfaces
-| attendees	| Attendance[]*| A Collection of Attendance resources
-| guestsCanInviteOthers | boolean | Attendees can invite guests to the event
-| reminders | list		| a list of reminder elements
-| .method	| string	| "email", "sms"
-| .minutes	| integer	| number of minutes before the start of the event to send reminder
-| capacity  | integer	| the max capacity for attendees of an event
-| total_accepted| integer | read-only computed property of attending guests count
-
-## Attendance
-
-| Name		| Type		| Description
-|-----------|-----------|------------------
-| id		| string	| Identifier
-| event		| Event*	| Event that this attendance refers to
-| person	| Person*	| Person that is attending the referenced event
-| status	| string	| The attendee's response status. Possible values
-| 			|			| "declined" The attendee declined
-|			|			| "tentative" The attendee tentatively accepted
-|			|			| "accepted" The attendee accepted
-|			|			| "needs action" The attendee needs help
-| attended 	| boolean	| true if the person actually attended
-| comment	| string	| An optional comment from the attendee
-| invited_by | Person*	| Person that invited this attendee.  This is expected to be used for guests
-
-## Event Guests
-To handle guests, additional attendance records are created with the invited_by attribute set to point to the attendee this guest is associated with.
-
-If guest information (such as name, etc) is not given, then the person resource is null.
+_[Back to top...](#)_
 
 
-## Event Attendance Helper
-The Event Attendance Helper provides a simple method for registering an RSVP for an event.
+### Event Fields
 
-The Event Attendance Helper URL can be determined from the donations collection under the "event_attendance_helper" link relation on a specific event resource
+A list of fields specific to the Event resource.
 
-The response to a Event Attendance Helper is the full representation of the attendance, with a link to the person resource created and optional embedded resources for person, event or invited_by resource.
+| Name          | Type      | Description
+|-----------    |-----------|-----------|--------------
+|origin_system		|string     |A human readable identifier of the system where this event was created. (ex: "OSDI System")
+|name				|string		|The name of the event. Intended for administrative display rather than a public title, though may be shown to a user.
+|title				|string		|The title of the event. Intended for public display rather than administrative purposes.
+|description		|string		|A description of the event, usually displayed publicly. May contain text and/or HTML.
+|summary			|string		|A text-only single paragraph summarizing the event. Shown on listing pages that have more than titles, but not enough room for full description.
+|browser_url		|string		|A URL string pointing to the publicly available event page on the web.
+|total_accepted		|integer	|A read-only computed property representing the current count of the total number of attendances on the event.
+|status				|enum		|Status of the event.  Possible values are: "confirmed", "tentative", or "cancelled".
+|instructions		| string 	|The instructions for the event shown to attendees after they have RSVPed. May contain text and/or HTML.
+|start_date			|datetime	|The start time for the event.
+|end_date			|datetime	|The end time for the event.
+|all_day_date		|date		|The date for all day events.
+|all_day			|boolean	|True if the event is an all day event.
+|capacity  			|integer	|The max capacity of attendees for the event.
+|guestsCanInviteOthers |boolean |Attendees can invite guests to the event.
+|transparence		|enum		|Whether the event blocks time on online calendar systems. Possible values are "opaque" or "transparent". Opaque is the default, but this can be overridden by a user.
+|visibility			|enum		|Visibility of the event.  Possible values are "public" and "private".
+|location			|[Address](#address)	| An object hash representing the location of the event.
+|reminders 			|[Reminders[]](#reminders)	|An array of object hashes representing the reminders set for this event.
 
-Some initial implementations may only support helpers, direct RESTful access may not be supporter.  In those cases,_links may be omitted in responses.
+_[Back to top...](#)_
 
-### Parameters
-The Event Attendance Helper takes the following parameters in its body
-* Inlined Person - A "person" attribute containing any valid attributes of a person resource are valid in the input representation
-* Optional Inlined "invited_by" Person - A "person" attribute containing any valid attributes of a person resource are valid in the input representation
-* Attendance attributes - any valid Attendance resource attribute
 
-### Example
+### Related Objects
+
+These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+#### Address
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|location.venue	|string	|Optional venue name at the event address, useful for names of buildings. (ex: Smith Hall)
+|location.address_lines	|strings[]	|An array of strings representing the event's street address.
+|location.locality	|string	|A city or other local administrative area.
+|location.region	|string	|State or subdivision codes according to ISO 3166-2 (Final 2 alpha digits).
+|location.postal_code	|string	|The region specific postal code, such as a zip code.
+|location.country	|string	|The country code according to ISO 3166-1 Alpha-2.
+|location.language	|string	|Language in which the address is recorded -- language code according to ISO 639.
+|location.location	|object	|An object hash representing the geocoded location information for the address.
+|location.location.latitude	|float	|A positive or negative float number representing the latitude of the address.
+|location.location.longitude	|float	|A positive or negative float number representing the longitude of the address.
+|location.location.accuracy	|enum	|A value representing the accuracy of the geocode. One of "Rooftop" or "Approximate".
+
+#### Reminders
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|reminder.method|enum    |The way the reminder is to be delivered. One of "email" or "sms".
+|reminder.minutes  |integer    |The number of minutes before the start of the event to send the reminder.
+
+
+### Links
+
+{% include links_intro.md %}
+
+| Name          | Type      | Description
+|-----------    |-----------|-----------|--------------
+|self			|[Event](events.html)	|A self-referential link to the event.
+|creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the event.
+|organizer		|[Person*](people.html)  		|A link to a single Person resource representing the organizer of the event.
+|modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this event.
+|attendances	|[Attendances[]*](attendances.html)	|A link to the collection of Attendance resources for this event.
+|record_attendance_helper	|[Record Attendance Helper*](record_attendance.html)	|A link to the Record Attendance Helper resource endpoint for this event.
+
+_[Back to top...](#)_
+
+
+## Related Resources
+
+* [Attendance](attendances.html)
+* [Record Attendance Helper](record_attendance.html)
+* [Person](people.html)
+
+_[Back to top...](#)_
+
+## Scenarios
+
+{% include scenarios_intro.md %}
+
+### Scenario: Retrieving a collection of Event resources (GET)
+
+Event resources are sometimes presented as collections of events. For example, calling the events endpoint will return a collection of all the events stored in the system's database associated with your api key.
 
 #### Request
+
 ```javascript
-POST /api/v1/events/507/event_attendance_helper
+GET https://osdi-sample-system.org/api/v1/events/
 
-{
-	"status" : "accepted",
-	"comment" : "I can't wait for this event!",
+Header:
+OSDI-API-Token:[your api key here]
+```
 
-	"person" : {
-		"family_name" : "Smith",
-		"given_name" : "John",
-		"postal_addresses" : [ { "postal_code" : "20009" } ],
-		"email_addresses" : [ { "address" : "jsmith@mail.com" } ]
-	},
-	"invited_by" : { /* optional */
-		"family_name" : "Testy",
-		"given_name" : "McTesterson",
-		"postal_addresses" : [ { "postal_code" : "20009" } ],
-		"email_addresses" : [ { "address" : "testy@mctesterson.com" } ]
-	}
-
-} 
-````
 #### Response
-````
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
 {
-	"status" : "accepted",
-	"comment" : "I can't wait for this event!",
-	"attended" : false,
-	
-	"_links" : {
-		"event" : { "href" : "http://server/event/507" },
-		"person" : { "href" : "http://server/person/4" },
-		"invited_by" : { "href" : "http://server/person/5" }
-	}
+    "total_pages": 10,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 250,
+    "_links": {
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/events?page=2"
+        },
+        "osdi:forms": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/events/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+            },
+            //(truncated for brevity)
+        ],
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/events"
+        }
+    },
+    "_embedded": {
+        "osdi:events": [
+            {
+                "identifiers": [
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+                    "foreign_system:1"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "name": "March 14th Rally",
+                "title": "Rally for Justice",
+                "description": "<p>Join us in the park to rally for justice!</p>",
+                "summary": "Join us in the park to rally for justice!",
+                "instructions": "<p>Bring a friend and a sign.</p>",
+                "browser_url": "http://osdi-sample-system.org/events/rally-for-justice",
+                "total_accepted": 14,
+                "status": "confirmed",
+                "start_date": "2015-03-14T12:00:00Z",
+                "end_date": "2015-03-14T14:00:00Z",
+                "all_day": false,
+                "guestsCanInviteOthers": true,
+                "transparence": "opaque",
+                "visibility": "public",
+                "location": {
+	                "venue": "Lafayette Square",
+	                "address_lines": [
+		                "1564 H St NW"
+		            ],
+		            "locality": "Washington",
+		            "region": "DC",
+		            "postal_code": "20001",
+		            "country": "US",
+		            "language": "EN",
+		            "location": {
+			            "latitude": 38.9002101,
+			            "longitude": -77.0359252,
+			            "accuracy": "Rooftop"
+			        }
+	            },
+	            "reminders": [
+		            {
+		                "method": "email",
+		                "minutes": 1440
+		            },
+		            {
+			            "method": "sms",
+			            "minutes": 60
+			        }
+		        ],
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                    },
+                    "osdi:attendances": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
+                    },
+                    "osdi:creator": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:organizer": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
+                    },
+                    "osdi:modified_by": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:record_attendance_helper": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_attendance_helper"
+                    }
+                }
+            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
+                "title": "House Party for Progress",
+                "description": "<p>Come to my small house party. We'll discuss how we can make more progress.</p>",
+                "instructions": "<p>This is an invite-only event, but feel free to bring a friend!</p>",
+                "browser_url": "http://osdi-sample-system.org/events/party-for-progress",
+                "total_accepted": 3,
+                "status": "tentative",
+                "start_date": "2015-01-05T19:00:00Z",
+                "end_date": "2015-01-05T21:00:00Z",
+                "all_day": false,
+                "guestsCanInviteOthers": false,
+                "capacity": 10,
+                "transparence": "opaque",
+                "visibility": "private",
+                "location": {
+	                "venue": "My House",
+	                "address_lines": [
+		                "1600 Pennsylvania Ave. NW"
+		            ],
+		            "locality": "Washington",
+		            "region": "DC",
+		            "postal_code": "20001",
+		            "country": "US",
+		            "language": "EN",
+		            "location": {
+			            "latitude": 38.9002101,
+			            "longitude": -77.0359252,
+			            "accuracy": "Rooftop"
+			        }
+	            },
+	            "reminders": [
+		            {
+		                "method": "email",
+		                "minutes": 1440
+		            }
+		        ],
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                    },
+                    "osdi:attendances": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/1efc3644-af25-4253-90b8-a0baf12dbd1e/attendances"
+                    },
+                    "osdi:creator": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:organizer": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
+                    },
+                    "osdi:modified_by": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:record_attendance_helper": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/1efc3644-af25-4253-90b8-a0baf12dbd1e/record_attendance_helper"
+                    }
+                }
+            },
+            //(truncated for brevity)
+        ]
+    }
+}
+```	
+
+_[Back to top...](#)_		
+
+### Scenario: Scenario: Retrieving an individual Event resource (GET)
+
+Calling an individual Event resource will return the resource directly, along with all associated fields and appropriate links to additional information about the event.
+
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/events/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+        "foreign_system:1"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "name": "March 14th Rally",
+    "title": "Rally for Justice",
+    "description": "<p>Join us in the park to rally for justice!</p>",
+    "summary": "Join us in the park to rally for justice!",
+    "instructions": "<p>Bring a friend and a sign.</p>",
+    "browser_url": "http://osdi-sample-system.org/events/rally-for-justice",
+    "total_accepted": 14,
+    "status": "confirmed",
+    "start_date": "2015-03-14T12:00:00Z",
+    "end_date": "2015-03-14T14:00:00Z",
+    "all_day": false,
+    "guestsCanInviteOthers": true,
+    "transparence": "opaque",
+    "visibility": "public",
+    "location": {
+        "venue": "Lafayette Square",
+        "address_lines": [
+            "1564 H St NW"
+        ],
+        "locality": "Washington",
+        "region": "DC",
+        "postal_code": "20001",
+        "country": "US",
+        "language": "EN",
+        "location": {
+            "latitude": 38.9002101,
+            "longitude": -77.0359252,
+            "accuracy": "Rooftop"
+        }
+    },
+    "reminders": [
+        {
+            "method": "email",
+            "minutes": 1440
+        },
+        {
+            "method": "sms",
+            "minutes": 60
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        },
+        "osdi:attendances": {
+            "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:organizer": {
+            "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:record_attendance_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_attendance_helper"
+        }
+    }
+}
+```
+
+_[Back to top...](#)_
+
+
+### Scenario: Creating a new event (POST)
+
+Posting to the event collection endpoint will allow you to create a new event. Optionally adding links to a Person resource will set the organizer or creator. The response is the new event that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/events/
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "identifiers": [
+        "foreign_system:1"
+    ],
+    "title": "Rally for Justice",
+    "name": "March 14th Rally",
+    "origin_system": "OpenSupporter",
+    "start_date": "2015-03-14T12:00:00Z",
+    "end_date": "2015-03-14T14:00:00Z",
+    "location": {
+        "venue": "Lafayette Square",
+        "address_lines": [
+            "1564 H St NW"
+        ],
+        "locality": "Washington",
+        "region": "DC",
+        "postal_code": "20001",
+        "country": "US",
+        "language": "EN",
+        "location": {
+            "latitude": 38.9002101,
+            "longitude": -77.0359252,
+            "accuracy": "Rooftop"
+        }
+    },
+    "_links" : {
+        "osdi:organizer" : { 
+            "href" : "https://actionnetwork.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2" 
+        }
+    }
+}
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+        "foreign_system:1"
+    ],
+    "origin_system": "OpenSupporter",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "name": "March 14th Rally",
+    "title": "Rally for Justice",
+    "total_accepted": 0,
+    "status": "confirmed",
+    "start_date": "2015-03-14T12:00:00Z",
+    "end_date": "2015-03-14T14:00:00Z",
+    "all_day": false,
+    "guestsCanInviteOthers": true,
+    "transparence": "opaque",
+    "visibility": "public",
+    "location": {
+        "venue": "Lafayette Square",
+        "address_lines": [
+            "1564 H St NW"
+        ],
+        "locality": "Washington",
+        "region": "DC",
+        "postal_code": "20001",
+        "country": "US",
+        "language": "EN",
+        "location": {
+            "latitude": 38.9002101,
+            "longitude": -77.0359252,
+            "accuracy": "Rooftop"
+        }
+    },
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        },
+        "osdi:attendances": {
+            "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:organizer": {
+            "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:record_attendance_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_attendance_helper"
+        }
+    }
+}
+```
+
+_[Back to top...](#)_
+
+
+### Scenario: Modifying an event (PUT)
+
+You can updating a event by calling a PUT operation on that event's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
+
+{% include array_warning.md %}
+
+#### Request
+
+```javascript
+PUT https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "name": "March 14th Rally",
+    "start_date": "2015-03-15T12:00:00Z",
+    "end_date": "2015-03-15T14:00:00Z"
 }
 
+```
+
+#### Response
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+        "foreign_system:1"
+    ],
+    "origin_system": "OpenSupporter",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "name": "March 15th Rally",
+    "title": "Rally for Justice",
+    "total_accepted": 0,
+    "status": "confirmed",
+    "start_date": "2015-03-15T12:00:00Z",
+    "end_date": "2015-03-15T14:00:00Z",
+    "all_day": false,
+    "guestsCanInviteOthers": true,
+    "transparence": "opaque",
+    "visibility": "public",
+    "location": {
+        "venue": "Lafayette Square",
+        "address_lines": [
+            "1564 H St NW"
+        ],
+        "locality": "Washington",
+        "region": "DC",
+        "postal_code": "20001",
+        "country": "US",
+        "language": "EN",
+        "location": {
+            "latitude": 38.9002101,
+            "longitude": -77.0359252,
+            "accuracy": "Rooftop"
+        }
+    },
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        },
+        "osdi:attendances": {
+            "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:organizer": {
+            "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:record_attendance_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_attendance_helper"
+        }
+    }
+}
+```
+
+_[Back to top...](#)_
 
 
-````
+### Scenario: Deleting an event (DELETE)
 
-# Single resource retrieval
+You may delete a event by calling the DELETE command on the event's endpoint.
 
-## default embed policy
-> TBD
+#### Request
 
-## JSON Representation
+```javascript
+DELETE https://osdi-sample-system.org/api/v1/events/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
 
-	{
-	  "id": string,
-	  "status": string,
-	  "created_date": datetime,
-	  "modified_date": datetime,
-	  "origin_system": string,
-	  "summary": string,
-	  "browser_url": string,
-	  "description": string,
-	  "instructions": string,
-	  "_embedded" : {
-			"osdi:location" : {
-				"venue": "Smith Hall",
-				"address1": "430 Erwin Stream",
-	            "city": "Altheastad",
-	            "state": "FL",
-	            "postal_code": "87210-9039",
-	            "country_code": "UK",
-	            "address_type": "Home",
-	            "lat": 44,
-	            "lng": 40,
-	            "accuracy": "Rooftop",
-	            "address_status": "Verified",
-	            "primary": true,
-	            "_links": {
-	              "self": {
-	                "href": "http://api.opensupporter.org/api/v1/addresses/42"
-	              },
-	              "person": {
-	                "href": "http://api.opensupporter.org/api/v1/people/21"
-	              }
-			"osdi:creator" :   {
-	            {
-		        "first_name": "Lurline",
-		        "last_name": "Glover",
-		        "middle_name": "Titus",
-		        "email": "test-1@example.com",
-		        "gender": "Male",
-		        "gender_identity": "Male",
-		        "twitter_handle": "@Lurline_Glover",
-		        "guid": "c199e4a0-b562-0130-dc7c-168c51e904de",
-		        "_embedded": {
-		          "primary_address": {
-		            "address1": "430 Erwin Stream",
-		             ...
-		          },
+Header:
+OSDI-API-Token:[your api key here]
+```
 
-			"osdi:organizer" :   {
-	            {
-		        "first_name": "Lurline",
-		        "last_name": "Glover",
-		        "middle_name": "Titus",
-		        "email": "test-1@example.com",
-		        "gender": "Male",
-		        "gender_identity": "Male",
-		        "twitter_handle": "@Lurline_Glover",
-		        "guid": "c199e4a0-b562-0130-dc7c-168c51e904de",
-		        "_embedded": {
-		          "primary_address": {
-		            "address1": "430 Erwin Stream",
-		             ...
-		          },
-			},
-	  "start_date": datetime,
-	  "end_date" : datetime,
-      "all_day" : boolean,
-      "all_day_date" : date,
+#### Response
 
-	  "transparency": string,
-	  "visibility": string,
-	  "attendance_count" : integer,
-	  "_embedded" : {
-	       "attendance": [
-                {
-				  "total_records": 80,
-					"_links" : {
-					    "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-						"osdi:event" : {"href" : uri }
-						"osdi:person" : {"href" : uri }
-					},
-					"_embedded" : {
-						"osdi:person": {
-				        "first_name": "Lurline",
-				        "last_name": "Glover",
-				        "middle_name": "Titus",
-				        "email": "test-1@example.com",
-				        "gender": "Male",
-				        "gender_identity": "Male",
-				        "twitter_handle": "@Lurline_Glover",
-				        "guid": "c199e4a0-b562-0130-dc7c-168c51e904de",
-				        "_embedded": {
-				          "primary_address": {
-				            "address1": "430 Erwin Stream",
-				             ...
-				          }
+```javascript
+200 OK
 
-              			}
-					}
-					]
-	  "guestsCanInviteOthers": boolean,
-	  "privateCopy": boolean,
-	  "locked": boolean,
-	  "reminders": [
-			{
-				method : "email",
-				minutes : "1440"
-	        },
-			{
-				method : "sms",
-				minutes : "120"
-	        }
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
 
-	    ],
-	  },
-	  "_links" : {
-	   "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-       "self": { "href" : uri },
-       "osdi:attendance" : { "href" : uri }
-       "osdi:location" : { "href" : uri }
-	   "osdi:organizer" : { "href" : uri }
-	   "osdi:creator" : { "href" : uri }
-      }
+{
+    "notice": "This event was successfully deleted."
+}
+```
 
-	}
-
-
-# Collection Response
-
-## Default embed policy
-When retrieving a collection of events, by default, the full event resource is returned but:
-
-* Included: creator, organizer, location
-* Excluded: Attendance collection
-
-All 1:1 relationships are contained in the response
-
-Excluded resources can be accessed directly by de-referencing the appropriate link in the _links collection
-
-## JSON Representation
-> TBD
+_[Back to top...](#)_

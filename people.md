@@ -63,6 +63,7 @@ A list of fields specific to the Person resource.
 |source         |string     |Information about the source where this person record was acquired.   _Example: "facebook-ad-october"_
 |ethnicities|strings[]   |A unique string array representing a person's ethnicities.
 |languages_spoken|strings[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
+|birthdate	|[Birthdate](#birthdate)    |An object hash representing the birthdate of the person.
 |employer|string    |The name of the person's employer.
 |employer_address|[Employer Address](#employer-address)    |An object hash representing the postal address of the person's employer.
 |postal_addresses      |[Postal Addresses[]](#postal-addresses)   |An array of postal address object hashes associated with the person.
@@ -82,7 +83,6 @@ These JSON hashes included in the table above are broken out into their own tabl
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-|birthdate      |object       |An object hash representing the birth date of the person.
 |birthdate.month|integer    |An integer representing the month of the birth date of the person.
 |birthdate.day  |integer    |An integer representing the day of the birth date of the person.
 |birthdate.year|integer     |An integer representing the 4 digit year of the birth date of the person.
@@ -170,9 +170,10 @@ _[Back to top...](#)_
 
 |Name          	|Type		|Description
 |-----------    |-----------|--------------
+|self			|[Person](people.html)	|A self-referential link to the person.
 |donations		|[Donations[]*](#)  |A link to the collection of donations associated with the person.
 |submissions	|[Submissions[]*](submissions.html)  |A link to the collection of form submissions associated with the person.
-|attendance		|[Attendances[]*](#)        |A link to the collection of event attendances associated with the person.
+|attendances		|[Attendances[]*](attendances.html)        |A link to the collection of event attendances associated with the person.
 |signatures		|[Signatures[]*](#)        |A link to the collection of petition signatures associated with the person.
 |question_answers		|[Question Answers[]*](#)  |A link to the collection of answers to questions associated with the person.
 |taggings		|[Taggings[]*](#)   	|A link to the collection of taggings associated with the person.
@@ -198,7 +199,7 @@ _[Back to top...](#)_
 * [Person Signup Helper](person_signup.html)
 * [Donation](#)
 * [Submission](submissions.html)
-* [Attendance](#)
+* [Attendance](attendances.html)
 * [Signature](#)
 * [Question Answer](#)
 * [Tagging](#)
