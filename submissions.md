@@ -107,7 +107,7 @@ OSDI-API-Token:[your api key here]
 
 #### Response
 
-```json
+```javascript
 200 OK
 
 Content-Type: application/hal+json
