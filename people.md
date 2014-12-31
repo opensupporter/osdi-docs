@@ -174,7 +174,7 @@ _[Back to top...](#)_
 |donations		|[Donations[]*](#)  |A link to the collection of donations associated with the person.
 |submissions	|[Submissions[]*](submissions.html)  |A link to the collection of form submissions associated with the person.
 |attendances		|[Attendances[]*](attendances.html)        |A link to the collection of event attendances associated with the person.
-|signatures		|[Signatures[]*](#)        |A link to the collection of petition signatures associated with the person.
+|signatures		|[Signatures[]*](signatures.html)        |A link to the collection of petition signatures associated with the person.
 |question_answers		|[Question Answers[]*](#)  |A link to the collection of answers to questions associated with the person.
 |taggings		|[Taggings[]*](#)   	|A link to the collection of taggings associated with the person.
 |items		|[Items[]*](#)   	|A link to the collection of list items associated with the person.
@@ -200,7 +200,7 @@ _[Back to top...](#)_
 * [Donation](#)
 * [Submission](submissions.html)
 * [Attendance](attendances.html)
-* [Signature](#)
+* [Signature](signatures.html)
 * [Question Answer](#)
 * [Tagging](#)
 * [Item](#)

@@ -70,7 +70,7 @@ _[Back to top...](#)_
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the form.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this form.
 |submissions	|[Submissions[]*](submissions.html)	|A link to the collection of Submission resources for this form.
-|record_submission_helper	|[Record Submissions Helper*](record_submission.html)	|A link to the Record Submissions Helper resource endpoint for this form.
+|record_submission_helper	|[Record Submission Helper*](record_submission.html)	|A link to the Record Submission Helper resource endpoint for this form.
 
 _[Back to top...](#)_
 
