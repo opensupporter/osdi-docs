@@ -62,7 +62,7 @@ _[Back to top...](#)_
 
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
-|self			|[Submission*](submissions.html)	|A self-referential link to the signature.
+|self			|[Signature*](signatures.html)	|A self-referential link to the signature.
 |person			|[Person*](people.html)		|A link to a single Person resource representing the person who signed the petition.
 |petition		|[Petition*](petitions.html)  		|A link to a Petition resource representing the petition on which this signature was created.
 
