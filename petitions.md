@@ -81,7 +81,7 @@ _[Back to top...](#)_
 
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
-|self			|[Form*](forms.html)	|A self-referential link to the petition.
+|self			|[Petition*](petitions.html)	|A self-referential link to the petition.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the petition.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this petition.
 |signatures		|[Signatures[]*](signatures.html)	|A link to the collection of Signature resources for this petition.
@@ -170,13 +170,13 @@ Cache-Control: max-age=0, private, must-revalidate
                 "browser_url": "http://osdi-sample-system.org/petitions/acme-co-stop-doing-the-bad-thing",
                 "total_signatures": 345,
                 "target": [
-	                {
-	                    "name": "Jane Doe, CEO, Acme Co"
-	                },
-	                {
-	                    "name": "John Smith, Chairman, Acme Co"
-	                }
-	            ],
+                    {
+                        "name": "Jane Doe, CEO, Acme Co"
+                    },
+                    {
+                        "name": "John Smith, Chairman, Acme Co"
+                    }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/petitions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -208,10 +208,10 @@ Cache-Control: max-age=0, private, must-revalidate
                 "browser_url": "http://osdi-sample-system.org/petitions/raise-the-wage",
                 "total_signatures": 10572,
                 "target": [
-	                {
-	                    "name": "Congress"
-	                }
-	            ],
+                    {
+                        "name": "Congress"
+                    }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/petitions/1efc3644-af25-4253-90b8-a0baf12dbd1e"
