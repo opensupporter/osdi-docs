@@ -83,7 +83,7 @@ _[Back to top...](#)_
 
 ## Related Resources
 
-* [Result](result.html)
+* [Result](results.html)
 * [Person](people.html)
 
 _[Back to top...](#)_
