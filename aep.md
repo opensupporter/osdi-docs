@@ -14,7 +14,7 @@ The AEP is the top level entry point for an OSDI API implementation. It provides
 
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
-    * [AEP Fields](#form-fields)  
+    * [AEP Fields](#aep-fields)  
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -57,7 +57,7 @@ Note that on the AEP, links will often contain titles to inform new users about 
 |donations		|[Donations[]*](donations.html)  		|A link to the collection of Donation resources in the system.
 |tags		|[Tags[]*](#)  		|A link to the collection of Tag resources in the system.
 |lists		|[Lists[]*](#)  		|A link to the collection of list resources in the system.
-|queries		|[Queries[]*](#)  		|A link to the collection of Query resources in the system.
+|queries		|[Queries[]*](queries.html)  		|A link to the collection of Query resources in the system.
 |questions		|[Questions[]*](#)  		|A link to the collection of Question resources in the system.
 |docs		|N/A  		|A link to the human-readable documentation for the API system.
 |person_signup_helper		|[Person Signup Helper*](person_signup.html)  		|A link to the Person Signup Helper resource.
@@ -75,7 +75,7 @@ _[Back to top...](#)_
 * [Donation](donations.html)
 * [Tag](#)
 * [List](#)
-* [Query](#)
+* [Query](queries.html)
 * [Question](#)
 * [Person Signup Helper](person_signup.html)
 

@@ -307,7 +307,7 @@ _[Back to top...](#)_
 
 ### Scenario: Modifying a signature (PUT)
 
-You can updating a signature by calling a PUT operation on that signature's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
+You can update a signature by calling a PUT operation on that signature's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
 
 {% include array_warning.md %}
 
@@ -338,7 +338,7 @@ Cache-Control: max-age=0, private, must-revalidate
         "foreign_system:1"
     ],
     "created_date": "2014-03-20T21:04:31Z",
-    "modified_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T22:04:31Z",
     "action_date": "2014-03-17T11:02:15Z",
     "comments": "Please stop!",
     "_links": {
