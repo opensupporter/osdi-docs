@@ -68,7 +68,7 @@ _[Back to top...](#)_
 ## Related Resources
 
 * [Person](people.html)
-* [Petition](petition.html)
+* [Petition](petitions.html)
 * [Event](events.html)
 * [Form](forms.html)
 * [Fundraising Page](#)
