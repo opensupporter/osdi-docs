@@ -49,8 +49,6 @@ An answer to a question.  An answer a user response to a question.
 |-----------    |-----------|--------------
 |identifier		|Identifier[]		|Array of identifiers
 |value          |string     |Human readable text of the value
-|question		|Question*	|Reference to associated question
-|person			|Person*	|Reference to associated person
 
 _[Back to top...](#)_
 
@@ -131,8 +129,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ],
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/resource"
-        },
-        //other links here
+        }
     },
     "_embedded": {
         "osdi:resource": [
@@ -151,7 +148,7 @@ Calling an individual Resource Example resource will return the resource directl
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/resource/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+GET https://osdi-sample-system.org/api/v1/answer/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -172,12 +169,17 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
-    //more fields here
+    "value": "Strong Supporter"
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/resource/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
-        //more links here
+         "osdi:question": {
+            "href": "https://osdi-sample-system.org/api/v1/question/asd3ds-7366-466d-a3b8-7e0d87c3cd8b
+        },
+        "osdi:person": {
+            "href": "https://osdi-sample-system.org/api/v1/people/asd3ds-3234-466d-a3b8-4e0d87c323ds
+        }
     }
 }
 ```
@@ -192,13 +194,13 @@ Posting to the resource collection endpoint will allow you to create a new resou
 #### Request
 
 ```javascript
-POST https://osdi-sample-system.org/api/v1/resource/
+POST https://osdi-sample-system.org/api/v1/person/abc-123/questions/321-xyz
 
 Header:
 OSDI-API-Token:[your api key here]
 
 {
-    //fields here
+    "value": "Strong Supporter"
 }
 ```
 
@@ -217,7 +219,18 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
-    // more fields/links here
+    "value": "Strong Supporter"
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/resource/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        },
+         "osdi:question": {
+            "href": "https://osdi-sample-system.org/api/v1/question/asd3ds-7366-466d-a3b8-7e0d87c3cd8b
+        },
+        "osdi:person": {
+            "href": "https://osdi-sample-system.org/api/v1/people/asd3ds-3234-466d-a3b8-4e0d87c323ds
+        }
+    }
 }
 ```
 
@@ -233,7 +246,7 @@ You can updating a resource by calling a PUT operation on that resource's endpoi
 #### Request
 
 ```javascript
-PUT https://osdi-sample-system.org/api/v1/resource/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
+PUT https://osdi-sample-system.org/api/v1/answers/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -268,7 +281,7 @@ You may delete a resource by calling the DELETE command on the resource's endpoi
 #### Request
 
 ```javascript
-DELETE https://osdi-sample-system.org/api/v1/resource/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+DELETE https://osdi-sample-system.org/api/v1/answers/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
 
 Header:
 OSDI-API-Token:[your api key here]
