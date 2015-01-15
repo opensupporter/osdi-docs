@@ -61,6 +61,7 @@ A list of fields specific to the List resource.
 |summary			|string		|A text-only single paragraph summarizing the list. Shown on listing pages that have more than titles, but not enough room for full description.
 |browser_url		|string		|A URL string pointing to the publicly available list page on the web.
 |total_items	|integer	|A read-only computed property representing the current count of the total number of items in the list.
+
 _[Back to top...](#)_
 
 
