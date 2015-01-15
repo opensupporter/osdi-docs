@@ -200,6 +200,9 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```
 
+_[Back to top...](#)_
+
+
 ### Scenario: Scenario: Retrieving an individual List resource (GET)
 
 Calling an individual List resource will return the resource directly, along with all associated fields and appropriate links to additional information about the list.
@@ -250,6 +253,8 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```
 
+_[Back to top...](#)_
+
 ### Scenario: Creating a new list (POST)
 
 Posting to the list collection endpoint will allow you to create a new list. The response is the new list that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
@@ -272,8 +277,6 @@ OSDI-API-Token:[your api key here]
 	"origin_system": "OpenSupporter"
 }
 ```
-
-#### Response
 
 #### Response
 
@@ -312,6 +315,8 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```
 
+_[Back to top...](#)_
+
 ### Scenario: Modifying a list (PUT)
 
 You can update a list by calling a PUT operation on that list's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
@@ -346,7 +351,7 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "origin_system": "OSDI Sample System",
     "created_date": "2014-03-20T21:04:31Z",
-    "modified_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T22:04:31Z",
     "name": "December Volunteers",
     "summary": "A list containing all of our volunteers",
     "browser_url": "http://osdi-sample-system.org/lists/volunteers",
