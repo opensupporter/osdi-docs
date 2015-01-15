@@ -53,16 +53,6 @@ An answer to a question.  An answer a user response to a question.
 _[Back to top...](#)_
 
 
-#### Example Object
-
-|Name          |Type      |Description
-|-----------    |-----------|--------------
-|field1      |string       |Description of field1
-|field2      |string       |Description of field2
-
-_[Back to top...](#)_
-
-
 
 ### Links
 
