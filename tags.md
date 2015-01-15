@@ -19,7 +19,7 @@ As an example, a customer might have a tag for volunteers.  Each Person who has 
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
     * [Scenario: Create a new tag (POST)](#scenario-create-a-new-tag-post)
-    * [Scenario Finding a tag reference for use in tagging by using odata query (GET)](scenario-finding-a-tag-reference-for-use-in-tagging-by-using-odata-query-get)
+    * [Scenario Finding a tag reference for use in tagging by using odata query (GET)](#scenario-finding-a-tag-reference-for-use-in-tagging-by-using-odata-query-get)
 
 
 {% include endpoints_and_url_structures.md %}
