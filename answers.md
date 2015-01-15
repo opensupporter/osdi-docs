@@ -5,7 +5,9 @@ title: Answer Resource
 
 # Answer Resource
 
-Introductory paragraphs describing the resource. 
+Answers are applied to a the Person resource and include a link to the cooresponding Question resource. 
+
+As an example, a Question might ask Do you support John Doe For City Council?  An Answer would be a Persons response to the question. 
 
 ### Sections
 
@@ -13,8 +15,6 @@ Introductory paragraphs describing the resource.
 * [Fields](#fields)
     * [Common Fields](#common-fields)
     * [Resource Fields](#resource-fields)
-    * [Related Objects](#related-objects)   
-    * [Links](#links)
 * [Helpers](#helpers)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -41,21 +41,19 @@ _[Back to top...](#)_
 _[Back to top...](#)_
 
 
-### Example Resource Fields
+### Answer Fields
 
-A list of fields specific to the Example Resource.
+An answer to a question.  An answer a user response to a question.
 
-|Name          |Type      |Description
+| Name          | Type      | Description
 |-----------    |-----------|--------------
-|field1      |string     |field1 description
-|field2|[ExampleObject](#example-object)    |An instance of an Example Object
-|field3      |[ExampleObject[]](#example-object)  |An array of Example Objects
+|identifier		|Identifier[]		|Array of identifiers
+|value          |string     |Human readable text of the value
+|question		|Question*	|Reference to associated question
+|person			|Person*	|Reference to associated person
 
 _[Back to top...](#)_
 
-### Related Objects
-
-These objects included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
 
 #### Example Object
 
@@ -74,30 +72,19 @@ _[Back to top...](#)_
 
 |Name          	|Type		|Description
 |-----------    |-----------|--------------
-|self			|Example Resource*	|A self-referential link to the resource.
-|linked_resource1		|LinkedResourceType1*  |A link to the instance of LinkedResourceType1
-|linked_resource2		|LinkedResourceType2[]*  |A link to the collection of resources
+|self			|Answer*	|A self-referential link to the resource.
+|person		|Person*  |A link to a single Person resource representing the person to whom this Answer belongs.
+|question		|Question*  |A link to the associated question
 
 _[Back to top...](#)_
 
 
-
-## Helpers
-
-{% include helpers_intro.md %}
-
-|Name          |Description
-|-----------    |-----------
-|example_helper1      |Description of helper's purpose.
-|example_helper2      |Description of helper's purpose.
-
-_[Back to top...](#)_
 
 
 ## Related Resources
 
-* [RelatedResource1](#)
-* [RelatedResource2](#)
+* [Question](#)
+* [Person](#)
 
 _[Back to top...](#)_
 
