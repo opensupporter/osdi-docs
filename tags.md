@@ -18,11 +18,8 @@ As an example, a customer might have a tag for volunteers.  Each Person who has 
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
-    * [Scenario: Retrieving a collection of Query resources (GET)](#scenario-retrieving-a-collection-of-query-resources-get)
-    * [Scenario: Retrieving an individual Query resource (GET)](#scenario-scenario-retrieving-an-individual-query-resource-get)
-    * [Scenario: Creating a new query (POST)](#scenario-creating-a-new-query-post)
-    * [Scenario: Modifying a query (PUT)](#scenario-modifying-a-query-put)
-    * [Scenario: Deleting a query (DELETE)](#scenario-deleting-a-query-delete)
+    * [Scenario: Create a new tag (POST)](#scenario-create-a-new-tag-post)
+    * [Scenario Finding a tag reference for use in tagging by using odata query (GET)](scenario-finding-a-tag-reference-for-use-in-tagging-by-using-odata-query-get)
 
 
 {% include endpoints_and_url_structures.md %}
