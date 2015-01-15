@@ -2,6 +2,12 @@
 layout: default
 title: "Tags"
 ---
+# Tag
+This document defines the Tag resource.
+
+Tags are associated to resources like people (Person) to indicate customer specific data.  
+
+As an example, a customer might have a tag for volunteers.  Each Person who has signed up to volunteer would have the volunteer tag associated.  Tags are associated to a resource via a Tagging resource.
 
 ### Sections
 
