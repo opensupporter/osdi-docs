@@ -36,7 +36,7 @@ A query must fit a set of criteria:
 
 {% include endpoints_and_url_structures.md %}
 
-The link relation label for a Form resource is ```osdi:query``` for a single Query resource or ```osdi:queries``` for a collection of Query resources.
+The link relation label for a Query resource is ```osdi:query``` for a single Query resource or ```osdi:queries``` for a collection of Query resources.
 
 _[Back to top...](#)_
 
@@ -273,7 +273,7 @@ You can update a query by calling a PUT operation on that query's endpoint. Your
 #### Request
 
 ```javascript
-PUT https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
+PUT https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
 
 Header:
 OSDI-API-Token:[your api key here]
