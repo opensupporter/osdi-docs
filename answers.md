@@ -165,7 +165,7 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/resource/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
          "osdi:question": {
-            "href": "https://osdi-sample-system.org/api/v1/question/asd3ds-7366-466d-a3b8-7e0d87c3cd8b
+            "href": "https://osdi-sample-system.org/api/v1/question/asd3ds-7366-466d-a3b8-7e0d87c3cd8b"
         },
         "osdi:person": {
             "href": "https://osdi-sample-system.org/api/v1/people/asd3ds-3234-466d-a3b8-4e0d87c323ds
