@@ -621,6 +621,11 @@ When this parameter is used in requests for Collections, the value applies to th
 Example
 
 Assuming a resource of Person with a collection of addresses, $expand=addresses would cause the collection of instances of addresses to be returned rather than a reference.
+## Mime Types
+When sending requests or responses via OSDI, the preferred Mime Type is
+> application/json
+
+Servers and clients are __strongly__ encouraged to be liberal in accepting entities with a missing or incorrect Mime Type.
 
 ## Common Attributes
 All resources have a set of common attributes.  These are present, even if the table definitions do not explicitly list them.
