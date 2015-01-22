@@ -1,52 +1,85 @@
 ---
 layout: default
-title: "Questions"
+title: Question Resource
 ---
 
-# Survey Questions and Answers
+# Survey Question
 
-## Question
+This document defines the Question resource.
 
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|identifier			|Identifier[]		|Array of identifiers
-|name			|string		|Name for the question
-|question       |string     |Human readable text of the question
-|question_type  |string     |One of "MultiChoice"
-|responses      |QuestionResponse[]*|A collection of possible responses
+Questions together make up a survey.  Examples include "Do you support John Doe for City Council?", "Do you approve or disapprove of the way Barak Obama is handling his job as president?"
 
-## QuestionResponse
-A possible response or choice for a question.
+### Sections
 
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|identifier			|Identifier[]		|Array of identifiers
-|name       |string     |Human readable text of the value
-|value		|string		|Actual value
-|default	|boolean	|True if this response should be the default response
-
-## QuestionAnswer
-An answer to a question.  An answer is chosen by the user from one of the QuestionResponse options
-
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|identifier		|Identifier[]		|Array of identifiers
-|value          |string     |Human readable text of the value
-|question		|Question*	|Reference to associated question
-|person			|Person*	|Reference to associated person
+* [Endpoints and URL structures](#endpoints-and-url-structures)
+* [Fields](#fields)
+    * [Common Fields](#common-fields)
+    * [Resource Fields](#resource-fields)
+* [Helpers](#helpers)
+* [Related Resources](#related-resources)
+* [Scenarios](#scenarios)
+    * [Scenario: Retrieving a collection of resources (GET)](#scenario-retrieving-a-collection-of-resources-get)
+    * [Scenario: Retrieving an individual resource (GET)](#scenario-scenario-retrieving-an-individual-resource-get)
+    * [Scenario: Creating a new resource (POST)](#scenario-creating-a-new-resource-post)
+    * [Scenario: Modifying a resource (PUT)](#scenario-modifying-a-resource-put)
+    * [Scenario: Deleting a resource (DELETE)](#scenario-deleting-a-resource-delete)
 
 
-## Retrieving Available Questions
+{% include endpoints_and_url_structures.md %}
+
+
+The link relation label for a Example Resource resource is ```osdi:example_resource``` for a single Example Resource resource or ```osdi:example_resources``` for a collection of Example Resource resources.
+
+_[Back to top...](#)_
+
+
+## Fields
+
+{% include fields_intro.md %}
+
+{% include global_fields.md %}
+
+_[Back to top...](#)_
+
+### Question Fields
+
+| Name          | Type                | Description
+| -----------   | -----------         | --------------
+| identifier    | Identifier[]        | Array of identifiers
+| name          | string              | Name for the question
+| question      | string              | Human readable text of the question
+| question_type | string              | One of "MultiChoice"
+| responses     | QuestionResponse[]* | A collection of possible responses
+
+
+## Related Resources
+
+* [Person](#)
+* [Response](#)
+
+
+## Scenarios
+
+{% include scenarios_intro.md %}
+
+### Scenario: Retrieving Available Questions (GET)
 
 ### Request
 
-	GET /api/v1/questions HTTP/1.1
+```javascript
+GET /api/v1/questions HTTP/1.1
+
+Header:
+OSDI-API-Token:[your api key here]
+```
 
 ### Response
 
-~~~~
+```javascript
 200 OK
-Content-Type: application/json
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
 
 {
   "_embedded": {
@@ -149,18 +182,12 @@ Content-Type: application/json
     }
   }
 }
-~~~~
+```
 
-## Creating a QuestionAnswer
+_[Back to top...](#)_
 
-### Request
 
-	POST /api/v1/people/question_answers HTTP/1.1
-	Content-Type: application/json
 
-	{
-		"value" : "Emacs",
-		"question_id" : 5
-	}
-	
-### Response
+
+
+
