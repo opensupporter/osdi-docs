@@ -24,6 +24,9 @@ Tags represent categories of data that are associated with People resources. For
 
 {% include endpoints_and_url_structures.md %}
 
+_[Back to top...](#)_
+
+
 ## Fields
 
 {% include fields_intro.md %}
@@ -33,7 +36,7 @@ Tags represent categories of data that are associated with People resources. For
 _[Back to top...](#)_
 
 
-# Tag Fields
+### Tag Fields
 
 A list of fields specific to the Tag resource.
 
@@ -53,7 +56,7 @@ _[Back to top...](#)_
 
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
-|self			|[Form*](forms.html)	|A self-referential link to the tag.
+|self			|[Tag*](tags.html)	|A self-referential link to the tag.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the tag.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this tag.
 |taggings	|[Taggings[]*](taggings.html)	|A link to the collection of Tagging resources for this tag.
@@ -62,7 +65,7 @@ _[Back to top...](#)_
 
 ## Related Resources
 
-* [Tagging](tagging.md)
+* [Tagging](tagging.html)
 * [Person](people.html)
 
 _[Back to top...](#)_
