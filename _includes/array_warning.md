@@ -1,0 +1,1 @@
+**Note:** Modifying members of an array separately is not supported. To change the contents of an array, first GET the current contents and then PUT back only those you wish to keep.

@@ -59,7 +59,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Brian Vallelunga, Trilogy Interactive (Editor)
 * Sandra Wechsler, The Quad
 * Nathan Woodhull, ControlShift Labs
-* Ryan Zarkesh, Popular Democrazy
+* Ryan Zarkesh
 * Misha Zhurkin, Catalist
 
 ## Additional Acknowledgments
@@ -213,8 +213,8 @@ Response
 		},
 		"people": [
 			{
-				"family_name": "Edwin",
-				"given_name": "Labadie",
+				"given_name": "Edwin",
+				"family_name": "Labadie",
 				"additional_name": "Marques",
 				"identifiers": [
 					"osdi:23"
@@ -623,6 +623,11 @@ When this parameter is used in requests for Collections, the value applies to th
 Example
 
 Assuming a resource of Person with a collection of addresses, $expand=addresses would cause the collection of instances of addresses to be returned rather than a reference.
+## Mime Types
+When sending requests or responses via OSDI, the preferred Mime Type is
+> application/json
+
+Servers and clients are __strongly__ encouraged to be liberal in accepting entities with a missing or incorrect Mime Type.
 
 ## Common Attributes
 All resources have a set of common attributes.  These are present, even if the table definitions do not explicitly list them.
