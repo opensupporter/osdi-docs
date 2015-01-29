@@ -59,7 +59,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Brian Vallelunga, Trilogy Interactive (Editor)
 * Sandra Wechsler, The Quad
 * Nathan Woodhull, ControlShift Labs
-* Ryan Zarkesh, Popular Democrazy
+* Ryan Zarkesh
 * Misha Zhurkin, Catalist
 
 ## Additional Acknowledgments
