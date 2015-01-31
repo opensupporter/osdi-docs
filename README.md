@@ -55,6 +55,7 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Ray Suelzer, UFCW International Union
 * Nate Thames, ActBlue
 * Jim Pugh, ShareProgress
+* Sylvia Rolle, Washington United for Marriage
 * Chris Thomas, Sierra Club
 * Brian Vallelunga, Trilogy Interactive (Editor)
 * Sandra Wechsler, The Quad
