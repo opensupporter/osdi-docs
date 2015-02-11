@@ -12,15 +12,10 @@ OSDI membership is made up of progressive vendors and organizations as well as i
 
 More Information about OSDI can be found at the website [opensupporter.org](http://opensupporter.org)
 
-[Download a one page PDF about the project](docs/osdi-one-pager.pdf)
+[The Github source for these documents can be found at:](https://github.com/opensupporter/osdi-docs)
+[The GitHub pages (prettier) can be found at:](http://opensupporter.github.io/osdi-docs/)
 
 [Experiment with our prototype server http://api.opensupporter.org](http://api.opensupporter.org)
-
-[Play with our Canvasser example client application](http://canvasser.opensupporter.org)
-
-Please give us feedback on our work. [Read the Review Guide](review_guide.md) to learn what kind of feedback we're looking for and how to provide it.
-
-
 
 # Authors
 * Leo Aguayo, Organizer
