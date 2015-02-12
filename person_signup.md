@@ -194,8 +194,8 @@ Cache-Control: max-age=0, private, must-revalidate
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
         },
-        "osdi:question_answers": {
-            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/question_answers"
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/answers"
         },
         "osdi:attendance": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/attendance"

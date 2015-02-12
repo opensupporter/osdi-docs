@@ -175,7 +175,7 @@ _[Back to top...](#)_
 |submissions	|[Submissions[]*](submissions.html)  |A link to the collection of form submissions associated with the person.
 |attendances		|[Attendances[]*](attendances.html)        |A link to the collection of event attendances associated with the person.
 |signatures		|[Signatures[]*](signatures.html)        |A link to the collection of petition signatures associated with the person.
-|question_answers		|[Question Answers[]*](#)  |A link to the collection of answers to questions associated with the person.
+|answers		|[Answers[]*](answers.html)  |A link to the collection of answers to questions associated with the person.
 |taggings		|[Taggings[]*](#)   	|A link to the collection of taggings associated with the person.
 |items		|[Items[]*](#)   	|A link to the collection of list items associated with the person.
 |modified_by		|[Person*](people.html)  	|A link to a Person resource representing the last editor of this person.
@@ -201,7 +201,7 @@ _[Back to top...](#)_
 * [Submission](submissions.html)
 * [Attendance](attendances.html)
 * [Signature](signatures.html)
-* [Question Answer](#)
+* [Answer](answers.html)
 * [Tagging](#)
 * [Item](#)
 
@@ -374,8 +374,8 @@ Cache-Control: max-age=0, private, must-revalidate
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
                     },
-                    "osdi:question_answers": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/question_answers"
+                    "osdi:answers": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
                     },
                     "osdi:attendance": {
                         "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendance"
@@ -431,8 +431,8 @@ Cache-Control: max-age=0, private, must-revalidate
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e"
                     },
-                    "osdi:question_answers": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/question_answers"
+                    "osdi:answers": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/answers"
                     },
                     "osdi:attendance": {
                         "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/attendance"
@@ -593,8 +593,8 @@ Cache-Control: max-age=0, private, must-revalidate
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
-        "osdi:question_answers": {
-            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/question_answers"
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
         },
         "osdi:attendance": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendance"
@@ -729,8 +729,8 @@ Cache-Control: max-age=0, private, must-revalidate
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
         },
-        "osdi:question_answers": {
-            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/question_answers"
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/answers"
         },
         "osdi:attendance": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/attendance"
@@ -836,8 +836,8 @@ Cache-Control: max-age=0, private, must-revalidate
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
         },
-        "osdi:question_answers": {
-            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/question_answers"
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/answers"
         },
         "osdi:attendance": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/attendance"

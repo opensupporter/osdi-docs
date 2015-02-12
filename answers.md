@@ -1,33 +1,34 @@
 ---
 layout: default
-title: Answer Resource
+title: Answers
 ---
 
-# Answer Resource
+# Answer
 
-Answers are applied to a the Person resource and include a link to the cooresponding Question resource. 
+This page defines the Answer resource.
 
-As an example, a Question might ask Do you support John Doe For City Council?  An Answer would be a Persons response to the question. 
+Answers are responses a person gave to a question defined by the [Question](questions.html) resource. For example, a Question might ask, "Do you support John Doe For City Council?" and an answer might be "Yes", indicating the person's resonse to the questio.
 
 ### Sections
 
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
     * [Common Fields](#common-fields)
-    * [Resource Fields](#resource-fields)
+    * [Answer Fields](#answer-fields)
+    * [Links](#links)
 * [Helpers](#helpers)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
-    * [Scenario: Retrieving a collection of resources (GET)](#scenario-retrieving-a-collection-of-resources-get)
-    * [Scenario: Retrieving an individual resource (GET)](#scenario-scenario-retrieving-an-individual-resource-get)
-    * [Scenario: Creating a new resource (POST)](#scenario-creating-a-new-resource-post)
-    * [Scenario: Modifying a resource (PUT)](#scenario-modifying-a-resource-put)
-    * [Scenario: Deleting a resource (DELETE)](#scenario-deleting-a-resource-delete)
+    * [Scenario: Retrieving a collection of Answer resources (GET)](#scenario-retrieving-a-collection-of-answer-resources-get)
+    * [Scenario: Retrieving an individual Answer resource (GET)](#scenario-scenario-retrieving-an-individual-answer-resource-get)
+    * [Scenario: Creating a new answer (POST)](#scenario-creating-a-new-answer-post)
+    * [Scenario: Modifying an answer (PUT)](#scenario-modifying-an-answer-put)
+    * [Scenario: Deleting an answer (DELETE)](#scenario-deleting-an-answer-delete)
 
 
 {% include endpoints_and_url_structures.md %}
 
-The link relation label for a Example Resource resource is ```osdi:example_resource``` for a single Example Resource resource or ```osdi:example_resources``` for a collection of Example Resource resources.
+The link relation label for an Answer resource is ```osdi:answer``` for a single Answer resource or ```osdi:answers``` for a collection of Answer resources.
 
 _[Back to top...](#)_
 
@@ -43,12 +44,11 @@ _[Back to top...](#)_
 
 ### Answer Fields
 
-An answer to a question.  An answer a user response to a question.
-
 | Name          | Type      | Description
 |-----------    |-----------|--------------
-|identifier		|Identifier[]		|Array of identifiers
-|value          |string     |Human readable text of the value
+|origin_system		|string     |A human readable identifier of the system where this answer was created. (ex: "OSDI System")
+|action_date		|string		|The date and time the answer was given by the person.
+|value				|string		|The response the person gave. 
 
 _[Back to top...](#)_
 
@@ -60,19 +60,17 @@ _[Back to top...](#)_
 
 |Name          	|Type		|Description
 |-----------    |-----------|--------------
-|self			|Answer*	|A self-referential link to the resource.
-|person		|Person*  |A link to a single Person resource representing the person to whom this Answer belongs.
-|question		|Question*  |A link to the associated question
+|self			|[Answer*](answers.html)	|A self-referential link to the answer.
+|person		|[Person*](people.html)  |A link to a single Person resource representing the person to whom this answer belongs.
+|question		|[Question*](questions.html)  |A link to the associated Question resource that the person answered.
 
 _[Back to top...](#)_
 
 
-
-
 ## Related Resources
 
-* [Question](#)
-* [Person](#)
+* [Question](questions.html)
+* [Person](people.html)
 
 _[Back to top...](#)_
 
@@ -80,14 +78,14 @@ _[Back to top...](#)_
 
 {% include scenarios_intro.md %}
 
-### Scenario: Retrieving a collection of resources (GET)
+### Scenario: Retrieving a collection of Answer resources (GET)
 
-Resource Example resources are sometimes presented as collections of resource example. For example, calling the resource example endpoint will return a collection of all the resource example stored in the system's database associated with your api key.
+Answer resources are sometimes presented as collections of answers. For example, calling the answer endpoint on a particular question will return a collection of all the answers for that question.
 
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/resource
+GET https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -102,14 +100,23 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "total_pages": 88,
+    "total_pages": 10,
     "per_page": 25,
     "page": 1,
-    "total_records": 2188,
+    "total_records": 250,
     "_links": {
         "next": {
-            "href": "https://osdi-sample-system.org/api/v1/resource?page=2"
+            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers?page=2"
         },
+        "osdi:answers": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+            },
+            //(truncated for brevity)
+        ],
         "curies": [
             {
                 "name": "osdi",
@@ -118,27 +125,70 @@ Cache-Control: max-age=0, private, must-revalidate
             }
         ],
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/resource"
+            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers"
         }
     },
     "_embedded": {
-        "osdi:resource": [
-            //fields go here
+        "osdi:attendances": [
+            {
+                "identifiers": [
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+                    "foreign_system:1"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "action_date": "2014-03-18T11:02:15Z",
+                "value": "Yes",
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                    },
+                    "osdi:question": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    }
+                }
+            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
+                "action_date": "2014-03-12T01:45:34Z",
+                "value": "No",
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                    },
+                    "osdi:question": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/adb951cb-51f9-420e-b7e6-de953195ec86"
+                    }
+                }
+            },
+            //(truncated for brevity)
         ]
     }
 }
-```
+```	
 
 _[Back to top...](#)_		
 
-### Scenario: Scenario: Retrieving an individual resource (GET)
+### Scenario: Scenario: Retrieving an individual Answer resource (GET)
 
-Calling an individual Resource Example resource will return the resource directly, along with all associated fields and appropriate links to additional information about the resource.
+Calling an individual Answer resource will return the resource directly, along with all associated fields and appropriate links to additional information about the answer.
 
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/answer/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+GET https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -157,18 +207,20 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
         "foreign_system:1"
     ],
+    "origin_system": "OSDI Sample System",
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
-    "value": "Strong Supporter"
+    "action_date": "2014-03-18T11:02:15Z",
+    "value": "Yes",
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/resource/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
-         "osdi:question": {
-            "href": "https://osdi-sample-system.org/api/v1/question/asd3ds-7366-466d-a3b8-7e0d87c3cd8b"
+        "osdi:question": {
+            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:person": {
-            "href": "https://osdi-sample-system.org/api/v1/people/asd3ds-3234-466d-a3b8-4e0d87c323ds
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         }
     }
 }
@@ -177,20 +229,30 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Creating a new resource (POST)
+### Scenario: Creating a new answer (POST)
 
-Posting to the resource collection endpoint will allow you to create a new resource. The response is the new resource that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+Posting to the answers collection endpoint and including a link to an existing Person resource will allow you to create a new answer associated with that question and person. The response is the new answer that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
 #### Request
 
 ```javascript
-POST https://osdi-sample-system.org/api/v1/person/abc-123/questions/321-xyz
+POST https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/
 
 Header:
 OSDI-API-Token:[your api key here]
 
 {
-    "value": "Strong Supporter"
+    "identifiers": [
+        "foreign_system:1"
+    ],
+    "origin_system": "OpenSupporter",
+    "action_date": "2014-03-18T11:02:15Z",
+    "value": "Yes",
+    "_links" : {
+        "osdi:person" : { 
+            "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
+        }
+    }
 }
 ```
 
@@ -209,16 +271,17 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
-    "value": "Strong Supporter"
+    "action_date": "2014-03-18T11:02:15Z",
+    "value": "Yes",
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/resource/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
         },
-         "osdi:question": {
-            "href": "https://osdi-sample-system.org/api/v1/question/asd3ds-7366-466d-a3b8-7e0d87c3cd8b
+        "osdi:question": {
+            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:person": {
-            "href": "https://osdi-sample-system.org/api/v1/people/asd3ds-3234-466d-a3b8-4e0d87c323ds
+            "href": "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         }
     }
 }
@@ -227,23 +290,24 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Modifying a resource (PUT)
+### Scenario: Modifying an answer (PUT)
 
-You can updating a resource by calling a PUT operation on that resource's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
+You can update an answer by calling a PUT operation on that answer's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
 
 {% include array_warning.md %}
 
 #### Request
 
 ```javascript
-PUT https://osdi-sample-system.org/api/v1/answers/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
+PUT https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/
 
 Header:
 OSDI-API-Token:[your api key here]
 
 {
-    // fields here
+    "value": "No"
 }
+
 ```
 
 #### Response
@@ -256,22 +320,37 @@ Cache-Control: max-age=0, private, must-revalidate
 {
     "identifiers": [
         "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+        "foreign_system:1"
     ],
-    // more fields/links here
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T22:04:31Z",
+    "action_date": "2014-03-17T11:02:15Z",
+    "value": "No",
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+        },
+        "osdi:question": {
+            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:person": {
+            "href": "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        }
+    }
 }
 ```
 
 _[Back to top...](#)_
 
 
-### Scenario: Deleting a resource (DELETE)
+### Scenario: Deleting an answer (DELETE)
 
-You may delete a resource by calling the DELETE command on the resource's endpoint.
+You may delete an answer by calling the DELETE command on the answer's endpoint.
 
 #### Request
 
 ```javascript
-DELETE https://osdi-sample-system.org/api/v1/answers/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+DELETE https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -286,7 +365,7 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "notice": "This resource was successfully deleted."
+    "notice": "This answer was successfully deleted."
 }
 ```
 
