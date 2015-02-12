@@ -16,7 +16,6 @@ Answers are responses a person gave to a question defined by the [Question](ques
     * [Common Fields](#common-fields)
     * [Answer Fields](#answer-fields)
     * [Links](#links)
-* [Helpers](#helpers)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
     * [Scenario: Retrieving a collection of Answer resources (GET)](#scenario-retrieving-a-collection-of-answer-resources-get)

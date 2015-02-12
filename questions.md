@@ -16,7 +16,6 @@ Questions are queries asked to a person. When people answer questions, [Answer](
     * [Common Fields](#common-fields)
     * [Question Fields](#question-fields)  
     * [Links](#links)
-* [Helpers](#helpers)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
     * [Scenario: Retrieving a collection of Question resources (GET)](#scenario-retrieving-a-collection-of-question-resources-get)
@@ -307,7 +306,7 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Modifying a qustion (PUT)
+### Scenario: Modifying a question (PUT)
 
 You can update a question by calling a PUT operation on that question's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
 
