@@ -7,7 +7,7 @@ title: Person Signup Helper
 
 This document defines the Person Signup Helper resource. 
 
-The Person Signup Helper is a helper endpoint to aid in the creation of People resources via POST. It provides a quick and easy way to add people to an OSDI system.
+The Person Signup Helper is a helper endpoint to aid in the creation of [People](people.html) resources via POST. It provides a quick and easy way to add people to an OSDI system.
 
 When using the Person Signup Helper, tagging and list membership info may be added at the same time as well, eliminating the need for multiple POST operations to store that information.
 
@@ -62,7 +62,7 @@ These JSON hashes included in the table above are broken out into their own tabl
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-|person      |[Person*](#person)     |An inlined hash representation of a person, containing any valid fields for the Person resource.
+|person      |[Person*](people.html)     |An inlined hash representation of a person, containing any valid fields for the Person resource.
 
 _[Back to top...](#)_
 
