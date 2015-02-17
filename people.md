@@ -131,6 +131,7 @@ These JSON hashes included in the table above are broken out into their own tabl
 |email_addresses.primary	|boolean	|Denotes if this is the primary address. A person can have only one primary address.
 |email_addresses.address	|string	|The email address for the person.
 |email_addresses.address_type	|flexenum	|The type of email address. One of "Personal", "Work", "Other", or another value.
+|email_addresses.status	|enum	|Indicates whether this email address is subscribed to receive emails in the system, either on one or more email lists. One of "Subscribed", "Unsubscribed", "Bouncing", "Spam Complaint".
 
 #### Phone Numbers
 
