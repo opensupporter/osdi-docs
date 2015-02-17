@@ -122,8 +122,8 @@ _[Back to top...](#)_
 
 When retrieving collections, the response representation will include some common attributes.
 
-|Name			|Type		| Description
-|----------------	|-----------------|------------------------
+|Name		|Type	 |Description
+|-----------|-----------	|------------------------
 |total_pages			|integer	|The number of pages applicable to this collection.
 |total_records	|integer	|The total number of resources matching this collection.
 |page			|integer	|The page number of this response.
