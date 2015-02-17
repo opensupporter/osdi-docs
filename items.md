@@ -49,7 +49,7 @@ A list of fields specific to the Item resource.
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
 |origin_system		|string     |A human readable identifier of the system where this item was created. (ex: "OSDI System")
-|item_type		|string			|A read-only property representing the type of resource this item links to. (ex: "osdi:person")
+|item_type		|string			|A property representing the type of resource this item links to. (ex: "osdi:person")
 
 _[Back to top...](#)_
 
@@ -128,7 +128,7 @@ Cache-Control: max-age=0, private, must-revalidate
         }
     },
     "_embedded": {
-        "osdi:results": [
+        "osdi:items": [
             {
                 "identifiers": [
                     "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
