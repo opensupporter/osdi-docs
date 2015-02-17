@@ -122,11 +122,12 @@ _[Back to top...](#)_
 
 When retrieving collections, the response representation will include some common attributes.
 
-|Name		|Type	 |Description
-|-----------|-----------	|------------------------
-|total_pages			|integer	|The number of pages applicable to this collection.
-|total_records	|integer	|The total number of resources matching this collection.
-|page			|integer	|The page number of this response.
+| Name  | Type | Description
+|-------|-------------------------------|-------------------------------
+| total_pages    | integer                  | The number of pages applicable to this collection.
+| total_records    | integer         | The total number of resources matching this collection.
+| page    | integer                  | The page number of this response.
+
 
 Collection responses may include additional links for navigation to previous and next pages.
 
@@ -218,8 +219,6 @@ Clients and providers may use a variety of mechanisms to authenticate and author
 * OpenID
 
 Future versions of this specification may officially support one or more of these methods, or provide standard ways of implementing various methods, or may in other ways be more specific about security and authentication.
-
-_[Back to top...](#)_
 
 
 #### Token Based Authentication
