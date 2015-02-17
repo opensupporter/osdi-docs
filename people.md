@@ -176,8 +176,8 @@ _[Back to top...](#)_
 |attendances		|[Attendances[]*](attendances.html)        |A link to the collection of event attendances associated with the person.
 |signatures		|[Signatures[]*](signatures.html)        |A link to the collection of petition signatures associated with the person.
 |answers		|[Answers[]*](answers.html)  |A link to the collection of answers to questions associated with the person.
-|taggings		|[Taggings[]*](#)   	|A link to the collection of taggings associated with the person.
-|items		|[Items[]*](#)   	|A link to the collection of list items associated with the person.
+|taggings		|[Taggings[]*](#taggings.html)   	|A link to the collection of taggings associated with the person.
+|items		|[Items[]*](#items.html)   	|A link to the collection of list items associated with the person.
 |modified_by		|[Person*](people.html)  	|A link to a Person resource representing the last editor of this person.
 
 _[Back to top...](#)_
@@ -202,8 +202,8 @@ _[Back to top...](#)_
 * [Attendance](attendances.html)
 * [Signature](signatures.html)
 * [Answer](answers.html)
-* [Tagging](#)
-* [Item](#)
+* [Tagging](#taggings.html)
+* [Item](#items.html)
 
 _[Back to top...](#)_
 

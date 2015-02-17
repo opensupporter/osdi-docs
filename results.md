@@ -81,7 +81,7 @@ _[Back to top...](#)_
 
 ### Scenario: Retrieving a collection of Result resources (GET)
 
-Result resources are sometimes presented as collections of results. For example, calling the results endpoint on a particular petition will return a collection of all the results made on that query.
+Result resources are sometimes presented as collections of results. For example, calling the results endpoint on a particular query will return a collection of all the results made on that query.
 
 #### Request
 
@@ -164,7 +164,7 @@ Cache-Control: max-age=0, private, must-revalidate
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/queries/c945d6fe-929e-11e3-a2e9-12313d316c29/results/1efc3644-af25-4253-90b8-a0baf12dbd1e"
                     },
-                    "osdi:queries": {
+                    "osdi:query": {
                         "href": "https://osdi-sample-system.org/api/v1/queries/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:event": {
@@ -187,7 +187,7 @@ Calling an individual Result resource will return the resource directly, along w
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/forms/c945d6fe-929e-11e3-a2e9-12313d316c29/results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3
+GET https://osdi-sample-system.org/api/v1/queries/c945d6fe-929e-11e3-a2e9-12313d316c29/results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3
 
 Header:
 OSDI-API-Token:[your api key here]
