@@ -130,8 +130,8 @@ These JSON hashes included in the table above are broken out into their own tabl
 |-----------    |-----------|--------------
 |email_addresses.primary	|boolean	|Denotes if this is the primary address. A person can have only one primary address.
 |email_addresses.address	|string	|The email address for the person.
-|email_addresses.address_type	|flexenum	|The type of email address. One of "Personal", "Work", "Other", or another value.
-|email_addresses.status	|enum	|Indicates whether this email address is subscribed to receive emails in the system, either on one or more email lists. One of "Subscribed", "Unsubscribed", "Bouncing", "Spam Complaint".
+|email_addresses.address_type	|flexenum	|The type of email address. One of "personal", "work", "other", or another value.
+|email_addresses.status	|enum	|Indicates whether this email address is subscribed to receive emails in the system, either on one or more email lists. One of "subscribed", "unsubscribed", "bouncing", "spam complaint".
 
 #### Phone Numbers
 
@@ -337,7 +337,8 @@ Cache-Control: max-age=0, private, must-revalidate
                     {
                         "primary": true,
                         "address": "johnsmith@mail.com",
-                        "address_type": "Personal"
+                        "address_type": "Personal",
+                        "status": "subscribed"
                     }
                 ],
                 "phone_numbers": [
@@ -410,7 +411,8 @@ Cache-Control: max-age=0, private, must-revalidate
                 "email_addresses": [
                     {
                         "primary": true,
-                        "address": "janedoe@mail.com"
+                        "address": "janedoe@mail.com",
+                        "status": "unsubscribed"
                     }
                 ],
                 "postal_addresses": [
@@ -556,7 +558,8 @@ Cache-Control: max-age=0, private, must-revalidate
         {
             "primary": true,
             "address": "johnsmith@mail.com",
-            "address_type": "Personal"
+            "address_type": "personal",
+            "status": "subscribed"
         }
     ],
     "phone_numbers": [
@@ -648,7 +651,8 @@ OSDI-API-Token:[your api key here]
         {
             "address":"test-3@example.com",
             "primary": true,
-            "address_type": "Personal"
+            "address_type": "personal",
+            "status": "subscribed"
         }
     ],
     "postal_addresses": [
@@ -700,7 +704,8 @@ Cache-Control: max-age=0, private, must-revalidate
         {
             "address":"test-3@example.com",
             "primary": true,
-            "address_type": "Personal"
+            "address_type": "personal",
+            "status": "subscribed"
         }
     ],
     "postal_addresses": [
@@ -778,7 +783,7 @@ OSDI-API-Token:[your api key here]
         {
             "address":"test-new@example.com",
             "primary": true,
-            "address_type": "Personal"
+            "address_type": "personal"
         }
     ]
 }
@@ -807,7 +812,8 @@ Cache-Control: max-age=0, private, must-revalidate
         {
             "address":"test-new@example.com",
             "primary": true,
-            "address_type": "Personal"
+            "address_type": "personal",
+            "status": "subscribed"
         }
     ],
     "postal_addresses": [
