@@ -4,7 +4,7 @@ title: "OSDI"
 permalink: index.html
 ---
 
-![Logo](logo.png)
+![Logo](http://opensupporter.org/wp-content/themes/osdiv2/images/site/osdi-logo.png)
 
 The Open Supporter Data Interface (OSDI) effort seeks to define an API and data structures for interoperability among products in the **progressive** cause-based, campaign and non-profit marketplace. The existence of a common API will reduce customer costs related to moving data between different systems, lower integration costs and enhance the ability of innovators to create products for the marketplace.
 
