@@ -23,10 +23,14 @@ As an example, a customer might have a tag for volunteers.  Each Person who has 
     * [Scenario: Retrieving a collection of Tagging resources (GET)](#scenario-retrieving-a-collection-of-tagging-resources-get)
     * [Scenario: Retrieving an individual Tagging resource (GET)](#scenario-scenario-retrieving-an-individual-tagging-resource-get)
     * [Scenario: Creating a new tagging (POST)](#scenario-creating-a-new-tagging-post)
-    * [Scenario: Modifying an tagging (PUT)](#scenario-modifying-an-tagging-put)
-    * [Scenario: Deleting an tagging (DELETE)](#scenario-deleting-an-tagging-delete)
+    * [Scenario: Modifying a tagging (PUT)](#scenario-modifying-a-tagging-put)
+    * [Scenario: Deleting a tagging (DELETE)](#scenario-deleting-a-tagging-delete)
     
 {% include endpoints_and_url_structures.md %}
+
+The link relation label for a Tagging resource is ```osdi:tagging``` for a single Tagging resource or ```osdi:taggings``` for a collection of Tagging resources.
+
+_[Back to top...](#)_
 
 ## Fields
 
