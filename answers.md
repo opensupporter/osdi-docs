@@ -128,7 +128,7 @@ Cache-Control: max-age=0, private, must-revalidate
         }
     },
     "_embedded": {
-        "osdi:attendances": [
+        "osdi:answers": [
             {
                 "identifiers": [
                     "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
