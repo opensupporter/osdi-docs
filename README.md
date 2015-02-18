@@ -39,7 +39,6 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 * [Authors and Leadership](#authors-and-leadership)
 * [Contributing and Contact](#contributing-and-contact)
 
-_[Back to top...](#)_
     
     
 ## API Overview and Structure
