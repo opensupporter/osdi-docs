@@ -50,7 +50,8 @@ _[Back to top...](#)_
 |title				|string		|The title of the question. Intended for public display rather than administrative purposes.
 |description		|string		|A description of the question, usually displayed publicly. May contain text and/or HTML.
 |summary			|string		|A text-only single paragraph summarizing the question. Shown on listing pages that have more than titles, but not enough room for full description.
-| question_type | string              | The format of the question. One of "Paragraph" or "MultiChoice".
+| question_type | string              | The format of the question. One of "Paragraph", "SingleChoice", or "MultiChoice".  "SingleChoice" means only one of several possible responses is accepted for any given answer, and "MultiChoice" means one or more of several possible responses is possible for any given answer.
+| responses |[QuestionResponse[]](question_responses.html)|The list of acceptable responses for this question, if question_type is "SingleChoice" or "MultiChoice".  For ex if the question is "What is your most important issue?", possible responses might be "Environment", "Health Care", "Economy", etc.
 
 _[Back to top...](#)_
 
@@ -65,6 +66,7 @@ _[Back to top...](#)_
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the question.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this question.
 |answers	|[Answers[]*](answers.html)	|A link to the collection of Answer resources for this question.
+| responses |[QuestionResponse[]](question_responses.html)|A link to the collection of Responses for this question.
 
 _[Back to top...](#)_
 
@@ -73,6 +75,7 @@ _[Back to top...](#)_
 
 * [Person](people.html)
 * [Answer](answers.html)
+* [Response](questions_responses.html)
 
 _[Back to top...](#)_
 
@@ -152,6 +155,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     },
                     "osdi:answers": {
                         "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+                    },
+                    "osdi:responses": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/responses"
                     },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -233,6 +239,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:answers": {
             "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+        },
+        "osdi:responses": {
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/responses"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
