@@ -4,7 +4,9 @@ title: "OSDI"
 permalink: index.html
 ---
 
-<center>![Logo](http://opensupporter.org/wp-content/themes/osdiv2/images/site/osdi-logo.png)</center>
+<center>
+![Logo](http://opensupporter.org/wp-content/themes/osdiv2/images/site/osdi-logo.png)
+</center>
 
 -----------------------------
 
