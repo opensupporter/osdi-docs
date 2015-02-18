@@ -69,17 +69,6 @@ _[Back to top...](#)_
 _[Back to top...](#)_
 
 
-## Helpers
-
-{% include helpers_intro.md %}
-
-|Name          |Description
-|-----------    |-----------
-|[record_submission_helper](record_submission.html)      |Allows the creation of a submission and a person at the same time.
-
-_[Back to top...](#)_
-
-
 ## Related Resources
 
 * [Record Submission Helper](record_submission.html)
