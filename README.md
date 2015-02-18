@@ -4,7 +4,9 @@ title: "OSDI"
 permalink: index.html
 ---
 
-![Logo](http://opensupporter.org/wp-content/themes/osdiv2/images/site/osdi-logo.png)
+<center>![Logo](http://opensupporter.org/wp-content/themes/osdiv2/images/site/osdi-logo.png)</center>
+
+-----------------------------
 
 The Open Supporter Data Interface (OSDI) effort seeks to define an API and data structures for interoperability among products in the **progressive** cause-based, campaign and non-profit marketplace. The existence of a common API will reduce customer costs related to moving data between different systems, lower integration costs and enhance the ability of innovators to create products for the marketplace.
 
@@ -12,11 +14,9 @@ OSDI membership is made up of progressive vendors and organizations as well as i
 
 More Information about OSDI can be found at the website [opensupporter.org](http://opensupporter.org)
 
-[The Github source for these documents can be found at: https://github.com/opensupporter/osdi-docs](https://github.com/opensupporter/osdi-docs)
+The Github source for these documents can be found at: [https://github.com/opensupporter/osdi-docs](https://github.com/opensupporter/osdi-docs)
 
-[The GitHub pages (prettier) can be found at:http://opensupporter.github.io/osdi-docs/](http://opensupporter.github.io/osdi-docs/)
-
-[Experiment with our prototype server http://api.opensupporter.org](http://api.opensupporter.org)
+Experiment with our prototype server: [http://api.opensupporter.org](http://api.opensupporter.org)
 
 
 ### Sections
