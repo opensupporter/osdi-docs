@@ -12,7 +12,7 @@ The Open Supporter Data Interface (OSDI) effort seeks to define an API and data 
 
 OSDI membership is made up of progressive vendors and organizations as well as invited non-partisan and mainstream industry vendors.
 
-More Information about OSDI can be found at the website [opensupporter.org](http://opensupporter.org)
+More Information about OSDI can be found at: [opensupporter.org](http://opensupporter.org)
 
 The Github source for these documents can be found at: [https://github.com/opensupporter/osdi-docs](https://github.com/opensupporter/osdi-docs)
 
