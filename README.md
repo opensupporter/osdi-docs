@@ -5,7 +5,7 @@ permalink: index.html
 ---
 
 <center>
-![Logo](http://opensupporter.org/wp-content/themes/osdiv2/images/site/osdi-logo.png)
+<img src="http://opensupporter.org/wp-content/themes/osdiv2/images/site/osdi-logo.png" alt="OSDI" />
 </center>
 
 -----------------------------
