@@ -15,6 +15,7 @@ Questions are queries asked to a person. When people answer questions, [Answer](
 * [Fields](#fields)
     * [Common Fields](#common-fields)
     * [Question Fields](#question-fields)  
+    * [Related Objects](#related-objects)
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -51,9 +52,23 @@ _[Back to top...](#)_
 |description		|string		|A description of the question, usually displayed publicly. May contain text and/or HTML.
 |summary			|string		|A text-only single paragraph summarizing the question. Shown on listing pages that have more than titles, but not enough room for full description.
 | question_type | string              | The format of the question. One of "Paragraph", "SingleChoice", or "MultiChoice".  "SingleChoice" means only one of several possible responses is accepted for any given answer, and "MultiChoice" means one or more of several possible responses is possible for any given answer.
-| responses |[QuestionResponse[]](question_responses.html)|The list of acceptable responses for this question, if question_type is "SingleChoice" or "MultiChoice".  For ex if the question is "What is your most important issue?", possible responses might be "Environment", "Health Care", "Economy", etc.
+| responses |[QuestionResponse[]](#question-responses)|The list of acceptable responses for this question, if question_type is "SingleChoice" or "MultiChoice".  For example, if the question is "What is your most important issue?", possible responses might be "Environment", "Health Care", "Economy", etc...
 
 _[Back to top...](#)_
+
+
+### Related Objects
+
+These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+
+#### Question Responses
+
+|Name          |Type       |Description
+|-----------   |-----------|--------------
+|response.key  |string     |An alphanumeric identifier which uniquely identifies this response among other responses for this question.  A single question resource may not have two or more responses with the same key.
+|response.name |string     |The name of the question response. Intended for administrative display rather than a public title, though may be shown to a user.
+|response.title|string     |The title of the question response. Intended for public display rather than administrative purposes.
 
 
 ### Links
@@ -66,7 +81,6 @@ _[Back to top...](#)_
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the question.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this question.
 |answers	|[Answers[]*](answers.html)	|A link to the collection of Answer resources for this question.
-| responses |[Question Responses](#question-responses)|A link to the collection of Responses for this question.
 
 _[Back to top...](#)_
 
@@ -76,13 +90,7 @@ _[Back to top...](#)_
 * [Person](people.html)
 * [Answer](answers.html)
 
-### Question Responses
 
-|Name          |Type       |Description
-|-----------   |-----------|--------------
-|response.key  |string     |An alphanumeric identifier which uniquely identifies this response among other responses for this question.  A single question resource may not have two or more responses with the same key.
-|response.name |string     |The name of the question response. Intended for administrative display rather than a public title, though may be shown to a user.
-|response.title|string     |The title of the question response. Intended for public display rather than administrative purposes.
 
 
 _[Back to top...](#)_
@@ -125,6 +133,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:questions": [
             {
                 "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/questions/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
             },
             {
                 "href": "https://osdi-sample-system.org/api/v1/questions/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -191,7 +202,7 @@ Cache-Control: max-age=0, private, must-revalidate
             },
             {
                 "identifiers": [
-                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
+                    "osdi_sample_system:a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
                 ],
                 "origin_system": "OSDI Sample System",
                 "created_date": "2014-03-20T21:04:31Z",
@@ -220,10 +231,10 @@ Cache-Control: max-age=0, private, must-revalidate
                 ],
                 "_links": {
                     "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
+                        "href": "https://osdi-sample-system.org/api/v1/questions/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
                     },
                     "osdi:answers": {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/answers"
+                        "href": "https://osdi-sample-system.org/api/v1/questions/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/answers"
                     },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -242,6 +253,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "modified_date": "2014-03-20T20:44:13Z",
                 "name":	"Why the respondant wants to get involved.",
                 "title": "Why do you want to get involved with our organization?",
+                "question_type": "Paragraph",
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/questions/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -533,7 +545,7 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "notice": "This questions was successfully deleted."
+    "notice": "This question was successfully deleted."
 }
 ```
 

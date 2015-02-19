@@ -139,7 +139,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "created_date": "2014-03-20T21:04:31Z",
                 "modified_date": "2014-03-20T21:04:31Z",
                 "action_date": "2014-03-18T11:02:15Z",
-                "value": "Yes",
+                "value": "He's not sure",
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -162,30 +162,6 @@ Cache-Control: max-age=0, private, must-revalidate
                 "action_date": "2014-03-12T01:45:34Z",
                 "responses": [
                     "Y"
-                ],
-                "_links": {
-                    "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/1efc3644-af25-4253-90b8-a0baf12dbd1e"
-                    },
-                    "osdi:question": {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29"
-                    },
-                    "osdi:person": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/adb951cb-51f9-420e-b7e6-de953195ec86"
-                    }
-                }
-            },
-            {
-                "identifiers": [
-                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd11"
-                ],
-                "origin_system": "OSDI Sample System",
-                "created_date": "2014-03-20T20:44:13Z",
-                "modified_date": "2014-03-20T20:44:13Z",
-                "action_date": "2014-03-12T01:45:34Z",
-                "responses": [
-                    "hc",
-                    "env"
                 ],
                 "_links": {
                     "self": {
