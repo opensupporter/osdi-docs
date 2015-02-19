@@ -61,7 +61,7 @@ _[Back to top...](#)_
 ## Related Objects
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
 
-### Recipient
+#### Recipient
 
 An object representing the recipient of a donation.
 
@@ -71,7 +71,7 @@ An object representing the recipient of a donation.
 |legal_name		|string		|The recipient's legal name. Example: Obama for America
 |amount  		|float	|The amount donated to the recipient.
 
-### Payment
+#### Payment
 
 An object representing the payment details of a donation.
 

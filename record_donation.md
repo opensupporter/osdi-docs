@@ -71,6 +71,27 @@ _[Back to top...](#)_
 
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
 
+
+#### Recipient
+
+An object representing the recipient of a donation.
+
+| Name          | Type      | Description
+|-----------    |-----------|--------------
+|display_name	|string		|The recipient's display name. Example: Barack Obama
+|legal_name		|string		|The recipient's legal name. Example: Obama for America
+|amount  		|float	|The amount donated to the recipient.
+
+#### Payment
+
+An object representing the payment details of a donation.
+
+| Name          | Type      | Description
+|-----------    |-----------|--------------
+|method			|enum		|A flexible enumeration of "Credit Card", "Check", "Cash", or "Electronic Funds Transfer".
+|reference_number |string		|A check number, transaction ID, or some other information referencing the payment.
+|authorization_stored |boolean	|Indicates if payment information has been stored for future automatic payments.
+
 #### Person
 
 |Name          |Type      |Description
