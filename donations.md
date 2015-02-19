@@ -7,7 +7,34 @@ title: "Donations"
 
 This page defines the Donation resource.
 
+### Sections:
+
+* [Endpoints and URL structures](#endpoints-and-url-structures)
+* [Fields](#fields)
+* [Common Fields](#common-fields)
+* [Donation Fields](#people-fields)
+* [Related Objects](#related-objects)
+* [Links](#links)
+* [Helpers](#helpers)
+* [Related Resources](#related-resources)
+
+{% include endpoints_and_url_structures.md %}
+
+The link relation label for a Donation resource is ```osdi:donation``` for a single Donation resource or ```osdi:donations``` for a collection of Donation resources.
+
+_[Back to top...](#)_
+
+
 ## Fields
+
+{% include fields_intro.md %}
+
+{% include global_fields.md %}
+
+_[Back to top...](#)_
+
+
+## Donation Fields
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
@@ -29,27 +56,10 @@ This page defines the Donation resource.
 |sources		|string[]   |Array of sources associated with the donation
 |attributions	|string[]   |Array of attributions associated with the donation
 
-## Links
+## Related Objects
+These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
 
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|modified_by	|Person*	|The Person who last modified the resource.
-|donor      	|Person*	|The Person who made the donation.
-|fundraising_page|FundraisingPage* |The related fundraising page the donation was taken on
-
-# Related Objects
-
-## Recipient
-
-An object representing the recipient of a donation.
-
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|display_name	|string		|The recipient's display name. Example: Barack Obama
-|legal_name		|string		|The recipient's legal name. Example: Obama for America
-|amount  		|decimal	|The amount donated to the recipient
-
-## Payment
+### Payment
 
 An object representing the payment details of a donation.
 
@@ -59,8 +69,25 @@ An object representing the payment details of a donation.
 |reference_number |string		|A check number, transaction ID, or some other information referencing the payment
 |authorization_stored |boolean	|Indicates if payment information has been stored for future automatic payments
 
+### Recipient
 
-# Helpers
+An object representing the recipient of a donation.
+
+| Name          | Type      | Description
+|-----------    |-----------|--------------
+|display_name	|string		|The recipient's display name. Example: Barack Obama
+|legal_name		|string		|The recipient's legal name. Example: Obama for America
+|amount  		|decimal	|The amount donated to the recipient
+
+## Links
+
+| Name          | Type      | Description
+|-----------    |-----------|--------------
+|modified_by	|Person*	|The Person who last modified the resource.
+|donor      	|Person*	|The Person who made the donation.
+|fundraising_page|FundraisingPage* |The related fundraising page the donation was taken on
+
+## Helpers
 
 Donations are used by the helper methods listed below.
 
@@ -74,17 +101,17 @@ Donations are used by the helper methods listed below.
 * [Person](people.md)
 
 
-# Scenarios
+## Scenarios
 
-## Scenario: Retrieving a donation
+### Scenario: Retrieving a donation
 
-### Request
+#### Request
 
 ```
-GET /donations/1E840712-CF6D-4BDD-934B-653F4BF6D4DF	
+GET /donations/1E840712-CF6D-4BDD-934B-653F4BF6D4DF
 ```
 
-### Response
+#### Response
 
 
 ```javascript
@@ -92,43 +119,43 @@ GET /donations/1E840712-CF6D-4BDD-934B-653F4BF6D4DF
 Content-Type: application/hal+json
 
 {
-    "identifiers": ["actblue:1E840712-CF6D-4BDD-934B-653F4BF6D4DF"],
-	"created_date": "2013-04-12T20:44:55",
-	"modified_date": "2013-04-12T21:42:34",
-	"originating_system": "ActBlue",
-	"action_date": "2013-04-12T20:44:55",
-    "currency": "USD",
-	"amount": 40.00,
-	"credited_amount": 5.00,
-	"credited_date": "2013-04-12T21:42:34",
-    "voided": false,
-	"voided_date": null,
-	"url": "htts://actblue.com/page/BobsCandidates",
-	"sources": ["email-your-friends"],
-	"attributions": ["JohnSmith", "SusanSmith"],
-	"payment": {
-		"method": "Credit Card",
-		"reference_number": "1232456",
-		"authorization_stored": true
-	},
-	"recipients": [
-		{
-			"amount": 20.00,
-			"display_name": "Barack Obama",
-			"legal_name": "Obama for America"
-		},
-		{
-			"amount": 20.00,
-			"display_name": "Joe Candidate",
-			"legal_name": "Joe for Congress"
-		}
-	],
+  "identifiers": ["actblue:1E840712-CF6D-4BDD-934B-653F4BF6D4DF"],
+  "created_date": "2013-04-12T20:44:55",
+  "modified_date": "2013-04-12T21:42:34",
+  "originating_system": "ActBlue",
+  "action_date": "2013-04-12T20:44:55",
+  "currency": "USD",
+  "amount": 40.00,
+  "credited_amount": 5.00,
+  "credited_date": "2013-04-12T21:42:34",
+  "voided": false,
+  "voided_date": null,
+  "url": "htts://actblue.com/page/BobsCandidates",
+  "sources": ["email-your-friends"],
+  "attributions": ["JohnSmith", "SusanSmith"],
+  "payment": {
+    "method": "Credit Card",
+    "reference_number": "1232456",
+    "authorization_stored": true
+    },
+    "recipients": [
+    {
+      "amount": 20.00,
+      "display_name": "Barack Obama",
+      "legal_name": "Obama for America"
+      },
+      {
+        "amount": 20.00,
+        "display_name": "Joe Candidate",
+        "legal_name": "Joe for Congress"
+      }
+      ],
 
-    "_links" : {
+      "_links" : {
         "_self": "/donations/1E840712-CF6D-4BDD-934B-653F4BF6D4DF",
-		"osdi:modified_by": "/people/c8f802c7-29a6-467c-929e-36b7230a77ab"
-		"osdi:donor": "/people/55c25b3c-3b31-4bef-8adc-0023cbac20b3"
+        "osdi:modified_by": "/people/c8f802c7-29a6-467c-929e-36b7230a77ab"
+        "osdi:donor": "/people/55c25b3c-3b31-4bef-8adc-0023cbac20b3"
         "osdi:fundraising_page": "/fundraisingpages/5f1e063a-a915-4c0d-b5f6-4f299652aa49"
+      }
     }
-}
-```
+    ```
