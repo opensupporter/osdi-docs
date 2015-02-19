@@ -5,7 +5,9 @@ title: "Donations"
 
 # Donation
 
-This page defines the Donation resource.
+This document defines the Donation resource. 
+
+Donations are a type of action that a user may take by donating on a fundraising page. Donations have fields to describe them such as when the donation was created, the amount that was donated, and typically are linked to the person who made the donation.
 
 ### Sections:
 
@@ -94,17 +96,16 @@ An object representing the payment details of a donation.
 
 | Name                  | Description
 |-----------------------|--------------
-|[record_donation_helper](record_donation_helper.html)| Provides a simple method for adding a new donation and a new person to a system at the same time.
+|[record_donation_helper](record_donation.html)| Provides a simple method for adding a new donation and a new person to a system at the same time.
 
 
 ## Related Resources
 
 * [Record Donation Helper](record_donation.html)
 * [Fundraising Page](fundraising_pages.html)
-* [Person](people.md)
+* [Person](people.html)
 
 
-## Scenarios
 
 ## Scenarios
 
