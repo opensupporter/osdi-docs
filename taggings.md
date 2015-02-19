@@ -135,13 +135,13 @@ Cache-Control: max-age=0, private, must-revalidate
                 "item_type": "osdi:person",
                 "_links": {
                     "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                        "href": "https://osdi-sample-system.org/api/v1/tags/50"
                     },
                     "osdi:tag": {
-                        "href": "https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                        "href": "https://osdi-sample-system.org/api/v1/tags/272"
                     },
                     "osdi:person": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                        "href": "https://osdi-sample-system.org/api/v1/people/478"
                     }
                 }
             },
@@ -171,7 +171,166 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```	
 
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29/taggings
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "total_pages": 10,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 250,
+    "_embedded": {
+        "osdi:taggings": [
+            {
+                "identifiers": [
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+                    "foreign_system:1"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "item_type": "osdi:person",
+				tagging_id: 50,
+				tag_id: 272,
+				person_id: 238
+	            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
+                "item_type": "osdi:event",
+				tagging_id: 50,
+				tag_id: 272,
+				person_id: 238
+            },
+            //(truncated for brevity)
+        ]
+    }
+}
+```	
 _[Back to top...](#)_		
+
+### Scenario: Creating a new tagging (POST)
+
+Posting to the taggings collection endpoint and including a link to an existing resource will allow you to create a new tagging associated with that tag and other resource. The response is the new tagging that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/tags/5/taggings/
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "identifiers": [
+        "foreign_system:1"
+    ],
+    "origin_system": "OpenSupporter",
+    "item_type": "osdi:person",
+    "_links" : {
+        "osdi:person" : { 
+            "href" : "https://actionnetwork.org/api/v1/people/6" 
+        }
+    }
+}
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+        "foreign_system:1"
+    ],
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "item_type": "osdi:person",
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/tags/4"
+        },
+        "osdi:tag": {
+            "href": "https://osdi-sample-system.org/api/v1/tags/5"
+        },
+        "osdi:person": {
+            "href": "https://actionnetwork.org/api/v1/people/6"
+        }
+    }
+}
+```
+
+### Standard URL Convention
+> **/api/v1/tags/[id]/taggings/[id]**
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29/taggings/
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "identifiers": [
+        "foreign_system:1"
+    ],
+    "origin_system": "OpenSupporter",
+    "item_type": "osdi:person",
+	"tagging_id": 4,
+	"tag_id: 5,
+	"person_id": 6
+}
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+        "foreign_system:1"
+    ],
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "item_type": "osdi:person",
+	"tagging_id" : 4,
+	"tag_id": 5,
+	"person_ld" : 6,
+}
+```
+
+_[Back to top...](#)_
+
+
 
 ### Scenario: Scenario: Retrieving an individual Tagging resource (GET)
 
@@ -219,64 +378,6 @@ Cache-Control: max-age=0, private, must-revalidate
 
 _[Back to top...](#)_
 
-
-### Scenario: Creating a new tagging (POST)
-
-Posting to the taggings collection endpoint and including a link to an existing resource will allow you to create a new tagging associated with that tag and other resource. The response is the new tagging that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
-
-#### Request
-
-```javascript
-POST https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29/taggings/
-
-Header:
-OSDI-API-Token:[your api key here]
-
-{
-    "identifiers": [
-        "foreign_system:1"
-    ],
-    "origin_system": "OpenSupporter",
-    "item_type": "osdi:person",
-    "_links" : {
-        "osdi:person" : { 
-            "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
-        }
-    }
-}
-```
-
-#### Response
-
-```javascript
-200 OK
-
-Content-Type: application/hal+json
-Cache-Control: max-age=0, private, must-revalidate
-
-{
-    "identifiers": [
-        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
-        "foreign_system:1"
-    ],
-    "created_date": "2014-03-20T21:04:31Z",
-    "modified_date": "2014-03-20T21:04:31Z",
-    "item_type": "osdi:person",
-    "_links": {
-        "self": {
-            "href": "https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29/taggings/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
-        },
-        "osdi:tag": {
-            "href": "https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29"
-        },
-        "osdi:person": {
-            "href": "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
-        }
-    }
-}
-```
-
-_[Back to top...](#)_
 
 
 ### Scenario: Modifying a tagging (PUT)
