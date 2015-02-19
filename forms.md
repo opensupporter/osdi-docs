@@ -1,427 +1,418 @@
 ---
 layout: default
-title: "Forms"
+title: Form
 ---
 
-# Forms
+# Form
 
-This page defines Forms and Submissions.
+This document defines the Form resource. 
 
-Forms are flexible actions for collecting user data. They can be as simple as a signup form collecting an email address on a website to complex surveys that collect lots of questions and answers from users. Forms take submissions, which represent the individual data each time the form was submitted by a user.
-
-Forms make use of but don't encapsulate OSDI [Questions and Answers](questions.html).
-
-## Forms
-
-| Name		| Type		| Description
-|-----------|-----------|------------------
-| identifiers	| Identifier[]	| An array of identifiers the provider has determined to be associated with the form
-| created_date	| datetime	| Date and Time of creation
-| modified_date	| datetime	| Date and Time of last modification
-| origin_system | string | Human readable identifier of the system where this form was created
-| name	| string	| name of the form
-| title	| string	| title of the form
-| summary	| string	| summary of the form
-| description	| string/html string	| description of the form, optionally an HTML string
-| call_to_action	| string	| Text of the call to action of the form (ex: Fill out our survey)
-| browser_url	| string	| A URL string pointing to the publicly available form page on the web
-| total_submissions	| integer	| Read-only computed property representing the current count of submissions on the form
-| creator	| Person*	| A single embedded instance of a person representing the creator of the form
-| submissions	| Submissions[]* | A Collection of Submission resources
-
-## Submissions
-
-| Name		| Type		| Description
-|-----------|-----------|------------------
-| identifiers	| Identifier[]	| An array of identifiers the provider has determined to be associated with the form
-| created_date	| datetime	| Date and Time of creation
-| modified_date	| datetime	| Date and Time of last modification
-| action_date | datetime  | Date and Time the submission was made by the person
-| person	| Person*	| An embedded person that made the submission on the referenced form
-| form	| Form*	| A reference to the form this submission is related to
-| question_answers	| Question_Answers[]* | A Collection of Question Answer resources related to this submission
-
-# Retrieving Resources (GET)
-
-## Default embed policy
-
-When retreiving a form resource, the creator can be embededed, but the submissions collection should only be linked.
-
-When retreiving a submission or list of submissions, the person, the form related to the submission, and the related question answers can be embedded.
-
-## A list of forms
-
-Only two shown for brevity.
-
-```
-GET /api/v1/forms/
-200 OK
-```
-
-```javascript
-{
-  "total_pages": 6,
-  "per_page": 25,
-  "page": 1,
-  "total_records": 139,
-  "_links": {
-    "next": {
-      "href": "https://api.opensupporter.org/api/v1/forms?page=2"
-    },
-    "self": {
-      "href": "https://api.opensupporter.org/api/v1/forms"
-    },
-    "osdi:forms": [
-      {
-        "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-      },
-      {
-        "href": "https://api.opensupporter.org/api/v1/forms/7580ac3e-9a72-11e3-a2e9-12313d316c29"
-      },
-      ...
-    ],
-    "curies": [
-      {
-        "name": "osdi",
-        "href": "http://api.opensupporter.org/docs/v1/{rel}",
-        "templated": true
-      }
-    ]
-  },
-  "_embedded": {
-    "osdi:forms": [
-      {
-        "identifier": [
-          "osdi_provider:9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-        ],
-        "created_date": "2014-02-20T21:30:55Z",
-        "modified_date": "2014-02-21T15:36:34Z",
-        "origin_system": "OpenSupporter",
-        "summary": "Take our year-end activist survey",
-        "description": "<p>Please take this survey to tell us stuff about you.</p>",
-        "call_to_action": "Take our survey",
-        "browser_url": "https://api.opensupporter.org/forms/take-our-year-end-activist-survey",
-        "total_submissions": 100,
-        "_embedded": {
-          "osdi:creator": {
-            "given_name": "Jane",
-            "family_name": "Doe",
-            "identifiers": [
-              "osdi_provider:c945d6fe-929e-11e3-a2e9-12313d316c29"
-            ],
-            "email_addresses": [
-              {
-                "primary": true,
-                "address": "jane.doe@gmail.com"
-              }
-            ],
-            "postal_addresses": [
-              {
-                "primary": true,
-                "address_lines": [
-                  "123 Something Rd."
-                ],
-                "locality": "Washington",
-                "region": "DC",
-                "postal_code": "20009",
-                "country": "US",
-                "language": "en",
-                "location": {
-                  "latitude": 38.919,
-                  "longitude": -72.6375,
-                  "accuracy": "Approximate"
-                }
-              }
-            ],
-            "_links": {
-              "self": {
-                "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-              },
-              "osdi:submissions": {
-                "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/submissions"
-              },
-              ...
-            }
-          }
-        },
-        "_links": {
-          "self": {
-            "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-          },
-          "osdi:submissions": {
-            "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions"
-          },
-          "osdi:creator": {
-            "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-          }
-        }
-      },
-      {
-        "identifier": [
-          "osdi_provider:7580ac3e-9a72-11e3-a2e9-12313d316c29"
-        ],
-        "created_date": "2014-02-14T15:35:59Z",
-        "modified_date": "2014-02-14T15:39:12Z",
-        "origin_system": "OpenSupporter",
-        "summary": "Sign up for our email list",
-        "description": "<p>Get the latest updates from us by adding your email here!</p>",
-        "call_to_action": "Sign up",
-        "browser_url": "https://api.opensupporter.org/forms/sign-up-for-our-email-list",
-        "total_submissions": 4829,
-        "_embedded": {
-          "osdi:creator": {
-            "given_name": "Tom",
-            "family_name": "Jones",
-            "identifiers": [
-              "osdi_provider:c945d6fe-929e-11e3-a2e9-12313d316c29"
-            ],
-            "email_addresses": [
-              {
-                "primary": true,
-                "address": "tom.jones@gmail.com"
-              }
-            ],
-            "postal_addresses": [
-              {
-                "primary": true,
-                "locality": "New York City",
-                "region": "NY",
-                "postal_code": "10001",
-                "country": "US",
-                "language": "en",
-                "location": {
-                  "latitude": 33.123,
-                  "longitude": -76.5432,
-                  "accuracy": "Approximate"
-                }
-              }
-            ],
-            "_links": {
-              "self": {
-                "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-              },
-              "osdi:submissions": {
-                "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/submissions"
-              },
-              ...
-            }
-          }
-        },
-        "_links": {
-          "self": {
-            "href": "https://api.opensupporter.org/api/v1/forms/7580ac3e-9a72-11e3-a2e9-12313d316c29"
-          },
-          "osdi:submissions": {
-            "href": "https://api.opensupporter.org/api/v1/forms/7580ac3e-9a72-11e3-a2e9-12313d316c29/submissions"
-          },
-          "osdi:creator": {
-            "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-          }
-        }
-      },
-      ...
-    ]
-  }
-}
-```
+Forms represent a page, survey, or interaction that a user may participate in by submitting their information. Forms have fields to describe them such as names, titles, summaries, and descriptions, and when activists submit a form, [Submission](submissions.html) resources are created representing the individual submission an activist made on that form.
 
 
-## A single form
-```
-GET /api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/
-200 OK
-```
+### Sections
+
+* [Endpoints and URL structures](#endpoints-and-url-structures)
+* [Fields](#fields)
+    * [Common Fields](#common-fields)
+    * [Form Fields](#form-fields)  
+    * [Links](#links)
+* [Related Resources](#related-resources)
+* [Scenarios](#scenarios)
+    * [Scenario: Retrieving a collection of Form resources (GET)](#scenario-retrieving-a-collection-of-form-resources-get)
+    * [Scenario: Retrieving an individual Form resource (GET)](#scenario-scenario-retrieving-an-individual-form-resource-get)
+    * [Scenario: Creating a new form (POST)](#scenario-creating-a-new-form-post)
+    * [Scenario: Modifying a form (PUT)](#scenario-modifying-a-form-put)
+    * [Scenario: Deleting a form (DELETE)](#scenario-deleting-a-form-delete)
+
+
+{% include endpoints_and_url_structures.md %}
+
+The link relation label for a Form resource is ```osdi:form``` for a single Form resource or ```osdi:forms``` for a collection of Form resources.
+
+_[Back to top...](#)_
+
+
+## Fields
+
+{% include fields_intro.md %}
+
+{% include global_fields.md %}
+
+_[Back to top...](#)_
+
+
+### Form Fields
+
+A list of fields specific to the Form resource.
+
+| Name          | Type      | Description
+|-----------    |-----------|-----------|--------------
+|origin_system		|string     |A human readable identifier of the system where this form was created. (ex: "OSDI System")
+|name				|string		|The name of the form. Intended for administrative display rather than a public title, though may be shown to a user.
+|title				|string		|The title of the form. Intended for public display rather than administrative purposes.
+|description		|string		|A description of the form, usually displayed publicly. May contain text and/or HTML.
+|summary			|string		|A text-only single paragraph summarizing the form. Shown on listing pages that have more than titles, but not enough room for full description.
+|call_to_action		|string		|The text of the call to action of the form. (ex: "Fill out our survey")
+|browser_url		|string		|A URL string pointing to the publicly available form page on the web.
+|total_submissions	|integer	|A read-only computed property representing the current count of the total number of submissions on the form.
+
+_[Back to top...](#)_
+
+
+### Links
+
+{% include links_intro.md %}
+
+| Name          | Type      | Description
+|-----------    |-----------|-----------|--------------
+|self			|[Form*](forms.html)	|A self-referential link to the form.
+|creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the form.
+|modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this form.
+|submissions	|[Submissions[]*](submissions.html)	|A link to the collection of Submission resources for this form.
+|record_submission_helper	|[Record Submission Helper*](record_submission.html)	|A link to the Record Submission Helper resource endpoint for this form.
+
+_[Back to top...](#)_
+
+
+## Related Resources
+
+* [Submission](submissions.html)
+* [Record Submission Helper](record_submission.html)
+* [Person](people.html)
+
+_[Back to top...](#)_
+
+## Scenarios
+
+{% include scenarios_intro.md %}
+
+### Scenario: Retrieving a collection of Form resources (GET)
+
+Form resources are sometimes presented as collections of forms. For example, calling the forms endpoint will return a collection of all the forms stored in the system's database associated with your api key.
+
+#### Request
 
 ```javascript
+GET https://osdi-sample-system.org/api/v1/forms/
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
 {
-	"identifier": [
-      "osdi_provider:9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-    ],
-    "created_date": "2014-02-20T21:30:55Z",
-    "modified_date": "2014-02-21T15:36:34Z",
-    "origin_system": "OpenSupporter",
-    "summary": "Take our year-end activist survey",
-    "description": "<p>Please take this survey to tell us stuff about you.</p>",
-	"call_to_action": "Take our survey",
-    "browser_url": "https://api.opensupporter.org/forms/take-our-year-end-activist-survey",
-    "total_submissions": 100,
-    "_embedded": {
-      "osdi:creator": {
-        "given_name": "Jane",
-        "family_name": "Doe",
-        "identifiers": [
-          "osdi_provider:c945d6fe-929e-11e3-a2e9-12313d316c29"
-        ],
-        "email_addresses": [
-          {
-            "primary": true,
-            "address": "jane.doe@gmail.com"
-          }
-        ],
-        "postal_addresses": [
-          {
-            "primary": true,
-            "address_lines": [
-              "123 Something Rd."
-            ],
-            "locality": "Washington",
-            "region": "DC",
-            "postal_code": "20009",
-            "country": "US",
-            "language": "en",
-            "location": {
-              "latitude": 38.919,
-              "longitude": -72.6375,
-              "accuracy": "Approximate"
-            }
-          }
-        ],
-        "_links": {
-          "self": {
-            "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-          },
-          "osdi:submissions": {
-            "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/submissions"
-          },
-          ...
-        }
-      }
-    },
+    "total_pages": 10,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 250,
     "_links": {
-      "self": {
-        "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-      },
-      "osdi:submissions": {
-        "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions"
-      },
-      "osdi:creator": {
-        "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-      }
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/forms?page=2"
+        },
+        "osdi:forms": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/forms/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+            },
+            //(truncated for brevity)
+        ],
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/forms"
+        }
+    },
+    "_embedded": {
+        "osdi:forms": [
+            {
+                "identifiers": [
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+                    "foreign_system:1"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "name": "My Form",
+                "title": "Tell Us About Yourself",
+                "description": "<p>Please take a moment to tell us about yourself so we can learn more about you.</p>",
+                "summary": "Please take a moment to tell us about yourself.",
+                "call_to_action": "Tell us about yourself here",
+                "browser_url": "http://osdi-sample-system.org/forms/tell-us-about-yourself",
+                "total_submissions": 30,
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                    },
+                    "osdi:submissions": {
+                        "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/submissions"
+                    },
+                    "osdi:creator": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:modified_by": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:record_submission_helper": {
+                        "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_submission_helper"
+                    }
+                }
+            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
+                "title": "Tell Your Story",
+                "description": "<p>Tell us your story today!</p>",
+                "browser_url": "http://osdi-sample-system.org/forms/tell-your-story",
+                "total_submissions": 10,
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/forms/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                    },
+                    "osdi:submissions": {
+                        "href": "https://osdi-sample-system.org/api/v1/forms/1efc3644-af25-4253-90b8-a0baf12dbd1e/submissions"
+                    },
+                    "osdi:creator": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:modified_by": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:record_submission_helper": {
+                        "href": "https://osdi-sample-system.org/api/v1/forms/1efc3644-af25-4253-90b8-a0baf12dbd1e/record_submission_helper"
+                    }
+                }
+            },
+            //(truncated for brevity)
+        ]
+    }
+}
+```	
+
+_[Back to top...](#)_		
+
+### Scenario: Scenario: Retrieving an individual Form resource (GET)
+
+Calling an individual Form resource will return the resource directly, along with all associated fields and appropriate links to additional information about the form.
+
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/forms/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+        "foreign_system:1"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "name": "My Form",
+    "title": "Tell Us About Yourself",
+    "description": "<p>Please take a moment to tell us about yourself so we can learn more about you.</p>",
+    "summary": "Please take a moment to tell us about yourself.",
+    "call_to_action": "Tell us about yourself here",
+    "browser_url": "http://osdi-sample-system.org/forms/tell-us-about-yourself",
+    "total_submissions": 30,
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        },
+        "osdi:submissions": {
+            "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/submissions"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:record_submission_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_submission_helper"
+        }
     }
 }
 ```
 
-## A list of submissions on a form
+_[Back to top...](#)_
 
-Only two shown for brevity.
 
-```
-GET /api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions
-200 OK
-```
+### Scenario: Creating a new form (POST)
+
+Posting to the form collection endpoint will allow you to create a new form. The response is the new form that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+
+#### Request
 
 ```javascript
+POST https://osdi-sample-system.org/api/v1/forms/
+
+Header:
+OSDI-API-Token:[your api key here]
+
 {
-  "total_pages": 4,
-  "per_page": 25,
-  "page": 1,
-  "total_records": 100,
-  "_links": {
-    "self": {
-      "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions"
-    },
-    "next": {
-      "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/?page=2"
-    },
-    "osdi:submissions": [
-      {
-        "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/25d2d08f-7c3a-4bdc-8329-815aa5117d54"
-      },
-      {
-        "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/13d2d08f-6c3a-3bec-8628-515aa5147e57"
-      },
-      ...
+    "identifiers": [
+        "foreign_system:1"
     ],
-    "curies": [
-      {
-        "name": "osdi",
-        "href": "http://api.opensupporter.org/docs/v1/{rel}",
-        "templated": true
-      }
-    ]
-  },
-  "_embedded": {
-    "osdi:submissions": [
-      {
-        "identifier": [
-          "osdi_provider:25d2d08f-7c3a-4bdc-8329-815aa5117d54"
-        ],
-        "created_date": "2014-02-20T21:32:56Z",
-        "modified_date": "2014-02-20T21:32:56Z",
-        "_links": {
-          "self": {
-            "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/25d2d08f-7c3a-4bdc-8329-815aa5117d54"
-          },
-          "osdi:form": {
-            "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-          },
-          "osdi:person": {
-            "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-          },
-          "osdi:question_answers": {
-            "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/25d2d08f-7c3a-4bdc-8329-815aa5117d54/question_answers"
-          }
-        }
-      },
-      {
-        "identifier": [
-          "osdi_provider:13d2d08f-6c3a-3bec-8628-515aa5147e57"
-        ],
-        "created_date": "2014-02-20T21:32:56Z",
-        "modified_date": "2014-02-20T21:32:56Z",
-        "_links": {
-          "self": {
-            "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/13d2d08f-6c3a-3bec-8628-515aa5147e57"
-          },
-          "osdi:form": {
-            "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-          },
-          "osdi:person": {
-            "href": "https://api.opensupporter.org/api/v1/people/35ad5d6ed-913e-12e6-a2e8-11673r314c14"
-          },
-          "osdi:question_answers": {
-            "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/13d2d08f-6c3a-3bec-8628-515aa5147e57/question_answers"
-          }
-        }
-      },
-      ...
-    ]
-  }
+    "title": "Take Our Survey",
+    "name": "2014 User Survey",
+    "origin_system": "OpenSupporter"
 }
 ```
 
+#### Response
 
-## A single submission on a form
-
-```
-GET /api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/25d2d08f-7c3a-4bdc-8329-815aa5117d54
-200 OK
-```
 ```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
 {
-	"identifier": [
-	  "osdi_provider:25d2d08f-7c3a-4bdc-8329-815aa5117d54"
-	],
-	"created_date": "2014-02-20T21:32:56Z",
-	"modified_date": "2014-02-20T21:32:56Z",
-	"_links": {
-	  "self": {
-	    "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/25d2d08f-7c3a-4bdc-8329-815aa5117d54"
-	  },
-	  "osdi:form": {
-	    "href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7"
-	  },
-	  "osdi:person": {
-	    "href": "https://api.opensupporter.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-	  },
-	  "osdi:question_answers": {
-      	"href": "https://api.opensupporter.org/api/v1/forms/9b385f65-23b3-47a4-a4b5-9abd537b37a7/submissions/25d2d08f-7c3a-4bdc-8329-815aa5117d54/question_answers"
-      }
-	}
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+        "foreign_system:1"
+    ],
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "title": "Take Our Survey",
+    "name": "2014 User Survey",
+    "origin_system": "OpenSupporter",
+    "total_submissions": 0,
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+        },
+        "osdi:submissions": {
+            "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/submissions"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:record_submission_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_submission_helper"
+        }
+    }
 }
 ```
 
+_[Back to top...](#)_
 
-# Adding/Modifying/Removing Resources (POST/PATCH/PUT/DELETE)
 
->TBD
+### Scenario: Modifying a form (PUT)
+
+You can update a form by calling a PUT operation on that form's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
+
+{% include array_warning.md %}
+
+#### Request
+
+```javascript
+PUT https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "name": "2014 New User Survey",
+    "description": "<p>Take our survey!</p>"
+}
+
+```
+
+#### Response
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+        "foreign_system:1"
+    ],
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T22:04:31Z",
+    "title": "Take Our Survey",
+    "name": "2014 New User Survey",
+    "description": "<p>Take our survey!</p>",
+    "origin_system": "OpenSupporter",
+    "total_submissions": 0,
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+        },
+        "osdi:submissions": {
+            "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/submissions"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:record_submission_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_submission_helper"
+        }
+    }
+}
+```
+
+_[Back to top...](#)_
+
+
+### Scenario: Deleting a form (DELETE)
+
+You may delete a form by calling the DELETE command on the form's endpoint.
+
+#### Request
+
+```javascript
+DELETE https://osdi-sample-system.org/api/v1/forms/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "notice": "This form was successfully deleted."
+}
+```
+
+_[Back to top...](#)_

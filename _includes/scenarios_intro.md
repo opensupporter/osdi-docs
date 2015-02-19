@@ -1,0 +1,1 @@
+The scenarios below show some common Create, Read, Update, Delete (CRUD) operations that can be performed on this resource, as well as any resource-specific behaviors worth highlighting. While the connonical definitions of fields are above, these examples should be complete as well.

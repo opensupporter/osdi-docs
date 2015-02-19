@@ -6,7 +6,7 @@ description: "The Open Supporter Data Interface (OSDI) effort seeks to define an
 baseurl: "/osdi-docs"
 url: "http://opensupporter.org/"
 
-testmessage: "yo"
+source_description: "Test description"
 
 # Enable/show navigation. There are there options:
 #   0 - always hide

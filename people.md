@@ -3,544 +3,898 @@ layout: default
 title: Person
 ---
 
-# People
+# Person
 
-This page defines the Person resource and several related objects: EmailAddress, PhoneNumber, Profile, PostalAddress.
+This document defines the Person resource. 
 
-## Person
+People are individual users who are stored in the OSDI system's database in some way.
 
-| Name          | Type      | Description
+People have names, email addresses, and other information, and they have associated action histories recording the actions they've taken on the system, such as a list of their signatures on various petitions.
+
+
+### Sections:
+
+* [Endpoints and URL structures](#endpoints-and-url-structures)
+* [Fields](#fields)
+    * [Common Fields](#common-fields)
+    * [People Fields](#people-fields)
+    * [Related Objects](#related-objects)
+    * [Links](#links)
+* [Helpers](#helpers)
+* [Related Resources](#related-resources)
+* [Scenarios](#scenarios)
+    * [Scenario: Retrieving a collection of Person resources (GET)](#scenario-retrieving-a-collection-of-person-resources-get)
+    * [Scenario: Retrieving an individual Person resource (GET)](#scenario-scenario-retrieving-an-individual-person-resource-get)
+    * [Scenario: Creating a new person (POST)](#scenario-creating-a-new-person-post)
+    * [Scenario: Modifying a person (PUT)](#scenario-modifying-a-person-put)
+    * [Scenario: Deleting a person (DELETE)](#scenario-deleting-a-person-delete)
+
+
+{% include endpoints_and_url_structures.md %}
+
+The link relation label for a Person resource is ```osdi:person``` for a single Person resource or ```osdi:people``` for a collection of Person resources.
+
+_[Back to top...](#)_
+
+
+## Fields
+
+{% include fields_intro.md %}
+
+{% include global_fields.md %}
+
+_[Back to top...](#)_
+
+
+### People Fields
+
+A list of fields specific to the Person resource.
+
+|Name          |Type      |Description
 |-----------    |-----------|--------------
-|family_name      |string     |Last name
-|given_name     |string     |First name
+|family_name      |string     |The person's last name.
+|given_name     |string     |The person's first name.
 |additional_name    |string     |An additional name not included in family or given. Usually a middle name.
-|honorific_prefix           | string    |An honorific prefix like "Dr", "Mr" etc. Free-form field
-|honorific_suffix           | string    |An honorific suffix like "Jr.", "Ph.D" Free-form field
-|gender         |string     |The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", "Other".
-|gender_identity|string     |The self-described gender with which a person identifies. Free-form field. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
-|party_identification_identification          |string     |Flexenum describing the person's politcal party_identification. Values: "None", "Democratic", "Republican", "Independent"
-|source         |string     |Information about the source where this person record was acquired.  Eg "Ref74"
-|origin_system  |string     | Human readable name of the system where this person was created
-|birthdate      |hash       | A hash representing the birth date
-|birthdate.month|integer    | integer representing the month of the birth date
-|birthdate.day  |integer    | integer representing the day of the birth date
-|birthdate.year|integer     | integer representing the 4 digit year of the birth date
-|ethnicities|string[]   | An array containing a person's ethinicities
-|languages_spoken|string[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
-|employer|string    |The name of the person's employer
-|employer_address|PostalAddress    |The postal address of the person's employer
-|occupation|string  |The occupation of the person.
-|identifiers    |Identifier[]| A collection of identifiers the provider has determined to be associated with the person
-|postal_addresses      |PostalAddress[]  |An array of postal addresses associated with the person
-|email_addresses         |EmailAddress[]    |An array of email addresses associated with the person
-|phone_numbers         |PhoneNumber[]   |An array of phone numbers associated with the person
-|profiles       | Profile[] | An array of profiles for online services
-|donations      |Donation[]* |A collection of donations associated with the person
-|question_answers|QuestionAnswer[]*|A collection of answers to questions from surveys
-|event_attendance |Attendance[]*|A collection of attendance records for a person
-|interactions   |Interaction[]*|A collection of outreach interactions for a person, eg Volunteer Joe called voter  Sam F. Bar
-|taggings | Tagging[]*|A collection of taggings for a person
+|honorific_prefix           |string    |An honorific prefix like "Dr", "Mr", etc...
+|honorific_suffix           |string    |An honorific suffix like "Jr.", "Ph.D", etc...
+|gender         |enum     |The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", or "Other".
+|gender_identity|string     |The self-described gender with which a person identifies. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
+|party_identification          |flexenum     |Flexenum describing the person's politcal party_identification. One of "None", "Democratic", "Republican", "Independent", or another free-form string.
+|source         |string     |Information about the source where this person record was acquired.   _Example: "facebook-ad-october"_
+|ethnicities|strings[]   |A unique string array representing a person's ethnicities.
+|languages_spoken|strings[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
+|birthdate	|[Birthdate](#birthdate)    |An object hash representing the birthdate of the person.
+|employer|string    |The name of the person's employer.
+|employer_address|[Employer Address](#employer-address)    |An object hash representing the postal address of the person's employer.
+|postal_addresses      |[Postal Addresses[]](#postal-addresses)   |An array of postal address object hashes associated with the person.
+|email_addresses	|[Email Addresses[]](#email-addresses)   |An array of email address object hashes associated with the person.
+|phone_numbers	|[Phone Numbers[]](#phone-numbers)   |An array of phone number object hashes associated with the person.
+|profiles       | [Profiles[]](#profiles) |An array of profile object hashes for online services related to the person.
+|custom_fields	|[Custom Fields](#custom-fields)	|An object hash of key/value pairs associated with the person created by a user rather than a service or vendor.
 
-# Email Address
-
-| Name          | Type      | Description
-|----------------|-----------|----------------
-| primary       | boolean   |Denotes if this is the primary address.  A person can have only one primary address
-| address       | string    | The actual email address according to RFC822
-| address_type  | string    | Flexenum of Personal, Work, Other
-
-# Phone Number
-
-| Name          | Type      | Description
-|----------------|-----------|----------------
-| primary       | boolean   |Denotes if this is the primary phone number.  A person can have only one primary number
-| number        | string    | The actual phone number which MUST including country code and MUST be numeric characters only 
-| extension     | string    | Optional associated extension
-| description   | string    | Optional Free form additional text description
-| number_type   | string    | flexenum of Home, Work, Mobile, Other, Daytime, Evening, Fax
-| operator      | string    | Optional: Operator/Carrier associated with number, eg "Verizon"
-| country       | string    | Country code according to ISO 3166-1 Alpha-2
-| sms_capable   | boolean   | True if the number can accept sms text messages
-| do_not_call   | boolean   | True if this number is registered on the US FCC Do Not Call Registry
-
-# Profile
-
-Profiles correspond to a person's accounts on online services like Facebook, Twitter, etc.
-
-| Name          | Type      | Description
-|----------------|-----------|----------------
-| provider      | string    | The provider name, eg "Facebook"
-| id            | string    | The unique identifier provided by the provider, eg "135165"
-| url           | string    | The URL to the user's web viewable profile, eg "http://facebook.com/johnqpublic"
-| handle        | string    | The handle name, eg "johnqpublic." Twitter handles should not include the "@"
+_[Back to top...](#)_
 
 
-# Custom Fields
-Custom fields are arbitrary key/value pairs associated with the person that are created by a user, *not* created by the server or vendor. For example, custom fields are appropriate to store information a user decided to collect on a particular form, like whether the person filling out a form wants to volunteer. They are not appropriate for storing extra information the server or vendor has on this person that doesn't fit into the OSDI spec, such as a person's modeling score. In this way, custom fields are designed to be a more flexible and lightweight version of [Survey Questions and Answers](questions.md).
+### Related Objects
 
-| Name          | Type      | Description
-|----------------|-----------|----------------
-| [key]     | string    | The key associated with this custom field, with a corresponding value as a string. May be prefixed by servers based on naming conventions they document to control how collisions across systems and data sets occur.
+These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+#### Birthdate
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|birthdate.month|integer    |An integer representing the month of the birth date of the person.
+|birthdate.day  |integer    |An integer representing the day of the birth date of the person.
+|birthdate.year|integer     |An integer representing the 4 digit year of the birth date of the person.
+
+#### Employer Address
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|employer_address.venue	|string	|Optional venue name at the employer address, useful for names of buildings. (ex: Smith Hall)
+|employer_address.address_lines	|strings[]	|An array of strings representing the employer's street address.
+|employer_address.locality	|string	|A city or other local administrative area.
+|employer_address.region	|string	|State or subdivision codes according to ISO 3166-2 (Final 2 alpha digits).
+|employer_address.postal_code	|string	|The region specific postal code, such as a zip code.
+|employer_address.country	|string	|The country code according to ISO 3166-1 Alpha-2.
+|employer_address.language	|string	|Language in which the address is recorded -- language code according to ISO 639.
+|employer_address.location	|object	|An object hash representing the geocoded location information for the address.
+|employer_address.location.latitude	|float	|A positive or negative float number representing the latitude of the address.
+|employer_address.location.longitude	|float	|A positive or negative float number representing the longitude of the address.
+|employer_address.location.accuracy	|enum	|A value representing the accuracy of the geocode. One of "Rooftop" or "Approximate".
+|employer_address.status	|enum	|A value representing the status of the address. One of "Potential", "Verified", or "Bad".
+
+#### Postal Addresses
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|postal_addresses.primary	|boolean	|Denotes if this is the primary address. A person can have only one primary address.
+|postal_addresses.address_type	|enum	|The type of address. One of "Home", "Work", or "Mailing".
+|postal_addresses.venue	|string	|Optional venue name at the address, useful for names of buildings. (ex: Smith Hall)
+|postal_addresses.address_lines	|strings[]	|An array of strings representing the person's street address.
+|postal_addresses.locality	|string	|A city or other local administrative area.
+|postal_addresses.region	|string	|State or subdivision codes according to ISO 3166-2 (Final 2 alpha digits).
+|postal_addresses.postal_code	|string	|The region specific postal code, such as a zip code.
+|postal_addresses.country	|string	|The country code according to ISO 3166-1 Alpha-2.
+|postal_addresses.language	|string	|Language in which the address is recorded -- language code according to ISO 639.
+|postal_addresses.location	|object	|An object hash representing the geocoded location information for the address.
+|postal_addresses.location.latitude	|float	|A positive or negative float number representing the latitude of the address.
+|postal_addresses.location.longitude	|float	|A positive or negative float number representing the longitude of the address.
+|postal_addresses.location.accuracy	|enum	|A value representing the accuracy of the geocode. One of "Rooftop" or "Approximate".
+|postal_addresses.status	|enum	|A value representing the status of the address. One of "Potential", "Verified", or "Bad".
+|occupation	|string  |The occupation of the person.
+
+#### Email Addresses
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|email_addresses.primary	|boolean	|Denotes if this is the primary address. A person can have only one primary address.
+|email_addresses.address	|string	|The email address for the person.
+|email_addresses.address_type	|flexenum	|The type of email address. One of "personal", "work", "other", or another value.
+|email_addresses.status	|enum	|Indicates whether this email address is subscribed to receive emails in the system, either on one or more email lists. One of "subscribed", "unsubscribed", "bouncing", "spam complaint".
+
+#### Phone Numbers
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|phone_numbers.primary	|string   |Denotes if this is the primary phone number. A person can have only one primary number.
+|phone_numbers.number	|string   |The phone number of the person. Must including country code and must be numeric characters only.
+|phone_numbers.extension	|string   |An optional associated extension for the number.
+|phone_numbers.description	|string   |A freeform description of the phone number.
+|phone_numbers.number_type	|flexenum   |The type of phone number. One of "Home", "Work", "Mobile", "Other", "Daytime", "Evening", "Fax", or another value.
+|phone_numbers.operator	|string   |The operator or carrier associated with the number. _Example: "Verizon"_
+|phone_numbers.country	|string   |The country code according to ISO 3166-1 Alpha-2.
+|phone_numbers.sms_capable	|boolean   |True if the number can accept SMS text messages.
+|phone_numbers.do_not_call	|boolean   |True if this number is registered on the US FCC Do Not Call Registry.
+
+#### Profiles
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|profiles.provider       | string |The provider name of the profile. _Example: "Facebook"_
+|profiles.id       | string |The unique identifier provided by the provider for the profile. _Example: "135165"_
+|profiles.url       | string |The URL to the person's web viewable profile. _Example: "http://facebook.com/john.doe"_
+|profiles.handle       | string |The handle name of the profile. Twitter handles should not include the "@" _Example: "johndoe"_
+
+#### Custom Fields
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|custom_fields.[key]	|string	|The key associated with this custom field, with a corresponding value as a string. May be prefixed by servers based on naming conventions they document to control how collisions across systems and data sets occur.
+
+_[Back to top...](#)_
 
 
-# Postal Address
+### Links
 
-| Name          | Type      | Description
-|----------------|-----------|----------------
-| primary       | boolean   |Denotes if this is the primary address.  A person can have only one primary address
-|address_type   |string     |Type of address "Home","Work","Mailing"
-|venue | string | Optional venue name at the address, useful for events. (ex: Smith Hall)
-|address_lines       |string[]     |Address lines 1 - n
-|locality           |string     |A locality or other local administrative area
-|region          |string     |region / subdivision codes according to ISO 3166-2 (Final 2 alpha digits)
-|postal_code    |string     |Region specific postal code
-|country    |string     |Country code according to ISO 3166-1 Alpha-2
-|language   |string     |Language in which the address is recorded -- language code according to ISO 639
-|location       |hash       | Location information for the address
-|.latitude     |string     |Geolocation latitude
-|.longitude     |string     |Geolocation longitude
-|.accuracy      |string     |One of "Rooftop", "Approximate"
-|status |string     |One of "Potential", "Verified", "Bad".
+{% include links_intro.md %}
 
-### Region and Country codes
-Country Codes should conform to [ISO 3166-1 Alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+|Name          	|Type		|Description
+|-----------    |-----------|--------------
+|self			|[Person*](people.html)	|A self-referential link to the person.
+|donations		|[Donations[]*](#)  |A link to the collection of donations associated with the person.
+|submissions	|[Submissions[]*](submissions.html)  |A link to the collection of form submissions associated with the person.
+|attendances		|[Attendances[]*](attendances.html)        |A link to the collection of event attendances associated with the person.
+|signatures		|[Signatures[]*](signatures.html)        |A link to the collection of petition signatures associated with the person.
+|answers		|[Answers[]*](answers.html)  |A link to the collection of answers to questions associated with the person.
+|taggings		|[Taggings[]*](taggings.html)   	|A link to the collection of taggings associated with the person.
+|items		|[Items[]*](items.html)   	|A link to the collection of list items associated with the person.
+|modified_by		|[Person*](people.html)  	|A link to a Person resource representing the last editor of this person.
 
-Examples:
+_[Back to top...](#)_
 
-|Country        |Code
-|---------------|----------------------
-|United regions |US
-|Canada         |CA
-|Cyprus         |CY
 
-In the United regions, region abbreviations should conform to [ISO 3166-2:US](http://en.wikipedia.org/wiki/ISO_3166-2:US) but using only the final two alphanumeric characters
+## Helpers
 
-Examples:
+{% include helpers_intro.md %}
 
-|region         |Code
-|---------------|----------------------
-|New Jersey     |NJ
-|California     |CA
-|New York       |NY
-|Washington     |WA
+|Name          |Description
+|-----------    |-----------
+|[person_signup_helper](person_signup.html)      |Allows the creation of a person and associated tag and list membership.
 
-# Identifier
+_[Back to top...](#)_
 
-- Any OSDI entity may generate an identifier to refer to a real person.
 
-- Identifiers are composed of two segments:
+## Related Resources
 
-        <issuer-id>:<person-id>
+* [Person Signup Helper](person_signup.html)
+* [Donation](#)
+* [Submission](submissions.html)
+* [Attendance](attendances.html)
+* [Signature](signatures.html)
+* [Answer](answers.html)
+* [Tagging](taggings.html)
+* [Item](items.html)
 
-    The `issuer-id` must be a unique string that identifies the issuer and has been registered by the issuer with OSDI. Valid characters for `issuer-id` are any printable US-ASCII character other than `:` and `SPACE`. 
+_[Back to top...](#)_
 
-    The `person-id` should be a unique string within the namespace of `issuer-id` that identifies the person. Valid characters for `person-id` are any printable US-ASCII character other than `SPACE`.
 
-    _Example: The company "Voter Labs" registers their `issuer-id` as "`voterlabs`" with OSDI. Their internal database id for Jane Doe is `123456`. Jane's OSDI identifier is: `voterlabs:123456`._ 
+## Scenarios
 
-- Identifiers are __not__ associated with a particular representation of a person record. When a person record is updated, the identifier should not change as a result.
+{% include scenarios_intro.md %}
 
-- An OSDI entity __must__ retain any identifiers it previously issued to refer to this person in the `identifiers` collection.
+### Scenario: Retrieving a collection of Person resources (GET)
 
-- The `identifiers` collection does not prescribe how an OSDI consumer should utilize the collection for merging or updating their own person records. It's only purpose is to communicate that a real person has been referred to by those identifiers and that the OSDI provider believes those identifiers to all be associated with the same real person.
-
-- Identifiers __must__ be persistent and consumers of a provider's OSDI API should always be able to request a person record by any `identifier` the provider previously used as their canonical `identifier`. If an `identifier` is no longer the canonical `identifier` for the requested person record, the response should be an HTTP 301 redirect to the new record for that real person. The new record should have the new canonical identifier in the `identifier` field and all previously issued identifiers in the `identifiers` collection.
-
-## Merging Records
-
-Determining how, when, and whether two person records should be merged, and then determining which record is more authoritative for each data element of a record is a very difficult task. Automating that process is highly error prone and defining a standard process for merging records goes beyond the scope of OSDI's charter. OSDI is only responsible for establishing a standard for how OSDI entities communicate with each other that they have merged records by whatever internal processes they have defined.
-
-### Example
-
-Voter Labs is a data provider who provides OSDI-formatted data. Voter Labs identifies a new supporter. They create a new person record for this supporter and assign them a new identifier:
-
-__Figure 1.__
-
-    {
-        "given_name": "Edwin",
-        "family_name": "Labadie"
-        "email_addresses": ["edwin.labadie@example.com"],
-        "identifiers": [
-            "voterlabs:1234"
-        ]
-    }
-
-Voter Labs also has an existing record in their database that looks like this:
-
-__Figure 2.__
-
-    {
-        "given_name": "Edwin",
-        "family_name": "Labadie"
-        "additional_name": "Marques"
-        "email_addresses": ["edwin@example-old.com"],
-        "identifiers": [
-            "voterlabs:5678"
-        ]
-    }
-
-Through some internally-defined process, Voter Labs decides the two records represent the same person and should be merged. Also through some internally-defined process, they determine which record should be trusted for which fields and determine which record's identifier is the new canonical identifier. The resulting merged record would look like this:
-
-__Figure 3.__
-
-    {
-        "given_name": "Edwin",
-        "family_name": "Labadie"
-        "additional_name": "Marques"
-        "email_addresses": ["edwin.labadie@example.com"],
-        "identifiers": [
-            "voterlabs:1234",
-            "voterlabs:5678"
-        ]
-    }
-
-What this new record means is that `voterlabs:1234` is the new id by which Voter Labs refers to this real person and that `voterlabs:5678` is another id by which this real person has previously been referred to.
-
-"Jane Doe For Congress" is a consumer of the Voter Labs API. They have a locally cached representation of both records before Voter Labs merged the two records. When "Jane Doe For Congress" requests the record `voterlabs:5678` from the Voter Labs API, they should get a 301 redirect to the newly merged record seen above (Figure 3).
-
-# Scenarios / Examples
-
-> JSON respresenations below are provided as an informative reflection of what the wire format would look like.  
-> The tables above are the authoritative specification of the attributes.  Any discrepancy should defer to the above tables.
-
-## Person Signup Helper
-The Person Signup Helper provides a simple method for adding a new person to a collection.  It also supports adding tags and list membership info.
-
-The Person Signup helper can be determined in the AEP with the "osdi:person_signup_helper" link relation
-
-The response to a Person Signup Helper is the full representation of the person.
-
-Some initial implementations may only support helpers, direct RESTful access may not be supporter.  In those cases,_links may be omitted in responses.
-
-### Parameters
-The Person Signup Helper takes the following parameters in its body
-* Inlined Person - A "person" attribute conaining any valid attributes of a person resource are valid in the input representation
-* add_tags - a collection of tag names
-* add_lists - an array of list names
-
-### Example
+Person resources are sometimes presented as collections of people. For example, calling the people endpoint will return a collection of all the people stored in the system's database associated with your api key.
 
 #### Request
-```
-POST /api/v1/person_signup_helper
 
-{
-    "person" : {
-        "family_name": "Edwin",
-        "given_name": "Labadie",
-        "additional_name": "Marques",
-        "origin_system": "OpenSupporter",
-        "email_addresses": [
-            {
-                "address":"test-3@example.com",
-                "primary": true,
-                "address_type": "Personal"
-            }
-        ],
-        "postal_addresses": [
-            {
-                "primary": true,
-                "address_lines": [
-                    "935 Ed Lock"
-                ],
-                "locality": "New Dudley",
-                "region": "MN",
-                "postal_code": "17678",
-                "country": "RU",
-                "address_type": "Home",
-                "status": "Verified"
-            },
-        "phone_numbers": [
-            {
-                "primary": true,
-                "number": 19876543210,
-                "number_type": "Mobile",
-                "sms_capable": true
-            }
-        ],
-        "gender": "Male"
-    }
-    "add_tags" : [ "volunteer", "donor" ],
-    "add_lists" : [ "supporters" ]
-}
+```javascript
+GET https://osdi-sample-system.org/api/v1/people/
+
+Header:
+OSDI-API-Token:[your api key here]
 ```
 
 #### Response
-    
-```
-    200 OK
 
-    {
-        "family_name": "Edwin",
-        "given_name": "Labadie",
-        "additional_name": "Marques",
-        "origin_system": "OpenSupporter",
-        "email_addresses": [
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "total_pages": 88,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 2188,
+    "_links": {
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/people?page=2"
+        },
+        "osdi:people": [
             {
-                "address":"test-3@example.com",
-                "primary": true,
-                "address_type": "Personal"
-            }
-        ],
-        "postal_addresses": [
-            {
-                "primary": true,
-                "address_lines": [
-                    "935 Ed Lock"
-                ],
-                "locality": "New Dudley",
-                "region": "MN",
-                "postal_code": "17678",
-                "country": "RU",
-                "address_type": "Home",
-                "status": "Verified"
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
             },
-        "phone_numbers": [
             {
-                "primary": true,
-                "number": 19876543210,
-                "number_type": "Mobile",
-                "sms_capable": true
+                "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+            },
+            //(truncated for brevity)
+        ],
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
             }
         ],
-        "gender": "Male",
-        "_embedded" : {
-            "osdi:taggings" : { .... }
-            "osdi:lists" : { .... }
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/people"
         }
-    }
-
-```
-
-
-## Get a list of people with pagination
-
-    GET /api/v1/people?per_page=2&page=1
-
-    200 OK
-    Content-Type: application/json
-
-    {
-        "total_pages": 1,
-        "page": 1,
-        "total_records": 2,
-        "people": [
+    },
+    "_embedded": {
+        "osdi:people": [
             {
-                "family_name": "Edwin",
-                "given_name": "Labadie",
-                "additional_name": "Marques",
-                "origin_system": "OpenSupporter",
                 "identifiers": [
-                    "osdi:23"
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+                    "foreign_system:1"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "given_name": "John",
+                "family_name": "Smith",
+                "honorific_prefix": "Mr.",
+                "honorific_suffix": "Ph.D",
+                "additional_name": "Scott",
+                "gender": "Male",
+                "gender_identity": "Male",
+                "party_identification": "Democratic",
+                "source": "october_canvass",
+                "birthdate": {
+                    "month": 6,
+                    "day": 2,
+                    "year": 1973
+                },
+                "ethnicities": [
+                    "African American"
+                ],
+                "languages_spoken": [
+                    "en",
+                    "fr"
+                ],
+                "employer": "Acme Corp",
+                "employer_address": {
+                    "venue": "Bull Hall",
+                    "address_lines": [
+                        "123 Acme Street",
+                        "Suite 400"
+                    ],
+                    "locality": "New Yorkhaven",
+                    "region": "NY",
+                    "postal_code": "10001",
+                    "country": "US",
+                    "language": "en",
+                    "location": {
+                        "latitude": 38.9382,
+                        "longitude": -77.3349,
+                        "accuracy": "Rooftop"
+                    },
+                    "status": "Verified"
+                },
+                "occupation": "Accountant",
+                "postal_addresses": [
+                    {
+                        "primary": true,
+                        "address_type": "Home",
+                        "address_lines": [
+                            "1900 Pennsylvania Ave"
+                        ],
+                        "locality": "Washington",
+                        "region": "DC",
+                        "postal_code": "20009",
+                        "country": "US",
+                        "language": "en",
+                        "location": {
+                            "latitude": 38.919,
+                            "longitude": -77.0379,
+                            "accuracy": "Rooftop"
+                        }
+                    }
                 ],
                 "email_addresses": [
                     {
-                        "address":"test-3@example.com",
                         "primary": true,
-                        "address_type": "Personal"
+                        "address": "johnsmith@mail.com",
+                        "address_type": "Personal",
+                        "status": "subscribed"
                     }
                 ],
                 "phone_numbers": [
                     {
                         "primary": true,
-                        "number": 19876543210,
-                        "number_type": "Mobile",
-                        "sms_capable": true
+                        "number": "11234567890",
+                        "extension": "432",
+                        "description": "Worksite line",
+                        "number_type": "Work",
+                        "operator": "ATT",
+                        "country": "US",
+                        "sms_capable": false,
+                        "do_not_call": true
                     }
                 ],
-                "gender": "Male",
-                "gender_identity": "Male",
-                "party_identification": "Democrat",
-                "source": "sed",
-                "ethnicities": ["Caucasian"],
                 "profiles": [
                     {
-                        "provider": "Twitter",
-                        "id": "Edwin_Labadie",
-                        "url": "http://twitter.com/Edwin_Labadie",
-                        "handle": "Edwin_Labadie"
-                     }
-                ],
-                "birth_date" : {
-                    "month" : 1,
-                    "day" : 1,
-                    "year" : 1970
-                },
-                "postal_addresses": [
-                    {
-                        "primary": true,
-                        "address_lines": [
-                            "935 Ed Lock"
-                        ],
-                        "locality": "New Dudley",
-                        "region": "MN",
-                        "postal_code": "17678",
-                        "country": "RU",
-                        "address_type": "Home",
-                        "location" : {
-                            "longitude" : "40.1",
-                            "latitude" : "44.5",
-                            "accuracy": "Rooftop"
-                        },
-                        "status": "Verified"
+                        "provider": "Facebook",
+                        "id": "john.doe.1234",
+                        "url": "https://facebook.com/john.doe"
                     },
                     {
-                        "address_lines": [
-                             "28160 Wiegand Divide",
-                             "Apt 1"
-                        ],
-                        "locality": "Lake Amarimouth",
-                        "region": "GA",
-                        "postal_code": "27585-7257",
-                        "country": "US",
-                        "address_type": "Work",
-                        "location" : {
-                            "longitude" : "40.1",
-                            "latitude" : "44.5",
-                            "accuracy": "Rooftop"
-                        },
-                        "status": "Verified",
-                        "primary": false
+                        "provider": "Twitter",
+                        "id": "eds34d8j2kddfd45",
+                        "url": "https://twitter.com/johndoe",
+                        "handle": "johndoe"
                     }
                 ],
+                "custom_fields": {
+                    "is_volunteer": "true",
+                    "most_important_issue": "Equal pay",
+                    "union_member": "true"
+                },
                 "_links": {
-                    "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-                    "osdi:question_answers": {
-                        "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23/question_answers"
-                    },
                     "self": {
-                        "href": "http://osdi-prototype.herokuapp.com/api/v1/people/23"
+                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                    },
+                    "osdi:answers": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+                    },
+                    "osdi:attendance": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendance"
+                    },
+                    "osdi:signatures": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/signatures"
+                    },
+                    "osdi:submissions": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/submissions"
+                    },
+                    "osdi:donations": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/donations"
+                    },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+                    },
+                    "osdi:items": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/items"
                     }
                 }
             },
             {
-                "family_name": "Parker",
-                "given_name": "Walker",
-                "additional_name": "Jannie",
-                "origin_system": "OpenSupporter",
+                "given_name": "Jane",
+                "family_name": "Doe",
                 "identifiers": [
-                    "osdi:24"
+                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
                 ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
                 "email_addresses": [
                     {
-                        "address":"test-4@example.com",
                         "primary": true,
-                        "address_type": "Work"
+                        "address": "janedoe@mail.com",
+                        "status": "unsubscribed"
                     }
                 ],
-                "gender": "Male",
-                "gender_identity": "Male",
-                "party_identification": "Democrat",
-                "source": "architecto",
-                "ethnicities": ["African American", "Hispanic"],
-                "profiles": [
-                    {
-                        "provider": "Twitter",
-                        "id": "Parker_Walker",
-                        "url": "http://twitter.com/Parker_Walker",
-                        "handle": "Parker_Walker"
-                    }
-                ],
-                "birth_date" : {
-                    "month" : 1,
-                    "day" : 1,
-                    "year" : 1970
-                },
                 "postal_addresses": [
                     {
                         "primary": true,
-                        "address_lines": [
-                            "22184 Vernie Cove",
-                            "Apt 1"
-                        ],
-                        "locality": "Rowemouth",
-                        "region": "JP",
-                        "postal_code": "74895",
-                        "country": "RU",
-                        "address_type": "Home",
-                        "location" : {
-                            "longitude" : "40.1",
-                            "latitude" : "44.5",
-                            "accuracy": "Rooftop"
-                        },
-                        "status": "Verified"
-                    },
-                    {
-                        "address_lines": [
-                            "7485 Rashad Pine"
-                        ],
-                        "locality": "Brandynview",
-                        "region": "PR",
-                        "postal_code": "76221-3163",
+                        "locality": "Washington",
+                        "region": "DC",
+                        "postal_code": "20009",
                         "country": "US",
-                        "address_type": "Work",
-                        "location" : {
-                            "longitude" : "40.1",
-                            "latitude" : "44.5",
-                            "accuracy": "Rooftop"
-                        },
-                        "status": "Verified",
-                        "primary": false
+                        "language": "en",
+                        "location": {
+                            "latitude": 38.919,
+                            "longitude": -77.0379,
+                            "accuracy": "Approximate"
+                        }
                     }
                 ],
                 "_links": {
-                     "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-                     "osdi:question_answers": {
-                        "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24/question_answers"
-                     },
-                     "self": {
-                        "href": "http://osdi-prototype.herokuapp.com/api/v1/people/24"
-                     }
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                    },
+                    "osdi:answers": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/answers"
+                    },
+                    "osdi:attendance": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/attendance"
+                    },
+                    "osdi:signatures": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/signatures"
+                    },
+                    "osdi:submissions": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/submissions"
+                    },
+                    "osdi:donations": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/donations"
+                    },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+                    },
+                    "osdi:items": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/items"
+                    }
                 }
-            }
+            },
+            //(truncated for brevity)
+        ]
+    }
+}
+```	
+
+_[Back to top...](#)_		
+
+### Scenario: Scenario: Retrieving an individual Person resource (GET)
+
+Calling an individual Person resource will return the resource directly, along with all associated fields and appropriate links to additional information about the person.
+
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/people/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+        "foreign_system:1"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "given_name": "John",
+    "family_name": "Smith",
+    "honorific_prefix": "Mr.",
+    "honorific_suffix": "Ph.D",
+    "additional_name": "Scott",
+    "gender": "Male",
+    "gender_identity": "Male",
+    "party_identification": "Democratic",
+    "source": "october_canvass",
+    "birthdate": {
+        "month": 6,
+        "day": 2,
+        "year": 1973
+    },
+    "ethnicities": [
+        "African American"
+    ],
+    "languages_spoken": [
+        "en",
+        "fr"
+    ],
+    "employer": "Acme Corp",
+    "employer_address": {
+        "venue": "Bull Hall",
+        "address_lines": [
+            "123 Acme Street",
+            "Suite 400"
         ],
-        "osdi:taggings": [
-              {
-                "added_at":"2014-03-01 00:00:00",
-                "tag":
-                  {
-                    "name":"labor",
-                    "description":"this person is a labor supporter",
-                    "created_at":"2014-01-01 00:00:00",
-                    "modified_at":"2014-02-28 11:23:23",
-                    "originating_system":"Voter Labs",
-                    "_links" : {
-                      "items" : {
-                        "href" : "api/v1/people/tag/labor",
-                      }
-                    }
-                  }
-                },
-                {
-                  "added_at":"2014-03-01 00:00:00",
-                  "tag":
-                  {
-                    "name":"reproductive-rights",
-                    "description":"this person supports a right to reproductive choice",
-                    "description":"this person supports a right to reproductive choice",
-                    "created_at":"2014-01-01 00:00:00",
-                    "modified_at":"2014-02-28 11:23:23",
-                    "originating_system":"Voter Labs",
-                    "_links" : {
-                      "items" : {
-                        "href" : "api/v1/people/tag/reproductive-rights"
-                      }
-                    }
-                  }
-                }
-              ],
-            },
-        "_links": {
-            "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-            "self": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/people"
-            },
-            "osdi:question_answers": {
-                "href": "http://osdi-prototype.herokuapp.com/api/v1/question_answers"
-            },
-            "osdi:find": {
-                "href": "http://api.opensupporter.org/api/v1/people?$filter={odata_query}",
-                "templated": true
+        "locality": "New Yorkhaven",
+        "region": "NY",
+        "postal_code": "10001",
+        "country": "US",
+        "language": "en",
+        "location": {
+            "latitude": 38.9382,
+            "longitude": -77.3349,
+            "accuracy": "Rooftop"
+        },
+        "status": "Verified"
+    },
+    "occupation": "Accountant",
+    "postal_addresses": [
+        {
+            "primary": true,
+            "address_type": "Home",
+            "address_lines": [
+                "1900 Pennsylvania Ave"
+            ],
+            "locality": "Washington",
+            "region": "DC",
+            "postal_code": "20009",
+            "country": "US",
+            "language": "en",
+            "location": {
+                "latitude": 38.919,
+                "longitude": -77.0379,
+                "accuracy": "Rooftop"
             }
         }
+    ],
+    "email_addresses": [
+        {
+            "primary": true,
+            "address": "johnsmith@mail.com",
+            "address_type": "personal",
+            "status": "subscribed"
+        }
+    ],
+    "phone_numbers": [
+        {
+            "primary": true,
+            "number": "11234567890",
+            "extension": "432",
+            "description": "Worksite line",
+            "number_type": "Work",
+            "operator": "ATT",
+            "country": "US",
+            "sms_capable": false,
+            "do_not_call": true
+        }
+    ],
+    "profiles": [
+        {
+            "provider": "Facebook",
+            "id": "john.doe.1234",
+            "url": "https://facebook.com/john.doe"
+        },
+        {
+            "provider": "Twitter",
+            "id": "eds34d8j2kddfd45",
+            "url": "https://twitter.com/johndoe",
+            "handle": "johndoe"
+        }
+    ],
+    "custom_fields": {
+        "is_volunteer": "true",
+        "most_important_issue": "Equal pay",
+        "union_member": "true"
+    },
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        },
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+        },
+        "osdi:attendance": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendance"
+        },
+        "osdi:signatures": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/signatures"
+        },
+        "osdi:submissions": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/submissions"
+        },
+        "osdi:donations": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/donations"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+        },
+        "osdi:items": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/items"
+        }
     }
+}
+```
+
+_[Back to top...](#)_
+
+
+### Scenario: Creating a new person (POST)
+
+Posting to the people collection endpoint will allow you to create a new person. The response is the new person that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+
+For information on how to link a person with tags and list subscription information in one post, see the [Person Signup Helper](person_signup.html) documentation.
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/people/
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "identifiers": [
+        "foreign_system:1"
+    ],
+    "family_name": "Edwin",
+    "given_name": "Labadie",
+    "additional_name": "Marques",
+    "origin_system": "OpenSupporter",
+    "email_addresses": [
+        {
+            "address":"test-3@example.com",
+            "primary": true,
+            "address_type": "personal",
+            "status": "subscribed"
+        }
+    ],
+    "postal_addresses": [
+        {
+            "primary": true,
+            "address_lines": [
+                "935 Ed Lock"
+            ],
+            "locality": "New Dudley",
+            "region": "MN",
+            "postal_code": "17678",
+            "country": "RU",
+            "address_type": "Home",
+            "status": "Verified"
+        }
+    ],
+    "phone_numbers": [
+        {
+            "primary": true,
+            "number": 19876543210,
+            "number_type": "Mobile",
+            "sms_capable": true
+        }
+    ],
+    "gender": "Male"
+}
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+        "foreign_system:1"
+    ],
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "family_name": "Edwin",
+    "given_name": "Labadie",
+    "additional_name": "Marques",
+    "origin_system": "OpenSupporter",
+    "email_addresses": [
+        {
+            "address":"test-3@example.com",
+            "primary": true,
+            "address_type": "personal",
+            "status": "subscribed"
+        }
+    ],
+    "postal_addresses": [
+        {
+            "primary": true,
+            "address_lines": [
+                "935 Ed Lock"
+            ],
+            "locality": "New Dudley",
+            "region": "MN",
+            "postal_code": "17678",
+            "country": "RU",
+            "address_type": "Home",
+            "status": "Verified"
+        }
+    ],
+    "phone_numbers": [
+        {
+            "primary": true,
+            "number": 19876543210,
+            "number_type": "Mobile",
+            "sms_capable": true
+        }
+    ],
+    "gender": "Male",
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+        },
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/answers"
+        },
+        "osdi:attendance": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/attendance"
+        },
+        "osdi:signatures": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/signatures"
+        },
+        "osdi:submissions": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/submissions"
+        },
+        "osdi:donations": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/donations"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/taggings"
+        },
+        "osdi:items": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/items"
+        }
+    }
+}
+```
+
+_[Back to top...](#)_
+
+
+### Scenario: Modifying a person (PUT)
+
+You can update a person by calling a PUT operation on that person's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
+
+{% include array_warning.md %}
+
+#### Request
+
+```javascript
+PUT https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "family_name": "Ed",
+    "email_addresses": [
+        {
+            "address":"test-new@example.com",
+            "primary": true,
+            "address_type": "personal"
+        }
+    ]
+}
+
+```
+
+#### Response
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+        "foreign_system:1"
+    ],
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T22:04:31Z",
+    "family_name": "Ed",
+    "given_name": "Labadie",
+    "additional_name": "Marques",
+    "origin_system": "OpenSupporter",
+    "email_addresses": [
+        {
+            "address":"test-new@example.com",
+            "primary": true,
+            "address_type": "personal",
+            "status": "subscribed"
+        }
+    ],
+    "postal_addresses": [
+        {
+            "primary": true,
+            "address_lines": [
+                "935 Ed Lock"
+            ],
+            "locality": "New Dudley",
+            "region": "MN",
+            "postal_code": "17678",
+            "country": "RU",
+            "address_type": "Home",
+            "status": "Verified"
+        }
+    ],
+    "phone_numbers": [
+        {
+            "primary": true,
+            "number": 19876543210,
+            "number_type": "Mobile",
+            "sms_capable": true
+        }
+    ],
+    "gender": "Male",
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+        },
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/answers"
+        },
+        "osdi:attendance": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/attendance"
+        },
+        "osdi:signatures": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/signatures"
+        },
+        "osdi:submissions": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/submissions"
+        },
+        "osdi:donations": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/donations"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/taggings"
+        },
+        "osdi:items": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/items"
+        }
+    }
+}
+```
+
+_[Back to top...](#)_
+
+
+### Scenario: Deleting a person (DELETE)
+
+You may delete a person by calling the DELETE command on the person's endpoint.
+
+#### Request
+
+```javascript
+DELETE https://osdi-sample-system.org/api/v1/people/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "notice": "This person was successfully deleted."
+}
+```
+
+_[Back to top...](#)_

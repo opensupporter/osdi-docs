@@ -1,166 +1,554 @@
 ---
 layout: default
-title: "Questions"
+title: Questions
 ---
 
-# Survey Questions and Answers
+# Question
 
-## Question
+This page defines the Question resource.
+
+Questions are queries asked to a person. When people answer questions, [Answer](answers.html) resources are created to store their answer. Examples of questions include "Do you support John Doe for City Council?" or "Do you approve or disapprove of the way Barak Obama is handling his job as president?"
+
+### Sections
+
+* [Endpoints and URL structures](#endpoints-and-url-structures)
+* [Fields](#fields)
+    * [Common Fields](#common-fields)
+    * [Question Fields](#question-fields)  
+    * [Related Objects](#related-objects)
+    * [Links](#links)
+* [Related Resources](#related-resources)
+* [Scenarios](#scenarios)
+    * [Scenario: Retrieving a collection of Question resources (GET)](#scenario-retrieving-a-collection-of-question-resources-get)
+    * [Scenario: Retrieving an individual Question resource (GET)](#scenario-scenario-retrieving-an-individual-question-resource-get)
+    * [Scenario: Creating a new question (POST)](#scenario-creating-a-new-question-post)
+    * [Scenario: Modifying a question (PUT)](#scenario-modifying-a-question-put)
+    * [Scenario: Deleting a question (DELETE)](#scenario-deleting-a-question-delete)
+
+
+{% include endpoints_and_url_structures.md %}
+
+
+The link relation label for a Question resource is ```osdi:question``` for a single Question resource or ```osdi:questions``` for a collection of Question resources.
+
+_[Back to top...](#)_
+
+
+## Fields
+
+{% include fields_intro.md %}
+
+{% include global_fields.md %}
+
+_[Back to top...](#)_
+
+### Question Fields
+
+| Name          | Type                | Description
+| -----------   | -----------         | --------------
+|origin_system		|string     |A human readable identifier of the system where this question was created. (ex: "OSDI System")
+|name				|string		|The name of the question. Intended for administrative display rather than a public title, though may be shown to a user.
+|title				|string		|The title of the question. Intended for public display rather than administrative purposes.
+|description		|string		|A description of the question, usually displayed publicly. May contain text and/or HTML.
+|summary			|string		|A text-only single paragraph summarizing the question. Shown on listing pages that have more than titles, but not enough room for full description.
+| question_type | string              | The format of the question. One of "Paragraph", "SingleChoice", or "MultiChoice".  "SingleChoice" means only one of several possible responses is accepted for any given answer, and "MultiChoice" means one or more of several possible responses is possible for any given answer.
+| responses |[QuestionResponse[]](#question-responses)|The list of acceptable responses for this question, if question_type is "SingleChoice" or "MultiChoice".  For example, if the question is "What is your most important issue?", possible responses might be "Environment", "Health Care", "Economy", etc...
+
+_[Back to top...](#)_
+
+
+### Related Objects
+
+These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+
+#### Question Responses
+
+|Name          |Type       |Description
+|-----------   |-----------|--------------
+|response.key  |string     |An alphanumeric identifier which uniquely identifies this response among other responses for this question.  A single question resource may not have two or more responses with the same key.
+|response.name |string     |The name of the question response. Intended for administrative display rather than a public title, though may be shown to a user.
+|response.title|string     |The title of the question response. Intended for public display rather than administrative purposes.
+
+_[Back to top...](#)_
+
+
+### Links
+
+{% include links_intro.md %}
 
 | Name          | Type      | Description
-|-----------    |-----------|--------------
-|identifier			|Identifier[]		|Array of identifiers
-|name			|string		|Name for the question
-|question       |string     |Human readable text of the question
-|question_type  |string     |One of "MultiChoice"
-|responses      |QuestionResponse[]*|A collection of possible responses
+|-----------    |-----------|-----------|--------------
+|self			|[Question*](questions.html)	|A self-referential link to the question.
+|creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the question.
+|modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this question.
+|answers	|[Answers[]*](answers.html)	|A link to the collection of Answer resources for this question.
 
-## QuestionResponse
-A possible response or choice for a question.
-
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|identifier			|Identifier[]		|Array of identifiers
-|name       |string     |Human readable text of the value
-|value		|string		|Actual value
-|default	|boolean	|True if this response should be the default response
-
-## QuestionAnswer
-An answer to a question.  An answer is chosen by the user from one of the QuestionResponse options
-
-| Name          | Type      | Description
-|-----------    |-----------|--------------
-|identifier		|Identifier[]		|Array of identifiers
-|value          |string     |Human readable text of the value
-|question		|Question*	|Reference to associated question
-|person			|Person*	|Reference to associated person
+_[Back to top...](#)_
 
 
-## Retrieving Available Questions
+## Related Resources
 
-### Request
+* [Person](people.html)
+* [Answer](answers.html)
 
-	GET /api/v1/questions HTTP/1.1
 
-### Response
 
-~~~~
+
+_[Back to top...](#)_
+
+
+## Scenarios
+
+{% include scenarios_intro.md %}
+
+### Scenario: Retrieving a collection of Question resources (GET)
+
+Question resources are sometimes presented as collections of questions. For example, calling the questions endpoint will return a collection of all the questions stored in the system's database associated with your api key.
+
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/questions/
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
 200 OK
-Content-Type: application/json
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
 
 {
-  "_embedded": {
-    "questions": [
-      {
-        "name": "Best Editor",
-        "question": "What is the best editor?",
-        "question_type": "MultiChoice",
-        "id": 1,
-        "_embedded": {
-          "osdi:question_responses": [
+    "total_pages": 10,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 250,
+    "_links": {
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/questions?page=2"
+        },
+        "osdi:questions": [
             {
-              "name": "Emacs",
-              "value": "Emacs",
-              "default": true,
-              "_links": {
-                "self": {
-                  "href": "http://osdi-prototype.herokuapp.com/api/v1/question_responses/1"
-                }
-              }
+                "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
             },
             {
-              "name": "Vi",
-              "value": "Vi",
-              "default": false,
-              "_links": {
-                "self": {
-                  "href": "http://osdi-prototype.herokuapp.com/api/v1/question_responses/2"
-                }
-              }
-            }
-          ]
-        },
-        "_links": {
-          "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-          "osdi:question_responses": { "href": "http://osdi-prototype.herokuapp.com/api/v1/questions/1/question_responses"}, 
-          "self": {
-            "href": "http://osdi-prototype.herokuapp.com/api/v1/questions/1"
-          }
-        }
-      },
-      {
-        "name": "Marriage Equality",
-        "question": "Gays should have the right to Marry?",
-        "question_type": "MultiChoice",
-        "id": 2,
-        "_embedded": {
-          "osdi:question_responses": [
-            {
-              "name": "Strongly Support",
-              "value": "5",
-              "default": true,
-              "_links": {
-                "self": {
-                  "href": "http://osdi-prototype.herokuapp.com/api/v1/question_responses/3"
-                }
-              }
+                "href": "https://osdi-sample-system.org/api/v1/questions/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
             },
             {
-              "name": "Strongly Oppose",
-              "value": "1",
-              "default": false,
-              "_links": {
-                "self": {
-                  "href": "http://osdi-prototype.herokuapp.com/api/v1/question_responses/4"
-                }
-              }
+                "href": "https://osdi-sample-system.org/api/v1/questions/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+            },
+            //(truncated for brevity)
+        ],
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
             }
-          ]
-        },
-        "_links": {
-          "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-          "osdi:question_responses": { "href": "http://osdi-prototype.herokuapp.com/api/v1/questions/1/question_responses"}, 
-          "self": {
-            "href": "http://osdi-prototype.herokuapp.com/api/v1/questions/2"
-          }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/questions"
         }
+    },
+    "_embedded": {
+        "osdi:questions": [
+            {
+                "identifiers": [
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+                    "foreign_system:1"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "name": "Volunteer Question",
+                "title": "Do you want to volunteer?",
+                "description": "<p>Do you want to volunteer? It will only take a few hours of time per week.</p>",
+                "summary": "Volunteer question for canvass",
+                "question_type": "SingleChoice",
+                "responses": [
+                  {
+                    "key": "Y",
+                    "name": "yes",
+                    "title": "Yes"
+                  },
+                  {
+                    "key": "M",
+                    "name": "maybe",
+                    "title": "Maybe"
+                  },
+                  {
+                    "key": "N",
+                    "name": "no",
+                    "title": "No"
+                  }
+                ],
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                    },
+                    "osdi:answers": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+                    },
+                    "osdi:creator": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:modified_by": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    }
+                }
+            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "name": "Issues question",
+                "title": "Which questions do you care about?",
+                "description": "<p>Which issues do you care about? Select all that apply.</p>",
+                "summary": "Issues the person cares about",
+                "question_type": "MultiChoice",
+                "responses": [
+                  {
+                    "key": "hc",
+                    "name": "healthcare",
+                    "title": "Health care"
+                  },
+                  {
+                    "key": "env",
+                    "name": "environment",
+                    "title": "Environment"
+                  },
+                  {
+                    "key": "ec",
+                    "name": "economy",
+                    "title": "Economy and jobs"
+                  }
+                ],
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
+                    },
+                    "osdi:answers": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/answers"
+                    },
+                    "osdi:creator": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:modified_by": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    }
+                }
+            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
+                "name":	"Why the respondant wants to get involved.",
+                "title": "Why do you want to get involved with our organization?",
+                "question_type": "Paragraph",
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                    },
+                    "osdi:answers": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/1efc3644-af25-4253-90b8-a0baf12dbd1e/answers"
+                    },
+                    "osdi:creator": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:modified_by": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    }
+                }
+            },
+            //(truncated for brevity)
+        ]
+    }
+}
+```	
+
+_[Back to top...](#)_		
+
+### Scenario: Scenario: Retrieving an individual Question resource (GET)
+
+Calling an individual Question resource will return the resource directly, along with all associated fields and appropriate links to additional information about the question.
+
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "name": "Issues question",
+    "title": "Which questions do you care about?",
+    "description": "<p>Which issues do you care about? Select all that apply.</p>",
+    "summary": "Issues the person cares about",
+    "question_type": "MultiChoice",
+    "responses": [
+      {
+        "key": "hc",
+        "name": "healthcare",
+        "title": "Health care"
       },
       {
-        "name": "Bio",
-        "question": "Tell us about yourself",
-        "question_type": "Paragraph",
-        "id": 3,
-        "_embedded": {
-          "osdi:question_responses": []
+        "key": "env",
+        "name": "environment",
+        "title": "Environment"
+      },
+      {
+        "key": "ec",
+        "name": "economy",
+        "title": "Economy and jobs"
+      }
+    ],
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
         },
-        "_links": {
-          "self": {
-            "curies": [{ "name": "osdi", "href": "http://api.opensupporter.org/docs/v1/{rel}", "templated": true }],
-            "osdi:question_responses": { "href": "http://osdi-prototype.herokuapp.com/api/v1/questions/1/question_responses"}, 
-            "href": "http://osdi-prototype.herokuapp.com/api/v1/questions/3"
-          }
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/answers"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         }
+    }
+}
+```
+
+_[Back to top...](#)_
+
+
+### Scenario: Creating a new question (POST)
+
+Posting to the question collection endpoint will allow you to create a new question. The response is the new question that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/questions/
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "identifiers": [
+        "foreign_system:1"
+    ],
+    "name": "Issues question",
+    "title": "Which questions do you care about?",
+    "description": "<p>Which issues do you care about? Select all that apply.</p>",
+    "summary": "Issues the person cares about",
+    "question_type": "MultiChoice",
+    "responses": [
+      {
+        "key": "hc",
+        "name": "healthcare",
+        "title": "Health care"
+      },
+      {
+        "key": "env",
+        "name": "environment",
+        "title": "Environment"
+      },
+      {
+        "key": "ec",
+        "name": "economy",
+        "title": "Economy and jobs"
       }
     ]
-  },
-  "_links": {
-    "self": {
-      "href": "http://osdi-prototype.herokuapp.com/api/v1/questions"
-    }
-  }
 }
-~~~~
 
-## Creating a QuestionAnswer
+```
 
-### Request
+#### Response
 
-	POST /api/v1/people/question_answers HTTP/1.1
-	Content-Type: application/json
+```javascript
+200 OK
 
-	{
-		"value" : "Emacs",
-		"question_id" : 5
-	}
-	
-### Response
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "name": "Issues question",
+    "title": "Which questions do you care about?",
+    "description": "<p>Which issues do you care about? Select all that apply.</p>",
+    "summary": "Issues the person cares about",
+    "question_type": "MultiChoice",
+    "responses": [
+      {
+        "key": "hc",
+        "name": "healthcare",
+        "title": "Health care"
+      },
+      {
+        "key": "env",
+        "name": "environment",
+        "title": "Environment"
+      },
+      {
+        "key": "ec",
+        "name": "economy",
+        "title": "Economy and jobs"
+      }
+    ],
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
+        },
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/answers"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        }
+    }
+}
+```
+
+_[Back to top...](#)_
+
+
+### Scenario: Modifying a question (PUT)
+
+You can update a question by calling a PUT operation on that question's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
+
+{% include array_warning.md %}
+
+#### Request
+
+```javascript
+PUT https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "name": "First canvass issues question",
+    "title": "Which issues do you care about?"
+}
+
+```
+
+#### Response
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "name": "First canvass issues question",
+    "title": "Which issues do you care about?",
+    "description": "<p>Which issues do you care about? Select all that apply.</p>",
+    "summary": "Issues the person cares about",
+    "question_type": "MultiChoice",
+    "responses": [
+      {
+        "key": "hc",
+        "name": "healthcare",
+        "title": "Health care"
+      },
+      {
+        "key": "env",
+        "name": "environment",
+        "title": "Environment"
+      },
+      {
+        "key": "ec",
+        "name": "economy",
+        "title": "Economy and jobs"
+      }
+    ],
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
+        },
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/answers"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        }
+    }
+}
+```
+
+_[Back to top...](#)_
+
+
+### Scenario: Deleting a question (DELETE)
+
+You may delete a question by calling the DELETE command on the question's endpoint.
+
+#### Request
+
+```javascript
+DELETE https://osdi-sample-system.org/api/v1/questions/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "notice": "This question was successfully deleted."
+}
+```
+
+_[Back to top...](#)_

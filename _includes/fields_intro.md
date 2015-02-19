@@ -1,0 +1,3 @@
+The field names for this resource, with standard names, punctuation and capitalization, and values where appropriate. 
+
+**Note:** As with the entire OSDI specification, the specific fields a compliant system implements will vary between each system, as will the fields each system requires when creating or updating resources, which fields are writeable, and the operations you are allowed to perform on each resource.
