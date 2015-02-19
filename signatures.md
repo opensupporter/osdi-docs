@@ -201,7 +201,7 @@ Calling an individual Signature resource will return the resource directly, alon
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/forms/c945d6fe-929e-11e3-a2e9-12313d316c29/signatures/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3
+GET https://osdi-sample-system.org/api/v1/petitions/c945d6fe-929e-11e3-a2e9-12313d316c29/signatures/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3
 
 Header:
 OSDI-API-Token:[your api key here]
