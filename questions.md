@@ -66,7 +66,7 @@ _[Back to top...](#)_
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the question.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this question.
 |answers	|[Answers[]*](answers.html)	|A link to the collection of Answer resources for this question.
-| responses |[QuestionResponse[]](question_responses.html)|A link to the collection of Responses for this question.
+| responses |[Question Responses](#question-responses)|A link to the collection of Responses for this question.
 
 _[Back to top...](#)_
 
@@ -75,7 +75,15 @@ _[Back to top...](#)_
 
 * [Person](people.html)
 * [Answer](answers.html)
-* [Response](questions_responses.html)
+
+### Question Responses
+
+|Name          |Type       |Description
+|-----------   |-----------|--------------
+|response.key  |string     |An alphanumeric identifier which uniquely identifies this response among other responses for this question.  A single question resource may not have two or more responses with the same key.
+|response.name |string     |The name of the question response. Intended for administrative display rather than a public title, though may be shown to a user.
+|response.title|string     |The title of the question response. Intended for public display rather than administrative purposes.
+
 
 _[Back to top...](#)_
 
@@ -148,7 +156,24 @@ Cache-Control: max-age=0, private, must-revalidate
                 "title": "Do you want to volunteer?",
                 "description": "<p>Do you want to volunteer? It will only take a few hours of time per week.</p>",
                 "summary": "Volunteer question for canvass",
-                "question_type": "MultiChoice",
+                "question_type": "SingleChoice",
+                "responses": [
+                  {
+                    "key": "Y",
+                    "name": "yes",
+                    "title": "Yes"
+                  },
+                  {
+                    "key": "M",
+                    "name": "maybe",
+                    "title": "Maybe"
+                  },
+                  {
+                    "key": "N",
+                    "name": "no",
+                    "title": "No"
+                  }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -156,8 +181,49 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:answers": {
                         "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
                     },
-                    "osdi:responses": {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/responses"
+                    "osdi:creator": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:modified_by": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    }
+                }
+            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "name": "Issues question",
+                "title": "Which questions do you care about?",
+                "description": "<p>Which issues do you care about? Select all that apply.</p>",
+                "summary": "Issues the person cares about",
+                "question_type": "MultiChoice",
+                "responses": [
+                  {
+                    "key": "hc",
+                    "name": "healthcare",
+                    "title": "Health care"
+                  },
+                  {
+                    "key": "env",
+                    "name": "environment",
+                    "title": "Environment"
+                  },
+                  {
+                    "key": "ec",
+                    "name": "economy",
+                    "title": "Economy and jobs"
+                  }
+                ],
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
+                    },
+                    "osdi:answers": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/answers"
                     },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -206,7 +272,7 @@ Calling an individual Question resource will return the resource directly, along
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/questions/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+GET https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -222,26 +288,39 @@ Cache-Control: max-age=0, private, must-revalidate
 
 {
     "identifiers": [
-        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
-        "foreign_system:1"
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
     ],
     "origin_system": "OSDI Sample System",
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
-    "name": "Volunteer Question",
-    "title": "Do you want to volunteer?",
-    "description": "<p>Do you want to volunteer? It will only take a few hours of time per week.</p>",
-    "summary": "Volunteer question for canvass",
+    "name": "Issues question",
+    "title": "Which questions do you care about?",
+    "description": "<p>Which issues do you care about? Select all that apply.</p>",
+    "summary": "Issues the person cares about",
     "question_type": "MultiChoice",
+    "responses": [
+      {
+        "key": "hc",
+        "name": "healthcare",
+        "title": "Health care"
+      },
+      {
+        "key": "env",
+        "name": "environment",
+        "title": "Environment"
+      },
+      {
+        "key": "ec",
+        "name": "economy",
+        "title": "Economy and jobs"
+      }
+    ],
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
         },
         "osdi:answers": {
-            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
-        },
-        "osdi:responses": {
-            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/responses"
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/answers"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -272,11 +351,30 @@ OSDI-API-Token:[your api key here]
     "identifiers": [
         "foreign_system:1"
     ],
-    "title": "Do you want to volunteer?",
-    "name": "Volunteer Question",
-    "origin_system": "OpenSupporter",
-    "question_type": "MultiChoice"
+    "name": "Issues question",
+    "title": "Which questions do you care about?",
+    "description": "<p>Which issues do you care about? Select all that apply.</p>",
+    "summary": "Issues the person cares about",
+    "question_type": "MultiChoice",
+    "responses": [
+      {
+        "key": "hc",
+        "name": "healthcare",
+        "title": "Health care"
+      },
+      {
+        "key": "env",
+        "name": "environment",
+        "title": "Environment"
+      },
+      {
+        "key": "ec",
+        "name": "economy",
+        "title": "Economy and jobs"
+      }
+    ]
 }
+
 ```
 
 #### Response
@@ -289,24 +387,45 @@ Cache-Control: max-age=0, private, must-revalidate
 
 {
     "identifiers": [
-        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
-        "foreign_system:1"
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
     ],
+    "origin_system": "OSDI Sample System",
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
-    "title": "Do you want to volunteer?",
-    "name": "Volunteer Question",
-    "origin_system": "OpenSupporter",
+    "name": "Issues question",
+    "title": "Which questions do you care about?",
+    "description": "<p>Which issues do you care about? Select all that apply.</p>",
+    "summary": "Issues the person cares about",
     "question_type": "MultiChoice",
+    "responses": [
+      {
+        "key": "hc",
+        "name": "healthcare",
+        "title": "Health care"
+      },
+      {
+        "key": "env",
+        "name": "environment",
+        "title": "Environment"
+      },
+      {
+        "key": "ec",
+        "name": "economy",
+        "title": "Economy and jobs"
+      }
+    ],
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
         },
         "osdi:answers": {
-            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/answers"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         }
     }
 }
@@ -324,14 +443,14 @@ You can update a question by calling a PUT operation on that question's endpoint
 #### Request
 
 ```javascript
-PUT https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
+PUT https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa
 
 Header:
 OSDI-API-Token:[your api key here]
 
 {
-    "name": "2014 Volunteer question",
-    "title": "Do you want to volunteer this year?"
+    "name": "First canvass issues question",
+    "title": "Which issues do you care about?"
 }
 
 ```
@@ -345,24 +464,45 @@ Cache-Control: max-age=0, private, must-revalidate
 
 {
     "identifiers": [
-        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
-        "foreign_system:1"
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
     ],
+    "origin_system": "OSDI Sample System",
     "created_date": "2014-03-20T21:04:31Z",
-    "modified_date": "2014-03-20T22:04:31Z",
-    "title": "Do you want to volunteer this year?",
-    "name": "2014 Volunteer question",
-    "origin_system": "OpenSupporter",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "name": "First canvass issues question",
+    "title": "Which issues do you care about?",
+    "description": "<p>Which issues do you care about? Select all that apply.</p>",
+    "summary": "Issues the person cares about",
     "question_type": "MultiChoice",
+    "responses": [
+      {
+        "key": "hc",
+        "name": "healthcare",
+        "title": "Health care"
+      },
+      {
+        "key": "env",
+        "name": "environment",
+        "title": "Environment"
+      },
+      {
+        "key": "ec",
+        "name": "economy",
+        "title": "Economy and jobs"
+      }
+    ],
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
         },
         "osdi:answers": {
-            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+            "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/answers"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         }
     }
 }
