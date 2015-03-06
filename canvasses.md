@@ -21,8 +21,8 @@ A canvass occurs when one person attempts to contact another person for the purp
     * [Scenario: Retrieving a collection of Canvass resources (GET)](#scenario-retrieving-a-collection-of-canvass-resources-for-a-person-get)
     * [Scenario: Retrieving an individual Canvass resource (GET)](#scenario-retrieving-an-individual-canvass-resource-get)
     * [Scenario: Creating a new Canvass (POST)](#scenario-creating-a-new-canvass-post)
-    * [Scenario: Modifying an answer (PUT)](#scenario-modifying-an-answer-put)
-    * [Scenario: Deleting an answer (DELETE)](#scenario-deleting-an-answer-delete)
+    * [Scenario: Modifying a Canvass (PUT)](#scenario-modifying-a-canvass-put)
+    * [Scenario: Deleting a Canvass (DELETE)](#scenario-deleting-a-canvass-delete)
 
 
 {% include endpoints_and_url_structures.md %}
@@ -45,7 +45,7 @@ _[Back to top...](#)_
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
-|origin_system		|string     |A human readable identifier of the system where this answer was created. (ex: "OSDI System")
+|origin_system		|string     |A human readable identifier of the system where this canvass was created. (ex: "OSDI System")
 |action_date		|string		|The date and time the canvass was attempted.
 | contactType  | string | A code indicating the method by which the person was contacted.  For example: "in-person"
 | inputType    | string | A code indicating the method by which the canvass is being input into the system. For example: "mobile"
@@ -61,8 +61,8 @@ _[Back to top...](#)_
 
 |Name          	|Type		|Description
 |-----------    |-----------|--------------
-|self			|[Canvass*](canvasses.html)	|A self-referential link to the answer.
-|target		|[Person](people.html)  |A link to a single Person resource representing the person to whom this answer belongs.
+|self			|[Canvass*](canvasses.html)	|A self-referential link to the canvass.
+|target		|[Person](people.html)  |A link to a single Person resource representing the person who was contacted.
 |answers      |[Answer*](answers.html) | Zero or more answers to [Questions](questions.html) posed during the canvass.
 |taggings     |[Tagging*](taggings.html) | Zero or more taggings applied as a result of the canvass.
 
@@ -199,7 +199,7 @@ _[Back to top...](#)_
 
 ### Scenario: Retrieving an individual Canvass resource (GET)
 
-Calling an individual Canvass resource will return the resource directly, along with all associated fields and appropriate links to additional information about the answer.
+Calling an individual Canvass resource will return the resource directly, along with all associated fields and appropriate links to additional information about the canvass.
 
 #### Request
 
@@ -332,9 +332,9 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Modifying an answer (PUT)
+### Scenario: Modifying a Canvass (PUT)
 
-You can update an answer by calling a PUT operation on that answer's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.  Answers and taggings indicated in a PUT will be added to the canvass - it is not possible to delete answers and taggings from a canvass, once applied.
+You can update an Canvass by calling a PUT operation on that canvass's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.  Answers and taggings indicated in a PUT will be added to the canvass - it is not possible to delete answers and taggings from a canvass, once applied.
 
 {% include array_warning.md %}
 
@@ -398,7 +398,7 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Deleting an Canvass (DELETE)
+### Scenario: Deleting a Canvass (DELETE)
 
 You may delete a canvass by calling the DELETE command on the canvass's endpoint.
 
@@ -420,7 +420,7 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "notice": "This answer was successfully deleted."
+    "notice": "This canvass was successfully deleted."
 }
 ```
 
