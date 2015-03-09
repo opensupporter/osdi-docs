@@ -9,6 +9,8 @@ This page defines the Canvass resource.
 
 A canvass occurs when one person attempts to contact another person for the purpose of obtaining data about that person.  For example, a canvasser visits a voter's home and asks the voter whether she intends to vote in the next election; or, a campaign staffer calls a volunteer to ask whether he intends to attend the candidate's upcoming kick-off event.  The person being contacted is known as the "target" of the canvass, and the target may have [Answers](answers.html) or [Taggings](taggings.html) applied to them as a result of the canvass.  Alternatively, the target may have a non-canvass result (e.g. "not home") applied to them.
 
+It is not necessary to create a Canvass in order to create an Answer or Tagging for a Person.  However, a Canvass can provide useful information about how the Answer or Tagging was collected, which may prove valuable for future organizing purposes.
+
 ### Sections
 
 * [Endpoints and URL structures](#endpoints-and-url-structures)
@@ -49,7 +51,7 @@ _[Back to top...](#)_
 |action_date		|string		|The date and time the canvass was attempted.
 | contactType  | string | A code indicating the method by which the person was contacted.  For example: "in-person"
 | inputType    | string | A code indicating the method by which the canvass is being input into the system. For example: "mobile"
-| failureCode  | string | A code indicating why the canvass failed, for eample: "not home". Empty string or absent value indicates the canvass succeeded.
+| failureCode  | string | A code indicating why the canvass failed, for eample: "not-home". Empty string or absent value indicates the target was successfully contacted.  It is usually the case that a Canvass with a non-empty failureCode will have no associated Answers or Taggings, and that a Canvass that does have Answers or Taggings should have an empty or absent failureCode.
 
 _[Back to top...](#)_
 
@@ -85,7 +87,7 @@ _[Back to top...](#)_
 
 ### Scenario: Retrieving a collection of Canvass resources for a person (GET)
 
-Calling this endpoing allows consumers to see a person's canvass history.
+Calling this endpoint allows consumers to see a person's canvass history.
 
 #### Request
 
@@ -146,7 +148,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "action_date": "2014-03-18T11:02:15Z",
                 "contactType": "in-person",
                 "inputType": "mobile",
-                "failureCode": "",
+                "failureCode": "not-home",
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -154,12 +156,10 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:target": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
-                    "osdi:answers": {
-                        "href": "people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
-                    },
-                    "osdi:taggings": {
-                        "href": "people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
-                    },
+                    "osdi:answers": [
+                    ],
+                    "osdi:taggings": [
+                    ]
                 }
             },
             {
@@ -181,12 +181,22 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:target": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
-                    "osdi:answers": {
-                        "href": "people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/answers"
-                    },
-                    "osdi:taggings": {
-                        "href": "people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/taggings"
-                    },
+                    "osdi:answers": [
+                      {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
+                      },
+                      {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0222/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb"
+                      }
+                    ],
+                    "osdi:taggings": [
+                      {
+                        "href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0aaa/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ddd"
+                      },
+                      {
+                        "href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0eee"
+                      }
+                    ]
                 }
             },
             //(truncated for brevity)
@@ -237,12 +247,22 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:target": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:answers": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
-        },
-        "osdi:taggings": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
-        },
+        "osdi:answers": [
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
+          },
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0222/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb"
+          }
+        ],
+        "osdi:taggings": [
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0aaa/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ddd"
+          },
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0eee"
+          }
+        ]
     }
 }
 ```
@@ -273,19 +293,19 @@ OSDI-API-Token:[your api key here]
     "failureCode": "",
     "_links" : {
         "osdi:answers": [
-        	{
-          	"href": "https://osdi-sample-system.org/api/v1/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
           },
           {
-          	"href": "https://osdi-sample-system.org/api/v1/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb"
+          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0222/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb"
           }
         ],
         "osdi:taggings": [
-        	{
-          	"href": "https://osdi-sample-system.org/api/v1/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ddd"
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0aaa/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ddd"
           },
           {
-          	"href": "https://osdi-sample-system.org/api/v1/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0eee"
+          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0eee"
           }
         ]
     }
@@ -319,12 +339,22 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:target": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:answers": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
-        },
-        "osdi:taggings": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
-        },
+        "osdi:answers": [
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
+          },
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0222/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb"
+          }
+        ],
+        "osdi:taggings": [
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0aaa/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ddd"
+          },
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0eee"
+          }
+        ]
     }
 }
 ```
@@ -334,14 +364,14 @@ _[Back to top...](#)_
 
 ### Scenario: Modifying a Canvass (PUT)
 
-You can update an Canvass by calling a PUT operation on that canvass's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.  Answers and taggings indicated in a PUT will be added to the canvass - it is not possible to delete answers and taggings from a canvass, once applied.
+You can update an Canvass by calling a PUT operation on that canvass's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
 
 {% include array_warning.md %}
 
 #### Request
 
 ```javascript
-PUT https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/
+PUT https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -350,8 +380,11 @@ OSDI-API-Token:[your api key here]
     "contactType": "phoneCall",
     "_links" : {
         "osdi:answers": [
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
+          },
         	{
-          	"href": "https://osdi-sample-system.org/api/v1/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111"
+          	"href": "https://osdi-sample-system.org/api/v1/questions/aaab4b2e-ae0e-4cd3-9ed7-d0ec501b0555/answers/aaab4b2e-ae0e-4cd3-9ed7-d0ec501b0fff"
           },
         ]
     }    
@@ -385,12 +418,22 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:target": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:answers": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
-        },
-        "osdi:taggings": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
-        },
+        "osdi:answers": [
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
+          },
+        	{
+          	"href": "https://osdi-sample-system.org/api/v1/questions/aaab4b2e-ae0e-4cd3-9ed7-d0ec501b0555/answers/aaab4b2e-ae0e-4cd3-9ed7-d0ec501b0fff"
+          }
+        ],
+        "osdi:taggings": [
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0aaa/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ddd"
+          },
+          {
+          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0eee"
+          }
+        ]
     }
 }
 ```
