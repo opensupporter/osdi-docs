@@ -22,6 +22,8 @@ It is not necessary to create a Canvass in order to create an Answer or Tagging 
 * [Scenarios](#scenarios)
     * [Scenario: Retrieving a collection of Canvass resources (GET)](#scenario-retrieving-a-collection-of-canvass-resources-for-a-person-get)
     * [Scenario: Retrieving an individual Canvass resource (GET)](#scenario-retrieving-an-individual-canvass-resource-get)
+    * [Scenario: Retrieving Answers for an individual Canvass resource (GET)](#scenario-retrieving-answers-for-an-individual-canvass-resource-get)
+    * [Scenario: Retrieving Taggings for an individual Canvass resource (GET)](#scenario-retrieving-taggings-for-an-individual-canvass-resource-get)
     * [Scenario: Creating a new Canvass (POST)](#scenario-creating-a-new-canvass-post)
     * [Scenario: Modifying a Canvass (PUT)](#scenario-modifying-a-canvass-put)
     * [Scenario: Deleting a Canvass (DELETE)](#scenario-deleting-a-canvass-delete)
@@ -156,10 +158,12 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:target": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
-                    "osdi:answers": [
-                    ],
-                    "osdi:taggings": [
-                    ]
+                    "osdi:answers": {
+			            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+                    },
+                    "osdi:taggings": {
+			            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+                    }
                 }
             },
             {
@@ -181,22 +185,12 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:target": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
-                    "osdi:answers": [
-                      {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
-                      },
-                      {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0222/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb"
-                      }
-                    ],
-                    "osdi:taggings": [
-                      {
-                        "href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0aaa/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ddd"
-                      },
-                      {
-                        "href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0eee"
-                      }
-                    ]
+                    "osdi:answers": {
+							"href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/answers"
+                    },
+                    "osdi:taggings": {
+							"href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/taggings"
+                    }
                 }
             },
             //(truncated for brevity)
@@ -247,25 +241,222 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:target": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:answers": [
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
-          },
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0222/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb"
-          }
-        ],
-        "osdi:taggings": [
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0aaa/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ddd"
-          },
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0eee"
-          }
-        ]
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+        }
     }
 }
 ```
+
+_[Back to top...](#)_
+
+### Scenario: Retrieving Answers for an individual Canvass resource (GET)
+
+Retrieves the Answers that were collected during the Canvass.
+
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+````javascript
+
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "total_pages": 10,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 250,
+    "_links": {
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers?page=2"
+        },
+        "osdi:answers": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+            },
+            //(truncated for brevity)
+        ],
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+        }
+    },
+    "_embedded": {
+        "osdi:answers": [
+            {
+                "identifiers": [
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+                    "foreign_system:1"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "action_date": "2014-03-18T11:02:15Z",
+                "value": "He's not sure",
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                    },
+                    "osdi:question": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                }
+            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
+                "action_date": "2014-03-12T01:45:34Z",
+                "responses": [
+                    "Y"
+                ],
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29/answers/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                    },
+                    "osdi:question": {
+                        "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/adb951cb-51f9-420e-b7e6-de953195ec86"
+                    }
+                }
+            },
+            //(truncated for brevity)
+        ]
+    }
+
+````
+
+_[Back to top...](#)_
+
+### Scenario: Retrieving Taggings for an individual Canvass resource (GET)
+
+Retrieves the Taggings that were collected during the Canvass.
+
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+````javascript
+
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "total_pages": 10,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 250,
+    "_links": {
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings?page=2"
+        },
+        "osdi:taggings": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29/taggings/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+            },
+        ],
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+        }
+    },
+    "_embedded": {
+        "osdi:taggings": [
+            {
+                "identifiers": [
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+                    "foreign_system:1"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "item_type": "osdi:person",
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                    },
+                    "osdi:tag": {
+                        "href": "https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    }
+                }
+            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
+                "item_type": "osdi:event",
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29/taggings/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                    },
+                    "osdi:tag": {
+                        "href": "https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    }
+                }
+            },
+            //(truncated for brevity)
+        ]
+    }
+
+````
 
 _[Back to top...](#)_
 
@@ -339,22 +530,12 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:target": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:answers": [
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
-          },
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0222/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb"
-          }
-        ],
-        "osdi:taggings": [
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0aaa/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ddd"
-          },
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0eee"
-          }
-        ]
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+        }
     }
 }
 ```
@@ -418,22 +599,12 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:target": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:answers": [
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
-          },
-        	{
-          	"href": "https://osdi-sample-system.org/api/v1/questions/aaab4b2e-ae0e-4cd3-9ed7-d0ec501b0555/answers/aaab4b2e-ae0e-4cd3-9ed7-d0ec501b0fff"
-          }
-        ],
-        "osdi:taggings": [
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0aaa/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ddd"
-          },
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0eee"
-          }
-        ]
+        "osdi:answers": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+        }
     }
 }
 ```
