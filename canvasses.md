@@ -49,9 +49,9 @@ _[Back to top...](#)_
 |-----------    |-----------|--------------
 |origin_system		|string     |A human readable identifier of the system where this canvass was created. (ex: "OSDI System")
 |action_date		|string		|The date and time the canvass was attempted.
-| contactType  | string | A code indicating the method by which the person was contacted.  For example: "in-person"
-| inputType    | string | A code indicating the method by which the canvass is being input into the system. For example: "mobile"
-| failureCode  | string | A code indicating why the canvass failed, for eample: "not-home". Empty string or absent value indicates the target was successfully contacted.  It is usually the case that a Canvass with a non-empty failureCode will have no associated Answers or Taggings, and that a Canvass that does have Answers or Taggings should have an empty or absent failureCode.
+| contact_type  | string | A code indicating the method by which the person was contacted.  For example: "in-person"
+| input_type    | string | A code indicating the method by which the canvass is being input into the system. For example: "mobile"
+| failure_code  | string | A code indicating why the canvass failed, for eample: "not-home". Empty string or absent value indicates the target was successfully contacted.  It is usually the case that a Canvass with a non-empty failure_code will have no associated Answers or Taggings, and that a Canvass that does have Answers or Taggings should have an empty or absent failure_code.
 
 _[Back to top...](#)_
 
@@ -146,9 +146,9 @@ Cache-Control: max-age=0, private, must-revalidate
                 "created_date": "2014-03-20T21:04:31Z",
                 "modified_date": "2014-03-20T21:04:31Z",
                 "action_date": "2014-03-18T11:02:15Z",
-                "contactType": "in-person",
-                "inputType": "mobile",
-                "failureCode": "not-home",
+                "contact_type": "in-person",
+                "input_type": "mobile",
+                "failure_code": "not-home",
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -171,9 +171,9 @@ Cache-Control: max-age=0, private, must-revalidate
                 "created_date": "2014-03-20T21:04:31Z",
                 "modified_date": "2014-03-20T21:04:31Z",
                 "action_date": "2014-03-18T11:02:15Z",
-                "contactType": "phoneCall",
-                "inputType": "paper",
-                "failureCode": "",
+                "contact_type": "phoneCall",
+                "input_type": "paper",
+                "failure_code": "",
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf"
@@ -237,9 +237,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
     "action_date": "2014-03-18T11:02:15Z",
-    "contactType": "in-person",
-    "inputType": "mobile",
-    "failureCode": "",
+    "contact_type": "in-person",
+    "input_type": "mobile",
+    "failure_code": "",
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -288,9 +288,9 @@ OSDI-API-Token:[your api key here]
     ],
     "origin_system": "OpenSupporter",
     "action_date": "2014-03-18T11:02:15Z",
-    "contactType": "in-person",
-    "inputType": "mobile",
-    "failureCode": "",
+    "contact_type": "in-person",
+    "input_type": "mobile",
+    "failure_code": "",
     "_links" : {
         "osdi:answers": [
           {
@@ -329,9 +329,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
     "action_date": "2014-03-18T11:02:15Z",
-    "contactType": "in-person",
-    "inputType": "mobile",
-    "failureCode": "",
+    "contact_type": "in-person",
+    "input_tinput_typeype": "mobile",
+    "failure_code": "",
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -377,7 +377,7 @@ Header:
 OSDI-API-Token:[your api key here]
 
 {
-    "contactType": "phoneCall",
+    "contact_type": "phoneCall",
     "_links" : {
         "osdi:answers": [
           {
@@ -408,9 +408,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
     "action_date": "2014-03-18T11:02:15Z",
-    "contactType": "phoneCall",
-    "inputType": "mobile",
-    "failureCode": "",
+    "contact_type": "phoneCall",
+    "input_type": "mobile",
+    "failure_code": "",
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
