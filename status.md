@@ -16,6 +16,10 @@ OSDI reports errors and status information according to a standard schema.  A co
     * [Scenario: Attempt to create invalid resource atomically](#attempt-to-create-invalid-resource-atomically)
     * [Scenario: Invalid non-atomic request](#invalid-non-atomic-request)
 
+{% include endpoints_and_url_structures.md %}
+
+_[Back to top...](#)_
+
 ## Status Codes
 
 The following status codes correspond to success or failure of different kinds of requests.  Status codes may be provided in the body of the response using the ````osdi:status```` resource, unless forbidden by the HTTP spec (e.g., if the response code is 204).
@@ -37,6 +41,7 @@ The following status codes correspond to success or failure of different kinds o
 | Delete single resource | DELETE https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa | Resource not found | 404 | [Error*](#errors)
 | Delete single resource | DELETE https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa | Resource found and deleted | 204 | n/a
 
+_[Back to top...](#)_
 
 ## Errors
 
@@ -50,13 +55,21 @@ When a request includes an invalid resource which cannot be created or updated, 
 | hint | string | An indication of how to resolve this error.  For example, if the property is an email address which is deemed invalid according to a regular expression, the regular expression can be provided here; e.g. ````.+@.+(\..+)+````
 | reference_code | string | A string which refers to an internal error report which may be used to diagnose the problem; for example, "Logger-2015-03-10-cecc4e52-b350-4dac-87fc-39fc819f8c48"
 
+_[Back to top...](#)_
+
 ## Non-atomic requests
 
 While most OSDI requests are atomic (i.e., the request either succeeds completely, possibly changing the state of the system, or fails completely, leaving system unchanged), it is possible to create non-atomic requests using helpers.
 
 For example, the [Person Signup Helper](person_signup.html) allows consumers to create a [Person](people.html) and a [Tagging](taggings.html) for the person in a single request.  However, if the Person  resource is valid but the Tagging is not, the Person may be created but the Tagging may not be created.  In this case the system should report back that the Person has been created while the Tagging has failed, and why it failed, using the ````osdi:resource```` resource in conjunction with ````osdi:status```` and ````osdi:errors```` in order to report status or failure for the individual resources.
 
+_[Back to top...](#)_
+
+
 # Scenarios
+
+{% include scenarios_intro.md %}
+
 
 ## Attempt to create invalid resource atomically
 
@@ -126,6 +139,8 @@ Cache-Control: max-age=0, private, must-revalidate
   ]
 }
 ````
+
+_[Back to top...](#)_
 
 
 ## Invalid non-atomic request
@@ -222,3 +237,6 @@ Cache-Control: max-age=0, private, must-revalidate
   }
 ]
 ````
+
+_[Back to top...](#)_
+

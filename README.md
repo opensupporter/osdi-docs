@@ -18,6 +18,9 @@ More Information about OSDI can be found at: [opensupporter.org](http://opensupp
 
 The Github source for these documents can be found at: [https://github.com/opensupporter/osdi-docs](https://github.com/opensupporter/osdi-docs)
 
+If you are looking at those sources now and want to see the prettier github pages version, look here:
+[https://opensupporter.github.io/osdi-docs](https://opensupporter.github.io/osdi-docs)
+
 Experiment with our prototype server: [http://api.opensupporter.org](http://api.opensupporter.org)
 
 
