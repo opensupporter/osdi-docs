@@ -482,24 +482,6 @@ OSDI-API-Token:[your api key here]
     "contact_type": "in-person",
     "input_type": "mobile",
     "result_code": "",
-    "_links" : {
-        "osdi:answers": [
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
-          },
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0222/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb"
-          }
-        ],
-        "osdi:taggings": [
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0aaa/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ddd"
-          },
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bbb/taggings/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0eee"
-          }
-        ]
-    }
 }
 ```
 
@@ -558,17 +540,7 @@ Header:
 OSDI-API-Token:[your api key here]
 
 {
-    "contact_type": "phoneCall",
-    "_links" : {
-        "osdi:answers": [
-          {
-          	"href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0111/answers/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ccc"
-          },
-        	{
-          	"href": "https://osdi-sample-system.org/api/v1/questions/aaab4b2e-ae0e-4cd3-9ed7-d0ec501b0555/answers/aaab4b2e-ae0e-4cd3-9ed7-d0ec501b0fff"
-          },
-        ]
-    }    
+    "contact_type": "phoneCall"
 }
 
 ```
