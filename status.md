@@ -15,7 +15,8 @@ This is done via the osdi:status resource
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
-    * [Scenario: Retrieving a collection of Tag resources (GET)](#scenario-retrieving-a-collection-of-tag-resources-get)
+    * [Scenario: Returning Simple Status Information](#scenario-simple-status-information)
+    * [Scenario: Returning  Complex Status Information](#scenario-complex-status-information)
 
 {% include endpoints_and_url_structures.md %}
 
@@ -49,7 +50,7 @@ _[Back to top...](#)_
 {% include scenarios_intro.md %}
 
 
-### Simple status information
+### Scenario: Simple status information
 
 #### Request
 
