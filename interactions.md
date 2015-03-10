@@ -1,3 +1,7 @@
+---
+layout: default
+title: "Canvassing Interactions"
+---
 # Interactions
 
 Interactions are instances of one person engaging another person. An example of this would be as follows.  Alice makes a telephone call to Bob.  On that call she asks Bob a question and records his response.  The Interaction is primarily associated with Alice via the person attribute as she is the one who took action.  Bob answered the question and is considered the prospect.  The Interaction is secondarily associated with Bob via the prospect attribute.  
