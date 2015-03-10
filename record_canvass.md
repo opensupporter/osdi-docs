@@ -55,6 +55,8 @@ A list of fields specific for POSTing via the Record Canvass Helper.
 | contact_type  | string | A code indicating the method by which the person was contacted.  For example: "in-person"
 | input_type    | string | A code indicating the method by which the canvass is being input into the system. For example: "mobile"
 | result_code  | string | A code indicating the status of the contact attempt.  For example: "not-home" indicates that the contact failed because the target was not home, while "success" indicates that the target was contacted successfully.  An empty or missing value for result_code should be assumed to mean that the contact was successful.
+|add_answers      |[QuestionResponse*](#QuestionResponse)     |An array of inline QuestionReponse objects, which will be used to create [Answer](answers.html) objects related to this Canvass.
+|add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
 
 _[Back to top...](#)_
 
@@ -63,19 +65,21 @@ _[Back to top...](#)_
 
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
 
-#### Person
+#### QuestionResponse
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-|answer      |[Answer*](answers.html)     |An inlined hash representation of an answer, containing any valid fields for the Answer resource.
-|tagging      |[Tagging*](taggings.html)     |An inlined hash representation of an answer, containing any valid fields for the Answer resource.
+|question      |[Question](questions.html)     | A question to which an Answer is being added
+|value      |string     |The response the person gave, if the question type is “Paragraph” or if otherwise appropriate (e.g., if the question response was “Other”).
+|responses  |string[] | An array of strings corresponding to the question response key(s) chosen by the Person who answered the Question.
 
 _[Back to top...](#)_
 
-
 ## Related Resources
 
+* [Canvass](canvasses.html)
 * [Answer](answers.html)
+* [Question](questions.html)
 * [Tagging](taggings.html)
 
 _[Back to top...](#)_
@@ -106,46 +110,21 @@ OSDI-API-Token:[your api key here]
       "input_type": "mobile",
       "result_code": ""
     },
-    "answers": [
+    "add_answers": [
       {
-        "identifiers": [
-          "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
-          "foreign_system:1"
-        ],
-        "value": "He's not sure",
-        "_links": {
-          "osdi:question": {
-            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29"
-          }
-        }
+        "question": ""https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29",
+        "value": "He's not sure"        
       },
       {
-        "identifiers": [
-          "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc4",
-          "foreign_system:1"
-        ],
-        "origin_system": "OSDI Sample System",
+        "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c33",
         "responses": [
           "Y"
-        ],
-        "_links": {
-          "osdi:question": {
-            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c33"
-          }
-        }
+        ]        
       }
     ],
-    "taggings": [
-      {
-        "identifiers": [
-          "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
-        ],
-        "_links": {
-          "osdi:tag": {
-            "href": "https://osdi-sample-system.org/api/v1/tags/c945d6fe-929e-11e3-a2e9-12313d316c29"
-          }
-        }
-      }
+    "add_tags": [
+      "wants_yard_sign",
+      "will_volunteer"
     ]
 }
 ```

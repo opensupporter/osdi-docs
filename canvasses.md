@@ -18,6 +18,7 @@ It is not necessary to create a Canvass in order to create an Answer or Tagging 
     * [Common Fields](#common-fields)
     * [Canvass Fields](#canvass-fields)
     * [Links](#links)
+* [Helpers](#helpers)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
     * [Scenario: Retrieving a collection of Canvass resources (GET)](#scenario-retrieving-a-collection-of-canvass-resources-for-a-person-get)
@@ -69,6 +70,16 @@ _[Back to top...](#)_
 |target		|[Person](people.html)  |A link to a single Person resource representing the person who was contacted.
 |answers      |[Answer*](answers.html) | Zero or more answers to [Questions](questions.html) posed during the canvass.
 |taggings     |[Tagging*](taggings.html) | Zero or more taggings applied as a result of the canvass.
+
+_[Back to top...](#)_
+
+## Helpers
+
+{% include helpers_intro.md %}
+
+|Name          |Description
+|-----------    |-----------
+|[record_canvass_helper](record_canvass.html)      |Allows the creation of a Canvass and associated Answers and Taggings.
 
 _[Back to top...](#)_
 
