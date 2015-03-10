@@ -53,7 +53,7 @@ _[Back to top...](#)_
 |action_date		|string		|The date and time the canvass was attempted.
 | contact_type  | string | A code indicating the method by which the person was contacted.  For example: "in-person"
 | input_type    | string | A code indicating the method by which the canvass is being input into the system. For example: "mobile"
-| failure_code  | string | A code indicating why the canvass failed, for eample: "not-home". Empty string or absent value indicates the target was successfully contacted.  It is usually the case that a Canvass with a non-empty failure_code will have no associated Answers or Taggings, and that a Canvass that does have Answers or Taggings should have an empty or absent failure_code.
+| result_code  | string | A code indicating the status of the contact attempt.  For example: "not-home" indicates that the contact failed because the target was not home, while "success" indicates that the target was contacted successfully.  An empty or missing value for result_code should be assumed to mean that the contact was successful.
 
 _[Back to top...](#)_
 
@@ -150,7 +150,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "action_date": "2014-03-18T11:02:15Z",
                 "contact_type": "in-person",
                 "input_type": "mobile",
-                "failure_code": "not-home",
+                "result_code": "not-home",
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -177,7 +177,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "action_date": "2014-03-18T11:02:15Z",
                 "contact_type": "phoneCall",
                 "input_type": "paper",
-                "failure_code": "",
+                "result_code": "",
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf"
@@ -233,7 +233,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "action_date": "2014-03-18T11:02:15Z",
     "contact_type": "in-person",
     "input_type": "mobile",
-    "failure_code": "",
+    "result_code": "",
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -481,7 +481,7 @@ OSDI-API-Token:[your api key here]
     "action_date": "2014-03-18T11:02:15Z",
     "contact_type": "in-person",
     "input_type": "mobile",
-    "failure_code": "",
+    "result_code": "",
     "_links" : {
         "osdi:answers": [
           {
@@ -522,7 +522,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "action_date": "2014-03-18T11:02:15Z",
     "contact_type": "in-person",
     "input_tinput_typeype": "mobile",
-    "failure_code": "",
+    "result_code": "",
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -591,7 +591,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "action_date": "2014-03-18T11:02:15Z",
     "contact_type": "phoneCall",
     "input_type": "mobile",
-    "failure_code": "",
+    "result_code": "",
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
