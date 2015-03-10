@@ -1,43 +1,82 @@
+---
+layout: default
+title: "Status"
+---
 # Status
 OSDI reports errors and status information according to a standard schema.
 This is done via the osdi:status resource
 
-## Issues
-Should status codes be vendor specific or standard?
-Should status codes need to align with the HTTP status code of the HTTP response
+### Sections
 
-## Attributes
+* [Endpoints and URL structures](#endpoints-and-url-structures)
+* [Fields](#fields)
+    * [Common Fields](#common-fields)
+    * [Fields](#status-fields)  
+    * [Links](#links)
+* [Related Resources](#related-resources)
+* [Scenarios](#scenarios)
+    * [Scenario: Retrieving a collection of Tag resources (GET)](#scenario-retrieving-a-collection-of-tag-resources-get)
+
+{% include endpoints_and_url_structures.md %}
+
+_[Back to top...](#)_
+
+
+## Fields
+
+{% include fields_intro.md %}
+
+{% include global_fields.md %}
+
+_[Back to top...](#)_
+
+## Status Fields
 
 | Name          | Type      | Description
 |-----------    |-----------|--------------
 | code			| integer	| A numeric status code. 
 | description	| string	| A text description of the status
 | trace			| Array[Status]| Additional trace information such as step-wise status.  Represented as an array of Status resources
- 
 
-# Scenarios / Examples
+## Related Resources
 
-> JSON respresenations below are provided as an informative reflection of what the wire format would look like.  
-> The tables above are the authoritative specification of the attributes.  Any discrepancy should defer to the above tables.
+* [Person](people.html)
 
-## Simple status information
-### A POST to people collection
-This request fails.
+_[Back to top...](#)_
 
-    POST /api/v1/people
+## Scenarios
 
-    500 ErrorK
-    Content-Type: application/json
+{% include scenarios_intro.md %}
 
-	{
-		"osdi:status" : {
-			"code" : 500,
-			"description": "This system does not support direct creation of people"
-		}
+
+### Simple status information
+
+#### Request
+
+````javascript
+POST /api/v1/people
+
+{ // imagine a request body that causes a failure }
+````
+
+#### Response
+
+````
+500 Error
+Content-Type: application/json
+
+{
+	"osdi:status" : {
+		"code" : 500,
+		"description": "This system does not support direct creation of people"
 	}
+}
+````
 
+_[Back to top...](#)_	
 
-## Status with trace information
+### Scenario: Complex Status Information
+
 Since person_signup_helper, like other helpers, performs multiple operations in a single request.  The helper upserts a person as well as adds tags and lists associations to the person.
 
 As a result, on some systems it is possible to have the person upsert succeed while tagging or list additions could fail.
@@ -46,30 +85,37 @@ The osdi:status trace attribute provides the ability for the server to indicate 
 
 Whether or not a server returns trace information is vendor-specific.
 
-### A POST to person_signup_helper
+#### Request
+````javascript
+POST /api/v1/people_signup_helper
+Header:
+OSDI-API-Token:[your api key here]
 
-    POST /api/v1/people_signup_helper
+{ // imagine a bad person_signup_helper body }
+````
 
-    500 ErrorK
-    Content-Type: application/json
+#### Response
+````javascript
+500 Error
+Content-Type: application/json
 
-	{
-		"osdi:status" : {
-			"code" : 500,
-			"description": "Tagging failure"
-			"trace" : [
-				{ 
-					"code" : 200,
-					"description" : "person update successful"
-				},
-				{
-					"code" : 500,
-					"description" : "Tagging 'volunteer' failed. No such tag"
-				},
-				{
-					"code" : 200,
-					"description" : "List donors successful"
-				}
-			]
-		}
+{
+	"osdi:status" : {
+		"code" : 500,
+		"description": "Tagging failure"
+		"trace" : [
+			{ 
+				"code" : 200,
+				"description" : "person update successful"
+			},
+			{
+				"code" : 500,
+				"description" : "Tagging 'volunteer' failed. No such tag"
+			},
+			{
+				"code" : 200,
+				"description" : "List donors successful"
+			}
+		]
 	}
+}
