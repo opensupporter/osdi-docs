@@ -7,7 +7,7 @@ title: Outreach
 
 This document defines the Outreach resource. 
 
-Outreachs are a type of action that a user may take by participating in an advocacy campaign. Outreachs have fields to describe them such as when the outreach was created, who the user contacted as the target of their advocacy, and the content of the message a user sent to that target, and typically are linked to the person who made the outreach.
+Outreachs are a type of action that a user may take by participating in an [advocacy campaign](advocacy_campaigns.html). Outreaches have fields to describe them such as when the outreach was created, who the user contacted as the target of their advocacy, and the content of the message a user sent to that target, and typically are linked to the person who made the outreach.
 
 
 ### Sections
@@ -24,8 +24,8 @@ Outreachs are a type of action that a user may take by participating in an advoc
     * [Scenario: Retrieving a collection of Outreach resources (GET)](#scenario-retrieving-a-collection-of-outreach-resources-get)
     * [Scenario: Retrieving an individual Outreach resource (GET)](#scenario-scenario-retrieving-an-individual-outreach-resource-get)
     * [Scenario: Creating a new outreach (POST)](#scenario-creating-a-new-outreach-post)
-    * [Scenario: Modifying a outreach (PUT)](#scenario-modifying-a-outreach-put)
-    * [Scenario: Deleting a outreach (DELETE)](#scenario-deleting-a-outreach-delete)
+    * [Scenario: Modifying an outreach (PUT)](#scenario-modifying-an-outreach-put)
+    * [Scenario: Deleting an outreach (DELETE)](#scenario-deleting-an-outreach-delete)
 
 
 {% include endpoints_and_url_structures.md %}
@@ -44,7 +44,7 @@ _[Back to top...](#)_
 _[Back to top...](#)_
 
 
-### Signature Fields
+### Outreach Fields
 
 A list of fields specific to the Outreach resource.
 
