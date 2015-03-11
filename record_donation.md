@@ -240,10 +240,10 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/petitions/c945d6fe-929e-11e3-a2e9-12313d316c29/signature/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+            "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/doantions/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
         },
-        "osdi:petition": {
-            "href": "https://osdi-sample-system.org/api/v1/petitions/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        "osdi:fundraising_page": {
+            "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:person": {
             "href": "https://osdi-sample-system.org/api/v1/people/adb951cb-51f9-420e-b7e6-de953195ec86"
