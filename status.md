@@ -16,8 +16,6 @@ OSDI reports errors and status information according to a standard schema.  A co
     * [Scenario: Attempt to create invalid resource atomically](#attempt-to-create-invalid-resource-atomically)
     * [Scenario: Invalid non-atomic request](#invalid-non-atomic-request)
 
-{% include endpoints_and_url_structures.md %}
-
 _[Back to top...](#)_
 
 ## Status Codes
@@ -26,8 +24,8 @@ The following status codes correspond to success or failure of different kinds o
 
 | Type of request | Example | Description of result | Response Status Code | Response Body
 |---------------- |-------- |---------------------- |--------- |----
-| Any             | n/a     | Unexpected server error | 500 | n/a
-| Any             | n/a     | Request not supported | 405 | n/a
+| Any             | n/a     | Unexpected server error | 500 | [Error](#errors) indicating unexpected error; reference_code is recommended
+| Any             | n/a     | Request not supported | 500 | [Error](#errors) indicating not-implemented
 | Any             | n/a     | API key not valid | 401 | n/a
 | Any             | n/a     | API key not allowed to execute this method | 403 | n/a
 | Read multiple resources | GET  https://osdi-sample-system.org/api/v1/questions/ | At least one resource found | 200 | Representation of list of resources found
