@@ -54,6 +54,7 @@ A list of fields specific for POSTing via the Record Canvass Helper.
 |action_date		|string		|The date and time the canvass was attempted.
 | contact_type  | string | A code indicating the method by which the person was contacted.  For example: "in-person"
 | input_type    | string | A code indicating the method by which the canvass is being input into the system. For example: "mobile"
+| success      | boolean | True if the target was successfully contacted, False otherwise.
 | result_code  | string | A code indicating the status of the contact attempt.  For example: "not-home" indicates that the contact failed because the target was not home, while "success" indicates that the target was contacted successfully.  An empty or missing value for result_code should be assumed to mean that the contact was successful.
 |add_answers      |[QuestionResponse*](#QuestionResponse)     |An array of inline QuestionReponse objects, which will be used to create [Answer](answers.html) objects related to this Canvass.
 |add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
@@ -108,6 +109,7 @@ OSDI-API-Token:[your api key here]
       "action_date": "2014-03-18T11:02:15Z",
       "contact_type": "in-person",
       "input_type": "mobile",
+      "success": true,
       "result_code": ""
     },
     "add_answers": [
@@ -148,6 +150,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "action_date": "2014-03-18T11:02:15Z",
     "contact_type": "in-person",
     "input_type": "mobile",
+    "success": true,
     "result_code": "",
     "_links": {
         "self": {
