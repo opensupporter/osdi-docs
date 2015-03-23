@@ -51,7 +51,7 @@ _[Back to top...](#)_
 |credited_amount|number		| Amount credited back to donor in specified currency.
 |credited_date	|datetime	| Date of the credit.
 |currency		|string		| ISO 4217 designation of currency. Example: USD, JPY
-|recipients		|[Recipient](#recipient)[]| Array of recipients associated with the donation.
+|recipients		|[Recipient[]](#recipient)[]| Array of recipients associated with the donation.
 |payment		|[Payment](#payment)	| The payment details.
 |subscription_instance|string| A sequence number or some other value unique to this instance of the donation in the context of a subscription. Examples: 5, JAN-2014
 |voided			|boolean	|Indicates if the donation has been voided.

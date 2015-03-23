@@ -56,7 +56,7 @@ A list of fields specific to the Outreach resource.
 |duration		|integer		|The duration in seconds of the outreach, if applicable. (ex: duration will only be present on phone outreach types)
 |subject		|string		|The subject of the outreach, if applicable. (ex: subject will only be present on email outreach types)
 |message		|string		|The message of the outreach, if applicable. (ex: message will only be present on email or postal mail outreach types)
-|target			|[Target](#target)    |An object hash representing the target of the outreach.
+|targets			|[Target[]](#target)    |An array of target object hashes representing the targets of the outreach.
 
 _[Back to top...](#)_
 
@@ -177,12 +177,20 @@ Cache-Control: max-age=0, private, must-revalidate
                 "type": "email",
                 "subject": "Vote no!",
                 "message": "Please vote no on HR 100.",
-                "target": {
-	                "title": "Senator",
-	                "given_name": "John",
-	                "family_name": "Smith",
-	                "ocdid": "ocd-division/country:us/state:ny"
-	            },
+                "targets": [
+	                {
+	                    "title": "Senator",
+	                    "given_name": "John",
+	                    "family_name": "Smith",
+	                    "ocdid": "ocd-division/country:us/state:ny"
+	                },
+	                {
+	                    "title": "Senator",
+	                    "given_name": "Jennifer",
+	                    "family_name": "Larson",
+	                    "ocdid": "ocd-division/country:us/state:ny"
+	                }
+	            ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -206,11 +214,13 @@ Cache-Control: max-age=0, private, must-revalidate
                 "type": "email",
                 "subject": "Don't do it!",
                 "message": "Vote no tomorrow!",
-                "target": {
-	                "title": "Senator",
-	                "given_name": "Jane",
-	                "family_name": "doe",
-	                "ocdid": "ocd-division/country:us/state:va"
+                "targets": [
+	                {
+	                    "title": "Senator",
+	                    "given_name": "Jane",
+	                    "family_name": "Doe",
+	                    "ocdid": "ocd-division/country:us/state:va"
+	                }
 	            },
                 "_links": {
                     "self": {
@@ -265,12 +275,20 @@ Cache-Control: max-age=0, private, must-revalidate
     "type": "email",
     "subject": "Vote no!",
     "message": "Please vote no on HR 100.",
-    "target": {
-        "title": "Senator",
-        "given_name": "John",
-        "family_name": "Smith",
-        "ocdid": "ocd-division/country:us/state:ny"
-    },
+    "targets": [
+	    {
+	        "title": "Senator",
+	        "given_name": "John",
+	        "family_name": "Smith",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    },
+	    {
+	        "title": "Senator",
+	        "given_name": "Jennifer",
+	        "family_name": "Larson",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    }
+	],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -310,12 +328,20 @@ OSDI-API-Token:[your api key here]
     "action_date": "2014-03-18T11:02:15Z",
     "type": "phone",
     "duration": 120,
-    "target": {
-        "title": "Senator",
-        "given_name": "John",
-        "family_name": "Smith",
-        "ocdid": "ocd-division/country:us/state:ny"
-    },
+    "targets": [
+	    {
+	        "title": "Senator",
+	        "given_name": "John",
+	        "family_name": "Smith",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    },
+	    {
+	        "title": "Senator",
+	        "given_name": "Jennifer",
+	        "family_name": "Larson",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    }
+	],
     "_links" : {
         "osdi:person" : { 
             "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
@@ -342,12 +368,20 @@ Cache-Control: max-age=0, private, must-revalidate
     "action_date": "2014-03-18T11:02:15Z",
     "type": "phone",
     "duration": 120,
-    "target": {
-        "title": "Senator",
-        "given_name": "John",
-        "family_name": "Smith",
-        "ocdid": "ocd-division/country:us/state:ny"
-    },
+    "targets": [
+	    {
+	        "title": "Senator",
+	        "given_name": "John",
+	        "family_name": "Smith",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    },
+	    {
+	        "title": "Senator",
+	        "given_name": "Jennifer",
+	        "family_name": "Larson",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    }
+	],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
@@ -402,12 +436,20 @@ Cache-Control: max-age=0, private, must-revalidate
     "action_date": "2014-03-17T11:02:15Z",
     "type": "phone",
     "duration": 120,
-    "target": {
-        "title": "Senator",
-        "given_name": "John",
-        "family_name": "Smith",
-        "ocdid": "ocd-division/country:us/state:ny"
-    },
+    "targets": [
+	    {
+	        "title": "Senator",
+	        "given_name": "John",
+	        "family_name": "Smith",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    },
+	    {
+	        "title": "Senator",
+	        "given_name": "Jennifer",
+	        "family_name": "Larson",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    }
+	],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
