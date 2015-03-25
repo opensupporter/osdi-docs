@@ -56,7 +56,7 @@ A list of fields specific for POSTing via the Record Outreach Helper.
 |duration		|integer		|The duration in seconds of the outreach, if applicable. (ex: duration will only be present on phone outreach types)
 |subject		|string		|The subject of the outreach, if applicable. (ex: subject will only be present on email outreach types)
 |message		|string		|The message of the outreach, if applicable. (ex: message will only be present on email or postal mail outreach types)
-|target			|[Target](#target)    |An object hash representing the target of the outreach.
+|targets			|[Target[]](#target)    |A array of target object hashes representing the targets of the outreach.
 |person			|[Person*](#person)	|An object hash representing the person who made the outreach.
 
 _[Back to top...](#)_
@@ -70,7 +70,8 @@ These JSON hashes included in the table above are broken out into their own tabl
 
 |Name          	|Type      |Description
 |-----------    |-----------|--------------
-|target.title	|string    |The title of the target. (ex: "Senator")
+|target.title	|string    |The title or position of the target. (ex: "Senator" or "CEO")
+|target.organization	|string	|The organization the target belongs to. (ex: "U.S. Senate" or "Acme Corporation")
 |target.given_name	|string    |The first or given name of the target. (ex: "John")
 |target.family_name	|string    |The last or family name of the target. (ex: "Smith")
 |target.ocdid	|string    |The Open Civic Data Division ID for this target's political geography, if applicable. See [here](http://docs.opencivicdata.org/en/latest/proposals/0002.html) for more documentation. (ex: "ocd-division/country:us/state:ny/cd:18", which corresponds to New York's 18th Congressional District)
@@ -156,12 +157,22 @@ OSDI-API-Token:[your api key here]
     "action_date": "2014-03-18T11:02:15Z",
     "type": "phone",
     "duration": 120,
-    "target": {
-        "title": "Senator",
-        "given_name": "John",
-        "family_name": "Smith",
-        "ocdid": "ocd-division/country:us/state:ny"
-    }
+    "targets": [
+	    {
+	        "title": "Senator",
+	        "given_name": "John",
+	        "family_name": "Smith",
+	        "organization": "U.S. Senate",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    },
+	    {
+	        "title": "Senator",
+	        "given_name": "Jennifer",
+	        "family_name": "Larson",
+	        "organization": "U.S. Senate",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    }
+	]
 }
 ```
 
@@ -184,12 +195,22 @@ Cache-Control: max-age=0, private, must-revalidate
     "origin_system": "OpenSupporter",
     "type": "phone",
     "duration": 120,
-    "target": {
-        "title": "Senator",
-        "given_name": "John",
-        "family_name": "Smith",
-        "ocdid": "ocd-division/country:us/state:ny"
-    },
+    "targets": [
+	    {
+	        "title": "Senator",
+	        "given_name": "John",
+	        "family_name": "Smith",
+	        "organization": "U.S. Senate",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    },
+	    {
+	        "title": "Senator",
+	        "given_name": "Jennifer",
+	        "family_name": "Larson",
+	        "organization": "U.S. Senate",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    }
+	],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
