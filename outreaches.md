@@ -69,7 +69,8 @@ These JSON hashes included in the table above are broken out into their own tabl
 
 |Name          	|Type      |Description
 |-----------    |-----------|--------------
-|target.title	|string    |The title of the target. (ex: "Senator")
+|target.title	|string    |The title or position of the target. (ex: "Senator" or "CEO")
+|target.organization	|string	|The organization the target belongs to. (ex: "U.S. Senate" or "Acme Corporation")
 |target.given_name	|string    |The first or given name of the target. (ex: "John")
 |target.family_name	|string    |The last or family name of the target. (ex: "Smith")
 |target.ocdid	|string    |The Open Civic Data Division ID for this target's political geography, if applicable. See [here](http://docs.opencivicdata.org/en/latest/proposals/0002.html) for more documentation. (ex: "ocd-division/country:us/state:ny/cd:18", which corresponds to New York's 18th Congressional District)
@@ -182,12 +183,14 @@ Cache-Control: max-age=0, private, must-revalidate
 	                    "title": "Senator",
 	                    "given_name": "John",
 	                    "family_name": "Smith",
+	                    "organization": "U.S. Senate",
 	                    "ocdid": "ocd-division/country:us/state:ny"
 	                },
 	                {
 	                    "title": "Senator",
 	                    "given_name": "Jennifer",
 	                    "family_name": "Larson",
+	                    "organization": "U.S. Senate",
 	                    "ocdid": "ocd-division/country:us/state:ny"
 	                }
 	            ],
@@ -219,6 +222,7 @@ Cache-Control: max-age=0, private, must-revalidate
 	                    "title": "Senator",
 	                    "given_name": "Jane",
 	                    "family_name": "Doe",
+	                    "organization": "U.S. Senate",
 	                    "ocdid": "ocd-division/country:us/state:va"
 	                }
 	            },
@@ -280,12 +284,14 @@ Cache-Control: max-age=0, private, must-revalidate
 	        "title": "Senator",
 	        "given_name": "John",
 	        "family_name": "Smith",
+	        "organization": "U.S. Senate",
 	        "ocdid": "ocd-division/country:us/state:ny"
 	    },
 	    {
 	        "title": "Senator",
 	        "given_name": "Jennifer",
 	        "family_name": "Larson",
+	        "organization": "U.S. Senate",
 	        "ocdid": "ocd-division/country:us/state:ny"
 	    }
 	],
@@ -333,12 +339,14 @@ OSDI-API-Token:[your api key here]
 	        "title": "Senator",
 	        "given_name": "John",
 	        "family_name": "Smith",
+	        "organization": "U.S. Senate",
 	        "ocdid": "ocd-division/country:us/state:ny"
 	    },
 	    {
 	        "title": "Senator",
 	        "given_name": "Jennifer",
 	        "family_name": "Larson",
+	        "organization": "U.S. Senate",
 	        "ocdid": "ocd-division/country:us/state:ny"
 	    }
 	],
@@ -373,12 +381,14 @@ Cache-Control: max-age=0, private, must-revalidate
 	        "title": "Senator",
 	        "given_name": "John",
 	        "family_name": "Smith",
+	        "organization": "U.S. Senate",
 	        "ocdid": "ocd-division/country:us/state:ny"
 	    },
 	    {
 	        "title": "Senator",
 	        "given_name": "Jennifer",
 	        "family_name": "Larson",
+	        "organization": "U.S. Senate",
 	        "ocdid": "ocd-division/country:us/state:ny"
 	    }
 	],
@@ -441,12 +451,14 @@ Cache-Control: max-age=0, private, must-revalidate
 	        "title": "Senator",
 	        "given_name": "John",
 	        "family_name": "Smith",
+	        "organization": "U.S. Senate",
 	        "ocdid": "ocd-division/country:us/state:ny"
 	    },
 	    {
 	        "title": "Senator",
 	        "given_name": "Jennifer",
 	        "family_name": "Larson",
+	        "organization": "U.S. Senate",
 	        "ocdid": "ocd-division/country:us/state:ny"
 	    }
 	],
