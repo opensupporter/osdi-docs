@@ -144,7 +144,7 @@ Cache-Control: max-age=0, private, must-revalidate
         "next": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches?page=2"
         },
-        "osdi:signatures": [
+        "osdi:outreaches": [
             {
                 "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
             },
