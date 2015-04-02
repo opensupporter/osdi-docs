@@ -70,17 +70,8 @@ OSDI uses Semantic Versioning. In practice, this means:
 * Incremental Bug fixes may use a sub-minor version number (1.1.1)
 
 ### Current Version
-When accessing a server, a client can determine the OSDI version by examining the OSDI-Version HTTP Header.
+When accessing a server, a client can determine the OSDI version by examining the osdi_version attribute in the [API Entry Point (AEP)](aep.html).
 
-#### Response
-````javascript
-200 OK
-OSDI-Version: 1.0
-
-{
-    // OSDI JSON message
-}
-````
 
 _[Back to top...](#)_
 
