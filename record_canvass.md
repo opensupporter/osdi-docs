@@ -56,6 +56,7 @@ A list of fields specific for POSTing via the Record Canvass Helper.
 | input_type    | string | A code indicating the method by which the canvass is being input into the system. For example: "mobile"
 | success      | boolean | True if the target was successfully contacted, False otherwise.
 | result_code  | string | A code indicating the status of the contact attempt.  For example: "not-home" indicates that the contact failed because the target was not home, while "success" indicates that the target was contacted successfully.  An empty or missing value for result_code should be assumed to mean that the contact was successful.
+| canvasser          |[Person](people.html) | A link to a single Person resource representing the person who made the contact.
 |add_answers      |[QuestionResponse*](#QuestionResponse)     |An array of inline QuestionReponse objects, which will be used to create [Answer](answers.html) objects related to this Canvass.
 |add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
 
@@ -82,6 +83,7 @@ _[Back to top...](#)_
 * [Answer](answers.html)
 * [Question](questions.html)
 * [Tagging](taggings.html)
+* [Person](people.html)
 
 _[Back to top...](#)_
 
@@ -110,7 +112,8 @@ OSDI-API-Token:[your api key here]
       "contact_type": "in-person",
       "input_type": "mobile",
       "success": true,
-      "result_code": ""
+      "result_code": "",
+      "canvasser": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
     },
     "add_answers": [
       {
@@ -155,6 +158,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        },
+        "osdi:canvasser": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
         },
         "osdi:target": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
