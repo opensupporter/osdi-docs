@@ -28,6 +28,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 
 * [API Overview and Structure](#api-overview-and-structure)
     * [REST + HAL](#rest--hal)
+    * [Versioning](#versioning)
     * [Helpers](#helpers)
     * [API Entry Point and Linking](#api-entry-point-and-linking)
     * [Curies](#curies)
@@ -61,6 +62,18 @@ Finally, OSDI implements the OData query language for filtering collections.
 
 _[Back to top...](#)_
 
+### Versioning
+OSDI uses Semantic Versioning. In practice, this means:
+
+* Breaking changes will use a new major version number (eg: 2.0)
+* New features will use a minor version number (eg: 1.1)
+* Incremental Bug fixes may use a sub-minor version number (1.1.1)
+
+### Current Version
+When accessing a server, a client can determine the OSDI version by examining the osdi_version attribute in the [API Entry Point (AEP)](aep.html).
+
+
+_[Back to top...](#)_
 
 ### Helpers
 OSDI also allows a client to perform a number of operations at once that in a traditionally RESTful API would take multiple requests through the use of helpers. For example, helpers can be used to create a new Person resource *and* register that this new person also signed a petition at the same time, something that with REST would require two operations (first creating the person, then associating them with the petition). 

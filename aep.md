@@ -36,7 +36,10 @@ A list of fields specific to the AEP resource.
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
 |motd		|string     |The system "message of the day" -- an informational message from the server.
-|max_pagesize				|integrer		|The maximum number of records a server can return in a single query. 
+|max_pagesize				|integer		|The maximum number of records a server can return in a single query. 
+|vendor_name    | string    | A string representing the vendor name
+|product_name   | string    | A string identifying the product name
+|osdi_version	| string	| A string identifying the OSDI Version
 
 _[Back to top...](#)_
 
@@ -108,6 +111,9 @@ Cache-Control: max-age=0, private, must-revalidate
 
 {
     "motd": "Welcome to the OSDI API Entry Point!",
+    "vendor_name" : "Foobar Incorporated",
+    "product_name" : "Curly Braces OSDI Server",
+	"osdi_version" : "1.0",
     "max_pagesize": 25,
     "_links": {
         "curies": [
