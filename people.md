@@ -176,6 +176,7 @@ _[Back to top...](#)_
 |submissions	|[Submissions[]*](submissions.html)  |A link to the collection of form submissions associated with the person.
 |attendances		|[Attendances[]*](attendances.html)        |A link to the collection of event attendances associated with the person.
 |signatures		|[Signatures[]*](signatures.html)        |A link to the collection of petition signatures associated with the person.
+|outreaches		|[Outreaches[]*](outreaches.html)        |A link to the collection of advocacy campaign outreaches associated with the person.
 |answers		|[Answers[]*](answers.html)  |A link to the collection of answers to questions associated with the person.
 |taggings		|[Taggings[]*](taggings.html)   	|A link to the collection of taggings associated with the person.
 |items		|[Items[]*](items.html)   	|A link to the collection of list items associated with the person.
@@ -391,6 +392,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:donations": {
                         "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/donations"
                     },
+                    "osdi:outreaches": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/outreaches"
+                    },
                     "osdi:taggings": {
                         "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
                     },
@@ -448,6 +452,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     },
                     "osdi:donations": {
                         "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/donations"
+                    },
+                    "osdi:outreaches": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/outreaches"
                     },
                     "osdi:taggings": {
                         "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
@@ -612,6 +619,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:donations": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/donations"
         },
+        "osdi:outreaches": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/outreaches"
+        },
         "osdi:taggings": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
         },
@@ -750,6 +760,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:donations": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/donations"
         },
+        "osdi:outreaches": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/outreaches"
+        },
         "osdi:taggings": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/taggings"
         },
@@ -857,6 +870,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:donations": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/donations"
+        },
+        "osdi:outreaches": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/outreaches"
         },
         "osdi:taggings": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/taggings"

@@ -165,7 +165,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "comments": "Support our campaign!",
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/petitions/c945d6fe-929e-11e3-a2e9-12313d316c29/signature/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+            "href": "https://osdi-sample-system.org/api/v1/petitions/c945d6fe-929e-11e3-a2e9-12313d316c29/signatures/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
         },
         "osdi:petition": {
             "href": "https://osdi-sample-system.org/api/v1/petitions/c945d6fe-929e-11e3-a2e9-12313d316c29"

@@ -209,6 +209,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:donations": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/donations"
         },
+        "osdi:outreaches": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/outreaches"
+        },
         "osdi:taggings": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/taggings"
         },
