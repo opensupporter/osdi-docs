@@ -349,6 +349,7 @@ _[Back to top...](#)_
 * Charles Parsons, Salsa Labs
 * Rich Ranallo, Revolution Messaging
 * Jason Rosenbaum, The Action Network
+* Shaie Sachs, NGP VAN
 * Ben Stein, Mobile Commons
 * Ben Stroud, Targetsmart Communications
 * Ray Suelzer, UFCW International Union
