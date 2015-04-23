@@ -27,6 +27,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 ### Sections
 
 * [API Overview and Structure](#api-overview-and-structure)
+    * [Working with OSDI in Real Life](#working-with-osdi-in-real-life)
     * [REST + HAL](#rest--hal)
     * [Versioning](#versioning)
     * [Helpers](#helpers)
@@ -49,6 +50,19 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 
 OSDI used a combination of approaches to provide flexible reading of data, simple operations for simple scenarios, and general purpose CRUD access.
 
+### Working with OSDI in Real Life
+
+OSDI Servers SHOULD expose the [HAL Browser](https://github.com/mikekelly/hal-browser) to provide a consistent interface for developers, scripters, digital, tech and data staff to work with.
+
+
+<center>
+<a href="images/hal-browser.png"><img src="images/hal-browser-small.png" /></a>
+</center>
+
+
+In the course of writing scripts, reports, applications and other utilities that integrate via OSDI, examining and inspecting the different resources available on a server is a significant component of time spent.  By having a consistent interface to work in, customers can further decrease their costs.
+
+Ask your OSDI vendor for the URL to their HAL Browser.
 
 ### REST + HAL
 
