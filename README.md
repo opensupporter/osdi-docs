@@ -27,6 +27,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 ### Sections
 
 * [API Overview and Structure](#api-overview-and-structure)
+    * [Version](#version)
     * [Working with OSDI in Real Life](#working-with-osdi-in-real-life)
     * [REST + HAL](#rest--hal)
     * [Versioning](#versioning)
@@ -45,10 +46,13 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 * [Contributing and Contact](#contributing-and-contact)
 
     
-    
+
 ## API Overview and Structure
 
 OSDI used a combination of approaches to provide flexible reading of data, simple operations for simple scenarios, and general purpose CRUD access.
+
+### Version
+This document represents OSDI version 1.0.1
 
 ### Working with OSDI in Real Life
 
