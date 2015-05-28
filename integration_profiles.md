@@ -19,34 +19,34 @@ This document defines common integration profiles.  Integration profiles define 
 
 #### Inbound Pull
 The Mobile Telephony System (MTS) system will pull information on mobile subscribers from an OSDI CRM using:
-1) find 'mobile subscribers' OData query 
-2) Oauth or API Key
-3) Multiple record, paged data query (person collection)
+1. find 'mobile subscribers' OData query 
+2. Oauth or API Key
+3. Multiple record, paged data query (person collection)
 
 #### Outbound supporter push
 The MTS will push updated supporter data to an OSDI CRM using:
-1) person_signup_helper
-2) Custom Fields
-3) Action History
-4) Canvassing Interactions
+1. person_signup_helper
+2. Custom Fields
+3. Action History
+4. Canvassing Interactions
 
 ### Field Organizing
 
 A Field Organizing System (FOS) has two types of integrations.  
-1) Inbound Pull - Pulls supporter data from CRMs into FOS store to perform survey Q&A
-2) Outbound Push - With survey Q&A responses captured, the system will push that data into CRMs.  There are multiple possible modes such as custom fields, or Q&A.  Custom fields is the initial scenario.
+1. Inbound Pull - Pulls supporter data from CRMs into FOS store to perform survey Q&A
+2. Outbound Push - With survey Q&A responses captured, the system will push that data into CRMs.  There are multiple possible modes such as custom fields, or Q&A.  Custom fields is the initial scenario.
 
 
 #### Inbound Pull
 To integrate, the following are needed
-1) Lists of Lists 
-2) Oauth or API Key
-3) Multiple record, paged data query (person collection)
+1. Lists of Lists 
+2. Oauth or API Key
+3. Multiple record, paged data query (person collection)
 
 #### Outbound push
 The FOS will push supporter data into a CRM with:
-1) person_signup_helper
-2) custom fields support
+1. person_signup_helper
+2. custom fields support
 
 #### Ephemeral Requirements
-1) sandbox environment for prototyping / testing
+1. sandbox environment for prototyping / testing
