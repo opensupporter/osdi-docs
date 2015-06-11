@@ -41,6 +41,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
     * [Mime Types](#mime-types)
     * [Error Handling](#error-handling)
     * [Flexibility and Server Behavior](#flexibility-and-server-behavior)
+    * [Deviations from RESTful Behavior](#deviations-from-restful-behavior)
     * [Notational Conventions](#notational-conventions)
 * [Authors and Leadership](#authors-and-leadership)
 * [Contributing and Contact](#contributing-and-contact)
@@ -305,6 +306,24 @@ Some servers may support some or all of the different resource collections.  For
 Some servers may support certain helpers and not others. The AEP and associated resources also includes links to the  helper endpoints available.
 
 Similarly, matching behavior will be determined by each implementing system. For example, some systems may match people based on email address or other information.
+
+### Deviations from RESTful Behavior
+
+This section outlines areas where the expectations of the OSDI customer community differ from boilerplate RESTful behavior and specify best practice expected behavior.
+
+#### Merging Objects (hashes) and Arrays on update
+
+Numerous resources in OSDI contain embedded objects (hashes) and arrays. For example, on Person, Birthday and Custom Fields are Objects (hashes) and Postal Addresses is an array.
+
+When dealing with updates to these elements of resources, servers should merge rather than replace these elements.  This is more consistent with expected user behavior.  This relates to helpers and POST's to collections.  
+
+For example, sending a person_signup_helper, or a POST on the person collection with only 1 address should not delete any existing addresses.  Similarly, including only 1 custom field, should not delete all existing custom fields on a resource.
+
+The behavior for PUT is currently unspecified and up to server behavior.  Contact your vendor for more details.
+
+
+#### Deleting the full contents of an Object (hash) or Array
+In order to cause the deletion of the contents of an Object (hash) or Array, a request should include that element, but set its value to ````null````
 
 _[Back to top...](#)_
 
