@@ -315,7 +315,12 @@ This section outlines areas where the expectations of the OSDI customer communit
 
 Numerous resources in OSDI contain embedded objects (hashes) and arrays. For example, on Person, Birthday and Custom Fields are Objects (hashes) and Postal Addresses is an array.
 
-When dealing with updates to these elements of resources, servers should merge rather than replace these elements.  This is more consistent with expected user behavior.  For example, sending a person_signup_helper, or a PUT on a person resource with only 1 address should not delete any existing addresses.  Similarly, including only 1 custom field, should not delete all existing custom fields on a resource.
+When dealing with updates to these elements of resources, servers should merge rather than replace these elements.  This is more consistent with expected user behavior.  This relates to helpers and POST's to collections.  
+
+For example, sending a person_signup_helper, or a POST on the person collection with only 1 address should not delete any existing addresses.  Similarly, including only 1 custom field, should not delete all existing custom fields on a resource.
+
+The behavior for PUT is currently unspecified and up to server behavior.  Contact your vendor for more details.
+
 
 #### Deleting the full contents of an Object (hash) or Array
 In order to cause the deletion of the contents of an Object (hash) or Array, a request should include that element, but set its value to ````null````
