@@ -70,7 +70,7 @@ _[Back to top...](#)_
 |self			|[Advocacy Campaigns*](advocacy_campaigns.html)	|A self-referential link to the advocacy campaign.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the advocacy campaign.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this advocacy campaign.
-|signatures		|[Outreaches[]*](outreaches.html)	|A link to the collection of Outreach resources for this advocacy campaign.
+|outreaches		|[Outreaches[]*](outreaches.html)	|A link to the collection of Outreach resources for this advocacy campaign.
 |record_outreach_helper	|[Record Outreach Helper*](record_outreach.html)	|A link to the Record Outreach Helper resource endpoint for this advocacy campaign.
 
 _[Back to top...](#)_
