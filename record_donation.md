@@ -11,6 +11,8 @@ The Record Donation Helper is a helper endpoint to aid in the creation of [Donat
 
 Some systems may attempt to match people sent via the Record Donation Helper to existing people in the database and update their record instead of creating a new person. The method used for matching will be detailed in that system's documentation. 
 
+When using the Record Donation Helper, tagging and list membership info may be added at the same time as well, eliminating the need for multiple POST operations to store that information.
+
 The response to a Record Donation Helper POST is the full representation of the donation.
 
 Some initial implementations may only support helpers -- direct RESTful access may not be supported. In those cases, the _links section may be omitted in responses.
@@ -62,6 +64,8 @@ A list of fields specific for POSTing via the Record Donation Helper.
 |voided			|boolean	|Indicates if the donation has been voided.
 |voided_date  	|datetime		|Date of the void.
 |url			|string		|URL at which the donation was taken.
+|add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
+|add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
 |person			|[Person*](#person)	|An object hash representing the person who made the donation.
 
 _[Back to top...](#)_
@@ -193,6 +197,13 @@ OSDI-API-Token:[your api key here]
             "display_name": "Joe Candidate",
             "legal_name": "Joe for Congress"
        }
+    ],
+    "add_tags": [
+        "volunteer",
+        "donor"
+    ],
+    "add_lists": [
+        "supporters"
     ]
 }
 ```
