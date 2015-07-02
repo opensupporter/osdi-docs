@@ -13,6 +13,8 @@ Some systems may attempt to match people sent via the Record Submission Helper t
 
 When using the Record Submission Helper, tagging and list membership info may be added at the same time as well, eliminating the need for multiple POST operations to store that information.
 
+In addition, you can indicate to the server whether to trigger additional actions, such as an autoresponse email sent back to the person who took action.
+
 The response to a Record Submission Helper POST is the full representation of the submission.
 
 Some initial implementations may only support helpers -- direct RESTful access may not be supported. In those cases, the _links section may be omitted in responses.
@@ -57,6 +59,7 @@ A list of fields specific for POSTing via the Record Submission Helper.
 |add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
 |add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
 |person			|[Person*](#person)	|An object hash representing the person who made the submission.
+|triggers		|[Triggers](#triggers)	|An object hash representing responses a user would like to trigger from the server as part of the POST, such as sending an autoresponse email back to the person who took action with this helper.
 
 _[Back to top...](#)_
 
@@ -70,6 +73,13 @@ These JSON hashes included in the table above are broken out into their own tabl
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |person      |[Person*](people.html)     |An inlined hash representation of a person, containing any valid fields for the Person resource.
+
+#### Triggers
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|autoresponse   |object     |An object hash representing the autoresponse email trigger type.
+|autoresponse.enabled   |boolean     |A boolean indicating whether the autoresponse email should be sent or not.
 
 _[Back to top...](#)_
 
@@ -150,7 +160,12 @@ OSDI-API-Token:[your api key here]
     ],
     "add_lists": [
         "supporters"
-    ]
+    ],
+    "triggers": {
+        "autoresponse": {
+            "enabled": true
+        }
+    }
 }
 ```
 

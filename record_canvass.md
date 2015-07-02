@@ -9,6 +9,8 @@ This document defines the Record Canvass Helper resource.
 
 The Record Attendance Helper is a helper endpoint to aid in the creation of [Canvass](canvasses.html), [Answer](answers.html), [Tagging](taggings.html), and [Item (list membership)](items.html) resources via POST. It provides a quick and easy way to create a canvass as well as all the data collected during that canvass, eliminating the need for multiple POST operations to store that information.
 
+In addition, you can indicate to the server whether to trigger additional actions, such as an autoresponse email sent back to the person who took action.
+
 The Record Canvass Helper assumes that the person who was canvassed (the "target") already exists in the system.
 
 The response to a Record Canvass Helper POST is the full representation of the Canvass.
@@ -60,6 +62,7 @@ A list of fields specific for POSTing via the Record Canvass Helper.
 |add_answers      |[QuestionResponse*](#QuestionResponse)     |An array of inline QuestionReponse objects, which will be used to create [Answer](answers.html) objects related to this Canvass.
 |add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
 |add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
+|triggers		|[Triggers](#triggers)	|An object hash representing responses a user would like to trigger from the server as part of the POST, such as sending an autoresponse email back to the person who took action with this helper.
 
 _[Back to top...](#)_
 
@@ -75,6 +78,13 @@ These JSON hashes included in the table above are broken out into their own tabl
 |question      |[Question](questions.html)     | A question to which an Answer is being added
 |value      |string     |The response the person gave, if the question type is “Paragraph” or if otherwise appropriate (e.g., if the question response was “Other”).
 |responses  |string[] | An array of strings corresponding to the question response key(s) chosen by the Person who answered the Question.
+
+#### Triggers
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|autoresponse   |object     |An object hash representing the autoresponse email trigger type.
+|autoresponse.enabled   |boolean     |A boolean indicating whether the autoresponse email should be sent or not.
 
 _[Back to top...](#)_
 
@@ -134,7 +144,12 @@ OSDI-API-Token:[your api key here]
     ],
     "add_lists": [
         "supporters"
-    ]
+    ],
+    "triggers": {
+        "autoresponse": {
+            "enabled": true
+        }
+    }
 }
 ```
 
