@@ -7,7 +7,7 @@ title: Record Canvass Helper
 
 This document defines the Record Canvass Helper resource. 
 
-The Record Attendance Helper is a helper endpoint to aid in the creation of [Canvass](canvasses.html), [Answer](answers.html), and [Tagging](taggingss.html) resources via POST. It provides a quick and easy way to create a canvass as well as all the data collected during that canvass, eliminating the need for multiple POST operations to store that information.
+The Record Attendance Helper is a helper endpoint to aid in the creation of [Canvass](canvasses.html), [Answer](answers.html), [Tagging](taggings.html), and [Item (list membership)](items.html) resources via POST. It provides a quick and easy way to create a canvass as well as all the data collected during that canvass, eliminating the need for multiple POST operations to store that information.
 
 The Record Canvass Helper assumes that the person who was canvassed (the "target") already exists in the system.
 
@@ -59,6 +59,7 @@ A list of fields specific for POSTing via the Record Canvass Helper.
 | canvasser          |[Person](people.html) | A link to a single Person resource representing the person who made the contact.
 |add_answers      |[QuestionResponse*](#QuestionResponse)     |An array of inline QuestionReponse objects, which will be used to create [Answer](answers.html) objects related to this Canvass.
 |add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
+|add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
 
 _[Back to top...](#)_
 
@@ -130,6 +131,9 @@ OSDI-API-Token:[your api key here]
     "add_tags": [
       "wants_yard_sign",
       "will_volunteer"
+    ],
+    "add_lists": [
+        "supporters"
     ]
 }
 ```

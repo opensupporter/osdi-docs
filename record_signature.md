@@ -11,6 +11,8 @@ The Record Signature Helper is a helper endpoint to aid in the creation of [Sign
 
 Some systems may attempt to match people sent via the Record Signature Helper to existing people in the database and update their record instead of creating a new person. The method used for matching will be detailed in that system's documentation. 
 
+When using the Record Signature Helper, tagging and list membership info may be added at the same time as well, eliminating the need for multiple POST operations to store that information.
+
 The response to a Record Signature Helper POST is the full representation of the signature.
 
 Some initial implementations may only support helpers -- direct RESTful access may not be supported. In those cases, the _links section may be omitted in responses.
@@ -53,6 +55,8 @@ A list of fields specific for POSTing via the Record Signature Helper.
 |origin_system		|string     |A human readable identifier of the system where this signature was created. (ex: "OSDI System")
 |action_date		|string		|The date and time the signature was made by the person.
 |comments		|string			|The comments left by the person when the signature was created.
+|add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
+|add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
 |person			|[Person*](#person)	|An object hash representing the person who made the submission.
 
 _[Back to top...](#)_
@@ -141,7 +145,14 @@ OSDI-API-Token:[your api key here]
     ],
     "origin_system": "OpenSupporter",
     "action_date": "2014-03-18T11:02:15Z",
-    "comments": "Support our campaign!"
+    "comments": "Support our campaign!",
+    "add_tags": [
+        "volunteer",
+        "donor"
+    ],
+    "add_lists": [
+        "supporters"
+    ]
 }
 ```
 
