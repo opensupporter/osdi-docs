@@ -13,7 +13,7 @@ When using the Person Signup Helper, tagging and list membership info may be add
 
 Some systems may attempt to match inputs via the Person Signup Helper to existing people in the database and update their record instead of creating a new person for every POST. The method used for matching will be detailed in that system's documentation. 
 
-The response to a Person Signup Helper POST is the full representation of the person.
+Typically, the response to a successful Person Signup Helper POST is the full representation of the person. However, the Person Signup Helper can be used without authentication, allowing for use in frontend javascript-based applications without giving away API key secrets, for example. If no authentication is passed, the response will simply be the server response code, to avoid leaking any data. (ex: 200 for success, 500 for error, etc...)
 
 Some initial implementations may only support helpers -- direct RESTful access may not be supported. In those cases, the _links section may be omitted in responses.
 
@@ -27,6 +27,7 @@ Some initial implementations may only support helpers -- direct RESTful access m
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
     * [Scenario: Creating a new person (POST)](#scenario-creating-a-new-person-post)
+    * [Scenario: Creating a new person without authentication (POST)](#scenario-creating-a-new-person-without-authentication-post)
 
 
 {% include endpoints_and_url_structures.md %}
@@ -220,6 +221,73 @@ Cache-Control: max-age=0, private, must-revalidate
         }
     }
 }
+```
+
+_[Back to top...](#)_
+
+### Scenario: Creating a new person without authentication (POST)
+
+Posting to the person signup helper endpoint without authentication will allow you to create a new person (or update a person if the system attempts to match people posted with helpers) along with associated tags and list membership information in one operation, but without giving away API key secrets or leaking data, so this method is appropriate for frontend javascript applications. The response is the server resonse code. (ex: 200 for success, 500 for error, etc...) While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/people/person_signup_helper/
+
+{
+    "person": {
+        "identifiers": [
+            "foreign_system:1"
+        ],
+        "family_name": "Edwin",
+        "given_name": "Labadie",
+        "additional_name": "Marques",
+        "origin_system": "OpenSupporter",
+        "email_addresses": [
+            {
+                "address":"test-3@example.com",
+                "primary": true,
+                "address_type": "Personal"
+            }
+        ],
+        "postal_addresses": [
+            {
+                "primary": true,
+                "address_lines": [
+                    "935 Ed Lock"
+                ],
+                "locality": "New Dudley",
+                "region": "MN",
+                "postal_code": "17678",
+                "country": "RU",
+                "address_type": "Home",
+                "status": "Verified"
+            }
+        ],
+        "phone_numbers": [
+            {
+                "primary": true,
+                "number": 19876543210,
+                "number_type": "Mobile",
+                "sms_capable": true
+            }
+        ],
+        "gender": "Male"
+    },
+    "add_tags": [
+        "volunteer",
+        "donor"
+    ],
+    "add_lists": [
+        "supporters"
+    ]
+}
+```
+
+#### Response
+
+```javascript
+200 OK
 ```
 
 _[Back to top...](#)_

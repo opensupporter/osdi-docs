@@ -15,7 +15,7 @@ When using the Record Outreach Helper, tagging and list membership info may be a
 
 In addition, you can indicate to the server whether to trigger additional actions, such as an autoresponse email sent back to the person who took action.
 
-The response to a Record Outreach Helper POST is the full representation of the outreach.
+Typically, the response to a successful Record Outreach Helper POST is the full representation of the outreach. However, the Record Outreach Helper can be used without authentication, allowing for use in frontend javascript-based applications without giving away API key secrets, for example. If no authentication is passed, the response will simply be the server response code, to avoid leaking any data. (ex: 200 for success, 500 for error, etc...)
 
 Some initial implementations may only support helpers -- direct RESTful access may not be supported. In those cases, the _links section may be omitted in responses.
 
@@ -30,6 +30,7 @@ Some initial implementations may only support helpers -- direct RESTful access m
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
     * [Scenario: Creating a new outreach and person (POST)](#scenario-creating-a-new-outreach-and-person-post)
+    * [Scenario: Creating a new outreach and person without authentication (POST)](#scenario-creating-a-new-outreach-and-person-without-authentication-post)
 
 
 {% include endpoints_and_url_structures.md %}
@@ -249,6 +250,101 @@ Cache-Control: max-age=0, private, must-revalidate
         }
     }
 }
+```
+
+_[Back to top...](#)_
+
+### Scenario: Creating a new outreach and person without authentication (POST)
+
+Posting to the record outreach helper endpoint without authentication will allow you to create a new outreach and person (or update a person if the system attempts to match people posted with helpers) in one operation, but without giving away API key secrets or leaking data, so this method is appropriate for frontend javascript applications. The response is the server resonse code. (ex: 200 for success, 500 for error, etc...) While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/record_outreach_helper
+
+{
+    "person": {
+        "identifiers": [
+            "foreign_system:1"
+        ],
+        "family_name": "Edwin",
+        "given_name": "Labadie",
+        "additional_name": "Marques",
+        "origin_system": "OpenSupporter",
+        "email_addresses": [
+            {
+                "address":"test-3@example.com",
+                "primary": true,
+                "address_type": "Personal"
+            }
+        ],
+        "postal_addresses": [
+            {
+                "primary": true,
+                "address_lines": [
+                    "935 Ed Lock"
+                ],
+                "locality": "New Dudley",
+                "region": "MN",
+                "postal_code": "17678",
+                "country": "RU",
+                "address_type": "Home",
+                "status": "Verified"
+            }
+        ],
+        "phone_numbers": [
+            {
+                "primary": true,
+                "number": 19876543210,
+                "number_type": "Mobile",
+                "sms_capable": true
+            }
+        ],
+        "gender": "Male"
+    },
+    "identifiers": [
+        "foreign_system:1"
+    ],
+    "origin_system": "OpenSupporter",
+    "action_date": "2014-03-18T11:02:15Z",
+    "type": "phone",
+    "duration": 120,
+    "targets": [
+	    {
+	        "title": "Senator",
+	        "given_name": "John",
+	        "family_name": "Smith",
+	        "organization": "U.S. Senate",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    },
+	    {
+	        "title": "Senator",
+	        "given_name": "Jennifer",
+	        "family_name": "Larson",
+	        "organization": "U.S. Senate",
+	        "ocdid": "ocd-division/country:us/state:ny"
+	    }
+	],
+	"add_tags": [
+        "volunteer",
+        "donor"
+    ],
+    "add_lists": [
+        "supporters"
+    ],
+    "triggers": {
+        "autoresponse": {
+            "enabled": true
+        }
+    }
+}
+```
+
+#### Response
+
+```javascript
+200 OK
 ```
 
 _[Back to top...](#)_
