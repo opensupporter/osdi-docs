@@ -249,9 +249,9 @@ _[Back to top...](#)_
 
 ###	Encryption
 
-Providers may support secure HTTP connections using TLS. TLS 1.0, which shall be implemented, is specified in [RFC2246], and the TLS 1.1 and TLS 1.2 should be implemented as specified in [RFC4346] and [RFC5246], respectively.
+Providers **should support secure HTTPS connections** using TLS 1.0 and above, and reject non-secure HTTP connections.
 
-Providers may support non-secure HTTP connections in addition or instead.
+If necessary, providers may support non-secure HTTP connections in addition or instead.
 
 _[Back to top...](#)_
 
