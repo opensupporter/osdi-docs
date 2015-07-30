@@ -63,7 +63,7 @@ A list of fields specific to the Event resource.
 |all_day_date		|date		|The date for all day events.
 |all_day			|boolean	|True if the event is an all day event.
 |capacity  			|integer	|The max capacity of attendees for the event.
-|guestsCanInviteOthers |boolean |Attendees can invite guests to the event.
+|guests_can_invite_others |boolean |Attendees can invite guests to the event.
 |transparence		|enum		|Whether the event blocks time on online calendar systems. Possible values are "opaque" or "transparent". Opaque is the default, but this can be overridden by a user.
 |visibility			|enum		|Visibility of the event.  Possible values are "public" and "private".
 |location			|[Location](#location)	| An object hash representing the location of the event.
@@ -201,7 +201,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "start_date": "2015-03-14T12:00:00Z",
                 "end_date": "2015-03-14T14:00:00Z",
                 "all_day": false,
-                "guestsCanInviteOthers": true,
+                "guests_can_invite_others": true,
                 "transparence": "opaque",
                 "visibility": "public",
                 "location": {
@@ -267,7 +267,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "start_date": "2015-01-05T19:00:00Z",
                 "end_date": "2015-01-05T21:00:00Z",
                 "all_day": false,
-                "guestsCanInviteOthers": false,
+                "guests_can_invite_others": false,
                 "capacity": 10,
                 "transparence": "opaque",
                 "visibility": "private",
@@ -362,7 +362,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "start_date": "2015-03-14T12:00:00Z",
     "end_date": "2015-03-14T14:00:00Z",
     "all_day": false,
-    "guestsCanInviteOthers": true,
+    "guests_can_invite_others": true,
     "transparence": "opaque",
     "visibility": "public",
     "location": {
@@ -485,7 +485,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "start_date": "2015-03-14T12:00:00Z",
     "end_date": "2015-03-14T14:00:00Z",
     "all_day": false,
-    "guestsCanInviteOthers": true,
+    "guests_can_invite_others": true,
     "transparence": "opaque",
     "visibility": "public",
     "location": {
@@ -574,7 +574,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "start_date": "2015-03-15T12:00:00Z",
     "end_date": "2015-03-15T14:00:00Z",
     "all_day": false,
-    "guestsCanInviteOthers": true,
+    "guests_can_invite_others": true,
     "transparence": "opaque",
     "visibility": "public",
     "location": {
