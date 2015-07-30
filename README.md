@@ -269,6 +269,8 @@ Clients and providers may use a variety of mechanisms to authenticate and author
 
 Future versions of this specification may officially support one or more of these methods, or provide standard ways of implementing various methods, or may in other ways be more specific about security and authentication.
 
+Not all interactions with the API will require authentication, and some behaviors might differ based on whether your request includes authentication or not. For example, when used in a javascript application, where authentication secrets can't be kept from users, a non-authenticated method may be used, and the server response may be truncated so as to not leak data to unauthenticated users. Some specific non-authenticated behaviors included in this specification are outlined on each resource page.
+
 
 #### Token Based Authentication
 
