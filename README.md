@@ -396,7 +396,7 @@ _[Back to top...](#)_
 * Marc Love, Independent
 * Walter Ludwig, Indigo Strategies
 * Drew Miller, NGP VAN
-* Joe McLaughlin, Citizen Action NY
+* Joe McLaughlin, Citizen Action of New York
 * Mark Paquette, TheDataBank
 * Charles Parsons, Salsa Labs
 * Rich Ranallo, Revolution Messaging
