@@ -48,8 +48,18 @@ A list of fields specific for POSTing via the Person Signup Helper.
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
+|add_answers      |[PersonSignupHelperAnswer](#person_signup_helper_answer_fields)     |An array of Person Signup Helper Answer objects, indicating answers which should be applied to the Person at the moment of signup
 |add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
 |person			|[Person*](#person)	|An object hash representing the person to be added.
+
+### Person Signup Helper Answer Fields
+
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|question      |string     |The identifier for the [Question](questions.html) which is being answered
+|responses     |string[]   |One or more responses to the Question, if the corresponding question_type is SingleChoice or MultiChoice; should be an improper subset of the responses available for the question
+|value          |string    |A free-text response to the question, if the corresponding question_type is Paragraph.
 
 _[Back to top...](#)_
 
@@ -134,6 +144,16 @@ OSDI-API-Token:[your api key here]
     "add_tags": [
         "volunteer",
         "donor"
+    ],
+    "add_answers": [
+      {
+        "question": "c945d6fe-929e-11e3-a2e9-12313d316c29",
+        "responses" : [ "r1", "r2", "r2"]
+      },
+      {
+        "question": "c945d6fe-929e-11e3-a2e9-12313d316c2a",
+        "value" : "Heard about the candidate at the Labor Day Picnic"
+      }
     ],
     "add_lists": [
         "supporters"
