@@ -1,6 +1,6 @@
+---
 layout: default
 title: "OSDI"
-permalink: integration_profiles.html
 ---
 
 <center>

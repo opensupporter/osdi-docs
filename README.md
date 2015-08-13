@@ -53,7 +53,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 OSDI used a combination of approaches to provide flexible reading of data, simple operations for simple scenarios, and general purpose CRUD access.
 
 ### Version
-This document represents OSDI version 1.0.1
+This document represents OSDI version 1.0.2
 
 ### Working with OSDI in Real Life
 
@@ -396,7 +396,7 @@ _[Back to top...](#)_
 * Marc Love, Independent
 * Walter Ludwig, Indigo Strategies
 * Drew Miller, NGP VAN
-* Joe McLaughlin, Citizen Action NY
+* Joe McLaughlin, Citizen Action of New York
 * Mark Paquette, TheDataBank
 * Charles Parsons, Salsa Labs
 * Rich Ranallo, Revolution Messaging
