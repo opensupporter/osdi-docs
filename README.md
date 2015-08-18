@@ -53,7 +53,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 OSDI used a combination of approaches to provide flexible reading of data, simple operations for simple scenarios, and general purpose CRUD access.
 
 ### Version
-This document represents OSDI version 1.0.2
+This document represents OSDI version 1.0.3
 
 ### Working with OSDI in Real Life
 
