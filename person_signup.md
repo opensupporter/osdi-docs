@@ -132,11 +132,11 @@ OSDI-API-Token:[your api key here]
         "gender": "Male"
     },
     "add_tags": [
-        "volunteer",
-        "donor"
+        "d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+        "1efc3644-af25-4253-90b8-a0baf12dbd1e"
     ],
     "add_lists": [
-        "supporters"
+        "d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
     ]
 }
 ```
@@ -150,6 +150,7 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
+    "id": "d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
     "identifiers": [
         "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
         "foreign_system:1"

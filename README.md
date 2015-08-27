@@ -42,6 +42,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
     * [Error Handling](#error-handling)
     * [Flexibility and Server Behavior](#flexibility-and-server-behavior)
     * [Deviations from RESTful Behavior](#deviations-from-restful-behavior)
+    * [Common Fields](#common-fields)
     * [Notational Conventions](#notational-conventions)
 * [Authors and Leadership](#authors-and-leadership)
 * [Contributing and Contact](#contributing-and-contact)
@@ -343,6 +344,13 @@ In order to cause the deletion of the contents of an Object (hash) or Array, a r
 _[Back to top...](#)_
 
 
+### Common Fields
+
+All OSDI resources share a set of common fields for consistency.  These are listed below.
+
+{% include global_fields.md %}
+
+_[Back to top...](#)_
 
 
 ### Notational Conventions
