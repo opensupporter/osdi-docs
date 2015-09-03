@@ -135,8 +135,8 @@ OSDI-API-Token:[your api key here]
         "volunteer",
         "donor"
     ],
-    "add_lists": [
-        "supporters"
+    "add_lists_uri": [
+        "https://osdi-sample-system.org/api/v1/lists/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
     ]
 }
 ```
