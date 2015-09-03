@@ -146,13 +146,13 @@ OSDI-API-Token:[your api key here]
         "volunteer",
         "donor"
     ],
-    "add_answers": [
+    "add_questions_responses_uri": [
       {
-        "question": "c945d6fe-929e-11e3-a2e9-12313d316c29",
+        "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29",
         "responses": [ "r1", "r2", "r2"]
       },
       {
-        "question": "c945d6fe-929e-11e3-a2e9-12313d316c2a",
+        "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c2a",
         "value": "Heard about the candidate at the Labor Day Picnic"
       }
     ],
