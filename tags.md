@@ -127,7 +127,6 @@ Cache-Control: max-age=0, private, must-revalidate
     "_embedded": {
         "osdi:tags": [
             {
-                "id": "d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
                 "identifiers": [
                     "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
                     "foreign_system:1"
@@ -153,7 +152,6 @@ Cache-Control: max-age=0, private, must-revalidate
                 }
             },
             {
-                "id": "1efc3644-af25-4253-90b8-a0baf12dbd1e",
                 "identifiers": [
                     "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
                 ],
@@ -207,7 +205,6 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "id": "d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
     "identifiers": [
         "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
         "foreign_system:1"
@@ -267,7 +264,6 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "id": "d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
     "identifiers": [
         "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
         "foreign_system:1"
@@ -322,7 +318,6 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "id": "d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
     "identifiers": [
         "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
         "foreign_system:1"
