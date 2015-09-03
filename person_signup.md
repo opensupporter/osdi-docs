@@ -23,6 +23,7 @@ Some initial implementations may only support helpers -- direct RESTful access m
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
     * [Person Signup Helper Fields](#person-signup-helper-fields)
+    * [Person Signup Helper Answer Fields](#person-signup-helper-answer-fields)
     * [Related Objects](#related-objects)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -52,9 +53,23 @@ A list of fields specific for POSTing via the Person Signup Helper.
 |add_lists     |strings[]     |An array of list IDs corresponding to previously created lists to add to this person when it is created.
 =======
 |add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
+<<<<<<< HEAD
 |add_tags_uri  |strings[]     |An array of tag URIs corresponding to previously created tags to add to this person when it is created.
 |add_lists_uri     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
+=======
+|add_questions_responses_uri      |[PersonSignupHelperAnswer](#person-signup-helper-answer-fields)     |An array of Person Signup Helper Answer objects, indicating answers which should be applied to the Person at the moment of signup
+|add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
+>>>>>>> d5cda0ba7a911d5bbf4f6ca0a2830df0a4c7bd49
 |person			|[Person*](#person)	|An object hash representing the person to be added.
+
+### Person Signup Helper Answer Fields
+
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|question      |string     |The identifier for the [Question](questions.html) which is being answered
+|responses     |string[]   |One or more responses to the Question, if the corresponding question_type is SingleChoice or MultiChoice; should be an improper subset of the responses available for the question
+|value          |string    |A free-text response to the question, if the corresponding question_type is Paragraph.
 
 _[Back to top...](#)_
 
@@ -140,12 +155,27 @@ OSDI-API-Token:[your api key here]
         "volunteer",
         "donor"
     ],
+<<<<<<< HEAD
     "add_tags_uri": [
         "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
     ],
     "add_lists_uri": [
         "https://osdi-sample-system.org/api/v1/lists/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
 
+=======
+    "add_questions_responses_uri": [
+      {
+        "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29",
+        "responses": [ "r1", "r2", "r2"]
+      },
+      {
+        "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c2a",
+        "value": "Heard about the candidate at the Labor Day Picnic"
+      }
+    ],
+    "add_lists": [
+        "supporters"
+>>>>>>> d5cda0ba7a911d5bbf4f6ca0a2830df0a4c7bd49
     ]
 }
 ```

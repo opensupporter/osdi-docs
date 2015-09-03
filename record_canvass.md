@@ -60,7 +60,7 @@ A list of fields specific for POSTing via the Record Canvass Helper.
 | success      | boolean | True if the target was successfully contacted, False otherwise.
 | status_code  | string | A code indicating the status of the contact attempt.  For example: "not-home" indicates that the contact failed because the target was not home, while "success" indicates that the target was contacted successfully.  An empty or missing value for status_code should be assumed to mean that the contact was successful.
 | canvasser          |[Person](people.html) | A link to a single Person resource representing the person who made the contact.
-|add_answers      |[QuestionResponse*](#QuestionResponse)     |An array of inline QuestionReponse objects, which will be used to create [Answer](answers.html) objects related to this Canvass.
+|add_questions_responses_uri      |[QuestionResponse*](#QuestionResponse)     |An array of inline QuestionReponse objects, which will be used to create [Answer](answers.html) objects related to this Canvass.
 |add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
 |add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
 |triggers		|[Triggers](#triggers)	|An object hash representing responses a user would like to trigger from the server as part of the POST, such as sending an autoresponse email back to the person who took action with this helper.
@@ -127,16 +127,14 @@ OSDI-API-Token:[your api key here]
       "status_code": "",
       "canvasser": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
     },
-    "add_answers": [
+    "add_questions_responses_uri": [
       {
-        "question": ""https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29",
-        "value": "He's not sure"        
+        "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29",
+        "responses": [ "r1", "r2", "r2"]
       },
       {
-        "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c33",
-        "responses": [
-          "Y"
-        ]        
+        "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c2a",
+        "value": "Heard about the candidate at the Labor Day Picnic"
       }
     ],
     "add_tags": [
