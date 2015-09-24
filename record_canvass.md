@@ -23,8 +23,9 @@ Some initial implementations may only support helpers -- direct RESTful access m
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
 	* [Common Fields](#common-fields)
-    * [Record Canvass Helper Fields](#record-canvass-helper-fields)
-    * [Related Objects](#related-objects)
+  * [Record Canvass Helper Fields](#record-canvass-helper-fields)
+  * [Helper Action Functions](#helper-action-functions)
+  * [Related Objects](#related-objects)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
     * [Scenario: Creating a new canvass (POST)](#scenario-creating-a-new-canvass-post)
@@ -60,13 +61,15 @@ A list of fields specific for POSTing via the Record Canvass Helper.
 | success      | boolean | True if the target was successfully contacted, False otherwise.
 | status_code  | string | A code indicating the status of the contact attempt.  For example: "not-home" indicates that the contact failed because the target was not home, while "success" indicates that the target was contacted successfully.  An empty or missing value for status_code should be assumed to mean that the contact was successful.
 | canvasser          |[Person](people.html) | A link to a single Person resource representing the person who made the contact.
-|add_questions_responses_uri      |[QuestionResponse*](#QuestionResponse)     |An array of inline QuestionReponse objects, which will be used to create [Answer](answers.html) objects related to this Canvass.
-|add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
-|add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
-|triggers		|[Triggers](#triggers)	|An object hash representing responses a user would like to trigger from the server as part of the POST, such as sending an autoresponse email back to the person who took action with this helper.
+| target         |[Person](people.html) | A link to a single Person resource representing the person who was contacted.
 
 _[Back to top...](#)_
 
+### Helper Action Functions
+
+{% include helper_action_functions.md %}
+
+_[Back to top...](#)_
 
 ### Related Objects
 
@@ -79,13 +82,6 @@ These JSON hashes included in the table above are broken out into their own tabl
 |question      |[Question](questions.html)     | A question to which an Answer is being added
 |value      |string     |The response the person gave, if the question type is “Paragraph” or if otherwise appropriate (e.g., if the question response was “Other”).
 |responses  |string[] | An array of strings corresponding to the question response key(s) chosen by the Person who answered the Question.
-
-#### Triggers
-
-|Name          |Type      |Description
-|-----------    |-----------|--------------
-|autoresponse   |object     |An object hash representing the autoresponse email trigger type.
-|autoresponse.enabled   |boolean     |A boolean indicating whether the autoresponse email should be sent or not.
 
 _[Back to top...](#)_
 
@@ -127,28 +123,7 @@ OSDI-API-Token:[your api key here]
       "status_code": "",
       "canvasser": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
     },
-    "add_questions_responses_uri": [
-      {
-        "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29",
-        "responses": [ "r1", "r2", "r2"]
-      },
-      {
-        "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c2a",
-        "value": "Heard about the candidate at the Labor Day Picnic"
-      }
-    ],
-    "add_tags": [
-      "wants_yard_sign",
-      "will_volunteer"
-    ],
-    "add_lists": [
-        "supporters"
-    ],
-    "triggers": {
-        "autoresponse": {
-            "enabled": true
-        }
-    }
+{% include helper_action_examples.md %}
 }
 ```
 
@@ -215,30 +190,7 @@ POST https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d
       "status_code": "",
       "canvasser": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
     },
-    "add_answers": [
-      {
-        "question": ""https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29",
-        "value": "He's not sure"        
-      },
-      {
-        "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c33",
-        "responses": [
-          "Y"
-        ]        
-      }
-    ],
-    "add_tags": [
-      "wants_yard_sign",
-      "will_volunteer"
-    ],
-    "add_lists": [
-        "supporters"
-    ],
-    "triggers": {
-        "autoresponse": {
-            "enabled": true
-        }
-    }
+{% include helper_action_examples.md %}
 }
 ```
 

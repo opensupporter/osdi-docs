@@ -26,6 +26,7 @@ Some initial implementations may only support helpers -- direct RESTful access m
 * [Fields](#fields)
 	* [Common Fields](#common-fields)
     * [Record Donation Helper Fields](#record-donation-helper-fields)
+    * [Helper Action Functions](#helper-action-functions)
     * [Related Objects](#related-objects)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -67,12 +68,15 @@ A list of fields specific for POSTing via the Record Donation Helper.
 |voided			|boolean	|Indicates if the donation has been voided.
 |voided_date  	|datetime		|Date of the void.
 |url			|string		|URL at which the donation was taken.
-|add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
-|add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
 |person			|[Person*](#person)	|An object hash representing the person who made the donation.
-|triggers		|[Triggers](#triggers)	|An object hash representing responses a user would like to trigger from the server as part of the POST, such as sending an autoresponse email back to the person who took action with this helper.
+_[Back to top...](#)_
+
+### Helper Action Functions
+
+{% include helper_action_functions.md %}
 
 _[Back to top...](#)_
+
 
 
 ### Related Objects
@@ -105,13 +109,6 @@ An object representing the payment details of a donation.
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |person      |[Person*](people.html)     |An inlined hash representation of a person, containing any valid fields for the Person resource.
-
-#### Triggers
-
-|Name          |Type      |Description
-|-----------    |-----------|--------------
-|autoresponse   |object     |An object hash representing the autoresponse email trigger type.
-|autoresponse.enabled   |boolean     |A boolean indicating whether the autoresponse email should be sent or not.
 
 _[Back to top...](#)_
 
@@ -209,18 +206,7 @@ OSDI-API-Token:[your api key here]
             "legal_name": "Joe for Congress"
        }
     ],
-    "add_tags": [
-        "volunteer",
-        "donor"
-    ],
-    "add_lists": [
-        "supporters"
-    ],
-    "triggers": {
-        "autoresponse": {
-            "enabled": true
-        }
-    }
+{% include helper_action_examples.md %}
 }
 ```
 
@@ -358,19 +344,11 @@ POST https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-
             "display_name": "Joe Candidate",
             "legal_name": "Joe for Congress"
        }
-    ],
-    "add_tags": [
+    ],    "add_tags": [
         "volunteer",
         "donor"
     ],
-    "add_lists": [
-        "supporters"
-    ],
-    "triggers": {
-        "autoresponse": {
-            "enabled": true
-        }
-    }
+{% include helper_action_examples.md %}
 }
 ```
 

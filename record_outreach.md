@@ -26,6 +26,7 @@ Some initial implementations may only support helpers -- direct RESTful access m
 * [Fields](#fields)
 	* [Common Fields](#common-fields)
     * [Record Outreach Helper Fields](#record-outreach-helper-fields)
+    * [Helper Action Functions](#helper-action-functions)
     * [Related Objects](#related-objects)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -62,12 +63,16 @@ A list of fields specific for POSTing via the Record Outreach Helper.
 |subject		|string		|The subject of the outreach, if applicable. (ex: subject will only be present on email outreach types)
 |message		|string		|The message of the outreach, if applicable. (ex: message will only be present on email or postal mail outreach types)
 |targets			|[Target[]](#target)    |A array of target object hashes representing the targets of the outreach.
-|add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
-|add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
 |person			|[Person*](#person)	|An object hash representing the person who made the outreach.
-|triggers		|[Triggers](#triggers)	|An object hash representing responses a user would like to trigger from the server as part of the POST, such as sending an autoresponse email back to the person who took action with this helper.
 
 _[Back to top...](#)_
+
+### Helper Action Functions
+
+{% include helper_action_functions.md %}
+
+_[Back to top...](#)_
+
 
 
 ### Related Objects
@@ -89,13 +94,6 @@ These JSON hashes included in the table above are broken out into their own tabl
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |person      |[Person*](people.html)     |An inlined hash representation of a person, containing any valid fields for the Person resource.
-
-#### Triggers
-
-|Name          |Type      |Description
-|-----------    |-----------|--------------
-|autoresponse   |object     |An object hash representing the autoresponse email trigger type.
-|autoresponse.enabled   |boolean     |A boolean indicating whether the autoresponse email should be sent or not.
 
 _[Back to top...](#)_
 
@@ -188,18 +186,7 @@ OSDI-API-Token:[your api key here]
 	        "ocdid": "ocd-division/country:us/state:ny"
 	    }
 	],
-	"add_tags": [
-        "volunteer",
-        "donor"
-    ],
-    "add_lists": [
-        "supporters"
-    ],
-    "triggers": {
-        "autoresponse": {
-            "enabled": true
-        }
-    }
+{% include helper_action_examples.md %}    
 }
 ```
 
@@ -326,18 +313,7 @@ POST https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3
 	        "ocdid": "ocd-division/country:us/state:ny"
 	    }
 	],
-	"add_tags": [
-        "volunteer",
-        "donor"
-    ],
-    "add_lists": [
-        "supporters"
-    ],
-    "triggers": {
-        "autoresponse": {
-            "enabled": true
-        }
-    }
+{% include helper_action_examples.md %}  
 }
 ```
 
