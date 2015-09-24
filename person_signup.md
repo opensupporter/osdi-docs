@@ -48,22 +48,20 @@ A list of fields specific for POSTing via the Person Signup Helper.
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-<<<<<<< HEAD
-|add_tags      |strings[]     |An array of tag IDs corresponding to previously created tags to add to this person when it is created.
-|add_lists     |strings[]     |An array of list IDs corresponding to previously created lists to add to this person when it is created.
-=======
+|person         |[Person*](#person) |An object hash representing the person to be added.
+
+
+### Helper Action Functions
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
 |add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
-<<<<<<< HEAD
 |add_tags_uri  |strings[]     |An array of tag URIs corresponding to previously created tags to add to this person when it is created.
-|add_lists_uri     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
-=======
-|add_questions_responses_uri      |[PersonSignupHelperAnswer](#person-signup-helper-answer-fields)     |An array of Person Signup Helper Answer objects, indicating answers which should be applied to the Person at the moment of signup
 |add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
->>>>>>> d5cda0ba7a911d5bbf4f6ca0a2830df0a4c7bd49
-|person			|[Person*](#person)	|An object hash representing the person to be added.
+|add_lists_uri     |strings[]     |An array of list URIs corresponding to previously created lists to add to this person when it is created.
+|add_questions_responses_uri      |[AnswerActionfunction](#answer-action-function-fields)     |An array of Person Signup Helper Answer objects, indicating answers which should be applied to the Person at the moment of signup
 
-### Person Signup Helper Answer Fields
-
+### Answer Action Function Fields
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
@@ -155,14 +153,15 @@ OSDI-API-Token:[your api key here]
         "volunteer",
         "donor"
     ],
-<<<<<<< HEAD
     "add_tags_uri": [
         "https://osdi-sample-system.org/api/v1/tags/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
     ],
+    "add_lists": [
+        "supporters"
+    ]
     "add_lists_uri": [
         "https://osdi-sample-system.org/api/v1/lists/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
-
-=======
+    ],
     "add_questions_responses_uri": [
       {
         "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c29",
@@ -172,10 +171,6 @@ OSDI-API-Token:[your api key here]
         "question": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9-12313d316c2a",
         "value": "Heard about the candidate at the Labor Day Picnic"
       }
-    ],
-    "add_lists": [
-        "supporters"
->>>>>>> d5cda0ba7a911d5bbf4f6ca0a2830df0a4c7bd49
     ]
 }
 ```
