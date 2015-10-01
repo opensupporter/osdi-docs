@@ -69,6 +69,7 @@ A list of fields specific for POSTing via the Record Donation Helper.
 |voided_date  	|datetime		|Date of the void.
 |url			|string		|URL at which the donation was taken.
 |person			|[Person*](#person)	|An object hash representing the person who made the donation.
+
 _[Back to top...](#)_
 
 ### Helper Action Functions

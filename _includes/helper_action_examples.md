@@ -1,4 +1,3 @@
-    "action_date": "2014-03-18T11:02:15Z",
     "triggers": {
         "autoresponse": {
             "enabled": true
