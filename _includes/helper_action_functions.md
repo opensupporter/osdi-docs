@@ -1,4 +1,6 @@
 
+Helper Action Functions are additional actions that the OSDI server will perform along with inserting or updating the associated person.
+
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
