@@ -345,9 +345,6 @@ POST https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-
             "display_name": "Joe Candidate",
             "legal_name": "Joe for Congress"
        }
-    ],    "add_tags": [
-        "volunteer",
-        "donor"
     ],
 {% include helper_action_examples.md %}
 }

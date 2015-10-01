@@ -5,10 +5,10 @@
 |add_tags_uri  |strings[]     |An array of tag URIs corresponding to previously created tags to add to this person when it is created.
 |add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
 |add_lists_uri     |strings[]     |An array of list URIs corresponding to previously created lists to add to this person when it is created.
-|add_questions_responses_uri      |[AnswerActionFunction](#answer-action-function-fields)     |An array of Person Signup Helper Answer objects, indicating answers which should be applied to the Person at the moment of signup
+|add_questions_responses_uri      |[QuestionResponseObject](#question-response-object-fields)     |An array of Question Response Objects, indicating answers which should be applied to the person.
 |triggers		|[Triggers](#triggers)	|An object hash representing responses a user would like to trigger from the server as part of the POST, such as sending an autoresponse email back to the person who took action with this helper.
 
-### Answer Action Function Fields
+### Question Response Object Fields
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
