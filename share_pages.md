@@ -181,6 +181,19 @@ Cache-Control: max-age=0, private, must-revalidate
                 "summary": "Thanks for signing! Now share!",
                 "browser_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing",
                 "total_shares": 345,
+                "facebook_share": {
+	                "title": "Sign the petition!",
+	                "description": "Please sign our awesome petition.",
+	                "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
+	                "browser_url": "http://osdi-sample-system.org/petitions/my-petition/"
+	            },
+	            "twitter_share": {
+		            "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/"
+		        },
+		        "email_share": {
+			        "subject": "Sign the petition!",
+			        "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/"
+			    },
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/share_pages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -203,6 +216,19 @@ Cache-Control: max-age=0, private, must-revalidate
                 "title": "Share this awesome video with everyone!",
                 "description": "<p>Watch this video, then click the buttons to share.</p>",
                 "total_shares": 43,
+                "facebook_share": {
+	                "title": "Watch this video!",
+	                "description": "Please check out this crazy video.",
+	                "image": "http://odsi-sample-system.org/images/video-share-image.jpg",
+	                "browser_url": "http://osdi-sample-system.org/share/my-video/"
+	            },
+	            "twitter_share": {
+		            "message": "Watch this crazy video! Click here: http://osdi-sample-system.org/petitions/my-petition/"
+		        },
+		        "email_share": {
+			        "subject": "Watch this video!",
+			        "body": "Check out this crazy video I just watched! Click here: http://osdi-sample-system.org/petitions/my-petition/"
+			    },
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/share_pages/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -258,6 +284,19 @@ Cache-Control: max-age=0, private, must-revalidate
     "summary": "Thanks for signing! Now share!",
     "browser_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing",
     "total_shares": 345,
+    "facebook_share": {
+        "title": "Sign the petition!",
+        "description": "Please sign our awesome petition.",
+        "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
+        "browser_url": "http://osdi-sample-system.org/petitions/my-petition/"
+    },
+    "twitter_share": {
+        "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/"
+    },
+    "email_share": {
+        "subject": "Sign the petition!",
+        "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/share_pages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -293,7 +332,20 @@ OSDI-API-Token:[your api key here]
     ],
     "name": "2015 Petition Share Page",
     "title": "Thanks for signing! Now share to keep up our momentum.",
-    "origin_system": "OpenSupporter"
+    "origin_system": "OpenSupporter",
+    "facebook_share": {
+        "title": "Sign the petition!",
+        "description": "Please sign our awesome petition.",
+        "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
+        "browser_url": "http://osdi-sample-system.org/petitions/my-petition/"
+    },
+    "twitter_share": {
+        "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/"
+    },
+    "email_share": {
+        "subject": "Sign the petition!",
+        "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/"
+    }
 }
 ```
 
@@ -317,6 +369,19 @@ Cache-Control: max-age=0, private, must-revalidate
     "title": "Thanks for signing! Now share to keep up our momentum.",
     "total_shares": 0,
     "browser_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing",
+    "facebook_share": {
+        "title": "Sign the petition!",
+        "description": "Please sign our awesome petition.",
+        "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
+        "browser_url": "http://osdi-sample-system.org/petitions/my-petition/"
+    },
+    "twitter_share": {
+        "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/"
+    },
+    "email_share": {
+        "subject": "Sign the petition!",
+        "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/share_pages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -370,6 +435,19 @@ Cache-Control: max-age=0, private, must-revalidate
     "title": "Thanks for signing! Now share to keep up our momentum.",
     "total_shares": 0,
     "browser_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing",
+    "facebook_share": {
+        "title": "Sign the petition!",
+        "description": "Please sign our awesome petition.",
+        "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
+        "browser_url": "http://osdi-sample-system.org/petitions/my-petition/"
+    },
+    "twitter_share": {
+        "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/"
+    },
+    "email_share": {
+        "subject": "Sign the petition!",
+        "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/share_pages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
