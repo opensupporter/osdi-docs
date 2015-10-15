@@ -55,16 +55,24 @@ A list of fields specific to the Share Page resource.
 |description		|string		|A description of the share page, usually displayed publicly. May contain text and/or HTML.
 |summary			|string		|A text-only single paragraph summarizing the share page. Shown on listing pages that have more than titles, but not enough room for full description.
 |browser_url		|string		|A URL string pointing to the publicly available share page page on the web.
-|total_shares	|integer	|A read-only computed property representing the current count of the total number of times the share page has been used by activists.
-|facebook_share	|[Facebook Share](#facebook-share)    |An object hash representing the default language and attributes used when an activist shares on Facebook.
-|twitter_share	|[Twitter Share](#twitter-share)    |An object hash representing the default language and attributes used when an activist shares on Twitter.
-|email_share	|[Email Share](#email-share)    |An object hash representing the default language and attributes used when an activist shares via email.
+|share_url			|string		|A URL string pointing to the page that will be shared using this share page.
+|total_shares	|integer	|A computed property representing the current count of the total number of times the share page has been used by activists.
+|share_options	|[ShareOptions[]](#share-options	|An array of share options objects representing the default language and attributes used when an activist shares via various mediums. 
+
 
 _[Back to top...](#)_
 
 ### Related Objects
 
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+#### Share Options
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|facebook_share	|[Facebook Share](#facebook-share)    |An object hash representing the default language and attributes used when an activist shares on Facebook.
+|twitter_share	|[Twitter Share](#twitter-share)    |An object hash representing the default language and attributes used when an activist shares on Twitter.
+|email_share	|[Email Share](#email-share)    |An object hash representing the default language and attributes used when an activist shares via email.
 
 #### Facebook Share
 
@@ -73,13 +81,14 @@ These JSON hashes included in the table above are broken out into their own tabl
 |facebook_share.title |string    |The title of the post created when an activist uses the share page to share content on Facebook.
 |facebook_share.description |string    |The description of the post created when an activist uses the share page to share content on Facebook.
 |facebook_share.image |string    |The URL of an image that goes with post created when an activist uses the share page to share content on Facebook.
-|facebook_share.browser_url |string    |The URL of the content to be shared on Facebook, linked in the post created when an activist uses the share page to share on Facebook.
+|facebook_share.total_shares		|integer	|A computed property representing the current count of the total number of times the share page has been used by activists to share on Facebook.
 
 #### Twitter Share
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-|twitter_share.message |string    |The text of the post created when an activist uses the share page to share content on Twitter.
+|twitter_share.message |string    |The text of the post created when an activist uses the share page to share content on Twitter. Some systems may use templating or appends to insert the share_url into the tweet automatically.
+|twitter_share.total_shares		|integer	|A computed property representing the current count of the total number of times the share page has been used by activists to share on Twitter.
 
 
 #### Email Share
@@ -87,7 +96,8 @@ These JSON hashes included in the table above are broken out into their own tabl
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |email_share.subject |string    |The subject line of the email created when an activist uses the share page to share content via email.
-|email_share.body |string    |The body text of the email created when an activist uses the share page to share content via email.
+|email_share.body |string    |The body text of the email created when an activist uses the share page to share content via email. Some systems may use templating or appends to insert the share_url into the email body automatically.
+|email_share.total_shares		|integer	|A computed property representing the current count of the total number of times the share page has been used by activists to share via email.
 
 _[Back to top...](#)_
 
@@ -180,20 +190,27 @@ Cache-Control: max-age=0, private, must-revalidate
                 "description": "<p>Thanks for singing the petition!</p><p>Now, can you share it with your friends?</p>",
                 "summary": "Thanks for signing! Now share!",
                 "browser_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing",
+                "share_url": "http://osdi-sample-system.org/petitions/my-petition/",
                 "total_shares": 345,
-                "facebook_share": {
-	                "title": "Sign the petition!",
-	                "description": "Please sign our awesome petition.",
-	                "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
-	                "browser_url": "http://osdi-sample-system.org/petitions/my-petition/"
-	            },
-	            "twitter_share": {
-		            "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/"
-		        },
-		        "email_share": {
-			        "subject": "Sign the petition!",
-			        "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/"
-			    },
+                "share_options": [
+	                {
+                        "facebook_share": {
+	                        "title": "Sign the petition!",
+	                        "description": "Please sign our awesome petition.",
+	                        "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
+	                        "total_shares": 100
+	                    },
+	                    "twitter_share": {
+		                    "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/",
+		                    "total_shares": 100
+		                },
+		                "email_share": {
+			                "subject": "Sign the petition!",
+			                "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/",
+			                "total_shares": 145
+			            }
+			        }
+			    ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/share_pages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -214,21 +231,29 @@ Cache-Control: max-age=0, private, must-revalidate
                 "created_date": "2014-03-20T20:44:13Z",
                 "modified_date": "2014-03-20T20:44:13Z",
                 "title": "Share this awesome video with everyone!",
-                "description": "<p>Watch this video, then click the buttons to share.</p>",
+                "description": "<p>Watch this video, then click the buttons to share.</p>",\
+                "browser_url": "http://osdi-sample-system.org/share_pages/share-this-video",
+                "share_url": "http://osdi-sample-system.org/share/my-video/",
                 "total_shares": 43,
-                "facebook_share": {
-	                "title": "Watch this video!",
-	                "description": "Please check out this crazy video.",
-	                "image": "http://odsi-sample-system.org/images/video-share-image.jpg",
-	                "browser_url": "http://osdi-sample-system.org/share/my-video/"
-	            },
-	            "twitter_share": {
-		            "message": "Watch this crazy video! Click here: http://osdi-sample-system.org/petitions/my-petition/"
-		        },
-		        "email_share": {
-			        "subject": "Watch this video!",
-			        "body": "Check out this crazy video I just watched! Click here: http://osdi-sample-system.org/petitions/my-petition/"
-			    },
+                "share_options": [
+	                {
+                        "facebook_share": {
+	                        "title": "Watch this video!",
+	                        "description": "Please check out this crazy video.",
+	                        "image": "http://odsi-sample-system.org/images/video-share-image.jpg",
+	                        "total_shares": 20
+	                    },
+	                    "twitter_share": {
+		                    "message": "Watch this crazy video! Click here: http://osdi-sample-system.org/petitions/my-petition/",
+		                    "total_shares": 3
+		                },
+		                "email_share": {
+			                "subject": "Watch this video!",
+			                "body": "Check out this crazy video I just watched! Click here: http://osdi-sample-system.org/petitions/my-petition/",
+			                "total_shares": 20
+			            }
+			        }
+			    ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/share_pages/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -283,20 +308,27 @@ Cache-Control: max-age=0, private, must-revalidate
     "description": "<p>Thanks for singing the petition!</p><p>Now, can you share it with your friends?</p>",
     "summary": "Thanks for signing! Now share!",
     "browser_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing",
+    "share_url": "http://osdi-sample-system.org/petitions/my-petition/",
     "total_shares": 345,
-    "facebook_share": {
-        "title": "Sign the petition!",
-        "description": "Please sign our awesome petition.",
-        "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
-        "browser_url": "http://osdi-sample-system.org/petitions/my-petition/"
-    },
-    "twitter_share": {
-        "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/"
-    },
-    "email_share": {
-        "subject": "Sign the petition!",
-        "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/"
-    },
+    "share_options": [
+	    {
+            "facebook_share": {
+	            "title": "Sign the petition!",
+	            "description": "Please sign our awesome petition.",
+	            "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
+	            "total_shares": 100
+	        },
+	        "twitter_share": {
+	            "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/",
+	            "total_shares": 100
+	        },
+	        "email_share": {
+	            "subject": "Sign the petition!",
+	            "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/",
+	            "total_shares": 145
+	        }
+	    }
+	],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/share_pages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -333,19 +365,22 @@ OSDI-API-Token:[your api key here]
     "name": "2015 Petition Share Page",
     "title": "Thanks for signing! Now share to keep up our momentum.",
     "origin_system": "OpenSupporter",
-    "facebook_share": {
-        "title": "Sign the petition!",
-        "description": "Please sign our awesome petition.",
-        "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
-        "browser_url": "http://osdi-sample-system.org/petitions/my-petition/"
-    },
-    "twitter_share": {
-        "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/"
-    },
-    "email_share": {
-        "subject": "Sign the petition!",
-        "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/"
-    }
+    "share_options": [
+	    {
+            "facebook_share": {
+	            "title": "Sign the petition!",
+	            "description": "Please sign our awesome petition.",
+	            "image": "http://odsi-sample-system.org/images/petition-share-image.jpg"
+	        },
+	        "twitter_share": {
+	            "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/"
+	        },
+	        "email_share": {
+	            "subject": "Sign the petition!",
+	            "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/"
+	        }
+	    }
+	]
 }
 ```
 
@@ -369,19 +404,26 @@ Cache-Control: max-age=0, private, must-revalidate
     "title": "Thanks for signing! Now share to keep up our momentum.",
     "total_shares": 0,
     "browser_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing",
-    "facebook_share": {
-        "title": "Sign the petition!",
-        "description": "Please sign our awesome petition.",
-        "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
-        "browser_url": "http://osdi-sample-system.org/petitions/my-petition/"
-    },
-    "twitter_share": {
-        "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/"
-    },
-    "email_share": {
-        "subject": "Sign the petition!",
-        "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/"
-    },
+    "share_url": "http://osdi-sample-system.org/petitions/my-petition/",
+    "share_options": [
+	    {
+            "facebook_share": {
+	            "title": "Sign the petition!",
+	            "description": "Please sign our awesome petition.",
+	            "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
+	            "total_shares": 0
+	        },
+	        "twitter_share": {
+	            "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/",
+	            "total_shares": 0
+	        },
+	        "email_share": {
+	            "subject": "Sign the petition!",
+	            "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/",
+	            "total_shares": 0
+	        }
+	    }
+	],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/share_pages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -435,19 +477,26 @@ Cache-Control: max-age=0, private, must-revalidate
     "title": "Thanks for signing! Now share to keep up our momentum.",
     "total_shares": 0,
     "browser_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing",
-    "facebook_share": {
-        "title": "Sign the petition!",
-        "description": "Please sign our awesome petition.",
-        "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
-        "browser_url": "http://osdi-sample-system.org/petitions/my-petition/"
-    },
-    "twitter_share": {
-        "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/"
-    },
-    "email_share": {
-        "subject": "Sign the petition!",
-        "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/"
-    },
+    "share_url": "http://osdi-sample-system.org/petitions/my-petition/",
+    "share_options": [
+	    {
+            "facebook_share": {
+	            "title": "Sign the petition!",
+	            "description": "Please sign our awesome petition.",
+	            "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
+	            "total_shares": 0
+	        },
+	        "twitter_share": {
+	            "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/",
+	            "total_shares": 0
+	        },
+	        "email_share": {
+	            "subject": "Sign the petition!",
+	            "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/",
+	            "total_shares": 0
+	        }
+	    }
+	],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/share_pages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
