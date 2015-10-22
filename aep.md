@@ -82,7 +82,7 @@ _[Back to top...](#)_
 * [List](lists.html)
 * [Query](queries.html)
 * [Question](questions.html)
-* [Share Page](questions.html)
+* [Share Page](share_pages.html)
 * [Person Signup Helper](person_signup.html)
 
 _[Back to top...](#)_

@@ -201,15 +201,15 @@ Cache-Control: max-age=0, private, must-revalidate
                             "total_shares": 100
                         },
                         "twitter_share": {
-    	                    "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/",
-    	                    "total_shares": 100
-    	                },
-    	                "email_share": {
-    		                "subject": "Sign the petition!",
-    		                "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/",
-    		                "total_shares": 145
-    		            }
-    		        }
+                            "message": "Sign the petition from @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/petitions/my-petition/",
+                            "total_shares": 100
+                        },
+                        "email_share": {
+                            "subject": "Sign the petition!",
+                            "body": "Can you sign the petition to get rid of the bad things? Click here: http://osdi-sample-system.org/petitions/my-petition/",
+                            "total_shares": 145
+                        }
+                    }
                 ],
                 "_links": {
                     "self": {
@@ -244,15 +244,15 @@ Cache-Control: max-age=0, private, must-revalidate
                             "total_shares": 20
                         },
                         "twitter_share": {
-    	                    "message": "Watch this crazy video! Click here: http://osdi-sample-system.org/petitions/my-petition/",
-    	                    "total_shares": 3
-    	                },
-    	                "email_share": {
-    		                "subject": "Watch this video!",
-    		                "body": "Check out this crazy video I just watched! Click here: http://osdi-sample-system.org/petitions/my-petition/",
-    		                "total_shares": 20
-    		            }
-    		        }
+                            "message": "Watch this crazy video! Click here: http://osdi-sample-system.org/petitions/my-petition/",
+                            "total_shares": 3
+                        },
+                        "email_share": {
+                            "subject": "Watch this video!",
+                            "body": "Check out this crazy video I just watched! Click here: http://osdi-sample-system.org/petitions/my-petition/",
+                            "total_shares": 20
+                        }
+                    }
                 ],
                 "_links": {
                     "self": {
