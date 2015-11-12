@@ -50,7 +50,7 @@ _[Back to top...](#)_
 
 ### Record Canvass Helper Fields
 
-A list of fields specific for POSTing via the Record Canvass Helper.
+A list of fields specific for POSTing via the Record Canvass Helper.  Please note that the target of a canvass (the person who has been canvassed) is indicated by the Person identifier in the route.
 
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
@@ -61,7 +61,6 @@ A list of fields specific for POSTing via the Record Canvass Helper.
 | success      | boolean | True if the target was successfully contacted, False otherwise.
 | status_code  | string | A code indicating the status of the contact attempt.  For example: "not-home" indicates that the contact failed because the target was not home, while "success" indicates that the target was contacted successfully.  An empty or missing value for status_code should be assumed to mean that the contact was successful.
 | canvasser          |[Person](people.html) | A link to a single Person resource representing the person who made the contact.
-| target         |[Person](people.html) | A link to a single Person resource representing the person who was contacted.
 
 _[Back to top...](#)_
 
