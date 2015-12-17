@@ -18,7 +18,7 @@ The commitment establishes the following principles
 
 3.	If you own a patent upon which an implementation of the OSDI Specification depends, you are not granting any licenses for implementations outside of the OSDI specification.
 
-## Normative Licensing Commitment. 
+## Normative Licensing Commitment 
 
 ###	Definitions
 
@@ -31,7 +31,7 @@ Written or oral input which is incorporated in the OSDI Specification though com
 #### Specification
 Any technical document or whitepaper that OSDI develops and is approved by an OSDI Committee.
 
-### Licensing Commitment.  
+### Licensing Commitment  
 Each Contributor agrees that it will offer to all applicants a royalty free, nonexclusive, worldwide, non-sub licensable, perpetual patent license to its __Necessary Claims__ on fair, reasonable, and non-discriminatory terms to make, have made, use, import, offer to sell, sell, and distribute conformant implementations of any OSDI Specification.
 
 ### Necessary Claims
