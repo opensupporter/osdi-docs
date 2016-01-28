@@ -128,7 +128,7 @@ _[Back to top...](#)_
 
 ### Scenario: Creating a new donation and person (POST)
 
-Posting to the record donation helper endpoint will allow you to create a new donation and person (or update a person if the system attempts to match people posted with helpers) in one operation. The response is the donation that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+Posting to the record donation helper endpoint will allow you to create a new donation and person (or update a person if the system attempts to match people posted with helpers) in one operation.  Donations created in this manner may also be linked to attendances or submissions, via the relevant property; below, the created donation is linked to an attendance.  The response is the donation that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
 #### Request
 
@@ -207,6 +207,9 @@ OSDI-API-Token:[your api key here]
             "legal_name": "Joe for Congress"
        }
     ],
+    "osdi:attendance": {
+        "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc"
+    }
 {% include helper_action_examples.md %}
 }
 ```
