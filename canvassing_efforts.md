@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Efforts
+title: Canvassing Efforts
 ---
 
-# Effort
+# Canvassing Effort
 
-This page defines the Effort resource.
+This page defines the Canvassing Effort resource.
 
-Efforts represent shifts in canvassing or phone banking, containing information about its start and end time, people to be canvassed or called, and a [Script](scripts.html) that is used for the shift. 
+Canvassing Efforts represent shifts in door-to-door canvassing or phone banking, containing information about its start and end time, people to be canvassed or called, and a [Script](scripts.html) that is used for the shift. 
 
 ### Sections
 
@@ -18,11 +18,11 @@ Efforts represent shifts in canvassing or phone banking, containing information 
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
-    * [Scenario: Retrieving a collection of Effort resources (GET)](#scenario-retrieving-a-collection-of-effort-resources-get)
-    * [Scenario: Retrieving an individual Effort resource (GET)](#scenario-retrieving-an-individual-effort-resource-get)
-    * [Scenario: Creating a new effort (POST)](#scenario-creating-a-new-effort-post)
-    * [Scenario: Modifying an effort (PUT)](#scenario-modifying-an-effort-put)
-    * [Scenario: Deleting an effort (DELETE)](#scenario-deleting-an-effort-delete)
+    * [Scenario: Retrieving a collection of Canvassing Effort resources (GET)](#scenario-retrieving-a-collection-of-effort-resources-get)
+    * [Scenario: Retrieving an individual Canvassing Effort resource (GET)](#scenario-retrieving-an-individual-effort-resource-get)
+    * [Scenario: Creating a new Canvassing Effort (POST)](#scenario-creating-a-new-effort-post)
+    * [Scenario: Modifying a Canvassing Effort (PUT)](#scenario-modifying-an-effort-put)
+    * [Scenario: Deleting a Canvassing Effort (DELETE)](#scenario-deleting-an-effort-delete)
     * [Scenario: Retrieving a collection of targeted People resources (GET)](#scenario-retrieving-a-collection-of-targeted-people-resources-get)
     * [Scenario: Creating a collection of targeted People resources (POST)](#scenario-creating-a-collection-of-targeted-people-resources-post)    
     * [Scenario: Retrieving a collection of Canvass resources (GET)](#scenario-retrieving-a-collection-of-canvass-resources-get)
@@ -30,7 +30,7 @@ Efforts represent shifts in canvassing or phone banking, containing information 
 
 {% include endpoints_and_url_structures.md %}
 
-The link relation label for an Effort resource is ```osdi:effort``` for a single Effort resource or ```osdi:efforts``` for a collection of Effort resources.
+The link relation label for an Canvassing Effort resource is ```osdi:canvassing_effort``` for a single Canvassing Effort resource or ```osdi:canvassing_efforts``` for a collection of Canvassing Effort resources.
 
 _[Back to top...](#)_
 
@@ -43,19 +43,18 @@ _[Back to top...](#)_
 
 _[Back to top...](#)_
 
-### Effort Fields
+### Canvassign Effort Fields
 
 | Name          | Type                | Description
 | -----------   | -----------         | --------------
 |origin_system      |string     |A human readable identifier of the system where this effort was created. (ex: "OSDI System")
-|name               |string     |The name of the Effort. Intended for administrative display rather than a public title, though may be shown to a user.
-|title              |string     |The title of the effort. Intended for public display rather than administrative purposes.
-|description        |string     |A description of the effort, usually displayed publicly. May contain text and/or HTML.
+|name               |string     |The name of the Canvassing Effort. Intended for administrative display rather than a public title, though may be shown to a user.
+|title              |string     |The title of the Canvassing Effort. Intended for public display rather than administrative purposes.
+|description        |string     |A description of the Canvassing Effort, usually displayed publicly. May contain text and/or HTML.
 |summary            |string     |A text-only single paragraph summarizing the effort. Shown on listing pages that have more than titles, but not enough room for full description.
-|start_time        |string     |The start date and time for the effort.
-|end_time        |string     |The end date and time for the effort.
-|type           |string      |The type of the effort "canvassing","phone banking",etc 
-|canvassers |[Person[]*](people.html)  |A collection of People resources who are involved as canvassers in this effort.
+|start_time        |string     |The start date and time for the Canvassing Effort.
+|end_time        |string     |The end date and time for the Canvassing Effort.
+|type           |string      |The type of the Canvassing Effort "in-person","phone banking",etc 
 |script  |[Script*](scripts.html) | A script associated with the effort 
 
 _[Back to top...](#)_
@@ -66,12 +65,12 @@ _[Back to top...](#)_
 
 | Name          | Type       | Description
 |-----------    |----------- |-----------
-|self           |[Effort*](efforts.html)    |A self-referential link to the effort.
-|creator        |[Person*](people.html)         |A link to a single Person resource representing the creator of the question.
-|modified_by    |[Person* ](people.html)        |A link to a Person resource representing the last editor of this question.
-|people  |[Person[]*](people.html)  |A link to the collection of targeted People resources for this effort.
-|canvassers  |[Person[]*](people.html)  |A link to the collection of targeted People resources for this effort.
-|script  |[Survey*](script.html) | A link to the script associated with the effort
+|self           |[Canvassing Effort*](canvassing_efforts.html)    |A self-referential link to the canvassing effort.
+|creator        |[Person*](people.html)         |A link to a single Person resource representing the creator of the Canvassing Effort.
+|modified_by    |[Person* ](people.html)        |A link to a Person resource representing the last editor of this Canvassing Effort.
+|people  |[Person[]*](people.html)  |A link to the collection of targeted People resources for this canvassing effort.
+|canvassers  |[Person[]*](people.html)  |A link to the collection of canvassers represented by People resources for this canvassing effort.
+|script  |[Script*](script.html) | A link to the script associated with the canvassing effort
 
 _[Back to top...](#)_
 
@@ -90,14 +89,14 @@ _[Back to top...](#)_
 
 {% include scenarios_intro.md %}
 
-### Scenario: Retrieving a collection of Effort resources (GET)
+### Scenario: Retrieving a collection of Canvassing Effort resources (GET)
 
-Effort resources are sometimes presented as collections of efforts. For example, calling the efforts endpoint will return a collection of all the efforts stored in the system's database associated with your api key.
+Canvassing Effort resources are sometimes presented as collections of canvassing efforts. For example, calling the canvassing_efforts endpoint will return a collection of all the canvassing efforts stored in the system's database associated with your api key.
 
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/efforts/
+GET https://osdi-sample-system.org/api/v1/canvassing_efforts/
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -118,14 +117,14 @@ Cache-Control: max-age=0, private, must-revalidate
     "total_records": 250,
     "_links": {
         "next": {
-            "href": "https://osdi-sample-system.org/api/v1/efforts?page=2"
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts?page=2"
         },
-        "osdi:efforts": [
+        "osdi:canvassing_efforts": [
             {
-                "href": "https://osdi-sample-system.org/api/v1/efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
             },
             {
-                "href": "https://osdi-sample-system.org/api/v1/efforts/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/1efc3644-af25-4253-90b8-a0baf12dbd1e"
             },
             //(truncated for brevity)
         ],
@@ -137,12 +136,12 @@ Cache-Control: max-age=0, private, must-revalidate
             }
         ],
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/efforts"
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts"
         }
     },
     "_embedded":
     {
-        "osdi:efforts": [
+        "osdi:canvassing_efforts": [
             {
                 "identifiers": [
                     "osdi_sample_system:a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bca",
@@ -172,7 +171,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 ],
                 "_links": {
                     "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/effort/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
                     },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -181,7 +180,7 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:people" : {
-                            "href": "https://osdi-sample-system.org/api/v1/effort/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
+                            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
                     },
                     "osdi:script" : {
                             "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
@@ -226,7 +225,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 ],
                 "_links": {
                     "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/effort/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
                     },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -235,7 +234,7 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:people" : {
-                            "href": "https://osdi-sample-system.org/api/v1/effort/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
+                            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
                     },
                     "osdi:script" : {
                             "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
@@ -259,14 +258,14 @@ Cache-Control: max-age=0, private, must-revalidate
 
 _[Back to top...](#)_       
 
-### Scenario: Retrieving an individual Effort resource (GET)
+### Scenario: Retrieving an individual Canvassing Effort resource (GET)
 
-Calling an individual Effort resource will return the resource directly.
+Calling an individual Canvassing Effort resource will return the resource directly.
 
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa
+GET https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -293,7 +292,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "summary": "Effort 2 for Team 1",
     "start_time": "2016-02-19T8:00:00Z",
     "end_time": "2016-02-20T8:00:00Z",
-    "type": "canvassing",
+    "type": "in-person",
     "script": {
         "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
     },
@@ -308,7 +307,7 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/effort/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -317,7 +316,7 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:people" : {
-                "href": "https://osdi-sample-system.org/api/v1/effort/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
+                "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
         },
         "osdi:script" : {
                 "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
@@ -415,7 +414,7 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/effort/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -424,7 +423,7 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:people" : {
-                "href": "https://osdi-sample-system.org/api/v1/effort/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
+                "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
         },
         "osdi:script" : {
                 "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
@@ -454,14 +453,14 @@ You can update an effort by calling a PUT operation on that effort's endpoint. Y
 #### Request
 
 ```javascript
-PUT https://osdi-sample-system.org/api/v1/efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa
+PUT https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa
 
 Header:
 OSDI-API-Token:[your api key here]
 
 {
     "name": "Effort 2",
-    "title": "Persuasion Script"
+    "title": "Canvassing Effort 2"
 }
 
 ```
@@ -490,18 +489,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "script": {
         "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
     },
-    "canvassers": [
-        {
-            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-        },
-        {
-            href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-        },
-        // truncated for brevity
-    ],
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/effort/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -510,7 +500,7 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:people" : {
-                "href": "https://osdi-sample-system.org/api/v1/effort/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
+                "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
         },
         "osdi:script" : {
                 "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
@@ -534,12 +524,12 @@ _[Back to top...](#)_
 
 ### Scenario: Deleting an effort (DELETE)
 
-You may delete an effort by calling the DELETE command on the effort's endpoint.
+You may delete an effort by calling the DELETE command on the Canvassing Effort's endpoint.
 
 #### Request
 
 ```javascript
-DELETE https://osdi-sample-system.org/api/v1/efforts/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+DELETE https://osdi-sample-system.org/api/v1/canvassing_efforts/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -554,7 +544,7 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "notice": "This script was successfully deleted."
+    "notice": "This canvassing effort was successfully deleted."
 }
 ```
 
