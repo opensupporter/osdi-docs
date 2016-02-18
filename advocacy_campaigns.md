@@ -55,6 +55,7 @@ A list of fields specific to the Advocacy Campaign resource.
 |summary			|string		|A text-only single paragraph summarizing the advocacy campaign. Shown on listing pages that have more than titles, but not enough room for full description.
 |targets			|string		|A human readable description of the target universe for this advocacy campaign. (ex: "U.S. Congress")
 |browser_url		|string		|A URL string pointing to the publicly available advocacy campaign page on the web.
+|featured_image_url		|string		|A URL string pointing to a publicly available featured image file for this advocacy campaign on the web.
 |total_outreaches	|integer	|A read-only computed property representing the current count of the total number of outreaches on the advocacy campaign.
 |type				|flexunum	|The type of advocacy campaign, specifying how users perform outreaches to targets. One of "email", "in-person", "phone", "postal mail", or another type as needed.
 
@@ -154,6 +155,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "summary": "Congress is prepared to pass a civil rights bill -- tell your member of Congress to vote yes.",
                 "target_universe": "U.S. Congress",
                 "browser_url": "http://osdi-sample-system.org/advocacy_campaigns/civil-rights-2015",
+                "featured_image_url": "http://osdi-sample-system.org/images/civil-rights-image.jpg",
                 "type": "email",
                 "total_outreaches": 345,
                 "_links": {
@@ -248,6 +250,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "summary": "Congress is prepared to pass a civil rights bill -- tell your member of Congress to vote yes.",
     "target_universe": "U.S. Congress",
     "browser_url": "http://osdi-sample-system.org/advocacy_campaigns/civil-rights-2015",
+    "featured_image_url": "http://osdi-sample-system.org/images/civil-rights-image.jpg",
     "type": "email",
     "total_outreaches": 345,
     "_links": {
