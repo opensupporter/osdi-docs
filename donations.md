@@ -89,8 +89,7 @@ An object representing the payment details of a donation.
 |self			|[Donation*](donations.html)	|A self-referential link to the donation.
 |person			|[Person*](people.html)		|A link to a single Person resource representing the person who donated.
 |fundraising_page			|[Fundraising Page*](fundraising_pages.html)  		|A link to a Fundraising Page resource representing the fundraising page on which this donation was submitted.
-|attendance | [Attendance*](attendances.html) | A link to the Attendance resource which was "purchased" with this donation, if any.  There is no requirement that the amount of this donation is equal to the cost of the tickets represented in the linked Attendance.
-|submission | [Submission*](submissions) | A link to the Submission resource which was "purchased" with this donation, if any.
+|attendance | [Attendance*](attendances.html) | A link to the Attendance resource which was "purchased" with this donation. Typically used to represent tickets sold for events. There is no requirement that the amount of this donation is equal to the cost of the tickets represented in the linked Attendance.
 
 ## Helpers
 
@@ -106,6 +105,7 @@ An object representing the payment details of a donation.
 * [Record Donation Helper](record_donation.html)
 * [Fundraising Page](fundraising_pages.html)
 * [Person](people.html)
+* [Attendace](attendances.html)
 
 
 
@@ -321,9 +321,6 @@ Cache-Control: max-age=0, private, must-revalidate
                     },
                     "osdi:person": {
                         "href": "https://osdi-sample-system.org/api/v1/people/adb951cb-51f9-420e-b7e6-de953195ec86"
-                    },
-                    "osdi:submission": {
-                        "href": "https://osdi-sample-system.org/api/v1/forms/c945d6fe-929e-11e3-a2e9-12313d316c29/submissions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
                     }
                 },
             },
