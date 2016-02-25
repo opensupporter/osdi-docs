@@ -55,7 +55,6 @@ _[Back to top...](#)_
 |start_time        |string     |The start date and time for the Canvassing Effort.
 |end_time        |string     |The end date and time for the Canvassing Effort.
 |type           |string      |The type of the Canvassing Effort "in-person","phone banking",etc 
-|script  |[Script*](scripts.html) | A script associated with the effort 
 
 _[Back to top...](#)_
 
@@ -157,18 +156,6 @@ Cache-Control: max-age=0, private, must-revalidate
                 "start_time": "2016-02-19T8:00:00Z",
                 "end_time": "2016-02-20T8:00:00Z",
                 "type": "canvassing",
-                "script": {
-                    "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-                },
-                "canvassers": [
-                    {
-                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-                    },
-                    {
-                        href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-                    },
-                    // truncated for brevity
-                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -211,18 +198,6 @@ Cache-Control: max-age=0, private, must-revalidate
                 "start_time": "2016-02-19T8:00:00Z",
                 "end_time": "2016-02-20T8:00:00Z",
                 "type": "canvassing",
-                "script": {
-                    "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-                },
-                "canvassers": [
-                    {
-                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-                    },
-                    {
-                        href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-                    },
-                    // truncated for brevity
-                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -293,18 +268,6 @@ Cache-Control: max-age=0, private, must-revalidate
     "start_time": "2016-02-19T8:00:00Z",
     "end_time": "2016-02-20T8:00:00Z",
     "type": "in-person",
-    "script": {
-        "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-    },
-    "canvassers": [
-        {
-            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-        },
-        {
-            href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-        },
-        // truncated for brevity
-    ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -361,7 +324,7 @@ OSDI-API-Token:[your api key here]
     "summary": "Effort 2 for Team 1",
     "start_time": "2016-02-19T8:00:00Z",
     "end_time": "2016-02-20T8:00:00Z",
-    "type": "canvassing",
+    "type": "in-person",
     "script": {
         "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
     },
@@ -399,7 +362,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "summary": "Effort 2 for Team 1",
     "start_time": "2016-02-19T8:00:00Z",
     "end_time": "2016-02-20T8:00:00Z",
-    "type": "canvassing",
+    "type": "in-person",
     "script": {
         "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
     },
@@ -485,10 +448,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "summary": "Effort 2 for Team 1",
     "start_time": "2016-02-19T8:00:00Z",
     "end_time": "2016-02-20T8:00:00Z",
-    "type": "canvassing",
-    "script": {
-        "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-    },
+    "type": "in-person",
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"

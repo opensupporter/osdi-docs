@@ -49,7 +49,6 @@ _[Back to top...](#)_
 |title              |string     |The title of the script. Intended for public display rather than administrative purposes.
 |description        |string     |A description of the script, usually displayed publicly. May contain text and/or HTML.
 |summary            |string     |A text-only single paragraph summarizing the script. Shown on listing pages that have more than titles, but not enough room for full description.
-| questions |[Question[]*](questions.html)|The list of questions included in the script. The order of questions in this list defines the order of the question in the script. 
 
 _[Back to top...](#)_
 
@@ -148,16 +147,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "name": "Script 1",
                 "title": "Persuasion Script",
                 "description": "<p>Persuasion Script for Area A</p>",
-                "summary": "Persuasion Script for Area A",
-                "questions": [
-                    {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-                    },
-                    {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-                     },
-                    //(truncated for brevity)
-                ]
+                "summary": "Persuasion Script for Area A"
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
@@ -189,15 +179,6 @@ Cache-Control: max-age=0, private, must-revalidate
                     "title": "Persuasion Script",
                     "description": "<p>Persuasion Script for Area A</p>",
                     "summary": "Persuasion Script for Area A",
-                    "questions": [
-                        {
-                            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-                        },
-                        {
-                            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-                        },
-                        //(truncated for brevity)
-                    ],
                     "_links": {
                         "self": {
                             "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
@@ -260,15 +241,6 @@ Cache-Control: max-age=0, private, must-revalidate
     "title": "Persuasion Script",
     "description": "<p>Persuasion Script for Area A</p>",
     "summary": "Persuasion Script for Area A",
-    "questions": [
-            {
-                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-            },
-            {
-                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-            },
-            //(truncated for brevity)
-        ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
@@ -433,15 +405,17 @@ OSDI-API-Token:[your api key here]
     "title": "Persuasion Script",
     "description": "<p>Persuasion Script for Area A</p>",
     "summary": "Persuasion Script for Area A",
-    "questions": [
-            {
-                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-            },
-            {
-                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-            },
-            //(truncated for brevity)
-        ]
+    "_links": {
+        "osdi:questions": [
+                {
+                    "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
+                },
+                {
+                    "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
+                },
+                //(truncated for brevity)
+            ]
+        }
 }
 
 ```
@@ -484,12 +458,15 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:question" : {
-            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-        },
-        "osdi:question" : {
-            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-        }
+       "osdi:questions": [
+                {
+                    "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
+                },
+                {
+                    "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
+                },
+                //(truncated for brevity)
+            ]
 }
 ```
 
@@ -535,15 +512,6 @@ Cache-Control: max-age=0, private, must-revalidate
     "title": "Persuasion Script",
     "description": "<p>Persuasion Script for Area A</p>",
     "summary": "Persuasion Script for Area A",
-    "questions": [
-            {
-                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-            },
-            {
-                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-            },
-            //(truncated for brevity)
-        ]
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
@@ -554,12 +522,15 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:question" : {
-            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-        },
-        "osdi:question" : {
-            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-        }
+        "osdi:questions": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
+            },
+            //(truncated for brevity)
+        ]
 }
 ```
 
