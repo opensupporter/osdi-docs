@@ -181,6 +181,7 @@ _[Back to top...](#)_
 |taggings		|[Taggings[]*](taggings.html)   	|A link to the collection of taggings associated with the person.
 |items		|[Items[]*](items.html)   	|A link to the collection of list items associated with the person.
 |modified_by		|[Person*](people.html)  	|A link to a Person resource representing the last editor of this person.
+|record_canvas_helper |[Record Canvass Helper*](record_canvass.html) | A link to the Record Canvass Helper for this person.
 
 _[Back to top...](#)_
 
@@ -400,6 +401,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     },
                     "osdi:items": {
                         "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/items"
+                    },
+                    "osdi:record_canvass_helper": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_canvass_helper"
                     }
                 }
             },
@@ -461,6 +465,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     },
                     "osdi:items": {
                         "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/items"
+                    },
+                    "osdi:record_canvass_helper": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/record_canvass_helper"
                     }
                 }
             },
@@ -627,6 +634,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:items": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/items"
+        },
+        "osdi:record_canvass_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_canvass_helper"
         }
     }
 }
@@ -768,6 +778,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:items": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/items"
+        },
+        "osdi:record_canvass_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/record_canvass_helper"
         }
     }
 }
@@ -879,6 +892,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:items": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/items"
+        },
+        "osdi:record_canvass_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/record_canvass_helper"
         }
     }
 }

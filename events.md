@@ -55,6 +55,7 @@ A list of fields specific to the Event resource.
 |description		|string		|A description of the event, usually displayed publicly. May contain text and/or HTML.
 |summary			|string		|A text-only single paragraph summarizing the event. Shown on listing pages that have more than titles, but not enough room for full description.
 |browser_url		|string		|A URL string pointing to the publicly available event page on the web.
+|featured_image_url		|string		|A URL string pointing to a publicly available featured image file for this event on the web.
 |total_accepted		|integer	|A read-only computed property representing the current count of the total number of attendances on the event.
 |status				|enum		|Status of the event.  Possible values are: "confirmed", "tentative", or "cancelled".
 |instructions		| string 	|The instructions for the event shown to attendees after they have RSVPed. May contain text and/or HTML.
@@ -63,7 +64,7 @@ A list of fields specific to the Event resource.
 |all_day_date		|date		|The date for all day events.
 |all_day			|boolean	|True if the event is an all day event.
 |capacity  			|integer	|The max capacity of attendees for the event.
-|guestsCanInviteOthers |boolean |Attendees can invite guests to the event.
+|guests_can_invite_others |boolean |Attendees can invite guests to the event.
 |transparence		|enum		|Whether the event blocks time on online calendar systems. Possible values are "opaque" or "transparent". Opaque is the default, but this can be overridden by a user.
 |visibility			|enum		|Visibility of the event.  Possible values are "public" and "private".
 |location			|[Location](#location)	| An object hash representing the location of the event.
@@ -196,12 +197,13 @@ Cache-Control: max-age=0, private, must-revalidate
                 "summary": "Join us in the park to rally for justice!",
                 "instructions": "<p>Bring a friend and a sign.</p>",
                 "browser_url": "http://osdi-sample-system.org/events/rally-for-justice",
+                "featured_image_url": "http://osdi-sample-system.org/images/rally-for-justice-banner.jpg",
                 "total_accepted": 14,
                 "status": "confirmed",
                 "start_date": "2015-03-14T12:00:00Z",
                 "end_date": "2015-03-14T14:00:00Z",
                 "all_day": false,
-                "guestsCanInviteOthers": true,
+                "guests_can_invite_others": true,
                 "transparence": "opaque",
                 "visibility": "public",
                 "location": {
@@ -267,7 +269,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "start_date": "2015-01-05T19:00:00Z",
                 "end_date": "2015-01-05T21:00:00Z",
                 "all_day": false,
-                "guestsCanInviteOthers": false,
+                "guests_can_invite_others": false,
                 "capacity": 10,
                 "transparence": "opaque",
                 "visibility": "private",
@@ -357,12 +359,13 @@ Cache-Control: max-age=0, private, must-revalidate
     "summary": "Join us in the park to rally for justice!",
     "instructions": "<p>Bring a friend and a sign.</p>",
     "browser_url": "http://osdi-sample-system.org/events/rally-for-justice",
+    "featured_image_url": "http://osdi-sample-system.org/images/rally-for-justice-banner.jpg",
     "total_accepted": 14,
     "status": "confirmed",
     "start_date": "2015-03-14T12:00:00Z",
     "end_date": "2015-03-14T14:00:00Z",
     "all_day": false,
-    "guestsCanInviteOthers": true,
+    "guests_can_invite_others": true,
     "transparence": "opaque",
     "visibility": "public",
     "location": {
@@ -485,7 +488,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "start_date": "2015-03-14T12:00:00Z",
     "end_date": "2015-03-14T14:00:00Z",
     "all_day": false,
-    "guestsCanInviteOthers": true,
+    "guests_can_invite_others": true,
     "transparence": "opaque",
     "visibility": "public",
     "location": {
@@ -574,7 +577,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "start_date": "2015-03-15T12:00:00Z",
     "end_date": "2015-03-15T14:00:00Z",
     "all_day": false,
-    "guestsCanInviteOthers": true,
+    "guests_can_invite_others": true,
     "transparence": "opaque",
     "visibility": "public",
     "location": {

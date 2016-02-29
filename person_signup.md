@@ -23,6 +23,7 @@ Some initial implementations may only support helpers -- direct RESTful access m
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
     * [Person Signup Helper Fields](#person-signup-helper-fields)
+    * [Helper Action Functions](#helper-action-functions)
     * [Related Objects](#related-objects)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -47,9 +48,13 @@ A list of fields specific for POSTing via the Person Signup Helper.
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-|add_tags      |strings[]     |An array of tag names corresponding to previously created tags to add to this person when it is created.
-|add_lists     |strings[]     |An array of list names corresponding to previously created lists to add to this person when it is created.
-|person			|[Person*](#person)	|An object hash representing the person to be added.
+|person         |[Person*](#person) |An object hash representing the person to be added.
+
+_[Back to top...](#)_
+
+### Helper Action Functions
+
+{% include helper_action_functions.md %}
 
 _[Back to top...](#)_
 
@@ -131,13 +136,7 @@ OSDI-API-Token:[your api key here]
         ],
         "gender": "Male"
     },
-    "add_tags": [
-        "volunteer",
-        "donor"
-    ],
-    "add_lists": [
-        "supporters"
-    ]
+{% include helper_action_examples.md %}
 }
 ```
 
@@ -150,6 +149,7 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
+    "id": "d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
     "identifiers": [
         "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
         "foreign_system:1"

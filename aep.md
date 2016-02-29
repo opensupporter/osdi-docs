@@ -40,6 +40,7 @@ A list of fields specific to the AEP resource.
 |vendor_name    | string    | A string representing the vendor name
 |product_name   | string    | A string identifying the product name
 |osdi_version	| string	| A string identifying the OSDI Version
+|namespace      | string    | A string representing the prefix used for curies, identifiers, and other applicable places.
 
 _[Back to top...](#)_
 
@@ -56,12 +57,13 @@ Note that on the AEP, links will often contain titles to inform new users about 
 |petitions		|[Petitions[]*](petitions.html)  		|A link to the collection of Petition resources in the system.
 |events		|[Events[]*](events.html)  		|A link to the collection of Event resources in the system.
 |forms		|[Forms[]*](forms.html)  		|A link to the collection of Form resources in the system.
-|fundraising_pages		|[Fundraising Pages[]*](#)  		|A link to the collection of Fundraising Page resources in the system.
+|fundraising_pages		|[Fundraising Pages[]*](fundraising_pages.html)  		|A link to the collection of Fundraising Page resources in the system.
 |donations		|[Donations[]*](donations.html)  		|A link to the collection of Donation resources in the system.
 |tags		|[Tags[]*](tags.html)  		|A link to the collection of Tag resources in the system.
 |lists		|[Lists[]*](lists.html)  		|A link to the collection of list resources in the system.
 |queries		|[Queries[]*](queries.html)  		|A link to the collection of Query resources in the system.
 |questions		|[Questions[]*](questions.html)  		|A link to the collection of Question resources in the system.
+|share_pages		|[Share Pages[]*](share_pages.html)  		|A link to the collection of Share Page resources in the system.
 |docs		|N/A  		|A link to the human-readable documentation for the API system.
 |person_signup_helper		|[Person Signup Helper*](person_signup.html)  		|A link to the Person Signup Helper resource.
 
@@ -74,12 +76,13 @@ _[Back to top...](#)_
 * [Petition](petitions.html)
 * [Event](events.html)
 * [Form](forms.html)
-* [Fundraising Page](#)
+* [Fundraising Page](fundraising_pages.html)
 * [Donation](donations.html)
 * [Tag](tags.html)
 * [List](lists.html)
 * [Query](queries.html)
 * [Question](questions.html)
+* [Share Page](share_pages.html)
 * [Person Signup Helper](person_signup.html)
 
 _[Back to top...](#)_
@@ -115,6 +118,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "product_name" : "Curly Braces OSDI Server",
 	"osdi_version" : "1.0",
     "max_pagesize": 25,
+    "namespace": "osdi_sample_system",
     "_links": {
         "curies": [
             {
@@ -166,6 +170,10 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:questions": {
             "href": "https://osdi-sample-system.org/api/v1/questions",
             "title": "The collection of questions in the system"
+        },
+        "osdi:share_pages": {
+            "href": "https://osdi-sample-system.org/api/v1/share_pages",
+            "title": "The collection of share pages in the system"
         },
         "docs": {
             "href": "https://osdi-sample-system.org/docs/v1/",
