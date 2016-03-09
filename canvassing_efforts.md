@@ -7,7 +7,7 @@ title: Canvassing Efforts
 
 This page defines the Canvassing Effort resource.
 
-Canvassing Efforts represent shifts in door-to-door canvassing or phone banking, containing information about its start and end time, people to be canvassed or called, and a [Script](scripts.html) that is used for the shift. 
+Canvassing Efforts represent specific canvassing/phone banking events planned for a specific time period. The resource contains information about start and end time, people to be canvassed or called, and a [Script](scripts.html) that is used for the effort. 
 
 ### Sections
 
@@ -18,14 +18,20 @@ Canvassing Efforts represent shifts in door-to-door canvassing or phone banking,
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
-    * [Scenario: Retrieving a collection of Canvassing Effort resources (GET)](#scenario-retrieving-a-collection-of-effort-resources-get)
-    * [Scenario: Retrieving an individual Canvassing Effort resource (GET)](#scenario-retrieving-an-individual-effort-resource-get)
-    * [Scenario: Creating a new Canvassing Effort (POST)](#scenario-creating-a-new-effort-post)
-    * [Scenario: Modifying a Canvassing Effort (PUT)](#scenario-modifying-an-effort-put)
-    * [Scenario: Deleting a Canvassing Effort (DELETE)](#scenario-deleting-an-effort-delete)
+    * [Scenario: Retrieving a collection of Canvassing Effort resources (GET)](#scenario-retrieving-a-collection-of-canvassing-effort-resources-get)
+    * [Scenario: Retrieving an individual Canvassing Effort resource (GET)](#scenario-retrieving-an-individual-canvassing-effort-resource-get)
+    * [Scenario: Creating a new Canvassing Effort (POST)](#scenario-creating-a-new-canvassing-effort-post)
+    * [Scenario: Modifying a Canvassing Effort (PUT)](#scenario-modifying-a-canvassing-effort-put)
+    * [Scenario: Deleting a Canvassing Effort (DELETE)](#scenario-deleting-a-canvassing-effort-delete)
     * [Scenario: Retrieving a collection of targeted People resources (GET)](#scenario-retrieving-a-collection-of-targeted-people-resources-get) 
+    * [Scenario: Assigning a collection of targeted People resources (POST)](#scenario-assigning-a-collection-of-targeted-people-resources-post) 
+    * [Scenario: Adding a collection of targeted People resources (PUT)](#scenario-adding-a-collection-of-targeted-people-resources-put)
+    * [Scenario: Removing a collection of targeted People resources (DELETE)](#scenario-removing-a-collection-of-targeted-people-resources-delete) 
     * [Scenario: Retrieving a collection of Canvass resources (GET)](#scenario-retrieving-a-collection-of-canvass-resources-get)
     * [Scenario: Retrieving a collection of canvassers People resources (GET)](#scenario-retrieving-a-collection-of-canvassers-people-resources-get)
+    * [Scenario: Assigning a collection of canvassers People resources (POST)](#scenario-assigning-a-collection-of-canvassers-people-resources-post) 
+    * [Scenario: Adding a collection of canvassers People resources (PUT)](#scenario-adding-a-collection-of-canvassers-people-resources-put)
+    * [Scenario: Removing a collection of canvassers People resources (DELETE)](#scenario-removing-a-collection-of-canvassers-people-resources-delete) 
 
 
 {% include endpoints_and_url_structures.md %}
@@ -283,14 +289,14 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Creating a new effort (POST)
+### Scenario: Creating a new Canvassing Effort (POST)
 
 Posting to the effort collection endpoint will allow you to create a new effort. The response is the new effort that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
 #### Request
 
 ```javascript
-POST https://osdi-sample-system.org/api/v1/scripts/
+POST https://osdi-sample-system.org/api/v1/canvassing_efforts/
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -307,8 +313,10 @@ OSDI-API-Token:[your api key here]
     "start_time": "2016-02-19T8:00:00Z",
     "end_time": "2016-02-20T8:00:00Z",
     "type": "in-person",
-    "script": {
-        "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+    "_links": {
+        "osdi:script": {
+            "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+        }
     }
 }
 
@@ -336,9 +344,6 @@ Cache-Control: max-age=0, private, must-revalidate
     "start_time": "2016-02-19T8:00:00Z",
     "end_time": "2016-02-20T8:00:00Z",
     "type": "in-person",
-    "script": {
-        "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -365,7 +370,7 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Modifying an effort (PUT)
+### Scenario: Modifying a Canvassing Effort (PUT)
 
 You can update an effort by calling a PUT operation on that effort's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
 
@@ -434,7 +439,7 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Deleting an effort (DELETE)
+### Scenario: Deleting a Canvassing Effort (DELETE)
 
 You may delete an effort by calling the DELETE command on the Canvassing Effort's endpoint.
 
@@ -723,6 +728,189 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ``` 
 
+
+_[Back to top...](#)_
+
+### Scenario: Assigning a collection of targeted People resources (POST)
+
+Posting to the people collection of an individual effort collection endpoint will allow you to assign new people to the canvassing effort. The response will contain a list of people that were assigned.
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/people
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "_links": {
+        "osdi:people" : [
+            { 
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            }, 
+            { 
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc4"
+            }, 
+            // truncated for brevity
+        ]
+}
+
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+{
+    "total_pages": 88,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 2188,
+    "_links": {
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/people?page=2"
+        },
+        "osdi:people": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc4"
+            },
+            //(truncated for brevity)
+        ],
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/people"
+        }
+    }
+}
+``` 
+
+_[Back to top...](#)_
+
+### Scenario: Adding a collection of targeted People resources (PUT)
+
+Executing a PUT request to the people collection of an individual effort collection endpoint will allow you to add new people to the canvassing effort. The response will contain a list of people that were assigned.
+
+#### Request
+
+```javascript
+PUT https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/people
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "_links": {
+        "osdi:people" : [
+            { 
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc5"
+            }, 
+            { 
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc6"
+            }
+        ]
+}
+
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+{
+    "total_pages": 88,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 2188,
+    "_links": {
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/people?page=2"
+        },
+        "osdi:people": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc4"
+            },
+            //(truncated for brevity)
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc5"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc6"
+            },
+        ],
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/people"
+        }
+    }
+}
+``` 
+
+_[Back to top...](#)_
+
+
+### Scenario: Removing a collection of targeted People resources (DELETE)
+
+You may unassign people from a canvassing effort by calling the DELETE command on the Canvassing Effort's people collection endpoint. If no people are provided in the request, all of the people are cleared.
+
+#### Request
+
+```javascript
+DELETE https://osdi-sample-system.org/api/v1/canvassing_efforts/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "_links": {
+        "osdi:people" : [
+            { 
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc5"
+            }, 
+            { 
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc6"
+            }
+        ]
+}
+```
+
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "notice": "People were unassigned."
+}
+```
 
 _[Back to top...](#)_
 
@@ -1111,5 +1299,188 @@ Cache-Control: max-age=0, private, must-revalidate
 ``` 
 
 
-_[Back to top...](#)_      
+_[Back to top...](#)_     
+
+### Scenario: Assigning a collection of canvassers People resources (POST)
+
+Posting to the canvassers collection of an individual effort collection endpoint will allow you to assign new canvassers to the canvassing effort. The response will contain a list of people that were assigned.
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/canvassers
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "_links": {
+        "osdi:people" : [
+            { 
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            }, 
+            { 
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc4"
+            }, 
+            // truncated for brevity
+        ]
+}
+
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+{
+    "total_pages": 88,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 2188,
+    "_links": {
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/canvassers?page=2"
+        },
+        "osdi:people": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc4"
+            },
+            //(truncated for brevity)
+        ],
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/canvassers"
+        }
+    }
+}
+``` 
+
+_[Back to top...](#)_
+
+### Scenario: Adding a collection of canvassers People resources (PUT)
+
+Calling the DELETE command on the canvassers collection of an individual effort endpoint will allow you to add new canvassers to the canvassing effort. The response will contain a list of people that were assigned.
+
+#### Request
+
+```javascript
+PUT https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/canvassers
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "_links": {
+        "osdi:people" : [
+            { 
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc5"
+            }, 
+            { 
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc6"
+            }
+        ]
+}
+
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+{
+    "total_pages": 88,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 2188,
+    "_links": {
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/canvassers?page=2"
+        },
+        "osdi:people": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc4"
+            },
+            //(truncated for brevity)
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc5"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc6"
+            },
+        ],
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/canvassers"
+        }
+    }
+}
+``` 
+
+_[Back to top...](#)_
+
+
+### Scenario: Removing a collection of targeted People resources (DELETE)
+
+You may unassign canvassers from a canvassing effort by calling the DELETE command on the Canvassing Effort's canvassers collection endpoint. If no people are provided in the request, all of the canvassers are cleared.
+
+#### Request
+
+```javascript
+DELETE https://osdi-sample-system.org/api/v1/canvassing_efforts/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b/canvassers
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "_links": {
+        "osdi:people" : [
+            { 
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc5"
+            }, 
+            { 
+                "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc6"
+            }
+        ]
+}
+```
+
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "notice": "People were unassigned."
+}
+```
+
+_[Back to top...](#)_ 
 
