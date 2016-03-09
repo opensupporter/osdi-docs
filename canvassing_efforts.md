@@ -1443,7 +1443,7 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Removing a collection of targeted People resources (DELETE)
+### Scenario: Removing a collection of canvassers People resources (DELETE)
 
 You may unassign canvassers from a canvassing effort by calling the DELETE command on the Canvassing Effort's canvassers collection endpoint. If no people are provided in the request, all of the canvassers are cleared.
 
