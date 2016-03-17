@@ -158,14 +158,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
-                    "osdi:questions" : [
-                        {
-                            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-                        },
-                        {
-                            "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-                        }
-                    ]
+                    "osdi:script_questions" : {
+                            "href": "https://osdi-sample-system.org/api/v1/survey/c945d6fe-929e-11e3-a2e9/script_questions"
+                    }
                 },
                 {
                     "identifiers": [
@@ -189,15 +184,9 @@ Cache-Control: max-age=0, private, must-revalidate
                         "osdi:modified_by": {
                             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                         },
-                        "osdi:questions" : [ 
-                            {
-                                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-                            },
-                            {
-                                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-                            },
-                            //(truncated for brevity)
-                        ]
+                        "osdi:script_questions" : {
+                                "href": "https://osdi-sample-system.org/api/v1/survey/c945d6fe-929e-11e3-a2e9/script_questions"
+                        }
                     }
                 }
             },
@@ -251,131 +240,108 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:questions" : [
-            {
-                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-            },
-            {
-                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-            }
-        },
+        "osdi:script_questions" : {
+                "href": "https://osdi-sample-system.org/api/v1/survey/c945d6fe-929e-11e3-a2e9/script_questions"
+        }
+    },
     "_embedded": {
-        "osdi:questions": [
-            {
-                "identifiers": [
-                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
-                    "foreign_system:1"
-                ],
-                "origin_system": "OSDI Sample System",
-                "created_date": "2014-03-20T21:04:31Z",
-                "modified_date": "2014-03-20T21:04:31Z",
-                "name": "Volunteer Question",
-                "title": "Do you want to volunteer?",
-                "description": "<p>Do you want to volunteer? It will only take a few hours of time per week.</p>",
-                "summary": "Volunteer question for canvass",
-                "question_type": "SingleChoice",
-                "responses": [
-                  {
-                    "key": "Y",
-                    "name": "yes",
-                    "title": "Yes"
-                  },
-                  {
-                    "key": "M",
-                    "name": "maybe",
-                    "title": "Maybe"
-                  },
-                  {
-                    "key": "N",
-                    "name": "no",
-                    "title": "No"
+        "osdi:script_questions": [
+          {
+            "sequence": 1,
+            "_embedded": {
+              "osdi:question":
+                {
+                  "origin_system": "OSDISystem",
+                  "name": "foobar",
+                  "description": "What is your name?",
+                  "title": "foobar",
+                  "summary": "What is your name?",
+                  "question_type": "SingleChoice",
+                  "identifiers": [
+                    "OSDISystem:202004"
+                  ],
+                  "_links": {
+                    "self": {
+                      "href": "http://osdi-sample-system.org/api/v1/questions/202004"
+                    },
+                    "curies": [
+                      {
+                        "name": "osdi",
+                        "href": "http://osdi-sample-system.org/osdi#{rel}",
+                        "templated": true
+                      }
+                    ]
                   }
-                ],
-                "_links": {
-                    "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
-                    },
-                    "osdi:answers": {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
-                    },
-                    "osdi:creator": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
-                    },
-                    "osdi:modified_by": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-                    }
                 }
-            },
-            {
-                "identifiers": [
-                    "osdi_sample_system:a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
-                ],
-                "origin_system": "OSDI Sample System",
-                "created_date": "2014-03-20T21:04:31Z",
-                "modified_date": "2014-03-20T21:04:31Z",
-                "name": "Issues question",
-                "title": "Which questions do you care about?",
-                "description": "<p>Which issues do you care about? Select all that apply.</p>",
-                "summary": "Issues the person cares about",
-                "question_type": "MultiChoice",
-                "responses": [
-                  {
-                    "key": "hc",
-                    "name": "healthcare",
-                    "title": "Health care"
-                  },
-                  {
-                    "key": "env",
-                    "name": "environment",
-                    "title": "Environment"
-                  },
-                  {
-                    "key": "ec",
-                    "name": "economy",
-                    "title": "Economy and jobs"
+            }
+          },
+          {
+            "sequence": 2,
+            "_embedded": {
+              "osdi:question": 
+                {
+                  "origin_system": "OSDISystem",
+                  "name": "pbank",
+                  "description": "Will you phone bank?",
+                  "title": "pbank",
+                  "summary": "Will you phone bank?",
+                  "question_type": "SingleChoice",
+                  "responses": [
+                    {
+                      "key": "856278",
+                      "name": "Yes",
+                      "title": "Yes"
+                    },
+                    {
+                      "key": "856279",
+                      "name": "No",
+                      "title": "No"
+                    }
+                  ],
+                  "identifiers": [
+                    "OSDISystem:203079"
+                  ],
+                  "_links": {
+                    "self": {
+                      "href": "http://osdi-sample-system.org/api/v1/questions/203079"
+                    },
+                    "curies": [
+                      {
+                        "name": "osdi",
+                        "href": "http://osdi-sample-system.org/osdi#{rel}",
+                        "templated": true
+                      }
+                    ]
                   }
-                ],
-                "_links": {
-                    "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
-                    },
-                    "osdi:answers": {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/answers"
-                    },
-                    "osdi:creator": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
-                    },
-                    "osdi:modified_by": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-                    }
                 }
-            },
-            {
-                "identifiers": [
-                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
-                ],
-                "origin_system": "OSDI Sample System",
-                "created_date": "2014-03-20T20:44:13Z",
-                "modified_date": "2014-03-20T20:44:13Z",
-                "name": "Why the respondant wants to get involved.",
-                "title": "Why do you want to get involved with our organization?",
-                "question_type": "Paragraph",
-                "_links": {
+            }
+          },
+          {
+            "sequence": 3,
+            "_embedded": {
+              "osdi:question":
+                {
+                  "origin_system": "OSDISystem",
+                  "question_type": "SingleChoice",
+                  "identifiers": [
+                    "OSDISystem:52472"
+                  ],
+                  "_links": {
                     "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                      "href": "http://osdi-sample-system.org/api/v1/questions/52472"
                     },
-                    "osdi:answers": {
-                        "href": "https://osdi-sample-system.org/api/v1/questions/1efc3644-af25-4253-90b8-a0baf12dbd1e/answers"
-                    },
-                    "osdi:creator": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
-                    },
-                    "osdi:modified_by": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
-                    }
+                    "curies": [
+                      {
+                        "name": "osdi",
+                        "href": "http://osdi-sample-system.org/osdi#{rel}",
+                        "templated": true
+                      }
+                    ]
+                  }
                 }
-            },
-            //(truncated for brevity)
+            }
+          },
+          // truncated for brevity
         ]
     }
 }
@@ -405,17 +371,6 @@ OSDI-API-Token:[your api key here]
     "title": "Persuasion Script",
     "description": "<p>Persuasion Script for Area A</p>",
     "summary": "Persuasion Script for Area A",
-    "_links": {
-        "osdi:questions": [
-                {
-                    "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-                },
-                {
-                    "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-                },
-                //(truncated for brevity)
-            ]
-        }
 }
 
 ```
@@ -439,15 +394,6 @@ Cache-Control: max-age=0, private, must-revalidate
     "title": "Persuasion Script",
     "description": "<p>Persuasion Script for Area A</p>",
     "summary": "Persuasion Script for Area A",
-    "questions": [
-            {
-                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-            },
-            {
-                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-            },
-            //(truncated for brevity)
-        ]
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
@@ -458,15 +404,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-       "osdi:questions": [
-                {
-                    "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-                },
-                {
-                    "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-                },
-                //(truncated for brevity)
-            ]
+       "osdi:script_questions": {
+            "href": "https://osdi-sample-system.org/api/v1/script/c945d6fe-929e-11e3-a2e9/script_questions"
+        }
 }
 ```
 
@@ -522,15 +462,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:questions": [
-            {
-                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2e9"
-            },
-            {
-                "href": "https://osdi-sample-system.org/api/v1/questions/c945d6fe-929e-11e3-a2ea"
-            },
-            //(truncated for brevity)
-        ]
+        "osdi:script_questions": {
+                "href": "https://osdi-sample-system.org/api/v1/script/c945d6fe-929e-11e3-a2e9/script_questions"
+        }
 }
 ```
 
