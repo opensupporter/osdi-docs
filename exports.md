@@ -61,7 +61,7 @@ _[Back to top...](#)_
 |status			|Flexenum	| [ initalizing, pending_approval, rejected, queued, processing, ready, expired	]	|
 |detail         | string | A string with additional details regarding the status
 |download_link | string | A URL pointing to a file download such as csv
-| export_type   | flexenum | A string representing the requested type, eg ['csv','tsv' other]
+| export_template  | flexenum | A string representing the template name to be used when creating the exported file.  The template is assumed to specify which columns will be included and the file type (zip,csv,tsv)
 
 
 ## Links
@@ -147,7 +147,8 @@ Cache-Control: max-age=0, private, must-revalidate
                 "processed_date" : "2014-03-18T11:02:15Z",
                 "name" : "People who love us export"m
                 "status" : "ready",
-                "download_link" : "https://osdi-sample-system.org/downloads/jdiejdjdiejd.csv"
+                "download_link" : "https://osdi-sample-system.org/downloads/jdiejdjdiejd.csv",
+                "export_template" : "my_template_tsv",
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/exports/c945d6fe-929e-11e3-a2e9-12313d316c29"
@@ -168,6 +169,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "action_date": "2014-03-18T11:02:15Z",
                 "name" : "Likely Hipsters export",
                 "status" : "pending_approval",
+                "export_template" : "my_template_tsv",
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/exports/d945d6fe-929e-11e3-a2e9-12313d316c29"
@@ -215,7 +217,8 @@ Cache-Control: max-age=0, private, must-revalidate
     "action_date": "2014-03-18T11:02:15Z",
     "name" : "Likely Hipsters export",
     "status" : "rejected",
-    "detail" : "Please ride your fixie to  campaign security, you are fired!"
+    "detail" : "Please ride your fixie to  campaign security, you are fired!",
+    "export_template" : "my_template_tsv",
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/exports/d945d6fe-929e-11e3-a2e9-12313d316c29"
@@ -242,7 +245,7 @@ Header:
 OSDI-API-Token:[your api key here]
 
 {
-    "export_type" : "tsv",
+    "export_template" : "my_template_tsv",
     "name" : "People who love us",
     "_links" : {
         "osdi:resource" : {
