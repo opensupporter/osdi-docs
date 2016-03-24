@@ -61,7 +61,7 @@ _[Back to top...](#)_
 |self           |[Script*](scripts.html)    |A self-referential link to the script.
 |creator        |[Person*](people.html)         |A link to a single Person resource representing the creator of the question.
 |modified_by    |[Person* ](people.html)        |A link to a Person resource representing the last editor of this question.
-|questions  |[Question[]*](questions.html)  |A link to the collection of Question resources for this script.
+|script_questions  |[ScriptQuestion[]*](script_questions.html)  |A link to the collection of Script Question resources for this script.
 
 _[Back to top...](#)_
 

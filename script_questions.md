@@ -20,7 +20,7 @@ Scripts Questions are intermediary resources that associate [Questions](question
 * [Scenarios](#scenarios)
     * [Scenario: Retrieving a collection of Script Question resources (GET)](#scenario-retrieving-a-collection-of-script-question-resources-get)
     * [Scenario: Add question to a script (POST)](#scenario-add-question-to-a-script-post)
-    * [Scenario: Clear all questions in a script (DELETE)](#scenario-clear-all-questions-in-a-script-delete)
+    * [Scenario: Delete a script question from the script (DELETE)](#scenario-delete-a-script-question-from-the-script-delete)
 
 
 {% include endpoints_and_url_structures.md %}
@@ -120,6 +120,24 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:scipt_questions": [
           {
             "sequence": 1,
+            "_links": {
+                "curies": [
+                    {
+                        "name": "osdi",
+                        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                        "templated": true
+                    }
+                ],
+                "self": {
+                    "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0
+                },
+                "osdi:question": {
+                  "href": "http://osdi-sample-system.org/api/v1/questions/202004"
+                },
+                "osdi:script": {
+                    "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
+                }
+            },
             "_embedded": {
               "osdi:question":
                 {
@@ -149,6 +167,24 @@ Cache-Control: max-age=0, private, must-revalidate
           },
           {
             "sequence": 2,
+            "_links": {
+                "curies": [
+                    {
+                        "name": "osdi",
+                        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                        "templated": true
+                    }
+                ],
+                "self": {
+                    "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/be0e-4cd3-9ed7-d0
+                },
+                "osdi:question": {
+                  "href": "http://osdi-sample-system.org/api/v1/questions/203079"
+                },
+                "osdi:script": {
+                    "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
+                }
+            },
             "_embedded": {
               "osdi:question": 
                 {
@@ -190,6 +226,24 @@ Cache-Control: max-age=0, private, must-revalidate
           },
           {
             "sequence": 3,
+            "_links": {
+                "curies": [
+                    {
+                        "name": "osdi",
+                        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                        "templated": true
+                    }
+                ],
+                "self": {
+                    "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ce0e-4cd3-9ed7-d0
+                },
+                "osdi:question": {
+                  "href": "http://osdi-sample-system.org/api/v1/questions/52472"
+                },
+                "osdi:script": {
+                    "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
+                }
+            },
             "_embedded": {
               "osdi:question":
                 {
@@ -259,14 +313,14 @@ _[Back to top...](#)_
 
 
 
-### Scenario: Clear all questions in a script (DELETE)
+### Scenario: Delete a script question from the script (DELETE)
 
-You may clear a script of all its questions by calling the DELETE command on the script questions endpoint.
+You may delete a script question from the script by calling the DELETE command on the script question endpoint.
 
 #### Request
 
 ```javascript
-DELETE https://osdi-sample-system.org/api/v1/scripts/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b/script_questions
+DELETE https://osdi-sample-system.org/api/v1/scripts/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b/script_questions/366-466d-a3b8
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -281,7 +335,7 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "notice": "All script questions were cleared."
+    "notice": "Script question was deleted from the script."
 }
 ```
 
