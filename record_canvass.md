@@ -13,7 +13,7 @@ In addition, you can indicate to the server whether to trigger additional action
 
 The Record Canvass Helper assumes that the person who was canvassed (the "target") already exists in the system.
 
-Typically, the response to a successful Record Canvass Helper POST is the full representation of the Canvass. However, the Record Canvass Helper can be used without authentication, allowing for use in frontend javascript-based applications without giving away API key secrets, for example. If no authentication is passed, the response will simply be the server response code, to avoid leaking any data. (ex: 200 for success, 500 for error, etc...)
+Typically, the response to a successful Record Canvass Helper POST is the full representation of the Canvass. However, the Record Canvass Helper can be used without authentication, allowing for use in frontend javascript-based applications without giving away API key secrets, for example. If no authentication is passed, the response on success will simply be the server response code (ex: 200) and an empty JSON object. On error, the server response code (ex: 404, 500) plus an error message may be returned.
 
 Some initial implementations may only support helpers -- direct RESTful access may not be supported. In those cases, the _links section may be omitted in responses.
 
@@ -172,7 +172,7 @@ _[Back to top...](#)_
 
 ### Scenario: Creating a new canvass without authentication (POST)
 
-Posting to the record canvass helper endpoint without authentication will allow you to create a new canvass and the associated answers and/or taggings in one operation, but without giving away API key secrets or leaking data, so this method is appropriate for frontend javascript applications. The response is the server resonse code. (ex: 200 for success, 500 for error, etc...) While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+Posting to the record canvass helper endpoint without authentication will allow you to create a new canvass and the associated answers and/or taggings in one operation, but without giving away API key secrets or leaking data, so this method is appropriate for frontend javascript applications. The response on success will simply be the server response code (ex: 200) and an empty JSON object. On error, the server response code (ex: 404, 500) plus an error message may be returned. While each implementing system will require different fields, any optional fields not included in a POST operation should not be set at all by the receiving system, or should be set to default values.
 
 #### Request
 
@@ -197,6 +197,11 @@ POST https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d
 
 ```javascript
 200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{}
 ```
 
 
