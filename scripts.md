@@ -159,7 +159,7 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:script_questions" : {
-                            "href": "https://osdi-sample-system.org/api/v1/survey/c945d6fe-929e-11e3-a2e9/script_questions"
+                            "href": "https://osdi-sample-system.org/api/v1/script/c945d6fe-929e-11e3-a2e9/script_questions"
                     }
                 },
                 {
@@ -185,7 +185,7 @@ Cache-Control: max-age=0, private, must-revalidate
                             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                         },
                         "osdi:script_questions" : {
-                                "href": "https://osdi-sample-system.org/api/v1/survey/c945d6fe-929e-11e3-a2e9/script_questions"
+                                "href": "https://osdi-sample-system.org/api/v1/script/c945d6fe-929e-11e3-a2e9/script_questions"
                         }
                     }
                 }
@@ -241,13 +241,31 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:script_questions" : {
-                "href": "https://osdi-sample-system.org/api/v1/survey/c945d6fe-929e-11e3-a2e9/script_questions"
+                "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
         }
     },
     "_embedded": {
         "osdi:script_questions": [
           {
             "sequence": 1,
+            "_links": {
+                "curies": [
+                    {
+                        "name": "osdi",
+                        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                        "templated": true
+                    }
+                ],
+                "self": {
+                    "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0
+                },
+                "osdi:question": {
+                  "href": "http://osdi-sample-system.org/api/v1/questions/202004"
+                },
+                "osdi:script": {
+                    "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
+                }
+            },
             "_embedded": {
               "osdi:question":
                 {
@@ -277,6 +295,24 @@ Cache-Control: max-age=0, private, must-revalidate
           },
           {
             "sequence": 2,
+            "_links": {
+                "curies": [
+                    {
+                        "name": "osdi",
+                        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                        "templated": true
+                    }
+                ],
+                "self": {
+                    "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/be0e-4cd3-9ed7-d0
+                },
+                "osdi:question": {
+                  "href": "http://osdi-sample-system.org/api/v1/questions/203079"
+                },
+                "osdi:script": {
+                    "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
+                }
+            },
             "_embedded": {
               "osdi:question": 
                 {
@@ -318,6 +354,24 @@ Cache-Control: max-age=0, private, must-revalidate
           },
           {
             "sequence": 3,
+            "_links": {
+                "curies": [
+                    {
+                        "name": "osdi",
+                        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                        "templated": true
+                    }
+                ],
+                "self": {
+                    "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ce0e-4cd3-9ed7-d0
+                },
+                "osdi:question": {
+                  "href": "http://osdi-sample-system.org/api/v1/questions/52472"
+                },
+                "osdi:script": {
+                    "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
+                }
+            },
             "_embedded": {
               "osdi:question":
                 {
@@ -405,7 +459,7 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
        "osdi:script_questions": {
-            "href": "https://osdi-sample-system.org/api/v1/script/c945d6fe-929e-11e3-a2e9/script_questions"
+            "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
         }
 }
 ```
@@ -463,7 +517,7 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:script_questions": {
-                "href": "https://osdi-sample-system.org/api/v1/script/c945d6fe-929e-11e3-a2e9/script_questions"
+                "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
         }
 }
 ```

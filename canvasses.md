@@ -21,7 +21,8 @@ It is not necessary to create a Canvass in order to create an Answer or Tagging 
 * [Helpers](#helpers)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
-    * [Scenario: Retrieving a collection of Canvass resources (GET)](#scenario-retrieving-a-collection-of-canvass-resources-for-a-person-get)
+    * [Scenario: Retrieving a collection of Canvass resources for a person(GET)](#scenario-retrieving-a-collection-of-canvass-resources-for-a-person-get)
+    * [Scenario: Retrieving a collection of Canvass resources for a canvassing effort(GET)](#scenario-retrieving-a-collection-of-canvass-resources-for-a-canvassing-effort-get)
     * [Scenario: Retrieving an individual Canvass resource (GET)](#scenario-retrieving-an-individual-canvass-resource-get)
     * [Scenario: Retrieving Answers for an individual Canvass resource (GET)](#scenario-retrieving-answers-for-an-individual-canvass-resource-get)
     * [Scenario: Retrieving Taggings for an individual Canvass resource (GET)](#scenario-retrieving-taggings-for-an-individual-canvass-resource-get)
@@ -220,7 +221,130 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```	
 
-_[Back to top...](#)_		
+_[Back to top...](#)_	
+
+### Scenario: Retrieving a collection of Canvass resources for a canvassing effort (GET)
+
+Calling this endpoint allows consumers to see a efforts's canvass history.
+
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/canvasses
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "total_pages": 10,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 250,
+    "_links": {
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/canvasses?page=2"
+        },
+        "osdi:canvasses": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+            },
+            //(truncated for brevity)
+        ],
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/canvasses"
+        }
+    },
+    "_embedded": {
+        "osdi:canvasses": [
+            {
+                "identifiers": [
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+                    "foreign_system:1"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "action_date": "2014-03-18T11:02:15Z",
+                "contact_type": "in-person",
+                "input_type": "mobile",
+                "success": false,
+                "status_code": "not-home",
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                    },
+                    "osdi:canvasser": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
+                    },
+                    "osdi:target": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:answers": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+                    },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+                    }
+                }
+            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf",
+                    "foreign_system:1"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "action_date": "2014-03-18T11:02:15Z",
+                "contact_type": "phoneCall",
+                "input_type": "paper",
+                "success": true,
+                "status_code": "",
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf"
+                    },
+                    "osdi:canvasser": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
+                    },
+                    "osdi:target": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:answers": {
+                            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/answers"
+                    },
+                    "osdi:taggings": {
+                            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/taggings"
+                    }
+                }
+            },
+            //(truncated for brevity)
+        ]
+    }
+}
+``` 
+
+_[Back to top...](#)_ 
+
 
 ### Scenario: Retrieving an individual Canvass resource (GET)
 

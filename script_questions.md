@@ -19,7 +19,8 @@ Scripts Questions are intermediary resources that associate [Questions](question
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
     * [Scenario: Retrieving a collection of Script Question resources (GET)](#scenario-retrieving-a-collection-of-script-question-resources-get)
-    * [Scenario: Add question to a script (POST)](#scenario-add-question-to-a-script-post)
+    * [Scenario: Add a question to the script (POST)](#scenario-add-a-question-to-the-script-post)
+    * [Scenario: Update a script question for the script (PUT)](#scenario-update-a-script-question-for-the-script-put)
     * [Scenario: Delete a script question from the script (DELETE)](#scenario-delete-a-script-question-from-the-script-delete)
 
 
@@ -42,7 +43,7 @@ _[Back to top...](#)_
 
 | Name          | Type                | Description
 | -----------   | -----------         | --------------
-|sequence      |int     |A sequence number for the scipt question. Defines position of the linked question in a survey
+|sequence      |int     |A sequence number for the scipt question. Defines position of the linked question in a script
 
 _[Back to top...](#)_
 
@@ -275,7 +276,7 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_       
 
 
-### Scenario: Add question to a script (POST)
+### Scenario: Add a question to the script (POST)
 
 Posting to the script questions collection endpoint will allow you to add a new question to an existing script.
 
@@ -283,6 +284,28 @@ Posting to the script questions collection endpoint will allow you to add a new 
 
 ```javascript
 POST https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "origin_system": "OSDISystem",
+    "sequence": 1,
+    "_links" : {
+      "osdi:question" : "http://osdi-sample-system.org/api/v1/questions/52472"
+    }
+}
+
+```
+
+### Scenario: Update a script question for the script (PUT)
+
+Calling a PUT request on a script question endpoint will allow you to update a script question for the script.
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/aed-234234
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -305,7 +328,7 @@ OSDI-API-Token:[your api key here]
 Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 {
-    "notice": "This question was successfully added."
+    "notice": "This script question was successfully updated."
 }
 ```
 

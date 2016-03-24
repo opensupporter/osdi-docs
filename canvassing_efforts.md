@@ -23,7 +23,6 @@ Canvassing Efforts represent specific canvassing/phone banking events planned fo
     * [Scenario: Creating a new Canvassing Effort (POST)](#scenario-creating-a-new-canvassing-effort-post)
     * [Scenario: Modifying a Canvassing Effort (PUT)](#scenario-modifying-a-canvassing-effort-put)
     * [Scenario: Deleting a Canvassing Effort (DELETE)](#scenario-deleting-a-canvassing-effort-delete)
-    * [Scenario: Retrieving a collection of Canvass resources (GET)](#scenario-retrieving-a-collection-of-canvass-resources-get)
 
 
 {% include endpoints_and_url_structures.md %}
@@ -65,8 +64,6 @@ _[Back to top...](#)_
 |self           |[Canvassing Effort*](canvassing_efforts.html)    |A self-referential link to the canvassing effort.
 |creator        |[Person*](people.html)         |A link to a single Person resource representing the creator of the Canvassing Effort.
 |modified_by    |[Person* ](people.html)        |A link to a Person resource representing the last editor of this Canvassing Effort.
-|people  |[Person[]*](people.html)  |A link to the collection of targeted People resources for this canvassing effort.
-|canvassers  |[Person[]*](people.html)  |A link to the collection of canvassers represented by People resources for this canvassing effort.
 |script  |[Script*](script.html) | A link to the script associated with the canvassing effort
 
 _[Back to top...](#)_
@@ -164,14 +161,8 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
-                    "osdi:people" : {
-                            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
-                    },
                     "osdi:script" : {
                             "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-                    }, 
-                     "osdi:canvassers" : {
-                        "href":"https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvassers"
                     }
                 }
             },
@@ -200,14 +191,8 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
-                    "osdi:people" : {
-                            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
-                    },
                     "osdi:script" : {
                             "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-                    }, 
-                     "osdi:canvassers" : {
-                        "href" : "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvassers"
                     }
                 }
             },   
@@ -264,15 +249,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:people" : {
-                "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
-        },
         "osdi:script" : {
                 "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-        }, 
-         "osdi:canvassers" : {
-            "href":"https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvassers"
-         }
+        }
     }
 }
 ```
@@ -346,14 +325,8 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:people" : {
-                "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
-        },
         "osdi:script" : {
                 "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-        }, 
-         "osdi:canvassers" : {
-                "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvassers"
         }
     }
 }
@@ -414,14 +387,8 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:people" : {
-                "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/people"
-        },
         "osdi:script" : {
                 "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
-        }, 
-         "osdi:canvassers" : {
-                "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvassers"
         }
     }
 }
@@ -458,126 +425,3 @@ Cache-Control: max-age=0, private, must-revalidate
 ```
 
 _[Back to top...](#)_
-
-
-### Scenario: Retrieving a collection of Canvass resources (GET)
-
-Calling this endpoint allows consumers to see a efforts's canvass history.
-
-#### Request
-
-```javascript
-GET https://osdi-sample-system.org/api/v1/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/canvasses
-
-Header:
-OSDI-API-Token:[your api key here]
-```
-
-#### Response
-
-```javascript
-200 OK
-
-Content-Type: application/hal+json
-Cache-Control: max-age=0, private, must-revalidate
-
-{
-    "total_pages": 10,
-    "per_page": 25,
-    "page": 1,
-    "total_records": 250,
-    "_links": {
-        "next": {
-            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/canvasses?page=2"
-        },
-        "osdi:canvasses": [
-            {
-                "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
-            },
-            {
-                "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/1efc3644-af25-4253-90b8-a0baf12dbd1e"
-            },
-            //(truncated for brevity)
-        ],
-        "curies": [
-            {
-                "name": "osdi",
-                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
-                "templated": true
-            }
-        ],
-        "self": {
-            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/canvasses"
-        }
-    },
-    "_embedded": {
-        "osdi:canvasses": [
-            {
-                "identifiers": [
-                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
-                    "foreign_system:1"
-                ],
-                "origin_system": "OSDI Sample System",
-                "created_date": "2014-03-20T21:04:31Z",
-                "modified_date": "2014-03-20T21:04:31Z",
-                "action_date": "2014-03-18T11:02:15Z",
-                "contact_type": "in-person",
-                "input_type": "mobile",
-                "success": false,
-                "status_code": "not-home",
-                "_links": {
-                    "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
-                    },
-                    "osdi:canvasser": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
-                    },
-                    "osdi:target": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-                    },
-                    "osdi:answers": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
-                    },
-                    "osdi:taggings": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
-                    }
-                }
-            },
-            {
-                "identifiers": [
-                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf",
-                    "foreign_system:1"
-                ],
-                "origin_system": "OSDI Sample System",
-                "created_date": "2014-03-20T21:04:31Z",
-                "modified_date": "2014-03-20T21:04:31Z",
-                "action_date": "2014-03-18T11:02:15Z",
-                "contact_type": "phoneCall",
-                "input_type": "paper",
-                "success": true,
-                "status_code": "",
-                "_links": {
-                    "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf"
-                    },
-                    "osdi:canvasser": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
-                    },
-                    "osdi:target": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-                    },
-                    "osdi:answers": {
-                            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/answers"
-                    },
-                    "osdi:taggings": {
-                            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/taggings"
-                    }
-                }
-            },
-            //(truncated for brevity)
-        ]
-    }
-}
-``` 
-
-_[Back to top...](#)_ 
