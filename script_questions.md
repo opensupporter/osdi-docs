@@ -9,6 +9,9 @@ This page defines the Script Question resource.
 
 Scripts Questions are intermediary resources that associate [Questions](questions.html) with  [Scripts](scripts.html). 
 
+> Note:  When putting or creating Script Question resources, it is up to the server to validate or return errors when problems with sequence arises
+
+
 ### Sections
 
 * [Endpoints and URL structures](#endpoints-and-url-structures)
