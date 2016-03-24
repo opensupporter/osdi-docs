@@ -48,10 +48,10 @@ The following response codes correspond to success or failure of different kinds
 | Any             | n/a     | Request not supported | 500 | [ErrorDescription](#error-description) indicating not-implemented
 | Any             | n/a     | API key not valid | 401 | n/a
 | Any             | n/a     | API key not allowed to execute this method | 403 | n/a
-| Read multiple resources | GET  https://osdi-sample-system.org/api/v1/questions/ | At least one resource found | 200 | Representation of list of resources found
-| Read multiple resources | GET  https://osdi-sample-system.org/api/v1/questions/ | No resources found | 404 | n/a
-| Read single resource | GET  https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa | Resource found | 200 | Representation of resource found
-| Read single resource | GET  https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa | Resource not found | 404 | n/a
+| Read collection of resources | GET  https://osdi-sample-system.org/api/v1/questions/ | At least one resource found | 200 | Representation of list of resources found
+| Read collection of resources | GET  https://osdi-sample-system.org/api/v1/questions/ | No resources found | 200 | Either HAL empty collection document or empty JSON element {}
+| Read single resource or subresource of single resource | GET  https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa | Resource found | 200 | Representation of resource found
+| Read single resource or subresource of single resource | GET  https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa | Resource not found | 404 | n/a
 | Create single resource | POST https://osdi-sample-system.org/api/v1/questions/ | Resource in request is not valid | 400 | [ErrorDescription[]](#error-description)
 | Create single resource | POST https://osdi-sample-system.org/api/v1/questions/ | Resource in request is valid and was created | 201 | Representation of created resource
 | Update single resource | PUT https://osdi-sample-system.org/api/v1/questions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa | Resource in request is not valid | 400 | [ErrorDescription[]](#error-description)
