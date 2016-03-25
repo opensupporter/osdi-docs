@@ -83,6 +83,12 @@ Ask your OSDI vendor for the URL to their HAL Browser.
 <a href="misc/get_people.rb"><img src="misc/ruby_get_people.png"/></a>
 </center>
 
+#### jQuery Plugin
+
+An OSDI jQuery plugin has been created for use with OSDI's [non-authenticated POST feature](#authentication). The plugin facilitates a javascript implementation of OSDI, allowing for HTML forms to POST data into an OSDI system using AJAX in a user's browser, all without much coding.
+
+[Learn more about the plugin and download a copy here.](http://opensupporter.github.io/jquery-osdi/)
+
 ### REST + HAL
 
 Generally, OSDI follows traditional RESTful practices for accessing resources and collections of resources as well as creating, editing, updating, and deleting resources. 
