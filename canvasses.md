@@ -7,7 +7,7 @@ title: Canvasses
 
 This page defines the Canvass resource.
 
-A canvass occurs when one person attempts to contact another person for the purpose of obtaining data about that person.  For example, a canvasser visits a voter's home and asks the voter whether she intends to vote in the next election; or, a campaign staffer calls a volunteer to ask whether he intends to attend the candidate's upcoming kick-off event.  The person being contacted is known as the "target" of the canvass, and the target may have [Answers](answers.html) or [Taggings](taggings.html) applied to them as a result of the canvass.  Alternatively, the target may have a non-canvass result (e.g. "not home") applied to them.
+A canvass occurs when one person attempts to contact another person for the purpose of obtaining data about that person.  For example, a canvasser visits a voter's home and asks the voter whether she intends to vote in the next election; or, a campaign staffer calls a volunteer to ask whether he intends to attend the candidate's upcoming kick-off event.  The person being contacted is known as the "target" of the canvass, and the target may have [Answers](answers.html) or [Taggings](taggings.html) applied to them as a result of the canvass.  Alternatively, the target may have a non-canvass result (e.g. "not home") applied to them. Canvasses can be part of a larger [Canvassing Effort](canvassing_efforts.html), representing a day of canvassing, for example.
 
 It is not necessary to create a Canvass in order to create an Answer or Tagging for a Person.  However, a Canvass can provide useful information about how the Answer or Tagging was collected, which may prove valuable for future organizing purposes.
 
@@ -21,8 +21,8 @@ It is not necessary to create a Canvass in order to create an Answer or Tagging 
 * [Helpers](#helpers)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
-    * [Scenario: Retrieving a collection of Canvass resources for a person(GET)](#scenario-retrieving-a-collection-of-canvass-resources-for-a-person-get)
-    * [Scenario: Retrieving a collection of Canvass resources for a canvassing effort(GET)](#scenario-retrieving-a-collection-of-canvass-resources-for-a-canvassing-effort-get)
+    * [Scenario: Retrieving a collection of Canvass resources for a person (GET)](#scenario-retrieving-a-collection-of-canvass-resources-for-a-person-get)
+    * [Scenario: Retrieving a collection of Canvass resources for a canvassing effort (GET)](#scenario-retrieving-a-collection-of-canvass-resources-for-a-canvassing-effort-get)
     * [Scenario: Retrieving an individual Canvass resource (GET)](#scenario-retrieving-an-individual-canvass-resource-get)
     * [Scenario: Retrieving Answers for an individual Canvass resource (GET)](#scenario-retrieving-answers-for-an-individual-canvass-resource-get)
     * [Scenario: Retrieving Taggings for an individual Canvass resource (GET)](#scenario-retrieving-taggings-for-an-individual-canvass-resource-get)
@@ -68,11 +68,12 @@ _[Back to top...](#)_
 
 |Name          	|Type		|Description
 |-----------    |-----------|--------------
-|self			|[Canvass*](canvasses.html)	|A self-referential link to the canvass.
-|canvasser   |[Person](people.html)  | A link to a single Person resource representing the person who made the contact.
-|target		|[Person](people.html)  |A link to a single Person resource representing the person who was contacted.
-|answers      |[Answer*](answers.html) | Zero or more answers to [Questions](questions.html) posed during the canvass.
-|taggings     |[Tagging*](taggings.html) | Zero or more taggings applied as a result of the canvass.
+|self			|[Canvass*](canvasses.html)	|A self-referential link to the Canvass.
+|canvasser   |[Person*](people.html)  | A link to a single Person resource representing the person who made the contact.
+|target		|[Person*](people.html)  |A link to a single Person resource representing the person who was contacted.
+|answers      |[Answers[]*](answers.html) | A link to the collection of Answers to [Questions](questions.html) posed during the Canvass.
+|taggings     |[Tagging[]*](taggings.html) | A link to the collection of Taggings applied as a result of the Canvass.
+|canvassing_effort     |[Canvassing Effort*](canvassing_efforts.html) | A link to the Canvass Effort this Canvass was part of.
 
 _[Back to top...](#)_
 
@@ -93,6 +94,7 @@ _[Back to top...](#)_
 * [Person](people.html)
 * [Answer](answers.html)
 * [Tagging](taggings.html)
+* [Canvassing Effort](canvassing_efforts.html)
 
 _[Back to top...](#)_
 
@@ -181,6 +183,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     },
                     "osdi:taggings": {
 			            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+                    },
+                    "osdi:canvassing_effort": {
+			            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
                     }
                 }
             },
@@ -208,10 +213,13 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:answers": {
-							"href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/answers"
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/answers"
                     },
                     "osdi:taggings": {
-							"href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/taggings"
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/taggings"
+                    },
+                    "osdi:canvassing_effort": {
+                        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
                     }
                 }
             },
@@ -223,7 +231,7 @@ Cache-Control: max-age=0, private, must-revalidate
 
 _[Back to top...](#)_	
 
-### Scenario: Retrieving a collection of Canvass resources for a canvassing effort (GET)
+### Scenario: Retrieving a collection of Canvass resources for a Canvassing Effort (GET)
 
 Calling this endpoint allows consumers to see a efforts's canvass history.
 
@@ -303,6 +311,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     },
                     "osdi:taggings": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+                    },
+                    "osdi:canvassing_effort": {
+			            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
                     }
                 }
             },
@@ -330,10 +341,13 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:answers": {
-                            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/answers"
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/answers"
                     },
                     "osdi:taggings": {
-                            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/taggings"
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/taggings"
+                    },
+                    "osdi:canvassing_effort": {
+			            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
                     }
                 }
             },
@@ -395,6 +409,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:taggings": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+        },
+        "osdi:canvassing_effort": {
+		    "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
         }
     }
 }
@@ -417,7 +434,7 @@ OSDI-API-Token:[your api key here]
 
 #### Response
 
-````javascript
+```javascript
 
 200 OK
 
@@ -504,7 +521,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 
-````
+```
 
 _[Back to top...](#)_
 
@@ -523,7 +540,7 @@ OSDI-API-Token:[your api key here]
 
 #### Response
 
-````javascript
+```javascript
 
 200 OK
 
@@ -605,14 +622,14 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 
-````
+```
 
 _[Back to top...](#)_
 
 
 ### Scenario: Creating a new Canvass (POST)
 
-Posting to the Canvasses collection endpoint and including a link to existing Answer and Tagging resource(s) will allow you to create a new canvass that indicates that the indicated Person was canvassed and that the answers and taggings indicated were recorded as a result.  The response is the new canvass that was created.
+Posting to the Canvasses collection endpoint and including a link to existing Answer and Tagging resource(s), plus People or Canvass Effort resource(s) depending on whether you're POSTing against a person or a canvass effort, will allow you to create a new canvass that indicates that the indicated Person was canvassed during that canvass effort and that the answers and taggings indicated were recorded as a result.  The response is the new canvass that was created.
 
 #### Request
 
@@ -635,6 +652,9 @@ OSDI-API-Token:[your api key here]
     "_links" : {
         "osdi:canvasser" : { 
             "href" : "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444" 
+        },
+        "osdi:canvassing_effort": {
+		    "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
         }
     }
 }
@@ -676,6 +696,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:taggings": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+        },
+        "osdi:canvassing_effort": {
+		    "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
         }
     }
 }
@@ -739,6 +762,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:taggings": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/canvasses/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+        },
+        "osdi:canvassing_effort": {
+		    "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
         }
     }
 }
