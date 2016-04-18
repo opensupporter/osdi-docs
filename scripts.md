@@ -7,7 +7,7 @@ title: Scripts
 
 This page defines the Script resource.
 
-Scripts are collections of [Questions](questions.html) asked to a person during a [Canvassing Effort](canvassing_efforts.html). 
+Scripts are collections of [Questions](questions.html), represented by the intermediate [Script Questions](script_questions.html) resource, asked to a person during a [Canvassing Effort](canvassing_efforts.html). 
 
 ### Sections
 
@@ -62,7 +62,7 @@ _[Back to top...](#)_
 |creator        |[Person*](people.html)         |A link to a single Person resource representing the creator of the Script.
 |modified_by    |[Person* ](people.html)        |A link to a Person resource representing the last editor of this Script.
 |script_questions  |[Script Questions[]*](script_questions.html)  |A link to the collection of Script Question resources for this Script.
-|canvassing_effort  |[Canvassing Effort*(canvassing_efforts.html)  |A link to the collection of Script Question resources for this Script.
+|canvassing_effort  |[Canvassing Effort*](canvassing_efforts.html)  |A link to the collection of Script Question resources for this Script.
 
 _[Back to top...](#)_
 
@@ -70,7 +70,7 @@ _[Back to top...](#)_
 ## Related Resources
 
 * [Person](people.html)
-* [Question](questions.html)
+* [Script Question](script_questions.html)
 * [Canvassing Effort](canvassing_efforts.html)
 
 
@@ -248,7 +248,7 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:script_questions" : {
-                "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
+            "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
         },
         "osdi:canvassing_effort" : {
             "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/c945d6fe-929e-11e3-a2e9"
@@ -314,7 +314,7 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-       "osdi:script_questions": {
+        "osdi:script_questions": {
             "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
         }
     }
@@ -324,7 +324,7 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Modifying a scipt (PUT)
+### Scenario: Modifying a script (PUT)
 
 You can update a script by calling a PUT operation on that script's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
 
@@ -374,7 +374,7 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:script_questions": {
-                "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
+            "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
         },
         "osdi:canvassing_effort" : {
             "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/c945d6fe-929e-11e3-a2e9"
@@ -387,7 +387,7 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Deleting a scipt (DELETE)
+### Scenario: Deleting a script (DELETE)
 
 You may delete a script by calling the DELETE command on the script's endpoint.
 

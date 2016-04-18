@@ -9,7 +9,7 @@ This page defines the Script Question resource.
 
 Scripts Questions are intermediary resources that associate [Questions](questions.html) with  [Scripts](scripts.html). 
 
-> Note:  When putting or creating Script Question resources, it is up to the server to validate or return errors when problems with sequence arises.
+_Note:_  When putting or creating Script Question resources, it is up to the server to validate or return errors when problems with sequence arises.
 
 
 ### Sections
@@ -23,7 +23,7 @@ Scripts Questions are intermediary resources that associate [Questions](question
 * [Scenarios](#scenarios)
     * [Scenario: Retrieving a collection of Script Question resources (GET)](#scenario-retrieving-a-collection-of-script-question-resources-get)
     * [Scenario: Retrieving an individual Script Question resource (GET)](#scenario-retrieving-an-individual-script-question-resource-get)
-    * [Scenario: Add a question to the script (POST)](#scenario-add-a-question-to-the-script-post)
+    * [Scenario: Add a script question to the script (POST)](#scenario-add-a-script-question-to-the-script-post)
     * [Scenario: Update a script question for the script (PUT)](#scenario-update-a-script-question-for-the-script-put)
     * [Scenario: Delete a script question from the script (DELETE)](#scenario-delete-a-script-question-from-the-script-delete)
 
@@ -147,7 +147,7 @@ Cache-Control: max-age=0, private, must-revalidate
                         }
                     ],
                     "self": {
-                        "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0
+                        "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0"
                     },
                     "osdi:question": {
                         "href": "http://osdi-sample-system.org/api/v1/questions/202004"
@@ -200,7 +200,7 @@ Cache-Control: max-age=0, private, must-revalidate
                         }
                     ],
                     "self": {
-                        "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/be0e-4cd3-9ed7-d0
+                        "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/be0e-4cd3-9ed7-d0"
                     },
                     "osdi:question": {
                         "href": "http://osdi-sample-system.org/api/v1/questions/203079"
@@ -295,7 +295,7 @@ Cache-Control: max-age=0, private, must-revalidate
             }
         ],
         "self": {
-            "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0
+            "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0"
         },
         "osdi:question": {
             "href": "http://osdi-sample-system.org/api/v1/questions/202004"
@@ -335,7 +335,7 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_       
 
 
-### Scenario: Add a question to the script (POST)
+### Scenario: Add a script question to the script (POST)
 
 Posting to the script questions collection endpoint will allow you to add a new question to an existing script.
 
@@ -381,7 +381,7 @@ Cache-Control: max-age=0, private, must-revalidate
             }
         ],
         "self": {
-            "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0
+            "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0"
         },
         "osdi:question": {
             "href": "http://osdi-sample-system.org/api/v1/questions/202004"
@@ -462,7 +462,7 @@ Cache-Control: max-age=0, private, must-revalidate
             }
         ],
         "self": {
-            "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0
+            "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0"
         },
         "osdi:question": {
             "href": "http://osdi-sample-system.org/api/v1/questions/202004"

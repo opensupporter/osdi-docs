@@ -67,7 +67,7 @@ _[Back to top...](#)_
 |creator        |[Person*](people.html)         |A link to a single Person resource representing the creator of the Canvassing Effort.
 |modified_by    |[Person* ](people.html)        |A link to a Person resource representing the last editor of this Canvassing Effort.
 |canvasses    |[Canvasses[]*](canvasses.html)        |A link to a collection of Canvass resources representing the canvasses that occured on this Canvassing Effort.
-|script  |[Script*](script.html) | A link to the Script resource associated with the Canvassing Effort.
+|script  |[Script*](scripts.html) | A link to the Script resource associated with the Canvassing Effort.
 
 _[Back to top...](#)_
 
@@ -169,7 +169,7 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
                     },
                     "osdi:canvasses": {
-	                    "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bca/canvasses"
+                        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bca/canvasses"
                     }
                 }
             },
@@ -200,10 +200,10 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:script" : {
-                            "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+                        "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
                     },
                     "osdi:canvasses": {
-	                    "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvasses"
+                        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvasses"
                     }
                 }
             },   
@@ -262,10 +262,10 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:script" : {
-                "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+            "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
         },
         "osdi:canvasses": {
-	        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvasses"
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvasses"
         }
     }
 }
@@ -342,10 +342,10 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:script" : {
-                "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+            "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
         },
         "osdi:canvasses": {
-	        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvasses"
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvasses"
         }
     }
 }
@@ -408,10 +408,10 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:script" : {
-                "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+            "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
         },
         "osdi:canvasses": {
-	        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvasses"
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvasses"
         }
     }
 }
