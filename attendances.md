@@ -7,7 +7,9 @@ title: Attendance
 
 This document defines the Attendance resource.
 
-Attendances are a type of action that a user may take by RSVPing to attend an event. Attendances have fields to describe them such as when the attendance was created and typically are linked to the person who made the attendance.
+Attendances are a type of action that a user may take by RSVPing to attend an event or buying tickets to a ticketed event. Attendances have fields to describe them such as when the attendance was created and typically are linked to the person who made the attendance.
+
+Attendances for ticketed events will look different from non-ticketed events, including fields for the tickets bought and who received those tickets (which can be different from the person who bought the tickets and created the attendance). 
 
 
 ### Sections
@@ -16,6 +18,7 @@ Attendances are a type of action that a user may take by RSVPing to attend an ev
 * [Fields](#fields)
     * [Common Fields](#common-fields)
     * [Attendance Fields](#attendance-fields)  
+    * [Related Objects](#related-objects)
     * [Links](#links)
 * [Helpers](#helpers)
 * [Related Resources](#related-resources)
@@ -52,10 +55,35 @@ A list of fields specific to the Attendance resource.
 |origin_system		|string     |A human readable identifier of the system where this attendance was created. (ex: "OSDI System")
 |action_date		|string		|The date and time the attendance was made by the person.
 |status			|flexenum			|The attendee's response status. One of "declined", "tentative", "accepted", "cancelled", or "needs action".  Note: OSDI vendors may implement varying or client-configured statuses; users should check with the vendor for available attendance status values. 
-|attended		|boolean		|Represents whether the person actually attended the event or not.
+|attended		|boolean		|For event RSVPs, represents whether the person actually attended the event or not. For ticketed events, field should be absent, as it's superseded by the `attended` field in the `ticket` object.
 |comment		|string			|An optional comment from the attendee.
+|tickets		|[Tickets[]](#tickets)	|If this event is a ticketed event, an array of object hashes representing each ticket purchased as part of this attendance. (ex: One $5 general admission ticket for Sam and two $50 VIP tickets for Sally and Saul.)
 
 
+
+_[Back to top...](#)_
+
+### Related Objects
+
+These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+#### Tickets
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|ticket.title	|string    |The name of the ticket type that was purchased. (ex: "General admission")
+|ticket.description	|string    |A longer description of the ticket type. (ex: "Gets you access to the convention floor.")
+|ticket.amount	|float    |The price paid for this ticket, in the specified currency. (ex: "10.50")
+|ticket.currency	|string    |ISO 4217 designation of currency. (ex: "USD", "JPY")
+|attended		|boolean		|Represents whether the person actually attended the event or not.
+|ticket.person		|[Person*](#person)	|An object hash representing the person who will use this ticket.
+
+
+#### Person
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|person      |[Person*](people.html)     |An inlined hash representation of a person who received this ticket, containing any valid fields for the Person resource.
 
 _[Back to top...](#)_
 
@@ -67,7 +95,7 @@ _[Back to top...](#)_
 | Name          | Type      | Description
 |-----------    |-----------|-----------|--------------
 |self			|[Attendance*](attendances.html)	|A self-referential link to the attendance.
-|person			|[Person*](people.html)		|A link to a single Person resource representing the person who RSVPed for the event.
+|person			|[Person*](people.html)		|A link to a single Person resource representing the person who RSVPed for the event, or in the case of ticketed events, bought the tickets.
 |invited_by		|[Person*](people.html)	|A link to a Person resource representing the person that invited this attendee. This is expected to be used for guests.
 |event			|[Event*](events.html)  		|A link to an Event resource representing the event on which this attendance was created.
 
@@ -100,6 +128,8 @@ _[Back to top...](#)_
 ### Scenario: Retrieving a collection of Attendance resources (GET)
 
 Attendance resources are sometimes presented as collections of attendances. For example, calling the attendance endpoint on a particular event will return a collection of all the attendances made to that event.
+
+Ticketed event attendances and non-ticketed event attendances look different. First, an example of non-ticketed event attendaces:
 
 #### Request
 
@@ -204,11 +234,174 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```
 
+Next, an example of ticketed event attendances:
+
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "total_pages": 10,
+    "per_page": 25,
+    "page": 1,
+    "total_records": 250,
+    "_links": {
+        "next": {
+            "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances?page=2"
+        },
+        "osdi:submissions": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+            },
+            //(truncated for brevity)
+        ],
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances"
+        }
+    },
+    "_embedded": {
+        "osdi:attendances": [
+            {
+                "identifiers": [
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+                    "foreign_system:1"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "action_date": "2014-03-18T11:02:15Z",
+                "status": "confirmed",
+                "comment": "Looking forward to it!",
+                "tickets": [
+	                {
+	                    "title": "General Admission",
+		                "description": "Gets you into the event and all activities.",
+		                "amount": 5,
+		                "currency": "USD",
+		                "attended": true,
+		                "person": {
+                            "family_name": "Edwin",
+                            "given_name": "Labadie",
+                            "email_addresses": [
+                                {
+                                    "address":"test-3@example.com",
+                                    "primary": true,
+                                    "address_type": "Personal"
+                                }
+                            ]
+			            }
+			        },
+			        {
+	                    "title": "VIP",
+		                "description": "Meet and greet before the event, and front-row seats.",
+		                "amount": 500,
+		                "currency": "USD",
+		                "attended": false,
+		                "person": {
+                            "family_name": "Jane",
+                            "given_name": "Doe",
+                            "email_addresses": [
+                                {
+                                    "address":"jdoe@example.com",
+                                    "primary": true,
+                                    "address_type": "Personal"
+                                }
+                            ]
+			            }
+			        }
+	            ],
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                    },
+                    "osdi:event": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:invited_by": {
+                        "href": "https://osdi-sample-system.org/api/v1/person/8a625981-67a4-4457-8b55-2e30b267b2c2"
+                    }
+                }
+            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
+                "action_date": "2014-03-12T01:45:34Z",
+                "status": "tentative",
+                "tickets": [
+	                {
+	                    "title": "General Admission",
+		                "description": "Gets you into the event and all activities.",
+		                "amount": 5,
+		                "currency": "USD",
+		                "attended": true,
+		                "person": {
+                            "family_name": "Sam",
+                            "given_name": "Smith",
+                            "email_addresses": [
+                                {
+                                    "address":"smitty@example.com",
+                                    "primary": true,
+                                    "address_type": "Personal"
+                                }
+                            ]
+			            }
+			        }
+	            ],
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                    },
+                    "osdi:event": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/adb951cb-51f9-420e-b7e6-de953195ec86"
+                    }
+                }
+            },
+            //(truncated for brevity)
+        ]
+    }
+}
+```	
+
 _[Back to top...](#)_		
 
 ### Scenario: Scenario: Retrieving an individual Attendance resource (GET)
 
 Calling an individual Attendance resource will return the resource directly, along with all associated fields and appropriate links to additional information about the attendance.
+
+Ticketed event attendances and non-ticketed event attendances look different. First, an example of a non-ticketed event attendace:
 
 #### Request
 
@@ -256,6 +449,92 @@ Cache-Control: max-age=0, private, must-revalidate
 }
 ```
 
+
+Next, an example of a ticketed event attendance:
+
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+        "foreign_system:1"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "action_date": "2014-03-18T11:02:15Z",
+    "status": "confirmed",
+    "comment": "Looking forward to it!",
+    "tickets": [
+	    {
+	        "title": "General Admission",
+	        "description": "Gets you into the event and all activities.",
+	        "amount": 5,
+	        "currency": "USD",
+	        "attended": true,
+	        "person": {
+                "family_name": "Edwin",
+                "given_name": "Labadie",
+                "email_addresses": [
+                    {
+                        "address":"test-3@example.com",
+                        "primary": true,
+                        "address_type": "Personal"
+                    }
+                ]
+	        }
+	    },
+	    {
+	        "title": "VIP",
+	        "description": "Meet and greet before the event, and front-row seats.",
+	        "amount": 500,
+	        "currency": "USD",
+	        "attended": false,
+	        "person": {
+                "family_name": "Jane",
+                "given_name": "Doe",
+                "email_addresses": [
+                    {
+                        "address":"jdoe@example.com",
+                        "primary": true,
+                        "address_type": "Personal"
+                    }
+                ]
+	        }
+	    }
+	],
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        },
+        "osdi:event": {
+            "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:person": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:invited_by": {
+            "href": "https://osdi-sample-system.org/api/v1/person/8a625981-67a4-4457-8b55-2e30b267b2c2"
+        }
+    }
+}
+```
+
 _[Back to top...](#)_
 
 
@@ -264,6 +543,8 @@ _[Back to top...](#)_
 Posting to the attendances collection endpoint and including a link to an existing Person resource will allow you to create a new attendance associated with that event and person. The response is the new attendance that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
 For information on how to create a person along with an attendance, see the [Record Attendance Helper](record_attendance.html) documentation.
+
+Ticketed event attendances and non-ticketed event attendances look different. First, an example of POSTing a non-ticketed event attendace:
 
 #### Request
 
@@ -280,8 +561,8 @@ OSDI-API-Token:[your api key here]
     "origin_system": "OpenSupporter",
     "action_date": "2014-03-18T11:02:15Z",
     "_links" : {
-        "osdi:person" : {
-            "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        "osdi:person" : { 
+            "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
         }
     }
 }
@@ -316,6 +597,137 @@ Cache-Control: max-age=0, private, must-revalidate
     }
 }
 ```
+
+Next, an example of POSTing a ticketed event attendance:
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "identifiers": [
+        "foreign_system:1"
+    ],
+    "origin_system": "OpenSupporter",
+    "action_date": "2014-03-18T11:02:15Z",
+    "tickets": [
+	    {
+	        "title": "General Admission",
+	        "description": "Gets you into the event and all activities.",
+	        "amount": 5,
+	        "currency": "USD",
+	        "attended": true,
+	        "person": {
+                "family_name": "Edwin",
+                "given_name": "Labadie",
+                "email_addresses": [
+                    {
+                        "address":"test-3@example.com",
+                        "primary": true,
+                        "address_type": "Personal"
+                    }
+                ]
+	        }
+	    },
+	    {
+	        "title": "VIP",
+	        "description": "Meet and greet before the event, and front-row seats.",
+	        "amount": 500,
+	        "currency": "USD",
+	        "attended": false,
+	        "person": {
+                "family_name": "Jane",
+                "given_name": "Doe",
+                "email_addresses": [
+                    {
+                        "address":"jdoe@example.com",
+                        "primary": true,
+                        "address_type": "Personal"
+                    }
+                ]
+	        }
+	    }
+	],
+    "_links" : {
+        "osdi:person" : {
+            "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        }
+    }
+}
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+        "foreign_system:1"
+    ],
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "action_date": "2014-03-18T11:02:15Z",
+    "tickets": [
+	    {
+	        "title": "General Admission",
+	        "description": "Gets you into the event and all activities.",
+	        "amount": 5,
+	        "currency": "USD",
+	        "attended": true,
+	        "person": {
+                "family_name": "Edwin",
+                "given_name": "Labadie",
+                "email_addresses": [
+                    {
+                        "address":"test-3@example.com",
+                        "primary": true,
+                        "address_type": "Personal"
+                    }
+                ]
+	        }
+	    },
+	    {
+	        "title": "VIP",
+	        "description": "Meet and greet before the event, and front-row seats.",
+	        "amount": 500,
+	        "currency": "USD",
+	        "attended": false,
+	        "person": {
+                "family_name": "Jane",
+                "given_name": "Doe",
+                "email_addresses": [
+                    {
+                        "address":"jdoe@example.com",
+                        "primary": true,
+                        "address_type": "Personal"
+                    }
+                ]
+	        }
+	    }
+	],
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+        },
+        "osdi:event": {
+            "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:person": {
+            "href": "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        }
+    }
+}
+```
+
 
 _[Back to top...](#)_
 

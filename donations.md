@@ -89,6 +89,7 @@ An object representing the payment details of a donation.
 |self			|[Donation*](donations.html)	|A self-referential link to the donation.
 |person			|[Person*](people.html)		|A link to a single Person resource representing the person who donated.
 |fundraising_page			|[Fundraising Page*](fundraising_pages.html)  		|A link to a Fundraising Page resource representing the fundraising page on which this donation was submitted.
+|attendance | [Attendance*](attendances.html) | A link to the Attendance resource which was "purchased" with this donation. Typically used to represent tickets sold for events. There is no requirement that the amount of this donation is equal to the cost of the tickets represented in the linked Attendance.
 
 ## Helpers
 
@@ -104,6 +105,7 @@ An object representing the payment details of a donation.
 * [Record Donation Helper](record_donation.html)
 * [Fundraising Page](fundraising_pages.html)
 * [Person](people.html)
+* [Attendace](attendances.html)
 
 
 
@@ -245,7 +247,84 @@ Cache-Control: max-age=0, private, must-revalidate
                     }
                 }
             },
-            //(truncated for brevity)
+            {
+                "identifiers": [
+                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbdaa"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
+                "action_date": "2014-03-12T01:45:34Z",
+                "currency": "USD",
+                "amount": 15.00,
+                "voided": false,
+                "voided_date": null,
+                "url": "htts://actblue.com/page/BobsCandidates",
+                "payment": {
+                    "method": "Credit Card",
+                    "reference_number": "12324567",
+                    "authorization_stored": false
+                },
+                "recipients": [
+                    {
+                        "amount": 15.00,
+                        "display_name": "Barack Obama",
+                        "legal_name": "Obama for America"
+                    }
+                ],
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                    },
+                    "osdi:fundraising_page": {
+                        "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/adb951cb-51f9-420e-b7e6-de953195ec86"
+                    },
+                    "osdi:attendance": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc"
+                    }
+                }
+            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbdbb"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
+                "action_date": "2014-03-12T01:45:34Z",
+                "currency": "USD",
+                "amount": 16.00,
+                "voided": false,
+                "voided_date": null,
+                "url": "htts://actblue.com/page/BobsCandidates",
+                "payment": {
+                    "method": "Credit Card",
+                    "reference_number": "12324567",
+                    "authorization_stored": false
+                },
+                "recipients": [
+                    {
+                        "amount": 16.00,
+                        "display_name": "Barack Obama",
+                        "legal_name": "Obama for America"
+                    }
+                ],
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                    },
+                    "osdi:fundraising_page": {
+                        "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/adb951cb-51f9-420e-b7e6-de953195ec86"
+                    }
+                },
+            },
+            // (truncated for brevity)
         ]
     }
 }
@@ -369,6 +448,9 @@ OSDI-API-Token:[your api key here]
     "_links" : {
         "osdi:person" : { 
             "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
+        },
+        "osdi:attendance": {
+            "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc"
         }
     }
 }
@@ -421,6 +503,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:person": {
             "href": "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:attendance": {
+            "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc"
         }
     }
 }
