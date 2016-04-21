@@ -296,13 +296,13 @@ Cache-Control: max-age=0, private, must-revalidate
                 "status": "confirmed",
                 "comment": "Looking forward to it!",
                 "tickets": [
-	                {
-	                    "title": "General Admission",
-		                "description": "Gets you into the event and all activities.",
-		                "amount": 5,
-		                "currency": "USD",
-		                "attended": true,
-		                "person": {
+                    {
+                        "title": "General Admission",
+                        "description": "Gets you into the event and all activities.",
+                        "amount": 5,
+                        "currency": "USD",
+                        "attended": true,
+                        "person": {
                             "family_name": "Edwin",
                             "given_name": "Labadie",
                             "email_addresses": [
@@ -312,15 +312,15 @@ Cache-Control: max-age=0, private, must-revalidate
                                     "address_type": "Personal"
                                 }
                             ]
-			            }
-			        },
-			        {
-	                    "title": "VIP",
-		                "description": "Meet and greet before the event, and front-row seats.",
-		                "amount": 500,
-		                "currency": "USD",
-		                "attended": false,
-		                "person": {
+                        }
+                    },
+                    {
+                        "title": "VIP",
+                        "description": "Meet and greet before the event, and front-row seats.",
+                        "amount": 500,
+                        "currency": "USD",
+                        "attended": false,
+                        "person": {
                             "family_name": "Jane",
                             "given_name": "Doe",
                             "email_addresses": [
@@ -330,9 +330,9 @@ Cache-Control: max-age=0, private, must-revalidate
                                     "address_type": "Personal"
                                 }
                             ]
-			            }
-			        }
-	            ],
+                        }
+                    }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -358,13 +358,13 @@ Cache-Control: max-age=0, private, must-revalidate
                 "action_date": "2014-03-12T01:45:34Z",
                 "status": "tentative",
                 "tickets": [
-	                {
-	                    "title": "General Admission",
-		                "description": "Gets you into the event and all activities.",
-		                "amount": 5,
-		                "currency": "USD",
-		                "attended": true,
-		                "person": {
+                    {
+                        "title": "General Admission",
+                        "description": "Gets you into the event and all activities.",
+                        "amount": 5,
+                        "currency": "USD",
+                        "attended": true,
+                        "person": {
                             "family_name": "Sam",
                             "given_name": "Smith",
                             "email_addresses": [
@@ -374,9 +374,9 @@ Cache-Control: max-age=0, private, must-revalidate
                                     "address_type": "Personal"
                                 }
                             ]
-			            }
-			        }
-	            ],
+                        }
+                    }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -481,13 +481,13 @@ Cache-Control: max-age=0, private, must-revalidate
     "status": "confirmed",
     "comment": "Looking forward to it!",
     "tickets": [
-	    {
-	        "title": "General Admission",
-	        "description": "Gets you into the event and all activities.",
-	        "amount": 5,
-	        "currency": "USD",
-	        "attended": true,
-	        "person": {
+        {
+            "title": "General Admission",
+            "description": "Gets you into the event and all activities.",
+            "amount": 5,
+            "currency": "USD",
+            "attended": true,
+            "person": {
                 "family_name": "Edwin",
                 "given_name": "Labadie",
                 "email_addresses": [
@@ -497,15 +497,15 @@ Cache-Control: max-age=0, private, must-revalidate
                         "address_type": "Personal"
                     }
                 ]
-	        }
-	    },
-	    {
-	        "title": "VIP",
-	        "description": "Meet and greet before the event, and front-row seats.",
-	        "amount": 500,
-	        "currency": "USD",
-	        "attended": false,
-	        "person": {
+            }
+        },
+        {
+            "title": "VIP",
+            "description": "Meet and greet before the event, and front-row seats.",
+            "amount": 500,
+            "currency": "USD",
+            "attended": false,
+            "person": {
                 "family_name": "Jane",
                 "given_name": "Doe",
                 "email_addresses": [
@@ -515,9 +515,9 @@ Cache-Control: max-age=0, private, must-revalidate
                         "address_type": "Personal"
                     }
                 ]
-	        }
-	    }
-	],
+            }
+        }
+    ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -615,13 +615,13 @@ OSDI-API-Token:[your api key here]
     "origin_system": "OpenSupporter",
     "action_date": "2014-03-18T11:02:15Z",
     "tickets": [
-	    {
-	        "title": "General Admission",
-	        "description": "Gets you into the event and all activities.",
-	        "amount": 5,
-	        "currency": "USD",
-	        "attended": true,
-	        "person": {
+        {
+            "title": "General Admission",
+            "description": "Gets you into the event and all activities.",
+            "amount": 5,
+            "currency": "USD",
+            "attended": true,
+            "person": {
                 "family_name": "Edwin",
                 "given_name": "Labadie",
                 "email_addresses": [
@@ -631,15 +631,15 @@ OSDI-API-Token:[your api key here]
                         "address_type": "Personal"
                     }
                 ]
-	        }
-	    },
-	    {
-	        "title": "VIP",
-	        "description": "Meet and greet before the event, and front-row seats.",
-	        "amount": 500,
-	        "currency": "USD",
-	        "attended": false,
-	        "person": {
+            }
+        },
+        {
+            "title": "VIP",
+            "description": "Meet and greet before the event, and front-row seats.",
+            "amount": 500,
+            "currency": "USD",
+            "attended": false,
+            "person": {
                 "family_name": "Jane",
                 "given_name": "Doe",
                 "email_addresses": [
@@ -649,9 +649,9 @@ OSDI-API-Token:[your api key here]
                         "address_type": "Personal"
                     }
                 ]
-	        }
-	    }
-	],
+            }
+        }
+    ],
     "_links" : {
         "osdi:person" : {
             "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -677,13 +677,13 @@ Cache-Control: max-age=0, private, must-revalidate
     "modified_date": "2014-03-20T21:04:31Z",
     "action_date": "2014-03-18T11:02:15Z",
     "tickets": [
-	    {
-	        "title": "General Admission",
-	        "description": "Gets you into the event and all activities.",
-	        "amount": 5,
-	        "currency": "USD",
-	        "attended": true,
-	        "person": {
+        {
+            "title": "General Admission",
+            "description": "Gets you into the event and all activities.",
+            "amount": 5,
+            "currency": "USD",
+            "attended": true,
+            "person": {
                 "family_name": "Edwin",
                 "given_name": "Labadie",
                 "email_addresses": [
@@ -693,15 +693,15 @@ Cache-Control: max-age=0, private, must-revalidate
                         "address_type": "Personal"
                     }
                 ]
-	        }
-	    },
-	    {
-	        "title": "VIP",
-	        "description": "Meet and greet before the event, and front-row seats.",
-	        "amount": 500,
-	        "currency": "USD",
-	        "attended": false,
-	        "person": {
+            }
+        },
+        {
+            "title": "VIP",
+            "description": "Meet and greet before the event, and front-row seats.",
+            "amount": 500,
+            "currency": "USD",
+            "attended": false,
+            "person": {
                 "family_name": "Jane",
                 "given_name": "Doe",
                 "email_addresses": [
@@ -711,9 +711,9 @@ Cache-Control: max-age=0, private, must-revalidate
                         "address_type": "Personal"
                     }
                 ]
-	        }
-	    }
-	],
+            }
+        }
+    ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"

@@ -284,27 +284,27 @@ Cache-Control: max-age=0, private, must-revalidate
                 "browser_url": "http://osdi-sample-system.org/events/party-for-progress",
                 "type": "ticketed",
                 "ticket_levels": [
-	                {
-		                "title": "General Admission",
-		                "description": "Gets you into the event and all activities.",
-		                "amount": 5,
-		                "currency": "USD",
-		                "limit": 20,
-		                "total_tickets": 10,
-		                "total_amount": 50
-		            },
-		            {
-		                "title": "VIP",
-		                "description": "Gets you into the event and all activities, plus a special meet and greet with the candidate.",
-		                "amount": 50,
-		                "currency": "USD",
-		                "limit": 5,
-		                "total_tickets": 2,
-		                "total_amount": 100
-		            }
-	            ],
-	            "total_tickets": 12,
-	            "total_amount": 150,
+                    {
+                        "title": "General Admission",
+                        "description": "Gets you into the event and all activities.",
+                        "amount": 5,
+                        "currency": "USD",
+                        "limit": 20,
+                        "total_tickets": 10,
+                        "total_amount": 50
+                    },
+                    {
+                        "title": "VIP",
+                        "description": "Gets you into the event and all activities, plus a special meet and greet with the candidate.",
+                        "amount": 50,
+                        "currency": "USD",
+                        "limit": 5,
+                        "total_tickets": 2,
+                        "total_amount": 100
+                    }
+                ],
+                "total_tickets": 12,
+                "total_amount": 150,
                 "total_accepted": 3,
                 "status": "tentative",
                 "start_date": "2015-01-05T19:00:00Z",
