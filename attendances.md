@@ -51,7 +51,7 @@ A list of fields specific to the Attendance resource.
 |-----------    |-----------|-----------|--------------
 |origin_system		|string     |A human readable identifier of the system where this attendance was created. (ex: "OSDI System")
 |action_date		|string		|The date and time the attendance was made by the person.
-|status			|enum			|The attendee's response status. One of "declined", "tentative", "accepted", "cancelled", or "needs action".
+|status			|flexenum			|The attendee's response status. One of "declined", "tentative", "accepted", "cancelled", or "needs action".  Note: OSDI vendors may implement varying or client-configured statuses; users should check with the vendor for available attendance status values. 
 |attended		|boolean		|Represents whether the person actually attended the event or not.
 |comment		|string			|An optional comment from the attendee.
 
