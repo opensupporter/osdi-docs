@@ -54,7 +54,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 OSDI used a combination of approaches to provide flexible reading of data, simple operations for simple scenarios, and general purpose CRUD access.
 
 ### Version
-This document represents OSDI version 1.1.0
+This document represents OSDI version 1.1.2
 
 ### Working with OSDI in Real Life
 
@@ -82,6 +82,12 @@ Ask your OSDI vendor for the URL to their HAL Browser.
 <center>
 <a href="misc/get_people.rb"><img src="misc/ruby_get_people.png"/></a>
 </center>
+
+#### jQuery Plugin
+
+An OSDI jQuery plugin has been created for use with OSDI's [non-authenticated POST feature](#authentication). The plugin facilitates a javascript implementation of OSDI, allowing for HTML forms to POST data into an OSDI system using AJAX in a user's browser, all without much coding.
+
+[Learn more about the plugin and download a copy here.](http://opensupporter.github.io/jquery-osdi/)
 
 ### REST + HAL
 

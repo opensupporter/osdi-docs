@@ -13,7 +13,7 @@ In addition, you can indicate to the server whether to trigger additional action
 
 The Record Canvass Helper assumes that the person who was canvassed (the "target") already exists in the system.
 
-Typically, the response to a successful Record Canvass Helper POST is the full representation of the Canvass. However, the Record Canvass Helper can be used without authentication, allowing for use in frontend javascript-based applications without giving away API key secrets, for example. If no authentication is passed, the response will simply be the server response code, to avoid leaking any data. (ex: 200 for success, 500 for error, etc...)
+Typically, the response to a successful Record Canvass Helper POST is the full representation of the Canvass. However, the Record Canvass Helper can be used without authentication, allowing for use in frontend javascript-based applications without giving away API key secrets, for example. If no authentication is passed, the response on success will simply be the server response code (ex: 200) and an empty JSON object. On error, the server response code (ex: 404, 500) plus an error message may be returned.
 
 Some initial implementations may only support helpers -- direct RESTful access may not be supported. In those cases, the _links section may be omitted in responses.
 
@@ -56,11 +56,12 @@ A list of fields specific for POSTing via the Record Canvass Helper.  Please not
 |-----------    |-----------|-----------|--------------
 |origin_system		|string     |A human readable identifier of the system where this attendance was created. (ex: "OSDI System")
 |action_date		|string		|The date and time the canvass was attempted.
-| contact_type  | string | A code indicating the method by which the person was contacted.  For example: "in-person"
-| input_type    | string | A code indicating the method by which the canvass is being input into the system. For example: "mobile"
-| success      | boolean | True if the target was successfully contacted, False otherwise.
-| status_code  | string | A code indicating the status of the contact attempt.  For example: "not-home" indicates that the contact failed because the target was not home, while "success" indicates that the target was contacted successfully.  An empty or missing value for status_code should be assumed to mean that the contact was successful.
-| canvasser          |[Person](people.html) | A link to a single Person resource representing the person who made the contact.
+|contact_type  |string |A code indicating the method by which the person was contacted.  For example: "in-person"
+|input_type    |string |A code indicating the method by which the canvass is being input into the system. For example: "mobile"
+|success      |boolean |True if the target was successfully contacted, False otherwise.
+|status_code  |string |A code indicating the status of the contact attempt.  For example: "not-home" indicates that the contact failed because the target was not home, while "success" indicates that the target was contacted successfully.  An empty or missing value for status_code should be assumed to mean that the contact was successful.
+|canvasser          |[Person*](people.html) |A link to a single Person resource representing the person who made the contact.
+|question_response          |[Question Response](#question_response)	|An object hash of key/value pairs associated with the person created by a user rather than a service or vendor.
 
 _[Back to top...](#)_
 
@@ -74,11 +75,11 @@ _[Back to top...](#)_
 
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
 
-#### QuestionResponse
+#### Question Response
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-|question      |[Question](questions.html)     | A question to which an Answer is being added
+|question      |[Question*](questions.html)     | A question to which an Answer is being added
 |value      |string     |The response the person gave, if the question type is “Paragraph” or if otherwise appropriate (e.g., if the question response was “Other”).
 |responses  |string[] | An array of strings corresponding to the question response key(s) chosen by the Person who answered the Question.
 
@@ -120,7 +121,6 @@ OSDI-API-Token:[your api key here]
       "input_type": "mobile",
       "success": true,
       "status_code": "",
-      "canvasser": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
     },
 {% include helper_action_examples.md %}
 }
@@ -172,7 +172,7 @@ _[Back to top...](#)_
 
 ### Scenario: Creating a new canvass without authentication (POST)
 
-Posting to the record canvass helper endpoint without authentication will allow you to create a new canvass and the associated answers and/or taggings in one operation, but without giving away API key secrets or leaking data, so this method is appropriate for frontend javascript applications. The response is the server resonse code. (ex: 200 for success, 500 for error, etc...) While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+Posting to the record canvass helper endpoint without authentication will allow you to create a new canvass and the associated answers and/or taggings in one operation, but without giving away API key secrets or leaking data, so this method is appropriate for frontend javascript applications. The response on success will simply be the server response code (ex: 200) and an empty JSON object. On error, the server response code (ex: 404, 500) plus an error message may be returned. While each implementing system will require different fields, any optional fields not included in a POST operation should not be set at all by the receiving system, or should be set to default values.
 
 #### Request
 
@@ -187,7 +187,6 @@ POST https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d
       "input_type": "mobile",
       "success": true,
       "status_code": "",
-      "canvasser": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
     },
 {% include helper_action_examples.md %}
 }
@@ -197,6 +196,11 @@ POST https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d
 
 ```javascript
 200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{}
 ```
 
 

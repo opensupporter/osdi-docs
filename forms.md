@@ -55,6 +55,7 @@ A list of fields specific to the Form resource.
 |summary			|string		|A text-only single paragraph summarizing the form. Shown on listing pages that have more than titles, but not enough room for full description.
 |call_to_action		|string		|The text of the call to action of the form. (ex: "Fill out our survey")
 |browser_url		|string		|A URL string pointing to the publicly available form page on the web.
+|featured_image_url		|string		|A URL string pointing to a publicly available featured image file for this form on the web.
 |total_submissions	|integer	|A read-only computed property representing the current count of the total number of submissions on the form.
 
 _[Back to top...](#)_
@@ -153,6 +154,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "summary": "Please take a moment to tell us about yourself.",
                 "call_to_action": "Tell us about yourself here",
                 "browser_url": "http://osdi-sample-system.org/forms/tell-us-about-yourself",
+                "featured_image_url": "http://osdi-sample-system.org/images/survey-image.jpg",
                 "total_submissions": 30,
                 "_links": {
                     "self": {
@@ -244,6 +246,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "summary": "Please take a moment to tell us about yourself.",
     "call_to_action": "Tell us about yourself here",
     "browser_url": "http://osdi-sample-system.org/forms/tell-us-about-yourself",
+    "featured_image_url": "http://osdi-sample-system.org/images/survey-image.jpg",
     "total_submissions": 30,
     "_links": {
         "self": {

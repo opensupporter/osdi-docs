@@ -5,7 +5,7 @@ title: Attendance
 
 # Attendance
 
-This document defines the Attendance resource. 
+This document defines the Attendance resource.
 
 Attendances are a type of action that a user may take by RSVPing to attend an event or buying tickets to a ticketed event. Attendances have fields to describe them such as when the attendance was created and typically are linked to the person who made the attendance.
 
@@ -54,7 +54,7 @@ A list of fields specific to the Attendance resource.
 |-----------    |-----------|-----------|--------------
 |origin_system		|string     |A human readable identifier of the system where this attendance was created. (ex: "OSDI System")
 |action_date		|string		|The date and time the attendance was made by the person.
-|status			|enum			|The attendee's response status. One of "declined", "tentative", "accepted", or "needs action".
+|status			|flexenum			|The attendee's response status. One of "declined", "tentative", "accepted", "cancelled", or "needs action".  Note: OSDI vendors may implement varying or client-configured statuses; users should check with the vendor for available attendance status values. 
 |attended		|boolean		|For event RSVPs, represents whether the person actually attended the event or not. For ticketed events, field should be absent, as it's superseded by the `attended` field in the `ticket` object.
 |comment		|string			|An optional comment from the attendee.
 |tickets		|[Tickets[]](#tickets)	|If this event is a ticketed event, an array of object hashes representing each ticket purchased as part of this attendance. (ex: One $5 general admission ticket for Sam and two $50 VIP tickets for Sally and Saul.)
@@ -232,7 +232,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-```	
+```
 
 Next, an example of ticketed event attendances:
 
@@ -653,8 +653,8 @@ OSDI-API-Token:[your api key here]
 	    }
 	],
     "_links" : {
-        "osdi:person" : { 
-            "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
+        "osdi:person" : {
+            "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         }
     }
 }

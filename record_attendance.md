@@ -17,7 +17,7 @@ When using the Record Attendance Helper, tagging and list membership info may be
 
 In addition, you can indicate to the server whether to trigger additional actions, such as an autoresponse email sent back to the person who took action.
 
-Typically, the response to a successful Record Attendance Helper POST is the full representation of the attendance. However, the Record Attendance Helper can be used without authentication, allowing for use in frontend javascript-based applications without giving away API key secrets, for example. If no authentication is passed, the response will simply be the server response code, to avoid leaking any data. (ex: 200 for success, 500 for error, etc...)
+Typically, the response to a successful Record Attendance Helper POST is the full representation of the attendance. However, the Record Attendance Helper can be used without authentication, allowing for use in frontend javascript-based applications without giving away API key secrets, for example. If no authentication is passed, the response on success will simply be the server response code (ex: 200) and an empty JSON object. On error, the server response code (ex: 404, 500) plus an error message may be returned.
 
 Some initial implementations may only support helpers -- direct RESTful access may not be supported. In those cases, the _links section may be omitted in responses.
 
@@ -381,7 +381,7 @@ _[Back to top...](#)_
 
 ### Scenario: Creating a new attendance and person without authentication (POST)
 
-Posting to the record attendance helper endpoint without authentication will allow you to create a new attendance and person (or update a person if the system attempts to match people posted with helpers) in one operation, but without giving away API key secrets or leaking data, so this method is appropriate for frontend javascript applications. The response is the server resonse code. (ex: 200 for success, 500 for error, etc...) While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+Posting to the record attendance helper endpoint without authentication will allow you to create a new attendance and person (or update a person if the system attempts to match people posted with helpers) in one operation, but without giving away API key secrets or leaking data, so this method is appropriate for frontend javascript applications. The response on success will simply be the server response code (ex: 200) and an empty JSON object. On error, the server response code (ex: 404, 500) plus an error message may be returned. While each implementing system will require different fields, any optional fields not included in a POST operation should not be set at all by the receiving system, or should be set to default values.
 
 #### Request
 
@@ -442,6 +442,11 @@ POST https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d
 
 ```javascript
 200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{}
 ```
 
 _[Back to top...](#)_
