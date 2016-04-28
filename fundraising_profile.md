@@ -12,20 +12,20 @@ This document describes the integration profile for fundraising.
 * [Scenario Overview](#scenario-overview)
 * [Related Resources](#related-resources)
 * [API Exchanges](#api-exchanges)
-    * [API Exchange: OCA retrieves the collection of scripts from VRM](#exchange-example-oca-list-collection-of-scripts-in-vrm)
-    * [Exchange Example: OCA retrieves a script including questions and responses](#exchange-example-oca-retrieves-a-script-including-questions-and-responses)
-    * [Exchange Example: OCA Submits canvass interaction results to VRM](#exchange-example-oca-submits-canvass-interaction-results-to-vrm)
+    * [Exchange Example: Fundraising application creates a fundraising page in digital organizing system](#exchange-example-fundraising-application-creates-a-fundraising-page-in-digital-organizing-system)
+    * [Exchange Example: Fundraising application sends data about donations to the digital organizing system
+](#exchange-example-fundraising-application-sends-data-about-donations-to-the-digital-organizing-system)
 
 ## Scenario Overview
 
-The Fundraising Integration Profile assumes a common pattern where an OSDI compliant fundraising application is used to raise money from individuals and then reporting the data collected while processing the donation (name of person, address, amount donated, etc...) to a digital organizing platform or contact relation management (CRM) system.
+The Fundraising Integration Profile assumes a common pattern where an OSDI compliant fundraising application is used to raise money from individuals and then reports the data collected while processing the donation (name of person, address, amount donated, etc...) to a digital organizing platform or contact relation management (CRM) system.
 
 The steps in this scenario, are loosely:
 
-1. Fundraising page creation: A user of the fundraising application creates a fundraising page to collect donations from people.
+1. Fundraising page creation: A user of the fundraising application creates a fundraising page to collect donations.
 2. API Exchange: The fundraising application creates a fundraising page on the digital organizing platform corresponding to the one created by the user, to store data as donations are collected. The fundraising application stores the ID or URL of the created fundraising page for later use.
 3. Donation collection: People donate on the fundraising page hosted by the fundraising application.
-4. API Exchange: The fundraising application sends data about the donation and who made it to the digital organzing platform, using the fundraising page it created in step 2.
+4. API Exchange: The fundraising application sends data about the donation and who made it to the digital organizing platform, using the fundraising page it created in step 2.
 
 _[Back to top...](#)_
 
@@ -39,7 +39,7 @@ _[Back to top...](#)_
 
 ## API Exchanges
 
-## Exchange Example: Fundraising application creates a fundraising page in digital organizing system
+### Exchange Example: Fundraising application creates a fundraising page in digital organizing system
 
 #### Request
 
@@ -100,7 +100,7 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-## Exchange Example: Fundraising application sends data about donations to the digital organizing system
+### Exchange Example: Fundraising application sends data about donations to the digital organizing system
 
 #### Request
 
@@ -196,7 +196,7 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "_links": {
         "self": {
-            "href": "https://digital-organizing-platform.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/doantions/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+            "href": "https://digital-organizing-platform.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
         },
         "osdi:fundraising_page": {
             "href": "https://digital-organizing-platform.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29"

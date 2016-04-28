@@ -257,7 +257,7 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/doantions/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+            "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
         },
         "osdi:fundraising_page": {
             "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29"
