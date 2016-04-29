@@ -23,7 +23,12 @@ Assuming the digital organizing system you're integrating with supports the rele
 
 In this way, integration profiles aim to help you as an implementer string together the chain of calls needed to accomplish common tasks. If an OSDI system supports a certain profile, then all you need to do to integrate in that way is implement the profile yourself.
 
+_[Back to top...](#)_
+
+
 ## List Of Profiles
 
 * [Fundraising Profile](fundraising_profile.html)
 * [List Exchange Profile](list_exchange_profile.html)
+
+_[Back to top...](#)_
