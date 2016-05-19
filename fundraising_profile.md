@@ -22,10 +22,19 @@ The Fundraising Integration Profile assumes a common pattern where an OSDI compl
 
 The steps in this scenario, are loosely:
 
+**Setup Phase**
+
+The setup phase occurs each time a user creates a fundraising page on the fundraising application.
+
 1. Fundraising page creation: A user of the fundraising application creates a fundraising page to collect donations.
 2. API Exchange: The fundraising application creates a fundraising page on the digital organizing platform corresponding to the one created by the user, to store data as donations are collected. The fundraising application stores the ID or URL of the created fundraising page for later use.
-3. Donation collection: People donate on the fundraising page hosted by the fundraising application.
-4. API Exchange: The fundraising application sends data about the donation and who made it to the digital organizing platform, using the fundraising page it created in step 2.
+
+**Operational Phase**
+
+After the page is set up, the operational phase occurs each time a donation is collected on that page.
+
+1. Donation collection: People donate on the fundraising page hosted by the fundraising application.
+2. API Exchange: The fundraising application sends data about the donation and who made it to the digital organizing platform, using the fundraising page it created in step 2.
 
 _[Back to top...](#)_
 
@@ -69,7 +78,7 @@ Cache-Control: max-age=0, private, must-revalidate
 
 {
     "identifiers": [
-        "digital_organizing_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+        "digital_organizing_system:c945d6fe-929e-11e3-a2e9-12313d316c29",
         "fundraising_application:1"
     ],
     "origin_system": "FundraisingApplication",
@@ -172,7 +181,7 @@ Cache-Control: max-age=0, private, must-revalidate
 
 {
     "identifiers": [
-        "digital_organizing_system:d91b4b2e-ae0e-4cd3-9ed7-de9uemdse",
+        "digital_organizing_system:c945d6fe-929e-11e3-a2e9-12313d316c29",
     ],
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",

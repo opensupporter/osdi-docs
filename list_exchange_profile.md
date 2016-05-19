@@ -22,11 +22,20 @@ The List Exchange Integration Profile assumes a common pattern where an OSDI com
 
 The steps in this scenario, are loosely:
 
+**Setup Phase**
+
+The setup phase occurs when a user wants to import a list from the second application to the first.
+
 1. API Exchange: The first application queries the lists collection in the second application to find available lists to import.
 2. Choose list: A user of the first application chooses a list to import.
 3. API Exchange: The first application imports people on the list from the second application by paging through the items collection of the list and following links to the associated person.
-4. Actions happen: Actions happen in the first system on the imported people, such as sending them a text message or an email.
-5. API Exchange: The first system sends back tag information to the second system, storing results of the action on the people in the first system in the second system as taggings.
+
+**Operational Phase**
+
+The operational phase occurs when actions take place on the first application and tags are sent back to the second as a result of those actions.
+
+1. Actions happen: Actions happen in the first system on the imported people, such as sending them a text message or an email.
+2. API Exchange: The first system sends back tag information to the second system, storing results of the action on the people in the first system in the second system as taggings.
 
 _[Back to top...](#)_
 
