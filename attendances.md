@@ -139,7 +139,7 @@ _[Back to top...](#)_
 
 Attendance resources are sometimes presented as collections of attendances. For example, calling the attendance endpoint on a particular event will return a collection of all the attendances made to that event.
 
-Ticketed event attendances and non-ticketed event attendances look different. First, an example of non-ticketed event attendaces:
+Ticketed event attendances and non-ticketed event attendances look different. First, an example of non-ticketed event attendances:
 
 #### Request
 
