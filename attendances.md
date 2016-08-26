@@ -57,6 +57,7 @@ A list of fields specific to the Attendance resource.
 |status			|flexenum			|The attendee's response status. One of "declined", "tentative", "accepted", "cancelled", or "needs action".  Note: OSDI vendors may implement varying or client-configured statuses; users should check with the vendor for available attendance status values. 
 |attended		|boolean		|For event RSVPs, represents whether the person actually attended the event or not. For ticketed events, field should be absent, as it's superseded by the `attended` field in the `ticket` object.
 |comment		|string			|An optional comment from the attendee.
+|referrer_data		|[Referrer Data*](#referrer-data)	|An object hash representing referrer and sourcing information about this attendance.
 |tickets		|[Tickets[]](#tickets)	|If this event is a ticketed event, an array of object hashes representing each ticket purchased as part of this attendance. (ex: One $5 general admission ticket for Sam and two $50 VIP tickets for Sally and Saul.)
 
 
@@ -66,6 +67,15 @@ _[Back to top...](#)_
 ### Related Objects
 
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+#### Referrer Data
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|referrer_data.source	|string    |The source code that was used when this attendance was created. Typically used to track individual links, such as a post on social media or a link in a specific email. (ex: "facebook-101016-mainpage")
+|referrer_data.referrer	|string    |The code representing a person or group that referred this attendance. Typically used to track which person referred the person who made this attendance to attend. (ex: "jane-doe")
+|referrer_data.website	|string    |The URL of the website where the person clicked from to then subsequently make this attendance. (ex: "https://facebook.com")
+
 
 #### Tickets
 
@@ -191,6 +201,11 @@ Cache-Control: max-age=0, private, must-revalidate
                 "status": "confirmed",
                 "attended": true,
                 "comment": "Looking forward to it!",
+                "referrer_data": {
+                    "source": "facebook-101016-mainpage",
+                    "referrer": "jane-doe",
+                    "website": "https://facebook.com"
+                },
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -216,6 +231,9 @@ Cache-Control: max-age=0, private, must-revalidate
                 "action_date": "2014-03-12T01:45:34Z",
                 "status": "tentative",
                 "attended": false,
+                "referrer_data": {
+                    "source": "email-101116-subjecttest1"
+                },
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -295,6 +313,10 @@ Cache-Control: max-age=0, private, must-revalidate
                 "action_date": "2014-03-18T11:02:15Z",
                 "status": "confirmed",
                 "comment": "Looking forward to it!",
+                "referrer_data": {
+                    "source": "twitter-101016",
+                    "website": "https://twitter.com"
+                },
                 "tickets": [
                     {
                         "title": "General Admission",
@@ -357,6 +379,9 @@ Cache-Control: max-age=0, private, must-revalidate
                 "modified_date": "2014-03-20T20:44:13Z",
                 "action_date": "2014-03-12T01:45:34Z",
                 "status": "tentative",
+                "referrer_data": {
+                    "source": "email-101216-final"
+                },
                 "tickets": [
                     {
                         "title": "General Admission",
@@ -432,6 +457,11 @@ Cache-Control: max-age=0, private, must-revalidate
     "status": "confirmed",
     "attended": true,
     "comment": "Looking forward to it!",
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -480,6 +510,11 @@ Cache-Control: max-age=0, private, must-revalidate
     "action_date": "2014-03-18T11:02:15Z",
     "status": "confirmed",
     "comment": "Looking forward to it!",
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com"
+    },
     "tickets": [
         {
             "title": "General Admission",
@@ -560,6 +595,9 @@ OSDI-API-Token:[your api key here]
     ],
     "origin_system": "OpenSupporter",
     "action_date": "2014-03-18T11:02:15Z",
+    "referrer_data": {
+        "source": "api"
+    },
     "_links" : {
         "osdi:person" : { 
             "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
@@ -584,6 +622,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
     "action_date": "2014-03-18T11:02:15Z",
+    "referrer_data": {
+        "source": "api"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
@@ -614,6 +655,9 @@ OSDI-API-Token:[your api key here]
     ],
     "origin_system": "OpenSupporter",
     "action_date": "2014-03-18T11:02:15Z",
+    "referrer_data": {
+        "source": "api"
+    },
     "tickets": [
         {
             "title": "General Admission",
@@ -676,6 +720,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
     "action_date": "2014-03-18T11:02:15Z",
+    "referrer_data": {
+        "source": "api"
+    },
     "tickets": [
         {
             "title": "General Admission",
@@ -768,6 +815,11 @@ Cache-Control: max-age=0, private, must-revalidate
     "modified_date": "2014-03-20T22:04:31Z",
     "action_date": "2014-03-17T11:02:15Z",
     "status": "declined",
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
