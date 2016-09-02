@@ -56,6 +56,7 @@ A list of fields specific to the Outreach resource.
 |duration		|integer		|The duration in seconds of the outreach, if applicable. (ex: duration will only be present on phone outreach types)
 |subject		|string		|The subject of the outreach, if applicable. (ex: subject will only be present on email outreach types)
 |message		|string		|The message of the outreach, if applicable. (ex: message will only be present on email or postal mail outreach types)
+|referrer_data		|[Referrer Data*](#referrer-data)	|An object hash representing referrer and sourcing information about this outreach.
 |targets			|[Target[]](#target)    |An array of target object hashes representing the targets of the outreach.
 
 _[Back to top...](#)_
@@ -64,6 +65,16 @@ _[Back to top...](#)_
 ### Related Objects
 
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+#### Referrer Data
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|referrer_data.source	|string    |The source code that was used when this outreach was created. Typically used to track individual links, such as a post on social media or a link in a specific email. (ex: "facebook-101016-mainpage")
+|referrer_data.referrer	|string    |The code or ID representing a person or group that referred this outreach. Typically used to track which person referred the person who made this outreach. (ex: "jane-doe")
+|referrer_data.website	|string    |The top level domain of the website where the person clicked from to then subsequently make this outreach. (ex: "facebook.com")
+|referrer_data.url	|string    |The specific URL where the person clicked from to then subsequently make this outreach. (ex: "https://facebook.com/posts/12345")
+
 
 #### Target
 
@@ -178,6 +189,12 @@ Cache-Control: max-age=0, private, must-revalidate
                 "type": "email",
                 "subject": "Vote no!",
                 "message": "Please vote no on HR 100.",
+                "referrer_data": {
+                    "source": "facebook-101016-mainpage",
+                    "referrer": "jane-doe",
+                    "website": "facebook.com",
+                    "url": "https://facebook.com/posts/12345"
+                },
                 "targets": [
 	                {
 	                    "title": "Senator",
@@ -217,6 +234,9 @@ Cache-Control: max-age=0, private, must-revalidate
                 "type": "email",
                 "subject": "Don't do it!",
                 "message": "Vote no tomorrow!",
+                "referrer_data": {
+                    "source": "email-101116-subjecttest1"
+                },
                 "targets": [
 	                {
 	                    "title": "Senator",
@@ -279,6 +299,12 @@ Cache-Control: max-age=0, private, must-revalidate
     "type": "email",
     "subject": "Vote no!",
     "message": "Please vote no on HR 100.",
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
+    },
     "targets": [
 	    {
 	        "title": "Senator",
@@ -334,6 +360,9 @@ OSDI-API-Token:[your api key here]
     "action_date": "2014-03-18T11:02:15Z",
     "type": "phone",
     "duration": 120,
+    "referrer_data": {
+        "source": "api"
+    },
     "targets": [
 	    {
 	        "title": "Senator",
@@ -376,6 +405,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "action_date": "2014-03-18T11:02:15Z",
     "type": "phone",
     "duration": 120,
+    "referrer_data": {
+        "source": "api"
+    },
     "targets": [
 	    {
 	        "title": "Senator",
@@ -446,6 +478,12 @@ Cache-Control: max-age=0, private, must-revalidate
     "action_date": "2014-03-17T11:02:15Z",
     "type": "phone",
     "duration": 120,
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
+    },
     "targets": [
 	    {
 	        "title": "Senator",

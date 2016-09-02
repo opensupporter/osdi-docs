@@ -73,8 +73,9 @@ These JSON hashes included in the table above are broken out into their own tabl
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |referrer_data.source	|string    |The source code that was used when this attendance was created. Typically used to track individual links, such as a post on social media or a link in a specific email. (ex: "facebook-101016-mainpage")
-|referrer_data.referrer	|string    |The code representing a person or group that referred this attendance. Typically used to track which person referred the person who made this attendance to attend. (ex: "jane-doe")
-|referrer_data.website	|string    |The URL of the website where the person clicked from to then subsequently make this attendance. (ex: "https://facebook.com")
+|referrer_data.referrer	|string    |The code or ID representing a person or group that referred this attendance. Typically used to track which person referred the person who made this attendance. (ex: "jane-doe")
+|referrer_data.website	|string    |The top level domain of the website where the person clicked from to then subsequently make this attendance. (ex: "facebook.com")
+|referrer_data.url	|string    |The specific URL where the person clicked from to then subsequently make this attendance. (ex: "https://facebook.com/posts/12345")
 
 
 #### Tickets
@@ -204,7 +205,8 @@ Cache-Control: max-age=0, private, must-revalidate
                 "referrer_data": {
                     "source": "facebook-101016-mainpage",
                     "referrer": "jane-doe",
-                    "website": "https://facebook.com"
+                    "website": "facebook.com",
+                    "url": "https://facebook.com/posts/12345"
                 },
                 "_links": {
                     "self": {
@@ -315,7 +317,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "comment": "Looking forward to it!",
                 "referrer_data": {
                     "source": "twitter-101016",
-                    "website": "https://twitter.com"
+                    "website": "twitter.com"
                 },
                 "tickets": [
                     {
@@ -460,7 +462,8 @@ Cache-Control: max-age=0, private, must-revalidate
     "referrer_data": {
         "source": "facebook-101016-mainpage",
         "referrer": "jane-doe",
-        "website": "facebook.com"
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
     },
     "_links": {
         "self": {
@@ -513,7 +516,8 @@ Cache-Control: max-age=0, private, must-revalidate
     "referrer_data": {
         "source": "facebook-101016-mainpage",
         "referrer": "jane-doe",
-        "website": "facebook.com"
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
     },
     "tickets": [
         {
@@ -818,7 +822,8 @@ Cache-Control: max-age=0, private, must-revalidate
     "referrer_data": {
         "source": "facebook-101016-mainpage",
         "referrer": "jane-doe",
-        "website": "facebook.com"
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
     },
     "_links": {
         "self": {
