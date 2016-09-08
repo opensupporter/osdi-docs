@@ -30,5 +30,6 @@ _[Back to top...](#)_
 
 * [Fundraising Profile](fundraising_profile.html)
 * [List Exchange Profile](list_exchange_profile.html)
+* [Field Organizing Profile](field_organizing_profile.html)
 
 _[Back to top...](#)_
