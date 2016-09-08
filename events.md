@@ -501,7 +501,7 @@ OSDI-API-Token:[your api key here]
     },
     "_links" : {
         "osdi:organizer" : { 
-            "href" : "https://actionnetwork.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2" 
+            "href" : "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2" 
         }
     }
 }
