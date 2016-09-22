@@ -59,6 +59,7 @@ A list of fields specific for POSTing via the Record Signature Helper.
 |origin_system		|string     |A human readable identifier of the system where this signature was created. (ex: "OSDI System")
 |action_date		|string		|The date and time the signature was made by the person.
 |comments		|string			|The comments left by the person when the signature was created.
+|referrer_data		|[Referrer Data*](#referrer-data)	|An object hash representing referrer and sourcing information about this signature.
 |person			|[Person*](#person)	|An object hash representing the person who made the submission.
 
 
@@ -73,6 +74,15 @@ _[Back to top...](#)_
 ### Related Objects
 
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+#### Referrer Data
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|referrer_data.source	|string    |The source code that was used when this signature was created. Typically used to track individual links, such as a post on social media or a link in a specific email. (ex: "facebook-101016-mainpage")
+|referrer_data.referrer	|string    |The code or ID representing a person or group that referred this signature. Typically used to track which person referred the person who made this signature. (ex: "jane-doe")
+|referrer_data.website	|string    |The top level domain of the website where the person clicked from to then subsequently make this signature. (ex: "facebook.com")
+|referrer_data.url	|string    |The specific URL where the person clicked from to then subsequently make this signature. (ex: "https://facebook.com/posts/12345")
 
 #### Person
 
@@ -155,6 +165,12 @@ OSDI-API-Token:[your api key here]
     "origin_system": "OpenSupporter",
     "action_date": "2014-03-18T11:02:15Z",
     "comments": "Support our campaign!",
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
+    },
 {% include helper_action_examples.md %}
 }
 ```
@@ -177,6 +193,12 @@ Cache-Control: max-age=0, private, must-revalidate
     "action_date": "2014-03-18T11:02:15Z",
     "origin_system": "OpenSupporter",
     "comments": "Support our campaign!",
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/petitions/c945d6fe-929e-11e3-a2e9-12313d316c29/signatures/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
@@ -248,6 +270,12 @@ POST https://osdi-sample-system.org/api/v1/petitions/c945d6fe-929e-11e3-a2e9-123
     "origin_system": "OpenSupporter",
     "action_date": "2014-03-18T11:02:15Z",
     "comments": "Support our campaign!",
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
+    },
 {% include helper_action_examples.md %}
 }
 ```
