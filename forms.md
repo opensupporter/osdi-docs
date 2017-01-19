@@ -16,6 +16,7 @@ Forms represent a page, survey, or interaction that a user may participate in by
 * [Fields](#fields)
     * [Common Fields](#common-fields)
     * [Form Fields](#form-fields)  
+    * [Related Objects](#related-objects) 
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -57,6 +58,16 @@ A list of fields specific to the Form resource.
 |browser_url		|string		|A URL string pointing to the publicly available form page on the web.
 |featured_image_url		|string		|A URL string pointing to a publicly available featured image file for this form on the web.
 |total_submissions	|integer	|A read-only computed property representing the current count of the total number of submissions on the form.
+{% include share_options_main_objects.md %}
+
+_[Back to top...](#)_
+
+
+### Related Objects
+
+These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+{% include share_options_related_objects.md %}
 
 _[Back to top...](#)_
 
@@ -156,6 +167,27 @@ Cache-Control: max-age=0, private, must-revalidate
                 "browser_url": "http://osdi-sample-system.org/forms/tell-us-about-yourself",
                 "featured_image_url": "http://osdi-sample-system.org/images/survey-image.jpg",
                 "total_submissions": 30,
+                "share_url": "http://osdi-sample-system.org/forms/my-form/",
+                "total_shares": 345,
+                "share_options": [
+                    {
+                        "facebook_share": {
+                            "title": "Take our survey",
+                            "description": "Tell us about yourself!",
+                            "image": "http://odsi-sample-system.org/images/form-share-image.jpg",
+                            "total_shares": 100
+                        },
+                        "twitter_share": {
+                            "message": "Take the @OSDI survey! Click here: http://osdi-sample-system.org/forms/my-form/",
+                            "total_shares": 100
+                        },
+                        "email_share": {
+                            "subject": "Take our survey!",
+                            "body": "Can you take our survey? Click here: http://osdi-sample-system.org/forms/my-form/",
+                            "total_shares": 145
+                        }
+                    }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -248,6 +280,27 @@ Cache-Control: max-age=0, private, must-revalidate
     "browser_url": "http://osdi-sample-system.org/forms/tell-us-about-yourself",
     "featured_image_url": "http://osdi-sample-system.org/images/survey-image.jpg",
     "total_submissions": 30,
+    "share_url": "http://osdi-sample-system.org/forms/my-form/",
+    "total_shares": 345,
+    "share_options": [
+        {
+            "facebook_share": {
+                "title": "Take our survey",
+                "description": "Tell us about yourself!",
+                "image": "http://odsi-sample-system.org/images/form-share-image.jpg",
+                "total_shares": 100
+            },
+            "twitter_share": {
+                "message": "Take the @OSDI survey! Click here: http://osdi-sample-system.org/forms/my-form/",
+                "total_shares": 100
+            },
+            "email_share": {
+                "subject": "Take our survey!",
+                "body": "Can you take our survey? Click here: http://osdi-sample-system.org/forms/my-form/",
+                "total_shares": 145
+            }
+        }
+    ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/forms/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"

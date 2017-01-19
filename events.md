@@ -73,6 +73,7 @@ A list of fields specific to the Event resource.
 |visibility			|enum		|Visibility of the event.  Possible values are "public" and "private".
 |location			|[Location](#location)	| An object hash representing the location of the event.
 |reminders 			|[Reminders[]](#reminders)	|An array of object hashes representing the reminders set for this event.
+{% include share_options_main_objects.md %}
 
 _[Back to top...](#)_
 
@@ -116,6 +117,8 @@ These JSON hashes included in the table above are broken out into their own tabl
 |-----------    |-----------|--------------
 |reminder.method|enum    |The way the reminder is to be delivered. One of "email" or "sms".
 |reminder.minutes  |integer    |The number of minutes before the start of the event to send the reminder.
+
+{% include share_options_related_objects.md %}
 
 _[Back to top...](#)_
 
@@ -248,6 +251,27 @@ Cache-Control: max-age=0, private, must-revalidate
                     {
                         "method": "sms",
                         "minutes": 60
+                    }
+                ],
+                "share_url": "http://osdi-sample-system.org/events/my-event/",
+                "total_shares": 345,
+                "share_options": [
+                    {
+                        "facebook_share": {
+                            "title": "Debate watch party!",
+                            "description": "Come and watch the debate.",
+                            "image": "http://odsi-sample-system.org/images/event-share-image.jpg",
+                            "total_shares": 100
+                        },
+                        "twitter_share": {
+                            "message": "Watch the debate with @OSDI! Click here: http://osdi-sample-system.org/events/my-event/",
+                            "total_shares": 100
+                        },
+                        "email_share": {
+                            "subject": "Come watch the debate!",
+                            "body": "Can you watch the debate with us? Click here: http://osdi-sample-system.org/events/my-event/",
+                            "total_shares": 145
+                        }
                     }
                 ],
                 "_links": {
@@ -434,6 +458,27 @@ Cache-Control: max-age=0, private, must-revalidate
         {
             "method": "sms",
             "minutes": 60
+        }
+    ],
+    "share_url": "http://osdi-sample-system.org/events/my-event/",
+    "total_shares": 345,
+    "share_options": [
+        {
+            "facebook_share": {
+                "title": "Debate watch party!",
+                "description": "Come and watch the debate.",
+                "image": "http://odsi-sample-system.org/images/event-share-image.jpg",
+                "total_shares": 100
+            },
+            "twitter_share": {
+                "message": "Watch the debate with @OSDI! Click here: http://osdi-sample-system.org/events/my-event/",
+                "total_shares": 100
+            },
+            "email_share": {
+                "subject": "Come watch the debate!",
+                "body": "Can you watch the debate with us? Click here: http://osdi-sample-system.org/events/my-event/",
+                "total_shares": 145
+            }
         }
     ],
     "_links": {
