@@ -55,9 +55,7 @@ A list of fields specific to the Share Page resource.
 |description		|string		|A description of the share page, usually displayed publicly. May contain text and/or HTML.
 |summary			|string		|A text-only single paragraph summarizing the share page. Shown on listing pages that have more than titles, but not enough room for full description.
 |browser_url		|string		|A URL string pointing to the publicly available share page page on the web.
-|share_url			|string		|A URL string pointing to the page that will be shared using this share page.
-|total_shares	|integer	|A computed property representing the current count of the total number of times the share page has been used by activists.
-|share_options	|[ShareOptions[]](#share-options)	|An array of share options objects representing the default language and attributes used when an activist shares via various mediums. 
+{% include share_options_main_objects.md %}
 
 
 _[Back to top...](#)_
@@ -66,38 +64,7 @@ _[Back to top...](#)_
 
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
 
-#### Share Options
-
-|Name          |Type      |Description
-|-----------    |-----------|--------------
-|facebook_share	|[Facebook Share](#facebook-share)    |An object hash representing the default language and attributes used when an activist shares on Facebook.
-|twitter_share	|[Twitter Share](#twitter-share)    |An object hash representing the default language and attributes used when an activist shares on Twitter.
-|email_share	|[Email Share](#email-share)    |An object hash representing the default language and attributes used when an activist shares via email.
-
-#### Facebook Share
-
-|Name          |Type      |Description
-|-----------    |-----------|--------------
-|facebook_share.title |string    |The title of the post created when an activist uses the share page to share content on Facebook.
-|facebook_share.description |string    |The description of the post created when an activist uses the share page to share content on Facebook.
-|facebook_share.image |string    |The URL of an image that goes with post created when an activist uses the share page to share content on Facebook.
-|facebook_share.total_shares		|integer	|A computed property representing the current count of the total number of times the share page has been used by activists to share on Facebook.
-
-#### Twitter Share
-
-|Name          |Type      |Description
-|-----------    |-----------|--------------
-|twitter_share.message |string    |The text of the post created when an activist uses the share page to share content on Twitter. Some systems may use templating or appends to insert the share_url into the tweet automatically.
-|twitter_share.total_shares		|integer	|A computed property representing the current count of the total number of times the share page has been used by activists to share on Twitter.
-
-
-#### Email Share
-
-|Name          |Type      |Description
-|-----------    |-----------|--------------
-|email_share.subject |string    |The subject line of the email created when an activist uses the share page to share content via email.
-|email_share.body |string    |The body text of the email created when an activist uses the share page to share content via email. Some systems may use templating or appends to insert the share_url into the email body automatically.
-|email_share.total_shares		|integer	|A computed property representing the current count of the total number of times the share page has been used by activists to share via email.
+{% include share_options_related_objects.md %}
 
 _[Back to top...](#)_
 
