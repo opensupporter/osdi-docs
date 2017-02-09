@@ -62,7 +62,8 @@ A list of fields specific to the Person resource.
 |party_identification          |flexenum     |Flexenum describing the person's politcal party_identification. One of "None", "Democratic", "Republican", "Independent", or another free-form string.
 |source         |string     |Information about the source where this person record was acquired.   _Example: "facebook-ad-october"_
 |ethnicities|strings[]   |A unique string array representing a person's ethnicities.
-|languages_spoken|strings[]      | Unique string array of languages spoken by the person. Values should be two-letter ISO 639 codes. 
+|languages_spoken|strings[]      | Unique string array of RFC5646 tags representing the languages spoken by the person. Example: en,  en-US, fr-CA, pt-BR
+|preferred_language | string  | The RFC5646 tag representing the person's preferred language.
 |birthdate	|[Birthdate](#birthdate)    |An object hash representing the birthdate of the person.
 |employer|string    |The name of the person's employer.
 |employer_address|[Employer Address](#employer-address)    |An object hash representing the postal address of the person's employer.
@@ -293,9 +294,10 @@ Cache-Control: max-age=0, private, must-revalidate
                     "African American"
                 ],
                 "languages_spoken": [
-                    "en",
-                    "fr"
+                    "en-US",
+                    "fr-CA"
                 ],
+                "preferred_language": "fr-CA",
                 "employer": "Acme Corp",
                 "employer_address": {
                     "venue": "Bull Hall",
