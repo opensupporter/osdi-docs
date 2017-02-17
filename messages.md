@@ -15,7 +15,7 @@ Message resources represent a some type of mass communication -- a mass email to
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
     * [Common Fields](#common-fields)
-    * [Message Fields](#event-fields)  
+    * [Message Fields](#message-fields)  
     * [Related Objects](#related-objects)
     * [Links](#links)
 * [Related Resources](#related-resources)
@@ -25,7 +25,6 @@ Message resources represent a some type of mass communication -- a mass email to
     * [Scenario: Creating a new message (POST)](#scenario-creating-a-new-message-post)
     * [Scenario: Modifying an message (PUT)](#scenario-modifying-an-message-put)
     * [Scenario: Adding queries to a message (POST)](#scenario-adding-queries-to-a-message-post)
-    * [Scenario: Sending, scheduling, or cancelling a message (PUT)](#sending-scheduling-or-cancelling-a-message-put)
     * [Scenario: Deleting an message (DELETE)](#scenario-deleting-an-message-delete)
 
 
@@ -53,17 +52,20 @@ A list of fields specific to the Message resource.
 |-----------    |-----------|-----------|--------------
 |origin_system		|string     |A human readable identifier of the system where this message was created. (ex: "OSDI System")
 |name				|string		|The name of the message. Intended for administrative display rather than a public title, though may be shown to a user.
-|title				|string		|The title of the message. Intended for public display rather than administrative purposes. (ex: email type messages will put the subject line of the email in this field)
-|description		|string		|The content of the message. May contain text and/or HTML. (ex: email type messages will put the HTML content of the email here)
+|subject			|string		|The subject of the message. (ex: email type messages will put the subject line of the email in this field)
+|body				|string		|The content of the message. May contain text and/or HTML. (ex: email type messages will put the HTML content of the email here)
 |from				|string		|The from line of the message. (ex: email messages can be from "John Doe" or "Progressives United". SMS messages can be from "202-123-4567")
 |reply_to			|string		|The reply to field for the message. (ex: emails may have a reply_to of "info@progressivesunited.org")
 |administrative_url		|string		|A URL string pointing to the message's administrative page on the web.
 |browser_url		|string		|A URL string pointing to the message's public page on the web.
 |type				|enum		|The type of message. One of "email" or "sms".
 |total_targeted		|integer	|A read-only computed property representing the current count of the total number of people targeted to receive this message.
-|status				|enum		|Status of the message.  Possible values are: "draft", "calculating", "scheduled", "sending", "stopped", or "sent". Changing the status via PUT may cause the message to be sent, scheduled, etc...
+|status				|enum		|Status of the message.  Possible values are: "draft", "calculating", "scheduled", "sending", "stopped", or "sent".
 |scheduled_date		|datetime	|The date and time the message is scheduled to be sent.
-|sent_date			|datetime	|The date and time the message was sent.
+|sent_start_date	|datetime	|The date and time the message started sending.
+|sent_end_date		|datetime	|The date and time the message finished sending.
+|daily_start_hour	|integer	|The hour of the day messages should start sending. (ex: SMS campaigns may only be sent during certain hours of the day)
+|daily_stop_hour	|integer	|The hour of the day messages should stop sending. (ex: SMS campaigns may only be sent during certain hours of the day)
 |statistics			|[Statistics](#statistics)	|An object hash representing the engagement statistics for this message. (ex: open rate and unsubscribe rate)
 
 _[Back to top...](#)_
@@ -81,6 +83,7 @@ These JSON hashes included in the table above are broken out into their own tabl
 |statistics.opened	|integer    |A read-only computed property representing the total number of messages opened.
 |statistics.clicked	|integer    |A read-only computed property representing the total number of messages where a link was clicked.
 |statistics.actions	|integer    |A read-only computed property representing the total number of action taken by people after clicking links in this message.
+|statistics.forwards	|integer    |A read-only computed property representing the total number of times this message was forwarded.
 |statistics.unsubscribed	|integer    |A read-only computed property representing the total number of messages where the person receiving the message unsubscribed.
 |statistics.bounced	|integer    |A read-only computed property representing the total number of messages that bounced or were otherwise undelivered.
 |statistics.spam_reports	|integer    |A read-only computed property representing the total number of messages marked as spam by people receiving them.
@@ -99,7 +102,10 @@ _[Back to top...](#)_
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this message.
 |queries	|[Queries[]*](queries.html)	|A link to the collection of Query resources that represent who this message was targeted to.
 |list	|[List*](lists.html)	|A link to the List resource that represent who this message was sent to.
+|wrapper	|[Wrapper*](wrappers.html)	|A link to the Wrapper resource that represent the wrapper that was used when sending this message.
 |email_wrapper	|[Email Wrapper*](email_wrappers.html)	|A link to the Email Wrapper resource that represent the email wrapper that was used when sending this message.
+|send_helper	|[Send Helper*](send.html)	|A link to the Send Helper resource endpoint for this message.
+|schedule_helper	|[Schedule Helper*](schedule.html)	|A link to the Schedule Helper resource endpoint for this message.
 
 _[Back to top...](#)_
 
@@ -108,7 +114,9 @@ _[Back to top...](#)_
 
 * [Query](queries.html)
 * [List](lists.html)
-* [Email Wrapper](email_wrappers.html)
+* [Wrapper](wrappers.html)
+* [Send Helper](send.html)
+* [Schedule Helper](schedule.html)
 * [Person](people.html)
 
 _[Back to top...](#)_
@@ -178,8 +186,8 @@ Cache-Control: max-age=0, private, must-revalidate
                 "created_date": "2014-03-20T21:04:31Z",
                 "modified_date": "2014-03-20T21:04:31Z",
                 "name": "GOTV email version 1",
-                "title": "It's time to go vote!",
-                "description": "<p>It's time to go vote!</p>",
+                "subject": "It's time to go vote!",
+                "body": "<p>It's time to go vote!</p>",
                 "from": "The Committee To Elect Jane Doe",
                 "reply_to": "info@janedoe.com",
                 "administrative_url": "http://osdi-sample-system.org/emails/gotv-v1/manage",
@@ -187,12 +195,14 @@ Cache-Control: max-age=0, private, must-revalidate
                 "type": "email",
                 "total_targeted": 14123,
                 "status": "sent",
-                "sent_date": "2015-03-14T12:00:00Z",
+                "sent_start_date": "2015-03-14T12:00:00Z",
+                "sent_end_date": "2015-03-14T13:00:00Z",
                 "statistics": {
                     "sent": 14123,
                     "opened": 5637,
                     "clicked": 1753,
                     "actions": 253,
+                    "forwards": 53,
                     "unsubscribed": 26,
                     "bounced": 58,
                     "spam_reports": 2
@@ -213,8 +223,14 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:list": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
-                    "osdi:email_wrapper": {
-                        "href": "https://osdi-sample-system.org/api/v1/email_wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    "osdi:wrapper": {
+                        "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:send_helper": {
+                        "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/send"
+                    },
+                    "osdi:schedule_helper": {
+                        "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/schedule"
                     }
                 }
             },
@@ -226,13 +242,15 @@ Cache-Control: max-age=0, private, must-revalidate
                 "created_date": "2014-03-20T20:44:13Z",
                 "modified_date": "2014-03-20T20:44:13Z",
                 "name": "GOTV SMS",
-                "description": "Don't forget to vote!",
+                "body": "Don't forget to vote!",
                 "from": "202-123-4567",
                 "administrative_url": "http://osdi-sample-system.org/sms/gotv/manage",
                 "type": "sms",
                 "total_targeted": 2536,
                 "status": "scheduled",
                 "scheduled_date": "2015-03-14T12:00:00Z",
+                "daily_start_hour": 9,
+                "daily_stop_hour": 17,
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -248,6 +266,15 @@ Cache-Control: max-age=0, private, must-revalidate
                     },
                     "osdi:list": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                    },
+                    "osdi:wrapper": {
+                        "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:send_helper": {
+                        "href": "ttps://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/send"
+                    },
+                    "osdi:schedule_helper": {
+                        "href": "ttps://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/schedule"
                     }
                 }
             },
@@ -289,8 +316,8 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
     "name": "GOTV email version 1",
-    "title": "It's time to go vote!",
-    "description": "<p>It's time to go vote!</p>",
+    "subject": "It's time to go vote!",
+    "body": "<p>It's time to go vote!</p>",
     "from": "The Committee To Elect Jane Doe",
     "reply_to": "info@janedoe.com",
     "administrative_url": "http://osdi-sample-system.org/emails/gotv-v1/manage",
@@ -298,12 +325,14 @@ Cache-Control: max-age=0, private, must-revalidate
     "type": "email",
     "total_targeted": 14123,
     "status": "sent",
-    "sent_date": "2015-03-14T12:00:00Z",
+    "sent_start_date": "2015-03-14T12:00:00Z",
+    "sent_end_date": "2015-03-14T13:00:00Z",
     "statistics": {
         "sent": 14123,
         "opened": 5637,
         "clicked": 1753,
         "actions": 253,
+        "forwards": 53,
         "unsubscribed": "26",
         "bounced": 58,
         "spam_reports": 2
@@ -324,8 +353,14 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:list": {
             "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:email_wrapper": {
-            "href": "https://osdi-sample-system.org/api/v1/email_wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        "osdi:wrapper": {
+            "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:send_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/send"
+        },
+        "osdi:schedule_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/schedule"
         }
     }
 }    
@@ -352,8 +387,8 @@ OSDI-API-Token:[your api key here]
     ],
     "origin_system": "OpenSupporter",
     "name": "GOTV email version 1",
-    "title": "It's time to go vote!",
-    "description": "<p>It's time to go vote!</p>",
+    "subject": "It's time to go vote!",
+    "body": "<p>It's time to go vote!</p>",
     "from": "The Committee To Elect Jane Doe",
     "reply_to": "info@janedoe.com",
     "type": "email",
@@ -361,8 +396,8 @@ OSDI-API-Token:[your api key here]
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
-        "osdi:email_wrapper": {
-            "href": "https://osdi-sample-system.org/api/v1/email_wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        "osdi:wrapper": {
+            "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
         }
     }
 }
@@ -385,8 +420,8 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
     "name": "GOTV email version 1",
-    "title": "It's time to go vote!",
-    "description": "<p>It's time to go vote!</p>",
+    "subject": "It's time to go vote!",
+    "body": "<p>It's time to go vote!</p>",
     "from": "The Committee To Elect Jane Doe",
     "reply_to": "info@janedoe.com",
     "type": "email",
@@ -410,8 +445,14 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:list": {
             "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:email_wrapper": {
-            "href": "https://osdi-sample-system.org/api/v1/email_wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        "osdi:wrapper": {
+            "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:send_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/send"
+        },
+        "osdi:schedule_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/schedule"
         }
     }
 }
@@ -456,8 +497,8 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
     "name": "GOTV email version 2",
-    "title": "It's time to go vote!",
-    "description": "<p>It's time to go vote!</p>",
+    "subject": "It's time to go vote!",
+    "body": "<p>It's time to go vote!</p>",
     "from": "The Committee To Elect Jane Doe",
     "reply_to": "info@janedoe.com",
     "type": "email",
@@ -481,8 +522,14 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:list": {
             "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:email_wrapper": {
-            "href": "https://osdi-sample-system.org/api/v1/email_wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        "osdi:wrapper": {
+            "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:send_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/send"
+        },
+        "osdi:schedule_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/schedule"
         }
     }
 }
@@ -570,87 +617,6 @@ Cache-Control: max-age=0, private, must-revalidate
                 }
             }
         ]
-    }
-}
-```
-
-_[Back to top...](#)_
-
-
-### Scenario: Sending, scheduling, or cancelling a message (PUT)
-
-By changing the status field of the message, you can send it, schedule it to be sent at a later date, stop it mid-send, or cancel scheduling. For example, changing a message's status from "draft" to "sending" will cause the message to start sending. Subsequently changing it from "sending" to "stopped" will stop the send mid-way. Changing the status from "draft" to "scheduled" and including a scheduled_date field will schedule the message to be sent at that date. Changing the status from "scheduled" to "draft" will cancel the scheduling. NOTE: Different implementing systems will have different rules around these manipulations. For example, you may not be able to send a message that's in the calculating status, as the message is still working to figure out who it should target.
-
-In this example, we'll send a message.
-
-#### Request
-
-```javascript
-PUT https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
-
-Header:
-OSDI-API-Token:[your api key here]
-
-{
-    "status": "sending"
-}
-
-```
-
-#### Response
-```javascript
-200 OK
-
-Content-Type: application/hal+json
-Cache-Control: max-age=0, private, must-revalidate
-
-{
-    "identifiers": [
-        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
-        "foreign_system:1"
-    ],
-    "origin_system": "OpenSupporter",
-    "created_date": "2014-03-20T21:04:31Z",
-    "modified_date": "2014-03-20T21:04:31Z",
-    "name": "GOTV email version 2",
-    "title": "It's time to go vote!",
-    "description": "<p>It's time to go vote!</p>",
-    "from": "The Committee To Elect Jane Doe",
-    "reply_to": "info@janedoe.com",
-    "type": "email",
-    "status": "sending",
-    "administrative_url": "http://osdi-sample-system.org/emails/gotv-v2/manage",
-    "browser_url": "http://osdi-sample-system.org/emails/gotv-v2",
-    "total_targeted": 23546,
-    "sent_date": "2015-03-14T12:00:00Z",
-    "statistics": {
-        "sent": 293,
-        "opened": 12,
-        "clicked": 1,
-        "actions": 0,
-        "unsubscribed": 0,
-        "bounced": 0,
-        "spam_reports": 0
-    },
-    "_links": {
-        "self": {
-            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
-        },
-        "osdi:queries": {
-            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/queries"
-        },
-        "osdi:creator": {
-            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
-        },
-        "osdi:modified_by": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-        },
-        "osdi:list": {
-            "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29"
-        },
-        "osdi:email_wrapper": {
-            "href": "https://osdi-sample-system.org/api/v1/email_wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
-        }
     }
 }
 ```
