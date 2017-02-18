@@ -59,7 +59,7 @@ A list of fields specific to the Person resource.
 |honorific_suffix           |string    |An honorific suffix like "Jr.", "Ph.D", etc...
 |gender         |enum     |The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", or "Other".
 |gender_identity|string     |The self-described gender with which a person identifies. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
-|party_identification          |flexenum     |Flexenum describing the person's politcal party_identification. One of "None", "Democratic", "Republican", "Independent", or another free-form string.
+|party_identification   |flexenum     |Flexenum describing the person's politcal party_identification. One of "None", "Democratic", "Republican", "Independent", or another free-form string.
 |parties |[Parties[]](#parties)|An array of party object hashes associated with the person.
 |source         |string     |Information about the source where this person record was acquired.   _Example: "facebook-ad-october"_
 |ethnicities|strings[]   |A unique string array representing a person's ethnicities.
@@ -93,9 +93,9 @@ These JSON hashes included in the table above are broken out into their own tabl
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-|parties.identification|flexenum    |One of "None", "Democratic", "Republican", "Independent", or another free-form string.
-|parties.last_verified_date  |integer    |A value representing the last verified date of the party registration.
-|parties.status|boolean     |Whether or not this party registration is active for the affiliated person.
+|parties.identification |flexenum |One of "None", "Democratic", "Republican", "Independent", or another free-form string.
+|parties.last_verified_date   |integer    |A value representing the last verified date of the party registration.
+|parties.active   |boolean     |Whether or not this party registration is active for the affiliated person.
 
 #### Employer Address
 
@@ -294,6 +294,13 @@ Cache-Control: max-age=0, private, must-revalidate
                 "gender": "Male",
                 "gender_identity": "Male",
                 "party_identification": "Democratic",
+                "parties": [
+                  {
+                     "identification: "Democratic",
+                     "last_verified_date: "2014-03-20T21:04:31Z",
+                     "active": true
+                  }
+                ],
                 "source": "october_canvass",
                 "birthdate": {
                     "month": 6,
@@ -310,7 +317,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "preferred_language": "fr-CA",
                 "employer": "Acme Corp",
                 "employer_address": {
-                    "venue": "Bull Hall",
+                    "venue": "Bull Hall","
                     "address_lines": [
                         "123 Acme Street",
                         "Suite 400"
@@ -344,7 +351,8 @@ Cache-Control: max-age=0, private, must-revalidate
                             "latitude": 38.919,
                             "longitude": -77.0379,
                             "accuracy": "Rooftop"
-                        }
+                        },
+                        "last_verified_date": "2014-03-20T21:04:31Z"
                     }
                 ],
                 "email_addresses": [
@@ -528,6 +536,13 @@ Cache-Control: max-age=0, private, must-revalidate
     "gender": "Male",
     "gender_identity": "Male",
     "party_identification": "Democratic",
+    "parties": [
+      {
+        "identification: "Democratic",
+        "last_verified_date: "2014-03-20T21:04:31Z",
+        "active": true
+      }
+    ],
     "source": "october_canvass",
     "birthdate": {
         "month": 6,
