@@ -15,7 +15,7 @@ Wrapper resources represent a some type of standard wrapper around a Message res
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
     * [Common Fields](#common-fields)
-    * [Wrapper Fields](#message-fields)  
+    * [Wrapper Fields](#wrapper-fields)  
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)

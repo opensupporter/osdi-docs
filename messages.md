@@ -24,7 +24,7 @@ Message resources represent a some type of mass communication -- a mass email to
     * [Scenario: Retrieving an individual Message resource (GET)](#scenario-scenario-retrieving-an-individual-message-resource-get)
     * [Scenario: Creating a new message (POST)](#scenario-creating-a-new-message-post)
     * [Scenario: Modifying a message (PUT)](#scenario-modifying-a-message-put)
-    * [Scenario: Adding targets to a message (POST/PUT)](#scenario-adding-targets-to-a-message-post-put)
+    * [Scenario: Adding targets to a message (POST/PUT)](#scenario-adding-targets-to-a-message-postput)
     * [Scenario: Deleting a message (DELETE)](#scenario-deleting-a-message-delete)
 
 

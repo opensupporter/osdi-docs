@@ -3,7 +3,7 @@ layout: default
 title: Schedule Helper
 ---
 
-# Send Helper
+# Schedule Helper
 
 This document defines the Schedule Helper resource. 
 
