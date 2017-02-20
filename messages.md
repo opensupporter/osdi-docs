@@ -7,7 +7,7 @@ title: Message
 
 This document defines the Message resource. 
 
-Message resources represent a some type of mass communication -- a mass email to an email list, an SMS sent to an SMS list, etc... -- that is sent or otherwise communicated to to a list of people. Messages have fields to describe them such as names, subject lines, contents, statistics about delivery and engagement, and the like. Messages can also be linked to queries for targeting a list of people, lists for showing who received the message, and similar metadata. Messages can be one of two types, ```email``` or ```sms```, indicating how the message was delivered.
+Message resources represent a some type of mass communication -- a mass email to an email list, an SMS sent to an SMS list, etc... -- that is sent or otherwise communicated to to a list of people. Messages have fields to describe them such as names, subjects, bodies, statistics about delivery and engagement, and the like. Messages contain arrays that link to queries or lists representing people who are targeted to receive the message, and link to recipient lists for showing who received the message, and similar metadata. Messages can be one of two types, ```email``` or ```sms```, indicating how the message was delivered.
 
 
 ### Sections
@@ -23,9 +23,9 @@ Message resources represent a some type of mass communication -- a mass email to
     * [Scenario: Retrieving a collection of Message resources (GET)](#scenario-retrieving-a-collection-of-message-resources-get)
     * [Scenario: Retrieving an individual Message resource (GET)](#scenario-scenario-retrieving-an-individual-message-resource-get)
     * [Scenario: Creating a new message (POST)](#scenario-creating-a-new-message-post)
-    * [Scenario: Modifying an message (PUT)](#scenario-modifying-an-message-put)
-    * [Scenario: Adding queries to a message (POST)](#scenario-adding-queries-to-a-message-post)
-    * [Scenario: Deleting an message (DELETE)](#scenario-deleting-an-message-delete)
+    * [Scenario: Modifying a message (PUT)](#scenario-modifying-a-message-put)
+    * [Scenario: Adding targets to a message (POST/PUT)](#scenario-adding-targets-to-a-message-post-put)
+    * [Scenario: Deleting a message (DELETE)](#scenario-deleting-a-message-delete)
 
 
 {% include endpoints_and_url_structures.md %}
@@ -59,6 +59,7 @@ A list of fields specific to the Message resource.
 |administrative_url		|string		|A URL string pointing to the message's administrative page on the web.
 |browser_url		|string		|A URL string pointing to the message's public page on the web.
 |type				|enum		|The type of message. One of "email" or "sms".
+|targets			|[Target[]](#target)| Array of queries and/or lists representing the people targeted to receive this message.
 |total_targeted		|integer	|A read-only computed property representing the current count of the total number of people targeted to receive this message.
 |status				|enum		|Status of the message.  Possible values are: "draft", "calculating", "scheduled", "sending", "stopped", or "sent".
 |scheduled_date		|datetime	|The date and time the message is scheduled to be sent.
@@ -74,6 +75,13 @@ _[Back to top...](#)_
 ### Related Objects
 
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+#### Target
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|target.href	|string    |A link to an Query or List resource representing a group of people targeted to receive this message.
+
 
 #### Statistics
 
@@ -100,10 +108,8 @@ _[Back to top...](#)_
 |self			|[Message*](messages.html)	|A self-referential link to the message.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the message.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this message.
-|queries	|[Queries[]*](queries.html)	|A link to the collection of Query resources that represent who this message was targeted to.
-|list	|[List*](lists.html)	|A link to the List resource that represent who this message was sent to.
+|recipients	|[List*](lists.html)	|A link to the List resource that represents the list of People who received this message.
 |wrapper	|[Wrapper*](wrappers.html)	|A link to the Wrapper resource that represent the wrapper that was used when sending this message.
-|email_wrapper	|[Email Wrapper*](email_wrappers.html)	|A link to the Email Wrapper resource that represent the email wrapper that was used when sending this message.
 |send_helper	|[Send Helper*](send.html)	|A link to the Send Helper resource endpoint for this message.
 |schedule_helper	|[Schedule Helper*](schedule.html)	|A link to the Schedule Helper resource endpoint for this message.
 
@@ -127,7 +133,7 @@ _[Back to top...](#)_
 
 ### Scenario: Retrieving a collection of Message resources (GET)
 
-Message resources are sometimes presented as collections of message. For example, calling the messages endpoint will return a collection of all the messages stored in the system's database associated with your api key.
+Message resources are sometimes presented as collections of messages. For example, calling the messages endpoint will return a collection of all the messages stored in the system's database associated with your api key.
 
 #### Request
 
@@ -193,6 +199,14 @@ Cache-Control: max-age=0, private, must-revalidate
                 "administrative_url": "http://osdi-sample-system.org/emails/gotv-v1/manage",
                 "browser_url": "http://osdi-sample-system.org/emails/gotv-v1",
                 "type": "email",
+                "targets": [
+	                {
+		                "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+		            },
+		            {
+			            "href": "https://osdi-sample-system.org/api/v1/lists/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+			        }
+	            ],    
                 "total_targeted": 14123,
                 "status": "sent",
                 "sent_start_date": "2015-03-14T12:00:00Z",
@@ -211,16 +225,13 @@ Cache-Control: max-age=0, private, must-revalidate
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
                     },
-                    "osdi:queries": {
-                        "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/queries"
-                    },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
-                    "osdi:list": {
+                    "osdi:recipients": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:wrapper": {
@@ -246,6 +257,11 @@ Cache-Control: max-age=0, private, must-revalidate
                 "from": "202-123-4567",
                 "administrative_url": "http://osdi-sample-system.org/sms/gotv/manage",
                 "type": "sms",
+                "targets": [
+	                {
+		                "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+		            }
+	            ], 
                 "total_targeted": 2536,
                 "status": "scheduled",
                 "scheduled_date": "2015-03-14T12:00:00Z",
@@ -255,16 +271,13 @@ Cache-Control: max-age=0, private, must-revalidate
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e"
                     },
-                    "osdi:queries": {
-                        "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/queries"
-                    },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
-                    "osdi:list": {
+                    "osdi:recipients": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
                     },
                     "osdi:wrapper": {
@@ -323,6 +336,14 @@ Cache-Control: max-age=0, private, must-revalidate
     "administrative_url": "http://osdi-sample-system.org/emails/gotv-v1/manage",
     "browser_url": "http://osdi-sample-system.org/emails/gotv-v1",
     "type": "email",
+    "targets": [
+	    {
+	        "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+	    },
+	    {
+	        "href": "https://osdi-sample-system.org/api/v1/lists/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+	    }
+	], 
     "total_targeted": 14123,
     "status": "sent",
     "sent_start_date": "2015-03-14T12:00:00Z",
@@ -341,16 +362,13 @@ Cache-Control: max-age=0, private, must-revalidate
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
-        "osdi:queries": {
-            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/queries"
-        },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:list": {
+        "osdi:recipients": {
             "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:wrapper": {
@@ -371,7 +389,7 @@ _[Back to top...](#)_
 
 ### Scenario: Creating a new message (POST)
 
-Posting to the message collection endpoint will allow you to create a new message. Optionally adding a link to a Person resource will set the creator and adding a link to an Email Wrapper will set up that email wrapper to be used by the message. The response is the new message that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+Posting to the messages collection endpoint will allow you to create a new message. Optionally adding a link to a Person resource will set the creator and adding a link to an Email Wrapper will set up that email wrapper to be used by the message. The response is the new message that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
 #### Request
 
@@ -428,13 +446,11 @@ Cache-Control: max-age=0, private, must-revalidate
     "status": "draft",
     "administrative_url": "http://osdi-sample-system.org/emails/gotv-v1/manage",
     "browser_url": "http://osdi-sample-system.org/emails/gotv-v1",
+    "targets": [],
     "total_targeted": 0,
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
-        },
-        "osdi:queries": {
-            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/queries"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -442,7 +458,7 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:list": {
+        "osdi:recipients": {
             "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:wrapper": {
@@ -505,13 +521,11 @@ Cache-Control: max-age=0, private, must-revalidate
     "status": "draft",
     "administrative_url": "http://osdi-sample-system.org/emails/gotv-v2/manage",
     "browser_url": "http://osdi-sample-system.org/emails/gotv-v2",
+    "targets": [],
     "total_targeted": 0,
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
-        },
-        "osdi:queries": {
-            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/queries"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -519,7 +533,7 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-        "osdi:list": {
+        "osdi:recipients": {
             "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:wrapper": {
@@ -538,25 +552,31 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Adding queries to a message (POST)
+### Scenario: Adding targets to a message (POST/PUT)
 
-You can add queries to a message by POSTing a link to the query to the message's queries collection. This action will typically cause the message's targets to be recalculated by the system, based on the query's parameters.
+You can add targeted people to receive a message in the form of links to queries or lists by POST/PUTing the targets array on a message. This action will typically cause the message's targets to be recalculated by the system, based on the targeted parameters.
+
+{% include array_warning.md %}
 
 #### Request
 
 ```javascript
-POST https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/queries
+PUT https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
 
 Header:
 OSDI-API-Token:[your api key here]
 
 {
-    "_links": {
-        "osdi:queries": {
-            "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
-        }
-    }
+    "targets": [
+	    {
+	        "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+	    },
+	    {
+	        "href": "https://osdi-sample-system.org/api/v1/lists/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+	    }
+	]
 }
+
 ```
 
 #### Response
@@ -567,56 +587,53 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "total_pages": 1,
-    "per_page": 25,
-    "page": 1,
-    "total_records": 1,
+    "identifiers": [
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+        "foreign_system:1"
+    ],
+    "origin_system": "OpenSupporter",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "name": "GOTV email version 2",
+    "subject": "It's time to go vote!",
+    "body": "<p>It's time to go vote!</p>",
+    "from": "The Committee To Elect Jane Doe",
+    "reply_to": "info@janedoe.com",
+    "type": "email",
+    "status": "calculating",
+    "administrative_url": "http://osdi-sample-system.org/emails/gotv-v2/manage",
+    "browser_url": "http://osdi-sample-system.org/emails/gotv-v2",
+    "targets": [
+	    {
+	        "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+	    },
+	    {
+	        "href": "https://osdi-sample-system.org/api/v1/lists/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+	    }
+	],
+    "total_targeted": 0,
     "_links": {
-        "osdi:queries": [
-            {
-                "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
-            }
-        ],
-        "curies": [
-            {
-                "name": "osdi",
-                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
-                "templated": true
-            }
-        ],
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/queries"
+            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:recipients": {
+            "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:wrapper": {
+            "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:send_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/send"
+        },
+        "osdi:schedule_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/schedule"
         }
-    },
-    "_embedded": {
-        "osdi:queries": [
-            {
-                "identifiers": [
-                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
-                    "foreign_system:1"
-                ],
-                "origin_system": "OSDI Sample System",
-                "created_date": "2014-03-20T21:04:31Z",
-                "modified_date": "2014-03-20T21:04:31Z",
-                "name": "GOTV query",
-                "browser_url": "http://osdi-sample-system.org/queries/gotv-query",
-                "total_results": 26497,
-                "_links": {
-                    "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
-                    },
-                    "osdi:results": {
-                        "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/results"
-                    },
-                    "osdi:creator": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
-                    },
-                    "osdi:modified_by": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
-                    }
-                }
-            }
-        ]
     }
 }
 ```
@@ -626,7 +643,7 @@ _[Back to top...](#)_
 
 ### Scenario: Deleting a message (DELETE)
 
-You may delete a message by calling the DELETE command on the event's endpoint.
+You may delete a message by calling the DELETE command on the message's endpoint.
 
 #### Request
 
