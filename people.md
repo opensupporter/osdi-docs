@@ -317,7 +317,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "preferred_language": "fr-CA",
                 "employer": "Acme Corp",
                 "employer_address": {
-                    "venue": "Bull Hall","
+                    "venue": "Bull Hall",
                     "address_lines": [
                         "123 Acme Street",
                         "Suite 400"
