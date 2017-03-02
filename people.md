@@ -538,8 +538,8 @@ Cache-Control: max-age=0, private, must-revalidate
     "party_identification": "Democratic",
     "parties": [
       {
-        "identification: "Democratic",
-        "last_verified_date: "2014-03-20T21:04:31Z",
+        "identification": "Democratic",
+        "last_verified_date": "2014-03-20T21:04:31Z",
         "active": true
       }
     ],
