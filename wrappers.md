@@ -53,7 +53,7 @@ A list of fields specific to the Wrapper resource.
 |header				|string		|The header content of the wrapper. May contain HTML.
 |footer				|string		|The footer content of the wrapper. May contain HTML.
 |administrative_url		|string		|A URL string pointing to the wrapper's administrative page on the web.
-|type				|enum		|The type of wrapper. One of "email" or "sms".
+|wrapper_type				|enum		|The type of wrapper. One of "email" or "sms".
 |default			|boolean	|Whether this wrapper is the default wrapper for messages or not.
 
 _[Back to top...](#)_
@@ -146,7 +146,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "header": "<p>It's time to go vote!</p>",
                 "footer": "<p>Sent by the campaign to elect Jane Doe.</p>",
                 "administrative_url": "http://osdi-sample-system.org/wrappers/gotv/manage",
-                "type": "email",
+                "wrapper_type": "email",
                 "default": true,
                 "_links": {
                     "self": {
@@ -169,7 +169,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "modified_date": "2014-03-20T20:44:13Z",
                 "name": "GOTV SMS wrapper",
                 "administrative_url": "http://osdi-sample-system.org/wrappers/gotv/manage",
-                "type": "sms",
+                "wrapper_type": "sms",
                 "default": true,
                 "_links": {
                     "self": {
@@ -224,7 +224,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "header": "<p>It's time to go vote!</p>",
     "footer": "<p>Sent by the campaign to elect Jane Doe.</p>",
     "administrative_url": "http://osdi-sample-system.org/wrappers/gotv/manage",
-    "type": "email",
+    "wrapper_type": "email",
     "default": true,
     "_links": {
         "self": {
@@ -263,7 +263,7 @@ OSDI-API-Token:[your api key here]
     "name": "GOTV email wrapper",
     "header": "<p>It's time to go vote!</p>",
     "footer": "<p>Sent by the campaign to elect Jane Doe.</p>",
-    "type": "email",
+    "wrapper_type": "email",
     "default": true
 }
 ```
@@ -288,7 +288,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "header": "<p>It's time to go vote!</p>",
     "footer": "<p>Sent by the campaign to elect Jane Doe.</p>",
     "administrative_url": "http://osdi-sample-system.org/wrappers/gotv/manage",
-    "type": "email",
+    "wrapper_type": "email",
     "default": true,
     "_links": {
         "self": {
@@ -346,7 +346,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "header": "<p>It's time to go vote!</p>",
     "footer": "<p>Sent by the campaign to elect Jane Doe.</p>",
     "administrative_url": "http://osdi-sample-system.org/wrappers/gotv/manage",
-    "type": "email",
+    "wrapper_type": "email",
     "default": true,
     "_links": {
         "self": {
