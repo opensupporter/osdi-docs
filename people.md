@@ -59,8 +59,8 @@ A list of fields specific to the Person resource.
 |honorific_suffix           |string    |An honorific suffix like "Jr.", "Ph.D", etc...
 |gender         |enum     |The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", or "Other".
 |gender_identity|string     |The self-described gender with which a person identifies. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
-|party_identification   |flexenum     |Flexenum describing the person's politcal party_identification. One of "None", "Democratic", "Republican", "Independent", or another free-form string.
-|parties |[Parties[]](#parties)|An array of party object hashes associated with the person.
+|party_identification   |flexenum     |Flexenum describing the person's politcal party identification. One of "None", "Democratic", "Republican", "Independent", or another free-form string.
+|parties |[Parties[]](#parties)|An array of all party object hashes associated with the person (past and present).
 |source         |string     |Information about the source where this person record was acquired.   _Example: "facebook-ad-october"_
 |ethnicities|strings[]   |A unique string array representing a person's ethnicities.
 |languages_spoken|strings[]      | Unique string array of RFC5646 tags representing the languages spoken by the person. Example: en,  en-US, fr-CA, pt-BR
@@ -94,7 +94,7 @@ These JSON hashes included in the table above are broken out into their own tabl
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |parties.identification |flexenum |One of "None", "Democratic", "Republican", "Independent", or another free-form string.
-|parties.last_verified_date   |integer    |A value representing the last verified date of the party registration.
+|parties.last_verified_date   |datetime    |A value representing the last verified date of the party registration.
 |parties.active   |boolean     |Whether or not this party registration is active for the affiliated person.
 
 #### Employer Address
