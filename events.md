@@ -181,7 +181,7 @@ Cache-Control: max-age=0, private, must-revalidate
         "next": {
             "href": "https://osdi-sample-system.org/api/v1/events?page=2"
         },
-        "osdi:forms": [
+        "osdi:events": [
             {
                 "href": "https://osdi-sample-system.org/api/v1/events/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
             },
@@ -713,7 +713,7 @@ _[Back to top...](#)_
 
 ### Scenario: Deleting an event (DELETE)
 
-You may delete a event by calling the DELETE command on the event's endpoint.
+You may delete an event by calling the DELETE command on the event's endpoint.
 
 #### Request
 
