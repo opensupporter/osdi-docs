@@ -23,7 +23,9 @@ Message resources represent a some type of mass communication -- a mass email to
     * [Scenario: Retrieving a collection of Message resources (GET)](#scenario-retrieving-a-collection-of-message-resources-get)
     * [Scenario: Retrieving an individual Message resource (GET)](#scenario-scenario-retrieving-an-individual-message-resource-get)
     * [Scenario: Creating a new message (POST)](#scenario-creating-a-new-message-post)
+    * [Scenario: Creating a new SMS message (POST)](#scenario-creating-a-new-sms-message-post)
     * [Scenario: Modifying a message (PUT)](#scenario-modifying-a-message-put)
+    * [Scenario: Modifying a SMS message (PUT)](#scenario-modifying-a-sms-message-put)
     * [Scenario: Adding targets to a message (POST/PUT)](#scenario-adding-targets-to-a-message-postput)
     * [Scenario: Deleting a message (DELETE)](#scenario-deleting-a-message-delete)
 
@@ -49,7 +51,7 @@ _[Back to top...](#)_
 A list of fields specific to the Message resource.
 
 | Name          | Type      | Description
-|-----------    |-----------|-----------|--------------
+|-----------    |-----------|-----------
 |origin_system		|string     |A human readable identifier of the system where this message was created. (ex: "OSDI System")
 |name				|string		|The name of the message. Intended for administrative display rather than a public title, though may be shown to a user.
 |subject			|string		|The subject of the message. (ex: email type messages will put the subject line of the email in this field)
@@ -60,6 +62,7 @@ A list of fields specific to the Message resource.
 |browser_url		|string		|A URL string pointing to the message's public page on the web.
 |type				|enum		|The type of message. One of "email" or "sms".
 |targets			|[Target[]](#target)| Array of queries and/or lists representing the people targeted to receive this message.
+|sections           |Array of keyword and auto replies configured for a message and triggered when an incoming response is received.
 |total_targeted		|integer	|A read-only computed property representing the current count of the total number of people targeted to receive this message.
 |status				|enum		|Status of the message.  Possible values are: "draft", "calculating", "scheduled", "sending", "stopped", or "sent".
 |scheduled_date		|datetime	|The date and time the message is scheduled to be sent.
@@ -104,7 +107,7 @@ _[Back to top...](#)_
 {% include links_intro.md %}
 
 | Name          | Type      | Description
-|-----------    |-----------|-----------|--------------
+|-----------    |-----------|-----------
 |self			|[Message*](messages.html)	|A self-referential link to the message.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the message.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this message.
@@ -253,7 +256,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "created_date": "2014-03-20T20:44:13Z",
                 "modified_date": "2014-03-20T20:44:13Z",
                 "name": "GOTV SMS",
-                "body": "Don't forget to vote!",
+                "body": "Don't forget to vote on March 21! Let us know by responding YES or NO",
                 "from": "202-123-4567",
                 "administrative_url": "http://osdi-sample-system.org/sms/gotv/manage",
                 "type": "sms",
@@ -263,6 +266,10 @@ Cache-Control: max-age=0, private, must-revalidate
 		            }
 	            ], 
                 "total_targeted": 2536,
+                "sections": [
+                    {"keyword": "YES", "auto_reply":"Thanks for voting!"},
+                    {"keyword": "NO", "auto_reply":"Sorry, maybe next time!"},
+                ],
                 "status": "scheduled",
                 "scheduled_date": "2015-03-14T12:00:00Z",
                 "daily_start_hour": 9,
@@ -278,16 +285,16 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:recipients": {
-                        "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                        "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:wrapper": {
                         "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:send_helper": {
-                        "href": "ttps://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/send"
+                        "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/send"
                     },
                     "osdi:schedule_helper": {
-                        "href": "ttps://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/schedule"
+                        "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/schedule"
                     }
                 }
             },
@@ -306,7 +313,8 @@ Calling an individual Message resource will return the resource directly, along 
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/messages/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+GET https://osdi-sample-system.org/api/v1/messages/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b (Email Message)
+GET https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e (SMS Message)
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -360,7 +368,7 @@ Cache-Control: max-age=0, private, must-revalidate
     },
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -375,13 +383,70 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:send_helper": {
-            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/send"
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/send"
         },
         "osdi:schedule_helper": {
-            "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/schedule"
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/schedule"
         }
     }
 }    
+
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T20:44:13Z",
+    "modified_date": "2014-03-20T20:44:13Z",
+    "name": "GOTV SMS",
+    "body": "Don't forget to vote on March 21! Let us know by responding YES or NO",
+    "from": "202-123-4567",
+    "administrative_url": "http://osdi-sample-system.org/sms/gotv/manage",
+    "type": "sms",
+    "targets": [
+        {
+            "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        }
+    ], 
+    "total_targeted": 2536,
+    "sections": [
+        {"keyword": "YES", "auto_reply":"Thanks for voting!"},
+        {"keyword": "NO", "auto_reply":"Sorry, maybe next time!"},
+    ],
+    "status": "scheduled",
+    "scheduled_date": "2015-03-14T12:00:00Z",
+    "daily_start_hour": 9,
+    "daily_stop_hour": 17,
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:recipients": {
+            "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+        },
+        "osdi:wrapper": {
+            "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:send_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/send"
+        },
+        "osdi:schedule_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/schedule"
+        }
+    }
+}
+
 ```
 
 _[Back to top...](#)_
@@ -477,6 +542,106 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
+### Scenario: Creating a new SMS message (POST)
+
+Posting to the messages collection endpoint will allow you to create a new SMS message. Optionally adding a link to a Person resource will set the creator. You can also add inline sections for setting keyword based responses for the SMS Message. The response is the new message that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/messages/
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "identifiers": [
+        "foreign_system:1"
+    ],
+    "origin_system": "OpenSupporter",
+    "name": "GOTV SMS",
+    "body": "Don't forget to vote on March 21! Let us know by responding YES or NO",
+    "from": "202-123-4567",
+    "reply_to": "202-123-4567",
+    "type": "sms",
+    "sections": [
+        {"keyword": "YES", "auto_reply":"Thanks for voting!"},
+        {"keyword": "NO", "auto_reply":"Sorry, maybe next time!"},
+    ],
+    "_links": {
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:wrapper": {
+            "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        }
+    }
+}
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T20:44:13Z",
+    "modified_date": "2014-03-20T20:44:13Z",
+    "name": "GOTV SMS",
+    "body": "Don't forget to vote on March 21! Let us know by responding YES or NO",
+    "from": "202-123-4567",
+    "administrative_url": "http://osdi-sample-system.org/sms/gotv/manage",
+    "type": "sms",
+    "targets": [
+        {
+            "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        }
+    ], 
+    "total_targeted": 2536,
+    "sections": [
+        {"keyword": "YES", "auto_reply":"Thanks for voting!"},
+        {"keyword": "NO", "auto_reply":"Sorry, maybe next time!"},
+    ],
+    "status": "scheduled",
+    "scheduled_date": "2015-03-14T12:00:00Z",
+    "daily_start_hour": 9,
+    "daily_stop_hour": 17,
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:recipients": {
+            "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+        },
+        "osdi:wrapper": {
+            "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:send_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/send"
+        },
+        "osdi:schedule_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/schedule"
+        }
+    }
+}
+```
+
+_[Back to top...](#)_
+
+
 ### Scenario: Modifying a message (PUT)
 
 You can update a message by calling a PUT operation on that message's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
@@ -551,6 +716,87 @@ Cache-Control: max-age=0, private, must-revalidate
 
 _[Back to top...](#)_
 
+
+### Scenario: Modifying a SMS message (PUT)
+
+You can update a message by calling a PUT operation on that message's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
+
+{% include array_warning.md %}
+
+#### Request
+
+```javascript
+PUT https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "name": "GOTV SMS Message California",
+    "body": "Don't forget to vote on March 21! Let us know by responding YES or NO or UNDECIDED"
+    "sections": [
+        {"keyword": "YES", "auto_reply":"Thanks for voting!"},
+        {"keyword": "NO", "auto_reply":"Sorry, maybe next time!"},
+        {"keyword": "UNDECIDED", "auto_reply":"Good luck, hope you make your decision soon."}
+    ]
+}
+
+```
+
+#### Response
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T20:44:13Z",
+    "modified_date": "2014-03-20T20:44:13Z",
+    "name": "GOTV SMS Message California",
+    "body": "Don't forget to vote on March 21! Let us know by responding YES or NO or UNDECIDED",
+    "from": "202-123-4567",
+    "administrative_url": "http://osdi-sample-system.org/sms/gotv/manage",
+    "type": "sms",
+    "targets": [],
+    "total_targeted": 0,
+    "sections": [
+        {"keyword": "YES", "auto_reply":"Thanks for voting!"},
+        {"keyword": "NO", "auto_reply":"Sorry, maybe next time!"},
+        {"keyword": "UNDECIDED", "auto_reply":"Good luck, hope you make your decision soon."}
+    ],
+    "status": "draft",
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+        },
+        "osdi:creator": {
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:modified_by": {
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:recipients": {
+            "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+        },
+        "osdi:wrapper": {
+            "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:send_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/send"
+        },
+        "osdi:schedule_helper": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/schedule"
+        }
+    }
+}
+```
+
+_[Back to top...](#)_
 
 ### Scenario: Adding targets to a message (POST/PUT)
 
