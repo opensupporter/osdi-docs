@@ -65,7 +65,8 @@ A list of fields specific to the Message resource.
 |sections           |Array of keyword and auto replies configured for a message and triggered when an incoming response is received.
 |total_targeted		|integer	|A read-only computed property representing the current count of the total number of people targeted to receive this message.
 |status				|enum		|Status of the message.  Possible values are: "draft", "calculating", "scheduled", "sending", "stopped", or "sent".
-|scheduled_date		|datetime	|The date and time the message is scheduled to be sent.
+|scheduled_start_date		|datetime	|The date and time the message is scheduled to start sending text to the targets.
+|scheduled_end_date     |datetime   |The date and time the message is scheduled to be stopped.
 |sent_start_date	|datetime	|The date and time the message started sending.
 |sent_end_date		|datetime	|The date and time the message finished sending.
 |daily_start_hour	|integer	|The hour of the day messages should start sending. (ex: SMS campaigns may only be sent during certain hours of the day)
@@ -98,6 +99,9 @@ These JSON hashes included in the table above are broken out into their own tabl
 |statistics.unsubscribed	|integer    |A read-only computed property representing the total number of messages where the person receiving the message unsubscribed.
 |statistics.bounced	|integer    |A read-only computed property representing the total number of messages that bounced or were otherwise undelivered.
 |statistics.spam_reports	|integer    |A read-only computed property representing the total number of messages marked as spam by people receiving them.
+|statistics.delivered       |integer    |A read-only computed property representing the SMS messages that were delivered to the recipients. (Applicable to SMS messages)
+|statistics.failed   |integer   |A read-only computed property representing the SMS messages that could not be delievered due to invalid mobile numbers or bad phone numbers. (Applicable to SMS messages)
+|statistics.no_route |integer   |A read-only computed property representing the number of SMS messages where the number was temporarily out of network. (Applicable to SMS messages)
 
 _[Back to top...](#)_
 
@@ -271,9 +275,16 @@ Cache-Control: max-age=0, private, must-revalidate
                     {"keyword": "NO", "auto_reply":"Sorry, maybe next time!"},
                 ],
                 "status": "scheduled",
-                "scheduled_date": "2015-03-14T12:00:00Z",
+                "scheduled_start_date": "2015-03-14T12:00:00Z",
+                "scheduled_end_date": "2015-03-17T12:00:00Z",
                 "daily_start_hour": 9,
                 "daily_stop_hour": 17,
+                "statistics": {
+                    "sent": 14123,
+                    "delivered": 12637,
+                    "failed": 1753,
+                    "no_route": 253,
+                },
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -419,9 +430,16 @@ Cache-Control: max-age=0, private, must-revalidate
         {"keyword": "NO", "auto_reply":"Sorry, maybe next time!"},
     ],
     "status": "scheduled",
-    "scheduled_date": "2015-03-14T12:00:00Z",
+    "scheduled_start_date": "2015-03-14T12:00:00Z",
+    "scheduled_end_date": "2015-03-17T12:00:00Z",
     "daily_start_hour": 9,
     "daily_stop_hour": 17,
+    "statistics": {
+        "sent": 14123,
+        "delivered": 12637,
+        "failed": 1753,
+        "no_route": 253,
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -610,7 +628,8 @@ Cache-Control: max-age=0, private, must-revalidate
         {"keyword": "NO", "auto_reply":"Sorry, maybe next time!"},
     ],
     "status": "scheduled",
-    "scheduled_date": "2015-03-14T12:00:00Z",
+    "scheduled_start_date": "2015-03-14T12:00:00Z",
+    "scheduled_end_date": "2015-03-17T12:00:00Z",
     "daily_start_hour": 9,
     "daily_stop_hour": 17,
     "_links": {

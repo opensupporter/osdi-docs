@@ -7,7 +7,7 @@ title: Schedule Helper
 
 This document defines the Schedule Helper resource. 
 
-The Schedule Helper is a helper endpoint that schedules a [Message](messages.html) to be sent at a later time via POST or cancels the scheduling via DELETE.
+The Schedule Helper is a helper endpoint that schedules a [Message](messages.md) to be sent at a later time via POST or cancels the scheduling via DELETE.
 
 The Schedule Helper POST body contains a datetime field for the time you want to schedule the message to be sent, and the DELETE body is empty.
 
@@ -43,15 +43,16 @@ _[Back to top...](#)_
 A list of fields specific for POSTing via the Schedule Helper.
 
 | Name          | Type      | Description
-|-----------    |-----------|-----------|--------------
-|scheduled_date		|datetime	|The date and time the message should be scheduled to be sent.
+|-----------    |-----------|-----------
+|scheduled_start_date		|datetime	|The date and time the message should be scheduled to to start sending text to the targets.
+|scheduled_stop_date		|datetime	|The date and time the message is scheduled to be stopped.
 
 _[Back to top...](#)_
 
 
 ## Related Resources
 
-* [Message](messages.html)
+* [Message](messages.md)
 
 _[Back to top...](#)_
 
@@ -74,7 +75,8 @@ Header:
 OSDI-API-Token:[your api key here]
 
 {
-    "scheduled_date": "2015-03-14T12:00:00Z"
+    "scheduled_start_date": "2015-03-14T12:00:00Z",
+    "scheduled_end_date": "2015-03-17T12:00:00Z",
 }
 ```
 
