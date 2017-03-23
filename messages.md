@@ -99,7 +99,7 @@ These JSON hashes included in the table above are broken out into their own tabl
 |statistics.unsubscribed	|integer    |A read-only computed property representing the total number of messages where the person receiving the message unsubscribed.
 |statistics.bounced	|integer    |A read-only computed property representing the total number of messages that bounced or were otherwise undelivered.
 |statistics.spam_reports	|integer    |A read-only computed property representing the total number of messages marked as spam by people receiving them.
-|statistics.delivered       |integer    |A read-only computed property representing the SMS messages that were delivered to the recipients. (Applicable to SMS messages)
+|statistics.delivered       |integer    |A read-only computed property representing the messages that were delivered to the recipients. You may have Email and SMS systems that confirm the delivery of message to recipient email or mobile numbers, 'delivered' is used in such scenarios.
 |statistics.failed   |integer   |A read-only computed property representing the SMS messages that could not be delievered due to invalid mobile numbers or bad phone numbers. (Applicable to SMS messages)
 |statistics.no_route |integer   |A read-only computed property representing the number of SMS messages where the number was temporarily out of network. (Applicable to SMS messages)
 
@@ -220,6 +220,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "sent_end_date": "2015-03-14T13:00:00Z",
                 "statistics": {
                     "sent": 14123,
+                    "delivered": 12637,
                     "opened": 5637,
                     "clicked": 1753,
                     "actions": 253,
@@ -369,6 +370,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "sent_end_date": "2015-03-14T13:00:00Z",
     "statistics": {
         "sent": 14123,
+        "delivered": 12637,
         "opened": 5637,
         "clicked": 1753,
         "actions": 253,
