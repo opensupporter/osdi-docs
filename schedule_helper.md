@@ -23,7 +23,7 @@ Typically, the response to a successful Schedule Helper POST or DELETE is a conf
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
     * [Scenario: Scheduling a Message (POST)](#scenario-scheduling-a-message-post)
-    * [Scenario: Canceling a Scheduled Message (DELETE)](#canceling-a-scheduled-message-delete)
+    * [Scenario: Canceling a Scheduled Message (DELETE)](#scenario-canceling-a-scheduled-message-delete)
 
 
 {% include endpoints_and_url_structures.md %}
