@@ -40,7 +40,7 @@ _[Back to top...](#)_
 
 _[Back to top...](#)_
 
-### Canvassign Effort Fields
+### Canvassing Effort Fields
 
 | Name          | Type                | Description
 | -----------   | -----------         | --------------
