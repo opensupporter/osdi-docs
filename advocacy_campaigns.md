@@ -53,12 +53,14 @@ A list of fields specific to the Advocacy Campaign resource.
 |name				|string		|The name of the advocacy campaign. Intended for administrative display rather than a public title, though may be shown to a user.
 |title				|string		|The title of the advocacy campaign. Intended for public display rather than administrative purposes.
 |description		|string		|A description of the advocacy campaign, usually displayed publicly. May contain text and/or HTML.
+|templates		|string[]		|A script to read over the phone, or a general template for a postcard or email. These may be captured in the description, but putting it in the `templates` field allows it to be highlighted by clients. May contain text and/or HTML.
 |summary			|string		|A text-only single paragraph summarizing the advocacy campaign. Shown on listing pages that have more than titles, but not enough room for full description.
 |targets			|string		|A human readable description of the target universe for this advocacy campaign. (ex: "U.S. Congress")
 |browser_url		|string		|A URL string pointing to the publicly available advocacy campaign page on the web.
 |featured_image_url		|string		|A URL string pointing to a publicly available featured image file for this advocacy campaign on the web.
 |total_outreaches	|integer	|A read-only computed property representing the current count of the total number of outreaches on the advocacy campaign.
 |type				|flexunum	|The type of advocacy campaign, specifying how users perform outreaches to targets. One of "email", "in-person", "phone", "postal mail", or another type as needed.
+|targets			|[Target[]](#target)    |An array of target object hashes representing the targets of the outreach.
 {% include share_options_main_objects.md %}
 
 _[Back to top...](#)_
@@ -66,6 +68,8 @@ _[Back to top...](#)_
 ### Related Objects
 
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+{% include target_subobject.md %}
 
 {% include share_options_related_objects.md %}
 
@@ -303,6 +307,58 @@ Cache-Control: max-age=0, private, must-revalidate
                 "body": "Can you write your representatives to get rid of the bad things? Click here: http://osdi-sample-system.org/advocacy_campaigns/my-campaign/",
                 "total_shares": 145
             }
+        }
+    ],
+    // Campaigns may be targeted toward a specific representative. In that
+    // case, it might make sense to use the `target` field to include contact
+    // info inline:
+    "targets": [
+        {
+            "title": "Senator",
+            "given_name": "Jennifer",
+            "family_name": "Larson",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny",
+            "postal_addresses": [
+                {
+                    "primary": true,
+                    "address_type": "Home",
+                    "address_lines": [
+                        "1900 Pennsylvania Ave"
+                    ],
+                    "locality": "Washington",
+                    "region": "DC",
+                    "postal_code": "20009",
+                    "country": "US",
+                    "language": "en",
+                    "location": {
+                        "latitude": 38.919,
+                        "longitude": -77.0379,
+                        "accuracy": "Rooftop"
+                    },
+                    "last_verified_date": "2014-03-20T21:04:31Z"
+                }
+            ],
+            "email_addresses": [
+                {
+                    "primary": true,
+                    "address": "johnsmith@mail.com",
+                    "address_type": "Personal",
+                }
+            ],
+            "phone_numbers": [
+                {
+                    "primary": true,
+                    "number": "11234567890",
+                    "extension": "432",
+                    "description": "Worksite line",
+                    "number_type": "Work",
+                    "operator": "ATT",
+                    "country": "US",
+                    "sms_capable": false,
+                    "do_not_call": true
+                }
+            ]
         }
     ],
     "_links": {
