@@ -16,6 +16,7 @@ Fundraising pages represent a page on a website that can take donations or other
 * [Fields](#fields)
     * [Common Fields](#common-fields)
     * [Fundraising Page Fields](#fundraising-page-fields)  
+    * [Related Objects](#related-objects) 
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -58,6 +59,16 @@ A list of fields specific to the Fundraising Page resource.
 |total_donations	|integer	|A read-only computed property representing the current count of the total number of donations on the fundraising page.
 |total_amount	|float	|A read-only computed property representing the current count of the total amount of money raised on the fundraising page.
 |currency		|string	|ISO 4217 designation of currency. (ex: "USD" or "JPY")
+{% include share_options_main_objects.md %}
+
+_[Back to top...](#)_
+
+
+### Related Objects
+
+These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+{% include share_options_related_objects.md %}
 
 _[Back to top...](#)_
 
@@ -158,6 +169,27 @@ Cache-Control: max-age=0, private, must-revalidate
                 "total_donations": 345,
                 "total_amount": 4567.21,
                 "currency": "USD",
+                "share_url": "http://osdi-sample-system.org/fundraising_pages/my-fundraiser/",
+                "total_shares": 345,
+                "share_options": [
+                    {
+                        "facebook_share": {
+                            "title": "Support us at the end of the year!",
+                            "description": "Please give generously.",
+                            "image": "http://odsi-sample-system.org/images/fundraiser-share-image.jpg",
+                            "total_shares": 100
+                        },
+                        "twitter_share": {
+                            "message": "Give to @OSDI at the end of the year! Click here: http://osdi-sample-system.org/fundraising_pages/my-fundraiser/",
+                            "total_shares": 100
+                        },
+                        "email_share": {
+                            "subject": "Give to us at the end of the year!",
+                            "body": "Can you give? Click here: http://osdi-sample-system.org/fundraising_pages/my-fundraiser/",
+                            "total_shares": 145
+                        }
+                    }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -252,6 +284,27 @@ Cache-Control: max-age=0, private, must-revalidate
     "total_donations": 345,
     "total_amount": 4567.21,
     "currency": "USD",
+    "share_url": "http://osdi-sample-system.org/fundraising_pages/my-fundraiser/",
+    "total_shares": 345,
+    "share_options": [
+        {
+            "facebook_share": {
+                "title": "Support us at the end of the year!",
+                "description": "Please give generously.",
+                "image": "http://odsi-sample-system.org/images/fundraiser-share-image.jpg",
+                "total_shares": 100
+            },
+            "twitter_share": {
+                "message": "Give to @OSDI at the end of the year! Click here: http://osdi-sample-system.org/fundraising_pages/my-fundraiser/",
+                "total_shares": 100
+            },
+            "email_share": {
+                "subject": "Give to us at the end of the year!",
+                "body": "Can you give? Click here: http://osdi-sample-system.org/fundraising_pages/my-fundraiser/",
+                "total_shares": 145
+            }
+        }
+    ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"

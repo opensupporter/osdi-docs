@@ -15,6 +15,7 @@ Donations are a type of action that a user may take by donating on a fundraising
 * [Fields](#fields)
     * [Common Fields](#common-fields)
     * [Donation Fields](#donation-fields)  
+    * [Related Objects](#related-objects)
     * [Links](#links)
 * [Helpers](#helpers)
 * [Related Resources](#related-resources)
@@ -57,6 +58,10 @@ _[Back to top...](#)_
 |voided			|boolean	|Indicates if the donation has been voided.
 |voided_date  	|datetime		|Date of the void.
 |url			|string		|URL at which the donation was taken.
+|referrer_data		|[Referrer Data*](#referrer-data)	|An object hash representing referrer and sourcing information about this donation.
+
+_[Back to top...](#)_
+
 
 ## Related Objects
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
@@ -82,6 +87,18 @@ An object representing the payment details of a donation.
 |authorization_stored |boolean	|Indicates if payment information has been stored for future automatic payments.
 
 
+#### Referrer Data
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|referrer_data.source	|string    |The source code that was used when this donation was created. Typically used to track individual links, such as a post on social media or a link in a specific email. (ex: "facebook-101016-mainpage")
+|referrer_data.referrer	|string    |The code or ID representing a person or group that referred this donation. Typically used to track which person referred the person who made this donation. (ex: "jane-doe")
+|referrer_data.website	|string    |The top level domain of the website where the person clicked from to then subsequently make this donation. (ex: "facebook.com")
+|referrer_data.url	|string    |The specific URL where the person clicked from to then subsequently make this donation. (ex: "https://facebook.com/posts/12345")
+
+_[Back to top...](#)_
+
+
 ## Links
 
 | Name          | Type      | Description
@@ -89,6 +106,9 @@ An object representing the payment details of a donation.
 |self			|[Donation*](donations.html)	|A self-referential link to the donation.
 |person			|[Person*](people.html)		|A link to a single Person resource representing the person who donated.
 |fundraising_page			|[Fundraising Page*](fundraising_pages.html)  		|A link to a Fundraising Page resource representing the fundraising page on which this donation was submitted.
+|attendance | [Attendance*](attendances.html) | A link to the Attendance resource which was "purchased" with this donation. Typically used to represent tickets sold for events. There is no requirement that the amount of this donation is equal to the cost of the tickets represented in the linked Attendance.
+
+_[Back to top...](#)_
 
 ## Helpers
 
@@ -98,12 +118,17 @@ An object representing the payment details of a donation.
 |-----------------------|--------------
 |[record_donation_helper](record_donation.html)| Provides a simple method for adding a new donation and a new person to a system at the same time.
 
+_[Back to top...](#)_
+
 
 ## Related Resources
 
 * [Record Donation Helper](record_donation.html)
 * [Fundraising Page](fundraising_pages.html)
 * [Person](people.html)
+* [Attendace](attendances.html)
+
+_[Back to top...](#)_
 
 
 
@@ -147,6 +172,12 @@ Cache-Control: max-age=0, private, must-revalidate
             },
             {
                 "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/c945d6fe-929e-11e3-a2e9-12313d316c29"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/adb951cb-51f9-420e-b7e6-de953195ec86"
             },
             //(truncated for brevity)
         ],
@@ -196,6 +227,12 @@ Cache-Control: max-age=0, private, must-revalidate
                         "legal_name": "Joe for Congress"
                    }
                 ],
+                "referrer_data": {
+                    "source": "facebook-101016-mainpage",
+                    "referrer": "jane-doe",
+                    "website": "facebook.com",
+                    "url": "https://facebook.com/posts/12345"
+                },
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -233,6 +270,9 @@ Cache-Control: max-age=0, private, must-revalidate
                         "legal_name": "Obama for America"
                     }
                 ],
+                "referrer_data": {
+                    "source": "email-101116-subjecttest1"
+                },
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -245,7 +285,90 @@ Cache-Control: max-age=0, private, must-revalidate
                     }
                 }
             },
-            //(truncated for brevity)
+            {
+                "identifiers": [
+                    "osdi_sample_system:c945d6fe-929e-11e3-a2e9-12313d316c29"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
+                "action_date": "2014-03-12T01:45:34Z",
+                "currency": "USD",
+                "amount": 15.00,
+                "voided": false,
+                "voided_date": null,
+                "url": "htts://actblue.com/page/BobsCandidates",
+                "payment": {
+                    "method": "Credit Card",
+                    "reference_number": "12324567",
+                    "authorization_stored": false
+                },
+                "recipients": [
+                    {
+                        "amount": 15.00,
+                        "display_name": "Barack Obama",
+                        "legal_name": "Obama for America"
+                    }
+                ],
+                "referrer_data": {
+                    "source": "event-rsvp-1"
+                },
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:fundraising_page": {
+                        "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/adb951cb-51f9-420e-b7e6-de953195ec86"
+                    },
+                    "osdi:attendance": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc"
+                    }
+                }
+            },
+            {
+                "identifiers": [
+                    "osdi_sample_system:adb951cb-51f9-420e-b7e6-de953195ec86"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T20:44:13Z",
+                "modified_date": "2014-03-20T20:44:13Z",
+                "action_date": "2014-03-12T01:45:34Z",
+                "currency": "USD",
+                "amount": 16.00,
+                "voided": false,
+                "voided_date": null,
+                "url": "htts://actblue.com/page/BobsCandidates",
+                "payment": {
+                    "method": "Credit Card",
+                    "reference_number": "12324567",
+                    "authorization_stored": false
+                },
+                "recipients": [
+                    {
+                        "amount": 16.00,
+                        "display_name": "Barack Obama",
+                        "legal_name": "Obama for America"
+                    }
+                ],
+                "referrer_data": {
+                    "source": "donation-ask-20918"
+                },
+                "_links": {
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/adb951cb-51f9-420e-b7e6-de953195ec86"
+                    },
+                    "osdi:fundraising_page": {
+                        "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29"
+                    },
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/adb951cb-51f9-420e-b7e6-de953195ec86"
+                    }
+                },
+            },
+            // (truncated for brevity)
         ]
     }
 }
@@ -307,6 +430,12 @@ Cache-Control: max-age=0, private, must-revalidate
             "legal_name": "Joe for Congress"
        }
     ],
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -366,9 +495,15 @@ OSDI-API-Token:[your api key here]
             "legal_name": "Joe for Congress"
        }
     ],
+    "referrer_data": {
+        "source": "api"
+    },
     "_links" : {
         "osdi:person" : { 
-            "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
+            "href" : "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
+        },
+        "osdi:attendance": {
+            "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc"
         }
     }
 }
@@ -412,6 +547,9 @@ Cache-Control: max-age=0, private, must-revalidate
             "legal_name": "Joe for Congress"
        }
     ],
+    "referrer_data": {
+        "source": "api"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
@@ -420,7 +558,10 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:person": {
-            "href": "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:attendance": {
+            "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc"
         }
     }
 }
@@ -486,6 +627,12 @@ Cache-Control: max-age=0, private, must-revalidate
             "legal_name": "Joe for Congress"
        }
     ],
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
@@ -494,7 +641,7 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:person": {
-            "href": "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         }
     }
 }

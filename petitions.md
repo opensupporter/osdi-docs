@@ -59,6 +59,7 @@ A list of fields specific to the Petition resource.
 |featured_image_url		|string		|A URL string pointing to a publicly available featured image file for this petition on the web.
 |total_signatures	|integer	|A read-only computed property representing the current count of the total number of signatures on the petition.
 |target				|[Targets[]](#targets)	|An array of target object hashes associated with this petition.
+{% include share_options_main_objects.md %}
 
 _[Back to top...](#)_
 
@@ -72,6 +73,8 @@ These JSON hashes included in the table above are broken out into their own tabl
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |target.name	|string    	|The name of the target
+
+{% include share_options_related_objects.md %}
 
 _[Back to top...](#)_
 
@@ -179,6 +182,27 @@ Cache-Control: max-age=0, private, must-revalidate
                         "name": "John Smith, Chairman, Acme Co"
                     }
                 ],
+                "share_url": "http://osdi-sample-system.org/petitions/my-petition/",
+                "total_shares": 345,
+                "share_options": [
+                    {
+                        "facebook_share": {
+                            "title": "Sign our petition!",
+                            "description": "They need to stop doing the bad thing",
+                            "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
+                            "total_shares": 100
+                        },
+                        "twitter_share": {
+                            "message": "Sign the @OSDI petition! Click here: http://osdi-sample-system.org/petitions/my-petition/",
+                            "total_shares": 100
+                        },
+                        "email_share": {
+                            "subject": "Sign our petition!",
+                            "body": "Can you sign? Click here: http://osdi-sample-system.org/petitions/my-petition/",
+                            "total_shares": 145
+                        }
+                    }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/petitions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -283,6 +307,27 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         {
             "name": "John Smith, Chairman, Acme Co"
+        }
+    ],
+    "share_url": "http://osdi-sample-system.org/petitions/my-petition/",
+    "total_shares": 345,
+    "share_options": [
+        {
+            "facebook_share": {
+                "title": "Sign our petition!",
+                "description": "They need to stop doing the bad thing",
+                "image": "http://odsi-sample-system.org/images/petition-share-image.jpg",
+                "total_shares": 100
+            },
+            "twitter_share": {
+                "message": "Sign the @OSDI petition! Click here: http://osdi-sample-system.org/petitions/my-petition/",
+                "total_shares": 100
+            },
+            "email_share": {
+                "subject": "Sign our petition!",
+                "body": "Can you sign? Click here: http://osdi-sample-system.org/petitions/my-petition/",
+                "total_shares": 145
+            }
         }
     ],
     "_links": {

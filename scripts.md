@@ -7,7 +7,7 @@ title: Scripts
 
 This page defines the Script resource.
 
-Scripts are collections of [Questions](questions.html) asked to a person during [Effort](effort.html). 
+Scripts are collections of [Questions](questions.html), represented by the intermediate [Script Questions](script_questions.html) resource, asked to a person during a [Canvassing Effort](canvassing_efforts.html). 
 
 ### Sections
 
@@ -44,11 +44,11 @@ _[Back to top...](#)_
 
 | Name          | Type                | Description
 | -----------   | -----------         | --------------
-|origin_system      |string     |A human readable identifier of the system where this script was created. (ex: "OSDI System")
-|name               |string     |The name of the script. Intended for administrative display rather than a public title, though may be shown to a user.
-|title              |string     |The title of the script. Intended for public display rather than administrative purposes.
-|description        |string     |A description of the script, usually displayed publicly. May contain text and/or HTML.
-|summary            |string     |A text-only single paragraph summarizing the script. Shown on listing pages that have more than titles, but not enough room for full description.
+|origin_system      |string     |A human readable identifier of the system where this Script was created. (ex: "OSDI System")
+|name               |string     |The name of the Script. Intended for administrative display rather than a public title, though may be shown to a user.
+|title              |string     |The title of the Script. Intended for public display rather than administrative purposes.
+|description        |string     |A description of the Script, usually displayed publicly. May contain text and/or HTML.
+|summary            |string     |A text-only single paragraph summarizing the Script. Shown on listing pages that have more than titles, but not enough room for full description.
 
 _[Back to top...](#)_
 
@@ -58,10 +58,11 @@ _[Back to top...](#)_
 
 | Name          | Type       | Description
 |-----------    |----------- |-----------
-|self           |[Script*](scripts.html)    |A self-referential link to the script.
-|creator        |[Person*](people.html)         |A link to a single Person resource representing the creator of the question.
-|modified_by    |[Person* ](people.html)        |A link to a Person resource representing the last editor of this question.
-|script_questions  |[ScriptQuestion[]*](script_questions.html)  |A link to the collection of Script Question resources for this script.
+|self           |[Script*](scripts.html)    |A self-referential link to the Script.
+|creator        |[Person*](people.html)         |A link to a single Person resource representing the creator of the Script.
+|modified_by    |[Person* ](people.html)        |A link to a Person resource representing the last editor of this Script.
+|script_questions  |[Script Questions[]*](script_questions.html)  |A link to the collection of Script Question resources for this Script.
+|canvassing_effort  |[Canvassing Effort*](canvassing_efforts.html)  |A link to the collection of Script Question resources for this Script.
 
 _[Back to top...](#)_
 
@@ -69,7 +70,8 @@ _[Back to top...](#)_
 ## Related Resources
 
 * [Person](people.html)
-* [Question](questions.html)
+* [Script Question](script_questions.html)
+* [Canvassing Effort](canvassing_efforts.html)
 
 
 
@@ -118,9 +120,6 @@ Cache-Control: max-age=0, private, must-revalidate
             {
                 "href": "https://osdi-sample-system.org/api/v1/scipts/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
             },
-            {
-                "href": "https://osdi-sample-system.org/api/v1/scipts/1efc3644-af25-4253-90b8-a0baf12dbd1e"
-            },
             //(truncated for brevity)
         ],
         "curies": [
@@ -159,9 +158,14 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:script_questions" : {
-                            "href": "https://osdi-sample-system.org/api/v1/script/c945d6fe-929e-11e3-a2e9/script_questions"
+                        "href": "https://osdi-sample-system.org/api/v1/script/c945d6fe-929e-11e3-a2e9/script_questions"
+                    },
+                    "osdi:canvassing_effort" : {
+                        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/c945d6fe-929e-11e3-a2e9"
                     }
-                },
+                }
+            },
+            {
                 {
                     "identifiers": [
                         "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa",
@@ -185,7 +189,10 @@ Cache-Control: max-age=0, private, must-revalidate
                             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                         },
                         "osdi:script_questions" : {
-                                "href": "https://osdi-sample-system.org/api/v1/script/c945d6fe-929e-11e3-a2e9/script_questions"
+                            "href": "https://osdi-sample-system.org/api/v1/script/c945d6fe-929e-11e3-a2e9/script_questions"
+                        },
+                        "osdi:canvassing_effort" : {
+                            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/c945d6fe-929e-11e3-a2e9"
                         }
                     }
                 }
@@ -241,162 +248,11 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:script_questions" : {
-                "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
-        }
-    },
-    "_embedded": {
-        "osdi:script_questions": [
-          {
-            "sequence": 1,
-            "_links": {
-                "curies": [
-                    {
-                        "name": "osdi",
-                        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
-                        "templated": true
-                    }
-                ],
-                "self": {
-                    "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0
-                },
-                "osdi:question": {
-                  "href": "http://osdi-sample-system.org/api/v1/questions/202004"
-                },
-                "osdi:script": {
-                    "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
-                }
-            },
-            "_embedded": {
-              "osdi:question":
-                {
-                  "origin_system": "OSDISystem",
-                  "name": "foobar",
-                  "description": "What is your name?",
-                  "title": "foobar",
-                  "summary": "What is your name?",
-                  "question_type": "SingleChoice",
-                  "identifiers": [
-                    "OSDISystem:202004"
-                  ],
-                  "_links": {
-                    "self": {
-                      "href": "http://osdi-sample-system.org/api/v1/questions/202004"
-                    },
-                    "curies": [
-                      {
-                        "name": "osdi",
-                        "href": "http://osdi-sample-system.org/osdi#{rel}",
-                        "templated": true
-                      }
-                    ]
-                  }
-                }
-            }
-          },
-          {
-            "sequence": 2,
-            "_links": {
-                "curies": [
-                    {
-                        "name": "osdi",
-                        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
-                        "templated": true
-                    }
-                ],
-                "self": {
-                    "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/be0e-4cd3-9ed7-d0
-                },
-                "osdi:question": {
-                  "href": "http://osdi-sample-system.org/api/v1/questions/203079"
-                },
-                "osdi:script": {
-                    "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
-                }
-            },
-            "_embedded": {
-              "osdi:question": 
-                {
-                  "origin_system": "OSDISystem",
-                  "name": "pbank",
-                  "description": "Will you phone bank?",
-                  "title": "pbank",
-                  "summary": "Will you phone bank?",
-                  "question_type": "SingleChoice",
-                  "responses": [
-                    {
-                      "key": "856278",
-                      "name": "Yes",
-                      "title": "Yes"
-                    },
-                    {
-                      "key": "856279",
-                      "name": "No",
-                      "title": "No"
-                    }
-                  ],
-                  "identifiers": [
-                    "OSDISystem:203079"
-                  ],
-                  "_links": {
-                    "self": {
-                      "href": "http://osdi-sample-system.org/api/v1/questions/203079"
-                    },
-                    "curies": [
-                      {
-                        "name": "osdi",
-                        "href": "http://osdi-sample-system.org/osdi#{rel}",
-                        "templated": true
-                      }
-                    ]
-                  }
-                }
-            }
-          },
-          {
-            "sequence": 3,
-            "_links": {
-                "curies": [
-                    {
-                        "name": "osdi",
-                        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
-                        "templated": true
-                    }
-                ],
-                "self": {
-                    "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ce0e-4cd3-9ed7-d0
-                },
-                "osdi:question": {
-                  "href": "http://osdi-sample-system.org/api/v1/questions/52472"
-                },
-                "osdi:script": {
-                    "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
-                }
-            },
-            "_embedded": {
-              "osdi:question":
-                {
-                  "origin_system": "OSDISystem",
-                  "question_type": "SingleChoice",
-                  "identifiers": [
-                    "OSDISystem:52472"
-                  ],
-                  "_links": {
-                    "self": {
-                      "href": "http://osdi-sample-system.org/api/v1/questions/52472"
-                    },
-                    "curies": [
-                      {
-                        "name": "osdi",
-                        "href": "http://osdi-sample-system.org/osdi#{rel}",
-                        "templated": true
-                      }
-                    ]
-                  }
-                }
-            }
-          },
-          // truncated for brevity
-        ]
+            "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
+        },
+        "osdi:canvassing_effort" : {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/c945d6fe-929e-11e3-a2e9"
+        }   
     }
 }
 ```
@@ -458,16 +314,17 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
-       "osdi:script_questions": {
+        "osdi:script_questions": {
             "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
         }
+    }
 }
 ```
 
 _[Back to top...](#)_
 
 
-### Scenario: Modifying a scipt (PUT)
+### Scenario: Modifying a script (PUT)
 
 You can update a script by calling a PUT operation on that script's endpoint. Your PUT should contain fields that you want to update. Missing fields will be ignored by the receiving system. Systems may also ignore PUT values, depending on whether fields you are trying to modify are read-only or not. You may set an attribute to nil by including the attribute using `nil` for value.
 
@@ -517,8 +374,12 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:script_questions": {
-                "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
+            "href": "https://osdi-sample-system.org/api/v1/scripts/c945d6fe-929e-11e3-a2e9/script_questions"
+        },
+        "osdi:canvassing_effort" : {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/c945d6fe-929e-11e3-a2e9"
         }
+    }
 }
 ```
 
@@ -526,7 +387,7 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_
 
 
-### Scenario: Deleting a scipt (DELETE)
+### Scenario: Deleting a script (DELETE)
 
 You may delete a script by calling the DELETE command on the script's endpoint.
 

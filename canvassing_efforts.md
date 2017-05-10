@@ -7,7 +7,7 @@ title: Canvassing Efforts
 
 This page defines the Canvassing Effort resource.
 
-Canvassing Efforts represent specific canvassing/phone banking events planned for a specific time period. The resource contains information about start and end time, people to be canvassed or called, and a [Script](scripts.html) that is used for the effort. 
+Canvassing Efforts represent specific canvassing/phone banking events planned for a specific time period. The resource contains information about start and end time, people to be canvassed or called, and a [Script](scripts.html) that is used for the effort. As people are contacted, [Canvass](canvasses.html) resources are created representing the individual interaction between a canvasser and a person, as well as the data that resulted from that interaction.
 
 ### Sections
 
@@ -40,18 +40,20 @@ _[Back to top...](#)_
 
 _[Back to top...](#)_
 
-### Canvassign Effort Fields
+### Canvassing Effort Fields
 
 | Name          | Type                | Description
 | -----------   | -----------         | --------------
-|origin_system      |string     |A human readable identifier of the system where this effort was created. (ex: "OSDI System")
+|origin_system      |string     |A human readable identifier of the system where this Canvassing Effort was created. (ex: "OSDI System")
 |name               |string     |The name of the Canvassing Effort. Intended for administrative display rather than a public title, though may be shown to a user.
 |title              |string     |The title of the Canvassing Effort. Intended for public display rather than administrative purposes.
 |description        |string     |A description of the Canvassing Effort, usually displayed publicly. May contain text and/or HTML.
-|summary            |string     |A text-only single paragraph summarizing the effort. Shown on listing pages that have more than titles, but not enough room for full description.
-|start_time        |string     |The start date and time for the Canvassing Effort.
-|end_time        |string     |The end date and time for the Canvassing Effort.
-|type           |string      |The type of the Canvassing Effort "in-person","phone banking",etc 
+|summary            |string     |A text-only single paragraph summarizing the Canvassing Effort. Shown on listing pages that have more than titles, but not enough room for full description.
+|start_time        |datetime     |The start date and time for the Canvassing Effort.
+|end_time        |datetime     |The end date and time for the Canvassing Effort.
+|type           |flexenum      |The type of the Canvassing Effort. One of "in-person", "phone banking", or another value.
+|total_canvasses	|integer	|A read-only computed property representing the current count of the total number of Canvasses on the Canvassing Effort.
+ 
 
 _[Back to top...](#)_
 
@@ -64,7 +66,8 @@ _[Back to top...](#)_
 |self           |[Canvassing Effort*](canvassing_efforts.html)    |A self-referential link to the canvassing effort.
 |creator        |[Person*](people.html)         |A link to a single Person resource representing the creator of the Canvassing Effort.
 |modified_by    |[Person* ](people.html)        |A link to a Person resource representing the last editor of this Canvassing Effort.
-|script  |[Script*](script.html) | A link to the script associated with the canvassing effort
+|canvasses    |[Canvasses[]*](canvasses.html)        |A link to a collection of Canvass resources representing the canvasses that occured on this Canvassing Effort.
+|script  |[Script*](scripts.html) | A link to the Script resource associated with the Canvassing Effort.
 
 _[Back to top...](#)_
 
@@ -85,7 +88,7 @@ _[Back to top...](#)_
 
 ### Scenario: Retrieving a collection of Canvassing Effort resources (GET)
 
-Canvassing Effort resources are sometimes presented as collections of canvassing efforts. For example, calling the canvassing_efforts endpoint will return a collection of all the canvassing efforts stored in the system's database associated with your api key.
+Canvassing Effort resources are sometimes presented as collections of canvassing efforts. For example, calling the canvassing efforts endpoint will return a collection of all the canvassing efforts stored in the system's database associated with your api key.
 
 #### Request
 
@@ -150,10 +153,11 @@ Cache-Control: max-age=0, private, must-revalidate
                 "summary": "Effort 1 for Team 1",
                 "start_time": "2016-02-19T8:00:00Z",
                 "end_time": "2016-02-20T8:00:00Z",
-                "type": "canvassing",
+                "type": "in_person",
+                "total_canvasses": 100,
                 "_links": {
                     "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bca"
                     },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -161,14 +165,17 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
-                    "osdi:script" : {
-                            "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+                    "osdi:script": {
+                        "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+                    },
+                    "osdi:canvasses": {
+                        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bca/canvasses"
                     }
                 }
             },
             {
                 "identifiers": [
-                    "osdi_sample_system:a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bca",
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
                     "foreign_system:1"
                 ],
                 "origin_system": "OSDI Sample System",
@@ -180,7 +187,8 @@ Cache-Control: max-age=0, private, must-revalidate
                 "summary": "Effort 2 for Team 1",
                 "start_time": "2016-02-19T8:00:00Z",
                 "end_time": "2016-02-20T8:00:00Z",
-                "type": "canvassing",
+                "type": "phonebank",
+                "total_canvasses": 9264,
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -192,7 +200,10 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:script" : {
-                            "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+                        "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+                    },
+                    "osdi:canvasses": {
+                        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvasses"
                     }
                 }
             },   
@@ -239,6 +250,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "start_time": "2016-02-19T8:00:00Z",
     "end_time": "2016-02-20T8:00:00Z",
     "type": "in-person",
+    "total_canvasses": 100,
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -250,7 +262,10 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:script" : {
-                "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+            "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+        },
+        "osdi:canvasses": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvasses"
         }
     }
 }
@@ -262,7 +277,7 @@ _[Back to top...](#)_
 
 ### Scenario: Creating a new Canvassing Effort (POST)
 
-Posting to the effort collection endpoint will allow you to create a new effort. The response is the new effort that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+Posting to the effort collection endpoint will allow you to create a new Canvassing Effort. The response is the new Canvassing Effort that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
 #### Request
 
@@ -302,7 +317,7 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 {
     "identifiers": [
-        "osdi_sample_system:a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bca",
+        "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
         "foreign_system:1"
     ],
     "origin_system": "OSDI Sample System",
@@ -315,6 +330,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "start_time": "2016-02-19T8:00:00Z",
     "end_time": "2016-02-20T8:00:00Z",
     "type": "in-person",
+    "total_canvasses": 0,
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -326,7 +342,10 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:script" : {
-                "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+            "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+        },
+        "osdi:canvasses": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvasses"
         }
     }
 }
@@ -377,6 +396,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "start_time": "2016-02-19T8:00:00Z",
     "end_time": "2016-02-20T8:00:00Z",
     "type": "in-person",
+    "total_canvasses": 100,
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -388,7 +408,10 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:script" : {
-                "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+            "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
+        },
+        "osdi:canvasses": {
+            "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/canvasses"
         }
     }
 }

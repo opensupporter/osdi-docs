@@ -10,7 +10,7 @@ Helper Action Functions are additional actions that the OSDI server will perform
 |add_questions_responses_uri      |[QuestionResponseObject](#question-response-object-fields)     |An array of Question Response Objects, indicating answers which should be applied to the person.
 |triggers		|[Triggers](#triggers)	|An object hash representing responses a user would like to trigger from the server as part of the POST, such as sending an autoresponse email back to the person who took action with this helper.
 
-### Question Response Object Fields
+#### Question Response Object Fields
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------

@@ -44,6 +44,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
     * [Deviations from RESTful Behavior](#deviations-from-restful-behavior)
     * [Common Fields](#common-fields)
     * [Notational Conventions](#notational-conventions)
+* [References](#references)
 * [Authors and Leadership](#authors-and-leadership)
 * [Contributing and Contact](#contributing-and-contact)
 
@@ -54,7 +55,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 OSDI used a combination of approaches to provide flexible reading of data, simple operations for simple scenarios, and general purpose CRUD access.
 
 ### Version
-This document represents OSDI version 1.1.1
+This document represents OSDI version 1.1.2
 
 ### Working with OSDI in Real Life
 
@@ -385,6 +386,12 @@ In these cases, the string value should conform to one of the choices unless spe
 _[Back to top...](#)_
 
     
+## References
+
+|ID          | Title                             | URL
+|------------|-----------------------------------|-------------------
+|RFC5646    |Tags for Identifying Languages     | https://tools.ietf.org/html/rfc5646
+
 
 ## Authors and Leadership
 

@@ -15,7 +15,8 @@ Advocacy campaigns represent an advocacy action directed at targets such as elec
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
     * [Common Fields](#common-fields)
-    * [Advocacy Campaign Fields](#advocacy-campaign-fields)  
+    * [Advocacy Campaign Fields](#advocacy-campaign-fields) 
+    * [Related Objects](#related-objects) 
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -58,6 +59,15 @@ A list of fields specific to the Advocacy Campaign resource.
 |featured_image_url		|string		|A URL string pointing to a publicly available featured image file for this advocacy campaign on the web.
 |total_outreaches	|integer	|A read-only computed property representing the current count of the total number of outreaches on the advocacy campaign.
 |type				|flexunum	|The type of advocacy campaign, specifying how users perform outreaches to targets. One of "email", "in-person", "phone", "postal mail", or another type as needed.
+{% include share_options_main_objects.md %}
+
+_[Back to top...](#)_
+
+### Related Objects
+
+These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+{% include share_options_related_objects.md %}
 
 _[Back to top...](#)_
 
@@ -158,6 +168,27 @@ Cache-Control: max-age=0, private, must-revalidate
                 "featured_image_url": "http://osdi-sample-system.org/images/civil-rights-image.jpg",
                 "type": "email",
                 "total_outreaches": 345,
+                "share_url": "http://osdi-sample-system.org/advocacy_campaigns/my-campaign/",
+                "total_shares": 345,
+                "share_options": [
+                    {
+                        "facebook_share": {
+                            "title": "Write your representative!",
+                            "description": "Please write today.",
+                            "image": "http://odsi-sample-system.org/images/advocacy-share-image.jpg",
+                            "total_shares": 100
+                        },
+                        "twitter_share": {
+                            "message": "Write your representative with @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/advocacy_campaigns/my-campaign/",
+                            "total_shares": 100
+                        },
+                        "email_share": {
+                            "subject": "Write your representatives!",
+                            "body": "Can you write your representatives to get rid of the bad things? Click here: http://osdi-sample-system.org/advocacy_campaigns/my-campaign/",
+                            "total_shares": 145
+                        }
+                    }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -253,6 +284,27 @@ Cache-Control: max-age=0, private, must-revalidate
     "featured_image_url": "http://osdi-sample-system.org/images/civil-rights-image.jpg",
     "type": "email",
     "total_outreaches": 345,
+    "share_url": "http://osdi-sample-system.org/advocacy_campaigns/my-campaign/",
+    "total_shares": 345,
+    "share_options": [
+        {
+            "facebook_share": {
+                "title": "Write your representative!",
+                "description": "Please write today.",
+                "image": "http://odsi-sample-system.org/images/advocacy-share-image.jpg",
+                "total_shares": 100
+            },
+            "twitter_share": {
+                "message": "Write your representative with @OSDI to get rid of the bad things! Click here: http://osdi-sample-system.org/advocacy_campaigns/my-campaign/",
+                "total_shares": 100
+            },
+            "email_share": {
+                "subject": "Write your representatives!",
+                "body": "Can you write your representatives to get rid of the bad things? Click here: http://osdi-sample-system.org/advocacy_campaigns/my-campaign/",
+                "total_shares": 145
+            }
+        }
+    ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"

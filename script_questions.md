@@ -9,7 +9,7 @@ This page defines the Script Question resource.
 
 Scripts Questions are intermediary resources that associate [Questions](questions.html) with  [Scripts](scripts.html). 
 
-> Note:  When putting or creating Script Question resources, it is up to the server to validate or return errors when problems with sequence arises
+_Note:_  When putting or creating Script Question resources, it is up to the server to validate or return errors when problems with sequence arises.
 
 
 ### Sections
@@ -22,7 +22,8 @@ Scripts Questions are intermediary resources that associate [Questions](question
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
     * [Scenario: Retrieving a collection of Script Question resources (GET)](#scenario-retrieving-a-collection-of-script-question-resources-get)
-    * [Scenario: Add a question to the script (POST)](#scenario-add-a-question-to-the-script-post)
+    * [Scenario: Retrieving an individual Script Question resource (GET)](#scenario-retrieving-an-individual-script-question-resource-get)
+    * [Scenario: Add a script question to the script (POST)](#scenario-add-a-script-question-to-the-script-post)
     * [Scenario: Update a script question for the script (PUT)](#scenario-update-a-script-question-for-the-script-put)
     * [Scenario: Delete a script question from the script (DELETE)](#scenario-delete-a-script-question-from-the-script-delete)
 
@@ -46,7 +47,7 @@ _[Back to top...](#)_
 
 | Name          | Type                | Description
 | -----------   | -----------         | --------------
-|sequence      |int     |A sequence number for the scipt question. Defines position of the linked question in a script
+|sequence      |int     |A sequence number for the Scipt Question. Defines the position of the linked question in a script.
 
 _[Back to top...](#)_
 
@@ -56,7 +57,7 @@ _[Back to top...](#)_
 
 | Name          | Type       | Description
 |-----------    |----------- |-----------
-|question  |[Question*](questions.html)  |A link to the associated Question resources for this script question.
+|question  |[Question*](questions.html)  |A link to the associated Question resources for this Script Question.
 
 _[Back to top...](#)_
 
@@ -78,7 +79,7 @@ _[Back to top...](#)_
 
 ### Scenario: Retrieving a collection of Script Question resources (GET)
 
-Script Question resources are always retrieved as a collections of script questions. Calling the script questions endpoint will return a collection of all the script questions associated with the script accessible with your api key.
+Script Question resources can be retrieved as a collection of script questions for a specific script. Calling the script questions endpoint will return a collection of all the script questions associated with the script accessible with your api key.
 
 #### Request
 
@@ -106,9 +107,15 @@ Cache-Control: max-age=0, private, must-revalidate
         "next": {
             "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions?page=2"
         },
-        "osdi:script": {
-            "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
-        },
+        "osdi:script_questions": [
+            {
+                "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0"
+            },
+            {
+                "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/be0e-4cd3-9ed7-d0"
+            },
+            // truncated for brevity
+        ],
         "curies": [
             {
                 "name": "osdi",
@@ -122,156 +129,205 @@ Cache-Control: max-age=0, private, must-revalidate
     },
     "_embedded": {
         "osdi:scipt_questions": [
-          {
-            "sequence": 1,
-            "_links": {
-                "curies": [
-                    {
-                        "name": "osdi",
-                        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
-                        "templated": true
-                    }
+            {
+                "identifiers": [
+                    "osdi_sample_system:ae0e-4cd3-9ed7-d0",
+                    "foreign_system:1"
                 ],
-                "self": {
-                    "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "sequence": 1,
+                "_links": {
+                    "curies": [
+                        {
+                            "name": "osdi",
+                            "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                            "templated": true
+                        }
+                    ],
+                    "self": {
+                        "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0"
+                    },
+                    "osdi:question": {
+                        "href": "http://osdi-sample-system.org/api/v1/questions/202004"
+                    },
+                    "osdi:script": {
+                        "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
+                    }
                 },
-                "osdi:question": {
-                  "href": "http://osdi-sample-system.org/api/v1/questions/202004"
-                },
-                "osdi:script": {
-                    "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
+                "_embedded": {
+                    "osdi:question": {
+                        "origin_system": "OSDISystem",
+                        "name": "foobar",
+                        "description": "What is your name?",
+                        "title": "foobar",
+                        "summary": "What is your name?",
+                        "question_type": "SingleChoice",
+                        "identifiers": [
+                            "OSDISystem:202004"
+                        ],
+                        "_links": {
+                            "self": {
+                                "href": "http://osdi-sample-system.org/api/v1/questions/202004"
+                            },
+                            "curies": [
+                                {
+                                    "name": "osdi",
+                                    "href": "http://osdi-sample-system.org/osdi#{rel}",
+                                    "templated": true
+                                }
+                            ]
+                        }
+                    }
                 }
             },
-            "_embedded": {
-              "osdi:question":
-                {
-                  "origin_system": "OSDISystem",
-                  "name": "foobar",
-                  "description": "What is your name?",
-                  "title": "foobar",
-                  "summary": "What is your name?",
-                  "question_type": "SingleChoice",
-                  "identifiers": [
-                    "OSDISystem:202004"
-                  ],
-                  "_links": {
-                    "self": {
-                      "href": "http://osdi-sample-system.org/api/v1/questions/202004"
-                    },
-                    "curies": [
-                      {
-                        "name": "osdi",
-                        "href": "http://osdi-sample-system.org/osdi#{rel}",
-                        "templated": true
-                      }
-                    ]
-                  }
-                }
-            }
-          },
-          {
-            "sequence": 2,
-            "_links": {
-                "curies": [
-                    {
-                        "name": "osdi",
-                        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
-                        "templated": true
-                    }
+            {
+                "identifiers": [
+                    "osdi_sample_system:be0e-4cd3-9ed7-d0",
+                    "foreign_system:2"
                 ],
-                "self": {
-                    "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/be0e-4cd3-9ed7-d0
-                },
-                "osdi:question": {
-                  "href": "http://osdi-sample-system.org/api/v1/questions/203079"
-                },
-                "osdi:script": {
-                    "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
-                }
-            },
-            "_embedded": {
-              "osdi:question": 
-                {
-                  "origin_system": "OSDISystem",
-                  "name": "pbank",
-                  "description": "Will you phone bank?",
-                  "title": "pbank",
-                  "summary": "Will you phone bank?",
-                  "question_type": "SingleChoice",
-                  "responses": [
-                    {
-                      "key": "856278",
-                      "name": "Yes",
-                      "title": "Yes"
-                    },
-                    {
-                      "key": "856279",
-                      "name": "No",
-                      "title": "No"
-                    }
-                  ],
-                  "identifiers": [
-                    "OSDISystem:203079"
-                  ],
-                  "_links": {
-                    "self": {
-                      "href": "http://osdi-sample-system.org/api/v1/questions/203079"
-                    },
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "sequence": 2,
+                "_links": {
                     "curies": [
-                      {
-                        "name": "osdi",
-                        "href": "http://osdi-sample-system.org/osdi#{rel}",
-                        "templated": true
-                      }
-                    ]
-                  }
-                }
-            }
-          },
-          {
-            "sequence": 3,
-            "_links": {
-                "curies": [
-                    {
-                        "name": "osdi",
-                        "href": "https://osdi-sample-system.org/docs/v1/{rel}",
-                        "templated": true
-                    }
-                ],
-                "self": {
-                    "href": https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ce0e-4cd3-9ed7-d0
-                },
-                "osdi:question": {
-                  "href": "http://osdi-sample-system.org/api/v1/questions/52472"
-                },
-                "osdi:script": {
-                    "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
-                }
-            },
-            "_embedded": {
-              "osdi:question":
-                {
-                  "origin_system": "OSDISystem",
-                  "question_type": "SingleChoice",
-                  "identifiers": [
-                    "OSDISystem:52472"
-                  ],
-                  "_links": {
+                        {
+                            "name": "osdi",
+                            "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                            "templated": true
+                        }
+                    ],
                     "self": {
-                      "href": "http://osdi-sample-system.org/api/v1/questions/52472"
+                        "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/be0e-4cd3-9ed7-d0"
                     },
-                    "curies": [
-                      {
-                        "name": "osdi",
-                        "href": "http://osdi-sample-system.org/osdi#{rel}",
-                        "templated": true
-                      }
-                    ]
-                  }
-                }
-            }
-          }
+                    "osdi:question": {
+                        "href": "http://osdi-sample-system.org/api/v1/questions/203079"
+                    },
+                    "osdi:script": {
+                        "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
+                    }
+                },
+                "_embedded": {
+                    "osdi:question": {
+                        "origin_system": "OSDISystem",
+                        "name": "pbank",
+                        "description": "Will you phone bank?",
+                        "title": "pbank",
+                        "summary": "Will you phone bank?",
+                        "question_type": "SingleChoice",
+                        "responses": [
+                            {
+                                "key": "856278",
+                                "name": "Yes",
+                                "title": "Yes"
+                            },
+                            {
+                                "key": "856279",
+                                "name": "No",
+                                "title": "No"
+                            }
+                        ],
+                        "identifiers": [
+                            "OSDISystem:203079"
+                        ],
+                        "_links": {
+                            "self": {
+                              "href": "http://osdi-sample-system.org/api/v1/questions/203079"
+                            },
+                            "curies": [
+                                {
+                                    "name": "osdi",
+                                    "href": "http://osdi-sample-system.org/osdi#{rel}",
+                                    "templated": true
+                                }
+                            ]
+                        }
+                    }
+               }
+            },
+            // truncated for brevity
         ]
+    }
+}
+``` 
+
+_[Back to top...](#)_  
+
+
+### Scenario: Retrieving an individual Script Question resource (GET)
+
+Calling an individual Script Question resource will return the resource directly, along with all associated fields, embedded Questions and appropriate links to additional information about the script question.
+
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "identifiers": [
+        "osdi_sample_system:ae0e-4cd3-9ed7-d0",
+        "foreign_system:1"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "sequence": 1,
+    "_links": {
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0"
+        },
+        "osdi:question": {
+            "href": "http://osdi-sample-system.org/api/v1/questions/202004"
+        },
+        "osdi:script": {
+            "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
+        }
+    },
+    "_embedded": {
+        "osdi:question": {
+            "origin_system": "OSDISystem",
+            "name": "foobar",
+            "description": "What is your name?",
+            "title": "foobar",
+            "summary": "What is your name?",
+            "question_type": "SingleChoice",
+            "identifiers": [
+                "OSDISystem:202004"
+            ],
+            "_links": {
+                "self": {
+                    "href": "http://osdi-sample-system.org/api/v1/questions/202004"
+                },
+                "curies": [
+                    {
+                        "name": "osdi",
+                        "href": "http://osdi-sample-system.org/osdi#{rel}",
+                        "templated": true
+                    }
+                ]
+            }
+        }
     }
 }
 ``` 
@@ -279,7 +335,7 @@ Cache-Control: max-age=0, private, must-revalidate
 _[Back to top...](#)_       
 
 
-### Scenario: Add a question to the script (POST)
+### Scenario: Add a script question to the script (POST)
 
 Posting to the script questions collection endpoint will allow you to add a new question to an existing script.
 
@@ -292,32 +348,9 @@ Header:
 OSDI-API-Token:[your api key here]
 
 {
-    "origin_system": "OSDISystem",
     "sequence": 1,
     "_links" : {
-      "osdi:question" : "http://osdi-sample-system.org/api/v1/questions/52472"
-    }
-}
-
-```
-
-### Scenario: Update a script question for the script (PUT)
-
-Calling a PUT request on a script question endpoint will allow you to update a script question for the script.
-
-#### Request
-
-```javascript
-POST https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/aed-234234
-
-Header:
-OSDI-API-Token:[your api key here]
-
-{
-    "origin_system": "OSDISystem",
-    "sequence": 1,
-    "_links" : {
-      "osdi:question" : "http://osdi-sample-system.org/api/v1/questions/52472"
+        "osdi:question" : "http://osdi-sample-system.org/api/v1/questions/52472"
     }
 }
 
@@ -331,7 +364,138 @@ OSDI-API-Token:[your api key here]
 Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 {
-    "notice": "This script question was successfully updated."
+    "identifiers": [
+        "osdi_sample_system:ae0e-4cd3-9ed7-d0"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "sequence": 1,
+    "origin_system": "OSDISystem",
+    "_links": {
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0"
+        },
+        "osdi:question": {
+            "href": "http://osdi-sample-system.org/api/v1/questions/202004"
+        },
+        "osdi:script": {
+            "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
+        }
+    },
+    "_embedded": {
+        "osdi:question": {
+            "origin_system": "OSDISystem",
+            "name": "foobar",
+            "description": "What is your name?",
+            "title": "foobar",
+            "summary": "What is your name?",
+            "question_type": "SingleChoice",
+            "identifiers": [
+                "OSDISystem:202004"
+            ],
+            "_links": {
+                "self": {
+                    "href": "http://osdi-sample-system.org/api/v1/questions/202004"
+                },
+                "curies": [
+                    {
+                        "name": "osdi",
+                        "href": "http://osdi-sample-system.org/osdi#{rel}",
+                        "templated": true
+                    }
+                ]
+            }
+        }
+    }
+}
+    
+```
+
+### Scenario: Update a script question for the script (PUT)
+
+Calling a PUT request on a script question endpoint will allow you to update a script question for the script.
+
+#### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "sequence": 2,
+}
+
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+{
+    "identifiers": [
+        "osdi_sample_system:ae0e-4cd3-9ed7-d0"
+    ],
+    "origin_system": "OSDI Sample System",
+    "created_date": "2014-03-20T21:04:31Z",
+    "modified_date": "2014-03-20T21:04:31Z",
+    "sequence": 2,
+    "origin_system": "OSDISystem",
+    "_links": {
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "https://osdi-sample-system.org/docs/v1/{rel}",
+                "templated": true
+            }
+        ],
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3/script_questions/ae0e-4cd3-9ed7-d0"
+        },
+        "osdi:question": {
+            "href": "http://osdi-sample-system.org/api/v1/questions/202004"
+        },
+        "osdi:script": {
+            "href": "https://osdi-sample-system.org/api/v1/scripts/d91b4b2e-ae0e-4cd3-9ed7-d0ecb0bc3"
+        }
+    },
+    "_embedded": {
+        "osdi:question": {
+            "origin_system": "OSDISystem",
+            "name": "foobar",
+            "description": "What is your name?",
+            "title": "foobar",
+            "summary": "What is your name?",
+            "question_type": "SingleChoice",
+            "identifiers": [
+                "OSDISystem:202004"
+            ],
+            "_links": {
+                "self": {
+                    "href": "http://osdi-sample-system.org/api/v1/questions/202004"
+                },
+                "curies": [
+                    {
+                        "name": "osdi",
+                        "href": "http://osdi-sample-system.org/osdi#{rel}",
+                        "templated": true
+                    }
+                ]
+            }
+        }
+    }
 }
 ```
 
@@ -346,7 +510,7 @@ You may delete a script question from the script by calling the DELETE command o
 #### Request
 
 ```javascript
-DELETE https://osdi-sample-system.org/api/v1/scripts/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b/script_questions/366-466d-a3b8
+DELETE https://osdi-sample-system.org/api/v1/scripts/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b/script_questions/ae0e-4cd3-9ed7-d0
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -361,7 +525,7 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "notice": "Script question was deleted from the script."
+    "notice": "Script Question was deleted from the script."
 }
 ```
 

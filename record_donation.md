@@ -68,6 +68,7 @@ A list of fields specific for POSTing via the Record Donation Helper.
 |voided			|boolean	|Indicates if the donation has been voided.
 |voided_date  	|datetime		|Date of the void.
 |url			|string		|URL at which the donation was taken.
+|referrer_data		|[Referrer Data*](#referrer-data)	|An object hash representing referrer and sourcing information about this donation.
 |person			|[Person*](#person)	|An object hash representing the person who made the donation.
 
 _[Back to top...](#)_
@@ -105,6 +106,16 @@ An object representing the payment details of a donation.
 |reference_number |string		|A check number, transaction ID, or some other information referencing the payment.
 |authorization_stored |boolean	|Indicates if payment information has been stored for future automatic payments.
 
+
+#### Referrer Data
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|referrer_data.source	|string    |The source code that was used when this donation was created. Typically used to track individual links, such as a post on social media or a link in a specific email. (ex: "facebook-101016-mainpage")
+|referrer_data.referrer	|string    |The code or ID representing a person or group that referred this donation. Typically used to track which person referred the person who made this donation. (ex: "jane-doe")
+|referrer_data.website	|string    |The top level domain of the website where the person clicked from to then subsequently make this donation. (ex: "facebook.com")
+|referrer_data.url	|string    |The specific URL where the person clicked from to then subsequently make this donation. (ex: "https://facebook.com/posts/12345")
+
 #### Person
 
 |Name          |Type      |Description
@@ -128,7 +139,7 @@ _[Back to top...](#)_
 
 ### Scenario: Creating a new donation and person (POST)
 
-Posting to the record donation helper endpoint will allow you to create a new donation and person (or update a person if the system attempts to match people posted with helpers) in one operation. The response is the donation that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
+Posting to the record donation helper endpoint will allow you to create a new donation and person (or update a person if the system attempts to match people posted with helpers) in one operation.  Donations created in this manner may also be linked to attendances or submissions, via the relevant property; below, the created donation is linked to an attendance.  The response is the donation that was created. While each implementing system will require different fields, any optional fields not included in a post operation should not be set at all by the receiving system, or should be set to default values.
 
 #### Request
 
@@ -207,6 +218,15 @@ OSDI-API-Token:[your api key here]
             "legal_name": "Joe for Congress"
        }
     ],
+    "osdi:attendance": {
+        "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc"
+    },
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
+    },
 {% include helper_action_examples.md %}
 }
 ```
@@ -252,15 +272,24 @@ Cache-Control: max-age=0, private, must-revalidate
             "legal_name": "Joe for Congress"
        }
     ],
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
+    },
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/doantions/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
+            "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29/donations/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
         },
         "osdi:fundraising_page": {
             "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:person": {
             "href": "https://osdi-sample-system.org/api/v1/people/adb951cb-51f9-420e-b7e6-de953195ec86"
+        },
+        "osdi:attendance": {
+            "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/attendances/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc"
         }
     }
 }
@@ -346,6 +375,12 @@ POST https://osdi-sample-system.org/api/v1/fundraising_pages/c945d6fe-929e-11e3-
             "legal_name": "Joe for Congress"
        }
     ],
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
+    },
 {% include helper_action_examples.md %}
 }
 ```

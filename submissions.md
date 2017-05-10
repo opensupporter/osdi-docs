@@ -16,6 +16,7 @@ Submissions are a type of action that a user may take by completing a form. Subm
 * [Fields](#fields)
     * [Common Fields](#common-fields)
     * [Submission Fields](#submission-fields)  
+    * [Related Objects](#related-objects)
     * [Links](#links)
 * [Helpers](#helpers)
 * [Related Resources](#related-resources)
@@ -51,6 +52,25 @@ A list of fields specific to the Submission resource.
 |-----------    |-----------|-----------|--------------
 |origin_system		|string     |A human readable identifier of the system where this submission was created. (ex: "OSDI System")
 |action_date		|string		|The date and time the submission was made by the person.
+|referrer_data		|[Referrer Data*](#referrer-data)	|An object hash representing referrer and sourcing information about this submission.
+
+
+_[Back to top...](#)_
+
+
+
+### Related Objects
+
+These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+#### Referrer Data
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|referrer_data.source	|string    |The source code that was used when this submission was created. Typically used to track individual links, such as a post on social media or a link in a specific email. (ex: "facebook-101016-mainpage")
+|referrer_data.referrer	|string    |The code or ID representing a person or group that referred this submission. Typically used to track which person referred the person who made this signature. (ex: "jane-doe")
+|referrer_data.website	|string    |The top level domain of the website where the person clicked from to then subsequently make this submission. (ex: "facebook.com")
+|referrer_data.url	|string    |The specific URL where the person clicked from to then subsequently make this submission. (ex: "https://facebook.com/posts/12345")
 
 _[Back to top...](#)_
 
@@ -143,6 +163,12 @@ Cache-Control: max-age=0, private, must-revalidate
                 "created_date": "2014-03-20T21:04:31Z",
                 "modified_date": "2014-03-20T21:04:31Z",
                 "action_date": "2014-03-18T11:02:15Z",
+                "referrer_data": {
+                    "source": "facebook-101016-mainpage",
+                    "referrer": "jane-doe",
+                    "website": "facebook.com",
+                    "url": "https://facebook.com/posts/12345"
+                },
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/forms/c945d6fe-929e-11e3-a2e9-12313d316c29/submissions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -166,6 +192,9 @@ Cache-Control: max-age=0, private, must-revalidate
                 "created_date": "2014-03-20T20:44:13Z",
                 "modified_date": "2014-03-20T20:44:13Z",
                 "action_date": "2014-03-12T01:45:34Z",
+                "referrer_data": {
+                    "source": "email-101116-subjecttest1"
+                },
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/forms/c945d6fe-929e-11e3-a2e9-12313d316c29/submissions/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -219,6 +248,12 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
     "action_date": "2014-03-18T11:02:15Z",
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/forms/c945d6fe-929e-11e3-a2e9-12313d316c29/submissions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -259,9 +294,12 @@ OSDI-API-Token:[your api key here]
     ],
     "origin_system": "OpenSupporter",
     "action_date": "2014-03-18T11:02:15Z",
+    "referrer_data": {
+        "source": "api"
+    },
     "_links" : {
         "osdi:person" : { 
-            "href" : "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
+            "href" : "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
         }
     }
 }
@@ -283,6 +321,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
     "action_date": "2014-03-18T11:02:15Z",
+    "referrer_data": {
+        "source": "api"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/forms/c945d6fe-929e-11e3-a2e9-12313d316c29/submissions/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
@@ -291,7 +332,7 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/forms/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:person": {
-            "href": "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
         "osdi:answers": {
             "href": "https://osdi-sample-system.org/api/v1/forms/c945d6fe-929e-11e3-a2e9-12313d316c29/submissions/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/answers"
@@ -338,6 +379,12 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T22:04:31Z",
     "action_date": "2014-03-17T11:02:15Z",
+    "referrer_data": {
+        "source": "facebook-101016-mainpage",
+        "referrer": "jane-doe",
+        "website": "facebook.com",
+        "url": "https://facebook.com/posts/12345"
+    },
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/forms/c945d6fe-929e-11e3-a2e9-12313d316c29/submissions/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
@@ -346,7 +393,7 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/forms/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:person": {
-            "href": "https://actionnetwork.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+            "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
         "osdi:answers": {
             "href": "https://osdi-sample-system.org/api/v1/forms/c945d6fe-929e-11e3-a2e9-12313d316c29/submissions/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse/answers"
