@@ -59,6 +59,7 @@ A list of fields specific to the Person resource.
 |honorific_suffix           |string    |An honorific suffix like "Jr.", "Ph.D", etc...
 |gender         |enum     |The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", or "Other".
 |gender_identity|string     |The self-described gender with which a person identifies. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
+|additional_gender_identities|string[] |An array of gender identities
 |gender_pronouns    | [Gender Pronouns](#gender-pronouns)   | An object hash representing the persons desired gender pronouns
 |party_identification   |flexenum     |Flexenum describing the person's politcal party identification. One of "None", "Democratic", "Republican", "Independent", or another free-form string.
 |parties |[Parties[]](#parties)|An array of all party object hashes associated with the person (past and present).
@@ -175,6 +176,15 @@ These JSON hashes included in the table above are broken out into their own tabl
 |custom_fields.[key]	|string	|The key associated with this custom field, with a corresponding value as a string. May be prefixed by servers based on naming conventions they document to control how collisions across systems and data sets occur.
 
 #### Gender Pronouns
+Gender pronouns are used to capture how a person chooses to be identified and to provide machine readable terms to use in scenarios like status updates.
+
+##### Example Scenarios
+
+* Alice completed her phone banking shift
+* Bob updated his avatar
+* Furiegh confirmed their attendance
+
+##### Gender Pronouns Object Fields
 
 |Name           |Type       |Description
 |---------------|-----------|--------------
@@ -182,7 +192,7 @@ These JSON hashes included in the table above are broken out into their own tabl
 |object         |flexenum   | A string representing the object (oblique) pronoun. One of "Her", "Him", "Them" or another value
 |posessive      |flexenum   | A string representing the posessive pronoun. One of "Hers", "His", "Theirs" or another value
 
-Terminology for the types of pronouns taken from [Wikipedia: https://en.wikipedia.org/wiki/Third-person_pronoun#Summary](https://en.wikipedia.org/wiki/Third-person_pronoun#Summary)
+> Terminology for the types of pronouns taken from [Wikipedia: https://en.wikipedia.org/wiki/Third-person_pronoun#Summary](https://en.wikipedia.org/wiki/Third-person_pronoun#Summary)
 
 
 _[Back to top...](#)_
