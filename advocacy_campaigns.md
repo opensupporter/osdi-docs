@@ -56,7 +56,7 @@ A list of fields specific to the Advocacy Campaign resource.
 |templates		|string[]		|A script to read over the phone, or a general template for a postcard or email. These may be captured in the description, but putting it in the `templates` field allows it to be highlighted by clients. May contain text and/or HTML.
 |summary			|string		|A text-only single paragraph summarizing the advocacy campaign. Shown on listing pages that have more than titles, but not enough room for full description.
 |targets			|string		|A human readable description of the target universe for this advocacy campaign. (ex: "U.S. Congress")
-|target_list		|[Target[]](#target)    |An array of target object hashes representing the targets of the outreach.
+|target_list		|[Target[]](#target)    |An array of target object hashes representing the targets of the advocacy campaign.
 |browser_url		|string		|A URL string pointing to the publicly available advocacy campaign page on the web.
 |featured_image_url		|string		|A URL string pointing to a publicly available featured image file for this advocacy campaign on the web.
 |total_outreaches	|integer	|A read-only computed property representing the current count of the total number of outreaches on the advocacy campaign.
