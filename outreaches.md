@@ -58,7 +58,7 @@ A list of fields specific to the Outreach resource.
 |message		|string		|The message of the outreach, if applicable. (ex: message will only be present on email or postal mail outreach types)
 |notes		|string		|Notes left by the person doing the outreach, if any. For example, any feedback they got from the person they called.
 |referrer_data		|[Referrer Data*](#referrer-data)	|An object hash representing referrer and sourcing information about this outreach.
-|targets			|[Target[]](#target)    |An array of target object hashes representing the targets of the outreach.
+|targets		|[Target[]](#target)    |An array of target object hashes representing the targets of the outreach.
 
 _[Back to top...](#)_
 
@@ -186,8 +186,6 @@ Cache-Control: max-age=0, private, must-revalidate
                     "website": "facebook.com",
                     "url": "https://facebook.com/posts/12345"
                 },
-                // You may wish to explicitly record the target of the outreach
-                // inline:
                 "targets": [
                     {
                         "title": "Senator",
