@@ -55,10 +55,11 @@ A list of fields specific to the Person resource.
 |family_name      |string     |The person's last name.
 |given_name     |string     |The person's first name.
 |additional_name    |string     |An additional name not included in family or given. Usually a middle name.
-|honorific_prefix           |string    |An honorific prefix like "Dr", "Mr", etc...
+|honorific_prefix           |string    |An honorific prefix like "Dr", "Mr", "Mx" etc...
 |honorific_suffix           |string    |An honorific suffix like "Jr.", "Ph.D", etc...
 |gender         |enum     |The gender binary with which a person most closely identifies, or "Other" if the person identifies with neither. One of "Female", "Male", or "Other".
 |gender_identity|string     |The self-described gender with which a person identifies. While this field is free-form, data should still follow standardized forms whenever possible (i.e. use "Female" and not "female" or "F"). _Examples: If a person self-identifies as "Female", both_ `gender` _and_ `gender_identity` _fields should have a value of "Female". If a person self-identifies as "Transgender Female",_ `gender` _should have a value of "Female" and_ `gender_identity` _should have a value of "Transgender Female"._
+|gender_pronouns    | [Gender Pronouns](#gender-pronouns)   | An object hash representing the persons desired gender pronouns
 |party_identification   |flexenum     |Flexenum describing the person's politcal party identification. One of "None", "Democratic", "Republican", "Independent", or another free-form string.
 |parties |[Parties[]](#parties)|An array of all party object hashes associated with the person (past and present).
 |source         |string     |Information about the source where this person record was acquired.   _Example: "facebook-ad-october"_
@@ -131,7 +132,19 @@ These JSON hashes included in the table above are broken out into their own tabl
 |-----------    |-----------|--------------
 |custom_fields.[key]	|string	|The key associated with this custom field, with a corresponding value as a string. May be prefixed by servers based on naming conventions they document to control how collisions across systems and data sets occur.
 
+#### Gender Pronouns
+
+|Name           |Type       |Description
+|---------------|-----------|--------------
+|subject        |flexenum   | A string representing the subject (nominative) pronoun. One of "She", "He", "They" or another value
+|object         |flexenum   | A string representing the object (oblique) pronoun. One of "Her", "Him", "Them" or another value
+|posessive      |flexenum   | A string representing the posessive pronoun. One of "Hers", "His", "Theirs" or another value
+
+Terminology for the types of pronouns taken from [Wikipedia: https://en.wikipedia.org/wiki/Third-person_pronoun#Summary](https://en.wikipedia.org/wiki/Third-person_pronoun#Summary)
+
+
 _[Back to top...](#)_
+
 
 
 ### Links
@@ -246,11 +259,16 @@ Cache-Control: max-age=0, private, must-revalidate
                 "modified_date": "2014-03-20T21:04:31Z",
                 "given_name": "John",
                 "family_name": "Smith",
-                "honorific_prefix": "Mr.",
+                "honorific_prefix": "Mx.",
                 "honorific_suffix": "Ph.D",
                 "additional_name": "Scott",
                 "gender": "Male",
-                "gender_identity": "Male",
+                "gender_identity": "Transgender Male",
+                "gender_pronouns": {
+                    "subject": "They",
+                    "object": "Them",
+                    "posessive": "Theirs"
+                },
                 "party_identification": "Democratic",
                 "parties": [
                   {
@@ -416,6 +434,11 @@ Cache-Control: max-age=0, private, must-revalidate
                         }
                     }
                 ],
+                "gender_pronouns": {
+                    "subject": "She",
+                    "object": "Her",
+                    "posessive": "Hers"
+                },
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/people/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -592,6 +615,11 @@ Cache-Control: max-age=0, private, must-revalidate
         "most_important_issue": "Equal pay",
         "union_member": "true"
     },
+    "gender_pronouns": {
+                    "subject": "They",
+                    "object": "Them",
+                    "posessive": "Theirs"
+    },      
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -682,7 +710,12 @@ OSDI-API-Token:[your api key here]
             "sms_capable": true
         }
     ],
-    "gender": "Male"
+    "gender": "Male",
+    "gender_pronouns": {
+                    "subject": "They",
+                    "object": "Them",
+                    "posessive": "Theirs"
+    }
 }
 ```
 
