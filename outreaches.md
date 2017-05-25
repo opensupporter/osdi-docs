@@ -189,19 +189,19 @@ Cache-Control: max-age=0, private, must-revalidate
                 // You may wish to explicitly record the target of the outreach
                 // inline:
                 "targets": [
-	                {
-	                    "title": "Senator",
-	                    "given_name": "John",
-	                    "family_name": "Smith",
-	                    "organization": "U.S. Senate",
-	                    "ocdid": "ocd-division/country:us/state:ny"
-	                },
-	                {
-	                    "title": "Senator",
-	                    "given_name": "Jennifer",
-	                    "family_name": "Larson",
-	                    "organization": "U.S. Senate",
-	                    "ocdid": "ocd-division/country:us/state:ny",
+                    {
+                        "title": "Senator",
+                        "given_name": "John",
+                        "family_name": "Smith",
+                        "organization": "U.S. Senate",
+                        "ocdid": "ocd-division/country:us/state:ny"
+                    },
+                    {
+                        "title": "Senator",
+                        "given_name": "Jennifer",
+                        "family_name": "Larson",
+                        "organization": "U.S. Senate",
+                        "ocdid": "ocd-division/country:us/state:ny",
                         "postal_addresses": [
                             {
                                 "primary": true,
@@ -242,8 +242,8 @@ Cache-Control: max-age=0, private, must-revalidate
                                 "do_not_call": true
                             }
                         ]
-	                }
-	            ],
+                    }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -271,14 +271,14 @@ Cache-Control: max-age=0, private, must-revalidate
                     "source": "email-101116-subjecttest1"
                 },
                 "targets": [
-	                {
-	                    "title": "Senator",
-	                    "given_name": "Jane",
-	                    "family_name": "Doe",
-	                    "organization": "U.S. Senate",
-	                    "ocdid": "ocd-division/country:us/state:va"
-	                }
-	            },
+                    {
+                        "title": "Senator",
+                        "given_name": "Jane",
+                        "family_name": "Doe",
+                        "organization": "U.S. Senate",
+                        "ocdid": "ocd-division/country:us/state:va"
+                    }
+                },
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -339,21 +339,21 @@ Cache-Control: max-age=0, private, must-revalidate
         "url": "https://facebook.com/posts/12345"
     },
     "targets": [
-	    {
-	        "title": "Senator",
-	        "given_name": "John",
-	        "family_name": "Smith",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    },
-	    {
-	        "title": "Senator",
-	        "given_name": "Jennifer",
-	        "family_name": "Larson",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    }
-	],
+        {
+            "title": "Senator",
+            "given_name": "John",
+            "family_name": "Smith",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        },
+        {
+            "title": "Senator",
+            "given_name": "Jennifer",
+            "family_name": "Larson",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        }
+    ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -397,21 +397,21 @@ OSDI-API-Token:[your api key here]
         "source": "api"
     },
     "targets": [
-	    {
-	        "title": "Senator",
-	        "given_name": "John",
-	        "family_name": "Smith",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    },
-	    {
-	        "title": "Senator",
-	        "given_name": "Jennifer",
-	        "family_name": "Larson",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    }
-	],
+        {
+            "title": "Senator",
+            "given_name": "John",
+            "family_name": "Smith",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        },
+        {
+            "title": "Senator",
+            "given_name": "Jennifer",
+            "family_name": "Larson",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        }
+    ],
     "_links" : {
         "osdi:person" : { 
             "href" : "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
@@ -442,21 +442,21 @@ Cache-Control: max-age=0, private, must-revalidate
         "source": "api"
     },
     "targets": [
-	    {
-	        "title": "Senator",
-	        "given_name": "John",
-	        "family_name": "Smith",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    },
-	    {
-	        "title": "Senator",
-	        "given_name": "Jennifer",
-	        "family_name": "Larson",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    }
-	],
+        {
+            "title": "Senator",
+            "given_name": "John",
+            "family_name": "Smith",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        },
+        {
+            "title": "Senator",
+            "given_name": "Jennifer",
+            "family_name": "Larson",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        }
+    ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
@@ -518,21 +518,21 @@ Cache-Control: max-age=0, private, must-revalidate
         "url": "https://facebook.com/posts/12345"
     },
     "targets": [
-	    {
-	        "title": "Senator",
-	        "given_name": "John",
-	        "family_name": "Smith",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    },
-	    {
-	        "title": "Senator",
-	        "given_name": "Jennifer",
-	        "family_name": "Larson",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    }
-	],
+        {
+            "title": "Senator",
+            "given_name": "John",
+            "family_name": "Smith",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        },
+        {
+            "title": "Senator",
+            "given_name": "Jennifer",
+            "family_name": "Larson",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        }
+    ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
