@@ -211,9 +211,11 @@ General information can be found at [odata.org](http://odata.org).
 
 #### Conventions
 
-* String literals are enclosed in single quotes, eg: 'Jon'
-* Integers are not quoted, eg: 5
+* String literals are enclosed in single quotes, eg: `'Jon'`
+* Integers are not quoted, eg: `5`
 * The whole query string is not enclosed in any quotes
+* Object properties are referenced using `/`, not `.`, e.g. `birthdate/month`
+
 
 #### Operators
 
@@ -223,7 +225,7 @@ OSDI supports the following OData operators:
 |-------|-------------------------------|-------------------------------
 | eq    | Exact match                   | first_name eq 'John'
 | ne    | Not Equal exact match         | first_name ne 'John'
-| gt    | Greater than                  | birthdate.month gt 1980
+| gt    | Greater than                  | birthdate/month gt 1980
 | ge    | Greater or equal than         | created gt '2013-11-17T18:27:35-05'
 | lt    | Less than                     | birthdate.year lt 1980
 | le    | Less or equal than            | created le '2013-11-17T18:27:35-05'
