@@ -246,11 +246,26 @@ OSDI defines the following OPTIONAL extension functions:
 |-------|-------------|-----------------------------------------------
 | near  | Returns entries near a location within a radius   | gender eq 'Female' and near('10011', '5 miles')
 
+#### Virtual Field Names
+
+There are some resource fields that should be searchable, but are not top-level fields. This is addressed by
+exposing Virtual Field Names at the filter level. OSDI implementations should add special case query handlers
+for these filter options.
+
+| Resource | Field                        | Virtual Field
+|----------|------------------------------|--------------
+| Person   | email_addresses.address      | email_address
+| Person   | phone_numbers.number         | phone_number
+| Person   | postal_addresses.postal_code | postal_code
+| Person   | postal_addresses.region      | region
+
 #### Examples
 
 Find all males in a given ZIP code: ```GET /api/v1/people?filter=gender eq 'Male' and address.postal_code eq '10011'```
     
 Find new signups on or since a date and time (Eastern Time) ```GET /api/v1/people?filter=created ge '2013-11-17T18:27:35-05'```
+
+Find all people associated with a given email address: ```GET /api/v1/people?filter=email_address eq 'jane@example.com'```
 
 _[Back to top...](#)_
 
