@@ -248,16 +248,27 @@ OSDI defines the following OPTIONAL extension functions:
 
 #### Virtual Field Names
 
-There are some resource fields that should be searchable, but are not top-level fields. This is addressed by
-exposing Virtual Field Names at the filter level. OSDI implementations should add special case query handlers
-for these filter options.
+There are some resource fields that should be searchable, but are not directly addressable using the filter
+syntax. This is the case for array fields and fields on array items. To allow querying of these properties, 
+we expose Virtual Field Names at the filter level.
 
-| Resource | Field                        | Virtual Field
-|----------|------------------------------|--------------
-| Person   | email_addresses.address      | email_address
-| Person   | phone_numbers.number         | phone_number
-| Person   | postal_addresses.postal_code | postal_code
-| Person   | postal_addresses.region      | region
+OSDI implementations should add special case query handlers for these filter options, where the parent resource
+should be returned if any of the array items match the condition.
+
+| Resource  | Field                        | Virtual Field
+|-----------|------------------------------|--------------
+| Donation  | recipient.display_name       | recipient_display_name
+| Donation  | recipient.legal_name         | recipient_legal_name
+| Message   | targets.href                 | target_href
+| Outreach  | targets.given_name           | target_given_name
+| Outreach  | targets.family_name          | target_family_name
+| Outreach  | targets.ocdid                | target_ocdid
+| Petition  | targets.name                 | target_name
+| Person    | email_addresses.address      | email_address
+| Person    | phone_numbers.number         | phone_number
+| Person    | postal_addresses.postal_code | postal_code
+| Person    | postal_addresses.region      | region
+
 
 #### Examples
 
