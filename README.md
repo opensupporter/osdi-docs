@@ -205,7 +205,7 @@ _[Back to top...](#)_
 
 When retrieving collections, a client may request that the server filter the results according to a query.  OSDI makes use of a subset of the OData query language to accomplish this.  The filter string is the value of the 'filter' query parameter.
 
-See [OData Filter Query](http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter) for more information. 
+See [OData Filter Query](http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/part2-url-conventions/odata-v4.0-errata03-os-part2-url-conventions-complete.html#_Toc453752358) for more information. 
 
 General information can be found at [odata.org](http://odata.org).
 
