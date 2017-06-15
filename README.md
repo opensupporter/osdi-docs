@@ -205,7 +205,7 @@ _[Back to top...](#)_
 
 When retrieving collections, a client may request that the server filter the results according to a query.  OSDI makes use of a subset of the OData query language to accomplish this.  The filter string is the value of the 'filter' query parameter.
 
-See [OData Filter Query](http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter) for more information. 
+See [OData Filter Query](http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/part2-url-conventions/odata-v4.0-errata03-os-part2-url-conventions-complete.html#_Toc453752358) for more information. 
 
 General information can be found at [odata.org](http://odata.org).
 
@@ -246,11 +246,37 @@ OSDI defines the following OPTIONAL extension functions:
 |-------|-------------|-----------------------------------------------
 | near  | Returns entries near a location within a radius   | gender eq 'Female' and near('10011', '5 miles')
 
+#### Virtual Field Names
+
+There are some resource fields that should be searchable, but are not directly addressable using the filter
+syntax. This is the case for array fields and fields on array items. To allow querying of these properties, 
+we expose Virtual Field Names at the filter level.
+
+OSDI implementations should add special case query handlers for these filter options, where the parent resource
+should be returned if any of the array items match the condition.
+
+| Resource  | Field                        | Virtual Field
+|-----------|------------------------------|--------------
+| Donation  | recipient.display_name       | recipient_display_name
+| Donation  | recipient.legal_name         | recipient_legal_name
+| Message   | targets.href                 | target_href
+| Outreach  | targets.given_name           | target_given_name
+| Outreach  | targets.family_name          | target_family_name
+| Outreach  | targets.ocdid                | target_ocdid
+| Petition  | targets.name                 | target_name
+| Person    | email_addresses.address      | email_address
+| Person    | phone_numbers.number         | phone_number
+| Person    | postal_addresses.postal_code | postal_code
+| Person    | postal_addresses.region      | region
+
+
 #### Examples
 
 Find all males in a given ZIP code: ```GET /api/v1/people?filter=gender eq 'Male' and address.postal_code eq '10011'```
     
 Find new signups on or since a date and time (Eastern Time) ```GET /api/v1/people?filter=created ge '2013-11-17T18:27:35-05'```
+
+Find all people associated with a given email address: ```GET /api/v1/people?filter=email_address eq 'jane@example.com'```
 
 _[Back to top...](#)_
 
