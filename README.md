@@ -55,7 +55,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 OSDI used a combination of approaches to provide flexible reading of data, simple operations for simple scenarios, and general purpose CRUD access.
 
 ### Version
-This document represents OSDI version 1.1.2
+This document represents OSDI version 1.2.0
 
 ### Working with OSDI in Real Life
 
@@ -211,9 +211,11 @@ General information can be found at [odata.org](http://odata.org).
 
 #### Conventions
 
-* String literals are enclosed in single quotes, eg: 'Jon'
-* Integers are not quoted, eg: 5
+* String literals are enclosed in single quotes, eg: `'Jon'`
+* Integers are not quoted, eg: `5`
 * The whole query string is not enclosed in any quotes
+* Object properties are referenced using `/`, not `.`, e.g. `birthdate/month`
+
 
 #### Operators
 
@@ -223,9 +225,9 @@ OSDI supports the following OData operators:
 |-------|-------------------------------|-------------------------------
 | eq    | Exact match                   | first_name eq 'John'
 | ne    | Not Equal exact match         | first_name ne 'John'
-| gt    | Greater than                  | birthdate.month gt 1980
+| gt    | Greater than                  | birthdate/month gt 1980
 | ge    | Greater or equal than         | created gt '2013-11-17T18:27:35-05'
-| lt    | Less than                     | birthdate.year lt 1980
+| lt    | Less than                     | birthdate/year lt 1980
 | le    | Less or equal than            | created le '2013-11-17T18:27:35-05'
 | or    | Logical OR                    | first_name eq 'John' or first_name eq 'Jon'
 | and   | Logical AND                   | first_name eq 'John' and last_name eq 'Doe'
