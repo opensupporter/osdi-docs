@@ -308,7 +308,7 @@ Future versions of this specification may officially support one or more of thes
 Not all interactions with the API will require authentication, and some behaviors might differ based on whether your request includes authentication or not. For example, when used in a javascript application, where authentication secrets can't be kept from users, a non-authenticated method may be used, and the server response may be truncated so as to not leak data to unauthenticated users. Some specific non-authenticated behaviors included in this specification are outlined on each resource page.
 
 
-#### Token Based Authentication
+#### OSDI Token Based Authentication
 
 While OSDI does not currently mandate implementation of token-based authentication, for those that do implement this method of authentication the following standard should be followed. 
 
