@@ -54,7 +54,8 @@ A list of fields specific to the Fundraising Page resource.
 |title				|string		|The title of the fundraising page. Intended for public display rather than administrative purposes.
 |description		|string		|A description of the fundraising page, usually displayed publicly. May contain text and/or HTML.
 |summary			|string		|A text-only single paragraph summarizing the fundraising page. Shown on listing pages that have more than titles, but not enough room for full description.
-|browser_url		|string		|A URL string pointing to the publicly available fundraising page page on the web.
+|browser_url		|string		|A URL string pointing to the publicly available fundraising page on the web.
+|administrative_url		|string		|A URL string pointing to the fundraising page's administrative page on the web.
 |featured_image_url		|string		|A URL string pointing to a publicly available featured image file for this fundraising page on the web.
 |total_donations	|integer	|A read-only computed property representing the current count of the total number of donations on the fundraising page.
 |total_amount	|float	|A read-only computed property representing the current count of the total amount of money raised on the fundraising page.
@@ -165,6 +166,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "description": "<p>It's time for our end of year fundraising push.</p><p>Please give generously!</p>",
                 "summary": "It's time for our end of year fundraising push.",
                 "browser_url": "http://osdi-sample-system.org/fundraising_pages/give-to-support-us",
+                "administrative_url": "http://osdi-sample-system.org/fundraising_pages/give-to-support-us/manage",
                 "featured_image_url": "http://osdi-sample-system.org/images/donate-image.jpg",
                 "total_donations": 345,
                 "total_amount": 4567.21,
@@ -280,6 +282,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "description": "<p>It's time for our end of year fundraising push.</p><p>Please give generously!</p>",
     "summary": "It's time for our end of year fundraising push.",
     "browser_url": "http://osdi-sample-system.org/fundraising_pages/give-to-support-us",
+    "administrative_url": "http://osdi-sample-system.org/fundraising_pages/give-to-support-us/manage",
     "featured_image_url": "http://osdi-sample-system.org/images/donate-image.jpg",
     "total_donations": 345,
     "total_amount": 4567.21,

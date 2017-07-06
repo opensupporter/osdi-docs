@@ -56,6 +56,7 @@ A list of fields specific to the Petition resource.
 |summary			|string		|A text-only single paragraph summarizing the petition. Shown on listing pages that have more than titles, but not enough room for full description.
 |petition_text		|string		|The text of the petition letter to the target.
 |browser_url		|string		|A URL string pointing to the publicly available petition page on the web.
+|administrative_url		|string		|A URL string pointing to the petition's administrative page on the web.
 |featured_image_url		|string		|A URL string pointing to a publicly available featured image file for this petition on the web.
 |total_signatures	|integer	|A read-only computed property representing the current count of the total number of signatures on the petition.
 |target				|[Targets[]](#targets)	|An array of target object hashes associated with this petition.
@@ -172,6 +173,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "summary": "Acme Co is doing a bad thing!",
                 "petition_text": "To: Acme Co -- Stop doing the bad thing!",
                 "browser_url": "http://osdi-sample-system.org/petitions/acme-co-stop-doing-the-bad-thing",
+                "administrative_url": "http://osdi-sample-system.org/petitions/acme-co-stop-doing-the-bad-thing/manage",
                 "featured_image_url": "http://osdi-sample-system.org/images/petition-image.jpg",
                 "total_signatures": 345,
                 "target": [
@@ -232,6 +234,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "description": "<p>We need $15/hour now!</p>",
                 "petition_text": "Congress, pass the minimum wage increase now!",
                 "browser_url": "http://osdi-sample-system.org/petitions/raise-the-wage",
+                "administrative_url": "http://osdi-sample-system.org/petitions/raise-the-wage/manage",
                 "total_signatures": 10572,
                 "target": [
                     {
@@ -299,6 +302,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "summary": "Acme Co is doing a bad thing!",
     "petition_text": "To: Acme Co -- Stop doing the bad thing!",
     "browser_url": "http://osdi-sample-system.org/petitions/acme-co-stop-doing-the-bad-thing",
+    "administrative_url": "http://osdi-sample-system.org/petitions/acme-co-stop-doing-the-bad-thing/manage",
     "featured_image_url": "http://osdi-sample-system.org/images/petition-image.jpg",
     "total_signatures": 345,
     "target": [
