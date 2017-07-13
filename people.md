@@ -65,6 +65,8 @@ A list of fields specific to the Person resource.
 |ethnicities|strings[]   |A unique string array representing a person's ethnicities.
 |languages_spoken|strings[]      | Unique string array of RFC5646 tags representing the languages spoken by the person. Example: en,  en-US, fr-CA, pt-BR
 |preferred_language | string  | The RFC5646 tag representing the person's preferred language.
+|browser_url		|string		|A URL string pointing to the publicly available person page on the web, such as a public profile page.
+|administrative_url		|string		|A URL string pointing to the person's administrative page on the web, such as a page for managing this person's record.
 |birthdate	|[Birthdate](#birthdate)    |An object hash representing the birthdate of the person.
 |employer|string    |The name of the person's employer.
 |employer_address|[Employer Address](#employer-address)    |An object hash representing the postal address of the person's employer.
@@ -260,6 +262,8 @@ Cache-Control: max-age=0, private, must-revalidate
                   }
                 ],
                 "source": "october_canvass",
+                "browser_url": "http://osdi-sample-system.org/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+                "administrative_url": "http://osdi-sample-system.org/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/manage",
                 "birthdate": {
                     "month": 6,
                     "day": 2,
@@ -394,6 +398,8 @@ Cache-Control: max-age=0, private, must-revalidate
                 "origin_system": "OSDI Sample System",
                 "created_date": "2014-03-20T20:44:13Z",
                 "modified_date": "2014-03-20T20:44:13Z",
+                "browser_url": "http://osdi-sample-system.org/people/1efc3644-af25-4253-90b8-a0baf12dbd1e",
+                "administrative_url": "http://osdi-sample-system.org/people/1efc3644-af25-4253-90b8-a0baf12dbd1e/manage",
                 "email_addresses": [
                     {
                         "primary": true,
@@ -502,6 +508,8 @@ Cache-Control: max-age=0, private, must-revalidate
       }
     ],
     "source": "october_canvass",
+    "browser_url": "http://osdi-sample-system.org/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+    "administrative_url": "http://osdi-sample-system.org/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/manage",
     "birthdate": {
         "month": 6,
         "day": 2,
@@ -705,6 +713,8 @@ Cache-Control: max-age=0, private, must-revalidate
     "given_name": "Labadie",
     "additional_name": "Marques",
     "origin_system": "OpenSupporter",
+    "browser_url": "http://osdi-sample-system.org/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+    "administrative_url": "http://osdi-sample-system.org/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/manage",
     "email_addresses": [
         {
             "address":"test-3@example.com",
@@ -819,6 +829,8 @@ Cache-Control: max-age=0, private, must-revalidate
     "given_name": "Labadie",
     "additional_name": "Marques",
     "origin_system": "OpenSupporter",
+    "browser_url": "http://osdi-sample-system.org/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+    "administrative_url": "http://osdi-sample-system.org/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/manage",
     "email_addresses": [
         {
             "address":"test-new@example.com",
