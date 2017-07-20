@@ -55,6 +55,7 @@ A list of fields specific to the Event resource.
 |description		|string		|A description of the event, usually displayed publicly. May contain text and/or HTML.
 |summary			|string		|A text-only single paragraph summarizing the event. Shown on listing pages that have more than titles, but not enough room for full description.
 |browser_url		|string		|A URL string pointing to the publicly available event page on the web.
+|administrative_url		|string		|A URL string pointing to the event's administrative page on the web.
 |type				|enum		|Whether the event asks people to purches tickets to RSVP or is an open RSVP. One of "ticketed" or "open".
 |ticket_levels		|[Ticket Levels[]](#ticket-levels)	|An array of object hashes representing the different ticket levels available for purches. (ex: $5 general admission tickets and $50 VIP tickets)
 |featured_image_url		|string		|A URL string pointing to a publicly available featured image file for this event on the web.
@@ -217,6 +218,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "summary": "Join us in the park to rally for justice!",
                 "instructions": "<p>Bring a friend and a sign.</p>",
                 "browser_url": "http://osdi-sample-system.org/events/rally-for-justice",
+                "administrative_url": "http://osdi-sample-system.org/events/rally-for-justice/manage",
                 "type": "open",
                 "featured_image_url": "http://osdi-sample-system.org/images/rally-for-justice-banner.jpg",
                 "total_accepted": 14,
@@ -306,6 +308,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "description": "<p>Come to my small house party. We'll discuss how we can make more progress.</p>",
                 "instructions": "<p>This is an invite-only event, but feel free to bring a friend!</p>",
                 "browser_url": "http://osdi-sample-system.org/events/party-for-progress",
+                "administrative_url": "http://osdi-sample-system.org/events/party-for-progress/manage",
                 "type": "ticketed",
                 "ticket_levels": [
                     {
@@ -424,6 +427,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "summary": "Join us in the park to rally for justice!",
     "instructions": "<p>Bring a friend and a sign.</p>",
     "browser_url": "http://osdi-sample-system.org/events/rally-for-justice",
+    "administrative_url": "http://osdi-sample-system.org/events/rally-for-justice/manage",
     "type": "open",
     "featured_image_url": "http://osdi-sample-system.org/images/rally-for-justice-banner.jpg",
     "total_accepted": 14,

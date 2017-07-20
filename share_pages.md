@@ -55,6 +55,7 @@ A list of fields specific to the Share Page resource.
 |description		|string		|A description of the share page, usually displayed publicly. May contain text and/or HTML.
 |summary			|string		|A text-only single paragraph summarizing the share page. Shown on listing pages that have more than titles, but not enough room for full description.
 |browser_url		|string		|A URL string pointing to the publicly available share page page on the web.
+|administrative_url		|string		|A URL string pointing to the share page's administrative page on the web.
 {% include share_options_main_objects.md %}
 
 
@@ -157,6 +158,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "description": "<p>Thanks for singing the petition!</p><p>Now, can you share it with your friends?</p>",
                 "summary": "Thanks for signing! Now share!",
                 "browser_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing",
+                "administrative_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing/manage",
                 "share_url": "http://osdi-sample-system.org/petitions/my-petition/",
                 "total_shares": 345,
                 "share_options": [
@@ -200,6 +202,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "title": "Share this awesome video with everyone!",
                 "description": "<p>Watch this video, then click the buttons to share.</p>",\
                 "browser_url": "http://osdi-sample-system.org/share_pages/share-this-video",
+                "administrative_url": "http://osdi-sample-system.org/share_pages/share-this-video/manage",
                 "share_url": "http://osdi-sample-system.org/share/my-video/",
                 "total_shares": 43,
                 "share_options": [
@@ -275,6 +278,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "description": "<p>Thanks for singing the petition!</p><p>Now, can you share it with your friends?</p>",
     "summary": "Thanks for signing! Now share!",
     "browser_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing",
+    "administrative_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing/manage",
     "share_url": "http://osdi-sample-system.org/petitions/my-petition/",
     "total_shares": 345,
     "share_options": [
@@ -371,6 +375,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "title": "Thanks for signing! Now share to keep up our momentum.",
     "total_shares": 0,
     "browser_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing",
+    "administrative_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing/manage",
     "share_url": "http://osdi-sample-system.org/petitions/my-petition/",
     "share_options": [
         {
@@ -444,6 +449,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "title": "Thanks for signing! Now share to keep up our momentum.",
     "total_shares": 0,
     "browser_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing",
+    "administrative_url": "http://osdi-sample-system.org/share_pages/thanks-for-signing/manage",
     "share_url": "http://osdi-sample-system.org/petitions/my-petition/",
     "share_options": [
         {
