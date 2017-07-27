@@ -73,6 +73,7 @@ A list of fields specific to the Event resource.
 |transparence		|enum		|Whether the event blocks time on online calendar systems. Possible values are "opaque" or "transparent". Opaque is the default, but this can be overridden by a user.
 |visibility			|enum		|Visibility of the event.  Possible values are "public" and "private".
 |location			|[Location](#location)	| An object hash representing the location of the event.
+|host             |[Host](#host)          | An object hash representing the event's host
 |reminders 			|[Reminders[]](#reminders)	|An array of object hashes representing the reminders set for this event.
 {% include share_options_main_objects.md %}
 
