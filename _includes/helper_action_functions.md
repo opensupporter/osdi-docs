@@ -25,3 +25,16 @@ Helper Action Functions are additional actions that the OSDI server will perform
 |-----------    |-----------|--------------
 |autoresponse   |object     |An object hash representing the autoresponse email trigger type.
 |autoresponse.enabled   |boolean     |A boolean indicating whether the autoresponse email should be sent or not.
+|autoresponse.identifiers |strings[]     | A unique string array of identifiers in the format `[system name]:[id]`. See the general concepts document for more information about identifiers.
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|sms_response |object     |An object hash representing the autoresponse sms trigger type.
+|sms_response.enabled   |boolean     |A boolean indicating whether the autoresponse sms should be sent or not.
+|sms_response.identifiers |strings[]     | A unique string array of identifiers in the format `[system name]:[id]`. See the general concepts document for more information about identifiers.
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|call_response |object     |An object hash representing the autoresponse call trigger type.
+|call_response.enabled   |boolean     |A boolean indicating whether the autoresponse call should be sent or not.
+|call_response.identifiers |strings[]     | A unique string array of identifiers in the format `[system name]:[id]`. See the general concepts document for more information about identifiers.
