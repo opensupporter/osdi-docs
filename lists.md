@@ -181,7 +181,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "title": "Membership List",
                 "browser_url": "http://osdi-sample-system.org/lists/members",
                 "administrative_url": "http://osdi-sample-system.org/lists/members/manage",
-                "total_results": 108273,
+                "total_items": 108273,
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
