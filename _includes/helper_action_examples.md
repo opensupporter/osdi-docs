@@ -1,5 +1,21 @@
     "triggers": {
         "autoresponse": {
+            "identifiers": [
+                "system_1:eb84f0d01dec3b1ffb9e4dca406fa45e", 
+                "system_2:15117b282328146ac6afebaa8acd80e7"
+            ],
+            "enabled": true
+        },
+        "sms_response": {
+            "identifiers": [
+                "system_1:efe398db3439be6bbf00d90e693ec3a3"
+            ],
+            "enabled": true
+        },
+        "call_response": {
+            "identifiers": [
+                "system_1:83069490-8a17-4131-b13e-f9a44d2b7646"
+            ],
             "enabled": true
         }
     },
