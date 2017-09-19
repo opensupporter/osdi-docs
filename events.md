@@ -73,7 +73,7 @@ A list of fields specific to the Event resource.
 |transparence		|enum		|Whether the event blocks time on online calendar systems. Possible values are "opaque" or "transparent". Opaque is the default, but this can be overridden by a user.
 |visibility			|enum		|Visibility of the event.  Possible values are "public" and "private".
 |location			|[Location](#location)	| An object hash representing the location of the event.
-|host             |[Host](#host)          | An object hash representing the event's host
+|contact          |[Contact](#contact)          | An object hash representing the who to contact for questions about the event.
 |reminders 			|[Reminders[]](#reminders)	|An array of object hashes representing the reminders set for this event.
 {% include share_options_main_objects.md %}
 
@@ -114,14 +114,15 @@ These JSON hashes included in the table above are broken out into their own tabl
 |location.location.accuracy	|enum	|A value representing the accuracy of the geocode. One of "Rooftop" or "Approximate".
 |location.public |boolean |Whether the venue's location should be shared publicly, or if false, only shared with RSVPs (for example, someone's house)
 
-#### Host
+#### Contact
 
 |Name          |Type      |Description
 |-----------    |-----------|--------------
-|host.name	|string	|Name of the host or contact person for event (e.g., Jane Doe)
-|host.email	|string	|Email address of the host (jane.doe@hotmail.co.uk)
-|host.phone	|string	|Phone number of the host (214-555-0869)
-|host.public|boolean |Whether the host's info should be shared publicly (if false, should only be shared with RSVPs)
+|contact.name	|string	|Name of the host or contact person for event (e.g., Jane Doe)
+|contact.email	|string	|Email address of the host (jane.doe@hotmail.co.uk)
+|contact.phone	|string	|Phone number of the host (214-555-0869)
+|contact.additional_info |string  |Free form place for information about the event contact
+|contact.public|boolean |Whether the host's info should be shared publicly (if false, should only be shared with RSVPs)
 
 #### Reminders
 
