@@ -119,8 +119,8 @@ These JSON hashes included in the table above are broken out into their own tabl
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |contact.name	|string	|Name of the host or contact person for event (e.g., Jane Doe)
-|contact.email	|string	|Email address of the host (jane.doe@hotmail.co.uk)
-|contact.phone	|string	|Phone number of the host (214-555-0869)
+|contact.email_address	|string	|Email address of the host (jane.doe@hotmail.co.uk)
+|contact.phone_number	|string	|Phone number of the host (214-555-0869)
 |contact.additional_info |string  |Free form place for information about the event contact
 |contact.public|boolean |Whether the host's info should be shared publicly (if false, should only be shared with RSVPs)
 
