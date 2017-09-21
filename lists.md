@@ -60,6 +60,7 @@ A list of fields specific to the List resource.
 |description		|string		|A description of the list, usually displayed publicly. May contain text and/or HTML.
 |summary			|string		|A text-only single paragraph summarizing the list. Shown on listing pages that have more than titles, but not enough room for full description.
 |browser_url		|string		|A URL string pointing to the publicly available list page on the web.
+|administrative_url		|string		|A URL string pointing to the list's administrative page on the web.
 |total_items	|integer	|A read-only computed property representing the current count of the total number of items in the list.
 
 _[Back to top...](#)_
@@ -153,6 +154,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "name": "Main Email List Subscribers",
                 "summary": "The main email list.",
                 "browser_url": "http://osdi-sample-system.org/lists/main-email-list",
+                "administrative_url": "http://osdi-sample-system.org/lists/main-email-list/manage",
                 "total_items": 1748920,
                 "_links": {
                     "self": {
@@ -178,7 +180,8 @@ Cache-Control: max-age=0, private, must-revalidate
                 "modified_date": "2014-03-20T20:44:13Z",
                 "title": "Membership List",
                 "browser_url": "http://osdi-sample-system.org/lists/members",
-                "total_results": 108273,
+                "administrative_url": "http://osdi-sample-system.org/lists/members/manage",
+                "total_items": 108273,
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -235,6 +238,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "name": "Main Email List Subscribers",
     "summary": "The main email list.",
     "browser_url": "http://osdi-sample-system.org/lists/main-email-list",
+    "administrative_url": "http://osdi-sample-system.org/lists/main-email-list/manage",
     "total_items": 1748920,
     "_links": {
         "self": {
@@ -297,6 +301,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "name": "Volunteers",
     "summary": "A list containing all of our volunteers",
     "browser_url": "http://osdi-sample-system.org/lists/volunteers",
+    "administrative_url": "http://osdi-sample-system.org/lists/volunteers/manage",
     "total_items": 0,
     "_links": {
         "self": {
@@ -355,6 +360,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "name": "December Volunteers",
     "summary": "A list containing all of our volunteers",
     "browser_url": "http://osdi-sample-system.org/lists/volunteers",
+    "administrative_url": "http://osdi-sample-system.org/lists/volunteers/manage",
     "total_items": 0,
     "_links": {
         "self": {

@@ -55,7 +55,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 OSDI used a combination of approaches to provide flexible reading of data, simple operations for simple scenarios, and general purpose CRUD access.
 
 ### Version
-This document represents OSDI version 1.1.2
+This document represents OSDI version 1.2.0
 
 ### Working with OSDI in Real Life
 
@@ -205,15 +205,17 @@ _[Back to top...](#)_
 
 When retrieving collections, a client may request that the server filter the results according to a query.  OSDI makes use of a subset of the OData query language to accomplish this.  The filter string is the value of the 'filter' query parameter.
 
-See [OData Filter Query](http://www.odata.org/documentation/odata-v2-documentation/uri-conventions/#45_Filter_System_Query_Option_filter) for more information. 
+See [OData Filter Query](http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/part2-url-conventions/odata-v4.0-errata03-os-part2-url-conventions-complete.html#_Toc453752358) for more information. 
 
 General information can be found at [odata.org](http://odata.org).
 
 #### Conventions
 
-* String literals are enclosed in single quotes, eg: 'Jon'
-* Integers are not quoted, eg: 5
+* String literals are enclosed in single quotes, eg: `'Jon'`
+* Integers are not quoted, eg: `5`
 * The whole query string is not enclosed in any quotes
+* Object properties are referenced using `/`, not `.`, e.g. `birthdate/month`
+
 
 #### Operators
 
@@ -223,9 +225,9 @@ OSDI supports the following OData operators:
 |-------|-------------------------------|-------------------------------
 | eq    | Exact match                   | first_name eq 'John'
 | ne    | Not Equal exact match         | first_name ne 'John'
-| gt    | Greater than                  | birthdate.month gt 1980
+| gt    | Greater than                  | birthdate/month gt 1980
 | ge    | Greater or equal than         | created gt '2013-11-17T18:27:35-05'
-| lt    | Less than                     | birthdate.year lt 1980
+| lt    | Less than                     | birthdate/year lt 1980
 | le    | Less or equal than            | created le '2013-11-17T18:27:35-05'
 | or    | Logical OR                    | first_name eq 'John' or first_name eq 'Jon'
 | and   | Logical AND                   | first_name eq 'John' and last_name eq 'Doe'
@@ -246,11 +248,37 @@ OSDI defines the following OPTIONAL extension functions:
 |-------|-------------|-----------------------------------------------
 | near  | Returns entries near a location within a radius   | gender eq 'Female' and near('10011', '5 miles')
 
+#### Virtual Field Names
+
+There are some resource fields that should be searchable, but are not directly addressable using the filter
+syntax. This is the case for array fields and fields on array items. To allow querying of these properties, 
+we expose Virtual Field Names at the filter level.
+
+OSDI implementations should add special case query handlers for these filter options, where the parent resource
+should be returned if any of the array items match the condition.
+
+| Resource  | Field                        | Virtual Field
+|-----------|------------------------------|--------------
+| Donation  | recipient.display_name       | recipient_display_name
+| Donation  | recipient.legal_name         | recipient_legal_name
+| Message   | targets.href                 | target_href
+| Outreach  | targets.given_name           | target_given_name
+| Outreach  | targets.family_name          | target_family_name
+| Outreach  | targets.ocdid                | target_ocdid
+| Petition  | targets.name                 | target_name
+| Person    | email_addresses.address      | email_address
+| Person    | phone_numbers.number         | phone_number
+| Person    | postal_addresses.postal_code | postal_code
+| Person    | postal_addresses.region      | region
+
+
 #### Examples
 
 Find all males in a given ZIP code: ```GET /api/v1/people?filter=gender eq 'Male' and address.postal_code eq '10011'```
     
 Find new signups on or since a date and time (Eastern Time) ```GET /api/v1/people?filter=created ge '2013-11-17T18:27:35-05'```
+
+Find all people associated with a given email address: ```GET /api/v1/people?filter=email_address eq 'jane@example.com'```
 
 _[Back to top...](#)_
 
@@ -280,7 +308,7 @@ Future versions of this specification may officially support one or more of thes
 Not all interactions with the API will require authentication, and some behaviors might differ based on whether your request includes authentication or not. For example, when used in a javascript application, where authentication secrets can't be kept from users, a non-authenticated method may be used, and the server response may be truncated so as to not leak data to unauthenticated users. Some specific non-authenticated behaviors included in this specification are outlined on each resource page.
 
 
-#### Token Based Authentication
+#### OSDI Token Based Authentication
 
 While OSDI does not currently mandate implementation of token-based authentication, for those that do implement this method of authentication the following standard should be followed. 
 

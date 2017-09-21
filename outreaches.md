@@ -7,7 +7,7 @@ title: Outreach
 
 This document defines the Outreach resource. 
 
-Outreachs are a type of action that a user may take by participating in an [advocacy campaign](advocacy_campaigns.html). Outreaches have fields to describe them such as when the outreach was created, who the user contacted as the target of their advocacy, and the content of the message a user sent to that target, and typically are linked to the person who made the outreach.
+Outreaches are a type of action that a user may take by participating in an [advocacy campaign](advocacy_campaigns.html). Outreaches have fields to describe them such as when the outreach was created, who the user contacted as the target of their advocacy, and the content of the message a user sent to that target, and typically are linked to the person who made the outreach.
 
 
 ### Sections
@@ -56,15 +56,17 @@ A list of fields specific to the Outreach resource.
 |duration		|integer		|The duration in seconds of the outreach, if applicable. (ex: duration will only be present on phone outreach types)
 |subject		|string		|The subject of the outreach, if applicable. (ex: subject will only be present on email outreach types)
 |message		|string		|The message of the outreach, if applicable. (ex: message will only be present on email or postal mail outreach types)
+|notes		|string		|Notes left by the person doing the outreach, if any. For example, any feedback they got from the person they called.
 |referrer_data		|[Referrer Data*](#referrer-data)	|An object hash representing referrer and sourcing information about this outreach.
-|targets			|[Target[]](#target)    |An array of target object hashes representing the targets of the outreach.
+|targets		|[Target[]](#target)    |An array of target object hashes representing the targets of the outreach.
 
 _[Back to top...](#)_
-
 
 ### Related Objects
 
 These JSON hashes included in the table above are broken out into their own tables for readability, rather than independent resources with their own endpoints.
+
+{% include target_subobject.md %}
 
 #### Referrer Data
 
@@ -74,17 +76,6 @@ These JSON hashes included in the table above are broken out into their own tabl
 |referrer_data.referrer	|string    |The code or ID representing a person or group that referred this outreach. Typically used to track which person referred the person who made this outreach. (ex: "jane-doe")
 |referrer_data.website	|string    |The top level domain of the website where the person clicked from to then subsequently make this outreach. (ex: "facebook.com")
 |referrer_data.url	|string    |The specific URL where the person clicked from to then subsequently make this outreach. (ex: "https://facebook.com/posts/12345")
-
-
-#### Target
-
-|Name          	|Type      |Description
-|-----------    |-----------|--------------
-|target.title	|string    |The title or position of the target. (ex: "Senator" or "CEO")
-|target.organization	|string	|The organization the target belongs to. (ex: "U.S. Senate" or "Acme Corporation")
-|target.given_name	|string    |The first or given name of the target. (ex: "John")
-|target.family_name	|string    |The last or family name of the target. (ex: "Smith")
-|target.ocdid	|string    |The Open Civic Data Division ID for this target's political geography, if applicable. See [here](http://docs.opencivicdata.org/en/latest/proposals/0002.html) for more documentation. (ex: "ocd-division/country:us/state:ny/cd:18", which corresponds to New York's 18th Congressional District)
 
 _[Back to top...](#)_
 
@@ -196,21 +187,61 @@ Cache-Control: max-age=0, private, must-revalidate
                     "url": "https://facebook.com/posts/12345"
                 },
                 "targets": [
-	                {
-	                    "title": "Senator",
-	                    "given_name": "John",
-	                    "family_name": "Smith",
-	                    "organization": "U.S. Senate",
-	                    "ocdid": "ocd-division/country:us/state:ny"
-	                },
-	                {
-	                    "title": "Senator",
-	                    "given_name": "Jennifer",
-	                    "family_name": "Larson",
-	                    "organization": "U.S. Senate",
-	                    "ocdid": "ocd-division/country:us/state:ny"
-	                }
-	            ],
+                    {
+                        "title": "Senator",
+                        "given_name": "John",
+                        "family_name": "Smith",
+                        "organization": "U.S. Senate",
+                        "ocdid": "ocd-division/country:us/state:ny"
+                    },
+                    {
+                        "title": "Senator",
+                        "given_name": "Jennifer",
+                        "family_name": "Larson",
+                        "organization": "U.S. Senate",
+                        "ocdid": "ocd-division/country:us/state:ny",
+                        "postal_addresses": [
+                            {
+                                "primary": true,
+                                "address_type": "Home",
+                                "address_lines": [
+                                    "1900 Pennsylvania Ave"
+                                ],
+                                "locality": "Washington",
+                                "region": "DC",
+                                "postal_code": "20009",
+                                "country": "US",
+                                "language": "en",
+                                "location": {
+                                    "latitude": 38.919,
+                                    "longitude": -77.0379,
+                                    "accuracy": "Rooftop"
+                                },
+                                "last_verified_date": "2014-03-20T21:04:31Z"
+                            }
+                        ],
+                        "email_addresses": [
+                            {
+                                "primary": true,
+                                "address": "johnsmith@mail.com",
+                                "address_type": "Personal",
+                            }
+                        ],
+                        "phone_numbers": [
+                            {
+                                "primary": true,
+                                "number": "11234567890",
+                                "extension": "432",
+                                "description": "Worksite line",
+                                "number_type": "Work",
+                                "operator": "ATT",
+                                "country": "US",
+                                "sms_capable": false,
+                                "do_not_call": true
+                            }
+                        ]
+                    }
+                ],
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -238,14 +269,14 @@ Cache-Control: max-age=0, private, must-revalidate
                     "source": "email-101116-subjecttest1"
                 },
                 "targets": [
-	                {
-	                    "title": "Senator",
-	                    "given_name": "Jane",
-	                    "family_name": "Doe",
-	                    "organization": "U.S. Senate",
-	                    "ocdid": "ocd-division/country:us/state:va"
-	                }
-	            },
+                    {
+                        "title": "Senator",
+                        "given_name": "Jane",
+                        "family_name": "Doe",
+                        "organization": "U.S. Senate",
+                        "ocdid": "ocd-division/country:us/state:va"
+                    }
+                },
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -306,21 +337,21 @@ Cache-Control: max-age=0, private, must-revalidate
         "url": "https://facebook.com/posts/12345"
     },
     "targets": [
-	    {
-	        "title": "Senator",
-	        "given_name": "John",
-	        "family_name": "Smith",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    },
-	    {
-	        "title": "Senator",
-	        "given_name": "Jennifer",
-	        "family_name": "Larson",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    }
-	],
+        {
+            "title": "Senator",
+            "given_name": "John",
+            "family_name": "Smith",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        },
+        {
+            "title": "Senator",
+            "given_name": "Jennifer",
+            "family_name": "Larson",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        }
+    ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
@@ -364,21 +395,21 @@ OSDI-API-Token:[your api key here]
         "source": "api"
     },
     "targets": [
-	    {
-	        "title": "Senator",
-	        "given_name": "John",
-	        "family_name": "Smith",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    },
-	    {
-	        "title": "Senator",
-	        "given_name": "Jennifer",
-	        "family_name": "Larson",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    }
-	],
+        {
+            "title": "Senator",
+            "given_name": "John",
+            "family_name": "Smith",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        },
+        {
+            "title": "Senator",
+            "given_name": "Jennifer",
+            "family_name": "Larson",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        }
+    ],
     "_links" : {
         "osdi:person" : { 
             "href" : "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f" 
@@ -409,21 +440,21 @@ Cache-Control: max-age=0, private, must-revalidate
         "source": "api"
     },
     "targets": [
-	    {
-	        "title": "Senator",
-	        "given_name": "John",
-	        "family_name": "Smith",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    },
-	    {
-	        "title": "Senator",
-	        "given_name": "Jennifer",
-	        "family_name": "Larson",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    }
-	],
+        {
+            "title": "Senator",
+            "given_name": "John",
+            "family_name": "Smith",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        },
+        {
+            "title": "Senator",
+            "given_name": "Jennifer",
+            "family_name": "Larson",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        }
+    ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
@@ -485,21 +516,21 @@ Cache-Control: max-age=0, private, must-revalidate
         "url": "https://facebook.com/posts/12345"
     },
     "targets": [
-	    {
-	        "title": "Senator",
-	        "given_name": "John",
-	        "family_name": "Smith",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    },
-	    {
-	        "title": "Senator",
-	        "given_name": "Jennifer",
-	        "family_name": "Larson",
-	        "organization": "U.S. Senate",
-	        "ocdid": "ocd-division/country:us/state:ny"
-	    }
-	],
+        {
+            "title": "Senator",
+            "given_name": "John",
+            "family_name": "Smith",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        },
+        {
+            "title": "Senator",
+            "given_name": "Jennifer",
+            "family_name": "Larson",
+            "organization": "U.S. Senate",
+            "ocdid": "ocd-division/country:us/state:ny"
+        }
+    ],
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/c945d6fe-929e-11e3-a2e9-12313d316c29/outreaches/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse"
