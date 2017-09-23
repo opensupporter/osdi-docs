@@ -24,7 +24,7 @@ The OCA may perform canvassing in a variety of ways such as mobile applications 
 
 The steps in this scenario, are loosely:
 
-1. Voter import - Via OSDI List Exchange Profile or out of band Bulk Data
+1. Voter import via List Exchange Profile or out of band bulk import
 2. API Exchange: OCA queries the collection of scripts in the VRM
 3. OCA User selects relevant script(s) to canvass on
 4. API Exchange: OCA downloads relevant scripts and associated questions
