@@ -5,7 +5,7 @@ title: Person
 
 # Person
 
-This document defines the Person resource. 
+This document defines the Person resource.
 
 People are individual users who are stored in the OSDI system's database in some way.
 
@@ -151,6 +151,7 @@ _[Back to top...](#)_
 |answers		|[Answers[]*](answers.html)  |A link to the collection of answers to questions associated with the person.
 |taggings		|[Taggings[]*](taggings.html)   	|A link to the collection of taggings associated with the person.
 |items		|[Items[]*](items.html)   	|A link to the collection of list items associated with the person.
+|memberships		|[Memberships[]*](memberships.html)   	|A link to the collection of memberships associated with the person.
 |modified_by		|[Person*](people.html)  	|A link to a Person resource representing the last editor of this person.
 |record_canvas_helper |[Record Canvass Helper*](record_canvass.html) | A link to the Record Canvass Helper for this person.
 
@@ -459,7 +460,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-```	
+```
 
 _[Back to top...](#)_		
 
