@@ -5,7 +5,7 @@ title: Event
 
 # Event
 
-This document defines the Event resource. 
+This document defines the Event resource.
 
 Event resources represent an event that a user may attend by submitting their RSVP information. Events have fields to describe them such as names, titles, summaries, descriptions, dates, times, and locations, and when people RSVP to attend an event, [Attendance](attendances.html) resources are created representing the individual RSVP made by an activist made for that event. Events can be one of two types, ```open``` or ```ticketed```. Ticketed events typically charge money for tickets when a person RSVPs, while open events do not.
 
@@ -145,6 +145,7 @@ _[Back to top...](#)_
 |self			|[Event*](events.html)	|A self-referential link to the event.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the event.
 |organizer		|[Person*](people.html)  		|A link to a single Person resource representing the organizer of the event.
+|organization |[Organiation*](organization.html) |A link to the Organization that is hosting, sponsoring, or associated with the event.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this event.
 |attendances	|[Attendances[]*](attendances.html)	|A link to the collection of Attendance resources for this event.
 |record_attendance_helper	|[Record Attendance Helper*](record_attendance.html)	|A link to the Record Attendance Helper resource endpoint for this event.
@@ -400,7 +401,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-```	
+```
 
 _[Back to top...](#)_		
 
@@ -561,8 +562,8 @@ OSDI-API-Token:[your api key here]
         }
     },
     "_links" : {
-        "osdi:organizer" : { 
-            "href" : "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2" 
+        "osdi:organizer" : {
+            "href" : "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
         }
     }
 }
