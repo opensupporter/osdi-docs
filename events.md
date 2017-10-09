@@ -147,7 +147,7 @@ _[Back to top...](#)_
 |organizer		|[Person*](people.html)  		|A link to a single Person resource representing the organizer of the event.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this event.
 |attendances	|[Attendances[]*](attendances.html)	|A link to the collection of Attendance resources for this event.
-|taggings     |[Taggings[]*](taggings.html) |A link to the colection of Tagging resources for this event.
+|taggings     |[Taggings[]*](taggings.html) |A link to the collection of Tagging resources for this event.
 |record_attendance_helper	|[Record Attendance Helper*](record_attendance.html)	|A link to the Record Attendance Helper resource endpoint for this event.
 
 _[Back to top...](#)_

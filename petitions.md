@@ -5,7 +5,7 @@ title: Petition
 
 # Petition
 
-This document defines the Petition resource. 
+This document defines the Petition resource.
 
 Petitions represent an action directed at a target that a user may sign by submitting their information. Petitions have fields to describe them such as names, titles, summaries, and descriptions, and when activists submit a petition, [Signature](signatures.html) resources are created representing the individual signature an activist made on that petition.
 
@@ -89,6 +89,7 @@ _[Back to top...](#)_
 |self			|[Petition*](petitions.html)	|A self-referential link to the petition.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the petition.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this petition.
+|taggings     |[Taggings[]*](taggings.html) |A link to the collection of Tagging resources for this petition.
 |signatures		|[Signatures[]*](signatures.html)	|A link to the collection of Signature resources for this petition.
 |record_signature_helper	|[Record Signature Helper*](record_signature.html)	|A link to the Record Signature Helper resource endpoint for this petition.
 
@@ -218,6 +219,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/petitions/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+                    },
                     "osdi:record_signature_helper": {
                         "href": "https://osdi-sample-system.org/api/v1/petitions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_signature_helper"
                     }
@@ -254,6 +258,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/petitions/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+                    },
                     "osdi:record_signature_helper": {
                         "href": "https://osdi-sample-system.org/api/v1/petitions/1efc3644-af25-4253-90b8-a0baf12dbd1e/record_signature_helper"
                     }
@@ -263,7 +270,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-```	
+```
 
 _[Back to top...](#)_		
 
@@ -344,6 +351,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/petitions/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+        },
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
@@ -408,6 +418,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/petitions/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+        },
         "osdi:record_signature_helper": {
             "href": "https://osdi-sample-system.org/api/v1/petitions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_signature_helper"
         }
@@ -465,6 +478,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/petitions/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
         "osdi:record_signature_helper": {
             "href": "https://osdi-sample-system.org/api/v1/petitions/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/record_signature_helper"
