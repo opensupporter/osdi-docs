@@ -5,7 +5,7 @@ title: Wrapper
 
 # Wrapper
 
-This document defines the Wrapper resource. 
+This document defines the Wrapper resource.
 
 Wrapper resources represent a some type of standard wrapper around a Message resource. For example a mass email will have HTML that typically adds a standard header and footer to the email message, whereas SMS will have standard from lines and unsubscribe text that will be added, etc... Wrappers have fields to describe them such as HTML headers and footers. Wrappers can be linked by Messages to show which wrapper the message is using.
 
@@ -67,6 +67,7 @@ _[Back to top...](#)_
 |-----------    |-----------|-----------|--------------
 |self			|[Wrapper*](wrappers.html)	|A self-referential link to the wrapper.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the wrapper.
+|taggings     |[Taggings[]*](taggings.html) |A link to the collection of Tagging resources for this wrapper.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this wrapper.
 
 _[Back to top...](#)_
@@ -155,6 +156,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/wrappers/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+                    },
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     }
@@ -178,6 +182,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/wrappers/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+                    },
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     }
@@ -187,7 +194,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-```	
+```
 
 _[Back to top...](#)_		
 
@@ -232,6 +239,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/wrappers/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
@@ -297,6 +307,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/wrappers/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+        },
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         }
@@ -354,6 +367,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/wrappers/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"

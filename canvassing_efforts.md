@@ -14,7 +14,7 @@ Canvassing Efforts represent specific canvassing/phone banking events planned fo
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
     * [Common Fields](#common-fields)
-    * [Script Fields](#effort-fields) 
+    * [Script Fields](#effort-fields)
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -53,7 +53,7 @@ _[Back to top...](#)_
 |end_time        |datetime     |The end date and time for the Canvassing Effort.
 |type           |flexenum      |The type of the Canvassing Effort. One of "in-person", "phone banking", or another value.
 |total_canvasses	|integer	|A read-only computed property representing the current count of the total number of Canvasses on the Canvassing Effort.
- 
+
 
 _[Back to top...](#)_
 
@@ -66,7 +66,8 @@ _[Back to top...](#)_
 |self           |[Canvassing Effort*](canvassing_efforts.html)    |A self-referential link to the canvassing effort.
 |creator        |[Person*](people.html)         |A link to a single Person resource representing the creator of the Canvassing Effort.
 |modified_by    |[Person* ](people.html)        |A link to a Person resource representing the last editor of this Canvassing Effort.
-|canvasses    |[Canvasses[]*](canvasses.html)        |A link to a collection of Canvass resources representing the canvasses that occured on this Canvassing Effort.
+|taggings       |[Taggings[]* ](people.html)    |A link to the collection of Tagging resources for this canvassing effort.
+|canvasses      |[Canvasses[]*](canvasses.html)        |A link to a collection of Canvass resources representing the canvasses that occured on this Canvassing Effort.
 |script  |[Script*](scripts.html) | A link to the Script resource associated with the Canvassing Effort.
 
 _[Back to top...](#)_
@@ -165,6 +166,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/canvassing_efforts/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bca/taggings"
+                    },
                     "osdi:script": {
                         "href": "https://osdi-sample-system.org/api/v1/script/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0ba3"
                     },
@@ -211,7 +215,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-``` 
+```
 
 _[Back to top...](#)_       
 

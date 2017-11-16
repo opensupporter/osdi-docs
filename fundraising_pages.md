@@ -5,7 +5,7 @@ title: Fundraising Page
 
 # Fundraising Page
 
-This document defines the Fundraising Page resource. 
+This document defines the Fundraising Page resource.
 
 Fundraising pages represent a page on a website that can take donations or other types of payment from end users. Fundraising pages have fields to describe them such as names, titles, summaries, and descriptions, and when activists submit a fundraising page and are charged money, [Donation](donations.html) resources are created representing the individual donation an activist made on that fundraising page.
 
@@ -16,7 +16,7 @@ Fundraising pages represent a page on a website that can take donations or other
 * [Fields](#fields)
     * [Common Fields](#common-fields)
     * [Fundraising Page Fields](#fundraising-page-fields)  
-    * [Related Objects](#related-objects) 
+    * [Related Objects](#related-objects)
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -83,6 +83,7 @@ _[Back to top...](#)_
 |self			|[Fundraising Page*](fundraising_pages.html)	|A self-referential link to the fundraising page.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the fundraising page.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this fundraising page.
+|taggings     |[Taggings[]*](taggings.html) |A link to the collection of Tagging resources for this fundraising page.
 |donations		|[Donations[]*](donations.html)	|A link to the collection of Donation resources for this fundraising page.
 |record_donation_helper	|[Record Donation Helper*](record_donation.html)	|A link to the Record Donation Helper resource endpoint for this fundraising page.
 
@@ -229,6 +230,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:donations": {
                         "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/1efc3644-af25-4253-90b8-a0baf12dbd1e/donations"
                     },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/fundraising_pages/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+                    },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
@@ -244,7 +248,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-```	
+```
 
 _[Back to top...](#)_		
 

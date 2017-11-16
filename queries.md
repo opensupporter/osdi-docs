@@ -5,15 +5,15 @@ title: Query
 
 # Query
 
-This document defines the Query resource. 
+This document defines the Query resource.
 
-Queries represent the results of a process on the server to create a collection of resources that share characteristics. For example, a query can represent the result of a SQL targeting operation. Queries have results which represent the individual resources that are part of the query's resulting collection. 
+Queries represent the results of a process on the server to create a collection of resources that share characteristics. For example, a query can represent the result of a SQL targeting operation. Queries have results which represent the individual resources that are part of the query's resulting collection.
 
 A query must fit a set of criteria:
 
 * Query results are nonarbitrary -- a resource's inclusion in the collection is based on attributes intrinsic to that resource, as opposed to having been put there by hand. For hand-created lists of resources, use the [List](lists.html) resource instead.
 * Queries may only be dynamic -- a query will return the resources which match its criteria at the moment the Query resource is retrieved. To implement a static query, which contains the resources which matched its criteria at the time the query was created or saved, the [List](lists.html) resource should be used instead.
-* Query targeting criteria may only be created, deleted and edited on the content provider's native system -- OSDI does not currently support an API-driven query, targeting, or SQL language. 
+* Query targeting criteria may only be created, deleted and edited on the content provider's native system -- OSDI does not currently support an API-driven query, targeting, or SQL language.
 * Consequently, OSDI does not support CRUD operations on queries beyond updating metadata. Queries may only be created or deleted via the API provider's system.
 * Queries are unique collections of resources -- a resource may match a query only once.
 
@@ -77,6 +77,7 @@ _[Back to top...](#)_
 |self			|[Query*](queries.html)	|A self-referential link to the query.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the query.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this query.
+|taggings     |[Taggings[]*](taggings.html) |A link to the collection of Tagging resources for this query.
 |results	|[Results[]*](results.html)	|A link to the collection of Results resources for this query.
 
 _[Back to top...](#)_
@@ -165,6 +166,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:results": {
                         "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/results"
                     },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/queries/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+                    },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
@@ -191,6 +195,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:results": {
                         "href": "https://osdi-sample-system.org/api/v1/queries/1efc3644-af25-4253-90b8-a0baf12dbd1e/results"
                     },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/queries/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+                    },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
@@ -203,7 +210,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-```	
+```
 
 _[Back to top...](#)_		
 
@@ -247,6 +254,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:results": {
             "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/results"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/queries/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -313,6 +323,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:results": {
             "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/results"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/queries/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"

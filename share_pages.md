@@ -5,7 +5,7 @@ title: Share Page
 
 # Share Page
 
-This document defines the Share Page resource. 
+This document defines the Share Page resource.
 
 Share pages represent a page on a website that is used to share content (including other pages) with others, chiefly through social media or email. Share pages have fields to describe them such as names, titles, summaries, and descriptions, and have attributes to describe the default language and other attributes that should be used when activists use the page to share content.
 
@@ -78,6 +78,7 @@ _[Back to top...](#)_
 |-----------    |-----------|-----------|--------------
 |self			|[Share Page*](share_pages.html)	|A self-referential link to the share page.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the share page.
+|taggings     |[Taggings[]*](taggings.html) |A link to the collection of Tagging resources for this share page.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this share page.
 
 _[Back to top...](#)_
@@ -187,6 +188,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/share_pages/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+                    },
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     }
@@ -231,6 +235,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/share_pages/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+                    },
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     }
@@ -240,7 +247,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-```	
+```
 
 _[Back to top...](#)_		
 
@@ -306,6 +313,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/share_pages/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
         "osdi:modified_by": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
@@ -400,6 +410,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/share_pages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/share_pages/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+        },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         }
@@ -473,6 +486,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/share_pages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/share_pages/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
