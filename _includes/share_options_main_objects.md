@@ -1,3 +1,3 @@
-|share_url			|string		|A URL string pointing to the page that will be shared when this content is shared.
+|share_url			|string		|A URL string pointing to the page that will be shared when this content is shared. (This may be subsumed by a particular share_option's share_url)
 |total_shares	|integer	|A computed property representing the current count of the total number of times the content has been shared by activists.
 |share_options	|[ShareOptions[]](#share-options)	|An array of share options objects representing the default language and attributes used when an activist shares this content via various mediums. More than one `share_options` object is allowed. Depending on server implementations, these could represent different share language variations to test or rotate. 
