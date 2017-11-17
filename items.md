@@ -373,9 +373,9 @@ _[Back to top...](#)_
 
 ### Scenario: Optimized List Item Retrieval (GET)
 
-Where supported by the API provider, a single request may retrieve one item (or a collection of items) along with the resource(s) they represent.  For example, calling the items endpoint on a particular list will return a collection of all the items in that list.  If the server optionally embeds into each item the resource to which the item refers, then the client will not need to make further API calls to retrieve the end resource(s).
+Where supported by the API provider, a single request may retrieve one item (or a collection of items) along with the resource(s) they represent.  For example, calling the items endpoint on a particular list will return a collection of the items in that list.  If the server optionally embeds into each item the resource to which the item refers, then the client will not need to make further API calls to retrieve the end resource(s).
 
-The following example retrieves a list collection where each item in the embedded list contains an embedded osdi:person resource:
+The following example retrieves a list collection where each item in the embedded list links to an osdi:person resource and also embeds the osdi:person resource within it:
 
 
 #### Request
@@ -468,7 +468,7 @@ Cache-Control: max-age=0, private, must-revalidate
                     "identifiers": [
                         "osdi-sample-system:5d7d6534-cd24-466a-a698-4f684fa7686e"
                     ],
-                    "modified_date": "2017-05-20 19:45:51",
+                    "modified_date": "2017-05-20T19:45:51Z",
                     "origin_system": "OSDI Sample System",
                     "postal_addresses": [
                         {
@@ -490,7 +490,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "origin_system": "OSDI Sample System",
                 "created_date": "2014-03-20T20:44:13Z",
                 "modified_date": "2014-03-20T20:44:13Z",
-                "item_type": "osdi:event",
+                "item_type": "osdi:person",
                 "_links": {
                     "self": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29/items/1efc3644-af25-4253-90b8-a0baf12dbd1e"
@@ -498,8 +498,8 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:list": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
-                    "osdi:event": {
-                        "href": "https://osdi-sample-system.org/api/v1/events/adb951cb-51f9-420e-b7e6-de953195ec86"
+                    "osdi:person": {
+                        "href": "https://osdi-sample-system.org/api/v1/people/5d7d6534-cd24-466a-a698-4f684fa743f3"
                     }
                 },
                 "_embedded": {
