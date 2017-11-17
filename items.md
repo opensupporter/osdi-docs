@@ -449,38 +449,39 @@ Cache-Control: max-age=0, private, must-revalidate
                 },
                 "_embedded": {
                     "osdi:person": {
-                    "_links": {
-                        "self": {
-                            "href": "https://osdi-sample-system.org/api/v1/people/5d7d6534-cd24-466a-a698-4f684fa7686e",
-                            "title": "David Grossman"
-                        }
-                    },
-                    "created_date": "2017-05-20T19:45:51Z",
-                    "email_addresses": [
-                        {
-                            "address": "dgros@sample.com",
-                            "primary": true,
-                            "status": "subscribed"
-                        }
-                    ],
-                    "family_name": "Grossman",
-                    "given_name": "David",
-                    "identifiers": [
-                        "osdi-sample-system:5d7d6534-cd24-466a-a698-4f684fa7686e"
-                    ],
-                    "modified_date": "2017-05-20T19:45:51Z",
-                    "origin_system": "OSDI Sample System",
-                    "postal_addresses": [
-                        {
-                            "address_lines": [
-                                "123 Creek Drive"
-                            ],
-                            "locality": "Askov",
-                            "postal_code": "55726",
-                            "primary": true,
-                            "region": "MN"
-                        }
-                    ]
+                        "_links": {
+                            "self": {
+                                "href": "https://osdi-sample-system.org/api/v1/people/5d7d6534-cd24-466a-a698-4f684fa7686e",
+                                "title": "David Grossman"
+                            }
+                        },
+                        "created_date": "2017-05-20T19:45:51Z",
+                        "email_addresses": [
+                            {
+                                "address": "dgros@sample.com",
+                                "primary": true,
+                                "status": "subscribed"
+                            }
+                        ],
+                        "family_name": "Grossman",
+                        "given_name": "David",
+                        "identifiers": [
+                            "osdi-sample-system:5d7d6534-cd24-466a-a698-4f684fa7686e"
+                        ],
+                        "modified_date": "2017-05-20T19:45:51Z",
+                        "origin_system": "OSDI Sample System",
+                        "postal_addresses": [
+                            {
+                                "address_lines": [
+                                    "123 Creek Drive"
+                                ],
+                                "locality": "Askov",
+                                "postal_code": "55726",
+                                "primary": true,
+                                "region": "MN"
+                            }
+                        ]
+                    }
                 }
             },
             {
@@ -504,38 +505,39 @@ Cache-Control: max-age=0, private, must-revalidate
                 },
                 "_embedded": {
                     "osdi:person": {
-                    "_links": {
-                        "self": {
-                            "href": "https://osdi-sample-system.org/api/v1/people/5d7d6534-cd24-466a-a698-4f684fa743f3",
-                            "title": "Christina Gonzalez"
-                        }
-                    },
-                    "created_date": "2017-05-20T13:45:07Z",
-                    "email_addresses": [
-                        {
-                            "address": "xtinag@sample.com",
-                            "primary": true,
-                            "status": "subscribed"
-                        }
-                    ],
-                    "family_name": "Gonzalez",
-                    "given_name": "Christina",
-                    "identifiers": [
-                        "osdi-sample-system:5d7d6534-cd24-466a-a698-4f684fa743f3"
-                    ],
-                    "modified_date": "2017-05-20T13:45:07Z",
-                    "origin_system": "OSDI Sample System",
-                    "postal_addresses": [
-                        {
-                            "address_lines": [
-                                "1200 18th Ave S"
-                            ],
-                            "locality": "Peoria",
-                            "postal_code": "61601",
-                            "primary": true,
-                            "region": "IL"
-                        }
-                    ]
+                        "_links": {
+                            "self": {
+                                "href": "https://osdi-sample-system.org/api/v1/people/5d7d6534-cd24-466a-a698-4f684fa743f3",
+                                "title": "Christina Gonzalez"
+                            }
+                        },
+                        "created_date": "2017-05-20T13:45:07Z",
+                        "email_addresses": [
+                            {
+                                "address": "xtinag@sample.com",
+                                "primary": true,
+                                "status": "subscribed"
+                            }
+                        ],
+                        "family_name": "Gonzalez",
+                        "given_name": "Christina",
+                        "identifiers": [
+                            "osdi-sample-system:5d7d6534-cd24-466a-a698-4f684fa743f3"
+                        ],
+                        "modified_date": "2017-05-20T13:45:07Z",
+                        "origin_system": "OSDI Sample System",
+                        "postal_addresses": [
+                            {
+                                "address_lines": [
+                                    "1200 18th Ave S"
+                                ],
+                                "locality": "Peoria",
+                                "postal_code": "61601",
+                                "primary": true,
+                                "region": "IL"
+                            }
+                        ]
+                    }
                 }
             },
             //(truncated for brevity)
