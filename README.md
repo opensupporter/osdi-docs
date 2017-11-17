@@ -48,7 +48,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
 * [Authors and Leadership](#authors-and-leadership)
 * [Contributing and Contact](#contributing-and-contact)
 
-    
+
 
 ## API Overview and Structure
 
@@ -92,9 +92,13 @@ An OSDI jQuery plugin has been created for use with OSDI's [non-authenticated PO
 
 ### REST + HAL
 
-Generally, OSDI follows traditional RESTful practices for accessing resources and collections of resources as well as creating, editing, updating, and deleting resources. 
+Generally, OSDI follows traditional RESTful practices for accessing resources and collections of resources as well as creating, editing, updating, and deleting resources.
 
-OSDI also implements the [JSON+HAL spec](http://tools.ietf.org/html/draft-kelly-json-hal-05) hypermedia standard, providing links to associated collections and resources. JSON+HAL specifies a simple way to embed linking into APIs.  The combination of linking and a specification allows generic clients to be written and, indeed, [many languages have HAL clients](http://stateless.co/hal_specification.html).  Linking itself makes it easier to both reason about and write clients for an API.
+OSDI also implements the [JSON+HAL spec](http://tools.ietf.org/html/draft-kelly-json-hal-05) hypermedia standard, providing links to associated collections and resources. JSON+HAL specifies a simple way to include these links in API output.  The combination of linking and a specification allows generic clients to be written and, indeed, [many languages have HAL clients](http://stateless.co/hal_specification.html).  Linking itself makes it easier to both reason about and write clients for an API.
+
+In addition to providing links for associated collections and resources, JSON+HAL specifies a way to embed the actual associated resources (or collections) in the same API response as the links.  For example, a request for a collection of Person resources will return a link for each  Person resource, and may also return the actual Person resources to which the links point. This allows OSDI providers and users to reduce the number of server round-trips needed to retrieve a set of data, at the expense of working with larger (possibly much larger) response sizes.
+
+Embedding is optional for associated resources or collections.  However, any resources or collections that are embedded must also be accessible by link.  OSDI clients may check to see if a related resource is embedded in the response, and if not present, should fall back to getting the resource via its link.
 
 By default, server responses should expand first level instances unless otherwise specified.  For example, in a response for a collection of resources, those resources should be embedded.
 
@@ -116,7 +120,7 @@ When accessing a server, a client can determine the OSDI version by examining th
 _[Back to top...](#)_
 
 ### Helpers
-OSDI also allows a client to perform a number of operations at once that in a traditionally RESTful API would take multiple requests through the use of helpers. For example, helpers can be used to create a new Person resource *and* register that this new person also signed a petition at the same time, something that with REST would require two operations (first creating the person, then associating them with the petition). 
+OSDI also allows a client to perform a number of operations at once that in a traditionally RESTful API would take multiple requests through the use of helpers. For example, helpers can be used to create a new Person resource *and* register that this new person also signed a petition at the same time, something that with REST would require two operations (first creating the person, then associating them with the petition).
 
 _[Back to top...](#)_
 
@@ -147,7 +151,7 @@ You may have noticed that most links are prefaced with a name space "osdi" and t
     }
 }
 ```
-    
+
 In order to fetch documentation on the question relationship, you would visit the following url: ```http://api.opensupporter.org/docs/v1/question```
 
 Any links not prefaced with a curie name space are defined [here](http://www.iana.org/assignments/link-relations/link-relations.xml).
@@ -205,7 +209,7 @@ _[Back to top...](#)_
 
 When retrieving collections, a client may request that the server filter the results according to a query.  OSDI makes use of a subset of the OData query language to accomplish this.  The filter string is the value of the 'filter' query parameter.
 
-See [OData Filter Query](http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/part2-url-conventions/odata-v4.0-errata03-os-part2-url-conventions-complete.html#_Toc453752358) for more information. 
+See [OData Filter Query](http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/part2-url-conventions/odata-v4.0-errata03-os-part2-url-conventions-complete.html#_Toc453752358) for more information.
 
 General information can be found at [odata.org](http://odata.org).
 
@@ -231,13 +235,13 @@ OSDI supports the following OData operators:
 | le    | Less or equal than            | created le '2013-11-17T18:27:35-05'
 | or    | Logical OR                    | first_name eq 'John' or first_name eq 'Jon'
 | and   | Logical AND                   | first_name eq 'John' and last_name eq 'Doe'
-    
+
 OSDI defines the following OPTIONAL extension operators:
 
 | Name  | Description | Example
 |-------|-------------------------------|------------------------------
 | like  | Case insensitive match        | first_name like 'john'       # returns John or john
-| re    | Matches a regular expression  | first_name regexp '/[Rr]ob/' # Returns robert, Robert, rob, roberto 
+| re    | Matches a regular expression  | first_name regexp '/[Rr]ob/' # Returns robert, Robert, rob, roberto
 
 #### Functions
 
@@ -251,7 +255,7 @@ OSDI defines the following OPTIONAL extension functions:
 #### Virtual Field Names
 
 There are some resource fields that should be searchable, but are not directly addressable using the filter
-syntax. This is the case for array fields and fields on array items. To allow querying of these properties, 
+syntax. This is the case for array fields and fields on array items. To allow querying of these properties,
 we expose Virtual Field Names at the filter level.
 
 OSDI implementations should add special case query handlers for these filter options, where the parent resource
@@ -275,7 +279,7 @@ should be returned if any of the array items match the condition.
 #### Examples
 
 Find all males in a given ZIP code: ```GET /api/v1/people?filter=gender eq 'Male' and address.postal_code eq '10011'```
-    
+
 Find new signups on or since a date and time (Eastern Time) ```GET /api/v1/people?filter=created ge '2013-11-17T18:27:35-05'```
 
 Find all people associated with a given email address: ```GET /api/v1/people?filter=email_address eq 'jane@example.com'```
@@ -310,7 +314,7 @@ Not all interactions with the API will require authentication, and some behavior
 
 #### OSDI Token Based Authentication
 
-While OSDI does not currently mandate implementation of token-based authentication, for those that do implement this method of authentication the following standard should be followed. 
+While OSDI does not currently mandate implementation of token-based authentication, for those that do implement this method of authentication the following standard should be followed.
 
 For header-based token authentication, the header should be named `OSDI-API-Token` (case sensitive), as in this example:
 
@@ -348,7 +352,7 @@ _[Back to top...](#)_
 
 ### Flexibility and Server Behavior
 
-Not all systems that implement OSDI will implement all aspects of the specification. 
+Not all systems that implement OSDI will implement all aspects of the specification.
 
 There are no required fields in OSDI, and many relations are left up to each individual system and server.
 
@@ -398,7 +402,7 @@ In this specification, when defining models, the following notational convention
 |Type[]*    | A reference to a collection of resources of type 'type'
 |	Type*	| A reference to a single resource of type 'type'
 |	string	| A string
-|	datetime| A date and time representation.  In JSON this is a string.  The contents of this attribute shall be  ISO 8601 
+|	datetime| A date and time representation.  In JSON this is a string.  The contents of this attribute shall be  ISO 8601
 | Object	| A complex attribute represented by a JSON object
 | decimal	| A number in decimal notation such as 12.15. Used for currency.
 | flexenum  | One of a list of values, or another value. For example, for party_identification on people, if the person is a Democrat they should be marked as "Democratic" with that exact spelling and casing, but if they are not one of the defined types then you can use another value instead, such as "Working Families".
@@ -413,7 +417,7 @@ In these cases, the string value should conform to one of the choices unless spe
 
 _[Back to top...](#)_
 
-    
+
 ## References
 
 |ID          | Title                             | URL
