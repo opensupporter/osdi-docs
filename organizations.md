@@ -215,14 +215,17 @@ Cache-Control: max-age=0, private, must-revalidate
                 "origin_system": "OSDI Sample System",
                 "created_date": "2014-03-20T21:04:31Z",
                 "modified_date": "2014-03-20T21:04:31Z",
-                "given_name": "John",
+                "organization": "F.O.O.",
+                "legal_status": "c3",
+                "summary": "For Our Opinions - helping people who have opinions everywhere",
+                "site_url": "https://foo.example/",
+                "logo_image_url": "https://foo.example/images/200x200/logo.png",
                 "source": "october_canvass",
                 "browser_url": "http://osdi-sample-system.org/organizations/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
                 "administrative_url": "http://osdi-sample-system.org/organizations/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/manage",
                 "postal_addresses": [
                     {
                         "primary": true,
-                        "address_type": "Home",
                         "address_lines": [
                             "1900 Pennsylvania Ave"
                         ],
@@ -242,8 +245,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "email_addresses": [
                     {
                         "primary": true,
-                        "address": "johnsmith@mail.com",
-                        "address_type": "Personal",
+                        "address": "help@mail.com",
                         "status": "subscribed"
                     }
                 ],
@@ -307,7 +309,9 @@ Cache-Control: max-age=0, private, must-revalidate
                 }
             },
             {
-                "given_name": "Jane",
+                "organization": "Bars For Justice",
+                "legal_status": "c4",
+                "logo_image_url": "https://bar.example/images/logo.svg",
                 "identifiers": [
                     "osdi_sample_system:1efc3644-af25-4253-90b8-a0baf12dbd1e"
                 ],
@@ -319,7 +323,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "email_addresses": [
                     {
                         "primary": true,
-                        "address": "janedoe@mail.com",
+                        "address": "support@mail.com",
                         "status": "unsubscribed"
                     }
                 ],
@@ -405,14 +409,17 @@ Cache-Control: max-age=0, private, must-revalidate
     "origin_system": "OSDI Sample System",
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
-    "given_name": "John",
+    "organization": "F.O.O.",
+    "legal_status": "c3",
+    "summary": "For Our Opinions - helping people who have opinions everywhere",
+    "site_url": "https://foo.example/",
+    "logo_image_url": "https://foo.example/images/200x200/logo.png",
     "source": "october_canvass",
     "browser_url": "http://osdi-sample-system.org/organizations/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
     "administrative_url": "http://osdi-sample-system.org/organizations/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/manage",
     "postal_addresses": [
         {
             "primary": true,
-            "address_type": "Home",
             "address_lines": [
                 "1900 Pennsylvania Ave"
             ],
@@ -431,8 +438,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "email_addresses": [
         {
             "primary": true,
-            "address": "johnsmith@mail.com",
-            "address_type": "personal",
+            "address": "help@mail.com",
             "status": "subscribed"
         }
     ],
@@ -516,13 +522,12 @@ OSDI-API-Token:[your api key here]
     "identifiers": [
         "foreign_system:1"
     ],
-    "given_name": "Labadie",
+    "organization": "Labadabadoo",
     "origin_system": "OpenSupporter",
     "email_addresses": [
         {
             "address":"test-3@example.com",
             "primary": true,
-            "address_type": "personal",
             "status": "subscribed"
         }
     ],
@@ -536,7 +541,6 @@ OSDI-API-Token:[your api key here]
             "region": "MN",
             "postal_code": "17678",
             "country": "RU",
-            "address_type": "Home",
             "status": "Verified"
         }
     ],
@@ -566,7 +570,7 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T21:04:31Z",
-    "given_name": "Labadie",
+    "organization": "Labadabadoo",
     "origin_system": "OpenSupporter",
     "browser_url": "http://osdi-sample-system.org/organizations/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
     "administrative_url": "http://osdi-sample-system.org/organizations/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/manage",
@@ -574,7 +578,6 @@ Cache-Control: max-age=0, private, must-revalidate
         {
             "address":"test-3@example.com",
             "primary": true,
-            "address_type": "personal",
             "status": "subscribed"
         }
     ],
@@ -588,7 +591,6 @@ Cache-Control: max-age=0, private, must-revalidate
             "region": "MN",
             "postal_code": "17678",
             "country": "RU",
-            "address_type": "Home",
             "status": "Verified"
         }
     ],
@@ -650,12 +652,11 @@ Header:
 OSDI-API-Token:[your api key here]
 
 {
-    "given_name": "Ed",
+    "organization": "Doctors for Education",
     "email_addresses": [
         {
             "address":"test-new@example.com",
-            "primary": true,
-            "address_type": "personal"
+            "primary": true
         }
     ]
 }
@@ -676,7 +677,7 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "created_date": "2014-03-20T21:04:31Z",
     "modified_date": "2014-03-20T22:04:31Z",
-    "given_name": "Labadie",
+    "organization": "Labadabadoo",
     "origin_system": "OpenSupporter",
     "browser_url": "http://osdi-sample-system.org/organizations/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
     "administrative_url": "http://osdi-sample-system.org/organizations/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/manage",
@@ -684,7 +685,6 @@ Cache-Control: max-age=0, private, must-revalidate
         {
             "address":"test-new@example.com",
             "primary": true,
-            "address_type": "personal",
             "status": "subscribed"
         }
     ],
@@ -698,7 +698,6 @@ Cache-Control: max-age=0, private, must-revalidate
             "region": "MN",
             "postal_code": "17678",
             "country": "RU",
-            "address_type": "Home",
             "status": "Verified"
         }
     ],

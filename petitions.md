@@ -88,6 +88,7 @@ _[Back to top...](#)_
 |-----------    |-----------|-----------|--------------
 |self			|[Petition*](petitions.html)	|A self-referential link to the petition.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the petition.
+|sponsors		|[Organizations[]*](organizations.html)  		|A link to a collection of Organization resources that are sponsoring or the organization(s) responsible for creating the petition.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this petition.
 |taggings     |[Taggings[]*](taggings.html) |A link to the collection of Tagging resources for this petition.
 |signatures		|[Signatures[]*](signatures.html)	|A link to the collection of Signature resources for this petition.
