@@ -145,6 +145,7 @@ _[Back to top...](#)_
 |self			|[Event*](events.html)	|A self-referential link to the event.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the event.
 |organizer		|[Person*](people.html)  		|A link to a single Person resource representing the organizer of the event.
+|organization |[Organiation*](organization.html) |A link to the Organization that is hosting, sponsoring, or associated with the event.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this event.
 |attendances	|[Attendances[]*](attendances.html)	|A link to the collection of Attendance resources for this event.
 |taggings     |[Taggings[]*](taggings.html) |A link to the collection of Tagging resources for this event.
