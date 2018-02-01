@@ -144,6 +144,7 @@ _[Back to top...](#)_
 |-----------    |-----------|-----------|--------------
 |self			|[Event*](events.html)	|A self-referential link to the event.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the event.
+|sponsor		|[Organization*](organizations.html)  		|A link to an Organization resource that is responsible for creating the event and/or is the primary supporting/sponsoring organization.
 |organizer		|[Person*](people.html)  		|A link to a single Person resource representing the organizer of the event.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this event.
 |attendances	|[Attendances[]*](attendances.html)	|A link to the collection of Attendance resources for this event.
@@ -299,6 +300,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
+                    "osdi:sponsor": {
+                        "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
+                    },
                     "osdi:organizer": {
                         "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
                     },
@@ -388,6 +392,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:sponsor": {
+                        "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
                     },
                     "osdi:organizer": {
                         "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
@@ -511,6 +518,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
+        "osdi:sponsor": {
+            "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
+        },
         "osdi:organizer": {
             "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
         },
@@ -625,6 +635,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
+        "osdi:sponsor": {
+            "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
+        },
         "osdi:organizer": {
             "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
         },
@@ -714,6 +727,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:sponsor": {
+            "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
         },
         "osdi:organizer": {
             "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"

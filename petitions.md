@@ -88,6 +88,7 @@ _[Back to top...](#)_
 |-----------    |-----------|-----------|--------------
 |self			|[Petition*](petitions.html)	|A self-referential link to the petition.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the petition.
+|sponsor		|[Organization*](organizations.html)  		|A link to an Organization resource that is responsible for creating the petition and/or is the primary supporting/sponsoring organization.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this petition.
 |taggings     |[Taggings[]*](taggings.html) |A link to the collection of Tagging resources for this petition.
 |signatures		|[Signatures[]*](signatures.html)	|A link to the collection of Signature resources for this petition.
@@ -216,6 +217,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
+                    "osdi:sponsor": {
+                        "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
+                    },
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
@@ -254,6 +258,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:sponsor": {
+                        "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
                     },
                     "osdi:modified_by": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
@@ -351,6 +358,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
+        "osdi:sponsor": {
+            "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
+        },
         "osdi:taggings": {
             "href": "https://osdi-sample-system.org/api/v1/petitions/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
@@ -418,6 +428,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
+        "osdi:sponsor": {
+            "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
+        },
         "osdi:taggings": {
             "href": "https://osdi-sample-system.org/api/v1/petitions/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
@@ -478,6 +491,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:sponsor": {
+            "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
         },
         "osdi:taggings": {
             "href": "https://osdi-sample-system.org/api/v1/petitions/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
