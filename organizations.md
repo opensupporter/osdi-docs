@@ -3,7 +3,8 @@ layout: default
 title: Organization
 ---
 
-# Organization
+# Organization (experimental)
+Experimental areas of the specification are published to illustrate the design direction, allow implementers to prototype, while taking additional feedback.
 
 This document defines the Organization resource.
 
