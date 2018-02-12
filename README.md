@@ -442,7 +442,6 @@ _[Back to top...](#)_
 * Chuck Hagenbuch, Blue State Digital
 * Harlan Hill, Indigo Strategies
 * Tim Holahan, BroadStripes
-* Matt Klaber, Independent
 * Ben Krokower, FasterCampaigns
 * Eli Lee, The Quad
 * Dave Leichtman, Microsoft Corporation
