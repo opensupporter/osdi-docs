@@ -35,7 +35,6 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Jascha Franklin-Hodge, Blue State Digital
 * Abraham Godong, FasterCampaigns
 * Tim Gutowski, Trilogy Interactive
-* Chuck Hagenbuch, Blue State Digital
 * Harlan Hill, Indigo Strategies
 * Tim Holahan, BroadStripes
 * Matt Klaber, Independent
