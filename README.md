@@ -31,7 +31,6 @@ Please give us feedback on our work. [Read the Review Guide](review_guide.md) to
 * Josh Cohen, Washington United For Marriage (Editor)
 * Jeff Crigler, Catalist
 * Gustavo Costa, The Action Network
-* Michael Eskin, Blue State Digital
 * Jascha Franklin-Hodge, Blue State Digital
 * Abraham Godong, FasterCampaigns
 * Tim Gutowski, Trilogy Interactive
