@@ -447,13 +447,11 @@ _[Back to top...](#)_
 * Dave Leichtman, Microsoft Corporation
 * Marc Love, Independent
 * Walter Ludwig, Indigo Strategies
-* Drew Miller, NGP VAN
 * Joe McLaughlin, Citizen Action of New York
 * Mark Paquette, TheDataBank
 * Charles Parsons, Salsa Labs
 * Rich Ranallo, Revolution Messaging
 * Jason Rosenbaum, The Action Network
-* Shaie Sachs, NGP VAN
 * Ben Stein, Mobile Commons
 * Ben Stroud, Targetsmart Communications
 * Ray Suelzer, UFCW International Union
