@@ -439,7 +439,6 @@ _[Back to top...](#)_
 * Jascha Franklin-Hodge, Blue State Digital
 * Abraham Godong, FasterCampaigns
 * Tim Gutowski, Trilogy Interactive
-* Chuck Hagenbuch, Blue State Digital
 * Harlan Hill, Indigo Strategies
 * Tim Holahan, BroadStripes
 * Ben Krokower, FasterCampaigns
