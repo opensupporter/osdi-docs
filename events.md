@@ -5,7 +5,7 @@ title: Event
 
 # Event
 
-This document defines the Event resource. 
+This document defines the Event resource.
 
 Event resources represent an event that a user may attend by submitting their RSVP information. Events have fields to describe them such as names, titles, summaries, descriptions, dates, times, and locations, and when people RSVP to attend an event, [Attendance](attendances.html) resources are created representing the individual RSVP made by an activist made for that event. Events can be one of two types, ```open``` or ```ticketed```. Ticketed events typically charge money for tickets when a person RSVPs, while open events do not.
 
@@ -73,6 +73,7 @@ A list of fields specific to the Event resource.
 |transparence		|enum		|Whether the event blocks time on online calendar systems. Possible values are "opaque" or "transparent". Opaque is the default, but this can be overridden by a user.
 |visibility			|enum		|Visibility of the event.  Possible values are "public" and "private".
 |location			|[Location](#location)	| An object hash representing the location of the event.
+|contact          |[Contact](#contact)          | An object hash representing the who to contact for questions about the event.
 |reminders 			|[Reminders[]](#reminders)	|An array of object hashes representing the reminders set for this event.
 {% include share_options_main_objects.md %}
 
@@ -111,6 +112,17 @@ These JSON hashes included in the table above are broken out into their own tabl
 |location.location.latitude	|float	|A positive or negative float number representing the latitude of the address.
 |location.location.longitude	|float	|A positive or negative float number representing the longitude of the address.
 |location.location.accuracy	|enum	|A value representing the accuracy of the geocode. One of "Rooftop" or "Approximate".
+|location.public |boolean |Whether the venue's location should be shared publicly, or if false, only shared with RSVPs (for example, someone's house)
+
+#### Contact
+
+|Name          |Type      |Description
+|-----------    |-----------|--------------
+|contact.name	|string	|Name of the host or contact person for event (e.g., Jane Doe)
+|contact.email_address	|string	|Email address of the host (jane.doe@hotmail.co.uk)
+|contact.phone_number	|string	|Phone number of the host (214-555-0869)
+|contact.additional_info |string  |Free form place for information about the event contact
+|contact.public|boolean |Whether the host's info should be shared publicly (if false, should only be shared with RSVPs)
 
 #### Reminders
 
@@ -132,9 +144,11 @@ _[Back to top...](#)_
 |-----------    |-----------|-----------|--------------
 |self			|[Event*](events.html)	|A self-referential link to the event.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the event.
+|sponsor		|[Organization*](organizations.html)  		|A link to an Organization resource that is responsible for creating the event and/or is the primary supporting/sponsoring organization.
 |organizer		|[Person*](people.html)  		|A link to a single Person resource representing the organizer of the event.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this event.
 |attendances	|[Attendances[]*](attendances.html)	|A link to the collection of Attendance resources for this event.
+|taggings     |[Taggings[]*](taggings.html) |A link to the collection of Tagging resources for this event.
 |record_attendance_helper	|[Record Attendance Helper*](record_attendance.html)	|A link to the Record Attendance Helper resource endpoint for this event.
 
 _[Back to top...](#)_
@@ -286,6 +300,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
                     },
+                    "osdi:sponsor": {
+                        "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
+                    },
                     "osdi:organizer": {
                         "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
                     },
@@ -370,8 +387,14 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:attendances": {
                         "href": "https://osdi-sample-system.org/api/v1/events/1efc3644-af25-4253-90b8-a0baf12dbd1e/attendances"
                     },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/events/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+                    },
                     "osdi:creator": {
                         "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+                    },
+                    "osdi:sponsor": {
+                        "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
                     },
                     "osdi:organizer": {
                         "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
@@ -388,7 +411,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-```	
+```
 
 _[Back to top...](#)_		
 
@@ -495,6 +518,9 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
+        "osdi:sponsor": {
+            "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
+        },
         "osdi:organizer": {
             "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
         },
@@ -549,8 +575,8 @@ OSDI-API-Token:[your api key here]
         }
     },
     "_links" : {
-        "osdi:organizer" : { 
-            "href" : "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2" 
+        "osdi:organizer" : {
+            "href" : "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
         }
     }
 }
@@ -608,6 +634,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:sponsor": {
+            "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
         },
         "osdi:organizer": {
             "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"
@@ -698,6 +727,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:sponsor": {
+            "href": "https://osdi-sample-system.org/api/v1/organizations/5d7d6534-cd24-566a-98a6-ef684f4a7686"
         },
         "osdi:organizer": {
             "href": "https://osdi-sample-system.org/api/v1/people/8a625981-67a4-4457-8b55-2e30b267b2c2"

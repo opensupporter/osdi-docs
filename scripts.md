@@ -7,14 +7,14 @@ title: Scripts
 
 This page defines the Script resource.
 
-Scripts are collections of [Questions](questions.html), represented by the intermediate [Script Questions](script_questions.html) resource, asked to a person during a [Canvassing Effort](canvassing_efforts.html). 
+Scripts are collections of [Questions](questions.html), represented by the intermediate [Script Questions](script_questions.html) resource, asked to a person during a [Canvassing Effort](canvassing_efforts.html).
 
 ### Sections
 
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
     * [Common Fields](#common-fields)
-    * [Script Fields](#script-fields) 
+    * [Script Fields](#script-fields)
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -61,6 +61,7 @@ _[Back to top...](#)_
 |self           |[Script*](scripts.html)    |A self-referential link to the Script.
 |creator        |[Person*](people.html)         |A link to a single Person resource representing the creator of the Script.
 |modified_by    |[Person* ](people.html)        |A link to a Person resource representing the last editor of this Script.
+|taggings       |[Taggings[]*](taggings.html)   | A link to a collection of taggings association with this Script.
 |script_questions  |[Script Questions[]*](script_questions.html)  |A link to the collection of Script Question resources for this Script.
 |canvassing_effort  |[Canvassing Effort*](canvassing_efforts.html)  |A link to the collection of Script Question resources for this Script.
 
@@ -201,7 +202,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-``` 
+```
 
 _[Back to top...](#)_       
 

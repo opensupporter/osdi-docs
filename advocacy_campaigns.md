@@ -5,7 +5,7 @@ title: Advocacy Campaign
 
 # Advocacy Campaign
 
-This document defines the Advocacy Campaign resource. 
+This document defines the Advocacy Campaign resource.
 
 Advocacy campaigns represent an advocacy action directed at targets such as elected officials that a user may participate in by contacting those officials in some way, such as via email or phone. Advocacy campaigns have fields to describe them such as names, titles, summaries, descriptions, and targeting information, and when activists participate in an advocacy campaign, [Outreach](outreaches.html) resources are created representing the individual outreach an activist made to a target as part of that advocacy campaign.
 
@@ -15,8 +15,8 @@ Advocacy campaigns represent an advocacy action directed at targets such as elec
 * [Endpoints and URL structures](#endpoints-and-url-structures)
 * [Fields](#fields)
     * [Common Fields](#common-fields)
-    * [Advocacy Campaign Fields](#advocacy-campaign-fields) 
-    * [Related Objects](#related-objects) 
+    * [Advocacy Campaign Fields](#advocacy-campaign-fields)
+    * [Related Objects](#related-objects)
     * [Links](#links)
 * [Related Resources](#related-resources)
 * [Scenarios](#scenarios)
@@ -86,6 +86,7 @@ _[Back to top...](#)_
 |self			|[Advocacy Campaigns*](advocacy_campaigns.html)	|A self-referential link to the advocacy campaign.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the advocacy campaign.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this advocacy campaign.
+|taggings       |[Taggings[]* ](people.html)    |A link to the collection of Tagging resources for this advocacy campaign.
 |outreaches		|[Outreaches[]*](outreaches.html)	|A link to the collection of Outreach resources for this advocacy campaign.
 |record_outreach_helper	|[Record Outreach Helper*](record_outreach.html)	|A link to the Record Outreach Helper resource endpoint for this advocacy campaign.
 
@@ -249,7 +250,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-```	
+```
 
 _[Back to top...](#)_		
 
@@ -490,6 +491,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:outreaches": {
             "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/outreaches"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/advocacy_campaigns/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bca/taggings"
         },
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"

@@ -5,7 +5,7 @@ title: Message
 
 # Message
 
-This document defines the Message resource. 
+This document defines the Message resource.
 
 Message resources represent a some type of mass communication -- a mass email to an email list, an SMS sent to an SMS list, etc... -- that is sent or otherwise communicated to to a list of people. Messages have fields to describe them such as names, subjects, bodies, statistics about delivery and engagement, and the like. Messages contain arrays that link to queries or lists representing people who are targeted to receive the message, and link to recipient lists for showing who received the message, and similar metadata. Messages can be one of two types, ```email``` or ```sms```, indicating how the message was delivered.
 
@@ -121,6 +121,7 @@ _[Back to top...](#)_
 |self			|[Message*](messages.html)	|A self-referential link to the message.
 |creator		|[Person*](people.html)  		|A link to a single Person resource representing the creator of the message.
 |modified_by	|[Person* ](people.html) 		|A link to a Person resource representing the last editor of this message.
+|taggings     |[Taggings[]*](taggings.html) |A link to the collection of Tagging resources for this message.
 |recipients	|[List*](lists.html)	|A link to the List resource that represents the list of People who received this message.
 |wrapper	|[Wrapper*](wrappers.html)	|A link to the Wrapper resource that represent the wrapper that was used when sending this message.
 |send_helper	|[Send Helper*](send_helper.html)	|A link to the Send Helper resource endpoint for this message.
@@ -251,6 +252,9 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:wrapper": {
                         "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
+                    "osdi:taggings": {
+                        "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
+                    },
                     "osdi:send_helper": {
                         "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/send"
                     },
@@ -275,15 +279,15 @@ Cache-Control: max-age=0, private, must-revalidate
                     {
                         "href": "https://osdi-sample-system.org/api/v1/queries/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
                     }
-                ], 
+                ],
                 "total_targeted": 2536,
                 "sections": [
                     {
-                        "keyword": "YES", 
+                        "keyword": "YES",
                         "auto_reply":"Thanks for voting!"
                     },
                     {
-                        "keyword": "NO", 
+                        "keyword": "NO",
                         "auto_reply":"Sorry, maybe next time!"
                     }
                 ],
@@ -326,7 +330,7 @@ Cache-Control: max-age=0, private, must-revalidate
         ]
     }
 }
-```	
+```
 
 _[Back to top...](#)_		
 
@@ -374,7 +378,7 @@ Cache-Control: max-age=0, private, must-revalidate
         {
              "href": "https://osdi-sample-system.org/api/v1/lists/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         }
-    ], 
+    ],
     "total_targeted": 14123,
     "status": "sent",
     "sent_start_date": "2015-03-14T12:00:00Z",
@@ -405,6 +409,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:wrapper": {
             "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
         "osdi:send_helper": {
             "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/send"
@@ -444,17 +451,20 @@ OSDI-API-Token:[your api key here]
     "type": "sms",
     "sections": [
         {
-            "keyword": "YES", 
+            "keyword": "YES",
             "auto_reply":"Thanks for voting!"
         },
         {
-            "keyword": "NO", 
+            "keyword": "NO",
             "auto_reply":"Sorry, maybe next time!"
         }
     ],
     "_links": {
         "osdi:creator": {
             "href": "https://osdi-sample-system.org/api/v1/people/65345d7d-cd24-466a-a698-4a7686ef684f"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
         "osdi:wrapper": {
             "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
@@ -486,15 +496,15 @@ Cache-Control: max-age=0, private, must-revalidate
     "status": "draft",
     "administrative_url": "http://osdi-sample-system.org/sms/gotv/manage",
     "type": "sms",
-    "targets": [], 
+    "targets": [],
     "total_targeted": 0,
     "sections": [
         {
-            "keyword": "YES", 
+            "keyword": "YES",
             "auto_reply":"Thanks for voting!"
         },
         {
-            "keyword": "NO", 
+            "keyword": "NO",
             "auto_reply":"Sorry, maybe next time!"
         }
     ],
@@ -513,6 +523,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:wrapper": {
             "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
         "osdi:send_helper": {
             "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/send"
@@ -588,6 +601,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:wrapper": {
             "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
         "osdi:send_helper": {
             "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/send"
@@ -678,6 +694,9 @@ Cache-Control: max-age=0, private, must-revalidate
         },
         "osdi:wrapper": {
             "href": "https://osdi-sample-system.org/api/v1/wrappers/c945d6fe-929e-11e3-a2e9-12313d316c29"
+        },
+        "osdi:taggings": {
+            "href": "https://osdi-sample-system.org/api/v1/messages/1efc3644-af25-4253-90b8-a0baf12dbd1e/taggings"
         },
         "osdi:send_helper": {
             "href": "https://osdi-sample-system.org/api/v1/messages/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/send"
