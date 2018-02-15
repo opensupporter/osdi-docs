@@ -466,6 +466,9 @@ _[Back to top...](#)_
 * Nathan Woodhull, ControlShift Labs
 * Ryan Zarkesh
 * Misha Zhurkin, Catalist
+* Kayley Whalen, Trans United
+* Hayden Mora, Trans United
+* Sonya Reynolds, Independent
 
 ### Additional Acknowledgments
 * Reed Probus, Web, Logo & Graphic Design
