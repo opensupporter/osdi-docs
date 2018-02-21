@@ -45,15 +45,17 @@ _[Back to top...](#)_
 | Name          | Type                | Description
 | -----------   | -----------         | --------------
 |origin_system      |string     |A human readable identifier of the system where this Phonebank was created. (ex: "OSDI System")
-|name               |string     |The name of the Phonebank.
+|name               |string     |The name of the Phonebank. Intended for administrative display rather than a public title, though may be shown to a user.
+|title              |string     |The title of the Phonebank. Intended for public display rather than administrative purposes.
 |description        |string     |A description of the Phonebank, usually displayed publicly. May contain text and/or HTML.
+|summary            |string     |A text-only single paragraph summarizing the Phonebank. Shown on listing pages that have more than titles, but not enough room for full description.
 |start_time        |datetime     |The start date and time for the Phone banking Effort.
 |end_time        |datetime     |The end date and time for the Phone banking Effort.
-|daily_start_hour |integer     |The hour of the day volunteers should start calling.
-|daily_stop_hour |integer     |The hour of the day volunteers should stop calling.
+|daily_start_hour |integer     |The hour of the day volunteers should start calling. This is in 24 hour time
+|daily_stop_hour |integer     |The hour of the day volunteers should stop calling. This is in 24 hour time
 |caller_id        |string     |The phone number that is displayed as the caller-id for this phonebank
-|status           |enum      |Status of the Phonebank. Possible values are: "draft", "pending", "scheduled", "started", or "stopped"
-|dialing_mode           |enum      |The type of the dialing for this phonebank. One of "predictive", "power", "manual", or another value.
+|status           |flexenum      |Status of the Phonebank. Possible values are: "draft", "paused", "scheduled", "started", or "stopped"
+|dialing_mode           |flexenum      |The type of the dialing for this phonebank. One of "predictive", "power", "manual", or another value.
 |voicemail_audio_url    |string      |A URL string pointing to a audio file used for voice mail audio drops.
 |administrative_url    |string      |A URL string pointing to the Phonebank administrative page on the web.
 |browser_url    |string      |A URL string pointing to the Phonebank public page on the web.
@@ -71,13 +73,13 @@ _effort [Back to top...](#)_
 |self           |[Phonebank*](phone_bank.html)    |A self-referential link to the phone bank.
 |creator        |[Person*](people.html)         |A link to a single Person resource representing the creator of the Phonebank.
 |modified_by    |[Person* ](people.html)        |A link to a Person resource representing the last editor of this Phonebank.
-|taggings       |[Taggings[]* ](people.html)    |A link to the collection of Tagging resources for this Phonebank.
-|phone_bank_result      |[Phonebank_result[]*](phone_bank_result.html)        |A link to a collection of Phone bank results resources representing the results that occured.
+|taggings       |[Taggings[]* ](taggings.html)    |A link to the collection of Tagging resources for this Phonebank.
+|phone_bank_results      |[Phonebank_results[]*](phone_bank_result.html)        |A link to a collection of Phone bank results resources representing the results that occured.
 |script  |[Script*](scripts.html) | A link to the Script resource associated with this Phonebank.
 |target_list  |[List*](lists.html) | A link to the List resource that represents the list of People who will receive calls in this phonebank.
-|advocacy_target  |[List*](lists.html) | A link to the List resource that represents the list of People who will be advocacy targets in this phonebank.
+|advocacy_targets  |[List*](lists.html) | A link to the List resource that represents the list of People who will be advocacy targets in this phonebank.
 |volunteers  |[List*](lists.html) | A link to the List resource that represents the list of People who will be the volunteers in this phonebank.
-|events  |[List*](lists.html) | A link to the List resource that represents a collection of events associated with this Phonebank.
+|events  |[List*](lists.html) | A link to the List resource that represents a collection of events associated with this Phonebank. These are the events volunteers are signing up people for in the phonebank.
 
 
 _[Back to top...](#)_
@@ -86,7 +88,9 @@ _[Back to top...](#)_
 ## Related Resources
 
 * [Person](people.html)
+* [List](lists.html)
 * [Script](scripts.html)
+* [Taggings](taggings.html)
 * [Phone bank result](phone_bank_result.html)
 
 
@@ -158,8 +162,10 @@ Cache-Control: max-age=0, private, must-revalidate
                 "origin_system": "OSDI Sample System",
                 "created_date": "2017-03-20T21:04:31Z",
                 "modified_date": "2017-03-20T21:04:31Z",
-                "name": "Rally for Rivers",
-                "description": "Rally for Rivers phone bank for Team 1",
+                "name": "Rally for Mountains",
+                "title": "Rally for Mountains Team 2",
+                "description": "Rally for Mountains phone bank for Team 2",
+                "summary": "Rally for Mountains phone bank effort 1 for Team 2",
                 "start_time": "2018-02-19T8:00:00Z",
                 "end_time": "2018-02-20T8:00:00Z",
                 "type": "power",
@@ -190,7 +196,7 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:target_list": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
                     },
-                    "osdi:advocacy_target": {
+                    "osdi:advocacy_targets": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
                     },
                     "osdi:volunteers": {
@@ -199,8 +205,8 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:events": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
                     },
-                    "osdi:phone_bank_result": {
-                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bca/phone_bank_result"
+                    "osdi:phone_bank_results": {
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/a91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bca/phone_bank_results"
                     }
                 }
             },
@@ -213,7 +219,9 @@ Cache-Control: max-age=0, private, must-revalidate
                 "created_date": "2017-03-20T21:04:31Z",
                 "modified_date": "2017-03-20T21:04:31Z",
                 "name": "Rally for Rivers",
+                "title": "Rally for Rivers Team 1",
                 "description": "Rally for Rivers phone bank for Team 1",
+                "summary": "Rally for Rivers phone bank effort 1 for Team 1",
                 "start_time": "2016-02-19T8:00:00Z",
                 "end_time": "2016-02-20T8:00:00Z",
                 "type": "power",
@@ -241,7 +249,7 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:target_list": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
                     },
-                    "osdi:advocacy_target": {
+                    "osdi:advocacy_targets": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
                     },
                     "osdi:volunteers": {
@@ -250,8 +258,8 @@ Cache-Control: max-age=0, private, must-revalidate
                     "osdi:events": {
                         "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
                     },
-                    "osdi:phone_bank_result": {
-                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/phone_bank_result"
+                    "osdi:phone_bank_results": {
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/phone_bank_results"
                     }
                 }
             },   
@@ -292,7 +300,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2017-03-20T21:04:31Z",
     "modified_date": "2017-03-20T21:04:31Z",
     "name": "Rally for Rivers",
+    "title": "Rally for Rivers Team 1",
     "description": "Rally for Rivers phone bank for Team 1",
+    "summary": "Rally for Rivers phone bank effort 1 for Team 1",
     "start_time": "2018-02-19T8:00:00Z",
     "end_time": "2018-02-20T8:00:00Z",
     "type": "power",
@@ -320,7 +330,7 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:target_list": {
             "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
         },
-        "osdi:advocacy_target": {
+        "osdi:advocacy_targets": {
             "href": "https://osdi-sample-system.org/api/v1/lists/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
         "osdi:volunteers": {
@@ -329,8 +339,8 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:events": {
             "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
         },
-        "osdi:phone_bank_result": {
-            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/phone_bank_result"
+        "osdi:phone_bank_results": {
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/phone_bank_results"
         }
     }
 }
@@ -358,7 +368,9 @@ OSDI-API-Token:[your api key here]
     ],
     "origin_system": "OSDI Sample System",
     "name": "Rally for Rivers",
+    "title": "Rally for Rivers Team 1",
     "description": "Rally for Rivers phone bank for Team 1",
+    "summary": "Rally for Rivers phone bank effort 1 for Team 1",
     "start_time": "2018-02-19T8:00:00Z",
     "end_time": "2018-02-20T8:00:00Z",
     "daily_start_hour": 9,
@@ -397,7 +409,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2017-03-20T21:04:31Z",
     "modified_date": "2017-03-20T21:04:31Z",
     "name": "Rally for Rivers",
+    "title": "Rally for Rivers Team 1",
     "description": "Rally for Rivers phone bank for Team 1",
+    "summary": "Rally for Rivers phone bank effort 1 for Team 1",
     "start_time": "2018-02-19T8:00:00Z",
     "end_time": "2018-02-20T8:00:00Z",
     "type": "power",
@@ -428,8 +442,8 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:volunteers": {
             "href": "https://osdi-sample-system.org/api/v1/lists/65345d7d-cd24-466a-a698-4a7686ef684f"
         },
-        "osdi:phone_bank_result": {
-            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/phone_bank_result"
+        "osdi:phone_bank_results": {
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/phone_bank_results"
         }
     }
 }
@@ -454,7 +468,9 @@ OSDI-API-Token:[your api key here]
 
 {
     "name": "Rally for Mountains",
-    "title": "Rally for Mountains phone bank for Team 2",
+    "title": "Rally for Mountains Team 2",
+    "description": "Rally for Mountains phone bank for Team 2",
+    "summary": "Rally for Mountains phone bank effort 1 for Team 2",
     "status": "started"
 }
 
@@ -475,7 +491,9 @@ Cache-Control: max-age=0, private, must-revalidate
     "created_date": "2017-03-20T21:04:31Z",
     "modified_date": "2017-03-20T21:04:31Z",
     "name": "Rally for Mountains",
+    "title": "Rally for Mountains Team 2",
     "description": "Rally for Mountains phone bank for Team 2",
+    "summary": "Rally for Mountains phone bank effort 1 for Team 2",
     "start_time": "2018-02-19T8:00:00Z",
     "end_time": "2018-02-20T8:00:00Z",
     "type": "power",
@@ -503,7 +521,7 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:target_list": {
             "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
         },
-        "osdi:advocacy_target": {
+        "osdi:advocacy_targets": {
             "href": "https://osdi-sample-system.org/api/v1/lists/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
         "osdi:volunteers": {
@@ -512,8 +530,8 @@ Cache-Control: max-age=0, private, must-revalidate
         "osdi:events": {
             "href": "https://osdi-sample-system.org/api/v1/lists/1efc3644-af25-4253-90b8-a0baf12dbd1e"
         },
-        "osdi:phone_bank_result": {
-            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/phone_bank_result"
+        "osdi:phone_bank_results": {
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/phone_bank_results"
         }
     }
 }
@@ -530,7 +548,7 @@ You may delete an effort by calling the DELETE command on the Phonebank's endpoi
 #### Request
 
 ```javascript
-DELETE https://osdi-sample-system.org/api/v1/phone_bank_result/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
+DELETE https://osdi-sample-system.org/api/v1/phone_bank/d32fcdd6-7366-466d-a3b8-7e0d87c3cd8b
 
 Header:
 OSDI-API-Token:[your api key here]

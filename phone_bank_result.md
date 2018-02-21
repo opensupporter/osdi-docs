@@ -30,7 +30,7 @@ A phonebank result occurs when one person attempts to contact another person in 
 
 {% include endpoints_and_url_structures.md %}
 
-The link relation label for an Phone bank result resource is ```osdi:phone-bank-result``` for a single resource or ```osdi:phone-bank-results``` for a collection of resources.
+The link relation label for an Phone bank result resource is ```osdi:phone_bank_result``` for a single resource or ```osdi:phone_bank_results``` for a collection of resources.
 
 _[Back to top...](#)_
 
@@ -52,8 +52,9 @@ _[Back to top...](#)_
 |call_date		  |string	 |The date and time the call was made.
 |caller_id        |string    |The phone number that is displayed as the caller-id for this call
 |phone_number     |string    |The phone number that was called
-|duration         |string    |The length of the phone call in seconds. Calls that do not connect will have zero in this field.
-|disposition      |enum      |Disposition of the phone call. Possible values are "answer". "busy", "do-not-call", "meaningful interaction", "machine" etc..
+|duration         |integer   |The length of the phone call in seconds. Calls that do not connect will have zero in this field.
+|success         | boolean  |True if the target was successfully contacted, False otherwise.
+|status_code     | flexenum |Disposition of the phone call. Possible values are "answer". "busy", "do-not-call", "meaningful interaction", "machine" etc..  An empty or missing value for status_code should be assumed to mean that the contact was successful.
 
 _[Back to top...](#)_
 
@@ -65,11 +66,11 @@ _[Back to top...](#)_
 
 |Name          	|Type		|Description
 |-----------    |-----------|--------------
-|self			|[Phonebank Result*](phone-bank-result.html)	|A self-referential link to the Phonebank result.
+|self			|[Phonebank Result*](phone_bank_result.html)	|A self-referential link to the Phonebank result.
 |caller         |[Person*](people.html)         |A link to a single Person resource representing the person who made the call
 |target		    |[Person*](people.html)  |A link to a single Person resource representing the person who was contacted.
 |answers        |[Answers[]*](answers.html) | A link to the collection of Answers to [Questions](questions.html) posed during the Phonebank.
-|attendances    |[Attendances[]*](attendances.html) | A link to the collection of Attendances to [Events](events.html) posed during the Phonebank.
+|attendances    |[Attendances[]*](attendances.html) | A common reason for a phonebank is for volunteers calling to invite people to an event. This is the link to the collection of Attendances to [Events](events.html) received during such a Phonebank.
 |taggings       |[Taggings[]*](taggings.html) | A link to the collection of Taggings applied as a result of the Phonebank.
 |phonebank      |[Phonebank*](phone_bank.html) | A link to the Phonebank this result was part of.
 
@@ -78,13 +79,11 @@ _[Back to top...](#)_
 
 ## Related Resources
 
-* [Question](questions.html)
 * [Person](people.html)
 * [Answer](answers.html)
 * [Tagging](taggings.html)
 * [Phonebank](phone_bank.html)
 * [Attendances](attendances.html)
-* [Events](events.html)
 
 _[Back to top...](#)_
 
@@ -100,7 +99,7 @@ Calling this endpoint allows consumers to see a person's phone bank result histo
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result
+GET https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone_bank_results
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -121,14 +120,14 @@ Cache-Control: max-age=0, private, must-revalidate
     "total_records": 250,
     "_links": {
         "next": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result?page=2"
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone_bank_results?page=2"
         },
-        "osdi:phone-bank-results": [
+        "osdi:phone_bank_results": [
             {
-                "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
             },
             {
-                "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone_bank_results/1efc3644-af25-4253-90b8-a0baf12dbd1e"
             },
             //(truncated for brevity)
         ],
@@ -140,11 +139,11 @@ Cache-Control: max-age=0, private, must-revalidate
             }
         ],
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result"
+            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone_bank_results"
         }
     },
     "_embedded": {
-        "osdi:phone-bank-results": [
+        "osdi:phone_bank_results": [
             {
                 "identifiers": [
                     "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
@@ -157,10 +156,11 @@ Cache-Control: max-age=0, private, must-revalidate
                 "caller_id": "18552345678",
                 "phone_number": "15104024182",
                 "duration": 36,
-                "disposition": "answer",
+                "success": true,
+                "status_code": "answer",
                 "_links": {
                     "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
                     },
                     "osdi:caller": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
@@ -169,13 +169,13 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:answers": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
                     },
                     "osdi:taggings": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
                     },
                     "osdi:attendances": {
-                        "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
                     },
                     "osdi:phone_bank": {
                         "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
@@ -194,10 +194,11 @@ Cache-Control: max-age=0, private, must-revalidate
                 "caller_id": "18552345678",
                 "phone_number": "15104024182",
                 "duration": 36,
-                "disposition": "answer",
+                "success": true,
+                "status_code": "answer",
                 "_links": {
                     "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf"
+                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf"
                     },
                     "osdi:caller": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
@@ -206,13 +207,13 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:answers": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/answers"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/answers"
                     },
                     "osdi:taggings": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/taggings"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/taggings"
                     },
                     "osdi:attendances": {
-                        "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
                     },
                     "osdi:phone_bank": {
                         "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
@@ -234,7 +235,7 @@ Calling this endpoint allows consumers to see a Phonebank's result history.
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone-bank-result
+GET https://osdi-sample-system.org/api/v1/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -255,14 +256,14 @@ Cache-Control: max-age=0, private, must-revalidate
     "total_records": 250,
     "_links": {
         "next": {
-            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result?page=2"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d945d6fe-929e-11e3-a2e9-12313d316c29/phone_bank_results?page=2"
         },
-        "osdi:phone-bank-results": [
+        "osdi:phone_bank_results": [
             {
-                "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                "href": "https://osdi-sample-system.org/api/v1/phone_bank/d945d6fe-929e-11e3-a2e9-12313d316c29/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
             },
             {
-                "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/1efc3644-af25-4253-90b8-a0baf12dbd1e"
+                "href": "https://osdi-sample-system.org/api/v1/phone_bank/d945d6fe-929e-11e3-a2e9-12313d316c29/phone_bank_results/1efc3644-af25-4253-90b8-a0baf12dbd1e"
             },
             //(truncated for brevity)
         ],
@@ -274,11 +275,11 @@ Cache-Control: max-age=0, private, must-revalidate
             }
         ],
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone-bank-result"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results"
         }
     },
     "_embedded": {
-        "osdi:phone-bank-results": [
+        "osdi:phone_bank_results": [
             {
                 "identifiers": [
                     "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
@@ -291,10 +292,11 @@ Cache-Control: max-age=0, private, must-revalidate
                 "caller_id": "18552345678",
                 "phone_number": "15104024182",
                 "duration": 36,
-                "disposition": "answer",
+                "success": true,
+                "status_code": "answer",
                 "_links": {
                     "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
                     },
                     "osdi:caller": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
@@ -303,13 +305,13 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:answers": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
                     },
                     "osdi:taggings": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
                     },
                     "osdi:attendances": {
-                        "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
                     },
                     "osdi:phone-bank": {
                         "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
@@ -328,10 +330,11 @@ Cache-Control: max-age=0, private, must-revalidate
                 "caller_id": "18552345678",
                 "phone_number": "15104024182",
                 "duration": 40,
-                "disposition": "machine",
+                "success": false,
+                "status_code": "machine",
                 "_links": {
                     "self": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf"
                     },
                     "osdi:caller": {
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
@@ -340,13 +343,13 @@ Cache-Control: max-age=0, private, must-revalidate
                         "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
                     },
                     "osdi:answers": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/answers"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/answers"
                     },
                     "osdi:taggings": {
-                        "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/taggings"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bcf/taggings"
                     },
                     "osdi:attendances": {
-                        "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
+                        "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
                     },
                     "osdi:phone-bank": {
                         "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
@@ -369,7 +372,7 @@ Calling an individual Phonebank result resource will return the resource directl
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3
+GET https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -395,10 +398,11 @@ Cache-Control: max-age=0, private, must-revalidate
     "caller_id": "18552345678",
     "phone_number": "15104024182",
     "duration": 36,
-    "disposition": "answer",
+    "success": true,
+    "status_code": "answer",
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
         "osdi:caller": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
@@ -407,13 +411,13 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:answers": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
         },
         "osdi:taggings": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
         },
         "osdi:attendances": {
-            "href": "https://osdi-sample-system.org/api/v1/events/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
         },
         "osdi:phone-bank": {
             "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
@@ -431,7 +435,7 @@ Retrieves the Answers that were collected in a particular the Phonebank result.
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers
+GET https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/c945d6fe-929e-11e3-a2e9-12313d316c29/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -453,7 +457,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "total_records": 250,
     "_links": {
         "next": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers?page=2"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers?page=2"
         },
         "osdi:answers": [
             {
@@ -472,7 +476,7 @@ Cache-Control: max-age=0, private, must-revalidate
             }
         ],
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
         }
     },
     "_embedded": {
@@ -537,7 +541,7 @@ Retrieves the Taggings that were collected in a Phonebank result.
 #### Request
 
 ```javascript
-GET https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings
+GET https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -559,7 +563,7 @@ Cache-Control: max-age=0, private, must-revalidate
     "total_records": 250,
     "_links": {
         "next": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings?page=2"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings?page=2"
         },
         "osdi:taggings": [
             {
@@ -577,7 +581,7 @@ Cache-Control: max-age=0, private, must-revalidate
             }
         ],
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
         }
     },
     "_embedded": {
@@ -640,7 +644,7 @@ Posting to the Phonebank result collection endpoint and including a link to exis
 #### Request
 
 ```javascript
-POST https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/
+POST https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/
 
 Header:
 OSDI-API-Token:[your api key here]
@@ -654,7 +658,8 @@ OSDI-API-Token:[your api key here]
     "caller_id": "18552345678",
     "phone_number": "15104024182",
     "duration": 56,
-    "disposition": "answer",
+    "success": true,
+    "status_code": "answer",
     "_links" : {
         "osdi:caller" : { 
             "href" : "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444" 
@@ -684,10 +689,11 @@ Cache-Control: max-age=0, private, must-revalidate
     "caller_id": "18552345678",
     "phone_number": "15104024182",
     "duration": 56,
-    "disposition": "answer",
+    "success": true,
+    "status_code": "answer",
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
         "osdi:caller": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
@@ -696,10 +702,10 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:answers": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
         },
         "osdi:taggings": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
         },
         "osdi:phone-bank": {
             "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
@@ -720,13 +726,13 @@ You can update an Phonebank result by calling a PUT operation on that result's e
 #### Request
 
 ```javascript
-PUT https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3
+PUT https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3
 
 Header:
 OSDI-API-Token:[your api key here]
 
 {
-    "disposition": "send_information"
+    "status_code": "send_information",
 }
 
 ```
@@ -748,10 +754,11 @@ Cache-Control: max-age=0, private, must-revalidate
     "caller_id": "18552345678",
     "phone_number": "15104024182",
     "duration": 56,
-    "disposition": "send_information",
+    "success": true,
+    "status_code": "send_information",
     "_links": {
         "self": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
         },
         "osdi:caller": {
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316444"
@@ -760,10 +767,10 @@ Cache-Control: max-age=0, private, must-revalidate
             "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29"
         },
         "osdi:answers": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/answers"
         },
         "osdi:taggings": {
-            "href": "https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
+            "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/taggings"
         },
         "osdi:phone-bank": {
             "href": "https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa"
@@ -782,7 +789,7 @@ You may delete a Phonebank result by calling the DELETE command on the result's 
 #### Request
 
 ```javascript
-DELETE https://osdi-sample-system.org/api/v1/people/c945d6fe-929e-11e3-a2e9-12313d316c29/phone-bank-result/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
+DELETE https://osdi-sample-system.org/api/v1/phone_bank/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0baa/phone_bank_results/d91b4b2e-ae0e-4cd3-9ed7-de9uemdse
 
 Header:
 OSDI-API-Token:[your api key here]
