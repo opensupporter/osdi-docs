@@ -63,7 +63,7 @@ Note that on the AEP, links will often contain titles to inform new users about 
 |lists		|[Lists[]*](lists.html)  		|A link to the collection of list resources in the system.
 |queries		|[Queries[]*](queries.html)  		|A link to the collection of Query resources in the system.
 |questions		|[Questions[]*](questions.html)  		|A link to the collection of Question resources in the system.
-|metadata		|[Metadta[]*](metadata.html)  			|A link to the Metadata endpoint in the system.
+|metadata		|[Metadata[]*](metadata.html)  			|A link to the Metadata endpoint in the system.
 |share_pages		|[Share Pages[]*](share_pages.html)  		|A link to the collection of Share Page resources in the system.
 |docs		|N/A  		|A link to the human-readable documentation for the API system.
 |person_signup_helper		|[Person Signup Helper*](person_signup.html)  		|A link to the Person Signup Helper resource.
