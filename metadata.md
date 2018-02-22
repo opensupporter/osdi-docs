@@ -7,7 +7,7 @@ title: Metadata
 
 This page defines the Metadata Endpoint.
 
-Metadata endpoint is a collection of resources that can be queried to gather information needed to work with OSDI resources. For instance, to record [Canvass[]](#canvasses) responses precisely, it is essential for the client to get the available options for canvass fields (ex: status codes or contact types). Collection of canvass fields supported by the system can be obtained by querying the resources available under the metadata endpoint.
+Metadata endpoint is a collection of resources that can be queried to gather information needed to work with OSDI resources. For instance, to record [Canvass[]](#canvasses) responses precisely, it is essential for the client to get the available options for canvass fields (ex: status codes or contact types). Collection of canvass fields supported by the system can be obtained by querying the resources available under the metadata endpoint. Metadata endpoint is generic enough to cover all other API resources that can provide information on main stream OSDI Endpoints like Events, Petitions, People etc.
 
 ### Sections
 
@@ -16,6 +16,7 @@ Metadata endpoint is a collection of resources that can be queried to gather inf
     * [Scenario: Retrieving the collection of resources under metadata endpoint (GET)](#scenario-retrieving-the-collection-of-resources-under-metadata-endpoint-get)
     * [Scenario: Retrieving the collection of canvass response codes (GET)](#scenario-retrieving-the-collection-of-canvass-response-codes-get)
     * [Scenario: Retrieving the collection of canvass contact types (GET)](#scenario-retrieving-the-collection-of-canvass-contact-types-get)
+    * [Scenario: Retrieving available canvass response codes for contact types (GET)](#scenario-retrieving-the-avilable-response-codes-for-contact-types-get)
     * [Scenario: Retrieving the collection of canvass input types (GET)](#scenario-retrieving-the-collection-of-canvass-input-types-get)
 
 
@@ -128,15 +129,15 @@ Cache-Control: max-age=0, private, must-revalidate
     },
     "response_codes": [
         {
-            "response_code": 59,
+            "response_code": "59",
             "name": "Bounced"
         },
         {
-            "response_code": 18,
+            "response_code": "18",
             "name": "Busy"
         },
         {
-            "response_code": 17,
+            "response_code": "17",
             "name": "Call Back"
         },
     ]
@@ -189,11 +190,11 @@ Cache-Control: max-age=0, private, must-revalidate
     },
     "contact_types": [
         {
-            "contact_type": 1,
+            "contact_type": "1",
             "name": "Phone"
         },
         {
-            "contact_type": 2,
+            "contact_type": "2",
             "name": "Walk"
         },
     ]
@@ -203,6 +204,62 @@ Cache-Control: max-age=0, private, must-revalidate
 
 _[Back to top...](#)_
 
+
+## Scenario: Retrieving available canvass response codes for contact types (GET)
+
+This resource is a collection of canvass response codes available for given contact type.
+
+#### Request
+
+```javascript
+GET https://osdi-sample-system.org/api/v1/metadata/canvass_response_codes?contacttype=1
+
+Header:
+OSDI-API-Token:[your api key here]
+```
+
+#### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+    "origin_system": "VAN",
+    "name": "Available contact types",
+    "description": "Available contact types",
+    "identifiers": [
+        "VAN:ContactTypes"
+    ],
+    "_links": {
+        "self": {
+            "href": "https://osdi-sample-system.org/api/v1/metadata/canvass_response_codes?contacttype=1"
+        },
+        "curies": [
+            {
+                "name": "osdi",
+                "href": "http://osdi-sample-system.org/osdi#{rel}",
+                "templated": true
+            }
+        ]
+    },
+    "response_codes": [
+        {
+            "response_code": "18",
+            "name": "Busy"
+        },
+        {
+            "response_code": "17",
+            "name": "Call back"
+        },
+    ]
+}
+
+``` 
+
+_[Back to top...](#)_
 
 ### Scenario: Retrieving the collection of canvass input types (GET)
 
@@ -246,15 +303,15 @@ Cache-Control: max-age=0, private, must-revalidate
     },
     "input_types": [
         {
-            "input_type": 11,
+            "input_type": "11",
             "name": "API"
         },
         {
-            "input_type": 4,
+            "input_type": "4",
             "name": "Bulk"
         },
         {
-            "input_type": 2,
+            "input_type": "2",
             "name": "Manual"
         },
     ]
