@@ -7,7 +7,8 @@ title: Metadata
 
 This page defines the Metadata Endpoint.
 
-Metadata endpoint is a collection of resources that can be queried to gather information needed to work with OSDI resources. For instance, to record [Canvass[]](#canvasses) responses precisely, it is essential for the client to get the available options for canvass fields (ex: status codes or contact types). Collection of canvass fields supported by the system can be obtained by querying the resources available under the metadata endpoint. Metadata endpoint is generic enough to cover all other API resources that can provide information on main stream OSDI Endpoints like Events, Petitions, People etc.
+Metadata endpoint is a collection of resources that can be queried to gather information needed to work with OSDI resources. Metadata endpoint is generic endpoint to cover all other API resources that can provide information on main stream OSDI Endpoints like Events, Petitions, People etc.
+For instance, to record [Canvass[]](#canvasses) responses precisely, it is essential for the client to get the available options for canvass fields (ex: status codes or contact types). Collection of canvass fields supported by the system can be obtained by querying the resources available under the metadata endpoint.
 
 ### Sections
 
@@ -56,7 +57,7 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-  "name": "NGP VAN OSDI Metadata",
+  "name": "OSDI Sample System",
   "_links": {
     "curies": [
       {
@@ -67,7 +68,7 @@ Cache-Control: max-age=0, private, must-revalidate
     ],
     "self": {
       "href": "https://osdi-sample-system.org/api/v1/metadata",
-      "title": "NGP VAN OSDI Metadata"
+      "title": "OSDI Metadata"
     },
     "osdi:canvass_response_codes": {
       "href": "https://osdi-sample-system.org/api/v1/metadata/canvass_response_codes",
@@ -109,11 +110,11 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "origin_system": "VAN",
+    "origin_system": "OSDI Sample System",
     "name": "Available response codes",
     "description": "Available response codes",
     "identifiers": [
-        "VAN:ResultCodes"
+        "osdi_sample_system:response_codes"
     ],
     "_links": {
         "self": {
@@ -170,11 +171,11 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "origin_system": "VAN",
+    "origin_system": "OSDI Sample System",
     "name": "Available contact types",
     "description": "Available contact types",
     "identifiers": [
-        "VAN:ContactTypes"
+        "osdi_sample_system:contact_types"
     ],
     "_links": {
         "self": {
@@ -227,11 +228,11 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "origin_system": "VAN",
-    "name": "Available contact types",
+    "origin_system": "OSDI Sample System",
+    "name": "Available response codes",
     "description": "Available contact types",
     "identifiers": [
-        "VAN:ContactTypes"
+        "osdi_sample_system:response_codes"
     ],
     "_links": {
         "self": {
@@ -283,11 +284,11 @@ Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
-    "origin_system": "VAN",
+    "origin_system": "OSDI Sample System",
     "name": "Available input types",
     "description": "Available input types",
     "identifiers": [
-        "VAN:InputTypes"
+        "osdi_sample_system:input_types"
     ],
     "_links": {
         "self": {
