@@ -3,7 +3,7 @@ layout: default
 title: License
 ---
 
-# License
+# Intellectual Property License
 
 The following license applies to all contributions to the OSDI Specification
 
@@ -45,4 +45,20 @@ d.	that are infringed by the implementation of other technologies developed else
 e.	that are infringed by any portions of any product and any combinations thereof the purpose or function of which is not required for conformance with the applicable Specification; or 
 f.	that are infringed by any software code set out in that Specification for purposes of illustration, sample implementation, or reference.
 
+Here's a proposal based on the W3C copyright license.  It allows republishing (like forking our repo for proposed changes), but prohibits publishing as a technical specification, or the representing the democratic consensus of OSDI
+
+# Copyright License
+
+By using and/or copying this document, or the OSDI document from which this statement is linked, you (the licensee) agree that you have read, understood, and will comply with the following terms and conditions:
+
+Permission to copy, and distribute the contents of this document, or the OSDI document from which this statement is linked, in any medium for any purpose and without fee or royalty is hereby granted, provided that you include the following on ALL copies of the document, or portions thereof, that you use:
+
+* A link or URL to the original OSDI document.
+* The pre-existing copyright notice (hypertext is preferred, but a textual representation is permitted) of the form: "Copyright © [$date-of-document] Open Supporter Data Interface (OSDI)
+
+No right to create modifications or derivatives of OSDI documents is granted pursuant to this license, except as follows: To facilitate implementation of the technical specifications set forth in this document, anyone may prepare and distribute derivative works and portions of this document in software, in supporting materials accompanying software, and in documentation of software, PROVIDED that all such works include the notice below. HOWEVER, the publication of derivative works of this document for use as a technical specification, or as a representation of consensus of OSDI democratic decision-making process is expressly prohibited.
+
+The notice is:
+
+> "Copyright © 2018 OSDI. This software or document includes material copied from or derived from [title and URI of the OSDI document]."
 
