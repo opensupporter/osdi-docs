@@ -75,6 +75,8 @@ A list of fields specific to the Event resource.
 |location			|[Location](#location)	| An object hash representing the location of the event.
 |contact          |[Contact](#contact)          | An object hash representing the who to contact for questions about the event.
 |reminders 			|[Reminders[]](#reminders)	|An array of object hashes representing the reminders set for this event.
+|timezone_identifier|string |The IANA timezone identifier representing the timezone in which the event occurs. [See https://www.iana.org/time-zones](https://www.iana.org/time-zones)
+
 {% include share_options_main_objects.md %}
 
 _[Back to top...](#)_
