@@ -71,8 +71,8 @@ A list of fields specific to the Person resource.
 |administrative_url		|string		|A URL string pointing to the person's administrative page on the web, such as a page for managing this person's record.
 |birthdate	|[Birthdate](#birthdate)    |An object hash representing the birthdate of the person.
 |employer|string    |The name of the person's employer.
-|title   |string   | The person's job title, eg 'Developer', 'Field Director', 'Minion'
-|department|string | The department the person is a part of, eg 'Engineering', 'OSDI Fire Department'
+|work_title   |string   | The person's job title at work, eg 'Developer', 'Field Director', 'Minion'
+|work_department|string | The department the person works in, eg 'Engineering', 'OSDI Fire Department'
 |employer_address|[Employer Address](#employer-address)    |An object hash representing the postal address of the person's employer.
 |postal_addresses      |[Postal Addresses[]](#postal-addresses)   |An array of postal address object hashes associated with the person.
 |email_addresses	|[Email Addresses[]](#email-addresses)   |An array of email address object hashes associated with the person.
