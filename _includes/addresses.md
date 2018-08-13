@@ -17,7 +17,6 @@
 |postal_addresses.location.accuracy	|enum	|A value representing the accuracy of the geocode. One of "Rooftop" or "Approximate".
 |postal_addresses.status	|enum	|A value representing the status of the address. One of "Potential", "Verified", "Bad", or "Past".
 |postal_addresses.last_verified_date  |datetime   |A value representing the last verified date of the address.
-|occupation	|string  |The occupation of the person.
 
 #### Email Addresses
 
