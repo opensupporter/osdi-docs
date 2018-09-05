@@ -79,6 +79,7 @@ A list of fields specific to the Person resource.
 |phone_numbers	|[Phone Numbers[]](#phone-numbers)   |An array of phone number object hashes associated with the person.
 |profiles       | [Profiles[]](#profiles) |An array of profile object hashes for online services related to the person.
 |custom_fields	|[Custom Fields](#custom-fields)	|An object hash of key/value pairs associated with the person created by a user rather than a service or vendor.
+{% include divisions_main_objects.md %}
 
 _[Back to top...](#)_
 
@@ -122,6 +123,8 @@ These JSON hashes included in the table above are broken out into their own tabl
 
 {% include addresses.md %}
 
+
+
 #### Profiles
 
 |Name          |Type      |Description
@@ -156,6 +159,7 @@ Gender pronouns are used to capture how a person chooses to be identified and to
 
 > Terminology for the types of pronouns taken from [Wikipedia: https://en.wikipedia.org/wiki/Third-person_pronoun#Summary](https://en.wikipedia.org/wiki/Third-person_pronoun#Summary)
 
+{% include divisions_related_objects.md %}
 
 _[Back to top...](#)_
 
@@ -291,6 +295,7 @@ Cache-Control: max-age=0, private, must-revalidate
                      "active": true
                   }
                 ],
+{% include divisions_examples.md prefix="                " %}   
                 "source": "october_canvass",
                 "browser_url": "http://osdi-sample-system.org/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
                 "administrative_url": "http://osdi-sample-system.org/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/manage",
