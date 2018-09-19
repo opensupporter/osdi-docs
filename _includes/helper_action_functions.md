@@ -15,7 +15,7 @@ Helper Action Functions are additional actions that the OSDI server will perform
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |question      |string     |The identifier for the [Question](questions.html) which is being answered
-|responses     |string[]   |One or more responses to the Question, if the corresponding question_type is SingleChoice or MultiChoice; should be an improper subset of the responses available for the question
+|responses     |string[]   |One or more responses to the Question, if the corresponding question_type is SingleChoice or MultiChoice; should be a subset of the responses available for the question
 |value          |string    |A free-text response to the question, if the corresponding question_type is Paragraph.
 
 
