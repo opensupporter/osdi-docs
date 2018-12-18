@@ -35,6 +35,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
     * [API Entry Point and Linking](#api-entry-point-and-linking)
     * [Curies](#curies)
     * [Collections and Navigation](#collections-and-navigation)
+    * [Resource Expansion](#resource-expansion)
     * [Filtering Collections](#filtering-collections)
     * [Encryption](#encryption)
     * [Authentication](#authentication)
@@ -204,6 +205,33 @@ The parameters ```per_page``` and ```page``` control pagination.
 
 _[Back to top...](#)_
 
+
+### Resource Expansion
+
+> Consult the documentation from your vendor or implementer to determine if expansion is supported.
+
+#### Including Linked Related Resource Collections
+
+The server may support including related resources in responses.  For example, a client might wish to have a response containing people also contain their event attendance resources. In this case, the attendance resources would be contained within an \_embedded collection within each person object.
+
+To request that the server included these related resources, the $expand query parameter is used, and the value would be the related OSDI collection, with its prefix 'osdi:attendances'
+
+```
+GET https://osdi-sample-system.org/api/v1/people?$expand=osdi:attendances
+```
+
+The $expand parameter can contain a comma separated list of resources to include.
+
+#### Including Inline Related Objects
+Certain OSDI resources have Related Objects, which are inline objects as opposed to a linked related resource collection link.
+
+Some servers may choose not to automatically return all inline related objects, for example if collecting the needed information for the object is expensive or time consuming.  In this case the server will omit those objects, unless the client includes the $expand query parameter containing the comma separated additional objects to return, specified by their attribute name (without an osdi: prefix).
+
+```
+GET https://osdi-sample-system.org/api/v1/people?$expand=divisions
+```
+
+_[Back to top...](#)_
 
 ### Filtering Collections
 
