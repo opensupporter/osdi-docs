@@ -31,3 +31,5 @@ permalink: none
 kramdown:
     input: GFM
 
+exclude:
+  - vendor
