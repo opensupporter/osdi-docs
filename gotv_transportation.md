@@ -121,6 +121,7 @@ An implementation supporting the APIs here would employ some matching and schedu
 | drop_off_at_time | datetime | The time at which this assigned ride is estimated to end
 | drop_off_at_location | Location | The specific location at which this assigned ride will end
 | return_assignment_id | string* | If set, the ID of the Assignment which will return the demanding riders to their next location. Typically the next location will be the same one from which the riders departed, but it may be different (example: voter departs from home but is returned after voting to their place of work or school).
+| status | string | One of `scheduled`, `in-progress`, `completed`, or `canceled`. Implementations may prevent certain actions on assignments based on their status at the time (example: an implementation may disallow cancellation of an assigned ride which is `in-progress`).
 
 ### Interval Fields
 
