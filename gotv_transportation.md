@@ -40,6 +40,8 @@ For more details on how a system might be built on the data types proposed here,
 | locations | Location[] | The locations to which the associated Riders may be transported
 | riders  | Rider[] | The Riders generating this Demand
 | coordinating_rider | Rider* | If set, then communications about an assigned Ride should be directed towards this Rider. It is an error if this value is set but is not associated with an element of `riders`
+| external_coordinator | Person* | If set, this person is not a rider but should receive communications about this Demand and, if appropriate, its Assignment. For example, this could be a staff member at a senior center coordinating rides for a resident and helping load that resident into and out of a vehicle.
+
 
 Systems may reject creation of demands which would result in a rider being associated with multiple demands.
 
@@ -96,6 +98,7 @@ Keyed as `osdi:rider_restriction_accessibility`
 | availability | Interval[] | An array of times during which this vehicle is operational and can be assigned to Demands.
 | range | Duration | The maximum amount of time this vehicle can travel for any particular ride. This value might be the minimum of the furthest the vehicle's driver is willing to travel, or of the maximum range of the vehicle itself, such as with an electric vehicle subject to frequent recharging stops.
 | location | Location | This vehicle's location, from which it is assumed to begin or end with each availiability interval.
+| user_description | string | A brief, human-readable description of the vehicle to assist riders. For example, "Black Honda Civic, License ABC123". Note that this description field may also give way to future, more structured fields ("Year", "Make", "Model", "License Plate", etc), but rather than diving into a potentially over-structured vehicle data model solely for the purposes of constructing a brief string message for users, we start with just this freeform field.
 
 #### VehicleSeat
 
@@ -109,7 +112,7 @@ Note that this type only has a single field at the moment, but we choose to mode
 
 An Assignment indicates a specific matching between a Vehicle and a Demand.
 
-An implementation supporting the APIs here would employ some matching and scheduling algorithm to pair Demands with Drivers and Vehicles in order to make specific Assignments, in which a vehicle is expected to satisfy a Rider's Demand by picking up and dropping off at a specified time and place. Assignments may be removed, such as by the cancellation by a Rider or a Driver. Doing so does not affect the underlying Demand, which may still be satisfied by the scheduling algorithm by making an alternate Assignment.
+An implementation supporting the APIs here would employ some matching and scheduling algorithm to pair Demands with Drivers and Vehicles in order to make specific Assignments, in which a vehicle is expected to satisfy a Rider's Demand by picking up and dropping off at a specified time and place. Assignments may be removed, such as by the cancellation by a Rider, Coordinator, Driver, or Dispatcher. Doing so does not affect the underlying Demand, which may still be satisfied by the scheduling algorithm by making an alternate Assignment.
 
 | Name | Type | Description
 |------|--------|------
@@ -142,7 +145,7 @@ Intervals determine a discrete and continuous amount of time during which a ride
 
 ## Scenarios
 
-The primary motivation for this data model is to describe and accelerate the implementation of applications which provide for matching of drivers and riders, producing assignments. The APIs described here could be used in various ways to build these applications. In one configuration, we can imagine a lower-level routing, dispatch, and scheduling system which is used by API clients to populate their specific rider and driver details, and which provides to those callers a scheduled and on-demand routing and dispatch system. Further, we can imagine that third-parties working as clients to these APIs, but representing neither the specific data owners nor the scheduler's implementation, could build role-specific apps, including mobile apps for drivers or riders, or web-based dispatch and assistance tools for coordinating teams.
+The primary motivation for this data model is to describe and accelerate the implementation of applications which provide for matching of drivers and riders, producing assignments. The APIs described here could be used in various ways to build these applications. In one configuration, we can imagine a lower-level routing, dispatch, and scheduling system which is used by API clients to populate their specific rider and driver details, and which provides to those callers a scheduled and on-demand routing and dispatch system. Further, we can imagine that third-parties working as clients to these APIs, but representing neither the specific data owners nor the scheduler's implementation, could build role-specific apps, including mobile apps ("mobile" includes both smartphone as well as SMS/Telephone based) for drivers or riders, or web-based dispatch and assistance tools for coordinating teams.
 
 While there are any number of ways to factor these various pieces, we present below a small motivating example.
 
