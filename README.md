@@ -44,6 +44,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
     * [Flexibility and Server Behavior](#flexibility-and-server-behavior)
     * [Deviations from RESTful Behavior](#deviations-from-restful-behavior)
     * [Common Fields](#common-fields)
+    * [Control Headers](#control-headers)
     * [Notational Conventions](#notational-conventions)
 * [References](#references)
 * [Authors and Leadership](#authors-and-leadership)
@@ -416,6 +417,8 @@ _[Back to top...](#)_
 All OSDI resources share a set of common fields for consistency.  These are listed below.
 
 {% include global_fields.md %}
+
+{% include control_headers_readme.md %}
 
 _[Back to top...](#)_
 
