@@ -1,6 +1,6 @@
 ### Control Headers
 
-An "osdi:control" JSON object may contain common OSDI control headers which can be used on an OSDI POST, PUT, PATCH, Helper or other function calls to modify server behavior. [Read More]({{ site.baseurl }}/#control-headers)
+An "osdi:control" JSON object may contain common OSDI control headers which can be used on an OSDI POST, PUT, PATCH, Helper or other function calls to modify server behavior. {% if page.title != "OSDI" %}[Read More]({{ site.baseurl }}/#control-headers){% endif %}
 
 |Name               |Type       |Description
 |-------------------|-----------|------------
