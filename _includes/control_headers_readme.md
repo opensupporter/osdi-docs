@@ -2,7 +2,7 @@
 
 > see issue [325](https://github.com/opensupporter/osdi-docs/issues/325)
 
-When mapping OSDI to certain systems, an extra proprietary API call mey be necessary to return the resource representation when doing an OSDI POST, Signup Helper, PUT or other function.  An OSDI client that does not need the representation can set this as false so a proxy or middleware server can avoid this extra call.  Instead of the representation, the proxy may return the self link, identifiers, or an empty response.
+When mapping OSDI to certain systems, an extra proprietary API call mey be necessary to return the resource representation when doing an OSDI POST, PUT, PATCH, Helper or other function.  An OSDI client that does not need the representation can set this as false so a proxy or middleware server can avoid this extra call.  Instead of the representation, the proxy may return the self link, identifiers, or an empty response.
 
 ##### Request
 

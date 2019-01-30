@@ -1,6 +1,6 @@
 ### Control Headers
 
-A set of common OSDI control headers which can be used on POST and PUT API calls to modify behavior, which are attributes of an "osdi:control" object.
+An "osdi:control" JSON object may contain common OSDI control headers which can be used on an OSDI POST, PUT, PATCH, Helper or other function calls to modify server behavior. [Read More]({{ site.baseurl }}/#control-headers)
 
 |Name               |Type       |Description
 |-------------------|-----------|------------
