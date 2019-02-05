@@ -3,6 +3,8 @@ layout: default
 title: Status
 ---
 
+{% include experimental.html %}
+
 # Errors
 
 OSDI reports response codes and errors according to a standard schema.  A combination of HTTP response codes and error objects is used to communicate the success or failure of a request.
