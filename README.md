@@ -515,4 +515,9 @@ _[Back to top...](#)_
 
 Anyone is welcome to contribute by filing GitHub issues. To join our committees for specification discussion, please contact us at [http://opensupporter.org](http://opensupporter.org) or via email at [info@opensupporter.org](mailto:info@opensupporter.org).
 
+To build and view these documents locally, use Jekyll, as configured via the `Gemfile` in this repo:
+  * `cd /path/to/your/checkout/of/this/repo`
+  * `bundle install`
+  * `bundle exec jekyll serve`
+
 _[Back to top...](#)_
