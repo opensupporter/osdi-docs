@@ -18,5 +18,5 @@ pickle-email-*.html
 .idea/*
 ~*
 /_site
-
+Gemfile.lock
 
