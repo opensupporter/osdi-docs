@@ -44,6 +44,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
     * [Flexibility and Server Behavior](#flexibility-and-server-behavior)
     * [Deviations from RESTful Behavior](#deviations-from-restful-behavior)
     * [Common Fields](#common-fields)
+    * [Control Headers](#control-headers)
     * [Notational Conventions](#notational-conventions)
 * [References](#references)
 * [Authors and Leadership](#authors-and-leadership)
@@ -417,6 +418,8 @@ All OSDI resources share a set of common fields for consistency.  These are list
 
 {% include global_fields.md %}
 
+{% include control_headers_readme.md %}
+
 _[Back to top...](#)_
 
 
@@ -511,5 +514,10 @@ _[Back to top...](#)_
 ## Contributing and Contact
 
 Anyone is welcome to contribute by filing GitHub issues. To join our committees for specification discussion, please contact us at [http://opensupporter.org](http://opensupporter.org) or via email at [info@opensupporter.org](mailto:info@opensupporter.org).
+
+To build and view these documents locally, use Jekyll, as configured via the `Gemfile` in this repo:
+  * `cd /path/to/your/checkout/of/this/repo`
+  * `bundle install`
+  * `bundle exec jekyll serve`
 
 _[Back to top...](#)_

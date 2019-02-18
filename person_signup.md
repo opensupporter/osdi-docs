@@ -41,7 +41,6 @@ _[Back to top...](#)_
 
 {% include fields_intro.md %}
 
-
 ### Person Signup Helper Fields
 
 A list of fields specific for POSTing via the Person Signup Helper.
@@ -49,6 +48,8 @@ A list of fields specific for POSTing via the Person Signup Helper.
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |person         |[Person*](#person) |An object hash representing the person to be added.
+
+{% include control_headers.md %}
 
 _[Back to top...](#)_
 
