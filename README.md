@@ -43,6 +43,7 @@ Experiment with our prototype server: [http://api.opensupporter.org](http://api.
     * [Error Handling](#error-handling)
     * [Flexibility and Server Behavior](#flexibility-and-server-behavior)
     * [Deviations from RESTful Behavior](#deviations-from-restful-behavior)
+    * [Common Elements](#common-elements)
     * [Common Fields](#common-fields)
     * [Control Headers](#control-headers)
     * [Notational Conventions](#notational-conventions)
@@ -412,7 +413,7 @@ In order to cause the deletion of the contents of an Object (hash) or Array, a r
 _[Back to top...](#)_
 
 
-### Common Fields
+### Common Elements
 
 All OSDI resources share a set of common fields for consistency.  These are listed below.
 

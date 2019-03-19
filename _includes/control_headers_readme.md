@@ -2,7 +2,9 @@
 
 > see issue [325](https://github.com/opensupporter/osdi-docs/issues/325)
 
-When mapping OSDI to certain systems, an extra proprietary API call may be necessary to return the resource representation when doing an OSDI POST, PUT, PATCH, Helper or other function.  An OSDI client that does not need the representation can set this as false so a proxy or middleware server can avoid this extra call.  Instead of the representation, the proxy may return the self link, identifiers, or an empty response.
+When mapping OSDI to certain systems, an extra proprietary API call may be necessary to return the resource representation when doing an OSDI POST, PUT, PATCH, Helper or other function.  An OSDI client that does not need the representation can set this as false so a proxy or middleware server can avoid this extra call.
+
+While OSDI clients may be uninterested in the attribute vvalues, the clients may be interested in navigating links to related collections.  Therefore, instead of the representation, the proxy may return the self link, related links, and identifiers, or an empty response.
 
 ##### Request
 
@@ -40,6 +42,13 @@ Cache-Control: max-age=0, private, must-revalidate
     "_links": {
         "self": {
             "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3"
+        },
+        "osdi:attendances": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/attendances"
+        },
+        "osdi:donations": {
+            "href": "https://osdi-sample-system.org/api/v1/people/d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3/donations"
+            }
         }
     }
 }
