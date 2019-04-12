@@ -22,6 +22,7 @@ OSDI reports response codes and errors according to a standard schema.  A combin
 * [Scenarios](#scenarios)
 	* [Atomic Request](#atomic-request)
 	* [Non-Atomic Request](#non-atomic-request)
+	* [Batch Request](#batch_request)
 
 _[Back to top...](#)_
 
@@ -39,6 +40,13 @@ The ````osdi:error```` object for both types of requests is identical, except th
 
 _[Back to top...](#)_
 
+### Batch Requests
+
+Batch requests are a collection of similar requests sent to the server in one OSDI call.  For example, the ````osdi:people_import_helper```` request includes an array of signups, where each array item is what would normally be in a single request to ````osdi:person_signup_helper````.
+
+The top level Batch Request is known as the parent request, while the array items are called sub-requests.
+
+In order to report errors for each sub-request, the ````batch_errors```` attribute is included, which is an array of ````osdi:error```` objects defined here.
 
 ### Response Codes for Atomic Requests
 
@@ -70,7 +78,7 @@ A list of fields specific to the Error resource.
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |request_type   |enum       | One of "atomic", "non-atomic"
-|response_code  |int        | An indication of the success or failure of the request as a whole.  Atomic requests should provide the appropriate value from the [Response Codes for Atomic Requests](#response-codes-for-atomic-requests) table.  Non-atomic requests should provide a value of 400.
+|response_code  |int        | An indication of the success or failure of the request as a whole.  Atomic requests should provide the appropriate value from the [Response Codes for Atomic Requests](#response-codes-for-atomic-requests) table.  Non-atomic requests should provide a value of 400 if the request is deemed unsuccessful, or 207 if it is deemed successful, but with non-critical errors.
 |resource_status |[ResourceStatus[]](#resource-status) | An indication of the success or failure of each individual request.
 
 _[Back to top...](#)_
@@ -98,6 +106,13 @@ _[Back to top...](#)_
 | reference_code | string | A string which refers to an internal error report which may be used to diagnose the problem; for example, "Logger-2015-03-10-cecc4e52-b350-4dac-87fc-39fc819f8c48"
 
 _[Back to top...](#)_
+
+### Batch Requests
+When a Batch Request response includes ````osdi:error```` status information, the response code in the parent request should reflect the status of the batch operation itself, such as the import operation.
+
+For example, if the import operation succeeds, even if not every record was successfully imported, the response code should be 200.  Conversely, if there is a format error, or fault with the parent request itself, such as a JSON parse error, the response should be 400.
+
+The sub-request error status is contained within an array with attribute name ````batch_errors````.  The sub-request array may omit status on successful sub-requests and only contain errors.
 
 # Scenarios
 
@@ -367,3 +382,128 @@ Cache-Control: max-age=0, private, must-revalidate
 
 _[Back to top...](#)_
 
+## Batch Request
+
+A batch of people is uploaded via the ````osdi:people_import_helper````.  The overall upload succeeds, but there are two errors that are reported.
+The first is an invalid tag in the ````add_tags```` helper action function, but the import of the person itself succeeds.
+The second person fails to be imported because of a wonderful but invalid phone number.
+
+### Request
+
+```javascript
+POST https://osdi-sample-system.org/api/v1/people/people_import_helper
+
+Header:
+OSDI-API-Token:[your api key here]
+
+{
+    "signups": [
+        {
+            "person": {
+                "identifiers": [
+                    "foreign_system:1"
+                ],
+                "family_name": "Edwin",
+                "given_name": "Labadie",
+                "additional_name": "Marques",
+                "origin_system": "OpenSupporter",
+                "email_addresses": [
+                    {
+                        "address":"test-3@example.com",
+                        "primary": true,
+                        "address_type": "Personal"
+                    }
+                ],
+            },
+{% include helper_action_examples_short.md prefix="            " %}
+        },
+        {
+            "person": {
+                "identifiers": [
+                    "osdi_sample_system:d91b4b2e-ae0e-4cd3-9ed7-d0ec501b0bc3",
+                    "foreign_system:1"
+                ],
+                "origin_system": "OSDI Sample System",
+                "created_date": "2014-03-20T21:04:31Z",
+                "modified_date": "2014-03-20T21:04:31Z",
+                "given_name": "John",
+                "family_name": "Smith",
+                "honorific_prefix": "Mx.",
+                "honorific_suffix": "Ph.D",
+                "email_addresses": [
+                    {
+                        "primary": true,
+                        "address": "johnsmith@mail.com",
+                        "address_type": "Personal",
+                        "status": "subscribed"
+                    }
+                ],
+                "phone_numbers": [
+                  {
+                    "number": "1-800-OSDI-RULES",
+                    "number_type": "Home"
+                  }
+                ]
+            },
+{% include helper_action_examples_short.md prefix="            " %}
+        }
+    ]
+}
+```
+
+### Response
+
+```javascript
+200 OK
+
+Content-Type: application/hal+json
+Cache-Control: max-age=0, private, must-revalidate
+
+{
+  "osdi:error": {
+    "request_type": "batch",
+    "response_code": 200,
+    "batch_errors": [
+      {
+        "request_type": "non-atomic",
+        "response_code": 207,
+        "resource_status": [
+          {
+            "resource": "osdi:person",
+            "response_code": 201
+          },
+          {
+            "resource": "osdi:tagging",
+            "response_code": 400,
+            "errors": [
+              {
+                "code": "TAG_NAME_DOES_NOT_EXIST",
+                "description": "The tag name 'volunteer' does not exist.",
+                "properties": [ 'add_tags' ]
+              },
+            ]
+          },
+        ]
+      },
+      {
+        "request_type": "non-atomic",
+        "response_code": 400,
+        "resource_status": [
+          {
+            "resource": "osdi:person",
+            "response_code": 400,
+            "errors": [
+              {
+                "code": "INVALID PHONE NUMBER",
+                "description": "The phone number '1-800-OSDI-RULES' is not a valid phone number.",
+                "properties": [ 'phone_numbers[0].number' ]
+              },
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+_[Back to top...](#)_

@@ -193,6 +193,7 @@ _[Back to top...](#)_
 |Name          |Description
 |-----------    |-----------
 |[person_signup_helper](person_signup.html)      |Allows the creation of a person and associated tag and list membership.
+|[people_import_helper](people_import_helper.html)  |Allows a batch of people to be created or updated.
 
 _[Back to top...](#)_
 
@@ -200,6 +201,7 @@ _[Back to top...](#)_
 ## Related Resources
 
 * [Person Signup Helper](person_signup.html)
+* [People Import Helper](people_import_helper.html)
 * [Donation](#)
 * [Submission](submissions.html)
 * [Attendance](attendances.html)
