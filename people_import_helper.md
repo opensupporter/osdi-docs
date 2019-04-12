@@ -58,6 +58,12 @@ A list of fields for the response to People import helper.
 |Name          |Type      |Description
 |-----------    |-----------|--------------
 |statistics     |object   | A vendor defined se
+|submitted    | integer | A count of submitted records
+|processed    | integer | A count of successfully processed records
+|errors       | integer | A count of records which caused errors
+|updated      | integer | A count of updated records
+|created      | integer | A count of newly created records
+|osdi:error   | OsdiError| OPTIONAL details of errors
 
 
 _[Back to top...](#)_
@@ -160,13 +166,16 @@ OSDI-API-Token:[your api key here]
 
 #### Response
 
-```javascript
+````json
 207 Multistatus
 
 Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
+  "submitted": 2,
+  "successful": 1,
+  "errors": 1,
   "osdi:error": {
     "request_type": "batch",
     "response_code": 200,
@@ -212,7 +221,7 @@ Cache-Control: max-age=0, private, must-revalidate
     ]
   }
 }
-```
+````
 
 _[Back to top...](#)_
 
@@ -223,7 +232,7 @@ Posting to the people import helper endpoint will allow you to upload a collecti
 
 #### Request
 
-```javascript
+```json
 POST https://osdi-sample-system.org/api/v1/people/people_import_helper
 
 Header:
@@ -286,13 +295,16 @@ OSDI-API-Token:[your api key here]
 
 #### Response
 
-```javascript
+````json
 200 OK
 
 Content-Type: application/hal+json
 Cache-Control: max-age=0, private, must-revalidate
 
 {
+  "submitted": 2,
+  "successful": 1,
+  "errors": 1,
   "osdi:error": {
     "request_type": "batch",
     "response_code": 200,
@@ -313,9 +325,9 @@ Cache-Control: max-age=0, private, must-revalidate
                 "code": "TAG_NAME_DOES_NOT_EXIST",
                 "description": "The tag name 'volunteer' does not exist.",
                 "properties": [ 'add_tags' ]
-              },
+              }
             ]
-          },
+          }
         ]
       },
       {
@@ -330,7 +342,7 @@ Cache-Control: max-age=0, private, must-revalidate
                 "code": "INVALID PHONE NUMBER",
                 "description": "The phone number '1-800-OSDI-RULES' is not a valid phone number.",
                 "properties": [ 'phone_numbers[0].number' ]
-              },
+              }
             ]
           }
         ]
@@ -338,6 +350,6 @@ Cache-Control: max-age=0, private, must-revalidate
     ]
   }
 }
-```
+````
 
 _[Back to top...](#)_
